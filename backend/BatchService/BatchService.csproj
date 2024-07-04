@@ -1,0 +1,41 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net6.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <Reference Include="AIplus.AIF.DBLib60">
+        <HintPath>..\Lib\net6.0\AIplus.AIF.DBLib60.dll</HintPath>
+      </Reference>
+      <Reference Include="AIplus.AiReport">
+        <HintPath>..\Lib\net6.0\AIplus.AiReport.dll</HintPath>
+      </Reference>
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Castle.Core" Version="5.1.1" />
+      <PackageReference Include="Hangfire.PostgreSql" Version="1.20.6" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\DataAccess\DataAccess.csproj" />
+      <ProjectReference Include="..\GaibuApiService\GaibuApiService.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Using Include="AIplus.AIF.DBLib" />
+      <Using Include="BatchService.Trigger.Base" />
+      <Using Include="BCC.Affect.DataAccess" />
+      <Using Include="Hangfire" />
+      <Using Include="System.ComponentModel" />
+      <Using Include="System.Linq.Expressions" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="HangFire\Base\Entity\" />
+    </ItemGroup>
+
+</Project>

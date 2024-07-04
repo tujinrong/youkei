@@ -1,0 +1,59 @@
+# バージョン番号
+version: '3'
+# Dockerネットワークを定義し、フロントエンドとバックエンドを同じネットワークに設定すると、サービス名での通信が使用できます
+networks:
+  # カスタムネットワーク名
+  app_network:
+    # 使用ブリッジネットワークドライバーでは、同じブリッジネットワークに接続しているDockerコンテナーのみが相互に通信できます
+    driver: bridge
+
+# サービス（複数可、拡張可能、複数のサービスがある場合、サービス名とホストマシンへのポート番号のマッピングが重複してはならない）
+services:
+  # フロントエンドサービス（サービス名：frontend）
+  frontend:
+    # 関連するビルドパラメーター
+    build:
+      # フロントエンドプロジェクトのルートディレクトリへの相対パス
+      context: ./frontend
+      # フロントエンドのルートディレクトリに対するフロントエンドDockerfileの相対パス
+      dockerfile: Dockerfile
+      # ビルドパラメータの--build-arg部分
+      args:
+        # Nginxのバージョン番号
+        - nginx_version=1.25.4
+    # このフロントエンドサービスのネットワーク
+    networks:
+      - app_network
+    # ポートマッピング
+    ports:
+      - '80:80'
+    # 環境変数
+    environment:
+      # バックエンドのAPIインターフェイスのURLは、同じDockerネットワーク内であれば、バックエンドのサービス名を使用できます
+      #- API_HOST=http://localhost:8000
+      - API_HOST=http://backend:8000
+      # クロスオリジンリソース共有（CORS）の設定では、信頼できるIPアドレスに設定することができます。また、「*」を使用すると、すべてのソースからのアクセスを許可します
+      - CORS=*
+    # 再起動ポリシー
+    restart: always
+
+  # バックエンドサービス（サービス名：backend）
+  backend:
+    # 関連するビルドパラメーター
+    build:
+      # バックエンドプロジェクトのルートディレクトリへの相対パス
+      context: ./backend
+      # バックエンドのルートディレクトリに対するバックエンドDockerfileの相対パス
+      dockerfile: WebService/Dockerfile
+    # このバックエンドサービスのネットワーク
+    networks:
+      - app_network
+    # ポートマッピング。生産環境では、バックエンドAPIのインターフェースポートは通常、セキュリティを高めるためにホストマシンにマッピングされません
+    #ports:
+    #  - '8000:8000'
+    # 環境変数
+    environment:
+      # バックエンドが起動する環境には、以下のようなものがあります：Development（開発環境）、Production（生産環境）など
+      - ASPNETCORE_ENVIRONMENT=${ASPNETCORE_ENVIRONMENT:-Production}
+    # 再起動ポリシー
+    restart: always

@@ -1,0 +1,49 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Remove="SQL\InitDate\**" />
+    <EmbeddedResource Remove="SQL\InitDate\**" />
+    <None Remove="SQL\InitDate\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="DaoGenerated\システム共有\" />
+    <Folder Include="Resource\" />
+    <Folder Include="SQL\View\" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="AdvanceSoftware.ExcelCreator.Creator" Version="11.0.2" />
+    <PackageReference Include="AdvanceSoftware.VBReport.BarCode" Version="11.0.3" />
+    <PackageReference Include="AdvanceSoftware.VBReport.CellReport" Version="11.0.4" />
+    <PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="8.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Log4Net.AspNetCore" Version="8.0.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="NodaTime" Version="3.1.11" />
+    <PackageReference Include="Npgsql" Version="8.0.3" />
+    <PackageReference Include="NPOI" Version="2.5.6" />
+    <PackageReference Include="PDFsharp" Version="6.1.0" />
+    <PackageReference Include="System.Drawing.Common" Version="5.0.3" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="AIplus.AIF.DBLib60">
+      <HintPath>..\Lib\net6.0\AIplus.AIF.DBLib60.dll</HintPath>
+    </Reference>
+    <Reference Include="AIplus.AiReport">
+      <HintPath>..\Lib\net6.0\AIplus.AiReport.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Using Include="AIplus.AIF.DBLib" />
+    <Using Include="BCC.Affect.DataAccess" />
+    <Using Include="System.Data" />
+    <Using Include="System.Text" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="Resource\msg.ts">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+</Project>

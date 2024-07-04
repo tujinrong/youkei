@@ -1,0 +1,75 @@
+/** -----------------------------------------------------------------
+ * 業務名称　: 健康管理システム
+ * 機能概要　: 共通フォーム(ユーザー)
+ * 　　　　　  スタイル設定
+ * 作成日　　: 2023.04.04
+ * 作成者　　: 李
+ * 変更履歴　:
+ * -----------------------------------------------------------------*/
+@import '@/style/index.less';
+
+.user-dropdown-menu {
+  span {
+    user-select: none;
+  }
+}
+
+.user-dropdown-menu-wrapper.ant-dropdown-menu {
+  .ant-dropdown-menu-item > .anticon:first-child,
+  .ant-dropdown-menu-item > .ant-dropdown-menu-title-content > a > .anticon:first-child,
+  .ant-dropdown-menu-submenu-title
+    > .anticon:first-child
+    .ant-dropdown-menu-submenu-title
+    > a
+    > .anticon:first-child {
+    min-width: 12px;
+    margin-right: 8px;
+  }
+}
+
+.user-dropdown-menu-wrapper {
+  .ant-dropdown-menu-item {
+    width: 100% !important;
+  }
+}
+
+.icon-tool {
+  display: inline;
+  vertical-align: top;
+
+  .icon-tool-item {
+    display: inline;
+    padding: 7px;
+    background-color: #eee;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: 5px;
+    font-size: 16px;
+
+    &.like {
+      background-color: var(--ant-primary-color);
+      color: #fff;
+    }
+
+    &:hover {
+      background-color: var(--ant-primary-color);
+      filter: hue-rotate(-60deg) opacity(0.8);
+      color: #fff;
+    }
+  }
+
+  .icon-tool-item:first-child {
+    margin-left: 0px;
+  }
+}
+
+.regsisyo {
+  width: 100px;
+  padding-right: 8px;
+  display: inline-block;
+  text-align: end;
+  word-break: keep-all;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
