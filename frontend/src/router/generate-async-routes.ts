@@ -14,7 +14,7 @@ import { GetMenu } from '@/views/affect/AF/AWAF00301G/service'
 import { Router } from './types'
 import { Search } from '@/views/affect/AF/AWAF00303D/service'
 import { getRoutePages } from '@/utils/batchImportFiles'
-import { createrRootRouter, createCollectRouter, notFoundRouter } from './common-routes'
+import { createrRootRouter, notFoundRouter } from './common-routes'
 import { BasicLayout, RouteView, BlankLayout } from '@/layouts'
 import Home from '@/views/affect/AF/AWAF00301G/AWAF00301G.vue'
 
@@ -49,8 +49,8 @@ const constantRouterComponents = () => {
 
 //ルーター設定
 const generateAsyncRoutes = async (list?: string[]): Promise<void> => {
+  debugger;
   const rootRouter = createrRootRouter()
-  const collectRouter = createCollectRouter()
   let lsMenu: MenuModel[] = []
   if (ss.get(MENU_NAV)) {
     lsMenu = ss.get(MENU_NAV)
@@ -89,11 +89,11 @@ const generateAsyncRoutes = async (list?: string[]): Promise<void> => {
     const res = await Search()
     collectKeys = res.kekkalist || []
   }
-  collectKeys.forEach((el) => {
-    const findItem = menu.find((item) => item.key === el)
-    findItem && collectRouter.children?.push(findItem)
-  })
-  rootRouter.children?.push(collectRouter)
+  // collectKeys.forEach((el) => {
+  //   const findItem = menu.find((item) => item.key === el)
+  //   findItem && collectRouter.children?.push(findItem)
+  // })
+  // rootRouter.children?.push(collectRouter)
   //メニュー
   const childrenNav = []
   listToTree(menu, childrenNav, menu[0]?.parentId || 0)

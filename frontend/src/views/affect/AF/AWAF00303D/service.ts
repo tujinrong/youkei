@@ -18,8 +18,26 @@ export const Init = (params: InitRequest): Promise<InitResponse> => {
 
 /** 検索処理 */
 export const Search = (): Promise<CommonResponse> => {
-  const methodname = 'Search'
-  return api(servicename, methodname, {})
+  return new Promise((resolve) => {
+    resolve({
+      kekkalist: [
+        "AWSH00301G",
+        "AWSH00302G",
+        "AWEU00101G",
+        "AWEU00201G",
+        "AWEU00301G",
+        "AWEU00401G",
+        "AWSH00107G",
+        "AWKK00301G",
+        "AWKK00303G"
+      ],
+      returncode: 0,
+      message: null,
+      rsaprivatekey: null
+    });
+  });
+  // const methodname = 'Search'
+  // return api(servicename, methodname, {})
 }
 
 /** 更新処理 */

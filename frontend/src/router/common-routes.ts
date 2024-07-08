@@ -71,10 +71,11 @@ export function createrRootRouter(): Router {
 
 //お気に入り
 export function createCollectRouter(): Router {
-  return {
-    path: '/Collect',
-    name: 'Collect',
-    meta: { title: 'お気に入り', isfolder: true, icon: 'file-open' },
-    children: []
-  }
+  return null;
+  // return {
+  //   path: '/Collect',
+  //   name: 'Collect',
+  //   meta: { title: 'お気に入り', isfolder: true, icon: 'file-open' },
+  //   children: []
+  // }
 }

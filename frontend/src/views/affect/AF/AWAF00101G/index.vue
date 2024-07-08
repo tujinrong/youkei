@@ -86,7 +86,7 @@ import { reactive, ref } from 'vue'
 import { Form } from 'ant-design-vue'
 import { useRouter } from 'vue-router'
 import { LoginRequest } from './type'
-import { Login } from './service'
+import { Login,Login2 } from './service'
 import { ss } from '@/utils/storage'
 import {
   ACCESS_TOKEN,
@@ -211,7 +211,7 @@ const onOk = async () => {
   ss.set(REGSISYO, selectedSisyo.value ?? { sisyocd: '', sisyonm: '' })
   instVisible.value = false
   try {
-    const res = await Login({
+    const res = await Login2({
       userid: form.userid,
       pword: form.pword,
       regsisyo: selectedSisyo.value?.sisyocd,

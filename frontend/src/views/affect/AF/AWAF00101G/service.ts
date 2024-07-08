@@ -13,9 +13,43 @@ const servicename = 'AWAF00101G'
 
 /** ログイン処理 */
 export const Login = (data: LoginRequest): Promise<LoginResponse> => {
-  const params = JSON.parse(JSON.stringify(data))
-  //パスワード暗号化
-  params.pword = encryptBySHA256(data.pword, data.userid)
-  const methodname = 'Login'
-  return login(servicename, methodname, params)
+  return new Promise((resolve) => {
+    resolve({
+      token: null,
+      userinfo: null,
+      sisyolist: [
+        {
+          sisyocd: "0",
+          sisyonm: "支所000"
+        },
+        {
+          sisyocd: "1",
+          sisyonm: "支所001"
+        }
+      ],
+      pwdmsgflg: false,
+      returncode: 0,
+      message: null,
+      rsaprivatekey: null
+    });
+  });
+}
+
+export const Login2 = (data: LoginRequest): Promise<LoginResponse> => {
+  return new Promise((resolve) => {
+    resolve({
+      token: "26rXIyqePDMo9ujJ4CY2aw==",
+      userinfo: { 
+        userid: "1",
+        usernm: "スーパー管理",
+        syozokunm: "",
+        kanrisyaflg: true
+      },
+      sisyolist: null,
+      pwdmsgflg: false,
+      returncode: 0,
+      message: null,
+      rsaprivatekey: null
+    });
+  });
 }
