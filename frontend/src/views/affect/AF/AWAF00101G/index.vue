@@ -98,7 +98,7 @@ import {
 } from '@/constants/mutation-types'
 import { notification } from 'ant-design-vue'
 import { Router } from 'vue-router'
-import generateAsyncRoutes from '@/router/generate-async-routes'
+// import generateAsyncRoutes from '@/router/generate-async-routes'
 import { LOGIN_OK_INFO, ITEM_REQUIRE_ERROR } from '@/constants/msg'
 import { TIMER_ONE_M } from '@/constants/constant'
 import { Rule } from 'ant-design-vue/lib/form'
@@ -175,7 +175,7 @@ const loginSuccess = async (res, router: Router, expiredMessage) => {
     ss.set(KIKANCD_LEN, res.kikancdlen)
   })
   //ルーター設定
-  await generateAsyncRoutes()
+  // await generateAsyncRoutes()
   const { query } = router.currentRoute.value
   //元のページ戻ります
   if (query.redirect) {

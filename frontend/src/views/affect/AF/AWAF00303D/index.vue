@@ -244,7 +244,7 @@ const saveData = () => {
     onOk: async () => {
       startConfirmLoading()
       const { kekkalist } = await Save({ kinoids: targetKeys.value })
-      await generateAsyncRoutes(kekkalist)
+      // await generateAsyncRoutes(kekkalist)
       editJudge.reset()
       endConfirmLoading()
       closeModal()

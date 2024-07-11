@@ -108,7 +108,7 @@ import {
   HistoryOutlined,
   UserSwitchOutlined
 } from '@ant-design/icons-vue'
-import generateAsyncRoutes from '@/router/generate-async-routes'
+// import generateAsyncRoutes from '@/router/generate-async-routes'
 import emitter from '@/utils/event-bus'
 import { ss } from '@/utils/storage'
 import { clearUserInfo, getUserInfo } from '@/utils/user'
@@ -228,7 +228,7 @@ const onChangeCollect = async (value: boolean) => {
   const updkbn = value ? Enum更新区分.追加 : Enum更新区分.削除
   const { kekkalist } = await Update({ kinoid: kinoid.value, updkbn })
   liked.value = value
-  generateAsyncRoutes(kekkalist)
+  // generateAsyncRoutes(kekkalist)
 }
 const goAdminPage = () => {
   router.push({ name: 'AWAF00901G' })

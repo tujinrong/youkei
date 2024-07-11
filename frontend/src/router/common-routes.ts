@@ -97,57 +97,57 @@ export const notFoundRouter: RouteRecordRaw = {
 
 //ルートメニュー
 export function createrRootRouter(): Router {
-  return {
-    key: '',
-    name: 'index',
-    path: '/',
-    component: 'BasicLayout',
-    redirect: '/home',
-    meta: {
-      title: 'ホーム'
-    },
-    children: [
-      {
-        path: '/home',
-        name: 'AWAF00301G',
-        component: 'Home',
-        meta: { title: 'ホーム', icon: 'common-manage' },
+  // return {
+  //   key: '',
+  //   name: 'index',
+  //   path: '/',
+  //   component: 'BasicLayout',
+  //   redirect: '/home',
+  //   meta: {
+  //     title: 'ホーム'
+  //   },
+  //   children: [
+  //     {
+  //       path: '/home',
+  //       name: 'AWAF00301G',
+  //       component: 'Home',
+  //       meta: { title: 'ホーム', icon: 'common-manage' },
 
-      },
-      {
-        path: '/GJ10',
-        name: 'GJ10',
-        meta: { title: '参加申込', icon: 'common-manage' },
-        children: [
-          {
-            path: '/GJ10/GJ1030',
-            name: 'AWAF00501G',
-            component: () => import('@/views/affect/AF/AWAF00501G/components/EditPage-unuse.vue'),
-            meta: { title: '(GJ1010) 契約者マスタメンテナンス', icon: 'common-manage' }
-          },
-        ]
-      },
-      {
-        path: '/GJ80',
-        name: 'GJ80',
-        meta: { title: 'マスタメンテナンス', icon: 'common-manage' },
-        children: [
-          {
-            path: '/GJ80/GJ8090',
-            name: 'GJ8090',
-            component: () => import('@/views/affect/AF/AWAF00501G/AWAF00501G.vue'),
-            meta: { title: '(GJ8090) 契約者農場マスタメンテナンス', icon: 'common-manage' }
-          },
-        ]
-      },
-      {
-        path: '/AWAF00901G',
-        name: 'AWAF00901G',
-        component: 'AWAF00901G',
-        meta: { title: 'ユーザー管理', hidden: true, disabled: !getUserInfo().kanrisyaflg }
-      }
-    ]
-  }
+  //     },
+  //     {
+  //       path: '/GJ10',
+  //       name: 'GJ10',
+  //       meta: { title: '参加申込', icon: 'common-manage' },
+  //       children: [
+  //         {
+  //           path: '/GJ10/GJ1030',
+  //           name: 'AWAF00501G',
+  //           component: () => import('@/views/affect/AF/AWAF00501G/components/EditPage-unuse.vue'),
+  //           meta: { title: '(GJ1010) 契約者マスタメンテナンス', icon: 'common-manage' }
+  //         },
+  //       ]
+  //     },
+  //     {
+  //       path: '/GJ80',
+  //       name: 'GJ80',
+  //       meta: { title: 'マスタメンテナンス', icon: 'common-manage' },
+  //       children: [
+  //         {
+  //           path: '/GJ80/GJ8090',
+  //           name: 'GJ8090',
+  //           component: () => import('@/views/affect/AF/AWAF00501G/AWAF00501G.vue'),
+  //           meta: { title: '(GJ8090) 契約者農場マスタメンテナンス', icon: 'common-manage' }
+  //         },
+  //       ]
+  //     },
+  //     {
+  //       path: '/AWAF00901G',
+  //       name: 'AWAF00901G',
+  //       component: 'AWAF00901G',
+  //       meta: { title: 'ユーザー管理', hidden: true, disabled: !getUserInfo().kanrisyaflg }
+  //     }
+  //   ]
+  // }
 }
 
 //お気に入り

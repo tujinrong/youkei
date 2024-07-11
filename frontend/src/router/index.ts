@@ -9,7 +9,7 @@
 import { RouteRecordRaw, createRouter, createWebHistory } from 'vue-router'
 import { setupBeforeEach, setupAfterEach } from './router-guard'
 import { commonRoutes } from './common-routes'
-import generateAsyncRoutes from './generate-async-routes'
+// import generateAsyncRoutes from './generate-async-routes'
 import { ss } from '@/utils/storage'
 import { ACCESS_TOKEN } from '@/constants/mutation-types'
 import { stringifyQuery, parseQuery } from '@/utils/encrypt/parameter'
