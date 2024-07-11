@@ -1,5 +1,5 @@
 /** -----------------------------------------------------------------
- * 業務名称　: 健康管理システム
+ * 業務名称　: 養鶏-互助防疫システム
  * 機能概要　: ルーター作成
  * 　　　　　  ルーター関連
  * 作成日　　: 2023.04.05
@@ -40,7 +40,7 @@ setupBeforeEach(router)
 setupAfterEach(router)
 
 if (ss.get(ACCESS_TOKEN)) {
-  generateAsyncRoutes()
+  // generateAsyncRoutes()
 }
 
 export default router

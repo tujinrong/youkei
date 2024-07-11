@@ -1,5 +1,5 @@
 <!------------------------------------------------------------------
- * 業務名称　: 健康管理システム
+ * 業務名称　: 養鶏-互助防疫システム
  * 機能概要　: 共通フォーム(ユーザー)
  * 　　　　　  画面レイアウト・処理
  * 作成日　　: 2023.03.06
@@ -139,7 +139,7 @@ const nickname = ref(UserInfo.usernm)
 //---------------------------------------------------------------------------
 //フック関数
 //--------------------------------------------------------------------------
-onMounted(() => searchData())
+// onMounted(() => searchData())
 
 //--------------------------------------------------------------------------
 //メソッド
@@ -242,8 +242,8 @@ watch(
     if (val.trim() === '/home') {
       liked.value = false
     } else {
-      const res = await Init({ kinoid: kinoid.value })
-      liked.value = res.statuskbn === Enumお気に入り区分.あり
+      // const res = await Init({ kinoid: kinoid.value })
+      // liked.value = res.statuskbn === Enumお気に入り区分.あり
     }
   },
   { immediate: true }

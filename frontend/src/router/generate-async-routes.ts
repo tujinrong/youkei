@@ -1,5 +1,5 @@
 /** -----------------------------------------------------------------
- * 業務名称　: 健康管理システム
+ * 業務名称　: 養鶏-互助防疫システム
  * 機能概要　: URL生成
  * 　　　　　  動的ルーター
  * 作成日　　: 2023.04.04
@@ -12,7 +12,6 @@ import emitter from '@/utils/event-bus'
 import router from './index'
 import { GetMenu } from '@/views/affect/AF/AWAF00301G/service'
 import { Router } from './types'
-import { Search } from '@/views/affect/AF/AWAF00303D/service'
 import { getRoutePages } from '@/utils/batchImportFiles'
 import { createrRootRouter, notFoundRouter } from './common-routes'
 import { BasicLayout, RouteView, BlankLayout } from '@/layouts'
@@ -52,14 +51,14 @@ const generateAsyncRoutes = async (list?: string[]): Promise<void> => {
   debugger;
   const rootRouter = createrRootRouter()
   let lsMenu: MenuModel[] = []
-  if (ss.get(MENU_NAV)) {
-    lsMenu = ss.get(MENU_NAV)
-  } else {
-    const res = await GetMenu()
-    ss.set(MENU_NAV, res.menulist)
-    ss.set(PROGRAM_LIST, res.programlist)
-    lsMenu = res.menulist
-  }
+  // if (ss.get(MENU_NAV)) {
+  //   lsMenu = ss.get(MENU_NAV)
+  // } else {
+  //   const res = await GetMenu()
+  //   ss.set(MENU_NAV, res.menulist)
+  //   ss.set(PROGRAM_LIST, res.programlist)
+  //   lsMenu = res.menulist
+  // }
   const menu: Router[] = lsMenu.map((el) => {
     return {
       key: el.menuid,
@@ -83,12 +82,12 @@ const generateAsyncRoutes = async (list?: string[]): Promise<void> => {
   })
   //お気に入り
   let collectKeys: string[] = []
-  if (list) {
-    collectKeys = list
-  } else {
-    const res = await Search()
-    collectKeys = res.kekkalist || []
-  }
+  // if (list) {
+  //   collectKeys = list
+  // } else {
+  //   const res = await Search()
+  //   collectKeys = res.kekkalist || []
+  // }
   // collectKeys.forEach((el) => {
   //   const findItem = menu.find((item) => item.key === el)
   //   findItem && collectRouter.children?.push(findItem)

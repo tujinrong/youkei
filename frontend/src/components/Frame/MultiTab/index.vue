@@ -1,5 +1,5 @@
 <!------------------------------------------------------------------
- * 業務名称　: 健康管理システム
+ * 業務名称　: 養鶏-互助防疫システム
  * 機能概要　: 画面タブ(ヘッダー部共有)
  * 　　　　　  共通フレーム
  * 作成日　　: 2023.04.04
@@ -117,7 +117,7 @@ onMounted(() => {
   }
   //Enter the uncached label from the url
   const currentMenu =
-    getUserMenu().find((item) => item.path === router.currentRoute.value.path) ||
+    getUserMenu()?.find((item) => item.path === router.currentRoute.value.path) ||
     ['AWAF00901G', 'more...'].includes(router.currentRoute.value.name as string) //Fixed route
 
   const sameMenu = pages.find((p) => p.path === router.currentRoute.value.path)

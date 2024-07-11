@@ -1,5 +1,5 @@
 <!------------------------------------------------------------------
- * 業務名称　: 健康管理システム
+ * 業務名称　: 養鶏-互助防疫システム
  * 機能概要　: ログイン画面用
  * 　　　　　  共通レイアウト
  * 作成日　　: 2023.04.05
@@ -15,7 +15,7 @@
           <div class="header">
             <div>
               <img src="~@/assets/icons/logo.svg" class="logo" alt="logo" />
-              <span class="title">健康管理システム</span>
+              <span class="title">養鶏-互助防疫システム</span>
             </div>
           </div>
         </div>

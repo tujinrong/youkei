@@ -224,11 +224,11 @@ const transform: AxiosTransform = {
     }
     // リクエストがキャンセルされたかどうか
     const isCancel = axios.isCancel(error)
-    if (!isCancel) {
-      checkStatus(error.response && error.response.status, msg)
-    } else {
-      console.warn(error, 'リクエストがキャンセルされました！')
-    }
+    // if (!isCancel) {
+    //   checkStatus(error.response && error.response.status, msg)
+    // } else {
+    //   console.warn(error, 'リクエストがキャンセルされました！')
+    // }
     return error
   }
 }
