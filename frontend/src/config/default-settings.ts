@@ -7,7 +7,7 @@
  * 変更履歴　:
  * -----------------------------------------------------------------*/
 export default {
-  title: 'AFFECT',
+  title: '養鶏-互助防疫',
   dynamicBrowserTab: true,
   multiTab: true,
   fixedHeader: true,

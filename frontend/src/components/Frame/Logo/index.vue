@@ -23,7 +23,7 @@ import SvgIcon from '@/components/Common/SvgIcon/index.vue'
 const props = defineProps({
   title: {
     type: String,
-    default: 'AFFECT',
+    default: '養鶏-互助防疫',
     required: false
   },
   showTitle: {

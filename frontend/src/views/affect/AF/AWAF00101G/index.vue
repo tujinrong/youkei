@@ -49,35 +49,6 @@
         >
       </a-form-item>
     </a-form>
-    <a-modal
-      v-model:visible="instVisible"
-      width="500px"
-      title="支所選択"
-      :mask-closable="false"
-      destroy-on-close
-      @ok="onOk"
-      @cancel="onCancel"
-    >
-      <vxe-table
-        height="400"
-        :column-config="{ resizable: true }"
-        :row-config="{ keyField: 'sisyocd', isCurrent: true, isHover: true }"
-        :keyboard-config="{
-          isArrow: true,
-          isTab: true
-        }"
-        :data="sisyolList"
-        :empty-render="{ name: 'NotData' }"
-        @current-change="clickRow"
-        @cell-dblclick="onDbclickCell"
-      >
-        <vxe-column field="sisyocd" title="支所コード"></vxe-column>
-        <vxe-column field="sisyonm" title="支所名"></vxe-column>
-      </vxe-table>
-      <template #footer>
-        <a-button type="primary" :disabled="!selectedSisyo" @click="onOk">選択</a-button>
-      </template>
-    </a-modal>
   </div>
 </template>
 
@@ -86,7 +57,7 @@ import { reactive, ref } from 'vue'
 import { Form } from 'ant-design-vue'
 import { useRouter } from 'vue-router'
 import { LoginRequest } from './type'
-import { Login,Login2 } from './service'
+import { Login, Login2 } from './service'
 import { ss } from '@/utils/storage'
 import {
   ACCESS_TOKEN,
@@ -142,13 +113,9 @@ const handleSubmit = async (e: Event) => {
   try {
     await validate(['userid', 'pword'])
     await Login(form).then((res) => {
-      if (res.sisyolist.length <= 1) {
-        selectedSisyo.value = res.sisyolist[0]
-        onOk()
-        return
-      }
-      sisyolList.value = res.sisyolist
-      instVisible.value = true
+      selectedSisyo.value = res.sisyolist[0]
+      onOk()
+      return
     })
   } catch (error) {
     loading.value = false
@@ -197,15 +164,7 @@ const loginSuccess = async (res, router: Router, expiredMessage) => {
 }
 
 const selectedSisyo = ref<CmSisyoVM | null>(null)
-//行選択(行をクリック)
-function clickRow({ row }) {
-  selectedSisyo.value = row
-}
-//行をダブルクリック
-function onDbclickCell({ row }) {
-  selectedSisyo.value = row
-  onOk()
-}
+
 //選択ボタン
 const onOk = async () => {
   ss.set(REGSISYO, selectedSisyo.value ?? { sisyocd: '', sisyonm: '' })
@@ -222,8 +181,5 @@ const onOk = async () => {
   } catch (error) {
     loading.value = false
   }
-}
-const onCancel = () => {
-  loading.value = false
 }
 </script>

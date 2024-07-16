@@ -1,85 +1,69 @@
 <template>
   <a-card :bordered="false" class="mb-2 h-full" :style="{ height: tableHeight + 50 + `px` }">
-    <div>
-      <a-row :gutter="8">
-        <a-col :span="12"
-          ><div class="self_adaption_table form">
-            <a-row>
-              <b class="mb-1">第99期</b>
-            </a-row>
-            <a-row>
-              <a-col v-bind="layout">
-                <th>契約者</th>
-                <td>
-                  <ai-select
-                    v-model:value="formData.keiyakusya"
-                    :options="selectorlist"
-                  ></ai-select>
-                </td>
-              </a-col>
-            </a-row></div
-        ></a-col>
+    <div class="self_adaption_table form">
+      <b>第99期</b>
+      <a-row>
+        <a-col v-bind="layout">
+          <th>契約者</th>
+          <td>
+            <ai-select v-model:value="formData.keiyakusya" :options="selectorlist"></ai-select>
+          </td>
+        </a-col>
       </a-row>
-    </div>
-    <div class="mt-2 header_operation">
-      <a-space>
-        <a-button class="warning-btn" @click="goList">登録</a-button>
-        <a-button type="primary" danger :disabled="isNew" @click="deleteData">削除</a-button>
-        <a-button type="primary" @click="goList">一覧へ</a-button>
-      </a-space>
-    </div>
-    <div>
-      <a-col :span="12">
-        <div class="mt-2 self_adaption_table form">
-          <a-row>
-            <b class="mb-1">契約者農場基本登録项目</b>
-          </a-row>
-          <a-row>
-            <a-col v-bind="layout">
-              <th class="required">農場番号</th>
-              <td>
-                <a-input v-model:value="formData.noujyobango" maxlength="3" type="number"></a-input>
-              </td>
-            </a-col>
-          </a-row>
-          <a-row>
-            <a-col v-bind="layout">
-              <th class="required">農場名</th>
-              <td>
-                <a-input v-model:value="formData.noujyomei"></a-input>
-              </td>
-            </a-col>
-          </a-row>
-          <a-row>
-            <a-col v-bind="layout">
-              <th class="required">都道府県</th>
-              <td>
-                <ai-select
-                  v-model:value="formData.todoufuken"
-                  :options="todoufukenList"
-                ></ai-select>
-              </td>
-            </a-col>
-          </a-row>
-          <a-row>
-            <a-col v-bind="layout">
-              <th class="required">住所</th>
-              <td>
-                <a-input v-model:value="formData.jyusyo1"></a-input>
-                <a-input v-model:value="formData.jyusyo2"></a-input>
-                <a-input v-model:value="formData.jyusyo3"></a-input>
-              </td>
-            </a-col>
-          </a-row>
-          <a-row>
-            <a-col v-bind="layout">
-              <th class="required">明細番号</th>
-              <td>
-                <a-input v-model:value="formData.meisaibango" maxlength="3" type="number"></a-input>
-              </td>
-            </a-col>
-          </a-row></div
-      ></a-col>
+      <a-row>
+        <a-col v-bind="layout"
+          ><div class="my-2 header_operation flex justify-between w-full">
+            <a-space :size="20">
+              <a-button class="warning-btn" @click="saveData">登録</a-button>
+              <a-button type="primary" danger :disabled="isNew" @click="deleteData">削除</a-button>
+            </a-space>
+            <a-button type="primary" class="text-end" @click="goList">一覧へ</a-button>
+          </div></a-col
+        >
+      </a-row>
+      <b>契約者農場基本登録項目</b>
+      <a-row>
+        <a-col v-bind="layout">
+          <th class="required">農場番号</th>
+          <td>
+            <a-input v-model:value="formData.noujyobango" maxlength="3" type="number"></a-input>
+          </td>
+        </a-col>
+      </a-row>
+      <a-row>
+        <a-col v-bind="layout">
+          <th class="required">農場名</th>
+          <td>
+            <a-input v-model:value="formData.noujyomei"></a-input>
+          </td>
+        </a-col>
+      </a-row>
+      <a-row>
+        <a-col v-bind="layout">
+          <th class="required">都道府県</th>
+          <td>
+            <ai-select v-model:value="formData.todoufuken" :options="todoufukenList"></ai-select>
+          </td>
+        </a-col>
+      </a-row>
+      <a-row>
+        <a-col v-bind="layout">
+          <th class="required">住所</th>
+          <td>
+            <a-input v-model:value="formData.jyusyo1"></a-input>
+            <a-input v-model:value="formData.jyusyo2"></a-input>
+            <a-input v-model:value="formData.jyusyo3"></a-input>
+          </td>
+        </a-col>
+      </a-row>
+      <a-row>
+        <a-col v-bind="layout">
+          <th class="required">明細番号</th>
+          <td>
+            <a-input v-model:value="formData.meisaibango" maxlength="3" type="number"></a-input>
+          </td>
+        </a-col>
+      </a-row>
     </div>
   </a-card>
 </template>
@@ -90,9 +74,10 @@ import { onMounted, reactive, ref, watch, nextTick, computed } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { Judgement } from '@/utils/judge-edited'
 import { showDeleteModal } from '@/utils/modal'
-import { DELETE_OK_INFO } from '@/constants/msg'
+import { DELETE_OK_INFO, SAVE_OK_INFO } from '@/constants/msg'
 import { message } from 'ant-design-vue'
 import { useTableHeight } from '@/utils/hooks'
+import emitter from '@/utils/event-bus'
 //---------------------------------------------------------------------------
 //属性
 //---------------------------------------------------------------------------
@@ -108,7 +93,29 @@ const route = useRoute()
 const editJudge = new Judgement(route.name as string)
 const isNew = props.status === PageSatatus.New
 const { tableHeight } = useTableHeight()
-const formData = reactive({
+const createDefaultParams = () => {
+  return {
+    keiyakusya: '',
+    noujyobango: '',
+    noujyomei: '',
+    todoufuken: '',
+    jyusyo1: '',
+    jyusyo2: '',
+    jyusyo3: '',
+    meisaibango: ''
+  }
+}
+const fakeFormData = {
+  keiyakusya: '1',
+  noujyobango: '99',
+  noujyomei: '東京都農場',
+  todoufuken: '13',
+  jyusyo1: '〒100-0001',
+  jyusyo2: '東京都千代田区',
+  jyusyo3: '千代田1-1',
+  meisaibango: '10001'
+}
+const fakeFormData1 = {
   keiyakusya: '',
   noujyobango: '',
   noujyomei: '',
@@ -116,12 +123,9 @@ const formData = reactive({
   jyusyo1: '',
   jyusyo2: '',
   jyusyo3: '',
-  meisaibango: '',
-  sinkiflg: false,
-  keizokuflg: false,
-  tyusiflg: false,
-  haigyoflg: false
-})
+  meisaibango: ''
+}
+const formData = reactive(fakeFormData1)
 const selectorlist = ref<DaSelectorModel[]>([
   { value: '1', label: '永玉田中' },
   { value: '2', label: '尾三玉田' },
@@ -180,14 +184,16 @@ const todoufukenList = [
 const layout = {
   md: 24,
   lg: 24,
-  xxl: 18
+  xxl: 10
 }
 //---------------------------------------------------------------------------
 //フック関数
 //--------------------------------------------------------------------------
-
 onMounted(async () => {
   editJudge.addEvent()
+  if (props.status === PageSatatus.Edit) {
+    Object.assign(formData, fakeFormData)
+  }
 })
 //--------------------------------------------------------------------------
 //計算定義
@@ -201,6 +207,12 @@ watch(
   () => editJudge.setEdited(),
   { deep: true }
 )
+
+watch(
+  () => props.status,
+  () => Object.assign(formData, fakeFormData),
+  { deep: true }
+)
 //--------------------------------------------------------------------------
 //メソッド
 //--------------------------------------------------------------------------
@@ -210,6 +222,10 @@ const goList = () => {
   editJudge.judgeIsEdited(() => {
     router.push({ name: route.name as string })
   })
+}
+const saveData = () => {
+  router.push({ name: route.name as string })
+  message.success(SAVE_OK_INFO.Msg)
 }
 
 //

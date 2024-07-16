@@ -9,62 +9,13 @@
 <template>
   <div class="user-wrapper">
     <div class="content-box" style="height: 48px">
-      <a-tooltip placement="bottom">
-        <template #title>
-          <span>{{ ss.get(REGSISYO).sisyonm }}</span>
-        </template>
-        <span class="regsisyo">{{ ss.get(REGSISYO).sisyonm }}</span>
-      </a-tooltip>
-      <div class="icon-tool">
-        <div class="icon-tool-item" @click="showHelp">
-          <a-tooltip placement="bottom">
-            <template #title>
-              <span>ヘルプ</span>
-            </template>
-            <question-outlined />
-          </a-tooltip>
-        </div>
-        <a-dropdown
-          :trigger="['click']"
-          placement="bottom"
-          :get-popup-container="(triggerNode) => triggerNode.parentNode"
-        >
-          <template #overlay>
-            <HistoryMenu />
-          </template>
-          <div class="icon-tool-item" @click="showHistory">
-            <a-tooltip v-model:visible="historyTipVisible" placement="bottom">
-              <template #title>
-                <span>使用履歴</span>
-              </template>
-              <history-outlined />
-            </a-tooltip>
-          </div>
-        </a-dropdown>
-        <div class="icon-tool-item" :class="{ like: liked }" @click="showLikeModal">
-          <a-tooltip placement="bottom">
-            <template #title>
-              <span>お気に入り</span>
-            </template>
-            <heart-outlined />
-          </a-tooltip>
-        </div>
-      </div>
       <a-dropdown>
         <span class="action ant-dropdown-link user-dropdown-menu">
           <a-button type="primary" shape="circle">{{ nickname[0] }}</a-button>
-          <!-- <a-avatar class="topAvatar">{{ nickname[0] }}</a-avatar> -->
           <span class="nickname">{{ nickname }}</span>
         </span>
         <template #overlay>
           <a-menu class="user-dropdown-menu-wrapper">
-            <a-divider>{{ nickname }}</a-divider>
-            <a-menu-item @click="showSystemSetting">
-              <a>
-                <SettingOutlined />
-                <span>システム設定</span>
-              </a>
-            </a-menu-item>
             <a-menu-item @click="showChangePassword">
               <a>
                 <LockOutlined />
@@ -90,7 +41,6 @@
     </div>
   </div>
   <PasswordChangeModal v-model:visible="passwordVisible" />
-  <FavoriteModal v-model:visible="modalVisible" />
 </template>
 
 <script lang="ts" setup>

@@ -37,7 +37,7 @@ onMounted(() => {
 watch(
   () => [route.name, route.query],
   () => {
-    if (route.name === 'AWAF00501G') {
+    if (route.name === 'GJ8090') {
       status.value = route.query.status ? +route.query.status : PageSatatus.List
     }
   },

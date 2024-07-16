@@ -106,6 +106,7 @@ import { useSearch, useTableHeight } from '@/utils/hooks'
 import { showConfirmModal, showDeleteModal, showInfoModal } from '@/utils/modal'
 import { CLOSE_CONFIRM, ITEM_REQUIRE_ERROR } from '@/constants/msg'
 import { changeTableSort } from '@/utils/util'
+import emitter from '@/utils/event-bus'
 //--------------------------------------------------------------------------
 //データ定義
 //--------------------------------------------------------------------------
@@ -123,33 +124,37 @@ const createDefaultParams = () => {
   }
 }
 const searchParams = reactive(createDefaultParams())
+
+const tableDefault = (): RowData[] => {
+  return [
+    {
+      noujyocd: 10001,
+      noujyomei: '東京都千代田区農場',
+      jyusyo: '〒100-0001 東京都千代田区千代田1-1'
+    },
+    {
+      noujyocd: 10002,
+      noujyomei: '大阪府大阪市北区農場',
+      jyusyo: '〒530-0001 大阪府大阪市北区梅田3丁目1-1'
+    },
+    {
+      noujyocd: 10003,
+      noujyomei: '京都府京都市下農場',
+      jyusyo: '〒600-8216 京都府京都市下京区東塩小路町901'
+    },
+    {
+      noujyocd: 10004,
+      noujyomei: '福岡県福岡市博多区農場',
+      jyusyo: '〒812-0011 福岡県福岡市博多区博多駅前3丁目2-1'
+    }
+  ]
+}
 type RowData = {
   noujyocd: number
   noujyomei: string
   jyusyo: string
 }
-const tableData = ref<RowData[]>([
-  {
-    noujyocd: 10001,
-    noujyomei: '東京都千代田区農場',
-    jyusyo: '〒100-0001 東京都千代田区千代田1-1'
-  },
-  {
-    noujyocd: 10002,
-    noujyomei: '大阪府大阪市北区農場',
-    jyusyo: '〒530-0001 大阪府大阪市北区梅田3丁目1-1'
-  },
-  {
-    noujyocd: 10003,
-    noujyomei: '京都府京都市下農場',
-    jyusyo: '〒600-8216 京都府京都市下京区東塩小路町901'
-  },
-  {
-    noujyocd: 10004,
-    noujyomei: '福岡県福岡市博多区農場',
-    jyusyo: '〒812-0011 福岡県福岡市博多区博多駅前3丁目2-1'
-  }
-])
+const tableData = ref<RowData[]>([])
 
 //表の高さ
 const headRef = ref(null)
@@ -214,10 +219,11 @@ function search() {
     showInfoModal({
       type: 'error',
       title: 'エラー',
-      content: ITEM_REQUIRE_ERROR.Msg.replace('{0}', '検索条件')
+      content: ITEM_REQUIRE_ERROR.Msg.replace('{0}', '必須検索条件')
     })
     return
   }
+  tableData.value = tableDefault()
 }
 
 //クリア処理
@@ -246,7 +252,11 @@ const deleteRow = () => {
 const back = () => {
   showConfirmModal({
     content: CLOSE_CONFIRM.Msg,
-    onOk: () => {}
+    onOk: () => {
+      router.push({
+        name: 'AWAF00301G'
+      })
+    }
   })
 }
 </script>

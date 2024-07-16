@@ -21,7 +21,9 @@
         </div>
         <router-view />
         <div class="footer">
-          <div class="copyright">Copyright &copy;&nbsp;{{ new Date().getFullYear() }} Affect</div>
+          <div class="copyright">
+            Copyright &copy;&nbsp;{{ new Date().getFullYear() }} 養鶏-互助防疫
+          </div>
         </div>
       </div>
     </div>

@@ -29,33 +29,32 @@ export const commonRoutes = [
         path: '/home',
         name: 'AWAF00301G',
         component: Home,
-        meta: { title: 'ホーム', icon: 'common-manage' },
-
+        meta: { title: 'ホーム', icon: 'common-manage' }
       },
       {
         path: '/GJ10',
         name: 'GJ10',
-        meta: { title: '参加申込', icon: 'common-manage' },
+        meta: { title: '参加申込', icon: 'file-open' },
         children: [
           {
             path: '/GJ10/GJ1030',
-            name: 'AWAF00501G',
-            component: () => import('@/views/affect/AF/AWAF00501G/components/EditPage-unuse.vue'),
-            meta: { title: '(GJ1010) 契約者マスタメンテナンス', icon: 'common-manage' }
-          },
+            name: 'AWAF00601G',
+            component: () => import('@/views/affect/AF/AWAF00601G/AWAF00601G.vue'),
+            meta: { title: '(GJ1010) 契約者マスタメンテナンス', icon: 'comprehensive-data' }
+          }
         ]
       },
       {
         path: '/GJ80',
         name: 'GJ80',
-        meta: { title: 'マスタメンテナンス', icon: 'common-manage' },
+        meta: { title: 'マスタメンテナンス', icon: 'file-open' },
         children: [
           {
             path: '/GJ80/GJ8090',
             name: 'GJ8090',
             component: () => import('@/views/affect/AF/AWAF00501G/AWAF00501G.vue'),
-            meta: { title: '(GJ8090) 契約者農場マスタメンテナンス', icon: 'common-manage' }
-          },
+            meta: { title: '(GJ8090) 契約者農場マスタメンテナンス', icon: 'comprehensive-data' }
+          }
         ]
       },
       {
@@ -112,7 +111,6 @@ export function createrRootRouter(): Router {
   //       name: 'AWAF00301G',
   //       component: 'Home',
   //       meta: { title: 'ホーム', icon: 'common-manage' },
-
   //     },
   //     {
   //       path: '/GJ10',
@@ -152,7 +150,7 @@ export function createrRootRouter(): Router {
 
 //お気に入り
 export function createCollectRouter(): Router {
-  return null;
+  return null
   // return {
   //   path: '/Collect',
   //   name: 'Collect',
