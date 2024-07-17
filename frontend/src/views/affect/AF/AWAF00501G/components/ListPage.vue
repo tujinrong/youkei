@@ -1,5 +1,6 @@
 <template>
   <a-card ref="headRef" :bordered="false">
+    <h1>契約者農場一覧</h1>
     <div class="self_adaption_table form">
       <a-row>
         <a-col v-bind="layout">
@@ -264,5 +265,8 @@ const back = () => {
 <style lang="less" scoped>
 th {
   min-width: 100px;
+}
+h1 {
+  font-size: 24px;
 }
 </style>

@@ -1,5 +1,6 @@
 <template>
   <a-card :bordered="false" class="mb-2 h-full" :style="{ height: tableHeight + 50 + `px` }">
+    <h1>契約者一覧表(連絡用)</h1>
     <div class="self_adaption_table form">
       <a-row>
         <a-col v-bind="layout">
@@ -180,5 +181,8 @@ function onPreview() {
 <style scoped lang="less">
 th {
   width: 130px;
+}
+h1 {
+  font-size: 24px;
 }
 </style>

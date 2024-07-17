@@ -1,13 +1,18 @@
 <template>
   <a-card :bordered="false" class="mb-2 h-full" :style="{ height: tableHeight + 50 + `px` }">
+    <h1>契約者農場マスタメンテナンス</h1>
     <div class="self_adaption_table form">
       <b>第99期</b>
       <a-row>
-        <a-col v-bind="layout">
+        <a-col v-if="isNew" v-bind="layout">
           <th>契約者</th>
           <td>
             <ai-select v-model:value="formData.keiyakusya" :options="selectorlist"></ai-select>
           </td>
+        </a-col>
+        <a-col v-else v-bind="layout">
+          <th class="bg-readonly">契約者</th>
+          <TD>{{ selectorlist.find((e) => e.value == formData.keiyakusya)?.label }}</TD>
         </a-col>
       </a-row>
       <a-row>
@@ -77,6 +82,7 @@ import { showDeleteModal } from '@/utils/modal'
 import { DELETE_OK_INFO, SAVE_OK_INFO } from '@/constants/msg'
 import { message } from 'ant-design-vue'
 import { useTableHeight } from '@/utils/hooks'
+import TD from '@/components/Common/TableTD/index.vue'
 import emitter from '@/utils/event-bus'
 //---------------------------------------------------------------------------
 //属性
@@ -243,5 +249,8 @@ const deleteData = () => {
 <style scoped lang="less">
 th {
   width: 130px;
+}
+h1 {
+  font-size: 24px;
 }
 </style>

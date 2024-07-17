@@ -1,7 +1,7 @@
 <template>
   <a-modal
     v-model:visible="modalVisible"
-    :closable="false"
+    :closable="true"
     :mask-closable="false"
     destroy-on-close
     centered
@@ -146,6 +146,6 @@ const closeModel = () => {
 }
 #viewer-host {
   width: 100%;
-  height: 600px;
+  height: 800px;
 }
 </style>

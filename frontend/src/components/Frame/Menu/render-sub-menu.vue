@@ -30,7 +30,15 @@
     <template #icon>
       <svg-icon v-if="menu.meta?.icon" :name="menu.meta.icon" />
     </template>
-    <span>{{ menu.meta?.title }}</span>
+
+    <a-dropdown :trigger="['contextmenu']">
+      <span>{{ menu.meta?.title }}</span>
+      <template #overlay>
+        <a-menu>
+          <a-menu-item @click="() => menuClick(menu.path)">コピー</a-menu-item>
+        </a-menu>
+      </template>
+    </a-dropdown>
   </a-menu-item>
 </template>
 <script lang="ts" setup>
@@ -86,6 +94,15 @@ const filterParams = (menu: Router) => {
   } else {
     router.push({ name })
   }
+}
+
+const menuClick = (path: string) => {
+  const width = 1000
+  const height = 800
+  const left = window.screen.width / 2 - width / 2
+  const top = window.screen.height / 2 - height / 2
+  const features = `width=${width},height=${height},left=${left},top=${top},toolbar=yes,menubar=yes,location=yes,status=yes`
+  window.open(`http://localhost:3000${path}`, '_blank', features)
 }
 </script>
 <style lang="less" scoped>

@@ -40,7 +40,7 @@ export const commonRoutes = [
             path: '/GJ10/GJ1030',
             name: 'AWAF00601G',
             component: () => import('@/views/affect/AF/AWAF00601G/AWAF00601G.vue'),
-            meta: { title: '(GJ1010) 契約者マスタメンテナンス', icon: 'comprehensive-data' }
+            meta: { title: '契約者一覧表(連絡用)', icon: 'comprehensive-data' }
           }
         ]
       },
@@ -53,7 +53,7 @@ export const commonRoutes = [
             path: '/GJ80/GJ8090',
             name: 'GJ8090',
             component: () => import('@/views/affect/AF/AWAF00501G/AWAF00501G.vue'),
-            meta: { title: '(GJ8090) 契約者農場マスタメンテナンス', icon: 'comprehensive-data' }
+            meta: { title: '契約者農場マスタ', icon: 'comprehensive-data' }
           }
         ]
       },
