@@ -39,9 +39,9 @@
         <a-col v-bind="layout">
           <th>契約区分</th>
           <td class="flex">
-            <ai-select v-model:value="formData.c" :options="selectorlist"></ai-select>～<ai-select
+            <ai-select v-model:value="formData.c" :options="keiyakukbnlist"></ai-select>～<ai-select
               v-model:value="formData.d"
-              :options="selectorlist"
+              :options="keiyakukbnlist"
             ></ai-select>
           </td>
         </a-col>
@@ -74,17 +74,15 @@
         <a-col v-bind="layout">
           <th>契約者番号</th>
           <td class="flex">
-            <a-input v-model:value="formData.c" :options="selectorlist" :xxl="9"></a-input>
+            <a-input v-model:value="formData.c" :xxl="9"></a-input>
             ～
             <a-input v-model:value="formData.d" :xxl="9"></a-input>
           </td>
         </a-col>
       </a-row>
     </div>
-    <!-- <JSViewer ref="reportViewer"></JSViewer> -->
-    <ReportViewer ref="reportViewer" />
   </a-card>
-  <!-- <PreviewModal v-model:visible="previewVisible" /> -->
+  <PreviewModal v-model:visible="previewVisible" />
 </template>
 
 <script setup lang="ts">
@@ -94,12 +92,7 @@ import { useRoute, useRouter } from 'vue-router'
 import { Judgement } from '@/utils/judge-edited'
 import { useTableHeight } from '@/utils/hooks'
 import PreviewModal from './components/PreviewModal.vue'
-import { DELETE_OK_INFO } from '@/constants/msg'
-import { showConfirmModal } from '@/utils/modal'
-import { message } from 'ant-design-vue'
-import { ReportViewer } from '@grapecity/activereports'
-import { Viewer as JSViewer } from '@grapecity/activereports-vue'
-import { PageReport } from '@grapecity/activereports/core'
+
 //---------------------------------------------------------------------------
 //属性
 //---------------------------------------------------------------------------
@@ -135,6 +128,11 @@ const selectorlist = [
   { value: '2', label: '尾三' },
   { value: '3', label: '史さん' }
 ]
+const keiyakukbnlist = [
+  { value: '1', label: '家族' },
+  { value: '2', label: '企業' },
+  { value: '3', label: '鶏以外' }
+]
 const layout = {
   md: 24,
   lg: 24,
@@ -144,12 +142,8 @@ const previewVisible = ref(false)
 //---------------------------------------------------------------------------
 //フック関数
 //--------------------------------------------------------------------------
-const reportViewer = ref()
 onMounted(async () => {
   editJudge.addEvent()
-  const report = new PageReport()
-  const viewer = reportViewer.value?.Viewer().open(report)
-  viewer.open('/2.rdlx-json')
 })
 //--------------------------------------------------------------------------
 //計算定義

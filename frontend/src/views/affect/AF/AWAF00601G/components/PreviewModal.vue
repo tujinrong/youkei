@@ -13,9 +13,7 @@
         <span>プレビュー</span>
       </div>
     </template>
-
-    <div id="viewercontainer" ref="viewerContainer" w-200 h-200></div>
-
+    <div id="viewer-host"></div>
     <template #footer>
       <a-button type="primary" @click="closeModel">閉じる</a-button>
     </template>
@@ -25,11 +23,11 @@
 <script setup lang="ts">
 import { PreviewRequest } from '@/views/affect/EU/AWEU00303D/type'
 import { computed, nextTick, ref, watch } from 'vue'
-import { data } from '../constant'
+import { Viewer as JSViewer } from '@grapecity/activereports-vue'
+import '@grapecity/activereports/styles/ar-js-ui.css'
+import '@grapecity/activereports/styles/ar-js-viewer.css'
+import '@grapecity/activereports-localization'
 import { ReportViewer, Core, PdfExport } from '@grapecity/activereports'
-// import { Viewer as ReportViewer } from '@grapecity/activereports-vue'
-// import '@grapecity/activereports/styles/ar-js-viewer.css'
-
 //---------------------------------------------------------------------------
 //属性
 //---------------------------------------------------------------------------
@@ -42,10 +40,50 @@ const emit = defineEmits(['update:visible'])
 //--------------------------------------------------------------------------
 //データ定義
 //--------------------------------------------------------------------------
-const viewercontainerHeight = ref('750px')
 const modalWidth = ref('1000px')
 const modalClass = ref('custom-modal')
-
+const categories = ref([
+  {
+    categoryId: 1,
+    categoryName: 'Beverages',
+    checked: true
+  },
+  {
+    categoryId: 2,
+    categoryName: 'Condiments',
+    checked: false
+  },
+  {
+    categoryId: 3,
+    categoryName: 'Confections',
+    checked: false
+  },
+  {
+    categoryId: 4,
+    categoryName: 'Dairy Products',
+    checked: false
+  },
+  {
+    categoryId: 5,
+    categoryName: 'Grains/Cereals',
+    checked: false
+  },
+  {
+    categoryId: 6,
+    categoryName: 'Meat/Poultry',
+    checked: false
+  },
+  {
+    categoryId: 7,
+    categoryName: 'Produce',
+    checked: false
+  },
+  {
+    categoryId: 8,
+    categoryName: 'Seafood',
+    checked: false
+  }
+])
 //--------------------------------------------------------------------------
 //計算定義
 //--------------------------------------------------------------------------
@@ -57,6 +95,10 @@ const modalVisible = computed({
     emit('update:visible', visible)
   }
 })
+
+const categoryIds = computed(() =>
+  categories.value.filter((cat) => cat.checked).map((cat) => cat.categoryId)
+)
 //--------------------------------------------------------------------------
 //監視定義
 //--------------------------------------------------------------------------
@@ -65,29 +107,18 @@ watch(
   async (visible) => {
     if (visible) {
       await nextTick()
-      const viewer = new ReportViewer.Viewer('#viewercontainer', { language: 'ja' })
-      // const viewer = new ReportViewer(viewerContainer.value, { language: 'ja' });
-      // viewer.open('/MarketSnapshot.rdlx-json');
-      viewer.open('public/MarketSnapshot.rdlx-json').catch((e) => {
-        console.log(e)
+      const viewer = new ReportViewer.Viewer('#viewer-host', { language: 'ja' })
+      viewer.open('/report/keyakusya.rdlx-json', {
+        ReportParams: [
+          {
+            Name: 'CategoryId',
+            Value: categoryIds.value
+          }
+        ]
       })
-      // viewerContainer.value.viewer.open('/MarketSnapshot.rdlx-json', { language: 'ja' })
-
-      // fetch('/1.rdlx-json')
-      //   .then((response) => response.json())
-      //   .then((report) => {
-      //     viewer.open(report)
-      //   })
-
-      // const parameters = [
-      //   { Name: 'レポートパラメータ1', Value: ['値1'] },
-      //   { Name: 'レポートパラメータ2', Value: ['値2'] }
-      // ]
-      // viewer.open('/youke.rdlx-json', { ReportParams: parameters })
     }
   }
 )
-
 //
 const closeModel = () => {
   modalVisible.value = false
@@ -112,5 +143,9 @@ const closeModel = () => {
 }
 .custom-modal .ant-modal-body {
   padding: 0 !important;
+}
+#viewer-host {
+  width: 100%;
+  height: 600px;
 }
 </style>

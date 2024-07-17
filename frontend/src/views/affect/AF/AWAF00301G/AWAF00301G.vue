@@ -9,7 +9,7 @@
 <template>
   <div class="home flex">
     <!-- <h1 class="title">ようこそ</h1> -->
-    <a-button type="primary" @click="open">jump</a-button>
+    <a-button type="primary" @click="open">ジャンプ</a-button>
   </div>
 </template>
 
@@ -27,7 +27,7 @@ function open() {
 <style lang="less" scoped>
 .home {
   display: flex;
-  justify-content: center;
+  justify-content: left;
   height: 100vh;
   background-color: white;
   //background-image: url('./logo.jpg');
