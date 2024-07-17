@@ -7,12 +7,22 @@
  * 変更履歴　:
  * ----------------------------------------------------------------->
 <template>
-  <div class="home">
+  <div class="home flex">
     <!-- <h1 class="title">ようこそ</h1> -->
+    <a-button type="primary" @click="open">jump</a-button>
   </div>
 </template>
 
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+function open() {
+  const width = 800
+  const height = 600
+  const left = window.screen.width / 2 - width / 2
+  const top = window.screen.height / 2 - height / 2
+  const features = `width=${width},height=${height},left=${left},top=${top},toolbar=yes,menubar=yes,location=yes,status=yes`
+  window.open('http://localhost:3000/home', '_blank', features)
+}
+</script>
 
 <style lang="less" scoped>
 .home {

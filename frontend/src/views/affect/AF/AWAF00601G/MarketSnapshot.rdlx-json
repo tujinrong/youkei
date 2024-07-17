@@ -1,0 +1,859 @@
+{
+    "Name": "Report",
+    "Type": "report",
+    "Width": "9.7215in",
+    "DataSources": [
+        {
+            "Name": "DataSource1",
+            "ConnectionProperties": {
+                "ConnectString": "jsondata={\n\t\"Snapshot\": [\n\t\t{\n\t\t\t\"Symbol\": \"MSFT\",\n\t\t\t\"Company\": \"Microsoft Corp.\",\n\t\t\t\"Date\": \"2007-10-29\",\n\t\t\t\"Open\": \"$34.85\",\n\t\t\t\"High\": \"$35.29\",\n\t\t\t\"Low\": \"$34.45\",\n\t\t\t\"Close\": \"$34.57\",\n\t\t\t\"Volume\": \"114655600\",\n\t\t\t\"AdjClose\": \"34.46\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"MSFT\",\n\t\t\t\"Company\": \"Microsoft Corp.\",\n\t\t\t\"Date\": \"2007-10-30\",\n\t\t\t\"Open\": \"$34.37\",\n\t\t\t\"High\": \"$35.59\",\n\t\t\t\"Low\": \"$34.35\",\n\t\t\t\"Close\": \"$35.57\",\n\t\t\t\"Volume\": \"107297300\",\n\t\t\t\"AdjClose\": \"35.45\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"MSFT\",\n\t\t\t\"Company\": \"Microsoft Corp.\",\n\t\t\t\"Date\": \"2007-10-31\",\n\t\t\t\"Open\": \"$35.52\",\n\t\t\t\"High\": \"$37.00\",\n\t\t\t\"Low\": \"$35.51\",\n\t\t\t\"Close\": \"$36.81\",\n\t\t\t\"Volume\": \"185635800\",\n\t\t\t\"AdjClose\": \"36.69\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"MSFT\",\n\t\t\t\"Company\": \"Microsoft Corp.\",\n\t\t\t\"Date\": \"2007-11-01\",\n\t\t\t\"Open\": \"$36.53\",\n\t\t\t\"High\": \"$37.49\",\n\t\t\t\"Low\": \"$36.36\",\n\t\t\t\"Close\": \"$37.06\",\n\t\t\t\"Volume\": \"152078800\",\n\t\t\t\"AdjClose\": \"36.94\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"MSFT\",\n\t\t\t\"Company\": \"Microsoft Corp.\",\n\t\t\t\"Date\": \"2007-11-02\",\n\t\t\t\"Open\": \"$37.22\",\n\t\t\t\"High\": \"$37.50\",\n\t\t\t\"Low\": \"$36.42\",\n\t\t\t\"Close\": \"$37.06\",\n\t\t\t\"Volume\": \"96389800\",\n\t\t\t\"AdjClose\": \"36.94\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"MSFT\",\n\t\t\t\"Company\": \"Microsoft Corp.\",\n\t\t\t\"Date\": \"2007-11-05\",\n\t\t\t\"Open\": \"$36.76\",\n\t\t\t\"High\": \"$37.10\",\n\t\t\t\"Low\": \"$36.63\",\n\t\t\t\"Close\": \"$36.73\",\n\t\t\t\"Volume\": \"75485400\",\n\t\t\t\"AdjClose\": \"36.61\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"MSFT\",\n\t\t\t\"Company\": \"Microsoft Corp.\",\n\t\t\t\"Date\": \"2007-11-06\",\n\t\t\t\"Open\": \"$36.59\",\n\t\t\t\"High\": \"$36.66\",\n\t\t\t\"Low\": \"$35.87\",\n\t\t\t\"Close\": \"$36.41\",\n\t\t\t\"Volume\": \"100966700\",\n\t\t\t\"AdjClose\": \"36.29\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"MSFT\",\n\t\t\t\"Company\": \"Microsoft Corp.\",\n\t\t\t\"Date\": \"2007-11-07\",\n\t\t\t\"Open\": \"$36.04\",\n\t\t\t\"High\": \"$36.16\",\n\t\t\t\"Low\": \"$35.45\",\n\t\t\t\"Close\": \"$35.52\",\n\t\t\t\"Volume\": \"74873600\",\n\t\t\t\"AdjClose\": \"35.40\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"MSFT\",\n\t\t\t\"Company\": \"Microsoft Corp.\",\n\t\t\t\"Date\": \"2007-11-08\",\n\t\t\t\"Open\": \"$35.60\",\n\t\t\t\"High\": \"$35.90\",\n\t\t\t\"Low\": \"$34.40\",\n\t\t\t\"Close\": \"$34.74\",\n\t\t\t\"Volume\": \"133742400\",\n\t\t\t\"AdjClose\": \"34.63\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"MSFT\",\n\t\t\t\"Company\": \"Microsoft Corp.\",\n\t\t\t\"Date\": \"2007-11-09\",\n\t\t\t\"Open\": \"$34.18\",\n\t\t\t\"High\": \"$34.54\",\n\t\t\t\"Low\": \"$33.65\",\n\t\t\t\"Close\": \"$33.73\",\n\t\t\t\"Volume\": \"125111400\",\n\t\t\t\"AdjClose\": \"33.62\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"MSFT\",\n\t\t\t\"Company\": \"Microsoft Corp.\",\n\t\t\t\"Date\": \"2007-11-12\",\n\t\t\t\"Open\": \"$33.32\",\n\t\t\t\"High\": \"$33.71\",\n\t\t\t\"Low\": \"$33.02\",\n\t\t\t\"Close\": \"$33.38\",\n\t\t\t\"Volume\": \"84719000\",\n\t\t\t\"AdjClose\": \"33.27\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"MSFT\",\n\t\t\t\"Company\": \"Microsoft Corp.\",\n\t\t\t\"Date\": \"2007-11-13\",\n\t\t\t\"Open\": \"$33.54\",\n\t\t\t\"High\": \"$34.67\",\n\t\t\t\"Low\": \"$33.38\",\n\t\t\t\"Close\": \"$34.46\",\n\t\t\t\"Volume\": \"104261100\",\n\t\t\t\"AdjClose\": \"34.46\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"MSFT\",\n\t\t\t\"Company\": \"Microsoft Corp.\",\n\t\t\t\"Date\": \"2007-11-14\",\n\t\t\t\"Open\": \"$34.62\",\n\t\t\t\"High\": \"$34.75\",\n\t\t\t\"Low\": \"$33.75\",\n\t\t\t\"Close\": \"$33.93\",\n\t\t\t\"Volume\": \"83840100\",\n\t\t\t\"AdjClose\": \"33.93\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"MSFT\",\n\t\t\t\"Company\": \"Microsoft Corp.\",\n\t\t\t\"Date\": \"2007-11-15\",\n\t\t\t\"Open\": \"$33.76\",\n\t\t\t\"High\": \"$34.10\",\n\t\t\t\"Low\": \"$33.55\",\n\t\t\t\"Close\": \"$33.76\",\n\t\t\t\"Volume\": \"63111200\",\n\t\t\t\"AdjClose\": \"33.76\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"MSFT\",\n\t\t\t\"Company\": \"Microsoft Corp.\",\n\t\t\t\"Date\": \"2007-11-16\",\n\t\t\t\"Open\": \"$33.86\",\n\t\t\t\"High\": \"$34.26\",\n\t\t\t\"Low\": \"$33.71\",\n\t\t\t\"Close\": \"$34.09\",\n\t\t\t\"Volume\": \"71113800\",\n\t\t\t\"AdjClose\": \"34.09\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"MSFT\",\n\t\t\t\"Company\": \"Microsoft Corp.\",\n\t\t\t\"Date\": \"2007-11-19\",\n\t\t\t\"Open\": \"$33.96\",\n\t\t\t\"High\": \"$34.24\",\n\t\t\t\"Low\": \"$33.87\",\n\t\t\t\"Close\": \"$33.96\",\n\t\t\t\"Volume\": \"63000300\",\n\t\t\t\"AdjClose\": \"33.96\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"MSFT\",\n\t\t\t\"Company\": \"Microsoft Corp.\",\n\t\t\t\"Date\": \"2007-11-20\",\n\t\t\t\"Open\": \"$34.23\",\n\t\t\t\"High\": \"$34.97\",\n\t\t\t\"Low\": \"$34.10\",\n\t\t\t\"Close\": \"$34.58\",\n\t\t\t\"Volume\": \"100009400\",\n\t\t\t\"AdjClose\": \"34.58\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"MSFT\",\n\t\t\t\"Company\": \"Microsoft Corp.\",\n\t\t\t\"Date\": \"2007-11-21\",\n\t\t\t\"Open\": \"$34.40\",\n\t\t\t\"High\": \"$34.73\",\n\t\t\t\"Low\": \"$34.18\",\n\t\t\t\"Close\": \"$34.23\",\n\t\t\t\"Volume\": \"89518700\",\n\t\t\t\"AdjClose\": \"34.23\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"MSFT\",\n\t\t\t\"Company\": \"Microsoft Corp.\",\n\t\t\t\"Date\": \"2007-11-23\",\n\t\t\t\"Open\": \"$34.36\",\n\t\t\t\"High\": \"$34.44\",\n\t\t\t\"Low\": \"$33.71\",\n\t\t\t\"Close\": \"$34.11\",\n\t\t\t\"Volume\": \"33467200\",\n\t\t\t\"AdjClose\": \"34.11\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"MSFT\",\n\t\t\t\"Company\": \"Microsoft Corp.\",\n\t\t\t\"Date\": \"2007-11-26\",\n\t\t\t\"Open\": \"$34.09\",\n\t\t\t\"High\": \"$34.37\",\n\t\t\t\"Low\": \"$32.93\",\n\t\t\t\"Close\": \"$32.97\",\n\t\t\t\"Volume\": \"80335000\",\n\t\t\t\"AdjClose\": \"32.97\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"MSFT\",\n\t\t\t\"Company\": \"Microsoft Corp.\",\n\t\t\t\"Date\": \"2007-11-27\",\n\t\t\t\"Open\": \"$33.27\",\n\t\t\t\"High\": \"$33.60\",\n\t\t\t\"Low\": \"$32.68\",\n\t\t\t\"Close\": \"$33.06\",\n\t\t\t\"Volume\": \"84178400\",\n\t\t\t\"AdjClose\": \"33.06\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"ORCL\",\n\t\t\t\"Company\": \"Oracle Corp.\",\n\t\t\t\"Date\": \"2007-10-29\",\n\t\t\t\"Open\": \"$21.49\",\n\t\t\t\"High\": \"$21.82\",\n\t\t\t\"Low\": \"$21.30\",\n\t\t\t\"Close\": \"$21.77\",\n\t\t\t\"Volume\": \"29289800\",\n\t\t\t\"AdjClose\": \"21.77\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"ORCL\",\n\t\t\t\"Company\": \"Oracle Corp.\",\n\t\t\t\"Date\": \"2007-10-30\",\n\t\t\t\"Open\": \"$21.65\",\n\t\t\t\"High\": \"$21.74\",\n\t\t\t\"Low\": \"$21.48\",\n\t\t\t\"Close\": \"$21.63\",\n\t\t\t\"Volume\": \"25713100\",\n\t\t\t\"AdjClose\": \"21.63\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"ORCL\",\n\t\t\t\"Company\": \"Oracle Corp.\",\n\t\t\t\"Date\": \"2007-10-31\",\n\t\t\t\"Open\": \"$21.64\",\n\t\t\t\"High\": \"$22.24\",\n\t\t\t\"Low\": \"$21.63\",\n\t\t\t\"Close\": \"$22.17\",\n\t\t\t\"Volume\": \"31532300\",\n\t\t\t\"AdjClose\": \"22.17\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"ORCL\",\n\t\t\t\"Company\": \"Oracle Corp.\",\n\t\t\t\"Date\": \"2007-11-01\",\n\t\t\t\"Open\": \"$22.00\",\n\t\t\t\"High\": \"$22.19\",\n\t\t\t\"Low\": \"$21.75\",\n\t\t\t\"Close\": \"$21.76\",\n\t\t\t\"Volume\": \"34307000\",\n\t\t\t\"AdjClose\": \"21.76\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"ORCL\",\n\t\t\t\"Company\": \"Oracle Corp.\",\n\t\t\t\"Date\": \"2007-11-02\",\n\t\t\t\"Open\": \"$21.81\",\n\t\t\t\"High\": \"$22.10\",\n\t\t\t\"Low\": \"$21.68\",\n\t\t\t\"Close\": \"$22.03\",\n\t\t\t\"Volume\": \"30855000\",\n\t\t\t\"AdjClose\": \"22.03\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"ORCL\",\n\t\t\t\"Company\": \"Oracle Corp.\",\n\t\t\t\"Date\": \"2007-11-05\",\n\t\t\t\"Open\": \"$21.83\",\n\t\t\t\"High\": \"$22.21\",\n\t\t\t\"Low\": \"$21.76\",\n\t\t\t\"Close\": \"$22.07\",\n\t\t\t\"Volume\": \"26492400\",\n\t\t\t\"AdjClose\": \"22.07\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"ORCL\",\n\t\t\t\"Company\": \"Oracle Corp.\",\n\t\t\t\"Date\": \"2007-11-06\",\n\t\t\t\"Open\": \"$22.53\",\n\t\t\t\"High\": \"$22.89\",\n\t\t\t\"Low\": \"$22.34\",\n\t\t\t\"Close\": \"$22.83\",\n\t\t\t\"Volume\": \"34099100\",\n\t\t\t\"AdjClose\": \"22.83\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"ORCL\",\n\t\t\t\"Company\": \"Oracle Corp.\",\n\t\t\t\"Date\": \"2007-11-07\",\n\t\t\t\"Open\": \"$22.50\",\n\t\t\t\"High\": \"$22.69\",\n\t\t\t\"Low\": \"$22.07\",\n\t\t\t\"Close\": \"$22.10\",\n\t\t\t\"Volume\": \"38079900\",\n\t\t\t\"AdjClose\": \"22.10\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"ORCL\",\n\t\t\t\"Company\": \"Oracle Corp.\",\n\t\t\t\"Date\": \"2007-11-08\",\n\t\t\t\"Open\": \"$21.90\",\n\t\t\t\"High\": \"$22.05\",\n\t\t\t\"Low\": \"$19.82\",\n\t\t\t\"Close\": \"$20.35\",\n\t\t\t\"Volume\": \"94809100\",\n\t\t\t\"AdjClose\": \"20.35\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"ORCL\",\n\t\t\t\"Company\": \"Oracle Corp.\",\n\t\t\t\"Date\": \"2007-11-09\",\n\t\t\t\"Open\": \"$19.93\",\n\t\t\t\"High\": \"$20.07\",\n\t\t\t\"Low\": \"$19.32\",\n\t\t\t\"Close\": \"$19.36\",\n\t\t\t\"Volume\": \"77217100\",\n\t\t\t\"AdjClose\": \"19.36\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"ORCL\",\n\t\t\t\"Company\": \"Oracle Corp.\",\n\t\t\t\"Date\": \"2007-11-12\",\n\t\t\t\"Open\": \"$19.25\",\n\t\t\t\"High\": \"$19.92\",\n\t\t\t\"Low\": \"$19.06\",\n\t\t\t\"Close\": \"$19.44\",\n\t\t\t\"Volume\": \"55279900\",\n\t\t\t\"AdjClose\": \"19.44\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"ORCL\",\n\t\t\t\"Company\": \"Oracle Corp.\",\n\t\t\t\"Date\": \"2007-11-13\",\n\t\t\t\"Open\": \"$19.80\",\n\t\t\t\"High\": \"$20.53\",\n\t\t\t\"Low\": \"$19.44\",\n\t\t\t\"Close\": \"$20.52\",\n\t\t\t\"Volume\": \"48236300\",\n\t\t\t\"AdjClose\": \"20.52\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"ORCL\",\n\t\t\t\"Company\": \"Oracle Corp.\",\n\t\t\t\"Date\": \"2007-11-14\",\n\t\t\t\"Open\": \"$20.83\",\n\t\t\t\"High\": \"$20.93\",\n\t\t\t\"Low\": \"$19.99\",\n\t\t\t\"Close\": \"$20.18\",\n\t\t\t\"Volume\": \"47227400\",\n\t\t\t\"AdjClose\": \"20.18\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"ORCL\",\n\t\t\t\"Company\": \"Oracle Corp.\",\n\t\t\t\"Date\": \"2007-11-15\",\n\t\t\t\"Open\": \"$19.92\",\n\t\t\t\"High\": \"$20.62\",\n\t\t\t\"Low\": \"$19.72\",\n\t\t\t\"Close\": \"$20.42\",\n\t\t\t\"Volume\": \"54921900\",\n\t\t\t\"AdjClose\": \"20.42\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"ORCL\",\n\t\t\t\"Company\": \"Oracle Corp.\",\n\t\t\t\"Date\": \"2007-11-16\",\n\t\t\t\"Open\": \"$20.42\",\n\t\t\t\"High\": \"$21.06\",\n\t\t\t\"Low\": \"$20.19\",\n\t\t\t\"Close\": \"$20.80\",\n\t\t\t\"Volume\": \"44726900\",\n\t\t\t\"AdjClose\": \"20.80\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"ORCL\",\n\t\t\t\"Company\": \"Oracle Corp.\",\n\t\t\t\"Date\": \"2007-11-19\",\n\t\t\t\"Open\": \"$20.65\",\n\t\t\t\"High\": \"$20.88\",\n\t\t\t\"Low\": \"$20.32\",\n\t\t\t\"Close\": \"$20.53\",\n\t\t\t\"Volume\": \"29047300\",\n\t\t\t\"AdjClose\": \"20.53\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"ORCL\",\n\t\t\t\"Company\": \"Oracle Corp.\",\n\t\t\t\"Date\": \"2007-11-20\",\n\t\t\t\"Open\": \"$20.44\",\n\t\t\t\"High\": \"$20.94\",\n\t\t\t\"Low\": \"$20.23\",\n\t\t\t\"Close\": \"$20.69\",\n\t\t\t\"Volume\": \"34610300\",\n\t\t\t\"AdjClose\": \"20.69\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"ORCL\",\n\t\t\t\"Company\": \"Oracle Corp.\",\n\t\t\t\"Date\": \"2007-11-21\",\n\t\t\t\"Open\": \"$20.25\",\n\t\t\t\"High\": \"$20.63\",\n\t\t\t\"Low\": \"$20.02\",\n\t\t\t\"Close\": \"$20.21\",\n\t\t\t\"Volume\": \"29401300\",\n\t\t\t\"AdjClose\": \"20.21\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"ORCL\",\n\t\t\t\"Company\": \"Oracle Corp.\",\n\t\t\t\"Date\": \"2007-11-23\",\n\t\t\t\"Open\": \"$20.24\",\n\t\t\t\"High\": \"$20.43\",\n\t\t\t\"Low\": \"$20.06\",\n\t\t\t\"Close\": \"$20.31\",\n\t\t\t\"Volume\": \"11205800\",\n\t\t\t\"AdjClose\": \"20.31\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"ORCL\",\n\t\t\t\"Company\": \"Oracle Corp.\",\n\t\t\t\"Date\": \"2007-11-26\",\n\t\t\t\"Open\": \"$20.38\",\n\t\t\t\"High\": \"$20.50\",\n\t\t\t\"Low\": \"$19.69\",\n\t\t\t\"Close\": \"$19.70\",\n\t\t\t\"Volume\": \"26671500\",\n\t\t\t\"AdjClose\": \"19.70\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"ORCL\",\n\t\t\t\"Company\": \"Oracle Corp.\",\n\t\t\t\"Date\": \"2007-11-27\",\n\t\t\t\"Open\": \"$19.75\",\n\t\t\t\"High\": \"$20.18\",\n\t\t\t\"Low\": \"$19.50\",\n\t\t\t\"Close\": \"$19.89\",\n\t\t\t\"Volume\": \"33107100\",\n\t\t\t\"AdjClose\": \"19.89\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"DELL\",\n\t\t\t\"Company\": \"Dell Inc.\",\n\t\t\t\"Date\": \"2007-10-29\",\n\t\t\t\"Open\": \"$29.66\",\n\t\t\t\"High\": \"$30.03\",\n\t\t\t\"Low\": \"$29.46\",\n\t\t\t\"Close\": \"$29.47\",\n\t\t\t\"Volume\": \"31773400\",\n\t\t\t\"AdjClose\": \"29.47\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"DELL\",\n\t\t\t\"Company\": \"Dell Inc.\",\n\t\t\t\"Date\": \"2007-10-30\",\n\t\t\t\"Open\": \"$29.45\",\n\t\t\t\"High\": \"$29.97\",\n\t\t\t\"Low\": \"$29.40\",\n\t\t\t\"Close\": \"$29.80\",\n\t\t\t\"Volume\": \"30864600\",\n\t\t\t\"AdjClose\": \"29.80\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"DELL\",\n\t\t\t\"Company\": \"Dell Inc.\",\n\t\t\t\"Date\": \"2007-10-31\",\n\t\t\t\"Open\": \"$30.56\",\n\t\t\t\"High\": \"$30.77\",\n\t\t\t\"Low\": \"$30.24\",\n\t\t\t\"Close\": \"$30.60\",\n\t\t\t\"Volume\": \"49728200\",\n\t\t\t\"AdjClose\": \"30.60\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"DELL\",\n\t\t\t\"Company\": \"Dell Inc.\",\n\t\t\t\"Date\": \"2007-11-01\",\n\t\t\t\"Open\": \"$30.28\",\n\t\t\t\"High\": \"$30.54\",\n\t\t\t\"Low\": \"$29.62\",\n\t\t\t\"Close\": \"$29.70\",\n\t\t\t\"Volume\": \"27497000\",\n\t\t\t\"AdjClose\": \"29.70\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"DELL\",\n\t\t\t\"Company\": \"Dell Inc.\",\n\t\t\t\"Date\": \"2007-11-02\",\n\t\t\t\"Open\": \"$29.96\",\n\t\t\t\"High\": \"$30.22\",\n\t\t\t\"Low\": \"$29.51\",\n\t\t\t\"Close\": \"$30.05\",\n\t\t\t\"Volume\": \"24725500\",\n\t\t\t\"AdjClose\": \"30.05\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"DELL\",\n\t\t\t\"Company\": \"Dell Inc.\",\n\t\t\t\"Date\": \"2007-11-05\",\n\t\t\t\"Open\": \"$29.51\",\n\t\t\t\"High\": \"$30.11\",\n\t\t\t\"Low\": \"$29.50\",\n\t\t\t\"Close\": \"$29.97\",\n\t\t\t\"Volume\": \"19276500\",\n\t\t\t\"AdjClose\": \"29.97\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"DELL\",\n\t\t\t\"Company\": \"Dell Inc.\",\n\t\t\t\"Date\": \"2007-11-06\",\n\t\t\t\"Open\": \"$30.20\",\n\t\t\t\"High\": \"$30.37\",\n\t\t\t\"Low\": \"$29.69\",\n\t\t\t\"Close\": \"$30.25\",\n\t\t\t\"Volume\": \"15779000\",\n\t\t\t\"AdjClose\": \"30.25\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"DELL\",\n\t\t\t\"Company\": \"Dell Inc.\",\n\t\t\t\"Date\": \"2007-11-07\",\n\t\t\t\"Open\": \"$29.97\",\n\t\t\t\"High\": \"$30.06\",\n\t\t\t\"Low\": \"$29.17\",\n\t\t\t\"Close\": \"$29.31\",\n\t\t\t\"Volume\": \"25627300\",\n\t\t\t\"AdjClose\": \"29.31\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"DELL\",\n\t\t\t\"Company\": \"Dell Inc.\",\n\t\t\t\"Date\": \"2007-11-08\",\n\t\t\t\"Open\": \"$29.25\",\n\t\t\t\"High\": \"$29.42\",\n\t\t\t\"Low\": \"$27.90\",\n\t\t\t\"Close\": \"$28.54\",\n\t\t\t\"Volume\": \"28863400\",\n\t\t\t\"AdjClose\": \"28.54\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"DELL\",\n\t\t\t\"Company\": \"Dell Inc.\",\n\t\t\t\"Date\": \"2007-11-09\",\n\t\t\t\"Open\": \"$27.53\",\n\t\t\t\"High\": \"$27.73\",\n\t\t\t\"Low\": \"$27.09\",\n\t\t\t\"Close\": \"$27.31\",\n\t\t\t\"Volume\": \"24790300\",\n\t\t\t\"AdjClose\": \"27.31\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"DELL\",\n\t\t\t\"Company\": \"Dell Inc.\",\n\t\t\t\"Date\": \"2007-11-12\",\n\t\t\t\"Open\": \"$27.35\",\n\t\t\t\"High\": \"$27.58\",\n\t\t\t\"Low\": \"$26.85\",\n\t\t\t\"Close\": \"$27.17\",\n\t\t\t\"Volume\": \"24082600\",\n\t\t\t\"AdjClose\": \"27.17\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"DELL\",\n\t\t\t\"Company\": \"Dell Inc.\",\n\t\t\t\"Date\": \"2007-11-13\",\n\t\t\t\"Open\": \"$27.42\",\n\t\t\t\"High\": \"$28.21\",\n\t\t\t\"Low\": \"$27.17\",\n\t\t\t\"Close\": \"$28.21\",\n\t\t\t\"Volume\": \"24278400\",\n\t\t\t\"AdjClose\": \"28.21\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"DELL\",\n\t\t\t\"Company\": \"Dell Inc.\",\n\t\t\t\"Date\": \"2007-11-14\",\n\t\t\t\"Open\": \"$28.31\",\n\t\t\t\"High\": \"$28.32\",\n\t\t\t\"Low\": \"$27.47\",\n\t\t\t\"Close\": \"$27.61\",\n\t\t\t\"Volume\": \"17764400\",\n\t\t\t\"AdjClose\": \"27.61\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"DELL\",\n\t\t\t\"Company\": \"Dell Inc.\",\n\t\t\t\"Date\": \"2007-11-15\",\n\t\t\t\"Open\": \"$27.32\",\n\t\t\t\"High\": \"$27.70\",\n\t\t\t\"Low\": \"$26.76\",\n\t\t\t\"Close\": \"$26.83\",\n\t\t\t\"Volume\": \"23135100\",\n\t\t\t\"AdjClose\": \"26.83\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"DELL\",\n\t\t\t\"Company\": \"Dell Inc.\",\n\t\t\t\"Date\": \"2007-11-16\",\n\t\t\t\"Open\": \"$26.93\",\n\t\t\t\"High\": \"$27.15\",\n\t\t\t\"Low\": \"$26.21\",\n\t\t\t\"Close\": \"$26.91\",\n\t\t\t\"Volume\": \"28954000\",\n\t\t\t\"AdjClose\": \"26.91\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"DELL\",\n\t\t\t\"Company\": \"Dell Inc.\",\n\t\t\t\"Date\": \"2007-11-19\",\n\t\t\t\"Open\": \"$26.76\",\n\t\t\t\"High\": \"$27.16\",\n\t\t\t\"Low\": \"$26.52\",\n\t\t\t\"Close\": \"$26.62\",\n\t\t\t\"Volume\": \"16996100\",\n\t\t\t\"AdjClose\": \"26.62\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"DELL\",\n\t\t\t\"Company\": \"Dell Inc.\",\n\t\t\t\"Date\": \"2007-11-20\",\n\t\t\t\"Open\": \"$26.91\",\n\t\t\t\"High\": \"$27.12\",\n\t\t\t\"Low\": \"$25.75\",\n\t\t\t\"Close\": \"$26.31\",\n\t\t\t\"Volume\": \"25311500\",\n\t\t\t\"AdjClose\": \"26.31\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"DELL\",\n\t\t\t\"Company\": \"Dell Inc.\",\n\t\t\t\"Date\": \"2007-11-21\",\n\t\t\t\"Open\": \"$25.78\",\n\t\t\t\"High\": \"$26.14\",\n\t\t\t\"Low\": \"$25.56\",\n\t\t\t\"Close\": \"$25.56\",\n\t\t\t\"Volume\": \"20778700\",\n\t\t\t\"AdjClose\": \"25.56\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"DELL\",\n\t\t\t\"Company\": \"Dell Inc.\",\n\t\t\t\"Date\": \"2007-11-23\",\n\t\t\t\"Open\": \"$25.66\",\n\t\t\t\"High\": \"$26.15\",\n\t\t\t\"Low\": \"$25.46\",\n\t\t\t\"Close\": \"$26.13\",\n\t\t\t\"Volume\": \"8111200\",\n\t\t\t\"AdjClose\": \"26.13\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"DELL\",\n\t\t\t\"Company\": \"Dell Inc.\",\n\t\t\t\"Date\": \"2007-11-26\",\n\t\t\t\"Open\": \"$26.00\",\n\t\t\t\"High\": \"$26.48\",\n\t\t\t\"Low\": \"$25.68\",\n\t\t\t\"Close\": \"$25.71\",\n\t\t\t\"Volume\": \"18214800\",\n\t\t\t\"AdjClose\": \"25.71\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"DELL\",\n\t\t\t\"Company\": \"Dell Inc.\",\n\t\t\t\"Date\": \"2007-11-27\",\n\t\t\t\"Open\": \"$26.05\",\n\t\t\t\"High\": \"$26.67\",\n\t\t\t\"Low\": \"$25.81\",\n\t\t\t\"Close\": \"$26.64\",\n\t\t\t\"Volume\": \"23704700\",\n\t\t\t\"AdjClose\": \"26.64\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"YHOO\",\n\t\t\t\"Company\": \"Yahoo! Inc.\",\n\t\t\t\"Date\": \"2007-10-29\",\n\t\t\t\"Open\": \"$34.07\",\n\t\t\t\"High\": \"$34.08\",\n\t\t\t\"Low\": \"$31.18\",\n\t\t\t\"Close\": \"$31.79\",\n\t\t\t\"Volume\": \"83685800\",\n\t\t\t\"AdjClose\": \"31.79\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"YHOO\",\n\t\t\t\"Company\": \"Yahoo! Inc.\",\n\t\t\t\"Date\": \"2007-10-30\",\n\t\t\t\"Open\": \"$31.55\",\n\t\t\t\"High\": \"$31.64\",\n\t\t\t\"Low\": \"$30.12\",\n\t\t\t\"Close\": \"$30.83\",\n\t\t\t\"Volume\": \"52417300\",\n\t\t\t\"AdjClose\": \"30.83\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"YHOO\",\n\t\t\t\"Company\": \"Yahoo! Inc.\",\n\t\t\t\"Date\": \"2007-10-31\",\n\t\t\t\"Open\": \"$31.50\",\n\t\t\t\"High\": \"$31.75\",\n\t\t\t\"Low\": \"$30.50\",\n\t\t\t\"Close\": \"$31.10\",\n\t\t\t\"Volume\": \"34762000\",\n\t\t\t\"AdjClose\": \"31.10\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"YHOO\",\n\t\t\t\"Company\": \"Yahoo! Inc.\",\n\t\t\t\"Date\": \"2007-11-01\",\n\t\t\t\"Open\": \"$30.86\",\n\t\t\t\"High\": \"$31.10\",\n\t\t\t\"Low\": \"$30.04\",\n\t\t\t\"Close\": \"$30.22\",\n\t\t\t\"Volume\": \"26913300\",\n\t\t\t\"AdjClose\": \"30.22\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"YHOO\",\n\t\t\t\"Company\": \"Yahoo! Inc.\",\n\t\t\t\"Date\": \"2007-11-02\",\n\t\t\t\"Open\": \"$30.54\",\n\t\t\t\"High\": \"$31.21\",\n\t\t\t\"Low\": \"$29.64\",\n\t\t\t\"Close\": \"$31.11\",\n\t\t\t\"Volume\": \"34090300\",\n\t\t\t\"AdjClose\": \"31.11\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"YHOO\",\n\t\t\t\"Company\": \"Yahoo! Inc.\",\n\t\t\t\"Date\": \"2007-11-05\",\n\t\t\t\"Open\": \"$30.71\",\n\t\t\t\"High\": \"$32.37\",\n\t\t\t\"Low\": \"$30.35\",\n\t\t\t\"Close\": \"$31.36\",\n\t\t\t\"Volume\": \"43520300\",\n\t\t\t\"AdjClose\": \"31.36\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"YHOO\",\n\t\t\t\"Company\": \"Yahoo! Inc.\",\n\t\t\t\"Date\": \"2007-11-06\",\n\t\t\t\"Open\": \"$31.76\",\n\t\t\t\"High\": \"$31.79\",\n\t\t\t\"Low\": \"$29.00\",\n\t\t\t\"Close\": \"$29.93\",\n\t\t\t\"Volume\": \"63664400\",\n\t\t\t\"AdjClose\": \"29.93\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"YHOO\",\n\t\t\t\"Company\": \"Yahoo! Inc.\",\n\t\t\t\"Date\": \"2007-11-07\",\n\t\t\t\"Open\": \"$29.27\",\n\t\t\t\"High\": \"$29.30\",\n\t\t\t\"Low\": \"$27.56\",\n\t\t\t\"Close\": \"$27.63\",\n\t\t\t\"Volume\": \"57069800\",\n\t\t\t\"AdjClose\": \"27.63\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"YHOO\",\n\t\t\t\"Company\": \"Yahoo! Inc.\",\n\t\t\t\"Date\": \"2007-11-08\",\n\t\t\t\"Open\": \"$28.11\",\n\t\t\t\"High\": \"$28.24\",\n\t\t\t\"Low\": \"$25.82\",\n\t\t\t\"Close\": \"$26.70\",\n\t\t\t\"Volume\": \"58160600\",\n\t\t\t\"AdjClose\": \"26.70\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"YHOO\",\n\t\t\t\"Company\": \"Yahoo! Inc.\",\n\t\t\t\"Date\": \"2007-11-09\",\n\t\t\t\"Open\": \"$26.13\",\n\t\t\t\"High\": \"$26.38\",\n\t\t\t\"Low\": \"$25.40\",\n\t\t\t\"Close\": \"$25.79\",\n\t\t\t\"Volume\": \"45199700\",\n\t\t\t\"AdjClose\": \"25.79\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"YHOO\",\n\t\t\t\"Company\": \"Yahoo! Inc.\",\n\t\t\t\"Date\": \"2007-11-12\",\n\t\t\t\"Open\": \"$25.80\",\n\t\t\t\"High\": \"$26.20\",\n\t\t\t\"Low\": \"$24.69\",\n\t\t\t\"Close\": \"$24.78\",\n\t\t\t\"Volume\": \"31264200\",\n\t\t\t\"AdjClose\": \"24.78\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"YHOO\",\n\t\t\t\"Company\": \"Yahoo! Inc.\",\n\t\t\t\"Date\": \"2007-11-13\",\n\t\t\t\"Open\": \"$25.53\",\n\t\t\t\"High\": \"$26.24\",\n\t\t\t\"Low\": \"$25.30\",\n\t\t\t\"Close\": \"$26.10\",\n\t\t\t\"Volume\": \"34123300\",\n\t\t\t\"AdjClose\": \"26.10\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"YHOO\",\n\t\t\t\"Company\": \"Yahoo! Inc.\",\n\t\t\t\"Date\": \"2007-11-14\",\n\t\t\t\"Open\": \"$26.42\",\n\t\t\t\"High\": \"$26.44\",\n\t\t\t\"Low\": \"$25.00\",\n\t\t\t\"Close\": \"$25.07\",\n\t\t\t\"Volume\": \"38154800\",\n\t\t\t\"AdjClose\": \"25.07\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"YHOO\",\n\t\t\t\"Company\": \"Yahoo! Inc.\",\n\t\t\t\"Date\": \"2007-11-16\",\n\t\t\t\"Open\": \"$25.66\",\n\t\t\t\"High\": \"$27.13\",\n\t\t\t\"Low\": \"$25.10\",\n\t\t\t\"Close\": \"$26.82\",\n\t\t\t\"Volume\": \"53013100\",\n\t\t\t\"AdjClose\": \"26.82\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"YHOO\",\n\t\t\t\"Company\": \"Yahoo! Inc.\",\n\t\t\t\"Date\": \"2007-11-19\",\n\t\t\t\"Open\": \"$27.11\",\n\t\t\t\"High\": \"$27.35\",\n\t\t\t\"Low\": \"$26.35\",\n\t\t\t\"Close\": \"$26.76\",\n\t\t\t\"Volume\": \"33066200\",\n\t\t\t\"AdjClose\": \"26.76\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"YHOO\",\n\t\t\t\"Company\": \"Yahoo! Inc.\",\n\t\t\t\"Date\": \"2007-11-20\",\n\t\t\t\"Open\": \"$26.93\",\n\t\t\t\"High\": \"$27.25\",\n\t\t\t\"Low\": \"$25.98\",\n\t\t\t\"Close\": \"$26.72\",\n\t\t\t\"Volume\": \"25672500\",\n\t\t\t\"AdjClose\": \"26.72\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"YHOO\",\n\t\t\t\"Company\": \"Yahoo! Inc.\",\n\t\t\t\"Date\": \"2007-11-21\",\n\t\t\t\"Open\": \"$26.11\",\n\t\t\t\"High\": \"$26.58\",\n\t\t\t\"Low\": \"$25.52\",\n\t\t\t\"Close\": \"$25.71\",\n\t\t\t\"Volume\": \"23320100\",\n\t\t\t\"AdjClose\": \"25.71\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"YHOO\",\n\t\t\t\"Company\": \"Yahoo! Inc.\",\n\t\t\t\"Date\": \"2007-11-23\",\n\t\t\t\"Open\": \"$25.98\",\n\t\t\t\"High\": \"$26.40\",\n\t\t\t\"Low\": \"$25.76\",\n\t\t\t\"Close\": \"$26.13\",\n\t\t\t\"Volume\": \"9249400\",\n\t\t\t\"AdjClose\": \"26.13\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"YHOO\",\n\t\t\t\"Company\": \"Yahoo! Inc.\",\n\t\t\t\"Date\": \"2007-11-26\",\n\t\t\t\"Open\": \"$26.08\",\n\t\t\t\"High\": \"$26.25\",\n\t\t\t\"Low\": \"$25.20\",\n\t\t\t\"Close\": \"$25.22\",\n\t\t\t\"Volume\": \"24157300\",\n\t\t\t\"AdjClose\": \"25.22\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"YHOO\",\n\t\t\t\"Company\": \"Yahoo! Inc.\",\n\t\t\t\"Date\": \"2007-11-27\",\n\t\t\t\"Open\": \"$25.18\",\n\t\t\t\"High\": \"$26.00\",\n\t\t\t\"Low\": \"$25.17\",\n\t\t\t\"Close\": \"$25.59\",\n\t\t\t\"Volume\": \"19484500\",\n\t\t\t\"AdjClose\": \"25.59\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"AAPL\",\n\t\t\t\"Company\": \"Apple Inc.\",\n\t\t\t\"Date\": \"2007-10-29\",\n\t\t\t\"Open\": \"$185.45\",\n\t\t\t\"High\": \"$186.59\",\n\t\t\t\"Low\": \"$184.70\",\n\t\t\t\"Close\": \"$185.09\",\n\t\t\t\"Volume\": \"19281800\",\n\t\t\t\"AdjClose\": \"185.09\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"AAPL\",\n\t\t\t\"Company\": \"Apple Inc.\",\n\t\t\t\"Date\": \"2007-10-30\",\n\t\t\t\"Open\": \"$186.18\",\n\t\t\t\"High\": \"$189.37\",\n\t\t\t\"Low\": \"$184.73\",\n\t\t\t\"Close\": \"$187.00\",\n\t\t\t\"Volume\": \"33495900\",\n\t\t\t\"AdjClose\": \"187.00\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"AAPL\",\n\t\t\t\"Company\": \"Apple Inc.\",\n\t\t\t\"Date\": \"2007-10-31\",\n\t\t\t\"Open\": \"$187.63\",\n\t\t\t\"High\": \"$190.12\",\n\t\t\t\"Low\": \"$184.95\",\n\t\t\t\"Close\": \"$189.95\",\n\t\t\t\"Volume\": \"29699700\",\n\t\t\t\"AdjClose\": \"189.95\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"AAPL\",\n\t\t\t\"Company\": \"Apple Inc.\",\n\t\t\t\"Date\": \"2007-11-01\",\n\t\t\t\"Open\": \"$188.60\",\n\t\t\t\"High\": \"$190.10\",\n\t\t\t\"Low\": \"$180.00\",\n\t\t\t\"Close\": \"$187.44\",\n\t\t\t\"Volume\": \"28734100\",\n\t\t\t\"AdjClose\": \"187.44\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"AAPL\",\n\t\t\t\"Company\": \"Apple Inc.\",\n\t\t\t\"Date\": \"2007-11-02\",\n\t\t\t\"Open\": \"$189.21\",\n\t\t\t\"High\": \"$189.44\",\n\t\t\t\"Low\": \"$183.49\",\n\t\t\t\"Close\": \"$187.87\",\n\t\t\t\"Volume\": \"35769600\",\n\t\t\t\"AdjClose\": \"187.87\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"AAPL\",\n\t\t\t\"Company\": \"Apple Inc.\",\n\t\t\t\"Date\": \"2007-11-05\",\n\t\t\t\"Open\": \"$185.29\",\n\t\t\t\"High\": \"$188.96\",\n\t\t\t\"Low\": \"$184.24\",\n\t\t\t\"Close\": \"$186.18\",\n\t\t\t\"Volume\": \"28703700\",\n\t\t\t\"AdjClose\": \"186.18\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"AAPL\",\n\t\t\t\"Company\": \"Apple Inc.\",\n\t\t\t\"Date\": \"2007-11-06\",\n\t\t\t\"Open\": \"$187.05\",\n\t\t\t\"High\": \"$192.00\",\n\t\t\t\"Low\": \"$185.27\",\n\t\t\t\"Close\": \"$191.79\",\n\t\t\t\"Volume\": \"34068500\",\n\t\t\t\"AdjClose\": \"191.79\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"AAPL\",\n\t\t\t\"Company\": \"Apple Inc.\",\n\t\t\t\"Date\": \"2007-11-07\",\n\t\t\t\"Open\": \"$190.61\",\n\t\t\t\"High\": \"$192.68\",\n\t\t\t\"Low\": \"$186.13\",\n\t\t\t\"Close\": \"$186.30\",\n\t\t\t\"Volume\": \"35473400\",\n\t\t\t\"AdjClose\": \"186.30\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"AAPL\",\n\t\t\t\"Company\": \"Apple Inc.\",\n\t\t\t\"Date\": \"2007-11-08\",\n\t\t\t\"Open\": \"$186.67\",\n\t\t\t\"High\": \"$186.90\",\n\t\t\t\"Low\": \"$167.77\",\n\t\t\t\"Close\": \"$175.47\",\n\t\t\t\"Volume\": \"67458500\",\n\t\t\t\"AdjClose\": \"175.47\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"AAPL\",\n\t\t\t\"Company\": \"Apple Inc.\",\n\t\t\t\"Date\": \"2007-11-09\",\n\t\t\t\"Open\": \"$171.15\",\n\t\t\t\"High\": \"$175.12\",\n\t\t\t\"Low\": \"$165.21\",\n\t\t\t\"Close\": \"$165.37\",\n\t\t\t\"Volume\": \"54458700\",\n\t\t\t\"AdjClose\": \"165.37\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"AAPL\",\n\t\t\t\"Company\": \"Apple Inc.\",\n\t\t\t\"Date\": \"2007-11-12\",\n\t\t\t\"Open\": \"$165.28\",\n\t\t\t\"High\": \"$167.70\",\n\t\t\t\"Low\": \"$150.63\",\n\t\t\t\"Close\": \"$153.76\",\n\t\t\t\"Volume\": \"63057700\",\n\t\t\t\"AdjClose\": \"153.76\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"AAPL\",\n\t\t\t\"Company\": \"Apple Inc.\",\n\t\t\t\"Date\": \"2007-11-13\",\n\t\t\t\"Open\": \"$160.85\",\n\t\t\t\"High\": \"$170.98\",\n\t\t\t\"Low\": \"$153.76\",\n\t\t\t\"Close\": \"$169.96\",\n\t\t\t\"Volume\": \"62034100\",\n\t\t\t\"AdjClose\": \"169.96\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"AAPL\",\n\t\t\t\"Company\": \"Apple Inc.\",\n\t\t\t\"Date\": \"2007-11-14\",\n\t\t\t\"Open\": \"$177.16\",\n\t\t\t\"High\": \"$177.57\",\n\t\t\t\"Low\": \"$163.74\",\n\t\t\t\"Close\": \"$166.11\",\n\t\t\t\"Volume\": \"51695400\",\n\t\t\t\"AdjClose\": \"166.11\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"AAPL\",\n\t\t\t\"Company\": \"Apple Inc.\",\n\t\t\t\"Date\": \"2007-11-15\",\n\t\t\t\"Open\": \"$166.39\",\n\t\t\t\"High\": \"$169.59\",\n\t\t\t\"Low\": \"$160.30\",\n\t\t\t\"Close\": \"$164.30\",\n\t\t\t\"Volume\": \"53095600\",\n\t\t\t\"AdjClose\": \"164.30\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"AAPL\",\n\t\t\t\"Company\": \"Apple Inc.\",\n\t\t\t\"Date\": \"2007-11-16\",\n\t\t\t\"Open\": \"$165.30\",\n\t\t\t\"High\": \"$167.02\",\n\t\t\t\"Low\": \"$159.33\",\n\t\t\t\"Close\": \"$166.39\",\n\t\t\t\"Volume\": \"49391300\",\n\t\t\t\"AdjClose\": \"166.39\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"AAPL\",\n\t\t\t\"Company\": \"Apple Inc.\",\n\t\t\t\"Date\": \"2007-11-19\",\n\t\t\t\"Open\": \"$166.10\",\n\t\t\t\"High\": \"$168.20\",\n\t\t\t\"Low\": \"$162.10\",\n\t\t\t\"Close\": \"$163.95\",\n\t\t\t\"Volume\": \"41196800\",\n\t\t\t\"AdjClose\": \"163.95\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"AAPL\",\n\t\t\t\"Company\": \"Apple Inc.\",\n\t\t\t\"Date\": \"2007-11-20\",\n\t\t\t\"Open\": \"$165.67\",\n\t\t\t\"High\": \"$171.79\",\n\t\t\t\"Low\": \"$163.53\",\n\t\t\t\"Close\": \"$168.85\",\n\t\t\t\"Volume\": \"55076200\",\n\t\t\t\"AdjClose\": \"168.85\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"AAPL\",\n\t\t\t\"Company\": \"Apple Inc.\",\n\t\t\t\"Date\": \"2007-11-21\",\n\t\t\t\"Open\": \"$165.84\",\n\t\t\t\"High\": \"$172.35\",\n\t\t\t\"Low\": \"$164.67\",\n\t\t\t\"Close\": \"$168.46\",\n\t\t\t\"Volume\": \"43493200\",\n\t\t\t\"AdjClose\": \"168.46\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"AAPL\",\n\t\t\t\"Company\": \"Apple Inc.\",\n\t\t\t\"Date\": \"2007-11-23\",\n\t\t\t\"Open\": \"$172.00\",\n\t\t\t\"High\": \"$172.05\",\n\t\t\t\"Low\": \"$169.75\",\n\t\t\t\"Close\": \"$171.54\",\n\t\t\t\"Volume\": \"16622500\",\n\t\t\t\"AdjClose\": \"171.54\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"AAPL\",\n\t\t\t\"Company\": \"Apple Inc.\",\n\t\t\t\"Date\": \"2007-11-26\",\n\t\t\t\"Open\": \"$173.59\",\n\t\t\t\"High\": \"$177.27\",\n\t\t\t\"Low\": \"$172.35\",\n\t\t\t\"Close\": \"$172.54\",\n\t\t\t\"Volume\": \"46603400\",\n\t\t\t\"AdjClose\": \"172.54\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"AAPL\",\n\t\t\t\"Company\": \"Apple Inc.\",\n\t\t\t\"Date\": \"2007-11-27\",\n\t\t\t\"Open\": \"$175.22\",\n\t\t\t\"High\": \"$175.79\",\n\t\t\t\"Low\": \"$170.01\",\n\t\t\t\"Close\": \"$174.81\",\n\t\t\t\"Volume\": \"47005000\",\n\t\t\t\"AdjClose\": \"174.81\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"GOOG\",\n\t\t\t\"Company\": \"Google Inc.\",\n\t\t\t\"Date\": \"2007-10-29\",\n\t\t\t\"Open\": \"$677.77\",\n\t\t\t\"High\": \"$680.00\",\n\t\t\t\"Low\": \"$672.09\",\n\t\t\t\"Close\": \"$679.23\",\n\t\t\t\"Volume\": \"3066300\",\n\t\t\t\"AdjClose\": \"679.23\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"GOOG\",\n\t\t\t\"Company\": \"Google Inc.\",\n\t\t\t\"Date\": \"2007-10-30\",\n\t\t\t\"Open\": \"$677.51\",\n\t\t\t\"High\": \"$699.91\",\n\t\t\t\"Low\": \"$677.51\",\n\t\t\t\"Close\": \"$694.77\",\n\t\t\t\"Volume\": \"6887700\",\n\t\t\t\"AdjClose\": \"694.77\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"GOOG\",\n\t\t\t\"Company\": \"Google Inc.\",\n\t\t\t\"Date\": \"2007-10-31\",\n\t\t\t\"Open\": \"$700.69\",\n\t\t\t\"High\": \"$707.00\",\n\t\t\t\"Low\": \"$696.04\",\n\t\t\t\"Close\": \"$707.00\",\n\t\t\t\"Volume\": \"6876800\",\n\t\t\t\"AdjClose\": \"707.00\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"GOOG\",\n\t\t\t\"Company\": \"Google Inc.\",\n\t\t\t\"Date\": \"2007-11-01\",\n\t\t\t\"Open\": \"$702.79\",\n\t\t\t\"High\": \"$713.72\",\n\t\t\t\"Low\": \"$701.78\",\n\t\t\t\"Close\": \"$703.21\",\n\t\t\t\"Volume\": \"6527200\",\n\t\t\t\"AdjClose\": \"703.21\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"GOOG\",\n\t\t\t\"Company\": \"Google Inc.\",\n\t\t\t\"Date\": \"2007-11-02\",\n\t\t\t\"Open\": \"$710.51\",\n\t\t\t\"High\": \"$713.58\",\n\t\t\t\"Low\": \"$697.34\",\n\t\t\t\"Close\": \"$711.25\",\n\t\t\t\"Volume\": \"5841500\",\n\t\t\t\"AdjClose\": \"711.25\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"GOOG\",\n\t\t\t\"Company\": \"Google Inc.\",\n\t\t\t\"Date\": \"2007-11-05\",\n\t\t\t\"Open\": \"$706.99\",\n\t\t\t\"High\": \"$730.23\",\n\t\t\t\"Low\": \"$706.07\",\n\t\t\t\"Close\": \"$725.65\",\n\t\t\t\"Volume\": \"8883700\",\n\t\t\t\"AdjClose\": \"725.65\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"GOOG\",\n\t\t\t\"Company\": \"Google Inc.\",\n\t\t\t\"Date\": \"2007-11-06\",\n\t\t\t\"Open\": \"$737.56\",\n\t\t\t\"High\": \"$741.79\",\n\t\t\t\"Low\": \"$725.00\",\n\t\t\t\"Close\": \"$741.79\",\n\t\t\t\"Volume\": \"8436300\",\n\t\t\t\"AdjClose\": \"741.79\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"GOOG\",\n\t\t\t\"Company\": \"Google Inc.\",\n\t\t\t\"Date\": \"2007-11-07\",\n\t\t\t\"Open\": \"$741.13\",\n\t\t\t\"High\": \"$747.24\",\n\t\t\t\"Low\": \"$723.14\",\n\t\t\t\"Close\": \"$732.94\",\n\t\t\t\"Volume\": \"8252900\",\n\t\t\t\"AdjClose\": \"732.94\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"GOOG\",\n\t\t\t\"Company\": \"Google Inc.\",\n\t\t\t\"Date\": \"2007-11-08\",\n\t\t\t\"Open\": \"$734.60\",\n\t\t\t\"High\": \"$734.89\",\n\t\t\t\"Low\": \"$677.18\",\n\t\t\t\"Close\": \"$693.84\",\n\t\t\t\"Volume\": \"16512200\",\n\t\t\t\"AdjClose\": \"693.84\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"GOOG\",\n\t\t\t\"Company\": \"Google Inc.\",\n\t\t\t\"Date\": \"2007-11-09\",\n\t\t\t\"Open\": \"$675.78\",\n\t\t\t\"High\": \"$681.88\",\n\t\t\t\"Low\": \"$661.21\",\n\t\t\t\"Close\": \"$663.97\",\n\t\t\t\"Volume\": \"11388100\",\n\t\t\t\"AdjClose\": \"663.97\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"GOOG\",\n\t\t\t\"Company\": \"Google Inc.\",\n\t\t\t\"Date\": \"2007-11-12\",\n\t\t\t\"Open\": \"$657.74\",\n\t\t\t\"High\": \"$669.93\",\n\t\t\t\"Low\": \"$626.21\",\n\t\t\t\"Close\": \"$632.07\",\n\t\t\t\"Volume\": \"10227300\",\n\t\t\t\"AdjClose\": \"632.07\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"GOOG\",\n\t\t\t\"Company\": \"Google Inc.\",\n\t\t\t\"Date\": \"2007-11-13\",\n\t\t\t\"Open\": \"$644.99\",\n\t\t\t\"High\": \"$660.92\",\n\t\t\t\"Low\": \"$632.07\",\n\t\t\t\"Close\": \"$660.55\",\n\t\t\t\"Volume\": \"8426100\",\n\t\t\t\"AdjClose\": \"660.55\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"GOOG\",\n\t\t\t\"Company\": \"Google Inc.\",\n\t\t\t\"Date\": \"2007-11-14\",\n\t\t\t\"Open\": \"$673.28\",\n\t\t\t\"High\": \"$675.49\",\n\t\t\t\"Low\": \"$636.27\",\n\t\t\t\"Close\": \"$641.68\",\n\t\t\t\"Volume\": \"8094700\",\n\t\t\t\"AdjClose\": \"641.68\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"GOOG\",\n\t\t\t\"Company\": \"Google Inc.\",\n\t\t\t\"Date\": \"2007-11-15\",\n\t\t\t\"Open\": \"$638.57\",\n\t\t\t\"High\": \"$647.50\",\n\t\t\t\"Low\": \"$624.00\",\n\t\t\t\"Close\": \"$629.65\",\n\t\t\t\"Volume\": \"6967700\",\n\t\t\t\"AdjClose\": \"629.65\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"GOOG\",\n\t\t\t\"Company\": \"Google Inc.\",\n\t\t\t\"Date\": \"2007-11-16\",\n\t\t\t\"Open\": \"$633.94\",\n\t\t\t\"High\": \"$635.49\",\n\t\t\t\"Low\": \"$616.02\",\n\t\t\t\"Close\": \"$633.63\",\n\t\t\t\"Volume\": \"9042800\",\n\t\t\t\"AdjClose\": \"633.63\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"GOOG\",\n\t\t\t\"Company\": \"Google Inc.\",\n\t\t\t\"Date\": \"2007-11-19\",\n\t\t\t\"Open\": \"$629.59\",\n\t\t\t\"High\": \"$636.77\",\n\t\t\t\"Low\": \"$618.50\",\n\t\t\t\"Close\": \"$625.85\",\n\t\t\t\"Volume\": \"5527400\",\n\t\t\t\"AdjClose\": \"625.85\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"GOOG\",\n\t\t\t\"Company\": \"Google Inc.\",\n\t\t\t\"Date\": \"2007-11-20\",\n\t\t\t\"Open\": \"$636.48\",\n\t\t\t\"High\": \"$659.10\",\n\t\t\t\"Low\": \"$632.87\",\n\t\t\t\"Close\": \"$648.54\",\n\t\t\t\"Volume\": \"9816900\",\n\t\t\t\"AdjClose\": \"648.54\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"GOOG\",\n\t\t\t\"Company\": \"Google Inc.\",\n\t\t\t\"Date\": \"2007-11-21\",\n\t\t\t\"Open\": \"$643.77\",\n\t\t\t\"High\": \"$669.97\",\n\t\t\t\"Low\": \"$642.08\",\n\t\t\t\"Close\": \"$660.52\",\n\t\t\t\"Volume\": \"7013500\",\n\t\t\t\"AdjClose\": \"660.52\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"GOOG\",\n\t\t\t\"Company\": \"Google Inc.\",\n\t\t\t\"Date\": \"2007-11-23\",\n\t\t\t\"Open\": \"$670.00\",\n\t\t\t\"High\": \"$678.28\",\n\t\t\t\"Low\": \"$668.11\",\n\t\t\t\"Close\": \"$676.70\",\n\t\t\t\"Volume\": \"2738700\",\n\t\t\t\"AdjClose\": \"676.70\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"GOOG\",\n\t\t\t\"Company\": \"Google Inc.\",\n\t\t\t\"Date\": \"2007-11-26\",\n\t\t\t\"Open\": \"$680.20\",\n\t\t\t\"High\": \"$693.40\",\n\t\t\t\"Low\": \"$665.00\",\n\t\t\t\"Close\": \"$666.00\",\n\t\t\t\"Volume\": \"6790100\",\n\t\t\t\"AdjClose\": \"666.00\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"GOOG\",\n\t\t\t\"Company\": \"Google Inc.\",\n\t\t\t\"Date\": \"2007-11-27\",\n\t\t\t\"Open\": \"$674.80\",\n\t\t\t\"High\": \"$676.43\",\n\t\t\t\"Low\": \"$650.26\",\n\t\t\t\"Close\": \"$673.57\",\n\t\t\t\"Volume\": \"8904500\",\n\t\t\t\"AdjClose\": \"673.57\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"IBM\",\n\t\t\t\"Company\": \"International Business Machines Corp.\",\n\t\t\t\"Date\": \"2007-10-29\",\n\t\t\t\"Open\": \"$113.90\",\n\t\t\t\"High\": \"$115.01\",\n\t\t\t\"Low\": \"$113.85\",\n\t\t\t\"Close\": \"$114.80\",\n\t\t\t\"Volume\": \"5103200\",\n\t\t\t\"AdjClose\": \"114.39\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"IBM\",\n\t\t\t\"Company\": \"International Business Machines Corp.\",\n\t\t\t\"Date\": \"2007-10-30\",\n\t\t\t\"Open\": \"$114.50\",\n\t\t\t\"High\": \"$114.90\",\n\t\t\t\"Low\": \"$113.75\",\n\t\t\t\"Close\": \"$114.12\",\n\t\t\t\"Volume\": \"4015500\",\n\t\t\t\"AdjClose\": \"113.72\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"IBM\",\n\t\t\t\"Company\": \"International Business Machines Corp.\",\n\t\t\t\"Date\": \"2007-10-31\",\n\t\t\t\"Open\": \"$114.75\",\n\t\t\t\"High\": \"$116.25\",\n\t\t\t\"Low\": \"$113.28\",\n\t\t\t\"Close\": \"$116.12\",\n\t\t\t\"Volume\": \"7216800\",\n\t\t\t\"AdjClose\": \"115.71\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"IBM\",\n\t\t\t\"Company\": \"International Business Machines Corp.\",\n\t\t\t\"Date\": \"2007-11-01\",\n\t\t\t\"Open\": \"$115.50\",\n\t\t\t\"High\": \"$116.09\",\n\t\t\t\"Low\": \"$113.32\",\n\t\t\t\"Close\": \"$113.65\",\n\t\t\t\"Volume\": \"7594400\",\n\t\t\t\"AdjClose\": \"113.25\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"IBM\",\n\t\t\t\"Company\": \"International Business Machines Corp.\",\n\t\t\t\"Date\": \"2007-11-02\",\n\t\t\t\"Open\": \"$114.42\",\n\t\t\t\"High\": \"$115.15\",\n\t\t\t\"Low\": \"$113.57\",\n\t\t\t\"Close\": \"$114.59\",\n\t\t\t\"Volume\": \"6114800\",\n\t\t\t\"AdjClose\": \"114.18\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"IBM\",\n\t\t\t\"Company\": \"International Business Machines Corp.\",\n\t\t\t\"Date\": \"2007-11-05\",\n\t\t\t\"Open\": \"$115.11\",\n\t\t\t\"High\": \"$115.11\",\n\t\t\t\"Low\": \"$112.83\",\n\t\t\t\"Close\": \"$113.40\",\n\t\t\t\"Volume\": \"7155300\",\n\t\t\t\"AdjClose\": \"113.00\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"IBM\",\n\t\t\t\"Company\": \"International Business Machines Corp.\",\n\t\t\t\"Date\": \"2007-11-06\",\n\t\t\t\"Open\": \"$113.49\",\n\t\t\t\"High\": \"$113.95\",\n\t\t\t\"Low\": \"$111.67\",\n\t\t\t\"Close\": \"$113.17\",\n\t\t\t\"Volume\": \"7299700\",\n\t\t\t\"AdjClose\": \"112.77\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"IBM\",\n\t\t\t\"Company\": \"International Business Machines Corp.\",\n\t\t\t\"Date\": \"2007-11-07\",\n\t\t\t\"Open\": \"$113.56\",\n\t\t\t\"High\": \"$113.64\",\n\t\t\t\"Low\": \"$110.90\",\n\t\t\t\"Close\": \"$111.08\",\n\t\t\t\"Volume\": \"7087000\",\n\t\t\t\"AdjClose\": \"111.08\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"IBM\",\n\t\t\t\"Company\": \"International Business Machines Corp.\",\n\t\t\t\"Date\": \"2007-11-08\",\n\t\t\t\"Open\": \"$105.65\",\n\t\t\t\"High\": \"$110.32\",\n\t\t\t\"Low\": \"$103.99\",\n\t\t\t\"Close\": \"$106.11\",\n\t\t\t\"Volume\": \"23092200\",\n\t\t\t\"AdjClose\": \"106.11\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"IBM\",\n\t\t\t\"Company\": \"International Business Machines Corp.\",\n\t\t\t\"Date\": \"2007-11-09\",\n\t\t\t\"Open\": \"$104.92\",\n\t\t\t\"High\": \"$104.92\",\n\t\t\t\"Low\": \"$99.27\",\n\t\t\t\"Close\": \"$100.25\",\n\t\t\t\"Volume\": \"18084100\",\n\t\t\t\"AdjClose\": \"100.25\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"IBM\",\n\t\t\t\"Company\": \"International Business Machines Corp.\",\n\t\t\t\"Date\": \"2007-11-12\",\n\t\t\t\"Open\": \"$101.89\",\n\t\t\t\"High\": \"$104.19\",\n\t\t\t\"Low\": \"$100.70\",\n\t\t\t\"Close\": \"$101.45\",\n\t\t\t\"Volume\": \"13553600\",\n\t\t\t\"AdjClose\": \"101.45\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"IBM\",\n\t\t\t\"Company\": \"International Business Machines Corp.\",\n\t\t\t\"Date\": \"2007-11-13\",\n\t\t\t\"Open\": \"$102.73\",\n\t\t\t\"High\": \"$105.74\",\n\t\t\t\"Low\": \"$102.50\",\n\t\t\t\"Close\": \"$105.27\",\n\t\t\t\"Volume\": \"10777900\",\n\t\t\t\"AdjClose\": \"105.27\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"IBM\",\n\t\t\t\"Company\": \"International Business Machines Corp.\",\n\t\t\t\"Date\": \"2007-11-14\",\n\t\t\t\"Open\": \"$106.12\",\n\t\t\t\"High\": \"$106.42\",\n\t\t\t\"Low\": \"$102.84\",\n\t\t\t\"Close\": \"$103.44\",\n\t\t\t\"Volume\": \"8453600\",\n\t\t\t\"AdjClose\": \"103.44\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"IBM\",\n\t\t\t\"Company\": \"International Business Machines Corp.\",\n\t\t\t\"Date\": \"2007-11-15\",\n\t\t\t\"Open\": \"$103.24\",\n\t\t\t\"High\": \"$105.64\",\n\t\t\t\"Low\": \"$103.05\",\n\t\t\t\"Close\": \"$103.60\",\n\t\t\t\"Volume\": \"8023600\",\n\t\t\t\"AdjClose\": \"103.60\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"IBM\",\n\t\t\t\"Company\": \"International Business Machines Corp.\",\n\t\t\t\"Date\": \"2007-11-16\",\n\t\t\t\"Open\": \"$104.51\",\n\t\t\t\"High\": \"$105.00\",\n\t\t\t\"Low\": \"$103.25\",\n\t\t\t\"Close\": \"$104.79\",\n\t\t\t\"Volume\": \"9294000\",\n\t\t\t\"AdjClose\": \"104.79\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"IBM\",\n\t\t\t\"Company\": \"International Business Machines Corp.\",\n\t\t\t\"Date\": \"2007-11-19\",\n\t\t\t\"Open\": \"$104.34\",\n\t\t\t\"High\": \"$105.39\",\n\t\t\t\"Low\": \"$101.34\",\n\t\t\t\"Close\": \"$102.22\",\n\t\t\t\"Volume\": \"9502200\",\n\t\t\t\"AdjClose\": \"102.22\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"IBM\",\n\t\t\t\"Company\": \"International Business Machines Corp.\",\n\t\t\t\"Date\": \"2007-11-20\",\n\t\t\t\"Open\": \"$102.59\",\n\t\t\t\"High\": \"$104.97\",\n\t\t\t\"Low\": \"$101.38\",\n\t\t\t\"Close\": \"$103.42\",\n\t\t\t\"Volume\": \"8393400\",\n\t\t\t\"AdjClose\": \"103.42\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"IBM\",\n\t\t\t\"Company\": \"International Business Machines Corp.\",\n\t\t\t\"Date\": \"2007-11-21\",\n\t\t\t\"Open\": \"$101.41\",\n\t\t\t\"High\": \"$104.09\",\n\t\t\t\"Low\": \"$101.41\",\n\t\t\t\"Close\": \"$102.22\",\n\t\t\t\"Volume\": \"7097200\",\n\t\t\t\"AdjClose\": \"102.22\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"IBM\",\n\t\t\t\"Company\": \"International Business Machines Corp.\",\n\t\t\t\"Date\": \"2007-11-23\",\n\t\t\t\"Open\": \"$103.10\",\n\t\t\t\"High\": \"$104.14\",\n\t\t\t\"Low\": \"$102.32\",\n\t\t\t\"Close\": \"$104.05\",\n\t\t\t\"Volume\": \"2827700\",\n\t\t\t\"AdjClose\": \"104.05\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"IBM\",\n\t\t\t\"Company\": \"International Business Machines Corp.\",\n\t\t\t\"Date\": \"2007-11-26\",\n\t\t\t\"Open\": \"$104.26\",\n\t\t\t\"High\": \"$105.15\",\n\t\t\t\"Low\": \"$101.72\",\n\t\t\t\"Close\": \"$101.97\",\n\t\t\t\"Volume\": \"7340700\",\n\t\t\t\"AdjClose\": \"101.97\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"IBM\",\n\t\t\t\"Company\": \"International Business Machines Corp.\",\n\t\t\t\"Date\": \"2007-11-27\",\n\t\t\t\"Open\": \"$102.70\",\n\t\t\t\"High\": \"$104.58\",\n\t\t\t\"Low\": \"$101.50\",\n\t\t\t\"Close\": \"$103.83\",\n\t\t\t\"Volume\": \"9117500\",\n\t\t\t\"AdjClose\": \"103.83\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"INTC\",\n\t\t\t\"Company\": \"Intel Corp.\",\n\t\t\t\"Date\": \"2007-10-29\",\n\t\t\t\"Open\": \"$26.05\",\n\t\t\t\"High\": \"$26.35\",\n\t\t\t\"Low\": \"$26.00\",\n\t\t\t\"Close\": \"$26.26\",\n\t\t\t\"Volume\": \"53264600\",\n\t\t\t\"AdjClose\": \"26.15\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"INTC\",\n\t\t\t\"Company\": \"Intel Corp.\",\n\t\t\t\"Date\": \"2007-10-30\",\n\t\t\t\"Open\": \"$26.11\",\n\t\t\t\"High\": \"$26.37\",\n\t\t\t\"Low\": \"$26.10\",\n\t\t\t\"Close\": \"$26.27\",\n\t\t\t\"Volume\": \"41449000\",\n\t\t\t\"AdjClose\": \"26.16\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"INTC\",\n\t\t\t\"Company\": \"Intel Corp.\",\n\t\t\t\"Date\": \"2007-10-31\",\n\t\t\t\"Open\": \"$26.37\",\n\t\t\t\"High\": \"$26.90\",\n\t\t\t\"Low\": \"$26.35\",\n\t\t\t\"Close\": \"$26.90\",\n\t\t\t\"Volume\": \"64819100\",\n\t\t\t\"AdjClose\": \"26.79\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"INTC\",\n\t\t\t\"Company\": \"Intel Corp.\",\n\t\t\t\"Date\": \"2007-11-01\",\n\t\t\t\"Open\": \"$26.70\",\n\t\t\t\"High\": \"$27.08\",\n\t\t\t\"Low\": \"$26.50\",\n\t\t\t\"Close\": \"$26.50\",\n\t\t\t\"Volume\": \"86590500\",\n\t\t\t\"AdjClose\": \"26.39\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"INTC\",\n\t\t\t\"Company\": \"Intel Corp.\",\n\t\t\t\"Date\": \"2007-11-02\",\n\t\t\t\"Open\": \"$26.75\",\n\t\t\t\"High\": \"$26.96\",\n\t\t\t\"Low\": \"$26.40\",\n\t\t\t\"Close\": \"$26.80\",\n\t\t\t\"Volume\": \"58633800\",\n\t\t\t\"AdjClose\": \"26.69\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"INTC\",\n\t\t\t\"Company\": \"Intel Corp.\",\n\t\t\t\"Date\": \"2007-11-05\",\n\t\t\t\"Open\": \"$26.58\",\n\t\t\t\"High\": \"$27.03\",\n\t\t\t\"Low\": \"$26.44\",\n\t\t\t\"Close\": \"$26.84\",\n\t\t\t\"Volume\": \"55392500\",\n\t\t\t\"AdjClose\": \"26.84\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"INTC\",\n\t\t\t\"Company\": \"Intel Corp.\",\n\t\t\t\"Date\": \"2007-11-06\",\n\t\t\t\"Open\": \"$26.96\",\n\t\t\t\"High\": \"$27.52\",\n\t\t\t\"Low\": \"$26.96\",\n\t\t\t\"Close\": \"$27.49\",\n\t\t\t\"Volume\": \"69334400\",\n\t\t\t\"AdjClose\": \"27.49\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"INTC\",\n\t\t\t\"Company\": \"Intel Corp.\",\n\t\t\t\"Date\": \"2007-11-07\",\n\t\t\t\"Open\": \"$27.24\",\n\t\t\t\"High\": \"$27.54\",\n\t\t\t\"Low\": \"$26.87\",\n\t\t\t\"Close\": \"$26.90\",\n\t\t\t\"Volume\": \"71460500\",\n\t\t\t\"AdjClose\": \"26.90\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"INTC\",\n\t\t\t\"Company\": \"Intel Corp.\",\n\t\t\t\"Date\": \"2007-11-08\",\n\t\t\t\"Open\": \"$26.89\",\n\t\t\t\"High\": \"$26.97\",\n\t\t\t\"Low\": \"$25.29\",\n\t\t\t\"Close\": \"$25.93\",\n\t\t\t\"Volume\": \"91382500\",\n\t\t\t\"AdjClose\": \"25.93\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"INTC\",\n\t\t\t\"Company\": \"Intel Corp.\",\n\t\t\t\"Date\": \"2007-11-09\",\n\t\t\t\"Open\": \"$25.36\",\n\t\t\t\"High\": \"$25.65\",\n\t\t\t\"Low\": \"$25.00\",\n\t\t\t\"Close\": \"$25.15\",\n\t\t\t\"Volume\": \"71675400\",\n\t\t\t\"AdjClose\": \"25.15\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"INTC\",\n\t\t\t\"Company\": \"Intel Corp.\",\n\t\t\t\"Date\": \"2007-11-12\",\n\t\t\t\"Open\": \"$25.41\",\n\t\t\t\"High\": \"$25.57\",\n\t\t\t\"Low\": \"$25.10\",\n\t\t\t\"Close\": \"$25.37\",\n\t\t\t\"Volume\": \"72908100\",\n\t\t\t\"AdjClose\": \"25.37\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"INTC\",\n\t\t\t\"Company\": \"Intel Corp.\",\n\t\t\t\"Date\": \"2007-11-13\",\n\t\t\t\"Open\": \"$25.59\",\n\t\t\t\"High\": \"$26.14\",\n\t\t\t\"Low\": \"$25.29\",\n\t\t\t\"Close\": \"$26.14\",\n\t\t\t\"Volume\": \"62116600\",\n\t\t\t\"AdjClose\": \"26.14\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"INTC\",\n\t\t\t\"Company\": \"Intel Corp.\",\n\t\t\t\"Date\": \"2007-11-14\",\n\t\t\t\"Open\": \"$26.50\",\n\t\t\t\"High\": \"$26.52\",\n\t\t\t\"Low\": \"$25.77\",\n\t\t\t\"Close\": \"$25.85\",\n\t\t\t\"Volume\": \"63222400\",\n\t\t\t\"AdjClose\": \"25.85\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"INTC\",\n\t\t\t\"Company\": \"Intel Corp.\",\n\t\t\t\"Date\": \"2007-11-15\",\n\t\t\t\"Open\": \"$25.84\",\n\t\t\t\"High\": \"$26.06\",\n\t\t\t\"Low\": \"$25.28\",\n\t\t\t\"Close\": \"$25.53\",\n\t\t\t\"Volume\": \"67012000\",\n\t\t\t\"AdjClose\": \"25.53\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"INTC\",\n\t\t\t\"Company\": \"Intel Corp.\",\n\t\t\t\"Date\": \"2007-11-16\",\n\t\t\t\"Open\": \"$25.53\",\n\t\t\t\"High\": \"$25.78\",\n\t\t\t\"Low\": \"$25.17\",\n\t\t\t\"Close\": \"$25.51\",\n\t\t\t\"Volume\": \"80440400\",\n\t\t\t\"AdjClose\": \"25.51\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"INTC\",\n\t\t\t\"Company\": \"Intel Corp.\",\n\t\t\t\"Date\": \"2007-11-19\",\n\t\t\t\"Open\": \"$25.45\",\n\t\t\t\"High\": \"$25.60\",\n\t\t\t\"Low\": \"$25.10\",\n\t\t\t\"Close\": \"$25.17\",\n\t\t\t\"Volume\": \"52318600\",\n\t\t\t\"AdjClose\": \"25.17\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"INTC\",\n\t\t\t\"Company\": \"Intel Corp.\",\n\t\t\t\"Date\": \"2007-11-20\",\n\t\t\t\"Open\": \"$25.35\",\n\t\t\t\"High\": \"$25.75\",\n\t\t\t\"Low\": \"$24.91\",\n\t\t\t\"Close\": \"$25.52\",\n\t\t\t\"Volume\": \"74694200\",\n\t\t\t\"AdjClose\": \"25.52\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"INTC\",\n\t\t\t\"Company\": \"Intel Corp.\",\n\t\t\t\"Date\": \"2007-11-21\",\n\t\t\t\"Open\": \"$25.23\",\n\t\t\t\"High\": \"$25.29\",\n\t\t\t\"Low\": \"$24.54\",\n\t\t\t\"Close\": \"$24.63\",\n\t\t\t\"Volume\": \"69533000\",\n\t\t\t\"AdjClose\": \"24.63\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"INTC\",\n\t\t\t\"Company\": \"Intel Corp.\",\n\t\t\t\"Date\": \"2007-11-23\",\n\t\t\t\"Open\": \"$24.78\",\n\t\t\t\"High\": \"$25.10\",\n\t\t\t\"Low\": \"$24.55\",\n\t\t\t\"Close\": \"$25.07\",\n\t\t\t\"Volume\": \"36581600\",\n\t\t\t\"AdjClose\": \"25.07\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"INTC\",\n\t\t\t\"Company\": \"Intel Corp.\",\n\t\t\t\"Date\": \"2007-11-26\",\n\t\t\t\"Open\": \"$25.04\",\n\t\t\t\"High\": \"$25.32\",\n\t\t\t\"Low\": \"$24.32\",\n\t\t\t\"Close\": \"$24.37\",\n\t\t\t\"Volume\": \"53157500\",\n\t\t\t\"AdjClose\": \"24.37\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"INTC\",\n\t\t\t\"Company\": \"Intel Corp.\",\n\t\t\t\"Date\": \"2007-11-27\",\n\t\t\t\"Open\": \"$24.75\",\n\t\t\t\"High\": \"$25.16\",\n\t\t\t\"Low\": \"$24.49\",\n\t\t\t\"Close\": \"$25.11\",\n\t\t\t\"Volume\": \"62931100\",\n\t\t\t\"AdjClose\": \"25.11\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"JAVA\",\n\t\t\t\"Company\": \"Sun Microsystems Inc.\",\n\t\t\t\"Date\": \"2007-10-29\",\n\t\t\t\"Open\": \"$5.91\",\n\t\t\t\"High\": \"$6.02\",\n\t\t\t\"Low\": \"$5.87\",\n\t\t\t\"Close\": \"$5.90\",\n\t\t\t\"Volume\": \"66753100\",\n\t\t\t\"AdjClose\": \"5.90\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"JAVA\",\n\t\t\t\"Company\": \"Sun Microsystems Inc.\",\n\t\t\t\"Date\": \"2007-10-30\",\n\t\t\t\"Open\": \"$5.88\",\n\t\t\t\"High\": \"$5.94\",\n\t\t\t\"Low\": \"$5.85\",\n\t\t\t\"Close\": \"$5.87\",\n\t\t\t\"Volume\": \"21923200\",\n\t\t\t\"AdjClose\": \"5.87\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"JAVA\",\n\t\t\t\"Company\": \"Sun Microsystems Inc.\",\n\t\t\t\"Date\": \"2007-10-31\",\n\t\t\t\"Open\": \"$5.90\",\n\t\t\t\"High\": \"$5.93\",\n\t\t\t\"Low\": \"$5.65\",\n\t\t\t\"Close\": \"$5.71\",\n\t\t\t\"Volume\": \"100186000\",\n\t\t\t\"AdjClose\": \"5.71\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"JAVA\",\n\t\t\t\"Company\": \"Sun Microsystems Inc.\",\n\t\t\t\"Date\": \"2007-11-01\",\n\t\t\t\"Open\": \"$5.65\",\n\t\t\t\"High\": \"$5.68\",\n\t\t\t\"Low\": \"$5.45\",\n\t\t\t\"Close\": \"$5.46\",\n\t\t\t\"Volume\": \"89433200\",\n\t\t\t\"AdjClose\": \"5.46\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"JAVA\",\n\t\t\t\"Company\": \"Sun Microsystems Inc.\",\n\t\t\t\"Date\": \"2007-11-02\",\n\t\t\t\"Open\": \"$5.51\",\n\t\t\t\"High\": \"$5.65\",\n\t\t\t\"Low\": \"$5.48\",\n\t\t\t\"Close\": \"$5.60\",\n\t\t\t\"Volume\": \"71470500\",\n\t\t\t\"AdjClose\": \"5.60\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"JAVA\",\n\t\t\t\"Company\": \"Sun Microsystems Inc.\",\n\t\t\t\"Date\": \"2007-11-05\",\n\t\t\t\"Open\": \"$5.58\",\n\t\t\t\"High\": \"$5.76\",\n\t\t\t\"Low\": \"$5.57\",\n\t\t\t\"Close\": \"$5.71\",\n\t\t\t\"Volume\": \"75232200\",\n\t\t\t\"AdjClose\": \"5.71\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"JAVA\",\n\t\t\t\"Company\": \"Sun Microsystems Inc.\",\n\t\t\t\"Date\": \"2007-11-06\",\n\t\t\t\"Open\": \"$5.75\",\n\t\t\t\"High\": \"$5.76\",\n\t\t\t\"Low\": \"$5.10\",\n\t\t\t\"Close\": \"$5.16\",\n\t\t\t\"Volume\": \"206381100\",\n\t\t\t\"AdjClose\": \"5.16\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"JAVA\",\n\t\t\t\"Company\": \"Sun Microsystems Inc.\",\n\t\t\t\"Date\": \"2007-11-07\",\n\t\t\t\"Open\": \"$5.19\",\n\t\t\t\"High\": \"$5.30\",\n\t\t\t\"Low\": \"$5.15\",\n\t\t\t\"Close\": \"$5.22\",\n\t\t\t\"Volume\": \"123876300\",\n\t\t\t\"AdjClose\": \"5.22\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"JAVA\",\n\t\t\t\"Company\": \"Sun Microsystems Inc.\",\n\t\t\t\"Date\": \"2007-11-08\",\n\t\t\t\"Open\": \"$5.28\",\n\t\t\t\"High\": \"$5.30\",\n\t\t\t\"Low\": \"$5.10\",\n\t\t\t\"Close\": \"$5.19\",\n\t\t\t\"Volume\": \"80042900\",\n\t\t\t\"AdjClose\": \"5.19\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"JAVA\",\n\t\t\t\"Company\": \"Sun Microsystems Inc.\",\n\t\t\t\"Date\": \"2007-11-09\",\n\t\t\t\"Open\": \"$5.16\",\n\t\t\t\"High\": \"$5.29\",\n\t\t\t\"Low\": \"$5.13\",\n\t\t\t\"Close\": \"$5.14\",\n\t\t\t\"Volume\": \"77342200\",\n\t\t\t\"AdjClose\": \"5.14\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"AMZN\",\n\t\t\t\"Company\": \"Amazon.com Inc.\",\n\t\t\t\"Date\": \"2007-10-29\",\n\t\t\t\"Open\": \"$90.41\",\n\t\t\t\"High\": \"$91.47\",\n\t\t\t\"Low\": \"$89.48\",\n\t\t\t\"Close\": \"$90.10\",\n\t\t\t\"Volume\": \"7061600\",\n\t\t\t\"AdjClose\": \"90.10\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"AMZN\",\n\t\t\t\"Company\": \"Amazon.com Inc.\",\n\t\t\t\"Date\": \"2007-10-30\",\n\t\t\t\"Open\": \"$89.67\",\n\t\t\t\"High\": \"$90.65\",\n\t\t\t\"Low\": \"$88.05\",\n\t\t\t\"Close\": \"$88.24\",\n\t\t\t\"Volume\": \"5405400\",\n\t\t\t\"AdjClose\": \"88.24\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"AMZN\",\n\t\t\t\"Company\": \"Amazon.com Inc.\",\n\t\t\t\"Date\": \"2007-10-31\",\n\t\t\t\"Open\": \"$88.05\",\n\t\t\t\"High\": \"$89.60\",\n\t\t\t\"Low\": \"$87.00\",\n\t\t\t\"Close\": \"$89.15\",\n\t\t\t\"Volume\": \"7044800\",\n\t\t\t\"AdjClose\": \"89.15\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"AMZN\",\n\t\t\t\"Company\": \"Amazon.com Inc.\",\n\t\t\t\"Date\": \"2007-11-01\",\n\t\t\t\"Open\": \"$87.75\",\n\t\t\t\"High\": \"$89.58\",\n\t\t\t\"Low\": \"$86.50\",\n\t\t\t\"Close\": \"$87.65\",\n\t\t\t\"Volume\": \"8265700\",\n\t\t\t\"AdjClose\": \"87.65\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"AMZN\",\n\t\t\t\"Company\": \"Amazon.com Inc.\",\n\t\t\t\"Date\": \"2007-11-02\",\n\t\t\t\"Open\": \"$87.97\",\n\t\t\t\"High\": \"$88.12\",\n\t\t\t\"Low\": \"$83.50\",\n\t\t\t\"Close\": \"$85.98\",\n\t\t\t\"Volume\": \"10230500\",\n\t\t\t\"AdjClose\": \"85.98\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"AMZN\",\n\t\t\t\"Company\": \"Amazon.com Inc.\",\n\t\t\t\"Date\": \"2007-11-05\",\n\t\t\t\"Open\": \"$84.35\",\n\t\t\t\"High\": \"$86.02\",\n\t\t\t\"Low\": \"$82.76\",\n\t\t\t\"Close\": \"$84.37\",\n\t\t\t\"Volume\": \"7453100\",\n\t\t\t\"AdjClose\": \"84.37\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"AMZN\",\n\t\t\t\"Company\": \"Amazon.com Inc.\",\n\t\t\t\"Date\": \"2007-11-06\",\n\t\t\t\"Open\": \"$84.61\",\n\t\t\t\"High\": \"$87.50\",\n\t\t\t\"Low\": \"$84.37\",\n\t\t\t\"Close\": \"$87.27\",\n\t\t\t\"Volume\": \"7934000\",\n\t\t\t\"AdjClose\": \"87.27\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"AMZN\",\n\t\t\t\"Company\": \"Amazon.com Inc.\",\n\t\t\t\"Date\": \"2007-11-07\",\n\t\t\t\"Open\": \"$86.41\",\n\t\t\t\"High\": \"$89.16\",\n\t\t\t\"Low\": \"$86.16\",\n\t\t\t\"Close\": \"$87.04\",\n\t\t\t\"Volume\": \"8397800\",\n\t\t\t\"AdjClose\": \"87.04\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"AMZN\",\n\t\t\t\"Company\": \"Amazon.com Inc.\",\n\t\t\t\"Date\": \"2007-11-08\",\n\t\t\t\"Open\": \"$86.80\",\n\t\t\t\"High\": \"$86.96\",\n\t\t\t\"Low\": \"$81.40\",\n\t\t\t\"Close\": \"$83.58\",\n\t\t\t\"Volume\": \"11803200\",\n\t\t\t\"AdjClose\": \"83.58\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"AMZN\",\n\t\t\t\"Company\": \"Amazon.com Inc.\",\n\t\t\t\"Date\": \"2007-11-09\",\n\t\t\t\"Open\": \"$82.42\",\n\t\t\t\"High\": \"$82.42\",\n\t\t\t\"Low\": \"$78.84\",\n\t\t\t\"Close\": \"$78.89\",\n\t\t\t\"Volume\": \"11620200\",\n\t\t\t\"AdjClose\": \"78.89\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"AMZN\",\n\t\t\t\"Company\": \"Amazon.com Inc.\",\n\t\t\t\"Date\": \"2007-11-12\",\n\t\t\t\"Open\": \"$78.26\",\n\t\t\t\"High\": \"$80.09\",\n\t\t\t\"Low\": \"$76.50\",\n\t\t\t\"Close\": \"$77.00\",\n\t\t\t\"Volume\": \"9396900\",\n\t\t\t\"AdjClose\": \"77.00\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"AMZN\",\n\t\t\t\"Company\": \"Amazon.com Inc.\",\n\t\t\t\"Date\": \"2007-11-13\",\n\t\t\t\"Open\": \"$77.91\",\n\t\t\t\"High\": \"$80.05\",\n\t\t\t\"Low\": \"$77.80\",\n\t\t\t\"Close\": \"$79.86\",\n\t\t\t\"Volume\": \"9496300\",\n\t\t\t\"AdjClose\": \"79.86\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"AMZN\",\n\t\t\t\"Company\": \"Amazon.com Inc.\",\n\t\t\t\"Date\": \"2007-11-14\",\n\t\t\t\"Open\": \"$80.40\",\n\t\t\t\"High\": \"$81.15\",\n\t\t\t\"Low\": \"$78.15\",\n\t\t\t\"Close\": \"$78.51\",\n\t\t\t\"Volume\": \"8427400\",\n\t\t\t\"AdjClose\": \"78.51\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"AMZN\",\n\t\t\t\"Company\": \"Amazon.com Inc.\",\n\t\t\t\"Date\": \"2007-11-15\",\n\t\t\t\"Open\": \"$79.43\",\n\t\t\t\"High\": \"$79.73\",\n\t\t\t\"Low\": \"$76.70\",\n\t\t\t\"Close\": \"$77.85\",\n\t\t\t\"Volume\": \"7831500\",\n\t\t\t\"AdjClose\": \"77.85\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"AMZN\",\n\t\t\t\"Company\": \"Amazon.com Inc.\",\n\t\t\t\"Date\": \"2007-11-16\",\n\t\t\t\"Open\": \"$77.01\",\n\t\t\t\"High\": \"$78.99\",\n\t\t\t\"Low\": \"$76.63\",\n\t\t\t\"Close\": \"$78.60\",\n\t\t\t\"Volume\": \"7114100\",\n\t\t\t\"AdjClose\": \"78.60\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"AMZN\",\n\t\t\t\"Company\": \"Amazon.com Inc.\",\n\t\t\t\"Date\": \"2007-11-19\",\n\t\t\t\"Open\": \"$78.83\",\n\t\t\t\"High\": \"$79.75\",\n\t\t\t\"Low\": \"$77.94\",\n\t\t\t\"Close\": \"$79.18\",\n\t\t\t\"Volume\": \"8649800\",\n\t\t\t\"AdjClose\": \"79.18\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"AMZN\",\n\t\t\t\"Company\": \"Amazon.com Inc.\",\n\t\t\t\"Date\": \"2007-11-20\",\n\t\t\t\"Open\": \"$79.86\",\n\t\t\t\"High\": \"$82.00\",\n\t\t\t\"Low\": \"$78.31\",\n\t\t\t\"Close\": \"$80.39\",\n\t\t\t\"Volume\": \"11256300\",\n\t\t\t\"AdjClose\": \"80.39\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"AMZN\",\n\t\t\t\"Company\": \"Amazon.com Inc.\",\n\t\t\t\"Date\": \"2007-11-21\",\n\t\t\t\"Open\": \"$79.24\",\n\t\t\t\"High\": \"$80.86\",\n\t\t\t\"Low\": \"$78.65\",\n\t\t\t\"Close\": \"$79.76\",\n\t\t\t\"Volume\": \"6678300\",\n\t\t\t\"AdjClose\": \"79.76\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"AMZN\",\n\t\t\t\"Company\": \"Amazon.com Inc.\",\n\t\t\t\"Date\": \"2007-11-23\",\n\t\t\t\"Open\": \"$80.11\",\n\t\t\t\"High\": \"$81.45\",\n\t\t\t\"Low\": \"$78.98\",\n\t\t\t\"Close\": \"$81.43\",\n\t\t\t\"Volume\": \"2780900\",\n\t\t\t\"AdjClose\": \"81.43\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"AMZN\",\n\t\t\t\"Company\": \"Amazon.com Inc.\",\n\t\t\t\"Date\": \"2007-11-26\",\n\t\t\t\"Open\": \"$82.30\",\n\t\t\t\"High\": \"$84.49\",\n\t\t\t\"Low\": \"$81.14\",\n\t\t\t\"Close\": \"$81.30\",\n\t\t\t\"Volume\": \"8610500\",\n\t\t\t\"AdjClose\": \"81.30\"\n\t\t},\n\t\t{\n\t\t\t\"Symbol\": \"AMZN\",\n\t\t\t\"Company\": \"Amazon.com Inc.\",\n\t\t\t\"Date\": \"2007-11-27\",\n\t\t\t\"Open\": \"$82.92\",\n\t\t\t\"High\": \"$85.65\",\n\t\t\t\"Low\": \"$82.21\",\n\t\t\t\"Close\": \"$85.59\",\n\t\t\t\"Volume\": \"8634200\",\n\t\t\t\"AdjClose\": \"85.59\"\n\t\t}\n\t]\n}",
+                "DataProvider": "JSON",
+                "IntegratedSecurity": false,
+                "Prompt": ""
+            },
+            "Transaction": false
+        }
+    ],
+    "DataSets": [
+        {
+            "AccentSensitivity": "Auto",
+            "CaseSensitivity": "Auto",
+            "Collation": "",
+            "Fields": [
+                {
+                    "Name": "Symbol",
+                    "DataField": "Symbol"
+                },
+                {
+                    "Name": "Company",
+                    "DataField": "Company"
+                },
+                {
+                    "Name": "Date",
+                    "DataField": "Date"
+                },
+                {
+                    "Name": "Open",
+                    "DataField": "Open"
+                },
+                {
+                    "Name": "High",
+                    "DataField": "High"
+                },
+                {
+                    "Name": "Low",
+                    "DataField": "Low"
+                },
+                {
+                    "Name": "Close",
+                    "DataField": "Close"
+                },
+                {
+                    "Name": "Volume",
+                    "DataField": "Volume"
+                },
+                {
+                    "Name": "AdjClose",
+                    "DataField": "AdjClose"
+                }
+            ],
+            "KanatypeSensitivity": "Auto",
+            "WidthSensitivity": "Auto",
+            "Query": {
+                "CommandText": "$.Snapshot[*]",
+                "CommandType": "Text",
+                "DataSourceName": "DataSource1",
+                "Timeout": 0
+            },
+            "Name": "DataSet1"
+        }
+    ],
+    "CustomProperties": [
+        {
+            "Name": "DisplayType",
+            "Value": "Page"
+        },
+        {
+            "Name": "SizeType",
+            "Value": "Default"
+        }
+    ],
+    "Page": {
+        "BottomMargin": "0.5in",
+        "LeftMargin": "0.6in",
+        "PageHeight": "8.5in",
+        "PageWidth": "11in",
+        "PageOrientation": "Landscape",
+        "RightMargin": "0.65in",
+        "TopMargin": "0.5in",
+        "ColumnSpacing": "0in",
+        "Columns": 1
+    },
+    "Layers": [
+        {
+            "Type": "layer",
+            "Name": "default"
+        }
+    ],
+    "Body": {
+        "Name": "Body",
+        "Type": "section",
+        "Height": "1.8167in",
+        "ReportItems": [
+            {
+                "KeepTogether": true,
+                "Type": "textbox",
+                "Left": "0.573in",
+                "Width": "6.5833in",
+                "Height": "0.5in",
+                "CanGrow": true,
+                "Value": "Stock Market Snapshot",
+                "Style": {
+                    "Color": "#5e5e5e",
+                    "TextAlign": "Left",
+                    "FontFamily": "Helvetica",
+                    "FontSize": "18pt",
+                    "FontWeight": "Bold",
+                    "PaddingLeft": "2pt",
+                    "PaddingRight": "2pt",
+                    "PaddingTop": "2pt",
+                    "PaddingBottom": "2pt",
+                    "VerticalAlign": "Middle"
+                },
+                "Name": "TextBox1"
+            },
+            {
+                "ZIndex": 1,
+                "DataSetName": "DataSet1",
+                "Type": "table",
+                "Top": "0.85in",
+                "Width": "9.7215in",
+                "Height": "0.9667in",
+                "TableColumns": [
+                    {
+                        "Type": "tablecolumn",
+                        "Width": "0.7257in"
+                    },
+                    {
+                        "Type": "tablecolumn",
+                        "Width": "2.1215in"
+                    },
+                    {
+                        "Type": "tablecolumn",
+                        "Width": "2.618in"
+                    },
+                    {
+                        "Type": "tablecolumn",
+                        "Width": "0.9763in"
+                    },
+                    {
+                        "Type": "tablecolumn",
+                        "Width": "0.82in"
+                    },
+                    {
+                        "Type": "tablecolumn",
+                        "Width": "0.82in"
+                    },
+                    {
+                        "Type": "tablecolumn",
+                        "Width": "0.82in"
+                    },
+                    {
+                        "Type": "tablecolumn",
+                        "Width": "0.82in"
+                    }
+                ],
+                "Header": {
+                    "Type": "tableheader",
+                    "TableRows": [
+                        {
+                            "Type": "tablerow",
+                            "Height": "0.4167in",
+                            "TableCells": [
+                                {
+                                    "Item": {
+                                        "KeepTogether": true,
+                                        "Type": "textbox",
+                                        "Width": "0.7257in",
+                                        "Height": "0.4167in",
+                                        "CanGrow": true,
+                                        "Value": "Symbol",
+                                        "Style": {
+                                            "BackgroundColor": "#ee9606",
+                                            "Color": "White",
+                                            "FontSize": "11pt",
+                                            "PaddingLeft": "2pt",
+                                            "PaddingRight": "2pt",
+                                            "PaddingTop": "2pt",
+                                            "PaddingBottom": "2pt",
+                                            "VerticalAlign": "Middle",
+                                            "FontWeight": "Bold"
+                                        },
+                                        "Name": "TextBox2"
+                                    },
+                                    "ColSpan": 1,
+                                    "RowSpan": 1,
+                                    "AutoMergeMode": "Never"
+                                },
+                                {
+                                    "Item": {
+                                        "KeepTogether": true,
+                                        "Type": "textbox",
+                                        "Width": "2.1215in",
+                                        "Height": "0.4167in",
+                                        "CanGrow": true,
+                                        "Value": "Company",
+                                        "Style": {
+                                            "BackgroundColor": "#ee9606",
+                                            "Color": "White",
+                                            "FontSize": "11pt",
+                                            "PaddingLeft": "2pt",
+                                            "PaddingRight": "2pt",
+                                            "PaddingTop": "2pt",
+                                            "PaddingBottom": "2pt",
+                                            "VerticalAlign": "Middle",
+                                            "FontWeight": "Bold"
+                                        },
+                                        "Name": "TextBox3"
+                                    },
+                                    "ColSpan": 1,
+                                    "RowSpan": 1,
+                                    "AutoMergeMode": "Never"
+                                },
+                                {
+                                    "Item": {
+                                        "KeepTogether": true,
+                                        "Type": "textbox",
+                                        "Width": "2.618in",
+                                        "Height": "0.4167in",
+                                        "CanGrow": true,
+                                        "Value": "Last 30 Days",
+                                        "Style": {
+                                            "BackgroundColor": "#ee9606",
+                                            "Color": "White",
+                                            "FontSize": "11pt",
+                                            "PaddingLeft": "2pt",
+                                            "PaddingRight": "2pt",
+                                            "PaddingTop": "2pt",
+                                            "PaddingBottom": "2pt",
+                                            "VerticalAlign": "Middle",
+                                            "FontWeight": "Bold"
+                                        },
+                                        "Name": "TextBox4"
+                                    },
+                                    "ColSpan": 1,
+                                    "RowSpan": 1,
+                                    "AutoMergeMode": "Never"
+                                },
+                                {
+                                    "Item": {
+                                        "KeepTogether": true,
+                                        "Type": "textbox",
+                                        "Width": "0.9763in",
+                                        "Height": "0.4167in",
+                                        "CanGrow": true,
+                                        "Value": "Close",
+                                        "Style": {
+                                            "BackgroundColor": "#ee9606",
+                                            "Color": "White",
+                                            "FontSize": "11pt",
+                                            "PaddingLeft": "9pt",
+                                            "PaddingRight": "2pt",
+                                            "PaddingTop": "2pt",
+                                            "PaddingBottom": "2pt",
+                                            "VerticalAlign": "Middle",
+                                            "Format": "c2",
+                                            "FontWeight": "Bold"
+                                        },
+                                        "Name": "TextBox23"
+                                    },
+                                    "ColSpan": 1,
+                                    "RowSpan": 1,
+                                    "AutoMergeMode": "Never"
+                                },
+                                {
+                                    "Item": {
+                                        "KeepTogether": true,
+                                        "Type": "textbox",
+                                        "Width": "0.82in",
+                                        "Height": "0.4167in",
+                                        "CanGrow": true,
+                                        "Value": "Open",
+                                        "Style": {
+                                            "BackgroundColor": "#ee9606",
+                                            "Color": "White",
+                                            "FontSize": "11pt",
+                                            "PaddingLeft": "2pt",
+                                            "PaddingRight": "2pt",
+                                            "PaddingTop": "2pt",
+                                            "PaddingBottom": "2pt",
+                                            "VerticalAlign": "Middle",
+                                            "Format": "c2",
+                                            "FontWeight": "Bold"
+                                        },
+                                        "Name": "TextBox20"
+                                    },
+                                    "ColSpan": 1,
+                                    "RowSpan": 1,
+                                    "AutoMergeMode": "Never"
+                                },
+                                {
+                                    "Item": {
+                                        "KeepTogether": true,
+                                        "Type": "textbox",
+                                        "Width": "0.82in",
+                                        "Height": "0.4167in",
+                                        "CanGrow": true,
+                                        "Value": "High",
+                                        "Style": {
+                                            "BackgroundColor": "#ee9606",
+                                            "Color": "White",
+                                            "FontSize": "11pt",
+                                            "PaddingLeft": "2pt",
+                                            "PaddingRight": "2pt",
+                                            "PaddingTop": "2pt",
+                                            "PaddingBottom": "2pt",
+                                            "VerticalAlign": "Middle",
+                                            "Format": "c2",
+                                            "FontWeight": "Bold"
+                                        },
+                                        "Name": "TextBox17"
+                                    },
+                                    "ColSpan": 1,
+                                    "RowSpan": 1,
+                                    "AutoMergeMode": "Never"
+                                },
+                                {
+                                    "Item": {
+                                        "KeepTogether": true,
+                                        "Type": "textbox",
+                                        "Width": "0.82in",
+                                        "Height": "0.4167in",
+                                        "CanGrow": true,
+                                        "Value": "Low",
+                                        "Style": {
+                                            "BackgroundColor": "#ee9606",
+                                            "Color": "White",
+                                            "FontSize": "11pt",
+                                            "PaddingLeft": "2pt",
+                                            "PaddingRight": "2pt",
+                                            "PaddingTop": "2pt",
+                                            "PaddingBottom": "2pt",
+                                            "VerticalAlign": "Middle",
+                                            "Format": "c2",
+                                            "FontWeight": "Bold"
+                                        },
+                                        "Name": "TextBox14"
+                                    },
+                                    "ColSpan": 1,
+                                    "RowSpan": 1,
+                                    "AutoMergeMode": "Never"
+                                },
+                                {
+                                    "Item": {
+                                        "KeepTogether": true,
+                                        "Type": "textbox",
+                                        "Width": "0.82in",
+                                        "Height": "0.4167in",
+                                        "CanGrow": true,
+                                        "Value": "Volume",
+                                        "Style": {
+                                            "BackgroundColor": "#ee9606",
+                                            "Color": "White",
+                                            "FontSize": "11pt",
+                                            "PaddingLeft": "2pt",
+                                            "PaddingRight": "2pt",
+                                            "PaddingTop": "2pt",
+                                            "PaddingBottom": "2pt",
+                                            "VerticalAlign": "Middle",
+                                            "FontWeight": "Bold"
+                                        },
+                                        "Name": "TextBox11"
+                                    },
+                                    "ColSpan": 1,
+                                    "RowSpan": 1,
+                                    "AutoMergeMode": "Never"
+                                }
+                            ]
+                        }
+                    ],
+                    "RepeatOnNewPage": true
+                },
+                "Footer": {
+                    "Type": "tablefooter",
+                    "TableRows": [
+                        {
+                            "Type": "tablerow",
+                            "Height": "0.25in",
+                            "TableCells": [
+                                {
+                                    "Item": {
+                                        "KeepTogether": true,
+                                        "Type": "textbox",
+                                        "Width": "0.7257in",
+                                        "Height": "0.25in",
+                                        "CanGrow": true,
+                                        "Style": {
+                                            "PaddingLeft": "2pt",
+                                            "PaddingRight": "2pt",
+                                            "PaddingTop": "2pt",
+                                            "PaddingBottom": "2pt"
+                                        },
+                                        "Name": "TextBox8"
+                                    },
+                                    "ColSpan": 1,
+                                    "RowSpan": 1,
+                                    "AutoMergeMode": "Never"
+                                },
+                                {
+                                    "Item": {
+                                        "KeepTogether": true,
+                                        "Type": "textbox",
+                                        "Width": "2.1215in",
+                                        "Height": "0.25in",
+                                        "CanGrow": true,
+                                        "Style": {
+                                            "PaddingLeft": "2pt",
+                                            "PaddingRight": "2pt",
+                                            "PaddingTop": "2pt",
+                                            "PaddingBottom": "2pt"
+                                        },
+                                        "Name": "TextBox9"
+                                    },
+                                    "ColSpan": 1,
+                                    "RowSpan": 1,
+                                    "AutoMergeMode": "Never"
+                                },
+                                {
+                                    "Item": {
+                                        "KeepTogether": true,
+                                        "Type": "textbox",
+                                        "Width": "2.618in",
+                                        "Height": "0.25in",
+                                        "CanGrow": true,
+                                        "Style": {
+                                            "PaddingLeft": "2pt",
+                                            "PaddingRight": "2pt",
+                                            "PaddingTop": "2pt",
+                                            "PaddingBottom": "2pt"
+                                        },
+                                        "Name": "TextBox10"
+                                    },
+                                    "ColSpan": 1,
+                                    "RowSpan": 1,
+                                    "AutoMergeMode": "Never"
+                                },
+                                {
+                                    "Item": {
+                                        "KeepTogether": true,
+                                        "Type": "textbox",
+                                        "Width": "0.9763in",
+                                        "Height": "0.25in",
+                                        "CanGrow": true,
+                                        "Style": {
+                                            "PaddingLeft": "9pt",
+                                            "PaddingRight": "2pt",
+                                            "PaddingTop": "2pt",
+                                            "PaddingBottom": "2pt",
+                                            "Format": "c2"
+                                        },
+                                        "Name": "TextBox25"
+                                    },
+                                    "ColSpan": 1,
+                                    "RowSpan": 1,
+                                    "AutoMergeMode": "Never"
+                                },
+                                {
+                                    "Item": {
+                                        "KeepTogether": true,
+                                        "Type": "textbox",
+                                        "Width": "0.82in",
+                                        "Height": "0.25in",
+                                        "CanGrow": true,
+                                        "Style": {
+                                            "PaddingLeft": "2pt",
+                                            "PaddingRight": "2pt",
+                                            "PaddingTop": "2pt",
+                                            "PaddingBottom": "2pt",
+                                            "Format": "c2"
+                                        },
+                                        "Name": "TextBox22"
+                                    },
+                                    "ColSpan": 1,
+                                    "RowSpan": 1,
+                                    "AutoMergeMode": "Never"
+                                },
+                                {
+                                    "Item": {
+                                        "KeepTogether": true,
+                                        "Type": "textbox",
+                                        "Width": "0.82in",
+                                        "Height": "0.25in",
+                                        "CanGrow": true,
+                                        "Style": {
+                                            "PaddingLeft": "2pt",
+                                            "PaddingRight": "2pt",
+                                            "PaddingTop": "2pt",
+                                            "PaddingBottom": "2pt",
+                                            "Format": "c2"
+                                        },
+                                        "Name": "TextBox19"
+                                    },
+                                    "ColSpan": 1,
+                                    "RowSpan": 1,
+                                    "AutoMergeMode": "Never"
+                                },
+                                {
+                                    "Item": {
+                                        "KeepTogether": true,
+                                        "Type": "textbox",
+                                        "Width": "0.82in",
+                                        "Height": "0.25in",
+                                        "CanGrow": true,
+                                        "Style": {
+                                            "PaddingLeft": "2pt",
+                                            "PaddingRight": "2pt",
+                                            "PaddingTop": "2pt",
+                                            "PaddingBottom": "2pt",
+                                            "Format": "c2"
+                                        },
+                                        "Name": "TextBox16"
+                                    },
+                                    "ColSpan": 1,
+                                    "RowSpan": 1,
+                                    "AutoMergeMode": "Never"
+                                },
+                                {
+                                    "Item": {
+                                        "KeepTogether": true,
+                                        "Type": "textbox",
+                                        "Width": "0.82in",
+                                        "Height": "0.25in",
+                                        "CanGrow": true,
+                                        "Style": {
+                                            "PaddingLeft": "2pt",
+                                            "PaddingRight": "2pt",
+                                            "PaddingTop": "2pt",
+                                            "PaddingBottom": "2pt"
+                                        },
+                                        "Name": "TextBox13"
+                                    },
+                                    "ColSpan": 1,
+                                    "RowSpan": 1,
+                                    "AutoMergeMode": "Never"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "Details": {
+                    "SortExpressions": [
+                        {
+                            "Value": "=Fields!Symbol.Value",
+                            "Direction": "Ascending"
+                        }
+                    ],
+                    "Type": "tabledetails",
+                    "TableRows": [
+                        {
+                            "Type": "tablerow",
+                            "Height": "0.3in",
+                            "TableCells": [
+                                {
+                                    "Item": {
+                                        "ZIndex": 4,
+                                        "KeepTogether": true,
+                                        "Type": "textbox",
+                                        "Width": "0.7257in",
+                                        "Height": "0.3in",
+                                        "CanGrow": true,
+                                        "Value": "=Fields!Symbol.Value",
+                                        "Style": {
+                                            "Border": {
+                                                "Color": "#ffffff"
+                                            },
+                                            "TopBorder": {
+                                                "Color": "#c8e5fc"
+                                            },
+                                            "BottomBorder": {
+                                                "Color": "#c8e5fc"
+                                            },
+                                            "TextAlign": "Left",
+                                            "VerticalAlign": "Middle",
+                                            "PaddingLeft": "2pt",
+                                            "PaddingRight": "2pt",
+                                            "PaddingTop": "2pt",
+                                            "PaddingBottom": "2pt",
+                                            "Color": "#5e5e5e"
+                                        },
+                                        "Name": "TextBox5"
+                                    },
+                                    "ColSpan": 1,
+                                    "RowSpan": 1,
+                                    "AutoMergeMode": "Never"
+                                },
+                                {
+                                    "Item": {
+                                        "ZIndex": 4,
+                                        "KeepTogether": true,
+                                        "Type": "textbox",
+                                        "Width": "2.1215in",
+                                        "Height": "0.3in",
+                                        "CanGrow": true,
+                                        "Value": "=Fields!Company.Value",
+                                        "Style": {
+                                            "Border": {
+                                                "Color": "#ffffff"
+                                            },
+                                            "TopBorder": {
+                                                "Color": "#c8e5fc"
+                                            },
+                                            "BottomBorder": {
+                                                "Color": "#c8e5fc"
+                                            },
+                                            "TextAlign": "Left",
+                                            "VerticalAlign": "Middle",
+                                            "PaddingLeft": "2pt",
+                                            "PaddingRight": "2pt",
+                                            "PaddingTop": "2pt",
+                                            "PaddingBottom": "2pt",
+                                            "Color": "#5e5e5e"
+                                        },
+                                        "Name": "TextBox6"
+                                    },
+                                    "ColSpan": 1,
+                                    "RowSpan": 1,
+                                    "AutoMergeMode": "Never"
+                                },
+                                {
+                                    "Item": {
+                                        "ZIndex": 3,
+                                        "DataSetName": "DataSet1",
+                                        "Type": "sparkline",
+                                        "Width": "2.618in",
+                                        "Height": "0.3in",
+                                        "LineColor": "#4bacff",
+                                        "MarkerColor": "#ee9606",
+                                        "MaximumColumnWidth": "2.5in",
+                                        "SeriesValue": "=Fields!AdjClose.Value",
+                                        "Group": {
+                                            "Name": ""
+                                        },
+                                        "Name": "Sparkline1"
+                                    },
+                                    "ColSpan": 1,
+                                    "RowSpan": 1,
+                                    "AutoMergeMode": "Never"
+                                },
+                                {
+                                    "Item": {
+                                        "ZIndex": 4,
+                                        "KeepTogether": true,
+                                        "Type": "textbox",
+                                        "Width": "0.9763in",
+                                        "Height": "0.3in",
+                                        "CanGrow": true,
+                                        "Value": "=Fields!Close.Value",
+                                        "Style": {
+                                            "Border": {
+                                                "Color": "#ffffff"
+                                            },
+                                            "TopBorder": {
+                                                "Color": "#c8e5fc"
+                                            },
+                                            "BottomBorder": {
+                                                "Color": "#c8e5fc"
+                                            },
+                                            "TextAlign": "Left",
+                                            "VerticalAlign": "Middle",
+                                            "PaddingLeft": "9pt",
+                                            "PaddingRight": "2pt",
+                                            "PaddingTop": "2pt",
+                                            "PaddingBottom": "2pt",
+                                            "Color": "#5e5e5e",
+                                            "Format": "c2"
+                                        },
+                                        "Name": "TextBox24"
+                                    },
+                                    "ColSpan": 1,
+                                    "RowSpan": 1,
+                                    "AutoMergeMode": "Never"
+                                },
+                                {
+                                    "Item": {
+                                        "ZIndex": 4,
+                                        "KeepTogether": true,
+                                        "Type": "textbox",
+                                        "Width": "0.82in",
+                                        "Height": "0.3in",
+                                        "CanGrow": true,
+                                        "Value": "=Fields!Open.Value",
+                                        "Style": {
+                                            "Border": {
+                                                "Color": "#ffffff"
+                                            },
+                                            "TopBorder": {
+                                                "Color": "#c8e5fc"
+                                            },
+                                            "BottomBorder": {
+                                                "Color": "#c8e5fc"
+                                            },
+                                            "TextAlign": "Left",
+                                            "VerticalAlign": "Middle",
+                                            "PaddingLeft": "2pt",
+                                            "PaddingRight": "2pt",
+                                            "PaddingTop": "2pt",
+                                            "PaddingBottom": "2pt",
+                                            "Color": "#5e5e5e",
+                                            "Format": "c2"
+                                        },
+                                        "Name": "TextBox21"
+                                    },
+                                    "ColSpan": 1,
+                                    "RowSpan": 1,
+                                    "AutoMergeMode": "Never"
+                                },
+                                {
+                                    "Item": {
+                                        "ZIndex": 4,
+                                        "KeepTogether": true,
+                                        "Type": "textbox",
+                                        "Width": "0.82in",
+                                        "Height": "0.3in",
+                                        "CanGrow": true,
+                                        "Value": "=Fields!High.Value",
+                                        "Style": {
+                                            "Border": {
+                                                "Color": "#ffffff"
+                                            },
+                                            "TopBorder": {
+                                                "Color": "#c8e5fc"
+                                            },
+                                            "BottomBorder": {
+                                                "Color": "#c8e5fc"
+                                            },
+                                            "TextAlign": "Left",
+                                            "VerticalAlign": "Middle",
+                                            "PaddingLeft": "2pt",
+                                            "PaddingRight": "2pt",
+                                            "PaddingTop": "2pt",
+                                            "PaddingBottom": "2pt",
+                                            "Color": "#5e5e5e",
+                                            "Format": "c2"
+                                        },
+                                        "Name": "TextBox18"
+                                    },
+                                    "ColSpan": 1,
+                                    "RowSpan": 1,
+                                    "AutoMergeMode": "Never"
+                                },
+                                {
+                                    "Item": {
+                                        "ZIndex": 4,
+                                        "KeepTogether": true,
+                                        "Type": "textbox",
+                                        "Width": "0.82in",
+                                        "Height": "0.3in",
+                                        "CanGrow": true,
+                                        "Value": "=Fields!Low.Value",
+                                        "Style": {
+                                            "Border": {
+                                                "Color": "#ffffff"
+                                            },
+                                            "TopBorder": {
+                                                "Color": "#c8e5fc"
+                                            },
+                                            "BottomBorder": {
+                                                "Color": "#c8e5fc"
+                                            },
+                                            "TextAlign": "Left",
+                                            "VerticalAlign": "Middle",
+                                            "PaddingLeft": "2pt",
+                                            "PaddingRight": "2pt",
+                                            "PaddingTop": "2pt",
+                                            "PaddingBottom": "2pt",
+                                            "Color": "#5e5e5e",
+                                            "Format": "c2"
+                                        },
+                                        "Name": "TextBox15"
+                                    },
+                                    "ColSpan": 1,
+                                    "RowSpan": 1,
+                                    "AutoMergeMode": "Never"
+                                },
+                                {
+                                    "Item": {
+                                        "ZIndex": 4,
+                                        "KeepTogether": true,
+                                        "Type": "textbox",
+                                        "Width": "0.82in",
+                                        "Height": "0.3in",
+                                        "CanGrow": true,
+                                        "Value": "=Fields!Volume.Value",
+                                        "Style": {
+                                            "Border": {
+                                                "Color": "#ffffff"
+                                            },
+                                            "TopBorder": {
+                                                "Color": "#c8e5fc"
+                                            },
+                                            "BottomBorder": {
+                                                "Color": "#c8e5fc"
+                                            },
+                                            "TextAlign": "Left",
+                                            "VerticalAlign": "Middle",
+                                            "Format": "n2",
+                                            "PaddingLeft": "2pt",
+                                            "PaddingRight": "2pt",
+                                            "PaddingTop": "2pt",
+                                            "PaddingBottom": "2pt",
+                                            "Color": "#5e5e5e"
+                                        },
+                                        "Name": "TextBox12"
+                                    },
+                                    "ColSpan": 1,
+                                    "RowSpan": 1,
+                                    "AutoMergeMode": "Never"
+                                }
+                            ]
+                        }
+                    ],
+                    "Group": {
+                        "Name": "Table1_DetailsGroup1",
+                        "GroupExpressions": [
+                            "=Fields!Symbol.Value"
+                        ]
+                    }
+                },
+                "TableGroups": [
+                    {
+                        "Type": "tablegroup",
+                        "Group": {
+                            "Name": "Table1_TableGroup1",
+                            "GroupExpressions": [
+                                ""
+                            ]
+                        }
+                    }
+                ],
+                "Name": "Table1"
+            },
+            {
+                "ZIndex": 2,
+                "Type": "shape",
+                "Left": "0.3279in",
+                "Width": "0.1771in",
+                "Height": "0.4688in",
+                "Style": {
+                    "BackgroundColor": "#ee9606",
+                    "Border": {
+                        "Style": "Solid",
+                        "Color": "#ee9606"
+                    }
+                },
+                "Name": "Shape1"
+            }
+        ]
+    },
+    "TransformationInfo": []
+}

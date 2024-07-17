@@ -11,16 +11,10 @@
     <template #title>
       <div style="display: flex; justify-content: space-between; align-items: center">
         <span>プレビュー</span>
-
-        <a-button
-          type="primary"
-          :icon="isFullScreen ? h(ShrinkOutlined) : h(ArrowsAltOutlined)"
-          @click="handleFullScreen"
-        ></a-button>
       </div>
     </template>
 
-    <div id="viewercontainer" :style="{ height: viewercontainerHeight, width: '100%' }"></div>
+    <div id="viewercontainer" ref="viewerContainer" w-200 h-200></div>
 
     <template #footer>
       <a-button type="primary" @click="closeModel">閉じる</a-button>
@@ -29,14 +23,12 @@
 </template>
 
 <script setup lang="ts">
-import { Preview } from '@/views/affect/EU/AWEU00303D/service'
 import { PreviewRequest } from '@/views/affect/EU/AWEU00303D/type'
 import { computed, nextTick, ref, watch } from 'vue'
-import CellReport from 'public/cellreport/cellreport.viewer.11.0.1.js'
-import { h } from 'vue'
-import { ArrowsAltOutlined, ShrinkOutlined } from '@ant-design/icons-vue'
-import { GlobalStore } from '@/store'
 import { data } from '../constant'
+import { ReportViewer, Core, PdfExport } from '@grapecity/activereports'
+// import { Viewer as ReportViewer } from '@grapecity/activereports-vue'
+// import '@grapecity/activereports/styles/ar-js-viewer.css'
 
 //---------------------------------------------------------------------------
 //属性
@@ -45,28 +37,15 @@ const props = defineProps<{
   visible: boolean
   params?: PreviewRequest
 }>()
+const viewerContainer = ref(null)
 const emit = defineEmits(['update:visible'])
 //--------------------------------------------------------------------------
 //データ定義
 //--------------------------------------------------------------------------
-const viewer = ref()
 const viewercontainerHeight = ref('750px')
 const modalWidth = ref('1000px')
 const modalClass = ref('custom-modal')
-const isFullScreen = ref(false)
-const handleFullScreen = () => {
-  if (isFullScreen.value) {
-    viewercontainerHeight.value = '750px'
-    modalWidth.value = '1000px'
-    modalClass.value = 'custom-modal'
-  } else {
-    // 自動的に高さを調整
-    viewercontainerHeight.value = `${window.innerHeight - 120}px`
-    modalWidth.value = '100%'
-    modalClass.value = 'full-modal custom-modal'
-  }
-  isFullScreen.value = !isFullScreen.value
-}
+
 //--------------------------------------------------------------------------
 //計算定義
 //--------------------------------------------------------------------------
@@ -85,14 +64,26 @@ watch(
   () => props.visible,
   async (visible) => {
     if (visible) {
-      debugger
       await nextTick()
-      viewer.value = new CellReport.CellReport.Viewer('viewercontainer')
-      const resolve = function () {
-        viewer.value.setPageZoom(-1)
-      }
-      //ビューファイル取得 bas64
-      viewer.value.reportPriview(data, resolve, '')
+      const viewer = new ReportViewer.Viewer('#viewercontainer', { language: 'ja' })
+      // const viewer = new ReportViewer(viewerContainer.value, { language: 'ja' });
+      // viewer.open('/MarketSnapshot.rdlx-json');
+      viewer.open('public/MarketSnapshot.rdlx-json').catch((e) => {
+        console.log(e)
+      })
+      // viewerContainer.value.viewer.open('/MarketSnapshot.rdlx-json', { language: 'ja' })
+
+      // fetch('/1.rdlx-json')
+      //   .then((response) => response.json())
+      //   .then((report) => {
+      //     viewer.open(report)
+      //   })
+
+      // const parameters = [
+      //   { Name: 'レポートパラメータ1', Value: ['値1'] },
+      //   { Name: 'レポートパラメータ2', Value: ['値2'] }
+      // ]
+      // viewer.open('/youke.rdlx-json', { ReportParams: parameters })
     }
   }
 )
@@ -100,7 +91,6 @@ watch(
 //
 const closeModel = () => {
   modalVisible.value = false
-  handleFullScreen()
 }
 </script>
 <style lang="less">

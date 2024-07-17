@@ -81,8 +81,10 @@
         </a-col>
       </a-row>
     </div>
+    <!-- <JSViewer ref="reportViewer"></JSViewer> -->
+    <ReportViewer ref="reportViewer" />
   </a-card>
-  <PreviewModal v-model:visible="previewVisible" />
+  <!-- <PreviewModal v-model:visible="previewVisible" /> -->
 </template>
 
 <script setup lang="ts">
@@ -95,6 +97,9 @@ import PreviewModal from './components/PreviewModal.vue'
 import { DELETE_OK_INFO } from '@/constants/msg'
 import { showConfirmModal } from '@/utils/modal'
 import { message } from 'ant-design-vue'
+import { ReportViewer } from '@grapecity/activereports'
+import { Viewer as JSViewer } from '@grapecity/activereports-vue'
+import { PageReport } from '@grapecity/activereports/core'
 //---------------------------------------------------------------------------
 //属性
 //---------------------------------------------------------------------------
@@ -139,9 +144,12 @@ const previewVisible = ref(false)
 //---------------------------------------------------------------------------
 //フック関数
 //--------------------------------------------------------------------------
-
+const reportViewer = ref()
 onMounted(async () => {
   editJudge.addEvent()
+  const report = new PageReport()
+  const viewer = reportViewer.value?.Viewer().open(report)
+  viewer.open('/2.rdlx-json')
 })
 //--------------------------------------------------------------------------
 //計算定義
