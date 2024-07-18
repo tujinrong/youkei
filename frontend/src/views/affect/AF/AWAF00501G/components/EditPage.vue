@@ -21,7 +21,8 @@
             <a-space :size="20">
               <a-button class="warning-btn" @click="saveData">登録</a-button>
               <a-button type="primary" danger :disabled="isNew" @click="deleteData">削除</a-button>
-              <a-button v-if="!isNew" :icon="h(LeftOutlined)"></a-button>
+              <!-- <a-pagination v-model:current="current" show-less-items total /> -->
+              <a-button v-if="!isNew" :icon="h(LeftOutlined)"></a-button>2/5
               <a-button v-if="!isNew" :icon="h(RightOutlined)"></a-button>
             </a-space>
             <a-button type="primary" class="text-end" @click="goList">一覧へ</a-button>
@@ -190,7 +191,7 @@ const todoufukenList = [
   { value: '46', label: '鹿児島県' },
   { value: '47', label: '沖縄県' }
 ]
-
+const current = ref<number>(2)
 const layout = {
   md: 24,
   lg: 24,
