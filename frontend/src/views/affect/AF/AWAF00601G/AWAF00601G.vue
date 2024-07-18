@@ -1,18 +1,7 @@
 <template>
-  <a-card :bordered="false" class="mb-2 h-full" :style="{ height: tableHeight + 50 + `px` }">
+  <a-card :bordered="false" class="mb-2 h-full" :style="{ height: tableHeight + 70 + `px` }">
     <h1>契約者一覧表(連絡用)</h1>
     <div class="self_adaption_table form">
-      <a-row>
-        <a-col v-bind="layout">
-          <div class="mb-2 header_operation flex justify-between w-full">
-            <a-space :size="20">
-              <a-button type="primary" @click="onPreview">プレビュー</a-button>
-              <a-button type="primary" @click="cancel">キャンセル</a-button>
-            </a-space>
-            <a-button type="primary" @click="goList" class="text-end">一覧へ</a-button>
-          </div>
-        </a-col>
-      </a-row>
       <a-row>
         <a-col v-bind="layout">
           <th class="required">対象期</th>
@@ -27,16 +16,12 @@
             >期
           </td>
         </a-col>
-      </a-row>
-      <a-row>
         <a-col v-bind="layout">
           <th class="required">対象期(現在)</th>
           <td>
-            <a-date-picker v-model:value="formData.b" style="width: 200" />
+            <a-date-picker v-model:value="formData.b" class="w-full" />
           </td>
         </a-col>
-      </a-row>
-      <a-row>
         <a-col v-bind="layout">
           <th>契約区分</th>
           <td class="flex">
@@ -46,8 +31,6 @@
             ></ai-select>
           </td>
         </a-col>
-      </a-row>
-      <a-row>
         <a-col v-bind="layout">
           <th class="required">契約状態</th>
           <td>
@@ -59,8 +42,6 @@
             </a-space>
           </td>
         </a-col>
-      </a-row>
-      <a-row>
         <a-col v-bind="layout">
           <th>事業委託先</th>
           <td class="flex">
@@ -70,18 +51,27 @@
             ></ai-select>
           </td>
         </a-col>
-      </a-row>
-      <a-row>
         <a-col v-bind="layout">
           <th>契約者番号</th>
           <td class="flex">
             <a-input v-model:value="formData.c" :xxl="9"></a-input>
             ～
             <a-input v-model:value="formData.d" :xxl="9"></a-input>
-          </td>
+          </td> </a-col
+      ></a-row>
+      <a-row class="m-t-1">
+        <a-col :span="24">
+          <div class="mb-2 header_operation flex justify-between w-full">
+            <a-space :size="20">
+              <a-button type="primary" @click="onPreview">プレビュー</a-button>
+              <a-button type="primary" @click="clear">クリア</a-button>
+            </a-space>
+            <a-button type="primary" @click="goList" class="text-end">閉じる</a-button>
+          </div>
         </a-col>
       </a-row>
     </div>
+    <div id="viewer-host" style="height: 650px"></div>
   </a-card>
   <PreviewModal v-model:visible="previewVisible" />
 </template>
@@ -89,17 +79,15 @@
 <script setup lang="ts">
 import { EnumRegex, Enum編集区分, PageSatatus } from '#/Enums'
 import { onMounted, reactive, ref, watch, nextTick, computed } from 'vue'
+import dayjs, { Dayjs } from 'dayjs'
 import { useRoute, useRouter } from 'vue-router'
 import { Judgement } from '@/utils/judge-edited'
 import { useTableHeight } from '@/utils/hooks'
 import PreviewModal from './components/PreviewModal.vue'
-
-//---------------------------------------------------------------------------
-//属性
-//---------------------------------------------------------------------------
-const props = defineProps<{
-  status: PageSatatus
-}>()
+import '@grapecity/activereports/styles/ar-js-ui.css'
+import '@grapecity/activereports/styles/ar-js-viewer.css'
+import '@grapecity/activereports-localization'
+import { ReportViewer, Core, PdfExport } from '@grapecity/activereports'
 
 //--------------------------------------------------------------------------
 //データ定義
@@ -107,17 +95,16 @@ const props = defineProps<{
 const router = useRouter()
 const route = useRoute()
 const editJudge = new Judgement(route.name as string)
-const isNew = props.status === PageSatatus.New
 const { tableHeight } = useTableHeight()
 const createDefaultParams = () => {
   return {
-    a: '',
-    b: '',
+    a: '12',
+    b: dayjs('2024-07-02'),
     c: '',
     d: '',
     e: '',
     f: '',
-    sinkiflg: false,
+    sinkiflg: true,
     keizokuflg: false,
     tyusiflg: false,
     haigyoflg: false
@@ -137,8 +124,10 @@ const keiyakukbnlist = [
 const layout = {
   md: 24,
   lg: 24,
-  xxl: 10
+  xl: 24,
+  xxl: 12
 }
+
 const previewVisible = ref(false)
 //---------------------------------------------------------------------------
 //フック関数
@@ -164,17 +153,19 @@ watch(
 
 //画面遷移
 const goList = () => {
-  editJudge.judgeIsEdited(() => {
-    router.push({ name: route.name as string })
+  router.push({
+    name: 'AWAF00301G'
   })
 }
 //
-const cancel = () => {
+const clear = () => {
   Object.assign(formData, createDefaultParams())
 }
 //preview
 function onPreview() {
-  previewVisible.value = true
+  //previewVisible.value = true
+  const viewer = new ReportViewer.Viewer('#viewer-host', { language: 'ja' })
+  viewer.open('/report/keyakusya.rdlx-json')
 }
 </script>
 

@@ -64,7 +64,7 @@
       />
       <vxe-table
         class="mt-2"
-        :height="tableHeight - 20"
+        :height="tableHeight"
         :header-cell-style="{ backgroundColor: '#ffffe1' }"
         :column-config="{ resizable: true }"
         :row-config="{ isCurrent: true, isHover: true }"
@@ -251,13 +251,8 @@ const deleteRow = () => {
 
 //戻る処理
 const back = () => {
-  showConfirmModal({
-    content: CLOSE_CONFIRM.Msg,
-    onOk: () => {
-      router.push({
-        name: 'AWAF00301G'
-      })
-    }
+  router.push({
+    name: 'AWAF00301G'
   })
 }
 </script>

@@ -1,5 +1,5 @@
 <template>
-  <a-card :bordered="false" class="mb-2 h-full" :style="{ height: tableHeight + 50 + `px` }">
+  <a-card :bordered="false" class="mb-2 h-full" :style="{ height: tableHeight + 70 + `px` }">
     <h1>契約者農場マスタメンテナンス</h1>
     <div class="self_adaption_table form">
       <b>第99期</b>

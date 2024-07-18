@@ -35,7 +35,7 @@
       <span>{{ menu.meta?.title }}</span>
       <template #overlay>
         <a-menu>
-          <a-menu-item @click="() => menuClick(menu.path)">コピー</a-menu-item>
+          <a-menu-item @click="() => menuClick(menu.path)">新しいウィンドウで開く</a-menu-item>
         </a-menu>
       </template>
     </a-dropdown>
