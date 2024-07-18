@@ -89,7 +89,7 @@ const contentPaddingLeft = computed(() => {
     return '0px'
   } else {
     if (sidebarOpened.value) {
-      return '256px'
+      return '300px'
     }
     return '80px'
   }

@@ -11,6 +11,7 @@
     <router-link :to="{ name: 'AWAF00301G' }">
       <svg-icon name="logo" />
       <h1 v-if="showTitle">{{ title }}</h1>
+      <span class="bottom-right">V1.0</span>
     </router-link>
   </div>
 </template>
@@ -33,3 +34,12 @@ const props = defineProps({
   }
 })
 </script>
+<style>
+.bottom-right {
+  font-size: 12px;
+  right: 10px;
+  color: white;
+  margin-top: 5px;
+  padding: 5px;
+}
+</style>

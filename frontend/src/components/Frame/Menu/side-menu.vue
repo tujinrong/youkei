@@ -10,7 +10,7 @@
   <a-layout-sider
     v-model:collapsed="sideMenuCollapsed"
     :class="['sider', 'dark', fixSiderbar ? 'ant-fixed-sidemenu' : null]"
-    width="256px"
+    width="300px"
     collapsible
     :trigger="null"
   >

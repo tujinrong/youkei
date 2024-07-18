@@ -21,6 +21,8 @@
             <a-space :size="20">
               <a-button class="warning-btn" @click="saveData">登録</a-button>
               <a-button type="primary" danger :disabled="isNew" @click="deleteData">削除</a-button>
+              <a-button v-if="!isNew" :icon="h(LeftOutlined)"></a-button>
+              <a-button v-if="!isNew" :icon="h(RightOutlined)"></a-button>
             </a-space>
             <a-button type="primary" class="text-end" @click="goList">一覧へ</a-button>
           </div></a-col
@@ -84,6 +86,8 @@ import { message } from 'ant-design-vue'
 import { useTableHeight } from '@/utils/hooks'
 import TD from '@/components/Common/TableTD/index.vue'
 import emitter from '@/utils/event-bus'
+import { h } from 'vue'
+import { LeftOutlined, RightOutlined } from '@ant-design/icons-vue'
 //---------------------------------------------------------------------------
 //属性
 //---------------------------------------------------------------------------

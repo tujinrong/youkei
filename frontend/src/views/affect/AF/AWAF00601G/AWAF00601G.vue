@@ -47,7 +47,7 @@
           <th>事業委託先</th>
           <td class="flex">
             <ai-select v-model:value="formData.itakusaki1" :options="selectorlist"></ai-select
-            >～<ai-select v-model:value="formData.itakusaki1" :options="selectorlist"></ai-select>
+            >～<ai-select v-model:value="formData.itakusaki2" :options="selectorlist"></ai-select>
           </td>
         </a-col>
         <a-col v-bind="layout">
