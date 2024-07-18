@@ -48,7 +48,7 @@
         <a-button type="primary" @click="forwardNew">新規</a-button>
         <a-button type="primary" @click="reset">クリア</a-button>
       </a-space>
-      <a-button type="primary" class="ml-a" @click="back">閉じる</a-button>
+      <close-page />
     </div>
   </a-card>
   <a-card class="mt-2">
@@ -247,13 +247,6 @@ const deleteRow = () => {
       }
     })
   }
-}
-
-//戻る処理
-const back = () => {
-  router.push({
-    name: 'AWAF00301G'
-  })
 }
 </script>
 

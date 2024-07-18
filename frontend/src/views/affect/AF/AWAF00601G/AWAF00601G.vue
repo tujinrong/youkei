@@ -66,7 +66,7 @@
               <a-button type="primary" @click="onPreview">プレビュー</a-button>
               <a-button type="primary" @click="clear">クリア</a-button>
             </a-space>
-            <a-button type="primary" @click="goList" class="text-end">閉じる</a-button>
+            <close-page />
           </div>
         </a-col>
       </a-row>
@@ -151,13 +151,6 @@ watch(
 //メソッド
 //--------------------------------------------------------------------------
 
-//画面遷移
-const goList = () => {
-  router.push({
-    name: 'AWAF00301G'
-  })
-}
-//
 const clear = () => {
   Object.assign(formData, createDefaultParams())
 }
