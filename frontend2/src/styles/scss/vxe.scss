@@ -1,0 +1,38 @@
+/** -----------------------------------------------------------------
+ * 業務名称　: 養鶏-互助防疫システム
+ * 機能概要　: vxe-table 変数
+ * 　　　　　  スタイル設定
+ * 作成日　　: 2023.04.04
+ * 作成者　　: 李
+ * 変更履歴　:
+ * -----------------------------------------------------------------*/
+
+$vxe-font-family: 'MS Gothic,Acgjm';
+$vxe-font-color: #262626;
+$vxe-table-border-color: #dddddd;
+$vxe-table-column-padding-default: 6px 0;
+$vxe-table-header-background-color: #ffffe1;
+$vxe-table-row-height-default: 36px;
+
+.vxe-table {
+  // border: 1px solid #606266;
+}
+
+.vxe-table--render-default.border--full .vxe-table--header-wrapper {
+  // border-bottom: 1px solid #606266;
+}
+
+//header
+.vxe-header--row .vxe-cell {
+  .vxe-cell--sort {
+    position: absolute;
+    right: 0;
+    scale: 0.8;
+    height: 1.25em;
+  }
+  &:has(.vxe-cell--sort) {
+    cursor: pointer;
+  }
+}
+
+@import 'vxe-table/styles/index.scss';

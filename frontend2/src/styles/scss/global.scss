@@ -1,0 +1,102 @@
+@import './scrollbar.scss';
+
+#app {
+  .ant-card-body {
+    padding: 12px;
+  }
+}
+
+//てきおう
+.self_adaption_table {
+  .ant-col {
+    display: flex;
+
+    th {
+      border: 1px solid #606266;
+      border-right: 1px solid #c0c4cc;
+      color: rgba(0, 0, 0, 0.85);
+      padding: 2px 4px;
+      line-height: 32px;
+      background-color: #ffffe1;
+      font-weight: normal;
+      text-align: start;
+      margin: 0 0 -1px -1px;
+    }
+    td {
+      border: 1px solid #606266;
+      border-left: none;
+      color: rgba(0, 0, 0, 0.85);
+      padding: 2px 2px;
+      // line-height: 32px;
+      flex: 1;
+      overflow-wrap: break-word;
+      margin: 0 0 -1px 0;
+    }
+  }
+  .ant-col td {
+    width: 0; // セレクタ幅制限
+  }
+  &.form {
+    .ant-col th {
+      background-color: #ecf5ff;
+    }
+    .required::after {
+      content: '＊';
+      color: #ff0000;
+    }
+  }
+  //灰色の頭部
+  .head-grey {
+    th {
+      padding-left: 16px;
+      background-color: #eee !important;
+      border-right: none !important;
+    }
+    td {
+      background-color: #eee;
+    }
+  }
+  // <a-col :md="0"
+  @media (max-width: 1600px) {
+    .ant-col-md-0 {
+      display: none;
+    }
+  }
+}
+
+//DB登録ボタン
+//<a-button type="warn"/>
+.ant-btn-warn {
+  color: #fff;
+  background-color: #e6a23c;
+  border-color: #e6a23c;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.12);
+  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.045);
+}
+.ant-btn-warn:focus,
+.ant-btn-warn:hover {
+  background: #e6c79a !important;
+  border-color: #e6c79a !important;
+  color: #fff !important;
+}
+//or <a-button class="warning-btn"/>
+.warning-btn {
+  color: #fff;
+  background-color: #e6a23c;
+  border-color: #e6a23c;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.12);
+  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.045);
+}
+.warning-btn:focus,
+.warning-btn:hover {
+  background: #e6c79a !important;
+  border-color: #e6c79a !important;
+  color: #fff !important;
+}
+
+a {
+  color: rgb(var(--primary-color));
+  &:hover {
+    color: rgb(var(--primary-300-color));
+  }
+}

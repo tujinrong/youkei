@@ -1,0 +1,35 @@
+@import './reset.css';
+@import './nprogress.css';
+@import './transition.css';
+
+@font-face {
+  font-family: 'IPAmjMincho';
+  src: url(../../assets/fonts/ipamjm.ttf);
+}
+
+@font-face {
+  font-family: 'Acgjm';
+  src: url(../../assets/fonts/acgjm.ttf);
+}
+
+html,
+body {
+  font-family:
+    MS Gothic,
+    Acgjm;
+}
+
+html,
+body,
+#app {
+  height: 100%;
+}
+
+
+html {
+  overflow-x: hidden;
+}
+
+html.grayscale {
+  filter: grayscale(100%);
+}
