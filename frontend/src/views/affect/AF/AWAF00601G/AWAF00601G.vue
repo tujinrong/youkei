@@ -1,7 +1,7 @@
 <template>
-  <a-card :bordered="false" class="mb-2 h-full" :style="{ height: tableHeight + 70 + `px` }">
+  <a-card :bordered="false" class="mb-2" :style="{ height: tableHeight + 70 + `px` }">
     <h1>契約者一覧表(連絡用)</h1>
-    <div class="self_adaption_table form">
+    <div class="self_adaption_table form" ref="headRef">
       <a-row>
         <a-col v-bind="layout">
           <th class="required">対象期</th>
@@ -71,7 +71,7 @@
         </a-col>
       </a-row>
     </div>
-    <div id="viewer-host" style="height: 650px"></div>
+    <div id="viewer-host" :style="{ height: previewHeight + `px` }"></div>
   </a-card>
   <PreviewModal v-model:visible="previewVisible" />
 </template>
@@ -96,6 +96,8 @@ const router = useRouter()
 const route = useRoute()
 const editJudge = new Judgement(route.name as string)
 const { tableHeight } = useTableHeight()
+const headRef = ref(null)
+const { tableHeight: previewHeight } = useTableHeight(headRef)
 const createDefaultParams = () => {
   return {
     a: '12',
