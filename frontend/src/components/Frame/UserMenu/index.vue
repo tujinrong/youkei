@@ -22,12 +22,12 @@
                 <span>パスワード変更</span>
               </a>
             </a-menu-item>
-            <a-menu-item v-if="UserInfo.kanrisyaflg">
+            <!-- <a-menu-item v-if="UserInfo.kanrisyaflg">
               <a href="javascript:;" @click="goAdminPage">
                 <UserSwitchOutlined />
                 <span>ユーザー管理</span>
               </a>
-            </a-menu-item>
+            </a-menu-item> -->
             <a-menu-divider />
             <a-menu-item>
               <a href="javascript:;" @click="handleLogout">

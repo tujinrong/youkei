@@ -24,12 +24,12 @@
         >
           <template #tab>
             <a-dropdown :trigger="['contextmenu']">
-              <span :style="{ userSelect: 'none' }">{{
-                page.meta.customTitle || page.meta.title
-              }}</span>
+              <span :style="{ userSelect: 'none' }"
+                >{{ getTitle(page.meta.customTitle || page.meta.title) }}
+              </span>
               <template #overlay>
                 <a-menu v-if="IS_DEV" @click="removeAll">
-                  <a-menu-item>todo:RemoveAll</a-menu-item>
+                  <a-menu-item>タブをすべて閉じる</a-menu-item>
                 </a-menu>
               </template>
             </a-dropdown>
@@ -52,6 +52,7 @@ import { CLOSE_CONFIRM } from '@/constants/msg'
 import { judgeStore } from '@/store'
 import { getUserMenu } from '@/utils/user'
 import { IS_DEV } from '@/constants/constant'
+import { computed } from 'vue'
 
 //--------------------------------------------------------------------------
 //データ定義
@@ -175,6 +176,10 @@ const removeAll = () => {
   fullPathList = [Homepage.fullPath]
   selectedLastPath()
   savePageData(pages)
+}
+
+const getTitle = (title: any) => {
+  return title.replace(/\([^)]*\)/g, '').trim()
 }
 
 const savePageData = (pages) => {

@@ -195,26 +195,27 @@ async function validatePassword(_rule: Rule, value: string) {
 }
 //確認と保存処理
 const saveData = () => {
-  editFormRef.value?.validate().then(async () => {
-    const params = {
-      oldpword: encryptBySHA256(passwordChangeForm.oldpword, passwordChangeForm.userid),
-      newpword: encryptBySHA256(passwordChangeForm.newpword, passwordChangeForm.userid)
-    }
-    const saveReq = async (checkflg: boolean) => {
-      await Save({
-        ...params,
-        checkflg
-      })
-    }
-    await saveReq(true)
-    showSaveModal({
-      onOk: async () => {
-        await saveReq(false)
-        afterPassClose()
-        message.success(I000007.Msg)
-      }
-    })
-  })
+  // editFormRef.value?.validate().then(async () => {
+  //   const params = {
+  //     oldpword: encryptBySHA256(passwordChangeForm.oldpword, passwordChangeForm.userid),
+  //     newpword: encryptBySHA256(passwordChangeForm.newpword, passwordChangeForm.userid)
+  //   }
+  //   const saveReq = async (checkflg: boolean) => {
+  //     await Save({
+  //       ...params,
+  //       checkflg
+  //     })
+  //   }
+  //   await saveReq(true)
+  //   showSaveModal({
+  //     onOk: async () => {
+  //       await saveReq(false)
+  //       afterPassClose()
+  message.success(I000007.Msg)
+  modalVisible.value = false
+  //     }
+  //   })
+  // })
 }
 //閉じるボタン(×を含む)
 const closeModal = () => {

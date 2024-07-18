@@ -97,8 +97,8 @@ const filterParams = (menu: Router) => {
 }
 
 const menuClick = (path: string) => {
-  const width = 1000
-  const height = 800
+  const width = 1600
+  const height = 900
   const left = window.screen.width / 2 - width / 2
   const top = window.screen.height / 2 - height / 2
   const features = `width=${width},height=${height},left=${left},top=${top},toolbar=yes,menubar=yes,location=yes,status=yes`

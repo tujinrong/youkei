@@ -8,7 +8,7 @@
           <td>
             第
             <a-input
-              v-model:value="formData.a"
+              v-model:value="formData.taisyoki1"
               maxlength="3"
               type="number"
               style="width: 120px"
@@ -17,16 +17,17 @@
           </td>
         </a-col>
         <a-col v-bind="layout">
-          <th class="required">対象期(現在)</th>
+          <th class="required">対象日(現在)</th>
           <td>
-            <a-date-picker v-model:value="formData.b" class="w-full" />
+            <a-date-picker v-model:value="formData.taisyoki2" class="w-full" />
           </td>
         </a-col>
         <a-col v-bind="layout">
           <th>契約区分</th>
           <td class="flex">
-            <ai-select v-model:value="formData.c" :options="keiyakukbnlist"></ai-select>～<ai-select
-              v-model:value="formData.d"
+            <ai-select v-model:value="formData.keiyakukbn1" :options="keiyakukbnlist"></ai-select
+            >～<ai-select
+              v-model:value="formData.keiyakukbn2"
               :options="keiyakukbnlist"
             ></ai-select>
           </td>
@@ -45,18 +46,16 @@
         <a-col v-bind="layout">
           <th>事業委託先</th>
           <td class="flex">
-            <ai-select v-model:value="formData.c" :options="selectorlist"></ai-select>～<ai-select
-              v-model:value="formData.d"
-              :options="selectorlist"
-            ></ai-select>
+            <ai-select v-model:value="formData.itakusaki1" :options="selectorlist"></ai-select
+            >～<ai-select v-model:value="formData.itakusaki1" :options="selectorlist"></ai-select>
           </td>
         </a-col>
         <a-col v-bind="layout">
           <th>契約者番号</th>
           <td class="flex">
-            <a-input v-model:value="formData.c" :xxl="9"></a-input>
+            <a-input v-model:value="formData.bango1" :xxl="9"></a-input>
             ～
-            <a-input v-model:value="formData.d" :xxl="9"></a-input>
+            <a-input v-model:value="formData.bango2" :xxl="9"></a-input>
           </td> </a-col
       ></a-row>
       <a-row class="m-t-1">
@@ -100,16 +99,18 @@ const headRef = ref(null)
 const { tableHeight: previewHeight } = useTableHeight(headRef)
 const createDefaultParams = () => {
   return {
-    a: '12',
-    b: dayjs('2024-07-02'),
-    c: '',
-    d: '',
-    e: '',
-    f: '',
+    taisyoki1: '12',
+    taisyoki2: dayjs('2024-07-02'),
+    keiyakukbn1: '',
+    keiyakukbn2: '',
+    itakusaki1: '',
+    itakusaki2: '',
+    bango1: '',
+    bango2: '',
     sinkiflg: true,
-    keizokuflg: false,
-    tyusiflg: false,
-    haigyoflg: false
+    keizokuflg: true,
+    tyusiflg: true,
+    haigyoflg: true
   }
 }
 const formData = reactive(createDefaultParams())
