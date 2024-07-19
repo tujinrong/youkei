@@ -7,12 +7,14 @@
  * 変更履歴　:
  * -----------------------------------------------------------------*/
 
-$vxe-font-family: 'MS Gothic,Acgjm';
-$vxe-font-color: #262626;
-$vxe-table-border-color: #dddddd;
-$vxe-table-column-padding-default: 6px 0;
-$vxe-table-header-background-color: #ffffe1;
-$vxe-table-row-height-default: 36px;
+:root {
+  --vxe-ui-font-family: 'MS Gothic,Acgjm';
+  --vxe-ui-font-color: #262626;
+  --vxe-ui-table-border-color: #dddddd;
+  --vxe-ui-table-column-padding-default: 6px 0;
+  --vxe-ui-table-header-background-color: #ffffe1;
+  --vxe-ui-table-row-height-default: 36px;
+}
 
 .vxe-table {
   // border: 1px solid #606266;
@@ -34,5 +36,3 @@ $vxe-table-row-height-default: 36px;
     cursor: pointer;
   }
 }
-
-@import 'vxe-table/styles/index.scss';

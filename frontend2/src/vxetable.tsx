@@ -1,8 +1,6 @@
 import VXETable from 'vxe-table'
-import TablePluginAntd from '@/utils/table-plugin-antd'
 import { h } from 'vue'
-import XEUtils from 'xe-utils'
-import jaJPLocat from 'vxe-table/lib/locale/lang/ja-JP'
+import jaJP from 'vxe-table/lib/locale/lang/ja-JP'
 import { Empty } from 'ant-design-vue'
 import {
   getDateHmsJpText,
@@ -18,15 +16,15 @@ import 'vxe-table/lib/style.css'
 import '@/styles/scss/vxe.scss'
 
 //グローバルパラメータ
-VXETable.setup({
-  i18n: (key, args) =>
-    XEUtils.toFormatString(XEUtils.get(jaJPLocat, key), args),
-  loadingText: null,
+VXETable.setConfig({
+  loading: { text: '' },
   table: {
     border: true,
     showOverflow: 'tooltip',
   },
 })
+VXETable.setI18n('ja-JP', jaJP)
+VXETable.setLanguage('ja-JP')
 //フォーマット
 VXETable.formats.mixin({
   //和暦
@@ -48,7 +46,6 @@ VXETable.formats.mixin({
   jpUnknownDate({ cellValue }) {
     return cellValue ? getUnKnownDateJpText(cellValue) : ''
   },
-
   //まる
   maru({ cellValue }) {
     return cellValue ? '○' : ''
@@ -73,7 +70,5 @@ VXETable.renderer.add('NotData', {
     return h(Empty, { image: Empty.PRESENTED_IMAGE_SIMPLE })
   },
 })
-
-VXETable.use(TablePluginAntd)
 
 export default VXETable

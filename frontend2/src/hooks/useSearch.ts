@@ -1,12 +1,5 @@
 import { Ref, reactive, ref, unref, watch, nextTick } from 'vue'
 
-interface DataInfoVM {
-  /** 項目物理名 */
-  key: string
-  /** 値 */
-  value: string
-}
-
 export default function useSearch({
   service,
   params,

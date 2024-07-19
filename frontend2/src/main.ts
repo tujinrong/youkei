@@ -11,6 +11,8 @@ import { setupStore } from './store'
 import { setupRouter } from './router'
 import { setupI18n } from './locales'
 import App from './App.vue'
+import VxeUI from 'vxe-pc-ui'
+import 'vxe-pc-ui/lib/style.css'
 import VxeTable from './vxetable'
 
 async function setupApp() {
@@ -32,7 +34,7 @@ async function setupApp() {
 
   setupAppVersionNotification()
 
-  app.use(VxeTable)
+  app.use(VxeUI).use(VxeTable)
 
   app.mount('#app')
 }
