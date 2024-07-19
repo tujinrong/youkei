@@ -711,12 +711,10 @@ declare namespace App {
     /** The backend service response data */
     type Response<T = unknown> = {
       /** The backend service response code */
-      code: string
+      returncode: number
       /** The backend service response message */
-      msg: string
-      /** The backend service response data */
-      data: T
-    }
+      message: string
+    } & T
 
     /** The demo backend service response data */
     type DemoResponse<T = unknown> = {

@@ -9,6 +9,7 @@
 import http from './axios'
 import { ContentTypeEnum, RequestEnum } from '@/enum'
 import axios, { RawAxiosRequestHeaders } from 'axios'
+import { request } from '../request'
 
 const controller = new AbortController()
 
@@ -26,7 +27,7 @@ export function cancelRequest(): void {
 }
 
 /** ログイン処理 */
-export function login(
+export async function login(
   servicename: string,
   methodname: string,
   data: any
@@ -39,10 +40,10 @@ export function login(
       data: JSON.stringify(data),
     },
   }
-  return http.request({
+  return request({
     url: '/AFCT/Login',
-    method: RequestEnum.POST,
-    params,
+    method: 'post',
+    data: params,
   })
 }
 
@@ -63,6 +64,13 @@ export function api(
       data: JSON.stringify(data) || '',
     },
   }
+
+  return request({
+    url: '/AFCT/WebRequest',
+    method: 'post',
+    data: params,
+    headers,
+  })
 
   return http.request(
     {
