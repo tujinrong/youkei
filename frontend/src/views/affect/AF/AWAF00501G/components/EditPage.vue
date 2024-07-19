@@ -22,7 +22,8 @@
               <a-button class="warning-btn" @click="saveData">登録</a-button>
               <a-button type="primary" danger :disabled="isNew" @click="deleteData">削除</a-button>
               <!-- <a-pagination v-model:current="current" show-less-items total /> -->
-              <a-button v-if="!isNew" :icon="h(LeftOutlined)"></a-button>2/5
+              <a-button v-if="!isNew" :icon="h(LeftOutlined)"></a-button
+              ><span v-if="!isNew">2/5</span>
               <a-button v-if="!isNew" :icon="h(RightOutlined)"></a-button>
             </a-space>
             <a-button type="primary" class="text-end" @click="goList">一覧へ</a-button>
@@ -81,9 +82,9 @@ import { EnumRegex, Enum編集区分, PageSatatus } from '#/Enums'
 import { onMounted, reactive, ref, watch, nextTick, computed } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { Judgement } from '@/utils/judge-edited'
-import { showDeleteModal } from '@/utils/modal'
-import { DELETE_OK_INFO, SAVE_OK_INFO } from '@/constants/msg'
-import { message } from 'ant-design-vue'
+import { Form, message } from 'ant-design-vue'
+import { showDeleteModal, showInfoModal } from '@/utils/modal'
+import { DELETE_OK_INFO, E064015, ITEM_REQUIRE_ERROR, SAVE_OK_INFO } from '@/constants/msg'
 import { useTableHeight } from '@/utils/hooks'
 import TD from '@/components/Common/TableTD/index.vue'
 import emitter from '@/utils/event-bus'
@@ -197,6 +198,15 @@ const layout = {
   lg: 24,
   xxl: 10
 }
+const rules = reactive({
+  meisaibango: [
+    {
+      required: true,
+      message: ITEM_REQUIRE_ERROR.Msg.replace('{0}', '明細番号')
+    }
+  ]
+})
+const { validate, clearValidate, validateInfos, resetFields } = Form.useForm(formData, rules)
 //---------------------------------------------------------------------------
 //フック関数
 //--------------------------------------------------------------------------
