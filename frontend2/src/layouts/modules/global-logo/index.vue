@@ -23,8 +23,8 @@ withDefaults(defineProps<Props>(), {
       class="pl-8px text-18px text-primary font-bold transition duration-300 ease-in-out"
     >
       {{ $t('system.title') }}
+      <span class="font-size-3 pl-1">v1.0</span>
     </h2>
-    <span class="pl-1">v1.0</span>
   </RouterLink>
 </template>
 
