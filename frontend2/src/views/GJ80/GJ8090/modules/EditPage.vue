@@ -32,7 +32,8 @@
                 @click="deleteData"
                 >削除</a-button
               >
-              <a-button v-if="!isNew" :icon="h(LeftOutlined)"></a-button>
+              <a-button v-if="!isNew" :icon="h(LeftOutlined)"></a-button
+              ><span v-if="!isNew">2/5</span>
               <a-button v-if="!isNew" :icon="h(RightOutlined)"></a-button>
             </a-space>
             <a-button type="primary" class="text-end" @click="goList"
@@ -107,6 +108,7 @@ import { showDeleteModal } from '@/utils/modal'
 import { DELETE_OK_INFO, SAVE_OK_INFO } from '@/constants/msg'
 import { message } from 'ant-design-vue'
 import { h } from 'vue'
+import { showSaveModal } from '@/utils/modal'
 import { LeftOutlined, RightOutlined } from '@ant-design/icons-vue'
 // import TD from '@/components/Common/TableTD/index.vue'
 //---------------------------------------------------------------------------
@@ -245,8 +247,12 @@ const goList = () => {
   router.push({ name: route.name as string })
 }
 const saveData = () => {
-  router.push({ name: route.name as string })
-  message.success(SAVE_OK_INFO.Msg)
+  showSaveModal({
+    onOk: () => {
+      router.push({ name: route.name as string })
+      message.success(SAVE_OK_INFO.Msg)
+    },
+  })
 }
 
 //
