@@ -87,8 +87,8 @@ const instVisible = ref(false)
 const loading = ref(false)
 
 const form = reactive<LoginRequest>({
-  userid: '',
-  pword: '',
+  userid: '1',
+  pword: '1',
   kbn: Enumログイン区分.一回目 //一回目：ユーザー認証及び登録支所一覧を取得
 })
 const rules = reactive<Record<string, Rule[]>>({
