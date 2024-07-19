@@ -12,7 +12,7 @@ import {
   DELETE_CONFIRM,
   LOGIC_DELETE_CONFIRM,
 } from '../constants/msg'
-import { cancelRequest } from '@/service/http/common-service'
+import { request } from '@/service/request'
 import { h } from 'vue'
 import {
   QuestionCircleOutlined,
@@ -52,7 +52,7 @@ export function showConfirmModal(options: Options): void {
     style: { 'white-space': 'pre-wrap' },
     content: options.content.Msg || options.content,
     onCancel() {
-      cancelRequest()
+      request.cancelAllRequest()
       options.onCancel?.()
     },
   })
@@ -96,7 +96,7 @@ export function showSaveModal(options: Options): void {
     style: { 'white-space': 'pre-wrap' },
     content: options.content || SAVE_CONFIRM.Msg,
     onCancel() {
-      cancelRequest()
+      request.cancelAllRequest()
       options.onCancel?.()
     },
   })
@@ -125,7 +125,7 @@ export function showDeleteModal(options: Options): void {
     style: { 'white-space': 'pre-wrap' },
     content,
     onCancel() {
-      cancelRequest()
+      request.cancelAllRequest()
       options.onCancel?.()
     },
   })

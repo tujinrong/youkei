@@ -1,4 +1,4 @@
-import { login } from '../http/common-service'
+import { login } from '../request/common-service'
 import { request } from '../request'
 import { encryptBySHA256 } from '@/utils/encrypt/data'
 /**
