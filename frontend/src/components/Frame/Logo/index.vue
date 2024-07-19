@@ -10,8 +10,7 @@
   <div class="logo">
     <router-link :to="{ name: 'AWAF00301G' }">
       <svg-icon name="logo" />
-      <h1 v-if="showTitle">{{ title }}</h1>
-      <span class="bottom-right">V1.0</span>
+      <h1 v-if="showTitle">{{ title }}<span class="bottom-right">V1.0</span></h1>
     </router-link>
   </div>
 </template>
@@ -24,7 +23,7 @@ import SvgIcon from '@/components/Common/SvgIcon/index.vue'
 const props = defineProps({
   title: {
     type: String,
-    default: '養鶏-互助防疫',
+    default: '互助防疫システム',
     required: false
   },
   showTitle: {

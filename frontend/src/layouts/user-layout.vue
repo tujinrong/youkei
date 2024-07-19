@@ -12,17 +12,18 @@
       <div class="user-layout-lang"></div>
       <div class="user-layout-content">
         <div class="top" style="margin-top: 120px">
+          <b style="font-size: 20px; font-family: 'Arial', 'Helvetica', sans-serif">日本養鶏協会</b>
           <div class="header">
             <div>
               <img src="~@/assets/icons/logo.svg" class="logo" alt="logo" />
-              <span class="title">養鶏-互助防疫システム</span>
+              <span class="title">互助防疫システム</span>
             </div>
           </div>
         </div>
         <router-view />
         <div class="footer">
           <div class="copyright">
-            Copyright &copy;&nbsp;{{ new Date().getFullYear() }} 養鶏-互助防疫
+            Copyright &copy;&nbsp;{{ new Date().getFullYear() }} 日本養鶏協会　互助防疫システム
           </div>
         </div>
       </div>
