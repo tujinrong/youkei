@@ -10,7 +10,9 @@
   <div class="logo">
     <router-link :to="{ name: 'AWAF00301G' }">
       <svg-icon name="logo" />
-      <h1 v-if="showTitle">{{ title }}<span class="bottom-right">V1.0</span></h1>
+      <h1 v-if="showTitle" style="margin-top: 3px">
+        {{ title }}<span class="bottom-right">V1.0</span>
+      </h1>
     </router-link>
   </div>
 </template>

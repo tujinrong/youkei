@@ -109,7 +109,19 @@ body {
     flex-direction: row;
   }
 
-  .trigger {
+  .trigger1 {
+    font-size: 20px;
+    line-height: 48px;
+    padding: 0 24px;
+    cursor: pointer;
+    margin-left: 40px;
+    transition: color 0.3s;
+
+    &:hover {
+      background: rgba(0, 0, 0, 0.025);
+    }
+  }
+  .trigger2 {
     font-size: 20px;
     line-height: 48px;
     padding: 0 24px;
@@ -854,13 +866,13 @@ body {
 
   .ant-layout-header.ant-header-side-opened {
     .ant-pro-multi-tab {
-      width: calc(100vw - 740px);
+      width: calc(100vw - 600px);
     }
   }
 
   .ant-layout-header.ant-header-side-closed {
     .ant-pro-multi-tab {
-      width: calc(100vw - 722px);
+      width: calc(100vw - 500px);
     }
   }
 

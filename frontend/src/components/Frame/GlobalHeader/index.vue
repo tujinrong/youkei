@@ -19,8 +19,8 @@
       >
         <div v-if="mode === MenuType.Side" class="header">
           <span @click="toggle">
-            <MenuUnfoldOutlined v-if="collapsed" class="trigger" />
-            <MenuFoldOutlined v-else class="trigger" />
+            <MenuUnfoldOutlined v-if="collapsed" class="trigger2" />
+            <MenuFoldOutlined v-else class="trigger1" />
           </span>
           <multi-tab v-if="multiTab"></multi-tab>
           <user-menu />
