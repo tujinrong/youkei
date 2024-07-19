@@ -89,6 +89,7 @@ import { useTableHeight } from '@/utils/hooks'
 import TD from '@/components/Common/TableTD/index.vue'
 import emitter from '@/utils/event-bus'
 import { h } from 'vue'
+import { showSaveModal } from '@/utils/modal'
 import { LeftOutlined, RightOutlined } from '@ant-design/icons-vue'
 //---------------------------------------------------------------------------
 //属性
@@ -245,8 +246,12 @@ const goList = () => {
   })
 }
 const saveData = () => {
-  router.push({ name: route.name as string })
-  message.success(SAVE_OK_INFO.Msg)
+  showSaveModal({
+    onOk: () => {
+      router.push({ name: route.name as string })
+      message.success(SAVE_OK_INFO.Msg)
+    }
+  })
 }
 
 //
