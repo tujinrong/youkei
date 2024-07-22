@@ -8,6 +8,8 @@ import { EnumServiceResult } from '@/enum'
 import { showConfirmModal, showInfoModal } from '@/utils/modal'
 import { Modal } from 'ant-design-vue'
 import { CM_LOGINTIMEOUT_ERROR } from '@/constants/msg'
+import { router } from '@/router'
+import type { InternalAxiosRequestConfig } from 'axios'
 
 const isHttpProxy =
   import.meta.env.DEV && import.meta.env.VITE_HTTP_PROXY === 'Y'
@@ -15,6 +17,13 @@ const { baseURL, otherBaseURL } = getServiceBaseURL(
   import.meta.env,
   isHttpProxy
 )
+
+type RequestConfig = InternalAxiosRequestConfig & {
+  extra?: {
+    onNextOk?: (data?: DaResponseBase) => void
+    onNextCancel?: (data?: DaResponseBase) => void
+  }
+}
 
 export const request = createRequest<
   App.Service.Response,
@@ -42,6 +51,7 @@ export const request = createRequest<
       return response.data.returncode === EnumServiceResult.OK
     },
     async onBackendFail(response, instance) {
+      const { extra } = response.config as RequestConfig
       const authStore = useAuthStore()
       function handleLogout() {
         authStore.resetStore()
@@ -55,20 +65,20 @@ export const request = createRequest<
         showInfoModal({
           type: 'error',
           content: message,
-          // onOk: () => options.onNextOk?.(data),
+          onOk: () => extra?.onNextOk?.(data),
         })
       } else if (code === EnumServiceResult.ServiceAlert) {
         showConfirmModal({
           title: 'アラート',
           content: message,
-          // onOk: () => options.onNextOk?.(data),
-          // onCancel: () => options.onNextCancel?.(data),
+          onOk: () => extra?.onNextOk?.(data),
+          onCancel: () => extra?.onNextCancel?.(data),
         })
       } else if (code === EnumServiceResult.ServiceAlert2) {
         showInfoModal({
           type: 'warning',
           content: message,
-          // onOk: () => options.onNextOk?.(data),
+          onOk: () => extra?.onNextOk?.(data),
         })
       } else if (code === EnumServiceResult.Exception) {
         showInfoModal({
@@ -86,7 +96,7 @@ export const request = createRequest<
           type: 'error',
           content: message,
           onOk: () => {
-            // options.onNextOk ? options.onNextOk?.(data) : router.back()
+            extra?.onNextOk ? extra?.onNextOk?.(data) : router.back()
           },
         })
       }

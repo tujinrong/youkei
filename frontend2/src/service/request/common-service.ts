@@ -15,7 +15,9 @@ const controller = new AbortController()
 export async function login(
   servicename: string,
   methodname: string,
-  data: any
+  data: any,
+  onNextOk?: (data?: DaResponseBase) => void,
+  onNextCancel?: (data?: DaResponseBase) => void
 ): Promise<any> {
   const params = {
     signal: controller.signal,
@@ -29,6 +31,10 @@ export async function login(
     url: '/AFCT/Login',
     method: 'post',
     data: params,
+    extra: {
+      onNextOk,
+      onNextCancel,
+    },
   })
 }
 

@@ -80,6 +80,10 @@ export type CustomAxiosRequestConfig<R extends ResponseType = 'json'> = Omit<
   'responseType'
 > & {
   responseType?: R
+  extra?: {
+    onNextOk?: (data?: DaResponseBase) => void
+    onNextCancel?: (data?: DaResponseBase) => void
+  }
 }
 
 export interface RequestInstanceCommon<T> {
