@@ -1,0 +1,17 @@
+﻿delete from tm_eurpt;
+INSERT INTO tm_eurpt VALUES('vw_eukensin_nendo','tt_eukensin','00001','0001',NULL,False,False,False,False,False,False,False,1,NULL,'system','2023-01-01','system','2023-01-01');
+INSERT INTO tm_eurpt VALUES('vw_eukensin_nendojigyo','tt_eukensin','00001','0002',NULL,False,False,False,False,False,False,False,2,NULL,'system','2023-01-01','system','2023-01-01');
+INSERT INTO tm_eurpt VALUES('vw_eukensin_nendomaxkaisu','tt_eukensin','00001','0003',NULL,False,False,False,False,False,False,False,3,NULL,'system','2023-01-01','system','2023-01-01');
+INSERT INTO tm_eurpt VALUES('vw_euseiken_nendo','tt_euseiken','00001','0004',NULL,False,False,False,False,False,False,False,4,NULL,'system','2023-01-01','system','2023-01-01');
+INSERT INTO tm_eurpt VALUES('vw_euseiken_nendojigyo','tt_euseiken','00001','0005',NULL,False,False,False,False,False,False,False,5,NULL,'system','2023-01-01','system','2023-01-01');
+INSERT INTO tm_eurpt VALUES('vw_euseiken_nendomaxkaisu','tt_euseiken','00002','0007',NULL,False,False,False,False,False,False,False,6,NULL,'system','2023-01-01','system','2023-01-01');
+INSERT INTO tm_eurpt VALUES(NULL,NULL,'00002','0008',NULL,False,False,False,False,False,False,False,7,NULL,'system','2023-01-01','system','2023-01-01');
+INSERT INTO tm_eurpt VALUES(NULL,NULL,'00004','0023',NULL,False,False,False,False,False,False,False,8,NULL,'system','2023-01-01','system','2023-01-01');
+INSERT INTO tm_eurpt VALUES('vw_eukensin_nendomaxkaisu_090','vw_eukensin_nendomaxkaisu','00009','0013',NULL,False,False,False,False,False,False,False,9,NULL,'system','2023-01-01','system','2023-01-01');
+INSERT INTO tm_eurpt VALUES('vw_euseiken_nendomaxkaisu_090','vw_euseiken_nendomaxkaisu','00006','0015',NULL,False,False,False,False,False,False,False,10,NULL,'system','2023-01-01','system','2023-01-01');
+INSERT INTO tm_eurpt VALUES('tt_shkensin_090','tt_shkensin','00004','0017',NULL,False,False,False,False,False,False,False,11,NULL,'system','2023-01-01','system','2023-01-01');
+INSERT INTO tm_eurpt VALUES('tt_shseiken_090','tt_shseiken','00004','0018',NULL,False,False,False,False,False,False,False,12,NULL,'system','2023-01-01','system','2023-01-01');
+INSERT INTO tm_eurpt VALUES(NULL,NULL,'00004','0017',NULL,False,False,False,False,False,False,False,13,NULL,'system','2023-01-01','system','2023-01-01');
+INSERT INTO tm_eurpt VALUES(NULL,NULL,'00004','0018',NULL,False,False,False,False,False,False,False,14,NULL,'system','2023-01-01','system','2023-01-01');
+INSERT INTO tm_eurpt VALUES(NULL,NULL,'00004','0023',NULL,False,False,False,False,False,False,False,15,NULL,'system','2023-01-01','system','2023-01-01');
+INSERT INTO tm_eurpt VALUES(NULL,NULL,'00004','0024',NULL,False,False,False,False,False,False,False,16,NULL,'system','2023-01-01','system','2023-01-01');

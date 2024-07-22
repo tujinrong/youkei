@@ -1,0 +1,29 @@
+﻿@model BCC.Affect.WebService.WebRequestModel
+@{
+    ViewBag.Title = "Preview";
+}
+<!-- Web 用ビューア､ビューア用依存ファイルのインクルード(jQueryは_Layout.cshtmlでインクルード)  -->
+<!-- cellreport.viewer -->
+<script type="text/javascript" src="~/js/gunzip.min.js"></script>
+<script type="text/javascript" src="~/js/cellreport.viewer.11.0.1.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+@Html.AntiForgeryToken()
+@Html.ValidationSummary("", new { @class = "text-danger" })
+<p>プレビュー画面:</p>
+<!--帳票ドキュメント格納用のDIV要素(id="documentcontainer")を用意。ViewData で帳票ドキュメントを挿入-->
+<div id="documentcontainer" style="display:none;">
+    @Html.Raw(ViewData["document"])
+</div>
+<!--ビューア配置用のDIV要素(id="viewercontainer")を用意。width、height でサイズ指定-->
+<div id="viewercontainer" style="width:90%;height:670px;margin-left:10px;margin-bottom:10px;">
+</div>
+<!--ビューアの表示とプレビュー実行-->
+<script type="text/javascript">
+    $(function () {
+        // ビューアを id名[viewercontainer] の DIV 要素に表示
+        viewer = new CellReport.Viewer('viewercontainer');
+        // id名[documentcontainer] の DIV 要素に格納された帳票ドキュメントを読み込み、プレビューを実施
+        viewer.report('documentcontainer');
+    });
+</script>
