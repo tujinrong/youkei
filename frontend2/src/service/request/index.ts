@@ -33,7 +33,7 @@ export const request = createRequest<
     baseURL,
     timeout: 18 * 60 * 10000,
     headers: {
-      // 'Content-Type': 'application/json;charset=UTF-8',
+      //
     },
   },
   {

@@ -6,21 +6,16 @@
  * 作成者　　: 屠
  * 変更履歴　:
  * -----------------------------------------------------------------*/
-import { RawAxiosRequestHeaders } from 'axios'
+import { AxiosRequestHeaders } from 'axios'
 import { request } from './index'
-
-const controller = new AbortController()
 
 /** ログイン処理 */
 export async function login(
   servicename: string,
   methodname: string,
-  data: any,
-  onNextOk?: (data?: DaResponseBase) => void,
-  onNextCancel?: (data?: DaResponseBase) => void
+  data: any
 ): Promise<any> {
-  const params = {
-    signal: controller.signal,
+  const body = {
     servicename,
     methodname,
     bizrequest: {
@@ -30,11 +25,7 @@ export async function login(
   return request({
     url: '/AFCT/Login',
     method: 'post',
-    data: params,
-    extra: {
-      onNextOk,
-      onNextCancel,
-    },
+    data: body,
   })
 }
 
@@ -42,39 +33,28 @@ export async function login(
 export function api(
   servicename: string,
   methodname: string,
-  data?: unknown,
-  headers?: RawAxiosRequestHeaders & { loading?: boolean },
+  data: any,
+  headers?: AxiosRequestHeaders & { loading?: boolean },
   onNextOk?: (data?: DaResponseBase) => void,
   onNextCancel?: (data?: DaResponseBase) => void
 ): Promise<any> {
-  const params = {
-    signal: controller.signal,
+  const body = {
     servicename,
     methodname,
     bizrequest: {
       data: JSON.stringify(data) || '',
     },
   }
-
   return request({
     url: '/AFCT/WebRequest',
     method: 'post',
-    data: params,
+    data: body,
     headers,
+    extra: {
+      onNextOk,
+      onNextCancel,
+    },
   })
-
-  // return http.request(
-  //   {
-  //     url: '/AFCT/WebRequest',
-  //     method: RequestEnum.POST,
-  //     params,
-  //     headers,
-  //   },
-  //   {
-  //     onNextOk,
-  //     onNextCancel,
-  //   }
-  // )
 }
 
 // /** プレビュー処理 */
