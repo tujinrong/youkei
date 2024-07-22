@@ -38,7 +38,7 @@ declare module "@elegant-router/types" {
     "gj80_gj8090": "/gj80/gj8090";
     "home": "/home";
     "iframe-page": "/iframe-page/:url";
-    "login": "/login/:module(pwd-login|code-login|register|reset-pwd|bind-wechat)?";
+    "login": "/login/:module(pwd-login|code-login|register|reset-pwd)?";
     "user-center": "/user-center";
   };
 

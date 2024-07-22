@@ -214,9 +214,9 @@ export const useRouteStore = defineStore(SetupStoreId.Route, () => {
     if (authRouteMode.value === 'static') {
       addConstantRoutes(staticRoute.constantRoutes)
     } else {
-      const { data, error } = await fetchGetConstantRoutes()
+      const data = await fetchGetConstantRoutes()
 
-      if (!error) {
+      if (data) {
         addConstantRoutes(data)
       } else {
         // if fetch constant routes failed, use static constant routes
@@ -262,9 +262,9 @@ export const useRouteStore = defineStore(SetupStoreId.Route, () => {
 
   /** Init dynamic auth route */
   async function initDynamicAuthRoute() {
-    const { data, error } = await fetchGetUserRoutes()
+    const data = await fetchGetUserRoutes()
 
-    if (!error) {
+    if (data) {
       const { routes, home } = data
 
       addAuthRoutes(routes)
@@ -356,7 +356,7 @@ export const useRouteStore = defineStore(SetupStoreId.Route, () => {
       return isRouteExistByRouteName(routeName, staticAuthRoutes)
     }
 
-    const { data } = await fetchIsRouteExist(routeName)
+    const data = await fetchIsRouteExist(routeName)
 
     return data
   }

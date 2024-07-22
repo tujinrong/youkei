@@ -73,7 +73,7 @@ export const parseQuery = (query: string) => {
 
   query.split('&').forEach((param) => {
     const parts = param.replace(/\+/g, ' ').split('=')
-    const key = decode(parts.shift())
+    const key = decode(parts.shift() ?? '')
     const val = parts.length > 0 ? decode(parts.join('=')) : null
 
     if (res[key] === undefined) {
