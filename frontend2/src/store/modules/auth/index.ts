@@ -67,25 +67,24 @@ export const useAuthStore = defineStore(SetupStoreId.Auth, () => {
     startLoading()
 
     try {
+      //getToken
       const res2 = await Login({
         userid: userName,
         pword: password,
       })
-      token.value = res2.token as string
-      localStg.set('token', res2.token as string)
-      Object.assign(userInfo, res2.userinfo)
-      Object.assign(userInfo, {
-        userName: res2.userinfo?.usernm,
-        roles: ['R_SUPER'],
-        buttons: ['B_CODE1', 'B_CODE2', 'B_CODE3'],
-      })
+      const loginToken: Api.Auth.LoginToken = {
+        token: res2.token || '',
+      }
 
+      //get user info
+      await loginByToken(loginToken)
+
+      //menu
       await routeStore.initAuthRoute()
 
       if (redirect) {
         await redirectFromLogin()
       }
-
       if (routeStore.isInitAuthRoute) {
         window.$notification?.success({
           message: $t('page.login.common.loginSuccess'),
@@ -104,7 +103,6 @@ export const useAuthStore = defineStore(SetupStoreId.Auth, () => {
   async function loginByToken(loginToken: Api.Auth.LoginToken) {
     // 1. stored in the localStorage, the later requests need it in headers
     localStg.set('token', loginToken.token)
-    localStg.set('refreshToken', loginToken.refreshToken)
 
     // 2. get user info
     const pass = await getUserInfo()
