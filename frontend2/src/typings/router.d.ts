@@ -66,6 +66,6 @@ declare module 'vue-router' {
     fixedIndexInTab?: number | null
     /** if set query parameters, it will be automatically carried when entering the route */
     query?: { key: string; value: string }[] | null
-    disabled: boolean
+    disabled?: boolean
   }
 }

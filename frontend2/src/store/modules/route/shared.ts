@@ -151,7 +151,7 @@ function getGlobalMenuByBaseRoute(
     i18nKey,
     icon = import.meta.env.VITE_MENU_ICON,
     localIcon,
-    disabled = false,
+    disabled,
   } = route.meta ?? {}
 
   const label = i18nKey ? $t(i18nKey) : title!
