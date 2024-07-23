@@ -83,13 +83,13 @@ const isWrapperScrollMode = computed(
     <SettingItem key="5" :label="$t('theme.tab.visible')">
       <ASwitch v-model:checked="themeStore.tab.visible" />
     </SettingItem>
-    <SettingItem
+    <!-- <SettingItem
       v-if="themeStore.tab.visible"
       key="5-1"
       :label="$t('theme.tab.cache')"
     >
       <ASwitch v-model:checked="themeStore.tab.cache" />
-    </SettingItem>
+    </SettingItem> -->
     <SettingItem
       v-if="themeStore.tab.visible"
       key="5-2"
