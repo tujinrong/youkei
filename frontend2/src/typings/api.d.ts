@@ -41,14 +41,7 @@ declare namespace Api {
     /** ログイン処理(成功) */
     export interface LoginResponse extends DaResponseBase {
       /** トークン(ベースロジック) */
-      token?: string
-      /** ユーザー情報(共通) */
-      userinfo?: {
-        /** ユーザID */
-        userid: string
-        /** ユーザー名 */
-        usernm: string
-      }
+      token: string
     }
   }
 

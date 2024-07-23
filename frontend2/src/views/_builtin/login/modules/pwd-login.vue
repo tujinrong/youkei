@@ -31,12 +31,14 @@ const rules = reactive<Record<keyof FormModel, App.Global.FormRule[]>>({
         '{0}',
         $t('page.login.common.userNamePlaceholder')
       ),
+      transform: (val) => val?.trim(),
     },
   ],
   pword: [
     {
       required: true,
       message: `${ITEM_REQUIRE_ERROR.Msg.replace('{0}', $t('page.login.common.passwordPlaceholder'))}`,
+      transform: (val) => val?.trim(),
     },
   ],
 })

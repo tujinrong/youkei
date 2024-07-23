@@ -67,35 +67,36 @@ export const useAuthStore = defineStore(SetupStoreId.Auth, () => {
     startLoading()
 
     try {
-      //getToken
-      const res2 = await Login({
+      //get token
+      const loginToken = await Login({
         userid: userName,
         pword: password,
       })
-      const loginToken: Api.Auth.LoginToken = {
-        token: res2.token || '',
-      }
 
-      //get user info
-      await loginByToken(loginToken)
+      if (loginToken) {
+        const pass = await loginByToken(loginToken)
 
-      //menu
-      await routeStore.initAuthRoute()
+        if (pass) {
+          //menu
+          await routeStore.initAuthRoute()
 
-      if (redirect) {
-        await redirectFromLogin()
+          if (redirect) {
+            await redirectFromLogin()
+          }
+
+          if (routeStore.isInitAuthRoute) {
+            window.$notification?.success({
+              message: $t('page.login.common.loginSuccess'),
+              description: $t('page.login.common.welcomeBack', {
+                userName: userInfo.userName,
+              }),
+            })
+          }
+        }
+      } else {
+        resetStore()
       }
-      if (routeStore.isInitAuthRoute) {
-        window.$notification?.success({
-          message: $t('page.login.common.loginSuccess'),
-          description: $t('page.login.common.welcomeBack', {
-            userName: userInfo.userid,
-          }),
-        })
-      }
-    } catch (error) {
-      resetStore()
-    }
+    } catch (error) {}
 
     endLoading()
   }
