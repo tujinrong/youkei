@@ -14,11 +14,7 @@ import { router } from '@/router'
 import { createStaticRoutes, getAuthVueRoutes } from '@/router/routes'
 import { ROOT_ROUTE } from '@/router/routes/builtin'
 import { getRouteName, getRoutePath } from '@/router/elegant/transform'
-import {
-  fetchGetConstantRoutes,
-  fetchGetUserRoutes,
-  fetchIsRouteExist,
-} from '@/service/api'
+import { fetchGetUserRoutes, fetchIsRouteExist } from '@/service/api'
 import { useAppStore } from '../app'
 import { useAuthStore } from '../auth'
 import { useTabStore } from '../tab'
@@ -211,18 +207,7 @@ export const useRouteStore = defineStore(SetupStoreId.Route, () => {
 
     const staticRoute = createStaticRoutes()
 
-    if (authRouteMode.value === 'static') {
-      addConstantRoutes(staticRoute.constantRoutes)
-    } else {
-      const data = await fetchGetConstantRoutes()
-
-      if (data) {
-        addConstantRoutes(data)
-      } else {
-        // if fetch constant routes failed, use static constant routes
-        addConstantRoutes(staticRoute.constantRoutes)
-      }
-    }
+    addConstantRoutes(staticRoute.constantRoutes)
 
     handleConstantAndAuthRoutes()
 
