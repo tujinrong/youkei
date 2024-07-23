@@ -158,6 +158,8 @@ declare namespace App {
       key: string
       /** The menu label */
       label: string
+      /** disable */
+      disabled: boolean
       /** The menu i18n key */
       i18nKey?: I18n.I18nKey | null
       /** The route key */
