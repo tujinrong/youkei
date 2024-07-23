@@ -165,7 +165,7 @@ async function initRoute(
     return location
   }
 
-  // await authStore.initUserInfo();
+  await authStore.initUserInfo()
 
   // initialize the auth route
   await routeStore.initAuthRoute()

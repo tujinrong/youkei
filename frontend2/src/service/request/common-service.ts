@@ -34,9 +34,11 @@ export function api(
   servicename: string,
   methodname: string,
   data: any,
-  headers?: AxiosRequestHeaders & { loading?: boolean },
-  onNextOk?: (data?: DaResponseBase) => void,
-  onNextCancel?: (data?: DaResponseBase) => void
+  headers?: AxiosRequestHeaders,
+  extra?: {
+    onNextOk?: (data?: DaResponseBase) => void
+    onNextCancel?: (data?: DaResponseBase) => void
+  }
 ): Promise<any> {
   const body = {
     servicename,
@@ -50,10 +52,7 @@ export function api(
     method: 'post',
     data: body,
     headers,
-    extra: {
-      onNextOk,
-      onNextCancel,
-    },
+    extra,
   })
 }
 
