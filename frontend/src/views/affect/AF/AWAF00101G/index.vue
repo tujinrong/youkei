@@ -77,7 +77,7 @@ import { Init } from '../AWAF00301G/service'
 import { changeFullAngle } from '@/utils/util'
 import { UserOutlined, LockOutlined } from '@ant-design/icons-vue'
 import { Enumログイン区分, Enum名称区分 } from '#/Enums'
-import { showPsdExpiredModal } from '@/utils/modal'
+import { showInfoModal, showPsdExpiredModal } from '@/utils/modal'
 //--------------------------------------------------------------------------
 //データ定義
 //--------------------------------------------------------------------------
@@ -87,8 +87,8 @@ const instVisible = ref(false)
 const loading = ref(false)
 
 const form = reactive<LoginRequest>({
-  userid: '1',
-  pword: '1',
+  userid: '',
+  pword: '',
   kbn: Enumログイン区分.一回目 //一回目：ユーザー認証及び登録支所一覧を取得
 })
 const rules = reactive<Record<string, Rule[]>>({
@@ -109,6 +109,16 @@ const sisyolList = ref<CmSisyoVM[]>([])
 //フォームの提出
 const handleSubmit = async (e: Event) => {
   e.preventDefault()
+
+  if (form.userid !== '1' && form.pword !== '1') {
+    showInfoModal({
+      type: 'error',
+      title: 'エラー',
+      content: 'ユーザーＩＤまたはパスワードが間違っています。'
+    })
+    return
+  }
+
   loading.value = true
   try {
     await validate(['userid', 'pword'])
