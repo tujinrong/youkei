@@ -59,11 +59,11 @@
         <a-col span="24">
           <th class="required">都道府県</th>
           <td>
-            <a-select
+            <ai-select
               v-model:value="formData.todoufuken"
               :options="todoufukenList"
               class="w-full"
-            ></a-select>
+            ></ai-select>
           </td>
         </a-col>
       </a-row>

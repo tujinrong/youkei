@@ -18,11 +18,11 @@
           <a-col v-bind="layout">
             <th class="required">契約者</th>
             <td>
-              <a-select
+              <ai-select
                 v-model:value="searchParams.keiyakusya"
                 :options="options1"
                 style="width: 100%"
-              ></a-select>
+              ></ai-select>
             </td>
           </a-col>
           <a-col v-bind="layout">
@@ -112,7 +112,7 @@ import { ITEM_REQUIRE_ERROR } from '@/constants/msg'
 import { changeTableSort } from '@/utils/util'
 import { useTabStore } from '@/store/modules/tab'
 import { useElementSize } from '@vueuse/core'
-import {Search} from "@/views/GJ80/GJ8090/service";
+import { Search } from '@/views/GJ80/GJ8090/service'
 
 //--------------------------------------------------------------------------
 //データ定義
