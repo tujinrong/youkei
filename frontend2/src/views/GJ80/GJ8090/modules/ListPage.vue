@@ -10,7 +10,7 @@
             <th class="required">期</th>
             <td>
               <a-input-number
-                v-model:value="searchParams.ki"
+                v-model:value="searchParams.KI"
                 class="w-full"
               ></a-input-number>
             </td>
@@ -19,7 +19,7 @@
             <th class="required">契約者</th>
             <td>
               <ai-select
-                v-model:value="searchParams.keiyakusya"
+                v-model:value="searchParams.KEIYAKUSYA_CD"
                 :options="options1"
                 style="width: 100%"
               ></ai-select>
@@ -28,13 +28,13 @@
           <a-col v-bind="layout">
             <th>農場番号</th>
             <td>
-              <a-input v-model:value="searchParams.noujyobango"></a-input>
+              <a-input v-model:value="searchParams.NOJO_CD"></a-input>
             </td>
           </a-col>
           <a-col v-bind="layout">
             <th>農場名</th>
             <td>
-              <a-input v-model:value="searchParams.noujyomei"></a-input>
+              <a-input v-model:value="searchParams.NOJO_NAME"></a-input>
             </td>
           </a-col>
         </a-row>
@@ -42,9 +42,9 @@
       <div class="my-2 flex">
         <a-space
           ><span>検索方法</span>
-          <a-radio-group v-model:value="jyoken">
-            <a-radio :value="false">すべてを含む</a-radio>
-            <a-radio :value="true">いずれかを含む</a-radio>
+          <a-radio-group v-model:value="searchParams.SEARCH_METHOD">
+            <a-radio :value="EnumAndOr.And">すべてを含む</a-radio>
+            <a-radio :value="EnumAndOr.Or">いずれかを含む</a-radio>
           </a-radio-group></a-space
         >
       </div>
@@ -105,7 +105,7 @@
 <script lang="ts" setup>
 import { ref, reactive, toRef } from 'vue'
 import { useRouter, useRoute, onBeforeRouteUpdate } from 'vue-router'
-import { PageSatatus } from '@/enum'
+import {EnumAndOr, PageSatatus} from '@/enum'
 import useSearch from '@/hooks/useSearch'
 import { showInfoModal } from '@/utils/modal'
 import { ITEM_REQUIRE_ERROR } from '@/constants/msg'
@@ -113,6 +113,7 @@ import { changeTableSort } from '@/utils/util'
 import { useTabStore } from '@/store/modules/tab'
 import { useElementSize } from '@vueuse/core'
 import { Search } from '@/views/GJ80/GJ8090/service'
+import {KeiyakuNojoSearchVM} from "@/views/GJ80/GJ8090/type";
 
 //--------------------------------------------------------------------------
 //データ定義
@@ -121,48 +122,45 @@ const router = useRouter()
 const route = useRoute()
 const tabStore = useTabStore()
 
-const jyoken = ref<boolean>(false)
+
 
 const createDefaultParams = () => {
   return {
-    ki: '',
-    keiyakusya: '',
-    noujyobango: '',
-    noujyomei: '',
+    KI: 8,
+    KEIYAKUSYA_CD: undefined,
+    NOJO_CD: undefined,
+    NOJO_NAME: '',
+    SEARCH_METHOD: EnumAndOr.And,
   }
 }
 const searchParams = reactive(createDefaultParams())
 
-const tableDefault = (): RowData[] => {
+const tableDefault = (): KeiyakuNojoSearchVM[] => {
   return [
     {
-      noujyocd: 10001,
-      noujyomei: '東京都千代田区農場',
-      jyusyo: '〒100-0001 東京都千代田区千代田1-1',
+      NOJO_CD: 10001,
+      NOJO_NAME: '東京都千代田区農場',
+      ADDR: '〒100-0001 東京都千代田区千代田1-1',
     },
     {
-      noujyocd: 10002,
-      noujyomei: '大阪府大阪市北区農場',
-      jyusyo: '〒530-0001 大阪府大阪市北区梅田3丁目1-1',
+      NOJO_CD: 10002,
+      NOJO_NAME: '大阪府大阪市北区農場',
+      ADDR: '〒530-0001 大阪府大阪市北区梅田3丁目1-1',
     },
     {
-      noujyocd: 10003,
-      noujyomei: '京都府京都市下農場',
-      jyusyo: '〒600-8216 京都府京都市下京区東塩小路町901',
+      NOJO_CD: 10003,
+      NOJO_NAME: '京都府京都市下農場',
+      ADDR: '〒600-8216 京都府京都市下京区東塩小路町901',
     },
     {
-      noujyocd: 10004,
-      noujyomei: '福岡県福岡市博多区農場',
-      jyusyo: '〒812-0011 福岡県福岡市博多区博多駅前3丁目2-1',
+      NOJO_CD: 10004,
+      NOJO_NAME: '福岡県福岡市博多区農場',
+      ADDR: '〒812-0011 福岡県福岡市博多区博多駅前3丁目2-1',
     },
   ]
 }
-type RowData = {
-  noujyocd: number
-  noujyomei: string
-  jyusyo: string
-}
-const tableData = ref<RowData[]>([])
+
+const tableData = ref<KeiyakuNojoSearchVM[]>([])
 
 //表の高さ
 const headRef = ref(null)
