@@ -20,28 +20,20 @@
           }}</TD>
         </a-col>
       </a-row>
-      <a-row>
-        <a-col v-bind="layout"
-          ><div class="my-2 header_operation flex justify-between w-full">
-            <a-space :size="20">
-              <a-button class="warning-btn" @click="saveData">登録</a-button>
-              <a-button
-                type="primary"
-                danger
-                :disabled="isNew"
-                @click="deleteData"
-                >削除</a-button
-              >
-              <a-button v-if="!isNew" :icon="h(LeftOutlined)"></a-button
-              ><span v-if="!isNew">2/5</span>
-              <a-button v-if="!isNew" :icon="h(RightOutlined)"></a-button>
-            </a-space>
-            <a-button type="primary" class="text-end" @click="goList"
-              >一覧へ</a-button
-            >
-          </div></a-col
+      <div class="my-2 header_operation flex justify-between w-full">
+        <a-space :size="20">
+          <a-button class="warning-btn" @click="saveData">登録</a-button>
+          <a-button type="primary" danger :disabled="isNew" @click="deleteData"
+            >削除</a-button
+          >
+          <a-button v-if="!isNew" :icon="h(LeftOutlined)"></a-button
+          ><span v-if="!isNew">2/5</span>
+          <a-button v-if="!isNew" :icon="h(RightOutlined)"></a-button>
+        </a-space>
+        <a-button type="primary" class="text-end" @click="goList"
+          >一覧へ</a-button
         >
-      </a-row>
+      </div>
       <b>契約者農場基本登録項目</b>
       <a-row>
         <a-col v-bind="layout">

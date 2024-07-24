@@ -10,9 +10,9 @@
 .self_adaption_table {
   .ant-col {
     display: flex;
-
+    border: 1px solid #606266;
+    margin: 0 -1px -1px 0;
     th {
-      border: 1px solid #606266;
       border-right: 1px solid #c0c4cc;
       color: rgba(0, 0, 0, 0.85);
       padding: 2px 4px;
@@ -20,17 +20,14 @@
       background-color: #ffffe1;
       font-weight: normal;
       text-align: start;
-      margin: 0 0 -1px -1px;
     }
     td {
-      border: 1px solid #606266;
-      border-left: none;
       color: rgba(0, 0, 0, 0.85);
       padding: 2px 2px;
-      // line-height: 32px;
       flex: 1;
       overflow-wrap: break-word;
-      margin: 0 0 -1px 0;
+      display: flex;
+      align-items: center;
     }
   }
   .ant-col td {
