@@ -11,9 +11,10 @@
     <a-input
       v-model:value="value1"
       maxlength="3"
-      style="width: 50px; text-align: center; border-right: 0"
+      style="width: 70px; text-align: center; border-right: 0"
       @change="onChange"
-    />
+      ><template #prefix> 〒 </template></a-input
+    >
     <a-input
       style="width: 30px; border-left: 0; pointer-events: none; background-color: #fff"
       placeholder="-"
