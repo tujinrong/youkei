@@ -1,10 +1,10 @@
 <template>
   <a-card :bordered="false" class="mb-2 h-full">
     <h1>契約者農場マスタメンテナンス</h1>
-    <div class="self_adaption_table form">
+    <div class="self_adaption_table form max-w-160">
       <b>第99期</b>
       <a-row>
-        <a-col v-if="isNew" v-bind="layout">
+        <a-col v-if="isNew" span="24">
           <th>契約者</th>
           <td>
             <ai-select
@@ -13,7 +13,7 @@
             ></ai-select>
           </td>
         </a-col>
-        <a-col v-else v-bind="layout">
+        <a-col v-else span="24">
           <th class="bg-readonly">契約者</th>
           <TD>{{
             selectorlist.find((e) => e.value == formData.keiyakusya)?.label
@@ -36,7 +36,7 @@
       </div>
       <b>契約者農場基本登録項目</b>
       <a-row>
-        <a-col v-bind="layout">
+        <a-col span="24">
           <th class="required">農場番号</th>
           <td>
             <a-input
@@ -48,7 +48,7 @@
         </a-col>
       </a-row>
       <a-row>
-        <a-col v-bind="layout">
+        <a-col span="24">
           <th class="required">農場名</th>
           <td>
             <a-input v-model:value="formData.noujyomei"></a-input>
@@ -56,7 +56,7 @@
         </a-col>
       </a-row>
       <a-row>
-        <a-col v-bind="layout">
+        <a-col span="24">
           <th class="required">都道府県</th>
           <td>
             <a-select
@@ -68,16 +68,17 @@
         </a-col>
       </a-row>
       <a-row>
-        <a-col v-bind="layout">
+        <a-col span="24">
           <th class="required">住所</th>
-          <td>
+          <td class="flex-col">
+            <PostCode v-model:value="formData.jyusyo1" />
             <a-input v-model:value="formData.jyusyo2"></a-input>
             <a-input v-model:value="formData.jyusyo3"></a-input>
           </td>
         </a-col>
       </a-row>
       <a-row>
-        <a-col v-bind="layout">
+        <a-col span="24">
           <th class="required">明細番号</th>
           <td>
             <a-input
@@ -103,6 +104,7 @@ import { h } from 'vue'
 import { showSaveModal } from '@/utils/modal'
 import { LeftOutlined, RightOutlined } from '@ant-design/icons-vue'
 // import TD from '@/components/Common/TableTD/index.vue'
+import PostCode from '@/components/Selector/PostCode/index.vue'
 //---------------------------------------------------------------------------
 //属性
 //---------------------------------------------------------------------------
@@ -144,8 +146,7 @@ const fakeFormData1 = {
   noujyobango: '',
   noujyomei: '',
   todoufuken: '',
-  jyusyo11: '',
-  jyusyo12: '',
+  jyusyo1: '',
   jyusyo2: '',
   jyusyo3: '',
   meisaibango: '',
@@ -206,11 +207,6 @@ const todoufukenList = [
   { value: '47', label: '沖縄県' },
 ]
 
-const layout = {
-  md: 24,
-  lg: 24,
-  xxl: 10,
-}
 //---------------------------------------------------------------------------
 //フック関数
 //--------------------------------------------------------------------------

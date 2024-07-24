@@ -7,7 +7,7 @@
  * 変更履歴　:
  * ----------------------------------------------------------------->
 <template>
-  <ai-select
+  <a-select
     v-model:value="curVal"
     class="w-full"
     show-search
@@ -27,7 +27,7 @@
     >
       {{ opt.value ? opt.value + ' : ' + opt.label : opt.label }}
     </ai-select-option>
-  </ai-select>
+  </a-select>
 </template>
 
 <script lang="ts" setup>
