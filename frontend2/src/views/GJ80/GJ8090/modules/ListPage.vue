@@ -82,16 +82,16 @@
       >
         <vxe-column field="noujyocd" title="農場番号" width="200" sortable>
           <template #default="{ row }">
-            <a @click="forwardEdit()">{{ row.noujyocd }}</a>
+            <a @click="forwardEdit()">{{ row.NOJO_CD }}</a>
           </template>
         </vxe-column>
         <vxe-column field="noujyomei" title="農場名" min-width="400" sortable>
           <template #default="{ row }">
-            <a @click="forwardEdit()">{{ row.noujyomei }}</a>
+            <a @click="forwardEdit()">{{ row.NOJO_NAME }}</a>
           </template>
         </vxe-column>
         <vxe-column
-          field="jyusyo"
+          field="ADDR"
           title="農場住所"
           min-width="700"
           sortable
