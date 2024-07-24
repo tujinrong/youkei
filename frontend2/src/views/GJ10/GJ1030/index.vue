@@ -26,16 +26,16 @@
           /></a-descriptions-item>
           <a-descriptions-item label="契約区分">
             <div class="flex items-center">
-              <a-select
+              <ai-select
                 v-model:value="formData.keiyakukbn1"
                 :options="keiyakukbnlist"
                 class="flex-1"
-              ></a-select
-              >～<a-select
+              ></ai-select
+              >～<ai-select
                 v-model:value="formData.keiyakukbn2"
                 :options="keiyakukbnlist"
                 class="flex-1"
-              ></a-select>
+              ></ai-select>
             </div>
           </a-descriptions-item>
           <a-descriptions-item label="契約状態">
@@ -56,16 +56,16 @@
           >
           <a-descriptions-item label="事業委託先">
             <div class="flex items-center min-w-60">
-              <a-select
+              <ai-select
                 v-model:value="formData.itakusaki1"
                 :options="selectorlist"
                 class="flex-1"
-              ></a-select
-              >～<a-select
+              ></ai-select
+              >～<ai-select
                 v-model:value="formData.itakusaki2"
                 :options="selectorlist"
                 class="flex-1"
-              ></a-select>
+              ></ai-select>
             </div>
           </a-descriptions-item>
           <a-descriptions-item label="契約者番号">
