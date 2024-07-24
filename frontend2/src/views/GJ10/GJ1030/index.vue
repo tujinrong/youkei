@@ -22,7 +22,7 @@
             </div>
           </a-descriptions-item>
           <a-descriptions-item label="対象期(現在)"
-            ><a-date-picker v-model:value="formData.taisyoki2"
+            ><DateJp v-model:value="formData.taisyoki2"
           /></a-descriptions-item>
           <a-descriptions-item label="契約区分">
             <div class="flex items-center">
@@ -101,6 +101,7 @@ import { reactive, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useTabStore } from '@/store/modules/tab'
 import dayjs from 'dayjs'
+import DateJp from '@/components/Selector/DateJp/index.vue'
 import { ReportViewer, Core, PdfExport } from '@grapecity/activereports'
 
 //--------------------------------------------------------------------------
