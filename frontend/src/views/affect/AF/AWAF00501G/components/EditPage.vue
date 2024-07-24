@@ -22,9 +22,9 @@
               <a-button class="warning-btn" @click="saveData">登録</a-button>
               <a-button type="primary" danger :disabled="isNew" @click="deleteData">削除</a-button>
               <!-- <a-pagination v-model:current="current" show-less-items total /> -->
-              <a-button v-if="!isNew" :icon="h(LeftOutlined)"></a-button
+              <!-- <a-button v-if="!isNew" :icon="h(LeftOutlined)"></a-button
               ><span v-if="!isNew">2/5</span>
-              <a-button v-if="!isNew" :icon="h(RightOutlined)"></a-button>
+              <a-button v-if="!isNew" :icon="h(RightOutlined)"></a-button> -->
             </a-space>
             <a-button type="primary" class="text-end" @click="goList">一覧へ</a-button>
           </div></a-col
@@ -59,7 +59,17 @@
         <a-col v-bind="layout">
           <th class="required">住所</th>
           <td>
-            <a-input v-model:value="formData.jyusyo1"></a-input>
+            <a-row>
+              <a-col><span class="mr-2">〒</span></a-col
+              ><a-col
+                ><a-input v-model:value="formData.jyusyo11" class="w-12" maxlength="3"></a-input
+              ></a-col>
+              <a-col class="mx-2">-</a-col
+              ><a-col
+                ><a-input v-model:value="formData.jyusyo12" class="w-16" maxlength="4"></a-input
+              ></a-col>
+            </a-row>
+            <div></div>
             <a-input v-model:value="formData.jyusyo2"></a-input>
             <a-input v-model:value="formData.jyusyo3"></a-input>
           </td>
@@ -123,7 +133,8 @@ const fakeFormData = {
   noujyobango: '99',
   noujyomei: '東京都農場',
   todoufuken: '13',
-  jyusyo1: '〒100-0001',
+  jyusyo11: '100',
+  jyusyo12: '0001',
   jyusyo2: '東京都千代田区',
   jyusyo3: '千代田1-1',
   meisaibango: '10001'
@@ -133,7 +144,8 @@ const fakeFormData1 = {
   noujyobango: '',
   noujyomei: '',
   todoufuken: '',
-  jyusyo1: '',
+  jyusyo11: '',
+  jyusyo12: '',
   jyusyo2: '',
   jyusyo3: '',
   meisaibango: ''

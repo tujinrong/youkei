@@ -16,12 +16,12 @@
         </span>
         <template #overlay>
           <a-menu class="user-dropdown-menu-wrapper">
-            <a-menu-item @click="showChangePassword">
+            <!-- <a-menu-item @click="showChangePassword">
               <a>
                 <LockOutlined />
                 <span>パスワード変更</span>
               </a>
-            </a-menu-item>
+            </a-menu-item> -->
             <!-- <a-menu-item v-if="UserInfo.kanrisyaflg">
               <a href="javascript:;" @click="goAdminPage">
                 <UserSwitchOutlined />
