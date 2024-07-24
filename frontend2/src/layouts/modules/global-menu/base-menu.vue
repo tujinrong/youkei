@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, onMounted, reactive, ref } from 'vue'
 import { useRoute } from 'vue-router'
 import type { MenuInfo, MenuMode } from 'ant-design-vue/es/menu/src/interface'
 import { SimpleScrollbar } from '@sa/materials'
@@ -79,6 +79,47 @@ function handleClickMenu(menuInfo: MenuInfo) {
 
   routerPushByKey(key, { query })
 }
+
+//右クリックメニュー------------------------------------------------------
+const menuVisible = ref(false)
+const menuStyle = reactive({
+  top: '0px',
+  left: '0px',
+})
+let currentPath = ''
+
+onMounted(() => {
+  const menuItems = document.querySelectorAll('.ant-menu-item')
+  menuItems.forEach((item) => {
+    item.addEventListener('contextmenu', (event) => {
+      event.preventDefault()
+      showMenu(event)
+      currentPath = item.getAttribute('routepath') ?? ''
+    })
+  })
+})
+
+function showMenu(event) {
+  event.stopPropagation()
+  menuStyle.top = `${event.clientY}px`
+  menuStyle.left = `${event.clientX}px`
+  menuVisible.value = true
+  document.addEventListener('click', hideMenu)
+}
+function hideMenu() {
+  menuVisible.value = false
+  document.removeEventListener('click', hideMenu)
+}
+
+const openNew = () => {
+  const width = 1600
+  const height = 900
+  const left = window.screen.width / 2 - width / 2
+  const top = window.screen.height / 2 - height / 2
+  const features = `width=${width},height=${height},left=${left},top=${top},toolbar=yes,menubar=yes,location=yes,status=yes`
+  window.open(`http://localhost:9527${currentPath}`, '_blank', features)
+}
+//---------------------------------------------------------------------
 </script>
 
 <template>
@@ -95,6 +136,11 @@ function handleClickMenu(menuInfo: MenuInfo) {
       :class="{ 'bg-container!': !darkTheme, 'horizontal-menu': isHorizontal }"
       @click="handleClickMenu"
     />
+    <Teleport to="body">
+      <a-menu v-if="menuVisible" :style="menuStyle" class="context-menu">
+        <a-menu-item @click="openNew">新しいウィンドウで開く</a-menu-item>
+      </a-menu>
+    </Teleport>
   </SimpleScrollbar>
 </template>
 
@@ -149,5 +195,12 @@ function handleClickMenu(menuInfo: MenuInfo) {
 
 .horizontal-menu {
   line-height: v-bind(headerHeight);
+}
+
+.context-menu {
+  position: absolute;
+  z-index: 999;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
 }
 </style>
