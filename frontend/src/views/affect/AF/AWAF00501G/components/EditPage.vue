@@ -60,11 +60,11 @@
           <th class="required">住所</th>
           <td>
             <a-row>
-              <a-col><span class="mr-2">〒</span></a-col
+              <a-col><span class="mr-1">〒</span></a-col
               ><a-col
                 ><a-input v-model:value="formData.jyusyo11" class="w-12" maxlength="3"></a-input
               ></a-col>
-              <a-col class="mx-2">-</a-col
+              <a-col class="mx-1">-</a-col
               ><a-col
                 ><a-input v-model:value="formData.jyusyo12" class="w-16" maxlength="4"></a-input
               ></a-col>
@@ -157,15 +157,15 @@ const selectorlist = ref<DaSelectorModel[]>([
   { value: '3', label: '史玉浅海' }
 ])
 const todoufukenList = [
-  { value: '1', label: '北海道' },
-  { value: '2', label: '青森県' },
-  { value: '3', label: '岩手県' },
-  { value: '4', label: '宮城県' },
-  { value: '5', label: '秋田県' },
-  { value: '6', label: '山形県' },
-  { value: '7', label: '福島県' },
-  { value: '8', label: '茨城県' },
-  { value: '9', label: '栃木県' },
+  { value: '01', label: '北海道' },
+  { value: '02', label: '青森県' },
+  { value: '03', label: '岩手県' },
+  { value: '04', label: '宮城県' },
+  { value: '05', label: '秋田県' },
+  { value: '06', label: '山形県' },
+  { value: '07', label: '福島県' },
+  { value: '08', label: '茨城県' },
+  { value: '09', label: '栃木県' },
   { value: '10', label: '群馬県' },
   { value: '11', label: '埼玉県' },
   { value: '12', label: '千葉県' },
