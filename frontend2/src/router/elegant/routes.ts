@@ -50,12 +50,12 @@ export const generatedRoutes: GeneratedRoute[] = [
     },
     children: [
       {
-        name: 'gj10_gj1010',
-        path: '/gj10/gj1010',
-        component: 'view.gj10_gj1010',
+        name: 'gj10_gj1030',
+        path: '/gj10/gj1030',
+        component: 'view.gj10_gj1030',
         meta: {
-          title: 'gj10_gj1010',
-          i18nKey: 'route.gj10_gj1010'
+          title: 'gj10_gj1030',
+          i18nKey: 'route.gj10_gj1030'
         }
       }
     ]

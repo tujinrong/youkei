@@ -15,7 +15,7 @@ export const layouts: Record<RouteLayout, RouteComponent | (() => Promise<RouteC
 };
 
 export const views: Record<LastLevelRouteKey, RouteComponent | (() => Promise<RouteComponent>)> = {
-  gj10_gj1010: () => import("@/views/GJ10/GJ1010/index.vue"),
+  gj10_gj1030: () => import("@/views/GJ10/GJ1030/index.vue"),
   gj80_gj8090: () => import("@/views/GJ80/GJ8090/index.vue"),
   403: () => import("@/views/_builtin/403/index.vue"),
   404: () => import("@/views/_builtin/404/index.vue"),
