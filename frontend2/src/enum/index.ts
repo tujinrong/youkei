@@ -71,3 +71,11 @@ export enum PageSatatus {
   /**新規画面 */
   New,
 }
+
+/** EnumAndOr(検索方法) */
+export enum EnumAndOr {
+  /**すべてを含む(AND) */
+  And,
+  /**いずれかを含む(OR) */
+  Or,
+}

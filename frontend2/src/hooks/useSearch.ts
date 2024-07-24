@@ -35,9 +35,9 @@ export default function useSearch({
         ...unref(params),
       })
 
-      if (res.totalpagecount < pageParams.pagenum) {
+      if (res.totalpagecount < pageParams.PAGE_NUM) {
         stopflg = true
-        pageParams.pagenum = 1
+        pageParams.PAGE_NUM = 1
         nextTick(() => (stopflg = false))
       }
 
@@ -55,7 +55,7 @@ export default function useSearch({
   const clear = () => {
     source.value = []
     totalCount.value = 0
-    pageParams.pagenum = 1
+    pageParams.PAGE_NUM = 1
   }
 
   return {

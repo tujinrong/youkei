@@ -33,7 +33,7 @@ export async function login(
 export function api(
   servicename: string,
   methodname: string,
-  data: any,
+  data?: any,
   headers?: AxiosRequestHeaders,
   extra?: {
     onNextOk?: (data?: DaResponseBase) => void

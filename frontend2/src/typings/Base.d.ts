@@ -1,71 +1,65 @@
 /** ----------------------------------------------------------------
- * 業務名称　: 健康管理システム
+ * 業務名称　: 互助防疫システム
  * 機能概要　: ベースロジック
  * 　　　　　  インターフェース定義
- * 作成日　　: 2023.03.03
- * 作成者　　: 劉
+ * 作成日　　: 2024.07.24
+ * 作成者　　: 屠
  * 変更履歴　:
  * -----------------------------------------------------------------*/
+
 //-------------------------------------------------------------------
 //リクエスト
 //-------------------------------------------------------------------
 /** 共通ベース：参照用、実質データ格納しない、httpのヘッダーに格納する */
 interface DaRequestBase {
   /** ユーザーID */
-  userid?: string
-  /** 支所 */
-  regsisyo?: string
+  USER_ID?: string
 }
-/** 排他処理 */
-interface CmLockRequestBase extends DaRequestBase {
-  /** タイムスタンプ */
-  timestamp: Date | null
-}
+
 /** 登録処理 */
 interface CmSaveRequestBase extends DaRequestBase {
   /** チェックフラグ */
-  checkflg: boolean
+  CHECK_FLG: boolean
 }
+
 /** 検索処理 */
 interface CmSearchRequestBase extends DaRequestBase {
   /** ページサイズ */
-  pagesize: number
+  PAGE_SIZE: number
   /** ページNo. */
-  pagenum: number
+  PAGE_NUM: number
   /** 並び順 */
-  orderby?: number
-  // //
-  // queryflg?: boolean
+  ORDER_BY?: number
 }
+
 /** upload file */
 interface CmUploadRequestBase extends DaRequestBase {
   files: File[] | null
   filerequired?: boolean
 }
+
 //-------------------------------------------------------------------
 //レスポンス
 //-------------------------------------------------------------------
+
 /** 共通ベース */
 interface DaResponseBase {
   /** レスポンス状態区別 */
-  returncode: import('@/enum').EnumServiceResult
+  RETURN_CODE: import('@/enum').EnumServiceResult
   /** メッセージ */
-  message: string
-  /** 秘密キー(復号化用) */
-  rsaprivatekey?: string
+  MESSAGE: string
+  // /** 秘密キー(復号化用) */
+  // rsaprivatekey?: string
 }
-/** 排他処理 */
-interface CmLockResponseBase extends DaResponseBase {
-  /** タイムスタンプ */
-  timestamp: Date | null
-}
+
 /** 検索処理 */
 interface CmSearchResponseBase extends DaResponseBase {
   /** ページ数 */
-  totalpagecount: number
+  TOTAL_PAGE_COUNT: number
   /** 総件数 */
-  totalrowcount: number
+  TOTAL_ROW_COUNT: number
 }
+
 /** ドロップダウンリスト */
 interface DaSelectorModel {
   /** 名称 */
