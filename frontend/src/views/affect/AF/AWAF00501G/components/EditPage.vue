@@ -69,7 +69,6 @@
                 ><a-input v-model:value="formData.jyusyo12" class="w-16" maxlength="4"></a-input
               ></a-col>
             </a-row>
-            <div></div>
             <a-input v-model:value="formData.jyusyo2"></a-input>
             <a-input v-model:value="formData.jyusyo3"></a-input>
           </td>

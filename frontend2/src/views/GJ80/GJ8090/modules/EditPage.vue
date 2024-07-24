@@ -62,6 +62,7 @@
             <a-select
               v-model:value="formData.todoufuken"
               :options="todoufukenList"
+              class="w-full"
             ></a-select>
           </td>
         </a-col>
@@ -70,7 +71,6 @@
         <a-col v-bind="layout">
           <th class="required">住所</th>
           <td>
-            <a-input v-model:value="formData.jyusyo1"></a-input>
             <a-input v-model:value="formData.jyusyo2"></a-input>
             <a-input v-model:value="formData.jyusyo3"></a-input>
           </td>
@@ -133,7 +133,8 @@ const fakeFormData = {
   noujyobango: '99',
   noujyomei: '東京都農場',
   todoufuken: '13',
-  jyusyo1: '〒100-0001',
+  jyusyo11: '100',
+  jyusyo12: '0001',
   jyusyo2: '東京都千代田区',
   jyusyo3: '千代田1-1',
   meisaibango: '10001',
@@ -143,7 +144,8 @@ const fakeFormData1 = {
   noujyobango: '',
   noujyomei: '',
   todoufuken: '',
-  jyusyo1: '',
+  jyusyo11: '',
+  jyusyo12: '',
   jyusyo2: '',
   jyusyo3: '',
   meisaibango: '',

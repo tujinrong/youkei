@@ -92,8 +92,6 @@
       </div>
 
       <div id="viewer-host" class="flex-1"></div>
-
-      <PreviewModal v-model:visible="previewVisible" />
     </a-card>
   </div>
 </template>
@@ -101,7 +99,6 @@
 <script setup lang="ts">
 import { reactive, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
-import PreviewModal from './modules/PreviewModal.vue'
 import { useTabStore } from '@/store/modules/tab'
 import dayjs from 'dayjs'
 import { ReportViewer, Core, PdfExport } from '@grapecity/activereports'
