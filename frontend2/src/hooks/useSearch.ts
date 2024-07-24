@@ -4,7 +4,7 @@ export default function useSearch({
   service,
   params,
   source,
-  listname = 'kekkalist',
+  listname = 'KEKKALIST',
 }: {
   service: (request) => Promise<CmSearchResponseBase & { [prop: string]: any }>
   params: Ref<{ [prop: string]: any }> | null

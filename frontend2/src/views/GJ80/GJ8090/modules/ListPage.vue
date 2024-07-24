@@ -61,8 +61,8 @@
     </a-card>
     <a-card :bordered="false" class="sm:flex-1-hidden" ref="cardRef">
       <a-pagination
-        v-model:current="pageParams.pagenum"
-        v-model:page-size="pageParams.pagesize"
+        v-model:current="pageParams.PAGE_NUM"
+        v-model:page-size="pageParams.PAGE_SIZE"
         :total="totalCount"
         :page-size-options="['10', '25', '50', '100']"
         show-less-items
@@ -78,7 +78,7 @@
         :sort-config="{ trigger: 'cell' }"
         :empty-render="{ name: 'NotData' }"
         @cell-dblclick="forwardEdit()"
-        @sort-change="(e) => changeTableSort(e, toRef(pageParams, 'orderby'))"
+        @sort-change="(e) => changeTableSort(e, toRef(pageParams, 'ORDER_BY'))"
       >
         <vxe-column field="noujyocd" title="農場番号" width="200" sortable>
           <template #default="{ row }">
@@ -112,6 +112,7 @@ import { ITEM_REQUIRE_ERROR } from '@/constants/msg'
 import { changeTableSort } from '@/utils/util'
 import { useTabStore } from '@/store/modules/tab'
 import { useElementSize } from '@vueuse/core'
+import {Search} from "@/views/GJ80/GJ8090/service";
 
 //--------------------------------------------------------------------------
 //データ定義
@@ -172,7 +173,7 @@ const layout = {
   xxl: 6,
 }
 const { pageParams, totalCount, searchData, clear } = useSearch({
-  service: undefined,
+  service: Search,
   source: tableData,
   params: toRef(() => searchParams),
 })
