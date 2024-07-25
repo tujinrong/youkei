@@ -34,11 +34,12 @@
         <a-col span="24">
           <th class="required">契約者農場</th>
           <td>
-            <a-input
+            <a-input-number
               v-model:value="formData.noujyobango"
+              :min="0"
+              :max="999"
               :maxlength="3"
-              type="number"
-            ></a-input>
+            ></a-input-number>
           </td>
         </a-col>
       </a-row>
@@ -78,11 +79,12 @@
         <a-col span="24">
           <th class="required">明細番号</th>
           <td>
-            <a-input
+            <a-input-number
               v-model:value="formData.meisaibango"
+              :min="0"
+              :max="999"
               :maxlength="3"
-              type="number"
-            ></a-input>
+            ></a-input-number>
           </td>
         </a-col>
       </a-row>
@@ -97,10 +99,10 @@ import { useRoute, useRouter } from 'vue-router'
 import { showDeleteModal } from '@/utils/modal'
 import { DELETE_OK_INFO, SAVE_OK_INFO } from '@/constants/msg'
 import { message } from 'ant-design-vue'
-import { h } from 'vue'
-import TD from '@/components/TableTD/index.vue'
+// import { h } from 'vue'
+// import TD from '@/components/TableTD/index.vue'
 import { showSaveModal } from '@/utils/modal'
-import { LeftOutlined, RightOutlined } from '@ant-design/icons-vue'
+// import { LeftOutlined, RightOutlined } from '@ant-design/icons-vue'
 import PostCode from '@/components/Selector/PostCode/index.vue'
 //---------------------------------------------------------------------------
 //属性
@@ -115,20 +117,20 @@ const props = defineProps<{
 const router = useRouter()
 const route = useRoute()
 const isNew = props.status === PageSatatus.New
-const createDefaultParams = () => {
-  return {
-    keiyakusya: '',
-    noujyobango: '',
-    noujyomei: '',
-    KEN_CD: '',
-    ADDR_POST: '',
-    ADDR_1: '',
-    ADDR_2: '',
-    ADDR_3: '',
-    ADDR_4: '',
-    meisaibango: '',
-  }
-}
+// const createDefaultParams = () => {
+//   return {
+//     keiyakusya: '',
+//     noujyobango: '',
+//     noujyomei: '',
+//     KEN_CD: '',
+//     ADDR_POST: '',
+//     ADDR_1: '',
+//     ADDR_2: '',
+//     ADDR_3: '',
+//     ADDR_4: '',
+//     meisaibango: '',
+//   }
+// }
 const fakeFormData = {
   keiyakusya: '1',
   noujyobango: '99',
@@ -139,7 +141,7 @@ const fakeFormData = {
   ADDR_2: '千代田区',
   ADDR_3: '丸の内',
   ADDR_4: '1丁目1-1',
-  meisaibango: '10001',
+  meisaibango: '234',
 }
 const fakeFormData1 = {
   keiyakusya: '',
@@ -261,8 +263,6 @@ const saveData = () => {
     },
   })
 }
-
-//
 const deleteData = () => {
   showDeleteModal({
     handleDB: true,
