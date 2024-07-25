@@ -19,13 +19,17 @@
         <a-col v-bind="layout">
           <th class="required">対象日(現在)</th>
           <td>
-            <a-date-picker v-model:value="formData.taisyoki2" class="w-full" />
+            <DateJp v-model:value="formData.taisyoki2" class="w-full" />
           </td>
         </a-col>
         <a-col v-bind="layout">
           <th>契約区分</th>
           <td class="flex">
-            <ai-select v-model:value="formData.keiyakukbn1" :options="keiyakukbnlist"></ai-select
+            <ai-select
+              v-model:value="formData.keiyakukbn1"
+              split-val
+              :options="keiyakukbnlist"
+            ></ai-select
             >～<ai-select
               v-model:value="formData.keiyakukbn2"
               :options="keiyakukbnlist"
@@ -87,6 +91,8 @@ import '@grapecity/activereports/styles/ar-js-ui.css'
 import '@grapecity/activereports/styles/ar-js-viewer.css'
 import '@grapecity/activereports-localization'
 import { ReportViewer, Core, PdfExport } from '@grapecity/activereports'
+
+import DateJp from '@/components/Selector/DateJp/index.vue'
 
 //--------------------------------------------------------------------------
 //データ定義
