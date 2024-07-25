@@ -15,9 +15,16 @@
         </a-col>
         <a-col v-else span="24">
           <th class="bg-readonly">契約者</th>
-          <TD>{{
+          <td>
+            <ai-select
+              v-model:value="formData.keiyakusya"
+              :options="selectorlist"
+              disabled
+            ></ai-select>
+          </td>
+          <!-- <TD>{{
             selectorlist.find((e) => e.value == formData.keiyakusya)?.label
-          }}</TD>
+          }}</TD> -->
         </a-col>
       </a-row>
       <div class="my-2 header_operation flex justify-between w-full">
@@ -37,7 +44,7 @@
       <b>契約者農場基本登録項目</b>
       <a-row>
         <a-col span="24">
-          <th class="required">農場番号</th>
+          <th class="required">契約者農場</th>
           <td>
             <a-input
               v-model:value="formData.noujyobango"
@@ -49,7 +56,7 @@
       </a-row>
       <a-row>
         <a-col span="24">
-          <th class="required">農場名</th>
+          <th class="required">農場名称</th>
           <td>
             <a-input v-model:value="formData.noujyomei"></a-input>
           </td>

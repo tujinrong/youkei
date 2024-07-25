@@ -43,8 +43,8 @@
         <a-space
           ><span>検索方法</span>
           <a-radio-group v-model:value="searchParams.SEARCH_METHOD">
-            <a-radio :value="EnumAndOr.And">すべてを含む</a-radio>
-            <a-radio :value="EnumAndOr.Or">いずれかを含む</a-radio>
+            <a-radio :value="EnumAndOr.And">すべてを含む(AND)</a-radio>
+            <a-radio :value="EnumAndOr.Or">いずれかを含む(OR)</a-radio>
           </a-radio-group></a-space
         >
       </div>
@@ -105,7 +105,7 @@
 <script lang="ts" setup>
 import { ref, reactive, toRef } from 'vue'
 import { useRouter, useRoute, onBeforeRouteUpdate } from 'vue-router'
-import {EnumAndOr, PageSatatus} from '@/enum'
+import { EnumAndOr, PageSatatus } from '@/enum'
 import useSearch from '@/hooks/useSearch'
 import { showInfoModal } from '@/utils/modal'
 import { ITEM_REQUIRE_ERROR } from '@/constants/msg'
@@ -113,7 +113,7 @@ import { changeTableSort } from '@/utils/util'
 import { useTabStore } from '@/store/modules/tab'
 import { useElementSize } from '@vueuse/core'
 import { Search } from '@/views/GJ80/GJ8090/service'
-import {KeiyakuNojoSearchVM} from "@/views/GJ80/GJ8090/type";
+import { KeiyakuNojoSearchVM } from '@/views/GJ80/GJ8090/type'
 
 //--------------------------------------------------------------------------
 //データ定義
@@ -121,8 +121,6 @@ import {KeiyakuNojoSearchVM} from "@/views/GJ80/GJ8090/type";
 const router = useRouter()
 const route = useRoute()
 const tabStore = useTabStore()
-
-
 
 const createDefaultParams = () => {
   return {
