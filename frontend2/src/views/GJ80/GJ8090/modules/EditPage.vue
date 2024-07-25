@@ -15,16 +15,16 @@
         </a-col>
         <a-col v-else span="24">
           <th class="bg-readonly">契約者</th>
-          <td>
+          <!-- <td>
             <ai-select
               v-model:value="formData.keiyakusya"
               :options="selectorlist"
               disabled
             ></ai-select>
-          </td>
-          <!-- <TD>{{
+          </td> -->
+          <TD>{{
             selectorlist.find((e) => e.value == formData.keiyakusya)?.label
-          }}</TD> -->
+          }}</TD>
         </a-col>
       </a-row>
       <div class="my-2 header_operation flex justify-between w-full">
@@ -108,9 +108,9 @@ import { showDeleteModal } from '@/utils/modal'
 import { DELETE_OK_INFO, SAVE_OK_INFO } from '@/constants/msg'
 import { message } from 'ant-design-vue'
 import { h } from 'vue'
+import TD from '@/components/TableTD/index.vue'
 import { showSaveModal } from '@/utils/modal'
 import { LeftOutlined, RightOutlined } from '@ant-design/icons-vue'
-// import TD from '@/components/Common/TableTD/index.vue'
 import PostCode from '@/components/Selector/PostCode/index.vue'
 //---------------------------------------------------------------------------
 //属性
