@@ -138,7 +138,7 @@ const tableDefault = (): KeiyakuNojoSearchVM[] => {
     {
       NOJO_CD: 10001,
       NOJO_NAME: '東京都千代田区農場',
-      ADDR: '〒100-0001 東京都千代田区千代田1-1',
+      ADDR: '〒100-0001 東京都千代田区丸の内1丁目1-1',
     },
     {
       NOJO_CD: 10002,

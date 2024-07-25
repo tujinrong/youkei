@@ -2,29 +2,17 @@
   <a-card :bordered="false" class="mb-2 h-full">
     <h1>契約者農場マスタメンテナンス</h1>
     <div class="self_adaption_table form max-w-160">
-      <b>第99期</b>
+      <b>第8期</b>
       <a-row>
-        <a-col v-if="isNew" span="24">
+        <a-col span="24">
           <th>契約者</th>
           <td>
             <ai-select
               v-model:value="formData.keiyakusya"
               :options="selectorlist"
+              :disabled="!isNew"
             ></ai-select>
           </td>
-        </a-col>
-        <a-col v-else span="24">
-          <th class="bg-readonly">契約者</th>
-          <!-- <td>
-            <ai-select
-              v-model:value="formData.keiyakusya"
-              :options="selectorlist"
-              disabled
-            ></ai-select>
-          </td> -->
-          <TD>{{
-            selectorlist.find((e) => e.value == formData.keiyakusya)?.label
-          }}</TD>
         </a-col>
       </a-row>
       <div class="my-2 header_operation flex justify-between w-full">
@@ -67,8 +55,8 @@
           <th class="required">都道府県</th>
           <td>
             <ai-select
-              v-model:value="formData.todoufuken"
-              :options="todoufukenList"
+              v-model:value="formData.KEN_CD"
+              :options="KEN_CD_NAME_LIST"
               class="w-full"
             ></ai-select>
           </td>
@@ -78,9 +66,11 @@
         <a-col span="24">
           <th class="required">住所</th>
           <td class="flex-col">
-            <PostCode v-model:value="formData.jyusyo1" />
-            <a-input v-model:value="formData.jyusyo2"></a-input>
-            <a-input v-model:value="formData.jyusyo3"></a-input>
+            <PostCode v-model:value="formData.ADDR_POST" />
+            <a-input v-model:value="formData.ADDR_1" disabled></a-input>
+            <a-input v-model:value="formData.ADDR_2"></a-input>
+            <a-input v-model:value="formData.ADDR_3"></a-input>
+            <a-input v-model:value="formData.ADDR_4"></a-input>
           </td>
         </a-col>
       </a-row>
@@ -130,31 +120,37 @@ const createDefaultParams = () => {
     keiyakusya: '',
     noujyobango: '',
     noujyomei: '',
-    todoufuken: '',
-    jyusyo1: '',
-    jyusyo2: '',
-    jyusyo3: '',
+    KEN_CD: '',
+    ADDR_POST: '',
+    ADDR_1: '',
+    ADDR_2: '',
+    ADDR_3: '',
+    ADDR_4: '',
     meisaibango: '',
   }
 }
 const fakeFormData = {
   keiyakusya: '1',
   noujyobango: '99',
-  noujyomei: '東京都農場',
-  todoufuken: '13',
-  jyusyo1: '100-0001',
-  jyusyo2: '東京都千代田区',
-  jyusyo3: '千代田1-1',
+  noujyomei: '東京都千代田区農場',
+  KEN_CD: '13',
+  ADDR_POST: '100-0001',
+  ADDR_1: '東京都',
+  ADDR_2: '千代田区',
+  ADDR_3: '丸の内',
+  ADDR_4: '1丁目1-1',
   meisaibango: '10001',
 }
 const fakeFormData1 = {
   keiyakusya: '',
   noujyobango: '',
   noujyomei: '',
-  todoufuken: '',
-  jyusyo1: '',
-  jyusyo2: '',
-  jyusyo3: '',
+  KEN_CD: '',
+  ADDR_POST: '',
+  ADDR_1: '',
+  ADDR_2: '',
+  ADDR_3: '',
+  ADDR_4: '',
   meisaibango: '',
 }
 const formData = reactive(fakeFormData1)
@@ -163,7 +159,7 @@ const selectorlist = ref<DaSelectorModel[]>([
   { value: '2', label: '尾三玉田' },
   { value: '3', label: '史玉浅海' },
 ])
-const todoufukenList = [
+const KEN_CD_NAME_LIST = [
   { value: '1', label: '北海道' },
   { value: '2', label: '青森県' },
   { value: '3', label: '岩手県' },
@@ -233,6 +229,21 @@ watch(
   () => props.status,
   () => Object.assign(formData, fakeFormData),
   { deep: true }
+)
+
+//都道府県を選択した場合、住所（住所１）の値をセットする
+watch(
+  () => formData.KEN_CD,
+  (newVal, oldVal) => {
+    if (newVal === undefined) {
+      formData.ADDR_1 = ''
+    } else if (newVal !== undefined) {
+      let newAddr1 = newVal.split(' : ')[1]
+      if (newAddr1 !== '' && newAddr1 !== undefined) {
+        formData.ADDR_1 = newAddr1
+      }
+    }
+  }
 )
 //--------------------------------------------------------------------------
 //メソッド
