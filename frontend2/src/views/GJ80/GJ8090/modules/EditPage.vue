@@ -8,7 +8,7 @@
           <th>契約者</th>
           <td>
             <ai-select
-              v-model:value="formData.keiyakusya"
+              v-model:value="formData.KEIYAKUSYA_CD"
               :options="selectorlist"
               :disabled="!isNew"
             ></ai-select>
@@ -35,7 +35,7 @@
           <th class="required">契約者農場</th>
           <td>
             <a-input-number
-              v-model:value="formData.noujyobango"
+              v-model:value="formData.NOJO_CD"
               :min="0"
               :max="999"
               :maxlength="3"
@@ -47,7 +47,7 @@
         <a-col span="24">
           <th class="required">農場名称</th>
           <td>
-            <a-input v-model:value="formData.noujyomei"></a-input>
+            <a-input v-model:value="formData.NOJO_NAME"></a-input>
           </td>
         </a-col>
       </a-row>
@@ -80,7 +80,7 @@
           <th class="required">明細番号</th>
           <td>
             <a-input-number
-              v-model:value="formData.meisaibango"
+              v-model:value="formData.MEISAINO"
               :min="0"
               :max="999"
               :maxlength="3"
@@ -132,28 +132,28 @@ const isNew = props.status === PageSatatus.New
 //   }
 // }
 const fakeFormData = {
-  keiyakusya: '1',
-  noujyobango: '99',
-  noujyomei: '東京都千代田区農場',
+  KEIYAKUSYA_CD: '1',
+  NOJO_CD: '99',
+  NOJO_NAME: '東京都千代田区農場',
   KEN_CD: '13',
   ADDR_POST: '100-0001',
   ADDR_1: '東京都',
   ADDR_2: '千代田区',
   ADDR_3: '丸の内',
   ADDR_4: '1丁目1-1',
-  meisaibango: '234',
+  MEISAINO: '234',
 }
 const fakeFormData1 = {
-  keiyakusya: '',
-  noujyobango: '',
-  noujyomei: '',
+  KEIYAKUSYA_CD: '',
+  NOJO_CD: '',
+  NOJO_NAME: '',
   KEN_CD: '',
   ADDR_POST: '',
   ADDR_1: '',
   ADDR_2: '',
   ADDR_3: '',
   ADDR_4: '',
-  meisaibango: '',
+  MEISAINO: '',
 }
 const formData = reactive(fakeFormData1)
 const selectorlist = ref<DaSelectorModel[]>([
