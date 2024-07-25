@@ -1,8 +1,12 @@
 import { request } from '../request'
+import { api } from '../request/common-service'
+
+const servicename = 'GJ0010'
 
 /** get user routes */
-export function fetchGetUserRoutes() {
-  return request<Api.Route.UserRoute>({ url: '/route/getUserRoutes' })
+export const fetchGetUserRoutes = (): Promise<Api.Route.UserRoute> => {
+  const methodname = 'GetUserRoutes'
+  return api(servicename, methodname, {})
 }
 
 /**

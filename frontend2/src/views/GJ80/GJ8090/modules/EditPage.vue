@@ -33,9 +33,9 @@
           <a-button type="primary" danger :disabled="isNew" @click="deleteData"
             >削除</a-button
           >
-          <a-button v-if="!isNew" :icon="h(LeftOutlined)"></a-button
+          <!-- <a-button v-if="!isNew" :icon="h(LeftOutlined)"></a-button
           ><span v-if="!isNew">2/5</span>
-          <a-button v-if="!isNew" :icon="h(RightOutlined)"></a-button>
+          <a-button v-if="!isNew" :icon="h(RightOutlined)"></a-button> -->
         </a-space>
         <a-button type="primary" class="text-end" @click="goList"
           >一覧へ</a-button
@@ -142,8 +142,7 @@ const fakeFormData = {
   noujyobango: '99',
   noujyomei: '東京都農場',
   todoufuken: '13',
-  jyusyo11: '100',
-  jyusyo12: '0001',
+  jyusyo1: '100-0001',
   jyusyo2: '東京都千代田区',
   jyusyo3: '千代田1-1',
   meisaibango: '10001',

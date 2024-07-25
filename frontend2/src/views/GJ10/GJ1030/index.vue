@@ -103,6 +103,9 @@ import { useTabStore } from '@/store/modules/tab'
 import dayjs from 'dayjs'
 import DateJp from '@/components/Selector/DateJp/index.vue'
 import { ReportViewer, Core, PdfExport } from '@grapecity/activereports'
+import '@grapecity/activereports/styles/ar-js-ui.css'
+import '@grapecity/activereports/styles/ar-js-viewer.css'
+import '@grapecity/activereports-localization'
 
 //--------------------------------------------------------------------------
 //データ定義
@@ -137,7 +140,6 @@ const keiyakukbnlist = [
   { value: '2', label: '企業' },
   { value: '3', label: '鶏以外' },
 ]
-const previewVisible = ref(false)
 
 //--------------------------------------------------------------------------
 //メソッド
