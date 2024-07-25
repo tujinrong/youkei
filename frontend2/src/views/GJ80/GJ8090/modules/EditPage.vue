@@ -67,16 +67,13 @@
         <a-col span="24">
           <th class="required">住所</th>
           <td class="flex-col">
-            <div class="flex w-full">
-              <PostCode
-                v-model:value="formData.ADDR_POST"
-                class="w-40"
-              /><a-input
+            <PostCode v-model:value="formData.ADDR_POST"
+              ><a-input
                 v-model:value="formData.ADDR_1"
                 disabled
-                class="w-40"
-              ></a-input>
-            </div>
+                class="!w-40"
+              ></a-input
+            ></PostCode>
             <a-input v-model:value="formData.ADDR_2"></a-input>
             <a-input v-model:value="formData.ADDR_3"></a-input>
             <a-input v-model:value="formData.ADDR_4"></a-input>
