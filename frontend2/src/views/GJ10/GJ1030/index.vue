@@ -151,9 +151,19 @@ const cancel = () => {
 }
 //preview
 function onPreview() {
-  //previewVisible.value = true
+  // フォント記述子の定義
+
+  const fonts = [
+    { name: 'ＭＳ ゴシック', source: '/fonts/MSGOTHIC.TTF' },
+    { name: '游明朝', source: '/fonts/yumin.ttf' },
+  ]
   const viewer = new ReportViewer.Viewer('#viewer-host', { language: 'ja' })
   viewer.open('/report/keyakusya.rdlx-json')
+  // サイドバーのエクスポート機能を有効化
+  viewer.availableExports = ['pdf', 'xlsx', 'html']
+
+  // 定義済みのフォント記述子を登録する
+  Core.FontStore.registerFonts(...fonts)
 }
 </script>
 
