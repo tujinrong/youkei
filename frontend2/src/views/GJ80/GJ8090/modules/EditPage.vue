@@ -2,7 +2,7 @@
   <a-card :bordered="false" class="mb-2 h-full">
     <h1>契約者農場マスタメンテナンス</h1>
     <div class="self_adaption_table form max-w-160">
-      <b>第8期</b>
+      <b>第{{ formData.KI }}期</b>
       <a-row>
         <a-col span="24">
           <th>契約者</th>
@@ -140,8 +140,9 @@ const isNew = props.status === PageSatatus.New
 //   }
 // }
 const fakeFormData = {
+  KI: 8,
   KEIYAKUSYA_CD: '1',
-  NOJO_CD: '99',
+  NOJO_CD: 99,
   NOJO_NAME: '東京都千代田区農場',
   KEN_CD: '13',
   ADDR_POST: '100-0001',
@@ -149,11 +150,12 @@ const fakeFormData = {
   ADDR_2: '千代田区',
   ADDR_3: '丸の内',
   ADDR_4: '1丁目1-1',
-  MEISAINO: '234',
+  MEISAINO: 234,
 }
 const fakeFormData1 = {
+  KI: 8,
   KEIYAKUSYA_CD: '',
-  NOJO_CD: '',
+  NOJO_CD: undefined,
   NOJO_NAME: '',
   KEN_CD: '',
   ADDR_POST: '',
@@ -161,7 +163,7 @@ const fakeFormData1 = {
   ADDR_2: '',
   ADDR_3: '',
   ADDR_4: '',
-  MEISAINO: '',
+  MEISAINO: undefined,
 }
 const formData = reactive(fakeFormData1)
 const selectorlist = ref<DaSelectorModel[]>([
