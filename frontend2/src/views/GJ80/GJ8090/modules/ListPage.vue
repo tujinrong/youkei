@@ -6,7 +6,15 @@
       <h1>契約者農場一覧</h1>
       <div class="self_adaption_table form mt-1">
         <a-row>
-          <a-col v-bind="layout">
+          <ai-form-item
+            v-model:value="searchParams.KI"
+            label="期"
+            type="number"
+            key="KI"
+            required
+            :layout="layout"
+          />
+          <!-- <a-col v-bind="layout">
             <th class="required">期</th>
             <td>
               <a-input-number
@@ -14,7 +22,7 @@
                 class="w-full"
               ></a-input-number>
             </td>
-          </a-col>
+          </a-col> -->
           <a-col v-bind="layout">
             <th class="required">契約者</th>
             <td>
@@ -235,7 +243,7 @@ function reset() {
 </script>
 
 <style lang="scss" scoped>
-th {
+:deep(th) {
   min-width: 100px;
 }
 h1 {
