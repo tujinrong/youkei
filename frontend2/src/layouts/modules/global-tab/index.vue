@@ -151,13 +151,15 @@ init()
               @close="handleCloseTab(tab)"
             >
               <template #prefix>
-                <SvgIcon
+                <!-- <SvgIcon
                   :icon="tab.icon"
                   :local-icon="tab.localIcon"
                   class="inline-block align-text-bottom text-16px"
-                />
+                /> -->
               </template>
-              <div class="max-w-240px ellipsis-text">{{ tab.label }}</div>
+              <div class="max-w-240px ellipsis-text">
+                {{ tab.label.replace(/\(.*?\)/g, '') }}
+              </div>
             </PageTab>
           </ContextMenu>
         </div>
