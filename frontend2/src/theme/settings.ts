@@ -18,7 +18,7 @@ export const themeSettings: App.Theme.ThemeSetting = {
   fixedHeaderAndTab: true,
   sider: {
     inverted: true,
-    width: 350,
+    width: 320,
     collapsedWidth: 64,
     mixWidth: 90,
     mixCollapsedWidth: 64,
