@@ -10,7 +10,7 @@
               <td>
                 第
                 <a-input-number
-                  v-model:value="formData.taisyoki1"
+                  v-model:value="formData.KI"
                   :min="1"
                   :max="99"
                   :maxlength="2"
@@ -22,20 +22,20 @@
             <a-col v-bind="layout">
               <th class="required">対象日(現在)</th>
               <td>
-                <DateJp v-model:value="formData.taisyoki2" class="w-full" />
+                <DateJp v-model:value="formData.TAISYOBI_YMD" class="w-full" />
               </td>
             </a-col>
             <a-col v-bind="layout">
               <th>契約区分</th>
               <td class="flex">
                 <ai-select
-                  v-model:value="formData.keiyakukbn1"
+                  v-model:value="formData.KEIYAKU_KBN_CD_FM"
                   split-val
-                  :options="keiyakukbnlist"
+                  :options="KEIYAKU_KBN_CD_NAME_LIST"
                 ></ai-select
                 >～<ai-select
-                  v-model:value="formData.keiyakukbn2"
-                  :options="keiyakukbnlist"
+                  v-model:value="formData.KEIYAKU_KBN_CD_TO"
+                  :options="KEIYAKU_KBN_CD_NAME_LIST"
                 ></ai-select>
               </td>
             </a-col>
@@ -43,16 +43,16 @@
               <th class="required">契約状態</th>
               <td>
                 <a-space class="flex-wrap">
-                  <a-checkbox v-model:checked="formData.sinkiflg"
+                  <a-checkbox v-model:checked="formData.KEIYAKU_JYOKYO_SHINKI"
                     >新規契約者</a-checkbox
                   >
-                  <a-checkbox v-model:checked="formData.keizokuflg"
+                  <a-checkbox v-model:checked="formData.KEIYAKU_JYOKYO_KEIZOKU"
                     >継続契約者</a-checkbox
                   >
-                  <a-checkbox v-model:checked="formData.tyusiflg"
+                  <a-checkbox v-model:checked="formData.KEIYAKU_JYOKYO_CHUSHI"
                     >中止者</a-checkbox
                   >
-                  <a-checkbox v-model:checked="formData.haigyoflg"
+                  <a-checkbox v-model:checked="formData.KEIYAKU_JYOKYO_HAIGYO"
                     >廃業者</a-checkbox
                   >
                 </a-space>
@@ -62,12 +62,12 @@
               <th>事業委託先</th>
               <td class="flex">
                 <ai-select
-                  v-model:value="formData.itakusaki1"
-                  :options="selectorlist"
+                  v-model:value="formData.ITAKU_CD_FM"
+                  :options="ITAKU_CD_NAME_LIST"
                 ></ai-select
                 >～<ai-select
-                  v-model:value="formData.itakusaki2"
-                  :options="selectorlist"
+                  v-model:value="formData.ITAKU_CD_TO"
+                  :options="ITAKU_CD_NAME_LIST"
                 ></ai-select>
               </td>
             </a-col>
@@ -75,11 +75,11 @@
               <th>契約者番号</th>
               <td class="flex">
                 <ai-select
-                  v-model:value="formData.bango1"
+                  v-model:value="formData.KEIYAKUSYA_CD_FM"
                   :options="KEIYAKUSYA_CD_NAME_LIST"
                 ></ai-select
                 >～<ai-select
-                  v-model:value="formData.bango2"
+                  v-model:value="formData.KEIYAKUSYA_CD_TO"
                   :options="KEIYAKUSYA_CD_NAME_LIST"
                 ></ai-select>
               </td>
@@ -106,12 +106,12 @@
 </template>
 
 <script setup lang="ts">
-import { reactive, ref, watch } from 'vue'
+import { reactive, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useTabStore } from '@/store/modules/tab'
 import dayjs from 'dayjs'
 import DateJp from '@/components/Selector/DateJp/index.vue'
-import { ReportViewer, Core, PdfExport } from '@grapecity/activereports'
+import { ReportViewer, Core } from '@grapecity/activereports'
 import '@grapecity/activereports/styles/ar-js-ui.css'
 import '@grapecity/activereports/styles/ar-js-viewer.css'
 import '@grapecity/activereports-localization'
@@ -122,38 +122,44 @@ import '@grapecity/activereports-localization'
 const router = useRouter()
 const route = useRoute()
 const tabStore = useTabStore()
+
 const createDefaultParams = () => {
   return {
-    taisyoki1: '8',
-    taisyoki2: dayjs(new Date().toISOString().split('T')[0]),
-    keiyakukbn1: '',
-    keiyakukbn2: '',
-    itakusaki1: '',
-    itakusaki2: '',
-    bango1: '',
-    bango2: '',
-    sinkiflg: true,
-    keizokuflg: true,
-    tyusiflg: true,
-    haigyoflg: true,
+    KI: '8',
+    TAISYOBI_YMD: dayjs(new Date().toISOString().split('T')[0]),
+    KEIYAKU_KBN_CD_FM: '',
+    KEIYAKU_KBN_CD_TO: '',
+    ITAKU_CD_FM: '',
+    ITAKU_CD_TO: '',
+    KEIYAKUSYA_CD_FM: '',
+    KEIYAKUSYA_CD_TO: '',
+    KEIYAKU_JYOKYO_SHINKI: true,
+    KEIYAKU_JYOKYO_KEIZOKU: true,
+    KEIYAKU_JYOKYO_CHUSHI: true,
+    KEIYAKU_JYOKYO_HAIGYO: true,
   }
 }
+
 const formData = reactive(createDefaultParams())
-const selectorlist = [
-  { value: '1', label: '永玉さん' },
-  { value: '2', label: '尾三さん' },
-  { value: '3', label: '史玉さん' },
-]
-const keiyakukbnlist = [
+
+const KEIYAKU_KBN_CD_NAME_LIST = [
   { value: '1', label: '家族' },
   { value: '2', label: '企業' },
   { value: '3', label: '鶏以外' },
 ]
+
+const ITAKU_CD_NAME_LIST = [
+  { value: '1', label: '永玉さん' },
+  { value: '2', label: '尾三さん' },
+  { value: '3', label: '史玉さん' },
+]
+
 const KEIYAKUSYA_CD_NAME_LIST = [
   { value: '1', label: '田中さん' },
   { value: '2', label: '玉田さん' },
   { value: '3', label: '浅海さん' },
 ]
+
 const layout = {
   md: 24,
   lg: 24,
@@ -168,7 +174,8 @@ const layout = {
 const clear = () => {
   Object.assign(formData, createDefaultParams())
 }
-//preview
+
+//プレビューボタンを押す時
 function onPreview() {
   // フォント記述子の定義
   const fonts = [
@@ -188,49 +195,56 @@ function onPreview() {
 //--------------------------------------------------------------------------
 //監視定義
 //--------------------------------------------------------------------------
+//契約者区分の値が変更した時の処理
 watch(
-  () => [formData.keiyakukbn1, formData.keiyakukbn2],
-  ([newKeiyakukbn1, newKeiyakukbn2], [oldKeiyakukbn1, oldKeiyakukbn2]) => {
-    if (newKeiyakukbn1 !== oldKeiyakukbn1) {
-      if (newKeiyakukbn1 && !newKeiyakukbn2) {
-        formData.keiyakukbn2 = newKeiyakukbn1
+  () => [formData.KEIYAKU_KBN_CD_FM, formData.KEIYAKU_KBN_CD_TO],
+  (
+    [newKeiyakuKbnCdFm, newKeiyakuKbnCdTo],
+    [oldKeiyakuKbnCdFm, oldKeiyakuKbnCdTo]
+  ) => {
+    if (newKeiyakuKbnCdFm !== oldKeiyakuKbnCdFm) {
+      if (newKeiyakuKbnCdFm && !newKeiyakuKbnCdTo) {
+        formData.KEIYAKU_KBN_CD_TO = newKeiyakuKbnCdFm
       }
     }
-    if (newKeiyakukbn2 !== oldKeiyakukbn2) {
-      if (newKeiyakukbn2 && !newKeiyakukbn1) {
-        formData.keiyakukbn1 = newKeiyakukbn2
+    if (newKeiyakuKbnCdTo !== oldKeiyakuKbnCdTo) {
+      if (newKeiyakuKbnCdTo && !newKeiyakuKbnCdFm) {
+        formData.KEIYAKU_KBN_CD_FM = newKeiyakuKbnCdTo
       }
     }
   }
 )
-
+//事業委託先の値が変更した時の処理
 watch(
-  () => [formData.itakusaki1, formData.itakusaki2],
-  ([newItakusaki1, newItakusaki2], [oldItakusaki1, oldItakusaki2]) => {
-    if (newItakusaki1 !== oldItakusaki1) {
-      if (newItakusaki1 && !newItakusaki2) {
-        formData.itakusaki2 = newItakusaki1
+  () => [formData.ITAKU_CD_FM, formData.ITAKU_CD_TO],
+  ([newItakuCdFm, newItakuCdTo], [oldItakuCdFm, oldItakuCdTo]) => {
+    if (newItakuCdFm !== oldItakuCdFm) {
+      if (newItakuCdFm && !newItakuCdTo) {
+        formData.ITAKU_CD_TO = newItakuCdFm
       }
     }
-    if (newItakusaki2 !== oldItakusaki2) {
-      if (newItakusaki2 && !newItakusaki1) {
-        formData.itakusaki1 = newItakusaki2
+    if (newItakuCdTo !== oldItakuCdTo) {
+      if (newItakuCdTo && !newItakuCdFm) {
+        formData.ITAKU_CD_FM = newItakuCdTo
       }
     }
   }
 )
-
+//契約番号の値が変更した時の処理
 watch(
-  () => [formData.bango1, formData.bango2],
-  ([newBango1, newBango2], [oldBango1, oldBango2]) => {
-    if (newBango1 !== oldBango1) {
-      if (newBango1 && !newBango2) {
-        formData.bango2 = newBango1
+  () => [formData.KEIYAKUSYA_CD_FM, formData.KEIYAKUSYA_CD_TO],
+  (
+    [newKeiyakusyaCdFm, newKeiyakusyaCdTo],
+    [oldKeiyakusyaCdFm, oldKeiyakusyaCdTo]
+  ) => {
+    if (newKeiyakusyaCdFm !== oldKeiyakusyaCdFm) {
+      if (newKeiyakusyaCdFm && !newKeiyakusyaCdTo) {
+        formData.KEIYAKUSYA_CD_TO = newKeiyakusyaCdFm
       }
     }
-    if (newBango2 !== oldBango2) {
-      if (newBango2 && !newBango1) {
-        formData.bango1 = newBango2
+    if (newKeiyakusyaCdTo !== oldKeiyakusyaCdTo) {
+      if (newKeiyakusyaCdTo && !newKeiyakusyaCdFm) {
+        formData.KEIYAKUSYA_CD_FM = newKeiyakusyaCdTo
       }
     }
   }

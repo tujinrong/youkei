@@ -6,23 +6,28 @@
       <h1>契約者農場一覧</h1>
       <div class="self_adaption_table form mt-1">
         <a-row>
-          <ai-form-item
+          <!-- <ai-form-item
             v-model:value="searchParams.KI"
             label="期"
             type="number"
             key="KI"
+            :min="1"
+            :max="99"
             required
             :layout="layout"
-          />
-          <!-- <a-col v-bind="layout">
+          /> -->
+          <a-col v-bind="layout">
             <th class="required">期</th>
             <td>
               <a-input-number
                 v-model:value="searchParams.KI"
+                :min="1"
+                :max="99"
+                :maxlength="2"
                 class="w-full"
               ></a-input-number>
             </td>
-          </a-col> -->
+          </a-col>
           <a-col v-bind="layout">
             <th class="required">契約者</th>
             <td>
@@ -36,7 +41,13 @@
           <a-col v-bind="layout">
             <th>農場番号</th>
             <td>
-              <a-input v-model:value="searchParams.NOJO_CD"></a-input>
+              <a-input-number
+                v-model:value="searchParams.NOJO_CD"
+                :min="0"
+                :max="999"
+                :maxlength="3"
+                class="w-full"
+              ></a-input-number>
             </td>
           </a-col>
           <a-col v-bind="layout">
