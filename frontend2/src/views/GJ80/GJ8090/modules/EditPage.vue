@@ -47,7 +47,10 @@
         <a-col span="24">
           <th class="required">農場名称</th>
           <td>
-            <a-input v-model:value="formData.NOJO_NAME"></a-input>
+            <a-input
+              v-model:value="formData.NOJO_NAME"
+              :maxlength="20"
+            ></a-input>
           </td>
         </a-col>
       </a-row>
@@ -74,9 +77,9 @@
                 class="!w-40"
               ></a-input
             ></PostCode>
-            <a-input v-model:value="formData.ADDR_2"></a-input>
-            <a-input v-model:value="formData.ADDR_3"></a-input>
-            <a-input v-model:value="formData.ADDR_4"></a-input>
+            <a-input v-model:value="formData.ADDR_2" :maxlength="15"></a-input>
+            <a-input v-model:value="formData.ADDR_3" :maxlength="15"></a-input>
+            <a-input v-model:value="formData.ADDR_4" :maxlength="20"></a-input>
           </td>
         </a-col>
       </a-row>

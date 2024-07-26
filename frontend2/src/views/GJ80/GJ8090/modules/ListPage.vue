@@ -53,7 +53,10 @@
           <a-col v-bind="layout">
             <th>農場名</th>
             <td>
-              <a-input v-model:value="searchParams.NOJO_NAME"></a-input>
+              <a-input
+                v-model:value="searchParams.NOJO_NAME"
+                :maxlength="20"
+              ></a-input>
             </td>
           </a-col>
         </a-row>
