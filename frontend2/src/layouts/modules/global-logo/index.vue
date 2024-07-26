@@ -20,7 +20,7 @@ withDefaults(defineProps<Props>(), {
     <SystemLogo class="size-8" />
     <h2
       v-show="showTitle"
-      class="pl-8px text-18px text-primary font-bold transition duration-300 ease-in-out"
+      class="pl-8px text-18px text-primary font-bold transition duration-300 ease-in-out c-white"
     >
       {{ $t('system.title') }}
       <span class="font-size-3 pl-1">v1.0</span>

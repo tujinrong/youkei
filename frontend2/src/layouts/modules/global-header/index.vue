@@ -67,18 +67,22 @@ const headerMenus = computed(() => {
       <GlobalBreadcrumb v-if="!appStore.isMobile" class="ml-12px" />
     </div>
     <div class="h-full flex-y-center justify-end">
-      <FullScreen
+      <!-- <FullScreen
         v-if="!appStore.isMobile"
         :full="isFullscreen"
         @click="toggle"
       />
-      <!-- <LangSwitch :lang="appStore.locale" :lang-options="appStore.localeOptions" @change-lang="appStore.changeLocale" /> -->
+      <LangSwitch
+        :lang="appStore.locale"
+        :lang-options="appStore.localeOptions"
+        @change-lang="appStore.changeLocale"
+      />
       <ThemeSchemaSwitch
         :theme-schema="themeStore.themeScheme"
         :is-dark="themeStore.darkMode"
         @switch="themeStore.toggleThemeScheme"
       />
-      <ThemeButton />
+      <ThemeButton /> -->
       <UserAvatar />
     </div>
   </DarkModeContainer>
