@@ -17,18 +17,6 @@ declare module "@elegant-router/types" {
   export type RouteMap = {
     "root": "/";
     "not-found": "/:pathMatch(.*)*";
-    "exception": "/exception";
-    "exception_403": "/exception/403";
-    "exception_404": "/exception/404";
-    "exception_500": "/exception/500";
-    "document": "/document";
-    "document_project": "/document/project";
-    "document_project-link": "/document/project-link";
-    "document_vue": "/document/vue";
-    "document_vite": "/document/vite";
-    "document_unocss": "/document/unocss";
-    "document_naive": "/document/naive";
-    "document_antd": "/document/antd";
     "403": "/403";
     "404": "/404";
     "500": "/500";
@@ -38,7 +26,7 @@ declare module "@elegant-router/types" {
     "gj80_gj8090": "/gj80/gj8090";
     "home": "/home";
     "iframe-page": "/iframe-page/:url";
-    "login": "/login/:module(pwd-login|code-login|register|reset-pwd)?";
+    "login": "/login/:module(pwd-login)?";
     "user-center": "/user-center";
   };
 
@@ -59,18 +47,6 @@ declare module "@elegant-router/types" {
     RouteKey,
     | "root"
     | "not-found"
-    | "exception"
-    | "exception_403"
-    | "exception_404"
-    | "exception_500"
-    | "document"
-    | "document_project"
-    | "document_project-link"
-    | "document_vue"
-    | "document_vite"
-    | "document_unocss"
-    | "document_naive"
-    | "document_antd"
   >;
 
   /**
@@ -101,8 +77,6 @@ declare module "@elegant-router/types" {
     CustomRouteKey,
     | "root"
     | "not-found"
-    | "exception"
-    | "document"
   >;
 
   /**
@@ -128,16 +102,6 @@ declare module "@elegant-router/types" {
     CustomRouteKey,
     | "root"
     | "not-found"
-    | "exception_403"
-    | "exception_404"
-    | "exception_500"
-    | "document_project"
-    | "document_project-link"
-    | "document_vue"
-    | "document_vite"
-    | "document_unocss"
-    | "document_naive"
-    | "document_antd"
   >;
 
   /**
