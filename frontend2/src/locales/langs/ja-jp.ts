@@ -179,7 +179,7 @@ const local: App.I18n.Schema = {
         passwordPlaceholder: 'パスワード',
         confirm: 'ログイン',
         loginSuccess: 'ログイン成功しました',
-        welcomeBack: 'お帰りなさい {userName}！',
+        welcomeBack: 'お帰りなさい 小松高橋！',
       },
       pwdLogin: {
         superAdmin: 'スーパー管理者',
