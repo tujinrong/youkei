@@ -158,7 +158,7 @@ init()
                 /> -->
               </template>
               <div class="max-w-240px ellipsis-text">
-                {{ tab.label.replace(/\(.*?\)/g, '') }}
+                {{ tab.label.replace(/\(.*?\)/, '') }}
               </div>
             </PageTab>
           </ContextMenu>
