@@ -21,6 +21,7 @@ export function DatePadZero(dateString) {
     }
   )
 }
+
 /**和暦取得(入力文字から変換、不明を含む) */
 export function getUnKnownDateJpText(value: string): string {
   let dateStr = DatePadZero(value)
@@ -84,6 +85,7 @@ export function getUnKnownDateJpText(value: string): string {
     return value
   }
 }
+
 /**和暦取得(日付) */
 export const getDateJpText = (value: Date): string => {
   if (value) {
@@ -106,6 +108,7 @@ export const getDateJpText = (value: Date): string => {
     return ''
   }
 }
+
 /**和暦取得(日時) */
 export const getDateHmsJpText = (value: Date): string => {
   if (value) {
@@ -126,6 +129,7 @@ export const getDateHmsJpText = (value: Date): string => {
     return ''
   }
 }
+
 /**和暦取得(簡易表記：日付) */
 export const getSimpleDateJpText = (date: Date): string => {
   if (date) {
@@ -141,6 +145,7 @@ export const getSimpleDateJpText = (date: Date): string => {
     return ''
   }
 }
+
 /**和暦取得(簡易表記：日時) */
 export const getSimpleDateHmsJpText = (date: Date): string => {
   if (date) {
@@ -159,6 +164,7 @@ export const getSimpleDateHmsJpText = (date: Date): string => {
     return ''
   }
 }
+
 /**和暦取得(年) */
 export const yearFormatter = (value: number): string => {
   let yearName = ''
@@ -187,6 +193,7 @@ export const yearFormatter = (value: number): string => {
 
   return yearName + yearNum + '年度'
 }
+
 /**和暦取得(年 不詳あり) */
 export const yearFormatter_unknown = (value: any): string => {
   if (!value) return ''
@@ -198,6 +205,7 @@ export const yearFormatter_unknown = (value: any): string => {
     return yearFormatter(+value)
   }
 }
+
 /**和暦取得(年月) */
 export const yearMonthFormatter = (value: string): string => {
   let year, month
@@ -214,6 +222,7 @@ export const yearMonthFormatter = (value: string): string => {
   month += '月'
   return year + month
 }
+
 /**和暦取得(年月 不詳あり) */
 export const yearMonthFormatter_unknown = (value: string): string => {
   let year, month
@@ -270,6 +279,7 @@ export function formatYubin(string = '', reverse = false) {
   }
   return string
 }
+
 /**時間 0000 => 00:00 */
 export function formatTime(time = '') {
   if (!time) return ''
@@ -318,6 +328,7 @@ export function getLabelByValue(
     })?.label ?? value
   )
 }
+
 /**コードで名称を取得  (複数選択ドロップダウンリスト)*/
 export function getMultipleLabel(
   list: string[] = [],
@@ -328,4 +339,11 @@ export function getMultipleLabel(
     return arr.filter(Boolean).join(',')
   }
   return ''
+}
+
+/**半角のアルファペット、数字、スペース及び記号を全角に変換*/
+export function convertToFullWidth(input: string): string {
+  return input
+    .replace(/[!-~]/g, (ch) => String.fromCharCode(ch.charCodeAt(0) + 0xfee0))
+    .replace(/ /g, '　')
 }

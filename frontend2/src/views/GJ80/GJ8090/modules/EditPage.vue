@@ -109,6 +109,7 @@ import { message } from 'ant-design-vue'
 import { showSaveModal } from '@/utils/modal'
 // import { LeftOutlined, RightOutlined } from '@ant-design/icons-vue'
 import PostCode from '@/components/Selector/PostCode/index.vue'
+import { convertToFullWidth } from '@/utils/util'
 //---------------------------------------------------------------------------
 //属性
 //---------------------------------------------------------------------------
@@ -243,7 +244,7 @@ watch(
 //都道府県を選択した場合、住所（住所１）の値をセットする
 watch(
   () => formData.KEN_CD,
-  (newVal, oldVal) => {
+  (newVal) => {
     if (newVal === undefined) {
       formData.ADDR_1 = ''
     } else if (newVal !== undefined) {
@@ -252,6 +253,16 @@ watch(
         formData.ADDR_1 = newAddr1
       }
     }
+  }
+)
+
+watch(
+  () => [formData.NOJO_NAME, formData.ADDR_2, formData.ADDR_3, formData.ADDR_4],
+  ([newNOJO_NAME, newADDR_2, newADDR_3, newADDR_4]) => {
+    formData.NOJO_NAME = convertToFullWidth(newNOJO_NAME)
+    formData.ADDR_2 = convertToFullWidth(newADDR_2)
+    formData.ADDR_3 = convertToFullWidth(newADDR_3)
+    formData.ADDR_4 = convertToFullWidth(newADDR_4)
   }
 )
 //--------------------------------------------------------------------------

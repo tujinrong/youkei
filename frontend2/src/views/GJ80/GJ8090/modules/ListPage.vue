@@ -122,13 +122,13 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, reactive, toRef } from 'vue'
+import { ref, reactive, toRef, watch } from 'vue'
 import { useRouter, useRoute, onBeforeRouteUpdate } from 'vue-router'
 import { EnumAndOr, PageSatatus } from '@/enum'
 import useSearch from '@/hooks/useSearch'
 import { showInfoModal } from '@/utils/modal'
 import { ITEM_REQUIRE_ERROR } from '@/constants/msg'
-import { changeTableSort } from '@/utils/util'
+import { changeTableSort, convertToFullWidth } from '@/utils/util'
 import { useTabStore } from '@/store/modules/tab'
 import { useElementSize } from '@vueuse/core'
 import { Search } from '@/views/GJ80/GJ8090/service'
@@ -251,6 +251,18 @@ function reset() {
   Object.assign(searchParams, createDefaultParams())
   tableData.value = []
 }
+
+//--------------------------------------------------------------------------
+//監視定義
+//--------------------------------------------------------------------------
+watch(
+  () => searchParams.NOJO_NAME,
+  (newVal) => {
+    if (newVal) {
+      searchParams.NOJO_NAME = convertToFullWidth(newVal)
+    }
+  }
+)
 </script>
 
 <style lang="scss" scoped>
