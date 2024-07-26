@@ -183,6 +183,11 @@ function onPreview() {
     { name: '游明朝', source: '/fonts/yumin.ttf' },
     { name: '游ゴシック', source: '/fonts/yugothib.ttf' },
     { name: 'IPAゴシック', source: '/fonts/ipaexg.ttf' },
+    { name: 'Arial', source: '/fonts/Arial.ttf' },
+    { name: 'Arial Italic', source: '/fonts/Arialbi.ttf' },
+    { name: 'Arial Bold', source: '/fonts/Arialbd.ttf' },
+    { name: 'Arial Bold Italic', source: '/fonts/Arialbi.ttf' },
+    { name: 'Arial Black', source: '/fonts/Ariblk.ttf' },
   ]
   const viewer = new ReportViewer.Viewer('#viewer-host', { language: 'ja' })
   viewer.open('/report/keyakusya.rdlx-json')
