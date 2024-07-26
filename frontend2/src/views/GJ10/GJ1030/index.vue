@@ -100,7 +100,7 @@
 </template>
 
 <script setup lang="ts">
-import { reactive, ref } from 'vue'
+import { reactive, ref, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useTabStore } from '@/store/modules/tab'
 import dayjs from 'dayjs'
@@ -173,6 +173,43 @@ function onPreview() {
   // 定義済みのフォント記述子を登録する
   Core.FontStore.registerFonts(...fonts)
 }
+
+//--------------------------------------------------------------------------
+//監視定義
+//--------------------------------------------------------------------------
+watch(
+  () => [formData.keiyakukbn1, formData.keiyakukbn2],
+  ([newKeiyakukbn1, newKeiyakukbn2], [oldKeiyakukbn1, oldKeiyakukbn2]) => {
+    if (newKeiyakukbn1 !== oldKeiyakukbn1) {
+      if (newKeiyakukbn1 && !newKeiyakukbn2) {
+        formData.keiyakukbn2 = newKeiyakukbn1
+      }
+    }
+
+    if (newKeiyakukbn2 !== oldKeiyakukbn2) {
+      if (newKeiyakukbn2 && !newKeiyakukbn1) {
+        formData.keiyakukbn1 = newKeiyakukbn2
+      }
+    }
+  }
+)
+
+watch(
+  () => [formData.itakusaki1, formData.itakusaki2],
+  ([newItakusaki1, newItakusaki2], [oldItakusaki1, oldItakusaki2]) => {
+    if (newItakusaki1 !== oldItakusaki1) {
+      if (newItakusaki1 && !newItakusaki2) {
+        formData.itakusaki2 = newItakusaki1
+      }
+    }
+
+    if (newItakusaki2 !== oldItakusaki2) {
+      if (newItakusaki2 && !newItakusaki1) {
+        formData.itakusaki1 = newItakusaki2
+      }
+    }
+  }
+)
 </script>
 
 <style scoped lang="scss">
