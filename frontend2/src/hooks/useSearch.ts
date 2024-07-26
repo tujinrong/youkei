@@ -15,9 +15,9 @@ export default function useSearch({
   const loading = ref(false)
   const totalCount = ref(0)
   const pageParams = reactive<CmSearchRequestBase>({
-    PAGE_SIZE: 25,
-    PAGE_NUM: 1,
-    ORDER_BY: 0,
+    pagesize: 25,
+    pagenum: 1,
+    orderby: 0,
   })
 
   let stopflg = false
@@ -35,13 +35,13 @@ export default function useSearch({
         ...unref(params),
       })
 
-      if (res.TOTAL_PAGE_COUNT < pageParams.PAGE_NUM) {
+      if (res.totalpagecount < pageParams.pagenum) {
         stopflg = true
-        pageParams.PAGE_NUM = 1
+        pageParams.pagenum = 1
         nextTick(() => (stopflg = false))
       }
 
-      totalCount.value = res.TOTAL_ROW_COUNT
+      totalCount.value = res.totalrowcount
 
       source.value = res[listname]
       loading.value = false
@@ -55,7 +55,7 @@ export default function useSearch({
   const clear = () => {
     source.value = []
     totalCount.value = 0
-    pageParams.PAGE_NUM = 1
+    pageParams.pagenum = 1
   }
 
   return {
