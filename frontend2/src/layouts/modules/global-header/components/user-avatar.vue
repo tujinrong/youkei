@@ -31,9 +31,7 @@ function logout() {
   <ADropdown v-else placement="bottomRight" trigger="click">
     <ButtonIcon>
       <SvgIcon icon="ph:user-circle" class="text-icon-large" />
-      <span class="text-16px font-medium">{{
-        authStore.userInfo.userName
-      }}</span>
+      <span class="text-16px font-medium">小松高橋</span>
     </ButtonIcon>
     <template #overlay>
       <AMenu>
