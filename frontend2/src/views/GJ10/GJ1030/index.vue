@@ -9,13 +9,14 @@
               <th class="required">対象期</th>
               <td>
                 第
-                <a-input
+                <a-input-number
                   v-model:value="formData.taisyoki1"
-                  :maxlength="3"
-                  type="number"
+                  :min="1"
+                  :max="99"
+                  :maxlength="2"
                   style="width: 120px"
-                ></a-input
-                >期
+                ></a-input-number>
+                期
               </td>
             </a-col>
             <a-col v-bind="layout">
@@ -118,7 +119,7 @@ const tabStore = useTabStore()
 const createDefaultParams = () => {
   return {
     taisyoki1: '12',
-    taisyoki2: dayjs('2024-07-02'),
+    taisyoki2: dayjs(new Date().toISOString().split('T')[0]),
     keiyakukbn1: '',
     keiyakukbn2: '',
     itakusaki1: '',
