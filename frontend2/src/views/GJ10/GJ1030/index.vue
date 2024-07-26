@@ -2,95 +2,97 @@
   <div>
     <a-card :bordered="false" class="h-full min-h-500px">
       <div>
-        <h1>契約者一覧表(連絡用)</h1>
-
-        <a-descriptions
-          bordered
-          :column="{ xxl: 2, xl: 2, lg: 2, md: 1, sm: 1, xs: 1 }"
-          size="small"
-          class="my-2"
-        >
-          <a-descriptions-item label="対象期">
-            <div class="flex items-center gap-1">
-              第
-              <a-input-number
-                v-model:value="formData.taisyoki1"
-                :maxlength="3"
-                style="width: 120px"
-              ></a-input-number>
-              期
-            </div>
-          </a-descriptions-item>
-          <a-descriptions-item label="対象期(現在)"
-            ><DateJp v-model:value="formData.taisyoki2"
-          /></a-descriptions-item>
-          <a-descriptions-item label="契約区分">
-            <div class="flex items-center">
-              <ai-select
-                v-model:value="formData.keiyakukbn1"
-                :options="keiyakukbnlist"
-                class="flex-1"
-              ></ai-select
-              >～<ai-select
-                v-model:value="formData.keiyakukbn2"
-                :options="keiyakukbnlist"
-                class="flex-1"
-              ></ai-select>
-            </div>
-          </a-descriptions-item>
-          <a-descriptions-item label="契約状態">
-            <a-space class="flex-wrap">
-              <a-checkbox v-model:checked="formData.sinkiflg"
-                >新規契約者</a-checkbox
-              >
-              <a-checkbox v-model:checked="formData.keizokuflg"
-                >継続契約者</a-checkbox
-              >
-              <a-checkbox v-model:checked="formData.tyusiflg"
-                >中止者</a-checkbox
-              >
-              <a-checkbox v-model:checked="formData.haigyoflg"
-                >廃業者</a-checkbox
-              >
-            </a-space></a-descriptions-item
-          >
-          <a-descriptions-item label="事業委託先">
-            <div class="flex items-center min-w-60">
-              <ai-select
-                v-model:value="formData.itakusaki1"
-                :options="selectorlist"
-                class="flex-1"
-              ></ai-select
-              >～<ai-select
-                v-model:value="formData.itakusaki2"
-                :options="selectorlist"
-                class="flex-1"
-              ></ai-select>
-            </div>
-          </a-descriptions-item>
-          <a-descriptions-item label="契約者番号">
-            <td class="flex items-center">
-              <a-input v-model:value="formData.bango1"></a-input>
-              ～
-              <a-input v-model:value="formData.bango2"></a-input></td
-          ></a-descriptions-item>
-        </a-descriptions>
-
-        <div class="my-2 flex justify-between">
-          <a-space :size="20">
-            <a-button type="primary" @click="onPreview">プレビュー</a-button>
-            <a-button type="primary" @click="cancel">キャンセル</a-button>
-          </a-space>
-          <AButton
-            type="primary"
-            class="ml-a"
-            @click="tabStore.removeActiveTab"
-          >
-            閉じる
-          </AButton>
+        <h1 class="bg-white">契約者一覧表(連絡用)</h1>
+        <div class="self_adaption_table form bg-white" ref="headRef">
+          <a-row>
+            <a-col v-bind="layout">
+              <th class="required">対象期</th>
+              <td>
+                第
+                <a-input
+                  v-model:value="formData.taisyoki1"
+                  :maxlength="3"
+                  type="number"
+                  style="width: 120px"
+                ></a-input
+                >期
+              </td>
+            </a-col>
+            <a-col v-bind="layout">
+              <th class="required">対象日(現在)</th>
+              <td>
+                <DateJp v-model:value="formData.taisyoki2" class="w-full" />
+              </td>
+            </a-col>
+            <a-col v-bind="layout">
+              <th>契約区分</th>
+              <td class="flex">
+                <ai-select
+                  v-model:value="formData.keiyakukbn1"
+                  split-val
+                  :options="keiyakukbnlist"
+                ></ai-select
+                >～<ai-select
+                  v-model:value="formData.keiyakukbn2"
+                  :options="keiyakukbnlist"
+                ></ai-select>
+              </td>
+            </a-col>
+            <a-col v-bind="layout">
+              <th class="required">契約状態</th>
+              <td>
+                <a-space class="flex-wrap">
+                  <a-checkbox v-model:checked="formData.sinkiflg"
+                    >新規契約者</a-checkbox
+                  >
+                  <a-checkbox v-model:checked="formData.keizokuflg"
+                    >継続契約者</a-checkbox
+                  >
+                  <a-checkbox v-model:checked="formData.tyusiflg"
+                    >中止者</a-checkbox
+                  >
+                  <a-checkbox v-model:checked="formData.haigyoflg"
+                    >廃業者</a-checkbox
+                  >
+                </a-space>
+              </td>
+            </a-col>
+            <a-col v-bind="layout">
+              <th>事業委託先</th>
+              <td class="flex">
+                <ai-select
+                  v-model:value="formData.itakusaki1"
+                  :options="selectorlist"
+                ></ai-select
+                >～<ai-select
+                  v-model:value="formData.itakusaki2"
+                  :options="selectorlist"
+                ></ai-select>
+              </td>
+            </a-col>
+            <a-col v-bind="layout">
+              <th>契約者番号</th>
+              <td class="flex">
+                <a-input v-model:value="formData.bango1" :xxl="9"></a-input>
+                ～
+                <a-input v-model:value="formData.bango2" :xxl="9"></a-input>
+              </td> </a-col
+          ></a-row>
+          <a-row class="m-t-1">
+            <a-col :span="24">
+              <div class="mb-2 header_operation flex justify-between w-full">
+                <a-space :size="20">
+                  <a-button type="primary" @click="onPreview"
+                    >プレビュー</a-button
+                  >
+                  <a-button type="primary" @click="clear">クリア</a-button>
+                </a-space>
+                <close-page />
+              </div>
+            </a-col>
+          </a-row>
         </div>
       </div>
-
       <div id="viewer-host" class="flex-1"></div>
     </a-card>
   </div>
@@ -140,13 +142,18 @@ const keiyakukbnlist = [
   { value: '2', label: '企業' },
   { value: '3', label: '鶏以外' },
 ]
-
+const layout = {
+  md: 24,
+  lg: 24,
+  xl: 24,
+  xxl: 12,
+}
 //--------------------------------------------------------------------------
 //メソッド
 //--------------------------------------------------------------------------
 
 //
-const cancel = () => {
+const clear = () => {
   Object.assign(formData, createDefaultParams())
 }
 //preview
