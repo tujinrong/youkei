@@ -74,11 +74,17 @@
             <a-col v-bind="layout">
               <th>契約者番号</th>
               <td class="flex">
-                <a-input v-model:value="formData.bango1" :xxl="9"></a-input>
-                ～
-                <a-input v-model:value="formData.bango2" :xxl="9"></a-input>
-              </td> </a-col
-          ></a-row>
+                <ai-select
+                  v-model:value="formData.bango1"
+                  :options="KEIYAKUSYA_CD_NAME_LIST"
+                ></ai-select
+                >～<ai-select
+                  v-model:value="formData.bango2"
+                  :options="KEIYAKUSYA_CD_NAME_LIST"
+                ></ai-select>
+              </td>
+            </a-col>
+          </a-row>
           <a-row class="m-t-1">
             <a-col :span="24">
               <div class="mb-2 header_operation flex justify-between w-full">
@@ -118,7 +124,7 @@ const route = useRoute()
 const tabStore = useTabStore()
 const createDefaultParams = () => {
   return {
-    taisyoki1: '12',
+    taisyoki1: '8',
     taisyoki2: dayjs(new Date().toISOString().split('T')[0]),
     keiyakukbn1: '',
     keiyakukbn2: '',
@@ -134,14 +140,19 @@ const createDefaultParams = () => {
 }
 const formData = reactive(createDefaultParams())
 const selectorlist = [
-  { value: '1', label: '永さん' },
-  { value: '2', label: '尾三' },
-  { value: '3', label: '史さん' },
+  { value: '1', label: '永玉さん' },
+  { value: '2', label: '尾三さん' },
+  { value: '3', label: '史玉さん' },
 ]
 const keiyakukbnlist = [
   { value: '1', label: '家族' },
   { value: '2', label: '企業' },
   { value: '3', label: '鶏以外' },
+]
+const KEIYAKUSYA_CD_NAME_LIST = [
+  { value: '1', label: '田中さん' },
+  { value: '2', label: '玉田さん' },
+  { value: '3', label: '浅海さん' },
 ]
 const layout = {
   md: 24,
@@ -185,7 +196,6 @@ watch(
         formData.keiyakukbn2 = newKeiyakukbn1
       }
     }
-
     if (newKeiyakukbn2 !== oldKeiyakukbn2) {
       if (newKeiyakukbn2 && !newKeiyakukbn1) {
         formData.keiyakukbn1 = newKeiyakukbn2
@@ -202,10 +212,25 @@ watch(
         formData.itakusaki2 = newItakusaki1
       }
     }
-
     if (newItakusaki2 !== oldItakusaki2) {
       if (newItakusaki2 && !newItakusaki1) {
         formData.itakusaki1 = newItakusaki2
+      }
+    }
+  }
+)
+
+watch(
+  () => [formData.bango1, formData.bango2],
+  ([newBango1, newBango2], [oldBango1, oldBango2]) => {
+    if (newBango1 !== oldBango1) {
+      if (newBango1 && !newBango2) {
+        formData.bango2 = newBango1
+      }
+    }
+    if (newBango2 !== oldBango2) {
+      if (newBango2 && !newBango1) {
+        formData.bango1 = newBango2
       }
     }
   }
