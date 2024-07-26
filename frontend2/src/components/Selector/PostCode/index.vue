@@ -12,7 +12,7 @@
       v-model:value="value1"
       :maxlength="3"
       style="width: 64px; text-align: center; border-right: 0"
-      @change="onChange"
+      @blur="onBlur"
     >
       <template #prefix> 〒 </template>
     </a-input>
@@ -30,7 +30,7 @@
       v-model:value="value2"
       :maxlength="4"
       style="width: 60px; text-align: center; border-left: 0"
-      @change="onChange"
+      @blur="onBlur"
     />
     <slot></slot>
   </a-input-group>
@@ -69,10 +69,9 @@ watchEffect(() => {
 //--------------------------------------------------------------------------
 //メソッド
 //--------------------------------------------------------------------------
-function onChange() {
-  // value1.value = replaceText(value1.value, EnumRegex.半角数字)
-  // value2.value = replaceText(value2.value, EnumRegex.半角数字)
-
+function onBlur() {
+  value1.value = value1.value.replace(/[^0-9]/g, '')
+  value2.value = value2.value.replace(/[^0-9]/g, '')
   const code = `${value1.value}-${value2.value}`
   emit('update:value', code === '-' ? '' : code)
 
