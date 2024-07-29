@@ -48,7 +48,13 @@ function filterAuthRouteByRoles(route: ElegantConstRoute, roles: string[]) {
     )
   }
 
-  return hasPermission || isEmptyRoles ? [filterRoute] : []
+  // return hasPermission || isEmptyRoles ? [filterRoute] : []
+
+  // set the disabled by roles
+  if (filterRoute.meta) {
+    filterRoute.meta.disabled = !(hasPermission || isEmptyRoles)
+  }
+  return [filterRoute]
 }
 
 /**
