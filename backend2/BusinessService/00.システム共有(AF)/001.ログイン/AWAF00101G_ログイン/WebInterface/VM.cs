@@ -15,7 +15,7 @@ namespace BCC.Affect.Service.AWAF00101G
     {
         public string userid { get; set; }      //ユーザID
         public string usernm { get; set; }      //ユーザー名
-        public string syozokunm { get; set; }   //所属名
+        public List<string> roles { get; set; } //使用区分
         public bool kanrisyaflg { get; set; }   //管理者フラグ
         public string pSiyoKbn { get; set; }   
 

@@ -20,7 +20,7 @@ namespace BCC.Affect.Service.AWAF00101G
             var vm = new UserInfoVM();
             vm.userid = dto.userid;                         //ユーザーID
             vm.usernm = dto.usernm;                         //ユーザー名
-            vm.syozokunm = CStr(syozokuDto?.syozokunm);     //所属コード
+            vm.roles.Add(CStr(syozokuDto?.syozokunm));     //所属コード
             //ユーザー権限設定の場合
             if (dto.authsetflg)
             {
