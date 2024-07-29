@@ -84,15 +84,21 @@
             <th class="required">住所</th>
             <td class="flex-col">
               <a-form-item v-bind="validateInfos.ADDR_POST">
-                <PostCode v-model:value="formData.ADDR_POST"></PostCode>
+                <PostCode v-model:value="formData.ADDR_POST">
+                  <a-input
+                    v-model:value="formData.ADDR_1"
+                    disabled
+                    class="!w-40"
+                  ></a-input
+                ></PostCode>
               </a-form-item>
-              <a-form-item v-bind="validateInfos.ADDR_1">
+              <!-- <a-form-item v-bind="validateInfos.ADDR_1">
                 <a-input
                   v-model:value="formData.ADDR_1"
                   disabled
                   class="!w-40"
                 ></a-input>
-              </a-form-item>
+              </a-form-item> -->
               <a-form-item v-bind="validateInfos.ADDR_2">
                 <a-input
                   v-model:value="formData.ADDR_2"

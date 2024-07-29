@@ -65,7 +65,7 @@ interface DaSelectorModel {
   /** 名称 */
   label: string
   /** コード */
-  value: string
+  value: string | number
   /** 無効属性 */
   disabled?: boolean
 }

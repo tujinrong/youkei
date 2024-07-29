@@ -35,6 +35,7 @@
                 v-model:value="searchParams.KEIYAKUSYA_CD"
                 :options="options1"
                 style="width: 100%"
+                type="number"
               ></ai-select>
             </td>
           </a-col>
@@ -196,9 +197,9 @@ const { pageParams, totalCount, searchData, clear } = useSearch({
   params: toRef(() => searchParams),
 })
 const options1 = ref<DaSelectorModel[]>([
-  { value: '1', label: '永玉田中' },
-  { value: '2', label: '尾三玉田' },
-  { value: '3', label: '史玉浅海' },
+  { value: 1, label: '永玉田中' },
+  { value: 2, label: '尾三玉田' },
+  { value: 3, label: '史玉浅海' },
 ])
 
 const cardRef = ref()
@@ -229,7 +230,8 @@ function forwardNew() {
 }
 function forwardEdit() {
   // console.log('1' + searchParams.KI)
-  // console.log('2' + searchParams.KEIYAKUSYA_CD)
+  console.log('2' + searchParams.KEIYAKUSYA_CD)
+  console.log(typeof searchParams.KEIYAKUSYA_CD)
   // console.log('3' + searchParams.NOJO_CD)
   // if(searchParams.KEIYAKUSYA_CD){
   //   let KEIYAKUSYA_CD  = searchParams.KEIYAKUSYA_CD.split(" : ")
