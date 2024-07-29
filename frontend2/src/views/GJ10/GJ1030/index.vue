@@ -120,7 +120,6 @@
 import { reactive, ref, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useTabStore } from '@/store/modules/tab'
-import dayjs, { Dayjs } from 'dayjs'
 import DateJp from '@/components/Selector/DateJp/index.vue'
 import { ReportViewer, Core } from '@grapecity/activereports'
 import '@grapecity/activereports/styles/ar-js-ui.css'

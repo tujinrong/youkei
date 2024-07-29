@@ -149,22 +149,22 @@ const searchParams = reactive(createDefaultParams())
 const tableDefault = (): KeiyakuNojoSearchVM[] => {
   return [
     {
-      NOJO_CD: 10001,
+      NOJO_CD: 100,
       NOJO_NAME: '東京都千代田区農場',
       ADDR: '〒100-0001 東京都千代田区丸の内1丁目1-1',
     },
     {
-      NOJO_CD: 10002,
+      NOJO_CD: 101,
       NOJO_NAME: '大阪府大阪市北区農場',
       ADDR: '〒530-0001 大阪府大阪市北区梅田3丁目1-1',
     },
     {
-      NOJO_CD: 10003,
+      NOJO_CD: 102,
       NOJO_NAME: '京都府京都市下農場',
       ADDR: '〒600-8216 京都府京都市下京区東塩小路町901',
     },
     {
-      NOJO_CD: 10004,
+      NOJO_CD: 103,
       NOJO_NAME: '福岡県福岡市博多区農場',
       ADDR: '〒812-0011 福岡県福岡市博多区博多駅前3丁目2-1',
     },

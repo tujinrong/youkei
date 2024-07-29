@@ -50,6 +50,15 @@ onMounted(() => {
   if (route.query.status) {
     status.value = +route.query.status
   }
+  if (route.query.KI) {
+    KI.value = +route.query.KI
+  }
+  if (route.query.KEIYAKUSYA_CD) {
+    KEIYAKUSYA_CD.value = +route.query.KEIYAKUSYA_CD
+  }
+  if (route.query.NOJO_CD) {
+    NOJO_CD.value = +route.query.NOJO_CD
+  }
 })
 //--------------------------------------------------------------------------
 //計算定義

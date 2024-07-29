@@ -140,7 +140,7 @@
 import { PageSatatus } from '@/enum'
 import { nextTick, onMounted, reactive, ref, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
-import { showDeleteModal } from '@/utils/modal'
+import { showDeleteModal, showInfoModal } from '@/utils/modal'
 import {
   DELETE_OK_INFO,
   ITEM_REQUIRE_ERROR,
@@ -360,18 +360,42 @@ const goList = () => {
 }
 const saveData = async () => {
   nextTick(async () => {
+    switch (formData.NOJO_CD) {
+      case 100:
+      case 101:
+      case 102:
+      case 103:
+        showInfoModal({
+          type: 'error',
+          title: 'エラー',
+          content: '入力されたコードは、すでに登録されています。',
+        })
+        return
+    }
     await validate()
-    showSaveModal({
-      onOk: () => {
-        router.push({ name: route.name as string })
-        message.success(SAVE_OK_INFO.Msg)
-      },
-    })
+    if (isNew) {
+      showSaveModal({
+        content: 'データを登録します。\nよろしいですか？',
+        onOk: () => {
+          router.push({ name: route.name as string })
+          message.success(SAVE_OK_INFO.Msg)
+        },
+      })
+    } else {
+      showSaveModal({
+        content: 'データを更新します。\nよろしいですか？',
+        onOk: () => {
+          router.push({ name: route.name as string })
+          message.success(SAVE_OK_INFO.Msg)
+        },
+      })
+    }
   })
 }
 const deleteData = () => {
   showDeleteModal({
     handleDB: true,
+    content: '指定されたデータを削除します。\nよろしいですか？',
     onOk() {
       router.push({ name: route.name as string })
       message.success(DELETE_OK_INFO.Msg)
