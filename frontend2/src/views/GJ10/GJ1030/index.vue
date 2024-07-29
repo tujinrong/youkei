@@ -22,7 +22,12 @@
             <a-col v-bind="layout">
               <th class="required">対象日(現在)</th>
               <td>
-                <DateJp v-model:value="formData.TAISYOBI_YMD" class="w-full" />
+                <DateJp
+                  v-model:value="formData.TAISYOBI_YMD"
+                  unknown
+                  format="YYYY-MM-DD"
+                  class="w-full"
+                />
               </td>
             </a-col>
             <a-col v-bind="layout">
@@ -115,7 +120,7 @@
 import { reactive, ref, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useTabStore } from '@/store/modules/tab'
-import dayjs from 'dayjs'
+import dayjs, { Dayjs } from 'dayjs'
 import DateJp from '@/components/Selector/DateJp/index.vue'
 import { ReportViewer, Core } from '@grapecity/activereports'
 import '@grapecity/activereports/styles/ar-js-ui.css'
@@ -123,6 +128,7 @@ import '@grapecity/activereports/styles/ar-js-viewer.css'
 import '@grapecity/activereports-localization'
 import { showInfoModal } from '@/utils/modal'
 import { ITEM_REQUIRE_ERROR } from '@/constants/msg'
+import { PreviewRequest } from './type'
 
 //--------------------------------------------------------------------------
 //データ定義
@@ -131,21 +137,21 @@ const router = useRouter()
 const route = useRoute()
 const tabStore = useTabStore()
 
-const createDefaultParams = () => {
+const createDefaultParams = (): PreviewRequest => {
   return {
-    KI: '8',
-    TAISYOBI_YMD: dayjs(new Date().toISOString().split('T')[0]),
-    KEIYAKU_KBN_CD_FM: '',
-    KEIYAKU_KBN_CD_TO: '',
-    ITAKU_CD_FM: '',
-    ITAKU_CD_TO: '',
-    KEIYAKUSYA_CD_FM: '',
-    KEIYAKUSYA_CD_TO: '',
+    KI: 8,
+    TAISYOBI_YMD: new Date().toISOString().split('T')[0],
+    KEIYAKU_KBN_CD_FM: undefined,
+    KEIYAKU_KBN_CD_TO: undefined,
     KEIYAKU_JYOKYO_SHINKI: true,
     KEIYAKU_JYOKYO_KEIZOKU: true,
     KEIYAKU_JYOKYO_CHUSHI: true,
     KEIYAKU_JYOKYO_HAIGYO: true,
-  }
+    ITAKU_CD_FM: undefined,
+    ITAKU_CD_TO: undefined,
+    KEIYAKUSYA_CD_FM: undefined,
+    KEIYAKUSYA_CD_TO: undefined,
+  } as PreviewRequest
 }
 
 const formData = reactive(createDefaultParams())
@@ -241,7 +247,7 @@ function onPreview() {
 //--------------------------------------------------------------------------
 //監視定義
 //--------------------------------------------------------------------------
-//契約者区分の値が変更した時の処理
+//契約者区分の値が変った時の処理
 watch(
   () => [formData.KEIYAKU_KBN_CD_FM, formData.KEIYAKU_KBN_CD_TO],
   (
