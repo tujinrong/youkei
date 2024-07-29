@@ -121,6 +121,8 @@ import { ReportViewer, Core } from '@grapecity/activereports'
 import '@grapecity/activereports/styles/ar-js-ui.css'
 import '@grapecity/activereports/styles/ar-js-viewer.css'
 import '@grapecity/activereports-localization'
+import { showInfoModal } from '@/utils/modal'
+import { ITEM_REQUIRE_ERROR } from '@/constants/msg'
 
 //--------------------------------------------------------------------------
 //データ定義
@@ -176,37 +178,70 @@ const layout = {
 //メソッド
 //--------------------------------------------------------------------------
 
-//
+function validateSearchParams() {
+  let flag = true
+  if (!formData.KI) {
+    showInfoModal({
+      type: 'error',
+      title: 'エラー',
+      content: ITEM_REQUIRE_ERROR.Msg.replace('{0}', '対象期'),
+    })
+    flag = false
+  } else if (!formData.TAISYOBI_YMD) {
+    showInfoModal({
+      type: 'error',
+      title: 'エラー',
+      content: ITEM_REQUIRE_ERROR.Msg.replace('{0}', '対象日(現在)'),
+    })
+    flag = false
+  } else if (
+    !formData.KEIYAKU_JYOKYO_SHINKI &&
+    !formData.KEIYAKU_JYOKYO_KEIZOKU &&
+    !formData.KEIYAKU_JYOKYO_CHUSHI &&
+    !formData.KEIYAKU_JYOKYO_HAIGYO
+  ) {
+    showInfoModal({
+      type: 'error',
+      title: 'エラー',
+      content: ITEM_REQUIRE_ERROR.Msg.replace('{0}', '契約状況'),
+    })
+    flag = false
+  }
+  return flag
+}
+
 const clear = () => {
   Object.assign(formData, createDefaultParams())
 }
 
 //プレビューボタンを押す時
 function onPreview() {
-  // フォント記述子の定義
-  const fonts = [
-    { name: 'ＭＳ ゴシック', source: '/fonts/MSGOTHIC.TTF' },
-    { name: '游明朝', source: '/fonts/yumin.ttf' },
-    { name: '游ゴシック', source: '/fonts/yugothib.ttf' },
-    { name: 'IPAゴシック', source: '/fonts/ipaexg.ttf' },
-    { name: 'Arial', source: '/fonts/Arial.ttf' },
-    { name: 'Arial Italic', source: '/fonts/Arialbi.ttf' },
-    { name: 'Arial Bold', source: '/fonts/Arialbd.ttf' },
-    { name: 'Arial Bold Italic', source: '/fonts/Arialbi.ttf' },
-    { name: 'Arial Black', source: '/fonts/Ariblk.ttf' },
-  ]
-  const viewer = new ReportViewer.Viewer('#viewer-host', { language: 'ja' })
-  viewer.open('/report/keyakusya.rdlx-json')
-  // サイドバーのエクスポート機能を有効化
-  viewer.availableExports = ['pdf', 'xlsx', 'html']
-  // 定義済みのフォント記述子を登録する
-  Core.FontStore.registerFonts(...fonts)
+  if (validateSearchParams()) {
+    // フォント記述子の定義
+    const fonts = [
+      { name: 'ＭＳ ゴシック', source: '/fonts/MSGOTHIC.TTF' },
+      { name: '游明朝', source: '/fonts/yumin.ttf' },
+      { name: '游ゴシック', source: '/fonts/yugothib.ttf' },
+      { name: 'IPAゴシック', source: '/fonts/ipaexg.ttf' },
+      { name: 'Arial', source: '/fonts/Arial.ttf' },
+      { name: 'Arial Italic', source: '/fonts/Arialbi.ttf' },
+      { name: 'Arial Bold', source: '/fonts/Arialbd.ttf' },
+      { name: 'Arial Bold Italic', source: '/fonts/Arialbi.ttf' },
+      { name: 'Arial Black', source: '/fonts/Ariblk.ttf' },
+    ]
+    const viewer = new ReportViewer.Viewer('#viewer-host', { language: 'ja' })
+    viewer.open('/report/keyakusya.rdlx-json')
+    // サイドバーのエクスポート機能を有効化
+    viewer.availableExports = ['pdf', 'xlsx', 'html']
+    // 定義済みのフォント記述子を登録する
+    Core.FontStore.registerFonts(...fonts)
+  }
 }
 
 //--------------------------------------------------------------------------
 //監視定義
 //--------------------------------------------------------------------------
-//契約者区分の値が変った時の処理
+//契約者区分の値が変更した時の処理
 watch(
   () => [formData.KEIYAKU_KBN_CD_FM, formData.KEIYAKU_KBN_CD_TO],
   (
