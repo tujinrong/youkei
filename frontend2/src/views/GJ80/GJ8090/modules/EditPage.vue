@@ -7,13 +7,11 @@
         <a-col span="24">
           <th>契約者</th>
           <td>
-            <a-form-item>
-              <ai-select
-                v-model:value="formData.KEIYAKUSYA_CD"
-                :options="selectorlist"
-                :disabled="!isNew"
-              ></ai-select>
-            </a-form-item>
+            <ai-select
+              v-model:value="formData.KEIYAKUSYA_CD"
+              :options="selectorlist"
+              :disabled="!isNew"
+            ></ai-select>
           </td>
         </a-col>
       </a-row>
@@ -36,14 +34,12 @@
         <a-col span="24">
           <th class="required">契約者農場</th>
           <td>
-            <a-form-item>
-              <a-input-number
-                v-model:value="formData.NOJO_CD"
-                :min="0"
-                :max="999"
-                :maxlength="3"
-              ></a-input-number>
-            </a-form-item>
+            <a-input-number
+              v-model:value="formData.NOJO_CD"
+              :min="0"
+              :max="999"
+              :maxlength="3"
+            ></a-input-number>
           </td>
         </a-col>
       </a-row>
@@ -51,12 +47,10 @@
         <a-col span="24">
           <th class="required">農場名称</th>
           <td>
-            <a-form-item>
-              <a-input
-                v-model:value="formData.NOJO_NAME"
-                :maxlength="20"
-              ></a-input>
-            </a-form-item>
+            <a-input
+              v-model:value="formData.NOJO_NAME"
+              :maxlength="20"
+            ></a-input>
           </td>
         </a-col>
       </a-row>
@@ -64,13 +58,11 @@
         <a-col span="24">
           <th class="required">都道府県</th>
           <td>
-            <a-form-item>
-              <ai-select
-                v-model:value="formData.KEN_CD"
-                :options="KEN_CD_NAME_LIST"
-                class="w-full"
-              ></ai-select>
-            </a-form-item>
+            <ai-select
+              v-model:value="formData.KEN_CD"
+              :options="KEN_CD_NAME_LIST"
+              class="w-full"
+            ></ai-select>
           </td>
         </a-col>
       </a-row>
@@ -78,33 +70,16 @@
         <a-col span="24">
           <th class="required">住所</th>
           <td class="flex-col">
-            <a-form-item>
-              <PostCode v-model:value="formData.ADDR_POST"
-                ><a-input
-                  v-model:value="formData.ADDR_1"
-                  disabled
-                  class="!w-40"
-                ></a-input
-              ></PostCode>
-            </a-form-item>
-            <a-form-item>
-              <a-input
-                v-model:value="formData.ADDR_2"
-                :maxlength="15"
-              ></a-input>
-            </a-form-item>
-            <a-form-item>
-              <a-input
-                v-model:value="formData.ADDR_3"
-                :maxlength="15"
-              ></a-input>
-            </a-form-item>
-            <a-form-item>
-              <a-input
-                v-model:value="formData.ADDR_4"
-                :maxlength="20"
-              ></a-input>
-            </a-form-item>
+            <PostCode v-model:value="formData.ADDR_POST"
+              ><a-input
+                v-model:value="formData.ADDR_1"
+                disabled
+                class="!w-40"
+              ></a-input
+            ></PostCode>
+            <a-input v-model:value="formData.ADDR_2" :maxlength="15"></a-input>
+            <a-input v-model:value="formData.ADDR_3" :maxlength="15"></a-input>
+            <a-input v-model:value="formData.ADDR_4" :maxlength="20"></a-input>
           </td>
         </a-col>
       </a-row>
@@ -326,9 +301,5 @@ th {
 }
 h1 {
   font-size: 24px;
-}
-:deep(.ant-form-item) {
-  width: 100%;
-  margin-bottom: 0;
 }
 </style>
