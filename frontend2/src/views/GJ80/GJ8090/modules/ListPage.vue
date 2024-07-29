@@ -105,12 +105,12 @@
       >
         <vxe-column field="noujyocd" title="農場番号" width="200" sortable>
           <template #default="{ row }">
-            <a @click="forwardEdit()">{{ row.NOJO_CD }}</a>
+            <a @click="forwardEdit2(row.NOJO_CD)">{{ row.NOJO_CD }}</a>
           </template>
         </vxe-column>
         <vxe-column field="noujyomei" title="農場名" min-width="400" sortable>
           <template #default="{ row }">
-            <a @click="forwardEdit()">{{ row.NOJO_NAME }}</a>
+            <a @click="forwardEdit2(row.NOJO_CD)">{{ row.NOJO_NAME }}</a>
           </template>
         </vxe-column>
         <vxe-column
@@ -196,6 +196,7 @@ const { pageParams, totalCount, searchData, clear } = useSearch({
   source: tableData,
   params: toRef(() => searchParams),
 })
+
 const options1 = ref<DaSelectorModel[]>([
   { value: 1, label: '永玉田中' },
   { value: 2, label: '尾三玉田' },
@@ -228,33 +229,45 @@ function forwardNew() {
     },
   })
 }
-function forwardEdit() {
-  // console.log('1' + searchParams.KI)
-  console.log('2' + searchParams.KEIYAKUSYA_CD)
-  console.log(typeof searchParams.KEIYAKUSYA_CD)
-  // console.log('3' + searchParams.NOJO_CD)
-  // if(searchParams.KEIYAKUSYA_CD){
-  //   let KEIYAKUSYA_CD  = searchParams.KEIYAKUSYA_CD.split(" : ")
-  // }
 
+function forwardEdit() {
   router.push({
     name: route.name as string,
     query: {
       status: PageSatatus.Edit,
-      // KI: searchParams.KI,
-      // KEIYAKUSYA_CD: searchParams.KEIYAKUSYA_CD,
-      // NOJO_CD: searchParams.NOJO_CD,
+      KI: searchParams.KI,
+      KEIYAKUSYA_CD: searchParams.KEIYAKUSYA_CD,
+    },
+  })
+}
+
+function forwardEdit2(NOJO_CD) {
+  router.push({
+    name: route.name as string,
+    query: {
+      status: PageSatatus.Edit,
+      KI: searchParams.KI,
+      KEIYAKUSYA_CD: searchParams.KEIYAKUSYA_CD,
+      NOJO_CD: NOJO_CD,
     },
   })
 }
 
 //検索処理
 function search() {
-  if (Object.values(searchParams).every((value) => !value)) {
+  if (!searchParams.KI) {
     showInfoModal({
       type: 'error',
       title: 'エラー',
-      content: ITEM_REQUIRE_ERROR.Msg.replace('{0}', '必須検索条件'),
+      content: ITEM_REQUIRE_ERROR.Msg.replace('{0}', '期'),
+    })
+    return
+  }
+  if (!searchParams.KEIYAKUSYA_CD) {
+    showInfoModal({
+      type: 'error',
+      title: 'エラー',
+      content: ITEM_REQUIRE_ERROR.Msg.replace('{0}', '契約者'),
     })
     return
   }

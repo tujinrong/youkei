@@ -7,13 +7,13 @@
       v-if="status === PageSatatus.New || status === PageSatatus.Edit"
       class="h-full"
     >
-      <EditPage :status="status" />
-      <!-- <EditPage
+      <!-- <EditPage :status="status" /> -->
+      <EditPage
         :status="status"
         :KI="KI"
         :KEIYAKUSYA_CD="KEIYAKUSYA_CD"
         :NOJO_CD="NOJO_CD"
-      /> -->
+      />
     </div>
   </div>
 </template>
@@ -29,25 +29,26 @@ import EditPage from './modules/EditPage.vue'
 //データ定義
 //--------------------------------------------------------------------------
 const route = useRoute()
-// const props = defineProps<{
-//   KI: number
-//   KEIYAKUSYA_CD: string
-//   NOJO_CD: string
-// }>()
-const status = ref(PageSatatus.List)
-// const KI = ref(props.KI)
-// const KEIYAKUSYA_CD = ref(props.KEIYAKUSYA_CD)
-// const NOJO_CD = ref(props.NOJO_CD)
+const props = defineProps<{
+  status: PageSatatus
+  KI: number | undefined
+  KEIYAKUSYA_CD: number | undefined
+  NOJO_CD: number | undefined
+}>()
+const status = ref(props.status)
+
+const KI = ref(props.KI)
+const KEIYAKUSYA_CD = ref(props.KEIYAKUSYA_CD)
+const NOJO_CD = ref(props.NOJO_CD)
 
 //--------------------------------------------------------------------------
 //フック関数
 //--------------------------------------------------------------------------
+
 onMounted(() => {
+  status.value = PageSatatus.List
   if (route.query.status) {
     status.value = +route.query.status
-    // KI.value = route.query.KI
-    // KEIYAKUSYA_CD.value = route.query.KEIYAKUSYA_CD
-    // NOJO_CD.value = route.query.NOJO_CD
   }
 })
 //--------------------------------------------------------------------------
@@ -63,6 +64,15 @@ watch(
     console.log('route.name: ', route.name)
     if (route.name === 'gj80_gj8090') {
       status.value = route.query.status ? +route.query.status : PageSatatus.List
+      if (route.query.KI) {
+        KI.value = +route.query.KI
+      }
+      if (route.query.KEIYAKUSYA_CD) {
+        KEIYAKUSYA_CD.value = +route.query.KEIYAKUSYA_CD
+      }
+      if (route.query.NOJO_CD) {
+        NOJO_CD.value = +route.query.NOJO_CD
+      }
     }
   },
   { deep: true }

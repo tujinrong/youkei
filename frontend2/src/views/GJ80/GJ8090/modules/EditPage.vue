@@ -47,6 +47,7 @@
                   :min="0"
                   :max="999"
                   :maxlength="3"
+                  :disabled="!isNew"
                 ></a-input-number>
               </a-form-item>
             </td>
@@ -162,9 +163,9 @@ import { convertToFullWidth } from '@/utils/util'
 //---------------------------------------------------------------------------
 const props = defineProps<{
   status: PageSatatus
-  KI: number
-  KEIYAKUSYA_CD: string
-  NOJO_CD: string
+  KI: number | undefined
+  KEIYAKUSYA_CD: number | undefined
+  NOJO_CD: number | undefined
 }>()
 
 //--------------------------------------------------------------------------
@@ -173,24 +174,11 @@ const props = defineProps<{
 const router = useRouter()
 const route = useRoute()
 const isNew = props.status === PageSatatus.New
-// const createDefaultParams = () => {
-//   return {
-//     keiyakusya: '',
-//     noujyobango: '',
-//     noujyomei: '',
-//     KEN_CD: '',
-//     ADDR_POST: '',
-//     ADDR_1: '',
-//     ADDR_2: '',
-//     ADDR_3: '',
-//     ADDR_4: '',
-//     meisaibango: '',
-//   }
-// }
+
 const fakeFormData = {
-  KI: 8,
-  KEIYAKUSYA_CD: '1',
-  NOJO_CD: 99,
+  KI: props.KI,
+  KEIYAKUSYA_CD: props.KEIYAKUSYA_CD,
+  NOJO_CD: props.NOJO_CD,
   NOJO_NAME: '東京都千代田区農場',
   KEN_CD: '13',
   ADDR_POST: '100-0001',
@@ -200,6 +188,7 @@ const fakeFormData = {
   ADDR_4: '1丁目1-1',
   MEISAINO: 234,
 }
+
 const fakeFormData1 = {
   KI: 8,
   KEIYAKUSYA_CD: '',
@@ -316,10 +305,8 @@ const { validate, clearValidate, validateInfos, resetFields } = Form.useForm(
 onMounted(async () => {
   if (props.status === PageSatatus.Edit) {
     Object.assign(formData, fakeFormData)
+    console.log(props)
   }
-  // console.log(props.KI)
-  // console.log(props.KEIYAKUSYA_CD)
-  // console.log(props.NOJO_CD)
 })
 //--------------------------------------------------------------------------
 //計算定義
