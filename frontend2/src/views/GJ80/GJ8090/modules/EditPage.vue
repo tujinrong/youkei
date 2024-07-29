@@ -3,99 +3,133 @@
     <h1>契約者農場マスタメンテナンス</h1>
     <div class="self_adaption_table form max-w-160">
       <b>第{{ formData.KI }}期</b>
-      <a-row>
-        <a-col span="24">
-          <th>契約者</th>
-          <td>
-            <ai-select
-              v-model:value="formData.KEIYAKUSYA_CD"
-              :options="selectorlist"
-              :disabled="!isNew"
-            ></ai-select>
-          </td>
-        </a-col>
-      </a-row>
-      <div class="my-2 header_operation flex justify-between w-full">
-        <a-space :size="20">
-          <a-button class="warning-btn" @click="saveData">登録</a-button>
-          <a-button type="primary" danger :disabled="isNew" @click="deleteData"
-            >削除</a-button
-          >
-          <!-- <a-button v-if="!isNew" :icon="h(LeftOutlined)"></a-button
+      <a-form>
+        <a-row>
+          <a-col span="24">
+            <th>契約者</th>
+            <td>
+              <a-form-item v-bind="validateInfos.KEIYAKUSYA_CD">
+                <ai-select
+                  v-model:value="formData.KEIYAKUSYA_CD"
+                  :options="selectorlist"
+                  disabled
+                ></ai-select>
+              </a-form-item>
+            </td>
+          </a-col>
+        </a-row>
+        <div class="my-2 header_operation flex justify-between w-full">
+          <a-space :size="20">
+            <a-button class="warning-btn" @click="saveData">登録</a-button>
+            <a-button
+              type="primary"
+              danger
+              :disabled="isNew"
+              @click="deleteData"
+              >削除</a-button
+            >
+            <!-- <a-button v-if="!isNew" :icon="h(LeftOutlined)"></a-button
           ><span v-if="!isNew">2/5</span>
           <a-button v-if="!isNew" :icon="h(RightOutlined)"></a-button> -->
-        </a-space>
-        <a-button type="primary" class="text-end" @click="goList"
-          >一覧へ</a-button
-        >
-      </div>
-      <b>契約者農場基本登録項目</b>
-      <a-row>
-        <a-col span="24">
-          <th class="required">契約者農場</th>
-          <td>
-            <a-input-number
-              v-model:value="formData.NOJO_CD"
-              :min="0"
-              :max="999"
-              :maxlength="3"
-            ></a-input-number>
-          </td>
-        </a-col>
-      </a-row>
-      <a-row>
-        <a-col span="24">
-          <th class="required">農場名称</th>
-          <td>
-            <a-input
-              v-model:value="formData.NOJO_NAME"
-              :maxlength="20"
-            ></a-input>
-          </td>
-        </a-col>
-      </a-row>
-      <a-row>
-        <a-col span="24">
-          <th class="required">都道府県</th>
-          <td>
-            <ai-select
-              v-model:value="formData.KEN_CD"
-              :options="KEN_CD_NAME_LIST"
-              class="w-full"
-            ></ai-select>
-          </td>
-        </a-col>
-      </a-row>
-      <a-row>
-        <a-col span="24">
-          <th class="required">住所</th>
-          <td class="flex-col">
-            <PostCode v-model:value="formData.ADDR_POST"
-              ><a-input
-                v-model:value="formData.ADDR_1"
-                disabled
-                class="!w-40"
-              ></a-input
-            ></PostCode>
-            <a-input v-model:value="formData.ADDR_2" :maxlength="15"></a-input>
-            <a-input v-model:value="formData.ADDR_3" :maxlength="15"></a-input>
-            <a-input v-model:value="formData.ADDR_4" :maxlength="20"></a-input>
-          </td>
-        </a-col>
-      </a-row>
-      <a-row>
-        <a-col span="24">
-          <th class="required">明細番号</th>
-          <td>
-            <a-input-number
-              v-model:value="formData.MEISAINO"
-              :min="0"
-              :max="999"
-              :maxlength="3"
-            ></a-input-number>
-          </td>
-        </a-col>
-      </a-row>
+          </a-space>
+          <a-button type="primary" class="text-end" @click="goList"
+            >一覧へ</a-button
+          >
+        </div>
+        <b>契約者農場基本登録項目</b>
+        <a-row>
+          <a-col span="24">
+            <th class="required">契約者農場</th>
+            <td>
+              <a-form-item v-bind="validateInfos.NOJO_CD">
+                <a-input-number
+                  v-model:value="formData.NOJO_CD"
+                  :min="0"
+                  :max="999"
+                  :maxlength="3"
+                ></a-input-number>
+              </a-form-item>
+            </td>
+          </a-col>
+        </a-row>
+        <a-row>
+          <a-col span="24">
+            <th class="required">農場名称</th>
+            <td>
+              <a-form-item v-bind="validateInfos.NOJO_NAME">
+                <a-input
+                  v-model:value="formData.NOJO_NAME"
+                  :maxlength="20"
+                ></a-input>
+              </a-form-item>
+            </td>
+          </a-col>
+        </a-row>
+        <a-row>
+          <a-col span="24">
+            <th class="required">都道府県</th>
+            <td>
+              <a-form-item v-bind="validateInfos.KEN_CD">
+                <ai-select
+                  v-model:value="formData.KEN_CD"
+                  :options="KEN_CD_NAME_LIST"
+                  class="w-full"
+                ></ai-select>
+              </a-form-item>
+            </td>
+          </a-col>
+        </a-row>
+        <a-row>
+          <a-col span="24">
+            <th class="required">住所</th>
+            <td class="flex-col">
+              <a-form-item v-bind="validateInfos.ADDR_POST">
+                <PostCode v-model:value="formData.ADDR_POST"></PostCode>
+              </a-form-item>
+              <a-form-item v-bind="validateInfos.ADDR_1">
+                <a-input
+                  v-model:value="formData.ADDR_1"
+                  disabled
+                  class="!w-40"
+                ></a-input>
+              </a-form-item>
+              <a-form-item v-bind="validateInfos.ADDR_2">
+                <a-input
+                  v-model:value="formData.ADDR_2"
+                  :maxlength="15"
+                ></a-input>
+              </a-form-item>
+              <a-form-item v-bind="validateInfos.ADDR_3">
+                <a-input
+                  v-model:value="formData.ADDR_3"
+                  :maxlength="15"
+                ></a-input>
+              </a-form-item>
+              <a-form-item v-bind="validateInfos.ADDR_4">
+                <a-input
+                  v-model:value="formData.ADDR_4"
+                  :maxlength="20"
+                ></a-input>
+              </a-form-item>
+            </td>
+          </a-col>
+        </a-row>
+        <a-row>
+          <a-col span="24">
+            <th class="required">明細番号</th>
+            <td>
+              <a-form-item v-bind="validateInfos.MEISAINO">
+                <a-input-number
+                  v-model:value="formData.MEISAINO"
+                  :min="0"
+                  :max="999"
+                  :maxlength="3"
+                ></a-input-number>
+              </a-form-item>
+            </td>
+          </a-col>
+        </a-row>
+      </a-form>
     </div>
   </a-card>
 </template>
@@ -105,8 +139,12 @@ import { PageSatatus } from '@/enum'
 import { onMounted, reactive, ref, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { showDeleteModal } from '@/utils/modal'
-import { DELETE_OK_INFO, SAVE_OK_INFO } from '@/constants/msg'
-import { message } from 'ant-design-vue'
+import {
+  DELETE_OK_INFO,
+  ITEM_REQUIRE_ERROR,
+  SAVE_OK_INFO,
+} from '@/constants/msg'
+import { Form, message } from 'ant-design-vue'
 // import { h } from 'vue'
 // import TD from '@/components/TableTD/index.vue'
 import { showSaveModal } from '@/utils/modal'
@@ -118,6 +156,9 @@ import { convertToFullWidth } from '@/utils/util'
 //---------------------------------------------------------------------------
 const props = defineProps<{
   status: PageSatatus
+  KI: number
+  KEIYAKUSYA_CD: string
+  NOJO_CD: string
 }>()
 
 //--------------------------------------------------------------------------
@@ -221,7 +262,48 @@ const KEN_CD_NAME_LIST = [
   { value: '46', label: '鹿児島県' },
   { value: '47', label: '沖縄県' },
 ]
-
+const rules = reactive({
+  NOJO_CD: [
+    {
+      required: true,
+      message: ITEM_REQUIRE_ERROR.Msg.replace('{0}', '農場番号'),
+    },
+  ],
+  NOJO_NAME: [
+    {
+      required: true,
+      message: ITEM_REQUIRE_ERROR.Msg.replace('{0}', '農場名称'),
+    },
+  ],
+  KEN_CD: [
+    {
+      required: true,
+      message: ITEM_REQUIRE_ERROR.Msg.replace('{0}', '都道府県'),
+    },
+  ],
+  ADDR_POST: [
+    {
+      required: true,
+      message: ITEM_REQUIRE_ERROR.Msg.replace('{0}', '郵便番号'),
+    },
+  ],
+  ADDR_2: [
+    {
+      required: true,
+      message: ITEM_REQUIRE_ERROR.Msg.replace('{0}', '住所2'),
+    },
+  ],
+  MEISAINO: [
+    {
+      required: true,
+      message: ITEM_REQUIRE_ERROR.Msg.replace('{0}', '明細番号'),
+    },
+  ],
+})
+const { validate, clearValidate, validateInfos, resetFields } = Form.useForm(
+  formData,
+  rules
+)
 //---------------------------------------------------------------------------
 //フック関数
 //--------------------------------------------------------------------------
@@ -229,6 +311,9 @@ onMounted(async () => {
   if (props.status === PageSatatus.Edit) {
     Object.assign(formData, fakeFormData)
   }
+  // console.log(props.KI)
+  // console.log(props.KEIYAKUSYA_CD)
+  // console.log(props.NOJO_CD)
 })
 //--------------------------------------------------------------------------
 //計算定義
@@ -277,6 +362,7 @@ const goList = () => {
   router.push({ name: route.name as string })
 }
 const saveData = () => {
+  validate()
   showSaveModal({
     onOk: () => {
       router.push({ name: route.name as string })
@@ -301,5 +387,9 @@ th {
 }
 h1 {
   font-size: 24px;
+}
+:deep(.ant-form-item) {
+  width: 100%;
+  margin-bottom: 0;
 }
 </style>

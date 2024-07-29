@@ -228,10 +228,20 @@ function forwardNew() {
   })
 }
 function forwardEdit() {
+  // console.log('1' + searchParams.KI)
+  // console.log('2' + searchParams.KEIYAKUSYA_CD)
+  // console.log('3' + searchParams.NOJO_CD)
+  // if(searchParams.KEIYAKUSYA_CD){
+  //   let KEIYAKUSYA_CD  = searchParams.KEIYAKUSYA_CD.split(" : ")
+  // }
+
   router.push({
     name: route.name as string,
     query: {
       status: PageSatatus.Edit,
+      // KI: searchParams.KI,
+      // KEIYAKUSYA_CD: searchParams.KEIYAKUSYA_CD,
+      // NOJO_CD: searchParams.NOJO_CD,
     },
   })
 }

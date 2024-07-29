@@ -36,7 +36,7 @@ export const CM_LOGINTIMEOUT_ERROR = {
 }
 export const ITEM_REQUIRE_ERROR = {
   No: 'E001001',
-  Msg: '{0}を入力してください。',
+  Msg: '{0}は必須入力項目です。',
 }
 export const ITEM_NOTEQUAL_ERROR = {
   No: 'E001002',
