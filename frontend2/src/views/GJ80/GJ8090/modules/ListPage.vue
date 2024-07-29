@@ -100,7 +100,7 @@
         :data="tableData"
         :sort-config="{ trigger: 'cell' }"
         :empty-render="{ name: 'NotData' }"
-        @cell-dblclick="forwardEdit()"
+        @cell-dblclick="({ row }) => forwardEdit2(row.NOJO_CD)"
         @sort-change="(e) => changeTableSort(e, toRef(pageParams, 'orderby'))"
       >
         <vxe-column field="noujyocd" title="農場番号" width="200" sortable>
