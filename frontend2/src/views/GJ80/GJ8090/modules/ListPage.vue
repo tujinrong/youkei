@@ -6,16 +6,6 @@
       <h1>契約者農場一覧</h1>
       <div class="self_adaption_table form mt-1">
         <a-row>
-          <!-- <ai-form-item
-            v-model:value="searchParams.KI"
-            label="期"
-            type="number"
-            key="KI"
-            :min="1"
-            :max="99"
-            required
-            :layout="layout"
-          /> -->
           <a-col v-bind="layout">
             <th class="required">期</th>
             <td>
@@ -135,7 +125,6 @@ import { ITEM_REQUIRE_ERROR } from '@/constants/msg'
 import { changeTableSort, convertToFullWidth } from '@/utils/util'
 import { useTabStore } from '@/store/modules/tab'
 import { useElementSize } from '@vueuse/core'
-import { Search } from '@/views/GJ80/GJ8090/service'
 import { KeiyakuNojoSearchVM } from '@/views/GJ80/GJ8090/type'
 
 //--------------------------------------------------------------------------
@@ -230,8 +219,7 @@ function validateSearchParams() {
       content: ITEM_REQUIRE_ERROR.Msg.replace('{0}', '期'),
     })
     flag = false
-  }
-  if (!searchParams.KEIYAKUSYA_CD) {
+  } else if (!searchParams.KEIYAKUSYA_CD) {
     showInfoModal({
       type: 'error',
       title: 'エラー',

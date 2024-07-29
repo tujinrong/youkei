@@ -13,6 +13,7 @@
                   v-model:value="formData.KEIYAKUSYA_CD"
                   :options="selectorlist"
                   disabled
+                  type="number"
                 ></ai-select>
               </a-form-item>
             </td>
@@ -75,6 +76,7 @@
                   v-model:value="formData.KEN_CD"
                   :options="KEN_CD_NAME_LIST"
                   class="w-full"
+                  type="number"
                 ></ai-select>
               </a-form-item>
             </td>
@@ -93,13 +95,6 @@
                   ></a-input
                 ></PostCode>
               </a-form-item>
-              <!-- <a-form-item v-bind="validateInfos.ADDR_1">
-                <a-input
-                  v-model:value="formData.ADDR_1"
-                  disabled
-                  class="!w-40"
-                ></a-input>
-              </a-form-item> -->
               <a-form-item v-bind="validateInfos.ADDR_2">
                 <a-input
                   v-model:value="formData.ADDR_2"
@@ -152,10 +147,7 @@ import {
   SAVE_OK_INFO,
 } from '@/constants/msg'
 import { Form, message } from 'ant-design-vue'
-// import { h } from 'vue'
-// import TD from '@/components/TableTD/index.vue'
 import { showSaveModal } from '@/utils/modal'
-// import { LeftOutlined, RightOutlined } from '@ant-design/icons-vue'
 import PostCode from '@/components/Selector/PostCode/index.vue'
 import { convertToFullWidth } from '@/utils/util'
 //---------------------------------------------------------------------------
@@ -180,7 +172,7 @@ const fakeFormData = {
   KEIYAKUSYA_CD: props.KEIYAKUSYA_CD,
   NOJO_CD: props.NOJO_CD,
   NOJO_NAME: '東京都千代田区農場',
-  KEN_CD: '13',
+  KEN_CD: 13,
   ADDR_POST: '100-0001',
   ADDR_1: '東京都',
   ADDR_2: '千代田区',
@@ -194,7 +186,7 @@ const fakeFormData1 = {
   KEIYAKUSYA_CD: props.KEIYAKUSYA_CD,
   NOJO_CD: undefined,
   NOJO_NAME: '',
-  KEN_CD: '',
+  KEN_CD: undefined,
   ADDR_POST: '',
   ADDR_1: '',
   ADDR_2: '',
@@ -202,61 +194,65 @@ const fakeFormData1 = {
   ADDR_4: '',
   MEISAINO: undefined,
 }
+
 const formData = reactive(fakeFormData1)
+
 const selectorlist = ref<DaSelectorModel[]>([
-  { value: '1', label: '永玉田中' },
-  { value: '2', label: '尾三玉田' },
-  { value: '3', label: '史玉浅海' },
+  { value: 1, label: '永玉田中' },
+  { value: 2, label: '尾三玉田' },
+  { value: 3, label: '史玉浅海' },
 ])
+
 const KEN_CD_NAME_LIST = [
-  { value: '1', label: '北海道' },
-  { value: '2', label: '青森県' },
-  { value: '3', label: '岩手県' },
-  { value: '4', label: '宮城県' },
-  { value: '5', label: '秋田県' },
-  { value: '6', label: '山形県' },
-  { value: '7', label: '福島県' },
-  { value: '8', label: '茨城県' },
-  { value: '9', label: '栃木県' },
-  { value: '10', label: '群馬県' },
-  { value: '11', label: '埼玉県' },
-  { value: '12', label: '千葉県' },
-  { value: '13', label: '東京都' },
-  { value: '14', label: '神奈川県' },
-  { value: '15', label: '新潟県' },
-  { value: '16', label: '富山県' },
-  { value: '17', label: '石川県' },
-  { value: '18', label: '福井県' },
-  { value: '19', label: '山梨県' },
-  { value: '20', label: '長野県' },
-  { value: '21', label: '岐阜県' },
-  { value: '22', label: '静岡県' },
-  { value: '23', label: '愛知県' },
-  { value: '24', label: '三重県' },
-  { value: '25', label: '滋賀県' },
-  { value: '26', label: '京都府' },
-  { value: '27', label: '大阪府' },
-  { value: '28', label: '兵庫県' },
-  { value: '29', label: '奈良県' },
-  { value: '30', label: '和歌山県' },
-  { value: '31', label: '鳥取県' },
-  { value: '32', label: '島根県' },
-  { value: '33', label: '岡山県' },
-  { value: '34', label: '広島県' },
-  { value: '35', label: '山口県' },
-  { value: '36', label: '徳島県' },
-  { value: '37', label: '香川県' },
-  { value: '38', label: '愛媛県' },
-  { value: '39', label: '高知県' },
-  { value: '40', label: '福岡県' },
-  { value: '41', label: '佐賀県' },
-  { value: '42', label: '長崎県' },
-  { value: '43', label: '熊本県' },
-  { value: '44', label: '大分県' },
-  { value: '45', label: '宮崎県' },
-  { value: '46', label: '鹿児島県' },
-  { value: '47', label: '沖縄県' },
+  { value: 1, label: '北海道' },
+  { value: 2, label: '青森県' },
+  { value: 3, label: '岩手県' },
+  { value: 4, label: '宮城県' },
+  { value: 5, label: '秋田県' },
+  { value: 6, label: '山形県' },
+  { value: 7, label: '福島県' },
+  { value: 8, label: '茨城県' },
+  { value: 9, label: '栃木県' },
+  { value: 10, label: '群馬県' },
+  { value: 11, label: '埼玉県' },
+  { value: 12, label: '千葉県' },
+  { value: 13, label: '東京都' },
+  { value: 14, label: '神奈川県' },
+  { value: 15, label: '新潟県' },
+  { value: 16, label: '富山県' },
+  { value: 17, label: '石川県' },
+  { value: 18, label: '福井県' },
+  { value: 19, label: '山梨県' },
+  { value: 20, label: '長野県' },
+  { value: 21, label: '岐阜県' },
+  { value: 22, label: '静岡県' },
+  { value: 23, label: '愛知県' },
+  { value: 24, label: '三重県' },
+  { value: 25, label: '滋賀県' },
+  { value: 26, label: '京都府' },
+  { value: 27, label: '大阪府' },
+  { value: 28, label: '兵庫県' },
+  { value: 29, label: '奈良県' },
+  { value: 30, label: '和歌山県' },
+  { value: 31, label: '鳥取県' },
+  { value: 32, label: '島根県' },
+  { value: 33, label: '岡山県' },
+  { value: 34, label: '広島県' },
+  { value: 35, label: '山口県' },
+  { value: 36, label: '徳島県' },
+  { value: 37, label: '香川県' },
+  { value: 38, label: '愛媛県' },
+  { value: 39, label: '高知県' },
+  { value: 40, label: '福岡県' },
+  { value: 41, label: '佐賀県' },
+  { value: 42, label: '長崎県' },
+  { value: 43, label: '熊本県' },
+  { value: 44, label: '大分県' },
+  { value: 45, label: '宮崎県' },
+  { value: 46, label: '鹿児島県' },
+  { value: 47, label: '沖縄県' },
 ]
+
 const rules = reactive({
   NOJO_CD: [
     {
@@ -295,10 +291,12 @@ const rules = reactive({
     },
   ],
 })
+
 const { validate, clearValidate, validateInfos, resetFields } = Form.useForm(
   formData,
   rules
 )
+
 //---------------------------------------------------------------------------
 //フック関数
 //--------------------------------------------------------------------------
@@ -326,14 +324,8 @@ watch(
 watch(
   () => formData.KEN_CD,
   (newVal) => {
-    if (newVal === undefined) {
-      formData.ADDR_1 = ''
-    } else if (newVal !== undefined) {
-      let newAddr1 = newVal.split(' : ')[1]
-      if (newAddr1 !== '' && newAddr1 !== undefined) {
-        formData.ADDR_1 = newAddr1
-      }
-    }
+    formData.ADDR_1 =
+      KEN_CD_NAME_LIST.find((item) => item.value === newVal)?.label || ''
   }
 )
 
