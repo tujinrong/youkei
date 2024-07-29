@@ -13,8 +13,8 @@ export const generatedRoutes: GeneratedRoute[] = [
       title: '403',
       i18nKey: 'route.403',
       constant: true,
-      hideInMenu: true
-    }
+      hideInMenu: true,
+    },
   },
   {
     name: '404',
@@ -24,8 +24,8 @@ export const generatedRoutes: GeneratedRoute[] = [
       title: '404',
       i18nKey: 'route.404',
       constant: true,
-      hideInMenu: true
-    }
+      hideInMenu: true,
+    },
   },
   {
     name: '500',
@@ -35,8 +35,8 @@ export const generatedRoutes: GeneratedRoute[] = [
       title: '500',
       i18nKey: 'route.500',
       constant: true,
-      hideInMenu: true
-    }
+      hideInMenu: true,
+    },
   },
   {
     name: 'gj10',
@@ -45,7 +45,7 @@ export const generatedRoutes: GeneratedRoute[] = [
     meta: {
       title: 'gj10',
       i18nKey: 'route.gj10',
-      order: 2
+      order: 2,
     },
     children: [
       {
@@ -56,8 +56,8 @@ export const generatedRoutes: GeneratedRoute[] = [
           title: 'gj10_gj1010',
           icon: '',
           roles: ['0'],
-          i18nKey: 'route.gj10_gj1010'
-        }
+          i18nKey: 'route.gj10_gj1010',
+        },
       },
       {
         name: 'gj10_gj1030',
@@ -67,10 +67,10 @@ export const generatedRoutes: GeneratedRoute[] = [
           title: 'gj10_gj1030',
           icon: '',
           roles: ['10', '20', '30'],
-          i18nKey: 'route.gj10_gj1030'
-        }
-      }
-    ]
+          i18nKey: 'route.gj10_gj1030',
+        },
+      },
+    ],
   },
   {
     name: 'gj80',
@@ -79,7 +79,7 @@ export const generatedRoutes: GeneratedRoute[] = [
     meta: {
       title: 'gj80',
       i18nKey: 'route.gj80',
-      order: 3
+      order: 3,
     },
     children: [
       {
@@ -90,10 +90,10 @@ export const generatedRoutes: GeneratedRoute[] = [
           title: 'gj80_gj8090',
           icon: '',
           roles: ['10', '20', '30'],
-          i18nKey: 'route.gj80_gj8090'
-        }
-      }
-    ]
+          i18nKey: 'route.gj80_gj8090',
+        },
+      },
+    ],
   },
   {
     name: 'home',
@@ -103,8 +103,8 @@ export const generatedRoutes: GeneratedRoute[] = [
       title: 'home',
       i18nKey: 'route.home',
       icon: 'mdi:monitor-dashboard',
-      order: 1
-    }
+      order: 1,
+    },
   },
   {
     name: 'iframe-page',
@@ -116,8 +116,8 @@ export const generatedRoutes: GeneratedRoute[] = [
       i18nKey: 'route.iframe-page',
       constant: true,
       hideInMenu: true,
-      keepAlive: true
-    }
+      keepAlive: true,
+    },
   },
   {
     name: 'login',
@@ -128,18 +128,18 @@ export const generatedRoutes: GeneratedRoute[] = [
       title: 'login',
       i18nKey: 'route.login',
       constant: true,
-      hideInMenu: true
-    }
+      hideInMenu: true,
+    },
   },
-  {
-    name: 'todo',
-    path: '/todo',
-    component: 'layout.base$view.todo',
-    meta: {
-      title: 'todo',
-      i18nKey: 'route.todo'
-    }
-  },
+  // {
+  //   name: 'todo',
+  //   path: '/todo',
+  //   component: 'layout.base$view.todo',
+  //   meta: {
+  //     title: 'todo',
+  //     i18nKey: 'route.todo'
+  //   }
+  // },
   {
     name: 'user-center',
     path: '/user-center',
@@ -147,7 +147,7 @@ export const generatedRoutes: GeneratedRoute[] = [
     meta: {
       title: 'user-center',
       i18nKey: 'route.user-center',
-      hideInMenu: true
-    }
-  }
-];
+      hideInMenu: true,
+    },
+  },
+]
