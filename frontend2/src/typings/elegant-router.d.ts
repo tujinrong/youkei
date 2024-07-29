@@ -21,12 +21,14 @@ declare module "@elegant-router/types" {
     "404": "/404";
     "500": "/500";
     "gj10": "/gj10";
+    "gj10_gj1010": "/gj10/gj1010";
     "gj10_gj1030": "/gj10/gj1030";
     "gj80": "/gj80";
     "gj80_gj8090": "/gj80/gj8090";
     "home": "/home";
     "iframe-page": "/iframe-page/:url";
     "login": "/login/:module(pwd-login)?";
+    "todo": "/todo";
     "user-center": "/user-center";
   };
 
@@ -67,6 +69,7 @@ declare module "@elegant-router/types" {
     | "home"
     | "iframe-page"
     | "login"
+    | "todo"
     | "user-center"
   >;
 
@@ -84,6 +87,7 @@ declare module "@elegant-router/types" {
    */
   export type LastLevelRouteKey = Extract<
     RouteKey,
+    | "gj10_gj1010"
     | "gj10_gj1030"
     | "gj80_gj8090"
     | "403"
@@ -91,6 +95,7 @@ declare module "@elegant-router/types" {
     | "500"
     | "iframe-page"
     | "login"
+    | "todo"
     | "home"
     | "user-center"
   >;

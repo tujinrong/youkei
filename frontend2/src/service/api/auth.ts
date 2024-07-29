@@ -1,7 +1,7 @@
 import { login, api } from '../request/common-service'
 import { encryptBySHA256 } from '@/utils/encrypt/data'
 
-const servicename = 'AWAF00101G'
+const servicename = 'GJ0000'
 
 /** ログイン処理 */
 export const Login = (
