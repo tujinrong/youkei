@@ -138,7 +138,7 @@
 
 <script setup lang="ts">
 import { PageSatatus } from '@/enum'
-import { onMounted, reactive, ref, watch } from 'vue'
+import { nextTick, onMounted, reactive, ref, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { showDeleteModal } from '@/utils/modal'
 import {
@@ -150,13 +150,14 @@ import { Form, message } from 'ant-design-vue'
 import { showSaveModal } from '@/utils/modal'
 import PostCode from '@/components/Selector/PostCode/index.vue'
 import { convertToFullWidth } from '@/utils/util'
+import { KeiyakuNojoSearchDetailVM } from '../type'
 //---------------------------------------------------------------------------
 //属性
 //---------------------------------------------------------------------------
 const props = defineProps<{
   status: PageSatatus
-  KI: number | undefined
-  KEIYAKUSYA_CD: number | undefined
+  KI: number
+  KEIYAKUSYA_CD: number
   NOJO_CD: number | undefined
 }>()
 
@@ -167,10 +168,11 @@ const router = useRouter()
 const route = useRoute()
 const isNew = props.status === PageSatatus.New
 
-const fakeFormData = {
+const keiyakuNojoSearchDetail = reactive({
   KI: props.KI,
   KEIYAKUSYA_CD: props.KEIYAKUSYA_CD,
   NOJO_CD: props.NOJO_CD,
+  KEIYAKUSYA_NAME: '',
   NOJO_NAME: '東京都千代田区農場',
   KEN_CD: 13,
   ADDR_POST: '100-0001',
@@ -179,21 +181,30 @@ const fakeFormData = {
   ADDR_3: '丸の内',
   ADDR_4: '1丁目1-1',
   MEISAINO: 234,
-}
+} as KeiyakuNojoSearchDetailVM & {
+  KI: number
+  KEIYAKUSYA_CD: number
+  NOJO_CD: number | undefined
+})
 
-const fakeFormData1 = {
+const fakeFormData1 = reactive({
   KI: props.KI,
   KEIYAKUSYA_CD: props.KEIYAKUSYA_CD,
   NOJO_CD: undefined,
+  KEIYAKUSYA_NAME: '',
   NOJO_NAME: '',
-  KEN_CD: undefined,
+  KEN_CD: undefined as number | undefined,
   ADDR_POST: '',
   ADDR_1: '',
   ADDR_2: '',
   ADDR_3: '',
   ADDR_4: '',
-  MEISAINO: undefined,
-}
+  MEISAINO: undefined as number | undefined,
+} as KeiyakuNojoSearchDetailVM & {
+  KI: number
+  KEIYAKUSYA_CD: number
+  NOJO_CD: number | undefined
+})
 
 const formData = reactive(fakeFormData1)
 
@@ -203,7 +214,7 @@ const selectorlist = ref<DaSelectorModel[]>([
   { value: 3, label: '史玉浅海' },
 ])
 
-const KEN_CD_NAME_LIST = [
+const KEN_CD_NAME_LIST = ref<DaSelectorModel[]>([
   { value: 1, label: '北海道' },
   { value: 2, label: '青森県' },
   { value: 3, label: '岩手県' },
@@ -251,7 +262,7 @@ const KEN_CD_NAME_LIST = [
   { value: 45, label: '宮崎県' },
   { value: 46, label: '鹿児島県' },
   { value: 47, label: '沖縄県' },
-]
+])
 
 const rules = reactive({
   NOJO_CD: [
@@ -302,10 +313,10 @@ const { validate, clearValidate, validateInfos, resetFields } = Form.useForm(
 //--------------------------------------------------------------------------
 onMounted(async () => {
   if (props.status === PageSatatus.Edit) {
-    Object.assign(formData, fakeFormData)
-    console.log(props)
+    Object.assign(formData, keiyakuNojoSearchDetail)
   }
 })
+
 //--------------------------------------------------------------------------
 //計算定義
 //--------------------------------------------------------------------------
@@ -313,10 +324,9 @@ onMounted(async () => {
 //--------------------------------------------------------------------------
 //監視定義
 //--------------------------------------------------------------------------
-
 watch(
   () => props.status,
-  () => Object.assign(formData, fakeFormData),
+  () => Object.assign(formData, keiyakuNojoSearchDetail),
   { deep: true }
 )
 
@@ -325,7 +335,7 @@ watch(
   () => formData.KEN_CD,
   (newVal) => {
     formData.ADDR_1 =
-      KEN_CD_NAME_LIST.find((item) => item.value === newVal)?.label || ''
+      KEN_CD_NAME_LIST.value.find((item) => item.value === newVal)?.label || ''
   }
 )
 
@@ -338,21 +348,25 @@ watch(
     formData.ADDR_4 = convertToFullWidth(newADDR_4)
   }
 )
+
 //--------------------------------------------------------------------------
 //メソッド
 //--------------------------------------------------------------------------
-
 //画面遷移
 const goList = () => {
+  clearValidate()
+  resetFields()
   router.push({ name: route.name as string })
 }
-const saveData = () => {
-  validate()
-  showSaveModal({
-    onOk: () => {
-      router.push({ name: route.name as string })
-      message.success(SAVE_OK_INFO.Msg)
-    },
+const saveData = async () => {
+  nextTick(async () => {
+    await validate()
+    showSaveModal({
+      onOk: () => {
+        router.push({ name: route.name as string })
+        message.success(SAVE_OK_INFO.Msg)
+      },
+    })
   })
 }
 const deleteData = () => {

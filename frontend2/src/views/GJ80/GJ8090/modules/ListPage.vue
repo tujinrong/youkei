@@ -23,7 +23,7 @@
             <td>
               <ai-select
                 v-model:value="searchParams.KEIYAKUSYA_CD"
-                :options="options1"
+                :options="KEIYAKUSYA_CD_NAME_LIST"
                 style="width: 100%"
                 type="number"
               ></ai-select>
@@ -125,7 +125,7 @@ import { ITEM_REQUIRE_ERROR } from '@/constants/msg'
 import { changeTableSort, convertToFullWidth } from '@/utils/util'
 import { useTabStore } from '@/store/modules/tab'
 import { useElementSize } from '@vueuse/core'
-import { KeiyakuNojoSearchVM } from '@/views/GJ80/GJ8090/type'
+import { KeiyakuNojoSearchVM, SearchRequest } from '@/views/GJ80/GJ8090/type'
 
 //--------------------------------------------------------------------------
 //データ定義
@@ -134,15 +134,16 @@ const router = useRouter()
 const route = useRoute()
 const tabStore = useTabStore()
 
-const createDefaultParams = () => {
+const createDefaultParams = (): SearchRequest => {
   return {
     KI: 8,
     KEIYAKUSYA_CD: undefined,
     NOJO_CD: undefined,
     NOJO_NAME: '',
     SEARCH_METHOD: EnumAndOr.And,
-  }
+  } as SearchRequest
 }
+
 const searchParams = reactive(createDefaultParams())
 
 const tableDefault = (): KeiyakuNojoSearchVM[] => {
@@ -180,13 +181,14 @@ const layout = {
   xl: 8,
   xxl: 6,
 }
+
 const { pageParams, totalCount, searchData, clear } = useSearch({
   service: undefined,
   source: tableData,
   params: toRef(() => searchParams),
 })
 
-const options1 = ref<DaSelectorModel[]>([
+const KEIYAKUSYA_CD_NAME_LIST = ref<DaSelectorModel[]>([
   { value: 1, label: '永玉田中' },
   { value: 2, label: '尾三玉田' },
   { value: 3, label: '史玉浅海' },
@@ -229,6 +231,7 @@ function validateSearchParams() {
   }
   return flag
 }
+
 function forwardNew() {
   if (validateSearchParams()) {
     router.push({
