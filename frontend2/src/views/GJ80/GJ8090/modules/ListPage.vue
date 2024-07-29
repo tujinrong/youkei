@@ -100,17 +100,17 @@
         :data="tableData"
         :sort-config="{ trigger: 'cell' }"
         :empty-render="{ name: 'NotData' }"
-        @cell-dblclick="({ row }) => forwardEdit2(row.NOJO_CD)"
+        @cell-dblclick="({ row }) => forwardEdit(row.NOJO_CD)"
         @sort-change="(e) => changeTableSort(e, toRef(pageParams, 'orderby'))"
       >
         <vxe-column field="noujyocd" title="農場番号" width="200" sortable>
           <template #default="{ row }">
-            <a @click="forwardEdit2(row.NOJO_CD)">{{ row.NOJO_CD }}</a>
+            <a @click="forwardEdit(row.NOJO_CD)">{{ row.NOJO_CD }}</a>
           </template>
         </vxe-column>
         <vxe-column field="noujyomei" title="農場名" min-width="400" sortable>
           <template #default="{ row }">
-            <a @click="forwardEdit2(row.NOJO_CD)">{{ row.NOJO_NAME }}</a>
+            <a @click="forwardEdit(row.NOJO_CD)">{{ row.NOJO_NAME }}</a>
           </template>
         </vxe-column>
         <vxe-column
@@ -230,18 +230,7 @@ function forwardNew() {
   })
 }
 
-function forwardEdit() {
-  router.push({
-    name: route.name as string,
-    query: {
-      status: PageSatatus.Edit,
-      KI: searchParams.KI,
-      KEIYAKUSYA_CD: searchParams.KEIYAKUSYA_CD,
-    },
-  })
-}
-
-function forwardEdit2(NOJO_CD) {
+function forwardEdit(NOJO_CD) {
   router.push({
     name: route.name as string,
     query: {
