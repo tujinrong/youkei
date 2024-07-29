@@ -11,7 +11,7 @@
               <a-form-item v-bind="validateInfos.KEIYAKUSYA_CD">
                 <ai-select
                   v-model:value="formData.KEIYAKUSYA_CD"
-                  :options="selectorlist"
+                  :options="KEIYAKUSYA_CD_NAME_LIST"
                   disabled
                   type="number"
                 ></ai-select>
@@ -208,7 +208,7 @@ const fakeFormData1 = reactive({
 
 const formData = reactive(fakeFormData1)
 
-const selectorlist = ref<DaSelectorModel[]>([
+const KEIYAKUSYA_CD_NAME_LIST = ref<DaSelectorModel[]>([
   { value: 1, label: '永玉田中' },
   { value: 2, label: '尾三玉田' },
   { value: 3, label: '史玉浅海' },

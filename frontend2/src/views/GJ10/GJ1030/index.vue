@@ -32,10 +32,12 @@
                   v-model:value="formData.KEIYAKU_KBN_CD_FM"
                   split-val
                   :options="KEIYAKU_KBN_CD_NAME_LIST"
+                  type="number"
                 ></ai-select
                 >～<ai-select
                   v-model:value="formData.KEIYAKU_KBN_CD_TO"
                   :options="KEIYAKU_KBN_CD_NAME_LIST"
+                  type="number"
                 ></ai-select>
               </td>
             </a-col>
@@ -64,10 +66,12 @@
                 <ai-select
                   v-model:value="formData.ITAKU_CD_FM"
                   :options="ITAKU_CD_NAME_LIST"
+                  type="number"
                 ></ai-select
                 >～<ai-select
                   v-model:value="formData.ITAKU_CD_TO"
                   :options="ITAKU_CD_NAME_LIST"
+                  type="number"
                 ></ai-select>
               </td>
             </a-col>
@@ -77,10 +81,12 @@
                 <ai-select
                   v-model:value="formData.KEIYAKUSYA_CD_FM"
                   :options="KEIYAKUSYA_CD_NAME_LIST"
+                  type="number"
                 ></ai-select
                 >～<ai-select
                   v-model:value="formData.KEIYAKUSYA_CD_TO"
                   :options="KEIYAKUSYA_CD_NAME_LIST"
+                  type="number"
                 ></ai-select>
               </td>
             </a-col>
@@ -106,7 +112,7 @@
 </template>
 
 <script setup lang="ts">
-import { reactive, watch } from 'vue'
+import { reactive, ref, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useTabStore } from '@/store/modules/tab'
 import dayjs from 'dayjs'
@@ -142,23 +148,23 @@ const createDefaultParams = () => {
 
 const formData = reactive(createDefaultParams())
 
-const KEIYAKU_KBN_CD_NAME_LIST = [
-  { value: '1', label: '家族' },
-  { value: '2', label: '企業' },
-  { value: '3', label: '鶏以外' },
-]
+const KEIYAKU_KBN_CD_NAME_LIST = ref<DaSelectorModel[]>([
+  { value: 1, label: '家族' },
+  { value: 2, label: '企業' },
+  { value: 3, label: '鶏以外' },
+])
 
-const ITAKU_CD_NAME_LIST = [
-  { value: '1', label: '永玉さん' },
-  { value: '2', label: '尾三さん' },
-  { value: '3', label: '史玉さん' },
-]
+const ITAKU_CD_NAME_LIST = ref<DaSelectorModel[]>([
+  { value: 1, label: '永玉さん' },
+  { value: 2, label: '尾三さん' },
+  { value: 3, label: '史玉さん' },
+])
 
-const KEIYAKUSYA_CD_NAME_LIST = [
-  { value: '1', label: '田中さん' },
-  { value: '2', label: '玉田さん' },
-  { value: '3', label: '浅海さん' },
-]
+const KEIYAKUSYA_CD_NAME_LIST = ref<DaSelectorModel[]>([
+  { value: 1, label: '田中さん' },
+  { value: 2, label: '玉田さん' },
+  { value: 3, label: '浅海さん' },
+])
 
 const layout = {
   md: 24,
@@ -200,7 +206,7 @@ function onPreview() {
 //--------------------------------------------------------------------------
 //監視定義
 //--------------------------------------------------------------------------
-//契約者区分の値が変更した時の処理
+//契約者区分の値が変った時の処理
 watch(
   () => [formData.KEIYAKU_KBN_CD_FM, formData.KEIYAKU_KBN_CD_TO],
   (
@@ -219,7 +225,7 @@ watch(
     }
   }
 )
-//事業委託先の値が変更した時の処理
+//事業委託先の値が変った時の処理
 watch(
   () => [formData.ITAKU_CD_FM, formData.ITAKU_CD_TO],
   ([newItakuCdFm, newItakuCdTo], [oldItakuCdFm, oldItakuCdTo]) => {
@@ -235,7 +241,7 @@ watch(
     }
   }
 )
-//契約番号の値が変更した時の処理
+//契約番号の値が変った時の処理
 watch(
   () => [formData.KEIYAKUSYA_CD_FM, formData.KEIYAKUSYA_CD_TO],
   (
