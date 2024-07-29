@@ -190,8 +190,8 @@ const fakeFormData = {
 }
 
 const fakeFormData1 = {
-  KI: 8,
-  KEIYAKUSYA_CD: '',
+  KI: props.KI,
+  KEIYAKUSYA_CD: props.KEIYAKUSYA_CD,
   NOJO_CD: undefined,
   NOJO_NAME: '',
   KEN_CD: '',

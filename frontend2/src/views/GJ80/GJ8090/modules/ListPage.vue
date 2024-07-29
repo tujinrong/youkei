@@ -221,36 +221,15 @@ onBeforeRouteUpdate((to, from) => {
 //メソッド
 //--------------------------------------------------------------------------
 
-function forwardNew() {
-  router.push({
-    name: route.name as string,
-    query: {
-      status: PageSatatus.New,
-    },
-  })
-}
-
-function forwardEdit(NOJO_CD) {
-  router.push({
-    name: route.name as string,
-    query: {
-      status: PageSatatus.Edit,
-      KI: searchParams.KI,
-      KEIYAKUSYA_CD: searchParams.KEIYAKUSYA_CD,
-      NOJO_CD: NOJO_CD,
-    },
-  })
-}
-
-//検索処理
-function search() {
+function validateSearchParams() {
+  let flag = true
   if (!searchParams.KI) {
     showInfoModal({
       type: 'error',
       title: 'エラー',
       content: ITEM_REQUIRE_ERROR.Msg.replace('{0}', '期'),
     })
-    return
+    flag = false
   }
   if (!searchParams.KEIYAKUSYA_CD) {
     showInfoModal({
@@ -258,9 +237,42 @@ function search() {
       title: 'エラー',
       content: ITEM_REQUIRE_ERROR.Msg.replace('{0}', '契約者'),
     })
-    return
+    flag = false
   }
-  tableData.value = tableDefault()
+  return flag
+}
+function forwardNew() {
+  if (validateSearchParams()) {
+    router.push({
+      name: route.name as string,
+      query: {
+        status: PageSatatus.New,
+        KI: searchParams.KI,
+        KEIYAKUSYA_CD: searchParams.KEIYAKUSYA_CD,
+      },
+    })
+  }
+}
+
+function forwardEdit(NOJO_CD) {
+  if (validateSearchParams()) {
+    router.push({
+      name: route.name as string,
+      query: {
+        status: PageSatatus.Edit,
+        KI: searchParams.KI,
+        KEIYAKUSYA_CD: searchParams.KEIYAKUSYA_CD,
+        NOJO_CD: NOJO_CD,
+      },
+    })
+  }
+}
+
+//検索処理
+function search() {
+  if (validateSearchParams()) {
+    tableData.value = tableDefault()
+  }
 }
 
 //クリア処理
