@@ -327,4 +327,8 @@ th {
 h1 {
   font-size: 24px;
 }
+:deep(.ant-form-item) {
+  width: 100%;
+  margin-bottom: 0;
+}
 </style>
