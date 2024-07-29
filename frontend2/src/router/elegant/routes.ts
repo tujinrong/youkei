@@ -66,7 +66,6 @@ export const generatedRoutes: GeneratedRoute[] = [
         meta: {
           title: 'gj10_gj1030',
           icon: '',
-          roles: ['10', '20', '30'],
           i18nKey: 'route.gj10_gj1030',
         },
       },
@@ -89,7 +88,6 @@ export const generatedRoutes: GeneratedRoute[] = [
         meta: {
           title: 'gj80_gj8090',
           icon: '',
-          roles: ['10', '20', '30'],
           i18nKey: 'route.gj80_gj8090',
         },
       },
