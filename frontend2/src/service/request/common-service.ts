@@ -55,6 +55,32 @@ export function api(
     extra,
   })
 }
+/** Web共通モック */
+export function api2(
+  servicename: string,
+  methodname: string,
+  data?: any,
+  headers?: AxiosRequestHeaders,
+  extra?: {
+    onNextOk?: (data?: DaResponseBase) => void
+    onNextCancel?: (data?: DaResponseBase) => void
+  }
+): Promise<any> {
+  const body = {
+    servicename,
+    methodname,
+    bizrequest: {
+      data: JSON.stringify(data) || '',
+    },
+  }
+  return request({
+    url: '/youkei/WebRequest/' + servicename + '/' + methodname,
+    method: 'post',
+    data: body,
+    headers,
+    extra,
+  })
+}
 
 // /** プレビュー処理 */
 // export function preview(

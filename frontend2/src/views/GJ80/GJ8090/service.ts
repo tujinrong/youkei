@@ -6,7 +6,7 @@
  * 作成者　　: 高 弘昆
  * 変更履歴　:
  * -----------------------------------------------------------------*/
-import { api } from '@/service/request/common-service'
+import { api, api2 } from '@/service/request/common-service'
 
 import {
   DeleteRequest,
@@ -25,7 +25,7 @@ const servicename2 = 'GJ8091'
 /** 初期化処理(一覧画面) */
 export const Init = (): Promise<InitResponse> => {
   const methodname = 'Init'
-  return api(servicename, methodname)
+  return api2(servicename, methodname)
 }
 
 /** 検索処理(一覧画面) */
