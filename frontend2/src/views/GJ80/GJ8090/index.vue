@@ -19,11 +19,12 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref, watch } from 'vue'
+import { onMounted, reactive, ref, watch } from 'vue'
 import { useRoute } from 'vue-router'
 import { PageSatatus } from '@/enum'
 import ListPage from './modules/ListPage.vue'
 import EditPage from './modules/EditPage.vue'
+import { Init } from './service'
 
 //--------------------------------------------------------------------------
 //データ定義
@@ -36,15 +37,15 @@ const props = defineProps<{
   NOJO_CD: number | undefined
 }>()
 const status = ref(props.status)
-
 const KI = ref(props.KI)
 const KEIYAKUSYA_CD = ref(props.KEIYAKUSYA_CD)
 const NOJO_CD = ref(props.NOJO_CD)
 
+const KEIYAKUSYA_CD_NAME_LIST = ref<DaSelectorModel[]>([])
+
 //--------------------------------------------------------------------------
 //フック関数
 //--------------------------------------------------------------------------
-
 onMounted(() => {
   status.value = PageSatatus.List
   if (route.query.status) {
@@ -59,10 +60,8 @@ onMounted(() => {
   if (route.query.NOJO_CD) {
     NOJO_CD.value = +route.query.NOJO_CD
   }
+  getInitData()
 })
-//--------------------------------------------------------------------------
-//計算定義
-//--------------------------------------------------------------------------
 
 //---------------------------------------------------------------------------
 //監視定義
@@ -86,6 +85,16 @@ watch(
   },
   { deep: true }
 )
+
+//--------------------------------------------------------------------------
+//メソッド
+//--------------------------------------------------------------------------
+//初期化処理
+const getInitData = () => {
+  Init().then((res) => {
+    KEIYAKUSYA_CD_NAME_LIST.value = res.KEIYAKUSYA_CD_NAME_LIST
+  })
+}
 </script>
 
 <style lang="less" scoped></style>

@@ -25,11 +25,11 @@ interface CmSaveRequestBase extends DaRequestBase {
 /** 検索処理 */
 interface CmSearchRequestBase extends DaRequestBase {
   /** ページサイズ */
-  pagesize: number
+  PAGE_SIZE: number
   /** ページNo. */
-  pagenum: number
+  PAGE_NUM: number
   /** 並び順 */
-  orderby?: number
+  ORDER_BY?: number
 }
 
 /** upload file */

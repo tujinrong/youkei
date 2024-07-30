@@ -145,8 +145,8 @@
     </a-card>
     <a-card :bordered="false" class="sm:flex-1-hidden" ref="cardRef">
       <a-pagination
-        v-model:current="pageParams.pagenum"
-        v-model:page-size="pageParams.pagesize"
+        v-model:current="pageParams.PAGE_NUM"
+        v-model:page-size="pageParams.PAGE_SIZE"
         :total="totalCount"
         :page-size-options="['10', '25', '50', '100']"
         show-less-items

@@ -82,7 +82,7 @@ export interface InitResponse extends DaResponseBase {
   /**対象期 */
   KI: number
   /**契約者情報プルダウンリスト */
-  KEIYAKUSYA_CD_NAME_LIST: DaSelectorModel
+  KEIYAKUSYA_CD_NAME_LIST: DaSelectorModel[]
 }
 
 /**検索処理(一覧画面) */
