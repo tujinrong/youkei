@@ -31,7 +31,15 @@ const themeStore = useThemeStore()
 const routeStore = useRouteStore()
 const { isFullscreen, toggle } = useFullscreen()
 const { menus } = useMixMenuContext()
-
+const formattedDate = computed(() => {
+  const currentDate = new Date()
+  return currentDate.toLocaleDateString('ja-JP', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+    weekday: 'short',
+  })
+})
 const headerMenus = computed(() => {
   if (themeStore.layout.mode === 'horizontal') {
     return routeStore.menus
@@ -83,6 +91,7 @@ const headerMenus = computed(() => {
         @switch="themeStore.toggleThemeScheme"
       />
       <ThemeButton /> -->
+      <span class="whitespace-nowrap mr-2">{{ formattedDate }}</span>
       <UserAvatar />
     </div>
   </DarkModeContainer>
