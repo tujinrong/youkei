@@ -1,4 +1,4 @@
-import type { App } from 'vue'
+import { reactive, type App } from 'vue'
 import { createPinia } from 'pinia'
 import { resetSetupStore } from './plugins'
 
@@ -10,3 +10,7 @@ export function setupStore(app: App) {
 
   app.use(store)
 }
+
+export const judgeStore = reactive<{
+  [prop: string]: boolean | undefined
+}>({})
