@@ -143,6 +143,7 @@ import { useRoute, useRouter } from 'vue-router'
 import { showDeleteModal, showInfoModal } from '@/utils/modal'
 import {
   DELETE_OK_INFO,
+  ITEM_ILLEGAL_ERROR,
   ITEM_REQUIRE_ERROR,
   SAVE_OK_INFO,
 } from '@/constants/msg'
@@ -152,6 +153,7 @@ import { showSaveModal } from '@/utils/modal'
 import PostCode from '@/components/Selector/PostCode/index.vue'
 import { convertToFullWidth } from '@/utils/util'
 import { KeiyakuNojoSearchDetailVM } from '../type'
+import { Judgement } from '@/utils/judge-edited'
 //---------------------------------------------------------------------------
 //属性
 //---------------------------------------------------------------------------
@@ -168,7 +170,7 @@ const props = defineProps<{
 const router = useRouter()
 const route = useRoute()
 const isNew = props.status === PageSatatus.New
-
+const editJudge = new Judgement()
 const keiyakuNojoSearchDetail = reactive({
   KI: props.KI,
   KEIYAKUSYA_CD: props.KEIYAKUSYA_CD,
@@ -236,8 +238,18 @@ const rules = reactive({
   ],
   ADDR_POST: [
     {
-      required: true,
-      message: ITEM_REQUIRE_ERROR.Msg.replace('{0}', '郵便番号'),
+      validator: async (_rule, value: string) => {
+        if (!value) {
+          return Promise.reject(
+            ITEM_REQUIRE_ERROR.Msg.replace('{0}', '郵便番号')
+          )
+        } else if (value.length < 8) {
+          return Promise.reject(
+            ITEM_ILLEGAL_ERROR.Msg.replace('{0}', '郵便番号')
+          )
+        }
+        return Promise.resolve()
+      },
     },
   ],
   ADDR_2: [
@@ -265,6 +277,7 @@ const { validate, clearValidate, validateInfos, resetFields } = Form.useForm(
 onMounted(async () => {
   if (props.status === PageSatatus.Edit) {
     Object.assign(formData, keiyakuNojoSearchDetail)
+    nextTick(() => editJudge.reset())
   }
 })
 
@@ -280,6 +293,8 @@ watch(
   () => Object.assign(formData, keiyakuNojoSearchDetail),
   { deep: true }
 )
+
+watch(formData, () => editJudge.setEdited())
 
 //都道府県を選択した場合、住所（住所１）の値をセットする
 watch(
@@ -305,9 +320,11 @@ watch(
 //--------------------------------------------------------------------------
 //画面遷移
 const goList = () => {
-  clearValidate()
-  resetFields()
-  router.push({ name: route.name as string })
+  editJudge.judgeIsEdited(() => {
+    clearValidate()
+    resetFields()
+    router.push({ name: route.name as string })
+  })
 }
 const saveData = async () => {
   if (isNew) {
