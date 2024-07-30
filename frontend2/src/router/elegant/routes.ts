@@ -129,15 +129,17 @@ export const generatedRoutes: GeneratedRoute[] = [
       hideInMenu: true,
     },
   },
-  // {
-  //   name: 'todo',
-  //   path: '/todo',
-  //   component: 'layout.base$view.todo',
-  //   meta: {
-  //     title: 'todo',
-  //     i18nKey: 'route.todo'
-  //   }
-  // },
+  {
+    name: 'todo',
+    path: '/todo',
+    component: 'layout.base$view.todo',
+    meta: {
+      title: 'todo',
+      i18nKey: 'route.todo',
+      constant: true,
+      hideInMenu: true,
+    },
+  },
   {
     name: 'user-center',
     path: '/user-center',
