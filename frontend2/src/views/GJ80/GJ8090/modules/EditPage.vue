@@ -359,7 +359,7 @@ const goList = () => {
   router.push({ name: route.name as string })
 }
 const saveData = async () => {
-  nextTick(async () => {
+  if (isNew) {
     switch (formData.NOJO_CD) {
       case 100:
       case 101:
@@ -371,26 +371,26 @@ const saveData = async () => {
           content: '入力されたコードは、すでに登録されています。',
         })
         return
+        break
     }
     await validate()
-    if (isNew) {
-      showSaveModal({
-        content: 'データを登録します。\nよろしいですか？',
-        onOk: () => {
-          router.push({ name: route.name as string })
-          message.success(SAVE_OK_INFO.Msg)
-        },
-      })
-    } else {
-      showSaveModal({
-        content: 'データを更新します。\nよろしいですか？',
-        onOk: () => {
-          router.push({ name: route.name as string })
-          message.success(SAVE_OK_INFO.Msg)
-        },
-      })
-    }
-  })
+    showSaveModal({
+      content: 'データを登録します。\nよろしいですか？',
+      onOk: () => {
+        router.push({ name: route.name as string })
+        message.success(SAVE_OK_INFO.Msg)
+      },
+    })
+  } else {
+    await validate()
+    showSaveModal({
+      content: 'データを更新します。\nよろしいですか？',
+      onOk: () => {
+        router.push({ name: route.name as string })
+        message.success(SAVE_OK_INFO.Msg)
+      },
+    })
+  }
 }
 const deleteData = () => {
   showDeleteModal({
