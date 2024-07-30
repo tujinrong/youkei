@@ -56,7 +56,7 @@ export const generatedRoutes: GeneratedRoute[] = [
         meta: {
           title: 'gj10_gj1010',
           icon: '',
-          roles: ['0'],
+          roles: ['10'],
           i18nKey: 'route.gj10_gj1010',
         },
       },
@@ -67,6 +67,7 @@ export const generatedRoutes: GeneratedRoute[] = [
         meta: {
           title: 'gj10_gj1020',
           icon: '',
+          roles: ['10'],
           i18nKey: 'route.gj10_gj1020',
         },
       },
@@ -87,6 +88,7 @@ export const generatedRoutes: GeneratedRoute[] = [
         meta: {
           title: 'gj10_gj1040',
           icon: '',
+          roles: ['10'],
           i18nKey: 'route.gj10_gj1040',
         },
       },
@@ -97,6 +99,7 @@ export const generatedRoutes: GeneratedRoute[] = [
         meta: {
           title: 'gj10_gj1050',
           icon: '',
+          roles: ['10'],
           i18nKey: 'route.gj10_gj1050',
         },
       },
@@ -107,6 +110,7 @@ export const generatedRoutes: GeneratedRoute[] = [
         meta: {
           title: 'gj10_gj1060',
           icon: '',
+          roles: ['10'],
           i18nKey: 'route.gj10_gj1060',
         },
       },
@@ -117,6 +121,7 @@ export const generatedRoutes: GeneratedRoute[] = [
         meta: {
           title: 'gj10_gj1070',
           icon: '',
+          roles: ['10'],
           i18nKey: 'route.gj10_gj1070',
         },
       },
@@ -140,6 +145,7 @@ export const generatedRoutes: GeneratedRoute[] = [
         meta: {
           title: 'gj20_gj2010',
           icon: '',
+          roles: ['10'],
           i18nKey: 'route.gj20_gj2010',
         },
       },
@@ -150,6 +156,7 @@ export const generatedRoutes: GeneratedRoute[] = [
         meta: {
           title: 'gj20_gj2020',
           icon: '',
+          roles: ['10'],
           i18nKey: 'route.gj20_gj2020',
         },
       },
@@ -160,6 +167,7 @@ export const generatedRoutes: GeneratedRoute[] = [
         meta: {
           title: 'gj20_gj2030',
           icon: '',
+          roles: ['10'],
           i18nKey: 'route.gj20_gj2030',
         },
       },
@@ -170,6 +178,7 @@ export const generatedRoutes: GeneratedRoute[] = [
         meta: {
           title: 'gj20_gj2040',
           icon: '',
+          roles: ['10'],
           i18nKey: 'route.gj20_gj2040',
         },
       },
@@ -180,6 +189,7 @@ export const generatedRoutes: GeneratedRoute[] = [
         meta: {
           title: 'gj20_gj2050',
           icon: '',
+          roles: ['10'],
           i18nKey: 'route.gj20_gj2050',
         },
       },
@@ -190,6 +200,7 @@ export const generatedRoutes: GeneratedRoute[] = [
         meta: {
           title: 'gj20_gj2060',
           icon: '',
+          roles: ['10'],
           i18nKey: 'route.gj20_gj2060',
         },
       },
@@ -200,6 +211,7 @@ export const generatedRoutes: GeneratedRoute[] = [
         meta: {
           title: 'gj20_gj2070',
           icon: '',
+          roles: ['10'],
           i18nKey: 'route.gj20_gj2070',
         },
       },
@@ -210,6 +222,7 @@ export const generatedRoutes: GeneratedRoute[] = [
         meta: {
           title: 'gj20_gj2080',
           icon: '',
+          roles: ['10'],
           i18nKey: 'route.gj20_gj2080',
         },
       },
@@ -220,6 +233,7 @@ export const generatedRoutes: GeneratedRoute[] = [
         meta: {
           title: 'gj20_gj2090',
           icon: '',
+          roles: ['10'],
           i18nKey: 'route.gj20_gj2090',
         },
       },
@@ -230,6 +244,7 @@ export const generatedRoutes: GeneratedRoute[] = [
         meta: {
           title: 'gj20_gj2100',
           icon: '',
+          roles: ['10'],
           i18nKey: 'route.gj20_gj2100',
         },
       },
@@ -240,6 +255,7 @@ export const generatedRoutes: GeneratedRoute[] = [
         meta: {
           title: 'gj20_gj2110',
           icon: '',
+          roles: ['10'],
           i18nKey: 'route.gj20_gj2110',
         },
       },
@@ -250,6 +266,7 @@ export const generatedRoutes: GeneratedRoute[] = [
         meta: {
           title: 'gj20_gj2120',
           icon: '',
+          roles: ['10'],
           i18nKey: 'route.gj20_gj2120',
         },
       },
@@ -273,6 +290,7 @@ export const generatedRoutes: GeneratedRoute[] = [
         meta: {
           title: 'gj30_gj3010',
           icon: '',
+          roles: ['10'],
           i18nKey: 'route.gj30_gj3010',
         },
       },
@@ -283,6 +301,7 @@ export const generatedRoutes: GeneratedRoute[] = [
         meta: {
           title: 'gj30_gj3020',
           icon: '',
+          roles: ['10'],
           i18nKey: 'route.gj30_gj3020',
         },
       },
@@ -293,6 +312,7 @@ export const generatedRoutes: GeneratedRoute[] = [
         meta: {
           title: 'gj30_gj3030',
           icon: '',
+          roles: ['10'],
           i18nKey: 'route.gj30_gj3030',
         },
       },
@@ -316,6 +336,7 @@ export const generatedRoutes: GeneratedRoute[] = [
         meta: {
           title: 'gj40_gj4010',
           icon: '',
+          roles: ['10'],
           i18nKey: 'route.gj40_gj4010',
         },
       },
@@ -326,6 +347,7 @@ export const generatedRoutes: GeneratedRoute[] = [
         meta: {
           title: 'gj40_gj4020',
           icon: '',
+          roles: ['10'],
           i18nKey: 'route.gj40_gj4020',
         },
       },
@@ -336,6 +358,7 @@ export const generatedRoutes: GeneratedRoute[] = [
         meta: {
           title: 'gj40_gj4030',
           icon: '',
+          roles: ['10'],
           i18nKey: 'route.gj40_gj4030',
         },
       },
@@ -346,6 +369,7 @@ export const generatedRoutes: GeneratedRoute[] = [
         meta: {
           title: 'gj40_gj4040',
           icon: '',
+          roles: ['10'],
           i18nKey: 'route.gj40_gj4040',
         },
       },
@@ -356,6 +380,7 @@ export const generatedRoutes: GeneratedRoute[] = [
         meta: {
           title: 'gj40_gj4050',
           icon: '',
+          roles: ['10'],
           i18nKey: 'route.gj40_gj4050',
         },
       },
@@ -366,6 +391,7 @@ export const generatedRoutes: GeneratedRoute[] = [
         meta: {
           title: 'gj40_gj4060',
           icon: '',
+          roles: ['10'],
           i18nKey: 'route.gj40_gj4060',
         },
       },
@@ -376,6 +402,7 @@ export const generatedRoutes: GeneratedRoute[] = [
         meta: {
           title: 'gj40_gj4070',
           icon: '',
+          roles: ['10'],
           i18nKey: 'route.gj40_gj4070',
         },
       },
@@ -399,6 +426,7 @@ export const generatedRoutes: GeneratedRoute[] = [
         meta: {
           title: 'gj50_gj5010',
           icon: '',
+          roles: ['10'],
           i18nKey: 'route.gj50_gj5010',
         },
       },
@@ -422,6 +450,7 @@ export const generatedRoutes: GeneratedRoute[] = [
         meta: {
           title: 'gj60_gj6010',
           icon: '',
+          roles: ['10'],
           i18nKey: 'route.gj60_gj6010',
           order: 1,
         },
@@ -433,6 +462,7 @@ export const generatedRoutes: GeneratedRoute[] = [
         meta: {
           title: 'gj60_gj6020',
           icon: '',
+          // roles: ['10'],
           i18nKey: 'route.gj60_gj6020',
           order: 2,
         },
@@ -444,6 +474,7 @@ export const generatedRoutes: GeneratedRoute[] = [
         meta: {
           title: 'gj60_gj6021',
           icon: '',
+          roles: ['10'],
           i18nKey: 'route.gj60_gj6021',
           order: 5,
         },
@@ -455,6 +486,7 @@ export const generatedRoutes: GeneratedRoute[] = [
         meta: {
           title: 'gj60_gj6030',
           icon: '',
+          roles: ['10'],
           i18nKey: 'route.gj60_gj6030',
           order: 3,
         },
@@ -466,6 +498,7 @@ export const generatedRoutes: GeneratedRoute[] = [
         meta: {
           title: 'gj60_gj6040',
           icon: '',
+          roles: ['10'],
           i18nKey: 'route.gj60_gj6040',
           order: 4,
         },
@@ -490,6 +523,7 @@ export const generatedRoutes: GeneratedRoute[] = [
         meta: {
           title: 'gj70_gj7010',
           icon: '',
+          roles: ['10'],
           i18nKey: 'route.gj70_gj7010',
         },
       },
@@ -500,6 +534,7 @@ export const generatedRoutes: GeneratedRoute[] = [
         meta: {
           title: 'gj70_gj7020',
           icon: '',
+          roles: ['10'],
           i18nKey: 'route.gj70_gj7020',
         },
       },
@@ -510,6 +545,7 @@ export const generatedRoutes: GeneratedRoute[] = [
         meta: {
           title: 'gj70_gj7030',
           icon: '',
+          roles: ['10'],
           i18nKey: 'route.gj70_gj7030',
         },
       },
@@ -533,6 +569,7 @@ export const generatedRoutes: GeneratedRoute[] = [
         meta: {
           title: 'gj80_gj8010',
           icon: '',
+          roles: ['10'],
           i18nKey: 'route.gj80_gj8010',
         },
       },
@@ -543,6 +580,7 @@ export const generatedRoutes: GeneratedRoute[] = [
         meta: {
           title: 'gj80_gj8020',
           icon: '',
+          roles: ['10'],
           i18nKey: 'route.gj80_gj8020',
         },
       },
@@ -553,6 +591,7 @@ export const generatedRoutes: GeneratedRoute[] = [
         meta: {
           title: 'gj80_gj8030',
           icon: '',
+          roles: ['10'],
           i18nKey: 'route.gj80_gj8030',
         },
       },
@@ -563,6 +602,7 @@ export const generatedRoutes: GeneratedRoute[] = [
         meta: {
           title: 'gj80_gj8040',
           icon: '',
+          roles: ['10'],
           i18nKey: 'route.gj80_gj8040',
         },
       },
@@ -573,6 +613,7 @@ export const generatedRoutes: GeneratedRoute[] = [
         meta: {
           title: 'gj80_gj8050',
           icon: '',
+          roles: ['10'],
           i18nKey: 'route.gj80_gj8050',
         },
       },
@@ -583,6 +624,7 @@ export const generatedRoutes: GeneratedRoute[] = [
         meta: {
           title: 'gj80_gj8060',
           icon: '',
+          roles: ['10'],
           i18nKey: 'route.gj80_gj8060',
         },
       },
@@ -593,6 +635,7 @@ export const generatedRoutes: GeneratedRoute[] = [
         meta: {
           title: 'gj80_gj8070',
           icon: '',
+          roles: ['10'],
           i18nKey: 'route.gj80_gj8070',
         },
       },
@@ -603,6 +646,7 @@ export const generatedRoutes: GeneratedRoute[] = [
         meta: {
           title: 'gj80_gj8080',
           icon: '',
+          roles: ['10'],
           i18nKey: 'route.gj80_gj8080',
         },
       },
@@ -623,6 +667,7 @@ export const generatedRoutes: GeneratedRoute[] = [
         meta: {
           title: 'gj80_gj8100',
           icon: '',
+          roles: ['10'],
           i18nKey: 'route.gj80_gj8100',
         },
       },
