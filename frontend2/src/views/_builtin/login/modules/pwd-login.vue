@@ -19,8 +19,8 @@ interface FormModel {
 }
 
 const model: FormModel = reactive({
-  userid: '1',
-  pword: '1',
+  userid: '',
+  pword: '',
 })
 
 const rules = reactive<Record<keyof FormModel, App.Global.FormRule[]>>({
