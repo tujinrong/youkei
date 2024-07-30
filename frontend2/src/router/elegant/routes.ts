@@ -44,6 +44,7 @@ export const generatedRoutes: GeneratedRoute[] = [
     component: 'layout.base',
     meta: {
       title: 'gj10',
+      icon: '',
       i18nKey: 'route.gj10',
       order: 2,
     },
@@ -60,6 +61,16 @@ export const generatedRoutes: GeneratedRoute[] = [
         },
       },
       {
+        name: 'gj10_gj1020',
+        path: '/gj10/gj1020',
+        component: 'view.gj10_gj1020',
+        meta: {
+          title: 'gj10_gj1020',
+          icon: '',
+          i18nKey: 'route.gj10_gj1020',
+        },
+      },
+      {
         name: 'gj10_gj1030',
         path: '/gj10/gj1030',
         component: 'view.gj10_gj1030',
@@ -67,6 +78,439 @@ export const generatedRoutes: GeneratedRoute[] = [
           title: 'gj10_gj1030',
           icon: '',
           i18nKey: 'route.gj10_gj1030',
+        },
+      },
+      {
+        name: 'gj10_gj1040',
+        path: '/gj10/gj1040',
+        component: 'view.gj10_gj1040',
+        meta: {
+          title: 'gj10_gj1040',
+          icon: '',
+          i18nKey: 'route.gj10_gj1040',
+        },
+      },
+      {
+        name: 'gj10_gj1050',
+        path: '/gj10/gj1050',
+        component: 'view.gj10_gj1050',
+        meta: {
+          title: 'gj10_gj1050',
+          icon: '',
+          i18nKey: 'route.gj10_gj1050',
+        },
+      },
+      {
+        name: 'gj10_gj1060',
+        path: '/gj10/gj1060',
+        component: 'view.gj10_gj1060',
+        meta: {
+          title: 'gj10_gj1060',
+          icon: '',
+          i18nKey: 'route.gj10_gj1060',
+        },
+      },
+      {
+        name: 'gj10_gj1070',
+        path: '/gj10/gj1070',
+        component: 'view.gj10_gj1070',
+        meta: {
+          title: 'gj10_gj1070',
+          icon: '',
+          i18nKey: 'route.gj10_gj1070',
+        },
+      },
+    ],
+  },
+  {
+    name: 'gj20',
+    path: '/gj20',
+    component: 'layout.base',
+    meta: {
+      title: 'gj20',
+      icon: '',
+      i18nKey: 'route.gj20',
+      order: 3,
+    },
+    children: [
+      {
+        name: 'gj20_gj2010',
+        path: '/gj20/gj2010',
+        component: 'view.gj20_gj2010',
+        meta: {
+          title: 'gj20_gj2010',
+          icon: '',
+          i18nKey: 'route.gj20_gj2010',
+        },
+      },
+      {
+        name: 'gj20_gj2020',
+        path: '/gj20/gj2020',
+        component: 'view.gj20_gj2020',
+        meta: {
+          title: 'gj20_gj2020',
+          icon: '',
+          i18nKey: 'route.gj20_gj2020',
+        },
+      },
+      {
+        name: 'gj20_gj2030',
+        path: '/gj20/gj2030',
+        component: 'view.gj20_gj2030',
+        meta: {
+          title: 'gj20_gj2030',
+          icon: '',
+          i18nKey: 'route.gj20_gj2030',
+        },
+      },
+      {
+        name: 'gj20_gj2040',
+        path: '/gj20/gj2040',
+        component: 'view.gj20_gj2040',
+        meta: {
+          title: 'gj20_gj2040',
+          icon: '',
+          i18nKey: 'route.gj20_gj2040',
+        },
+      },
+      {
+        name: 'gj20_gj2050',
+        path: '/gj20/gj2050',
+        component: 'view.gj20_gj2050',
+        meta: {
+          title: 'gj20_gj2050',
+          icon: '',
+          i18nKey: 'route.gj20_gj2050',
+        },
+      },
+      {
+        name: 'gj20_gj2060',
+        path: '/gj20/gj2060',
+        component: 'view.gj20_gj2060',
+        meta: {
+          title: 'gj20_gj2060',
+          icon: '',
+          i18nKey: 'route.gj20_gj2060',
+        },
+      },
+      {
+        name: 'gj20_gj2070',
+        path: '/gj20/gj2070',
+        component: 'view.gj20_gj2070',
+        meta: {
+          title: 'gj20_gj2070',
+          icon: '',
+          i18nKey: 'route.gj20_gj2070',
+        },
+      },
+      {
+        name: 'gj20_gj2080',
+        path: '/gj20/gj2080',
+        component: 'view.gj20_gj2080',
+        meta: {
+          title: 'gj20_gj2080',
+          icon: '',
+          i18nKey: 'route.gj20_gj2080',
+        },
+      },
+      {
+        name: 'gj20_gj2090',
+        path: '/gj20/gj2090',
+        component: 'view.gj20_gj2090',
+        meta: {
+          title: 'gj20_gj2090',
+          icon: '',
+          i18nKey: 'route.gj20_gj2090',
+        },
+      },
+      {
+        name: 'gj20_gj2100',
+        path: '/gj20/gj2100',
+        component: 'view.gj20_gj2100',
+        meta: {
+          title: 'gj20_gj2100',
+          icon: '',
+          i18nKey: 'route.gj20_gj2100',
+        },
+      },
+      {
+        name: 'gj20_gj2110',
+        path: '/gj20/gj2110',
+        component: 'view.gj20_gj2110',
+        meta: {
+          title: 'gj20_gj2110',
+          icon: '',
+          i18nKey: 'route.gj20_gj2110',
+        },
+      },
+      {
+        name: 'gj20_gj2120',
+        path: '/gj20/gj2120',
+        component: 'view.gj20_gj2120',
+        meta: {
+          title: 'gj20_gj2120',
+          icon: '',
+          i18nKey: 'route.gj20_gj2120',
+        },
+      },
+    ],
+  },
+  {
+    name: 'gj30',
+    path: '/gj30',
+    component: 'layout.base',
+    meta: {
+      title: 'gj30',
+      icon: '',
+      i18nKey: 'route.gj30',
+      order: 4,
+    },
+    children: [
+      {
+        name: 'gj30_gj3010',
+        path: '/gj30/gj3010',
+        component: 'view.gj30_gj3010',
+        meta: {
+          title: 'gj30_gj3010',
+          icon: '',
+          i18nKey: 'route.gj30_gj3010',
+        },
+      },
+      {
+        name: 'gj30_gj3020',
+        path: '/gj30/gj3020',
+        component: 'view.gj30_gj3020',
+        meta: {
+          title: 'gj30_gj3020',
+          icon: '',
+          i18nKey: 'route.gj30_gj3020',
+        },
+      },
+      {
+        name: 'gj30_gj3030',
+        path: '/gj30/gj3030',
+        component: 'view.gj30_gj3030',
+        meta: {
+          title: 'gj30_gj3030',
+          icon: '',
+          i18nKey: 'route.gj30_gj3030',
+        },
+      },
+    ],
+  },
+  {
+    name: 'gj40',
+    path: '/gj40',
+    component: 'layout.base',
+    meta: {
+      title: 'gj40',
+      icon: '',
+      i18nKey: 'route.gj40',
+      order: 5,
+    },
+    children: [
+      {
+        name: 'gj40_gj4010',
+        path: '/gj40/gj4010',
+        component: 'view.gj40_gj4010',
+        meta: {
+          title: 'gj40_gj4010',
+          icon: '',
+          i18nKey: 'route.gj40_gj4010',
+        },
+      },
+      {
+        name: 'gj40_gj4020',
+        path: '/gj40/gj4020',
+        component: 'view.gj40_gj4020',
+        meta: {
+          title: 'gj40_gj4020',
+          icon: '',
+          i18nKey: 'route.gj40_gj4020',
+        },
+      },
+      {
+        name: 'gj40_gj4030',
+        path: '/gj40/gj4030',
+        component: 'view.gj40_gj4030',
+        meta: {
+          title: 'gj40_gj4030',
+          icon: '',
+          i18nKey: 'route.gj40_gj4030',
+        },
+      },
+      {
+        name: 'gj40_gj4040',
+        path: '/gj40/gj4040',
+        component: 'view.gj40_gj4040',
+        meta: {
+          title: 'gj40_gj4040',
+          icon: '',
+          i18nKey: 'route.gj40_gj4040',
+        },
+      },
+      {
+        name: 'gj40_gj4050',
+        path: '/gj40/gj4050',
+        component: 'view.gj40_gj4050',
+        meta: {
+          title: 'gj40_gj4050',
+          icon: '',
+          i18nKey: 'route.gj40_gj4050',
+        },
+      },
+      {
+        name: 'gj40_gj4060',
+        path: '/gj40/gj4060',
+        component: 'view.gj40_gj4060',
+        meta: {
+          title: 'gj40_gj4060',
+          icon: '',
+          i18nKey: 'route.gj40_gj4060',
+        },
+      },
+      {
+        name: 'gj40_gj4070',
+        path: '/gj40/gj4070',
+        component: 'view.gj40_gj4070',
+        meta: {
+          title: 'gj40_gj4070',
+          icon: '',
+          i18nKey: 'route.gj40_gj4070',
+        },
+      },
+    ],
+  },
+  {
+    name: 'gj50',
+    path: '/gj50',
+    component: 'layout.base',
+    meta: {
+      title: 'gj50',
+      icon: '',
+      i18nKey: 'route.gj50',
+      order: 6,
+    },
+    children: [
+      {
+        name: 'gj50_gj5010',
+        path: '/gj50/gj5010',
+        component: 'view.gj50_gj5010',
+        meta: {
+          title: 'gj50_gj5010',
+          icon: '',
+          i18nKey: 'route.gj50_gj5010',
+        },
+      },
+    ],
+  },
+  {
+    name: 'gj60',
+    path: '/gj60',
+    component: 'layout.base',
+    meta: {
+      title: 'gj60',
+      icon: '',
+      i18nKey: 'route.gj60',
+      order: 7,
+    },
+    children: [
+      {
+        name: 'gj60_gj6010',
+        path: '/gj60/gj6010',
+        component: 'view.gj60_gj6010',
+        meta: {
+          title: 'gj60_gj6010',
+          icon: '',
+          i18nKey: 'route.gj60_gj6010',
+          order: 1,
+        },
+      },
+      {
+        name: 'gj60_gj6020',
+        path: '/gj60/gj6020',
+        component: 'view.gj60_gj6020',
+        meta: {
+          title: 'gj60_gj6020',
+          icon: '',
+          i18nKey: 'route.gj60_gj6020',
+          order: 2,
+        },
+      },
+      {
+        name: 'gj60_gj6021',
+        path: '/gj60/gj6021',
+        component: 'view.gj60_gj6021',
+        meta: {
+          title: 'gj60_gj6021',
+          icon: '',
+          i18nKey: 'route.gj60_gj6021',
+          order: 5,
+        },
+      },
+      {
+        name: 'gj60_gj6030',
+        path: '/gj60/gj6030',
+        component: 'view.gj60_gj6030',
+        meta: {
+          title: 'gj60_gj6030',
+          icon: '',
+          i18nKey: 'route.gj60_gj6030',
+          order: 3,
+        },
+      },
+      {
+        name: 'gj60_gj6040',
+        path: '/gj60/gj6040',
+        component: 'view.gj60_gj6040',
+        meta: {
+          title: 'gj60_gj6040',
+          icon: '',
+          i18nKey: 'route.gj60_gj6040',
+          order: 4,
+        },
+      },
+    ],
+  },
+  {
+    name: 'gj70',
+    path: '/gj70',
+    component: 'layout.base',
+    meta: {
+      title: 'gj70',
+      icon: '',
+      i18nKey: 'route.gj70',
+      order: 8,
+    },
+    children: [
+      {
+        name: 'gj70_gj7010',
+        path: '/gj70/gj7010',
+        component: 'view.gj70_gj7010',
+        meta: {
+          title: 'gj70_gj7010',
+          icon: '',
+          i18nKey: 'route.gj70_gj7010',
+        },
+      },
+      {
+        name: 'gj70_gj7020',
+        path: '/gj70/gj7020',
+        component: 'view.gj70_gj7020',
+        meta: {
+          title: 'gj70_gj7020',
+          icon: '',
+          i18nKey: 'route.gj70_gj7020',
+        },
+      },
+      {
+        name: 'gj70_gj7030',
+        path: '/gj70/gj7030',
+        component: 'view.gj70_gj7030',
+        meta: {
+          title: 'gj70_gj7030',
+          icon: '',
+          i18nKey: 'route.gj70_gj7030',
         },
       },
     ],
@@ -77,10 +521,91 @@ export const generatedRoutes: GeneratedRoute[] = [
     component: 'layout.base',
     meta: {
       title: 'gj80',
+      icon: '',
       i18nKey: 'route.gj80',
-      order: 3,
+      order: 9,
     },
     children: [
+      {
+        name: 'gj80_gj8010',
+        path: '/gj80/gj8010',
+        component: 'view.gj80_gj8010',
+        meta: {
+          title: 'gj80_gj8010',
+          icon: '',
+          i18nKey: 'route.gj80_gj8010',
+        },
+      },
+      {
+        name: 'gj80_gj8020',
+        path: '/gj80/gj8020',
+        component: 'view.gj80_gj8020',
+        meta: {
+          title: 'gj80_gj8020',
+          icon: '',
+          i18nKey: 'route.gj80_gj8020',
+        },
+      },
+      {
+        name: 'gj80_gj8030',
+        path: '/gj80/gj8030',
+        component: 'view.gj80_gj8030',
+        meta: {
+          title: 'gj80_gj8030',
+          icon: '',
+          i18nKey: 'route.gj80_gj8030',
+        },
+      },
+      {
+        name: 'gj80_gj8040',
+        path: '/gj80/gj8040',
+        component: 'view.gj80_gj8040',
+        meta: {
+          title: 'gj80_gj8040',
+          icon: '',
+          i18nKey: 'route.gj80_gj8040',
+        },
+      },
+      {
+        name: 'gj80_gj8050',
+        path: '/gj80/gj8050',
+        component: 'view.gj80_gj8050',
+        meta: {
+          title: 'gj80_gj8050',
+          icon: '',
+          i18nKey: 'route.gj80_gj8050',
+        },
+      },
+      {
+        name: 'gj80_gj8060',
+        path: '/gj80/gj8060',
+        component: 'view.gj80_gj8060',
+        meta: {
+          title: 'gj80_gj8060',
+          icon: '',
+          i18nKey: 'route.gj80_gj8060',
+        },
+      },
+      {
+        name: 'gj80_gj8070',
+        path: '/gj80/gj8070',
+        component: 'view.gj80_gj8070',
+        meta: {
+          title: 'gj80_gj8070',
+          icon: '',
+          i18nKey: 'route.gj80_gj8070',
+        },
+      },
+      {
+        name: 'gj80_gj8080',
+        path: '/gj80/gj8080',
+        component: 'view.gj80_gj8080',
+        meta: {
+          title: 'gj80_gj8080',
+          icon: '',
+          i18nKey: 'route.gj80_gj8080',
+        },
+      },
       {
         name: 'gj80_gj8090',
         path: '/gj80/gj8090',
@@ -89,6 +614,16 @@ export const generatedRoutes: GeneratedRoute[] = [
           title: 'gj80_gj8090',
           icon: '',
           i18nKey: 'route.gj80_gj8090',
+        },
+      },
+      {
+        name: 'gj80_gj8100',
+        path: '/gj80/gj8100',
+        component: 'view.gj80_gj8100',
+        meta: {
+          title: 'gj80_gj8100',
+          icon: '',
+          i18nKey: 'route.gj80_gj8100',
         },
       },
     ],
