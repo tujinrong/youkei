@@ -135,6 +135,10 @@ const router = useRouter()
 const route = useRoute()
 const tabStore = useTabStore()
 
+const props = defineProps<{
+  KEIYAKUSYA_CD_NAME_LIST: DaSelectorModel[]
+}>()
+
 const createDefaultParams = (): SearchRequest => {
   return {
     KI: 8,
@@ -189,11 +193,11 @@ const { pageParams, totalCount, searchData, clear } = useSearch({
   params: toRef(() => searchParams),
 })
 
-const KEIYAKUSYA_CD_NAME_LIST = ref<DaSelectorModel[]>([
-  { value: 1, label: '永玉田中' },
-  { value: 2, label: '尾三玉田' },
-  { value: 3, label: '史玉浅海' },
-])
+// const KEIYAKUSYA_CD_NAME_LIST = ref<DaSelectorModel[]>([
+//   { value: 1, label: '永玉田中' },
+//   { value: 2, label: '尾三玉田' },
+//   { value: 3, label: '史玉浅海' },
+// ])
 
 const cardRef = ref()
 const { height } = useElementSize(cardRef)

@@ -1,7 +1,7 @@
 <template>
   <div>
     <div v-show="status === PageSatatus.List" class="h-full">
-      <ListPage />
+      <ListPage :KEIYAKUSYA_CD_NAME_LIST="KEIYAKUSYA_CD_NAME_LIST" />
     </div>
     <div
       v-if="status === PageSatatus.New || status === PageSatatus.Edit"
@@ -13,6 +13,7 @@
         :KI="KI"
         :KEIYAKUSYA_CD="KEIYAKUSYA_CD"
         :NOJO_CD="NOJO_CD"
+        :KEIYAKUSYA_CD_NAME_LIST="KEIYAKUSYA_CD_NAME_LIST"
       />
     </div>
   </div>
@@ -32,8 +33,8 @@ import { Init } from './service'
 const route = useRoute()
 const props = defineProps<{
   status: PageSatatus
-  KI: number | undefined
-  KEIYAKUSYA_CD: number | undefined
+  KI: number
+  KEIYAKUSYA_CD: number
   NOJO_CD: number | undefined
 }>()
 const status = ref(props.status)

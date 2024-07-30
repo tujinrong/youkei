@@ -162,6 +162,7 @@ const props = defineProps<{
   KI: number
   KEIYAKUSYA_CD: number
   NOJO_CD: number | undefined
+  KEIYAKUSYA_CD_NAME_LIST: DaSelectorModel[]
 }>()
 
 //--------------------------------------------------------------------------
@@ -211,11 +212,11 @@ const fakeFormData1 = reactive({
 
 const formData = reactive(fakeFormData1)
 
-const KEIYAKUSYA_CD_NAME_LIST = ref<DaSelectorModel[]>([
-  { value: 1, label: '永玉田中' },
-  { value: 2, label: '尾三玉田' },
-  { value: 3, label: '史玉浅海' },
-])
+// const KEIYAKUSYA_CD_NAME_LIST = ref<DaSelectorModel[]>([
+//   { value: 1, label: '永玉田中' },
+//   { value: 2, label: '尾三玉田' },
+//   { value: 3, label: '史玉浅海' },
+// ])
 
 const rules = reactive({
   NOJO_CD: [
