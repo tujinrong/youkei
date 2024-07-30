@@ -138,7 +138,7 @@
 
 <script setup lang="ts">
 import { PageSatatus } from '@/enum'
-import { nextTick, onMounted, reactive, ref, watch } from 'vue'
+import { computed, nextTick, onMounted, reactive, ref, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { showDeleteModal, showInfoModal } from '@/utils/modal'
 import {
@@ -382,5 +382,8 @@ h1 {
 :deep(.ant-form-item) {
   width: 100%;
   margin-bottom: 0;
+}
+:deep(.ant-input-number-input:disabled) {
+  color: gray;
 }
 </style>
