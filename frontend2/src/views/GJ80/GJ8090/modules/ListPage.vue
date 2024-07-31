@@ -50,12 +50,12 @@
           <a-col v-bind="layout">
             <th>農場名</th>
             <td>
-              <!-- <a-form-item> -->
-              <a-input
-                v-model:value="searchParams.NOJO_NAME"
-                :maxlength="20"
-              ></a-input>
-              <!-- </a-form-item> -->
+              <a-form-item>
+                <a-input
+                  v-model:value="searchParams.NOJO_NAME"
+                  :maxlength="20"
+                ></a-input>
+              </a-form-item>
             </td>
           </a-col>
         </a-row>
@@ -124,11 +124,10 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, reactive, toRef, watch, onMounted } from 'vue'
+import { ref, reactive, toRef, watch } from 'vue'
 import { useRouter, useRoute, onBeforeRouteUpdate } from 'vue-router'
 import { EnumAndOr, PageSatatus } from '@/enum'
 import useSearch from '@/hooks/useSearch'
-import { showInfoModal } from '@/utils/modal'
 import { ITEM_REQUIRE_ERROR } from '@/constants/msg'
 import { changeTableSort, convertToFullWidth } from '@/utils/util'
 import { useTabStore } from '@/store/modules/tab'
@@ -144,10 +143,6 @@ const router = useRouter()
 const route = useRoute()
 const tabStore = useTabStore()
 
-onMounted(() => {
-  console.log(props.KI)
-})
-
 const props = defineProps<{
   KI: number
   KEIYAKUSYA_CD_NAME_LIST: DaSelectorModel[]
@@ -158,12 +153,27 @@ const createDefaultParams = (): SearchRequest => {
     KI: props.KI,
     KEIYAKUSYA_CD: undefined,
     NOJO_CD: undefined,
-    NOJO_NAME: '',
+    NOJO_NAME: undefined,
     SEARCH_METHOD: EnumAndOr.And,
   } as SearchRequest
 }
-
 const searchParams = reactive(createDefaultParams())
+
+const tableData = ref<KeiyakuNojoSearchVM[]>([])
+
+//表の高さ
+const headRef = ref(null)
+const layout = {
+  md: 12,
+  lg: 12,
+  xl: 8,
+  xxl: 6,
+}
+const cardRef = ref()
+const { height } = useElementSize(cardRef)
+//--------------------------------------------------------------------------
+//計算定義
+//--------------------------------------------------------------------------
 
 const rules = reactive({
   KI: [
@@ -204,62 +214,6 @@ const { validate, clearValidate, validateInfos } = Form.useForm(
   searchParams,
   rules
 )
-
-// const tableDefault = (): KeiyakuNojoSearchVM[] => {
-//   return [
-//     {
-//       NOJO_CD: 100,
-//       NOJO_NAME: '東京都千代田区農場',
-//       ADDR: '〒100-0001 東京都千代田区丸の内1丁目1-1',
-//     },
-//     {
-//       NOJO_CD: 101,
-//       NOJO_NAME: '大阪府大阪市北区農場',
-//       ADDR: '〒530-0001 大阪府大阪市北区梅田3丁目1-1',
-//     },
-//     {
-//       NOJO_CD: 102,
-//       NOJO_NAME: '京都府京都市下農場',
-//       ADDR: '〒600-8216 京都府京都市下京区東塩小路町901',
-//     },
-//     {
-//       NOJO_CD: 103,
-//       NOJO_NAME: '福岡県福岡市博多区農場',
-//       ADDR: '〒812-0011 福岡県福岡市博多区博多駅前3丁目2-1',
-//     },
-//   ]
-// }
-
-const tableData = ref<KeiyakuNojoSearchVM[]>([])
-
-//表の高さ
-const headRef = ref(null)
-const layout = {
-  md: 12,
-  lg: 12,
-  xl: 8,
-  xxl: 6,
-}
-
-const { pageParams, totalCount, searchData, clear } = useSearch({
-  service: Search,
-  source: tableData,
-  params: toRef(() => searchParams),
-  validate,
-})
-
-// const KEIYAKUSYA_CD_NAME_LIST = ref<DaSelectorModel[]>([
-//   { value: 1, label: '永玉田中' },
-//   { value: 2, label: '尾三玉田' },
-//   { value: 3, label: '史玉浅海' },
-// ])
-
-const cardRef = ref()
-const { height } = useElementSize(cardRef)
-//--------------------------------------------------------------------------
-//計算定義
-//--------------------------------------------------------------------------
-
 //---------------------------------------------------------------------------
 //フック関数
 //--------------------------------------------------------------------------
@@ -272,28 +226,7 @@ onBeforeRouteUpdate((to, from) => {
 //メソッド
 //--------------------------------------------------------------------------
 
-function validateSearchParams() {
-  let flag = true
-  if (!searchParams.KI) {
-    showInfoModal({
-      type: 'error',
-      title: 'エラー',
-      content: ITEM_REQUIRE_ERROR.Msg.replace('{0}', '期'),
-    })
-    flag = false
-  } else if (!searchParams.KEIYAKUSYA_CD) {
-    showInfoModal({
-      type: 'error',
-      title: 'エラー',
-      content: ITEM_REQUIRE_ERROR.Msg.replace('{0}', '契約者'),
-    })
-    flag = false
-  }
-  return flag
-}
-
-const forwardNew = async () => {
-  // if (validateSearchParams()) {
+async function forwardNew() {
   await validate()
   router.push({
     name: route.name as string,
@@ -305,35 +238,32 @@ const forwardNew = async () => {
   })
   // }
 }
-
-function forwardEdit(NOJO_CD) {
-  if (validateSearchParams()) {
-    router.push({
-      name: route.name as string,
-      query: {
-        status: PageSatatus.Edit,
-        KI: searchParams.KI,
-        KEIYAKUSYA_CD: searchParams.KEIYAKUSYA_CD,
-        NOJO_CD: NOJO_CD,
-      },
-    })
-  }
-}
-
-//検索処理
-function search() {
-  if (validateSearchParams()) {
-    tableData.value = tableDefault()
-  }
+async function forwardEdit(NOJO_CD) {
+  await validate()
+  router.push({
+    name: route.name as string,
+    query: {
+      status: PageSatatus.Edit,
+      KI: searchParams.KI,
+      KEIYAKUSYA_CD: searchParams.KEIYAKUSYA_CD,
+      NOJO_CD: NOJO_CD,
+    },
+  })
 }
 
 //クリア処理
 function reset() {
-  console.log('666')
-  console.log(tableData.value)
   Object.assign(searchParams, createDefaultParams())
   tableData.value = []
 }
+
+//検索処理
+const { pageParams, totalCount, searchData, clear } = useSearch({
+  service: Search,
+  source: tableData,
+  params: toRef(() => searchParams),
+  validate,
+})
 
 //--------------------------------------------------------------------------
 //監視定義
