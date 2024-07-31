@@ -91,11 +91,14 @@ let currentPath = ''
 onMounted(() => {
   const menuItems = document.querySelectorAll('.ant-menu-item')
   menuItems.forEach((item) => {
-    item.addEventListener('contextmenu', (event) => {
-      event.preventDefault()
-      showMenu(event)
-      currentPath = item.getAttribute('routepath') ?? ''
-    })
+    const disabled = item.classList.contains('ant-menu-item-disabled')
+    if (!disabled) {
+      item.addEventListener('contextmenu', (event) => {
+        event.preventDefault()
+        showMenu(event)
+        currentPath = item.getAttribute('routepath') ?? ''
+      })
+    }
   })
 })
 
