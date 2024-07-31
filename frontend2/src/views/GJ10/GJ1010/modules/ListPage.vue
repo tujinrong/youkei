@@ -197,13 +197,13 @@
         <vxe-column
           field="KEIYAKU_KBN"
           title="契約区分"
-          min-width="150"
+          min-width="120"
           sortable
         ></vxe-column>
         <vxe-column
           field="KEIYAKU_JYOKYO"
           title="契約状況"
-          min-width="150"
+          min-width="120"
           sortable
         ></vxe-column>
         <vxe-column
@@ -215,7 +215,7 @@
         <vxe-column
           field="KEN_CD1"
           title="都道府県"
-          min-width="200"
+          min-width="150"
           sortable
         ></vxe-column>
         <vxe-column
@@ -307,7 +307,6 @@ function search() {
     })
     return
   }
-  debugger
   tableData.value.push(tableDefault)
 }
 
