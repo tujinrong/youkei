@@ -1,7 +1,7 @@
 <template>
   <div>
     <div v-show="status === PageSatatus.List" class="h-full">
-      <ListPage :KI="KI" :KEIYAKUSYA_CD_NAME_LIST="KEIYAKUSYA_CD_NAME_LIST" />
+      <ListPage />
     </div>
     <div
       v-if="status === PageSatatus.New || status === PageSatatus.Edit"
@@ -19,7 +19,6 @@ import { useRoute } from 'vue-router'
 import { PageSatatus } from '@/enum'
 import ListPage from './modules/ListPage.vue'
 import EditPage from './modules/EditPage.vue'
-import { Init } from './service'
 
 //--------------------------------------------------------------------------
 //データ定義
@@ -28,16 +27,10 @@ const route = useRoute()
 
 const status = ref(PageSatatus.List)
 
-//TODO
-const KI = ref<number>(8)
-
-const KEIYAKUSYA_CD_NAME_LIST = ref<DaSelectorModel[]>([])
-
 //--------------------------------------------------------------------------
 //フック関数
 //--------------------------------------------------------------------------
 onMounted(() => {
-  getInitData()
   if (route.query.status) {
     status.value = +route.query.status
   }
@@ -60,13 +53,6 @@ watch(
 //--------------------------------------------------------------------------
 //メソッド
 //--------------------------------------------------------------------------
-//初期化処理
-const getInitData = () => {
-  Init().then((res) => {
-    KI.value = res.KI
-    KEIYAKUSYA_CD_NAME_LIST.value = res.KEIYAKUSYA_CD_NAME_LIST
-  })
-}
 </script>
 
 <style lang="less" scoped></style>

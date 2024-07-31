@@ -124,7 +124,7 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, reactive, toRef, watch } from 'vue'
+import { ref, reactive, toRef, watch, onMounted } from 'vue'
 import { useRouter, useRoute, onBeforeRouteUpdate } from 'vue-router'
 import { EnumAndOr, PageSatatus } from '@/enum'
 import useSearch from '@/hooks/useSearch'
@@ -133,7 +133,7 @@ import { changeTableSort, convertToFullWidth } from '@/utils/util'
 import { useTabStore } from '@/store/modules/tab'
 import { useElementSize } from '@vueuse/core'
 import { KeiyakuNojoSearchVM, SearchRequest } from '@/views/GJ80/GJ8090/type'
-import { Search } from '../service'
+import { Init, Search } from '../service'
 import { Form } from 'ant-design-vue'
 
 //--------------------------------------------------------------------------
@@ -143,14 +143,9 @@ const router = useRouter()
 const route = useRoute()
 const tabStore = useTabStore()
 
-const props = defineProps<{
-  KI: number
-  KEIYAKUSYA_CD_NAME_LIST: DaSelectorModel[]
-}>()
-
 const createDefaultParams = (): SearchRequest => {
   return {
-    KI: props.KI,
+    KI: undefined as number | undefined,
     KEIYAKUSYA_CD: undefined,
     NOJO_CD: undefined,
     NOJO_NAME: undefined,
@@ -158,7 +153,7 @@ const createDefaultParams = (): SearchRequest => {
   } as SearchRequest
 }
 const searchParams = reactive(createDefaultParams())
-
+const KEIYAKUSYA_CD_NAME_LIST = ref<DaSelectorModel[]>([])
 const tableData = ref<KeiyakuNojoSearchVM[]>([])
 
 //表の高さ
@@ -217,6 +212,17 @@ const { validate, clearValidate, validateInfos } = Form.useForm(
 //---------------------------------------------------------------------------
 //フック関数
 //--------------------------------------------------------------------------
+onMounted(() => {
+  getInitData()
+})
+
+//初期化処理
+const getInitData = () => {
+  Init().then((res) => {
+    searchParams.KI = res.KI
+    KEIYAKUSYA_CD_NAME_LIST.value = res.KEIYAKUSYA_CD_NAME_LIST
+  })
+}
 
 onBeforeRouteUpdate((to, from) => {
   if (to.query.refresh) {
@@ -254,6 +260,7 @@ async function forwardEdit(NOJO_CD) {
 //クリア処理
 function reset() {
   Object.assign(searchParams, createDefaultParams())
+  searchParams.KI = 8
   tableData.value = []
 }
 
@@ -277,6 +284,13 @@ watch(
   }
 )
 
+watch(
+  () => searchParams.KI,
+  (newVal) => {
+    if (newVal) {
+    }
+  }
+)
 watch(
   () => searchParams.KEIYAKUSYA_CD,
   (newVal) => {
