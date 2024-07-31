@@ -137,7 +137,7 @@
 
 <script setup lang="ts">
 import { PageSatatus } from '@/enum'
-import {  nextTick, onMounted, reactive, ref, watch } from 'vue'
+import { nextTick, onMounted, reactive, ref, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { showDeleteModal, showInfoModal } from '@/utils/modal'
 import {
@@ -159,9 +159,9 @@ import { InitDetail, SearchDetail } from '../service'
 //---------------------------------------------------------------------------
 const props = defineProps<{
   status: PageSatatus
-  KI: number|undefined
-  KEIYAKUSYA_CD: number|undefined
-  NOJO_CD: number|undefined
+  // KI: number|undefined
+  // KEIYAKUSYA_CD: number|undefined
+  // NOJO_CD: number|undefined
 }>()
 
 //--------------------------------------------------------------------------
@@ -175,9 +175,9 @@ const editJudge = new Judgement()
 const KEN_CD_NAME_LIST = ref<DaSelectorModel[]>([])
 
 const formData = reactive({
-  KI: props.KI,
-  KEIYAKUSYA_CD: props.KEIYAKUSYA_CD,
-  NOJO_CD: undefined,
+  KI: undefined as number | undefined,
+  KEIYAKUSYA_CD: undefined as number | undefined,
+  NOJO_CD: undefined as number | undefined,
   KEIYAKUSYA_NAME: '',
   NOJO_NAME: '',
   KEN_CD: undefined as number | undefined,
@@ -190,7 +190,7 @@ const formData = reactive({
 } as KeiyakuNojoSearchDetailVM & {
   KI: number
   KEIYAKUSYA_CD: number
-  NOJO_CD: number | undefined
+  NOJO_CD: number
   KEIYAKUSYA_NAME: string
 })
 
@@ -252,17 +252,26 @@ const { validate, clearValidate, validateInfos, resetFields } = Form.useForm(
 //フック関数
 //--------------------------------------------------------------------------
 onMounted(async () => {
+  if (route.query.KI) {
+    formData.KI = +route.query.KI
+  }
+  if (route.query.KEIYAKUSYA_CD) {
+    formData.KEIYAKUSYA_CD = +route.query.KEIYAKUSYA_CD
+  }
+  if (route.query.NOJO_CD) {
+    formData.NOJO_CD = +route.query.NOJO_CD
+  }
   await InitDetail().then((res) => {
-    formData.KEIYAKUSYA_NAME = props.KEIYAKUSYA_CD + ' : ' + res.KEIYAKUSYA_NAME
+    formData.KEIYAKUSYA_NAME =
+      formData.KEIYAKUSYA_CD + ' : ' + res.KEIYAKUSYA_NAME
     KEN_CD_NAME_LIST.value = res.KEN_CD_NAME_LIST
   })
   if (props.status === PageSatatus.Edit) {
     await SearchDetail({
-      KI: props.KI,
-      KEIYAKUSYA_CD: props.KEIYAKUSYA_CD,
-      NOJO_CD: props.NOJO_CD,
+      KI: formData.KI,
+      KEIYAKUSYA_CD: formData.KEIYAKUSYA_CD,
+      NOJO_CD: formData.NOJO_CD,
     }).then((res) => {
-      formData.NOJO_CD = props.NOJO_CD
       formData.NOJO_NAME = res.KEIYAKUSYA_NOJO.NOJO_NAME
       formData.KEN_CD = res.KEIYAKUSYA_NOJO.KEN_CD
       formData.ADDR_POST = res.KEIYAKUSYA_NOJO.ADDR_POST
