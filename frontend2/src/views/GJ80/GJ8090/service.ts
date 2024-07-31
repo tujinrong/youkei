@@ -43,7 +43,7 @@ export const Delete = (params: DeleteRequest): Promise<DaResponseBase> => {
 /** 初期化処理(詳細画面) */
 export const InitDetail = (): Promise<InitDetailResponse> => {
   const methodname = 'InitDetail'
-  return api(servicename2, methodname)
+  return api2(servicename2, methodname)
 }
 
 /** 検索処理(詳細画面) */
@@ -51,7 +51,7 @@ export const SearchDetail = (
   params: SearchDetailRequest
 ): Promise<SearchDetailResponse> => {
   const methodname = 'SearchDetail'
-  return api(servicename2, methodname, params)
+  return api2(servicename2, methodname, params)
 }
 
 /** 保存処理(詳細画面) */

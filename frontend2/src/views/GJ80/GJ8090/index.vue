@@ -36,9 +36,9 @@ import { Init } from './service'
 const route = useRoute()
 const props = defineProps<{
   status: PageSatatus
-  KI: number | undefined
-  KEIYAKUSYA_CD: number | undefined
-  NOJO_CD: number | undefined
+  KI: number
+  KEIYAKUSYA_CD: number
+  NOJO_CD: number
 }>()
 const status = ref(props.status)
 const KI = ref(props.KI)

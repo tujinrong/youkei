@@ -6,15 +6,14 @@
       <a-form>
         <a-row>
           <a-col span="24">
-            <th>契約者</th>
+            <th class="bg-readonly">契約者</th>
             <td>
-              <a-form-item v-bind="validateInfos.KEIYAKUSYA_CD">
-                <ai-select
-                  v-model:value="formData.KEIYAKUSYA_CD"
-                  :options="KEIYAKUSYA_CD_NAME_LIST"
+              <a-form-item>
+                <a-input
+                  v-model:value="formData.KEIYAKUSYA_NAME"
+                  :maxlength="20"
                   disabled
-                  type="number"
-                ></ai-select>
+                ></a-input>
               </a-form-item>
             </td>
           </a-col>
@@ -40,7 +39,7 @@
         <b>契約者農場基本登録項目</b>
         <a-row>
           <a-col span="24">
-            <th class="required">契約者農場</th>
+            <th :class="!isNew ? 'bg-readonly' : 'required'">契約者農場</th>
             <td>
               <a-form-item v-bind="validateInfos.NOJO_CD">
                 <a-input-number
@@ -147,21 +146,22 @@ import {
   ITEM_REQUIRE_ERROR,
   SAVE_OK_INFO,
 } from '@/constants/msg'
-import { KEN_CD_NAME_LIST } from '../constant'
+// import { KEN_CD_NAME_LIST } from '../constant'
 import { Form, message } from 'ant-design-vue'
 import { showSaveModal } from '@/utils/modal'
 import PostCode from '@/components/Selector/PostCode/index.vue'
 import { convertToFullWidth } from '@/utils/util'
 import { KeiyakuNojoSearchDetailVM } from '../type'
 import { Judgement } from '@/utils/judge-edited'
+import { InitDetail, SearchDetail } from '../service'
 //---------------------------------------------------------------------------
 //属性
 //---------------------------------------------------------------------------
 const props = defineProps<{
   status: PageSatatus
-  KI: number | undefined
-  KEIYAKUSYA_CD: number | undefined
-  NOJO_CD: number | undefined
+  KI: number
+  KEIYAKUSYA_CD: number
+  NOJO_CD: number
   KEIYAKUSYA_CD_NAME_LIST: DaSelectorModel[]
 }>()
 
@@ -172,26 +172,10 @@ const router = useRouter()
 const route = useRoute()
 const isNew = props.status === PageSatatus.New
 const editJudge = new Judgement()
-const keiyakuNojoSearchDetail = reactive({
-  KI: props.KI,
-  KEIYAKUSYA_CD: props.KEIYAKUSYA_CD,
-  NOJO_CD: props.NOJO_CD,
-  KEIYAKUSYA_NAME: '',
-  NOJO_NAME: '東京都千代田区農場',
-  KEN_CD: 13,
-  ADDR_POST: '100-0001',
-  ADDR_1: '東京都',
-  ADDR_2: '千代田区',
-  ADDR_3: '丸の内',
-  ADDR_4: '1丁目1-1',
-  MEISAINO: 234,
-} as KeiyakuNojoSearchDetailVM & {
-  KI: number
-  KEIYAKUSYA_CD: number
-  NOJO_CD: number | undefined
-})
 
-const fakeFormData1 = reactive({
+const KEN_CD_NAME_LIST = ref<DaSelectorModel[]>([])
+
+const formData = reactive({
   KI: props.KI,
   KEIYAKUSYA_CD: props.KEIYAKUSYA_CD,
   NOJO_CD: undefined,
@@ -208,15 +192,8 @@ const fakeFormData1 = reactive({
   KI: number
   KEIYAKUSYA_CD: number
   NOJO_CD: number | undefined
+  KEIYAKUSYA_NAME: string
 })
-
-const formData = reactive(fakeFormData1)
-
-// const KEIYAKUSYA_CD_NAME_LIST = ref<DaSelectorModel[]>([
-//   { value: 1, label: '永玉田中' },
-//   { value: 2, label: '尾三玉田' },
-//   { value: 3, label: '史玉浅海' },
-// ])
 
 const rules = reactive({
   NOJO_CD: [
@@ -276,8 +253,27 @@ const { validate, clearValidate, validateInfos, resetFields } = Form.useForm(
 //フック関数
 //--------------------------------------------------------------------------
 onMounted(async () => {
+  await InitDetail().then((res) => {
+    formData.KEIYAKUSYA_NAME = props.KEIYAKUSYA_CD + ' : ' + res.KEIYAKUSYA_NAME
+    KEN_CD_NAME_LIST.value = res.KEN_CD_NAME_LIST
+  })
   if (props.status === PageSatatus.Edit) {
-    Object.assign(formData, keiyakuNojoSearchDetail)
+    await SearchDetail({
+      KI: props.KI,
+      KEIYAKUSYA_CD: props.KEIYAKUSYA_CD,
+      NOJO_CD: props.NOJO_CD,
+    }).then((res) => {
+      formData.NOJO_CD = props.NOJO_CD
+
+      formData.NOJO_NAME = res.KEIYAKUSYA_NOJO.NOJO_NAME
+      formData.KEN_CD = res.KEIYAKUSYA_NOJO.KEN_CD
+      formData.ADDR_POST = res.KEIYAKUSYA_NOJO.ADDR_POST
+      formData.ADDR_1 = res.KEIYAKUSYA_NOJO.ADDR_1
+      formData.ADDR_2 = res.KEIYAKUSYA_NOJO.ADDR_2
+      formData.ADDR_3 = res.KEIYAKUSYA_NOJO.ADDR_3
+      formData.ADDR_4 = res.KEIYAKUSYA_NOJO.ADDR_4
+      formData.MEISAINO = res.KEIYAKUSYA_NOJO.MEISAINO
+    })
     nextTick(() => editJudge.reset())
   }
 })
@@ -289,11 +285,6 @@ onMounted(async () => {
 //--------------------------------------------------------------------------
 //監視定義
 //--------------------------------------------------------------------------
-watch(
-  () => props.status,
-  () => Object.assign(formData, keiyakuNojoSearchDetail),
-  { deep: true }
-)
 
 watch(formData, () => editJudge.setEdited())
 
@@ -340,7 +331,6 @@ const saveData = async () => {
           content: '入力されたコードは、すでに登録されています。',
         })
         return
-        break
     }
     await validate()
     showSaveModal({

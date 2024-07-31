@@ -97,8 +97,10 @@ export interface SearchResponse extends CmSearchResponseBase {
 
 /**初期化処理(詳細画面) */
 export interface InitDetailResponse extends DaResponseBase {
+  /**契約者名 */
+  KEIYAKUSYA_NAME: string
   /**都道府県情報プルダウンリスト */
-  KEN_CD_NAME_LIST: DaSelectorModel
+  KEN_CD_NAME_LIST: DaSelectorModel[]
 }
 
 /**検索処理(詳細画面) */
@@ -120,8 +122,6 @@ export interface KeiyakuNojoSearchVM {
 }
 
 export interface KeiyakuNojoSearchDetailVM {
-  /**契約者名 */
-  KEIYAKUSYA_NAME: string
   /**農場名称 */
   NOJO_NAME: string
   /**都道府県コード */
