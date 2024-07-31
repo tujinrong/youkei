@@ -36,22 +36,26 @@
           <a-col v-bind="layout">
             <th>農場番号</th>
             <td>
-              <a-input-number
-                v-model:value="searchParams.NOJO_CD"
-                :min="0"
-                :max="999"
-                :maxlength="3"
-                class="w-full"
-              ></a-input-number>
+              <a-form-item>
+                <a-input-number
+                  v-model:value="searchParams.NOJO_CD"
+                  :min="0"
+                  :max="999"
+                  :maxlength="3"
+                  class="w-full"
+                ></a-input-number>
+              </a-form-item>
             </td>
           </a-col>
           <a-col v-bind="layout">
             <th>農場名</th>
             <td>
-              <a-input
-                v-model:value="searchParams.NOJO_NAME"
-                :maxlength="20"
-              ></a-input>
+              <a-form-item>
+                <a-input
+                  v-model:value="searchParams.NOJO_NAME"
+                  :maxlength="20"
+                ></a-input>
+              </a-form-item>
             </td>
           </a-col>
         </a-row>
@@ -164,12 +168,36 @@ const searchParams = reactive(createDefaultParams())
 const rules = reactive({
   KI: [
     { required: true, message: ITEM_REQUIRE_ERROR.Msg.replace('{0}', '期') },
+    // {
+    //   validator: (_rule, value: string) => {
+    //     if (!value) {
+    //       showInfoModal({
+    //         type: 'error',
+    //         title: 'エラー',
+    //         content: ITEM_REQUIRE_ERROR.Msg.replace('{0}', '期'),
+    //       })
+    //     }
+    //     return Promise.resolve()
+    //   },
+    // },
   ],
   KEIYAKUSYA_CD: [
     {
       required: true,
-      message: ITEM_REQUIRE_ERROR.Msg.replace('{0}', '契約者コード'),
+      message: ITEM_REQUIRE_ERROR.Msg.replace('{0}', '契約者'),
     },
+    // {
+    //   validator: (_rule, value: string) => {
+    //     if (!value) {
+    //       showInfoModal({
+    //         type: 'error',
+    //         title: 'エラー',
+    //         content: ITEM_REQUIRE_ERROR.Msg.replace('{0}', '契約者'),
+    //       })
+    //     }
+    //     return Promise.resolve()
+    //   },
+    // },
   ],
 })
 const { validate, clearValidate, validateInfos } = Form.useForm(
@@ -264,17 +292,18 @@ function validateSearchParams() {
   return flag
 }
 
-function forwardNew() {
-  if (validateSearchParams()) {
-    router.push({
-      name: route.name as string,
-      query: {
-        status: PageSatatus.New,
-        KI: searchParams.KI,
-        KEIYAKUSYA_CD: searchParams.KEIYAKUSYA_CD,
-      },
-    })
-  }
+const forwardNew = async () => {
+  // if (validateSearchParams()) {
+  await validate()
+  router.push({
+    name: route.name as string,
+    query: {
+      status: PageSatatus.New,
+      KI: searchParams.KI,
+      KEIYAKUSYA_CD: searchParams.KEIYAKUSYA_CD,
+    },
+  })
+  // }
 }
 
 function forwardEdit(NOJO_CD) {
