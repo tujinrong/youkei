@@ -276,6 +276,15 @@ watch(
     }
   }
 )
+
+watch(
+  () => searchParams.KEIYAKUSYA_CD,
+  (newVal) => {
+    if (newVal && tableData.value.length > 0) {
+      searchData()
+    }
+  }
+)
 </script>
 
 <style lang="scss" scoped>
