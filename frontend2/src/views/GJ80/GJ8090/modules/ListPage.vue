@@ -50,12 +50,12 @@
           <a-col v-bind="layout">
             <th>農場名</th>
             <td>
-              <a-form-item>
-                <a-input
-                  v-model:value="searchParams.NOJO_NAME"
-                  :maxlength="20"
-                ></a-input>
-              </a-form-item>
+              <!-- <a-form-item> -->
+              <a-input
+                v-model:value="searchParams.NOJO_NAME"
+                :maxlength="20"
+              ></a-input>
+              <!-- </a-form-item> -->
             </td>
           </a-col>
         </a-row>
@@ -354,5 +354,9 @@ watch(
 }
 h1 {
   font-size: 24px;
+}
+:deep(.ant-form-item) {
+  margin-bottom: 0;
+  width: 100%;
 }
 </style>
