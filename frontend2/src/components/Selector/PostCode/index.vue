@@ -61,9 +61,9 @@ const value2 = ref('')
 //監視定義
 //--------------------------------------------------------------------------
 watchEffect(() => {
-  const parts = (props.value ?? '').split('-')
-  value1.value = parts[0] ?? ''
-  value2.value = parts[1] ?? ''
+  const value = props.value ?? ''
+  value1.value = value.substring(0, 3)
+  value2.value = value.substring(3)
 })
 
 //--------------------------------------------------------------------------
@@ -73,7 +73,7 @@ function onBlur() {
   value1.value = value1.value.replace(/[^0-9]/g, '')
   value2.value = value2.value.replace(/[^0-9]/g, '')
   const code = `${value1.value}-${value2.value}`
-  emit('update:value', code === '-' ? '' : code)
+  emit('update:value', code === '-' ? '' : code.replace('-', ''))
 
   formItemContext.onFieldChange()
 }

@@ -221,7 +221,7 @@ const rules = reactive({
           return Promise.reject(
             ITEM_REQUIRE_ERROR.Msg.replace('{0}', '郵便番号')
           )
-        } else if (value.length < 8) {
+        } else if (value.length < 7) {
           return Promise.reject(
             ITEM_ILLEGAL_ERROR.Msg.replace('{0}', '郵便番号')
           )
@@ -264,7 +264,6 @@ onMounted(async () => {
       NOJO_CD: props.NOJO_CD,
     }).then((res) => {
       formData.NOJO_CD = props.NOJO_CD
-
       formData.NOJO_NAME = res.KEIYAKUSYA_NOJO.NOJO_NAME
       formData.KEN_CD = res.KEIYAKUSYA_NOJO.KEN_CD
       formData.ADDR_POST = res.KEIYAKUSYA_NOJO.ADDR_POST
