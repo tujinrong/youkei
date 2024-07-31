@@ -8,7 +8,7 @@ import {
 } from 'vue-router'
 import { createBuiltinVueRoutes } from './routes/builtin'
 import { createRouterGuard } from './guard'
-
+import { stringifyQuery, parseQuery } from '@/utils/encrypt/parameter'
 const { VITE_ROUTER_HISTORY_MODE = 'history', VITE_BASE_URL } = import.meta.env
 
 const historyCreatorMap: Record<
@@ -22,6 +22,9 @@ const historyCreatorMap: Record<
 
 export const router = createRouter({
   history: historyCreatorMap[VITE_ROUTER_HISTORY_MODE](VITE_BASE_URL),
+  // 暗号化
+  stringifyQuery: stringifyQuery,
+  parseQuery: parseQuery,
   routes: createBuiltinVueRoutes(),
 })
 
