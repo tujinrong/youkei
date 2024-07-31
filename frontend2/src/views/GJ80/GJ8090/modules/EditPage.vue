@@ -159,8 +159,8 @@ import { Judgement } from '@/utils/judge-edited'
 //---------------------------------------------------------------------------
 const props = defineProps<{
   status: PageSatatus
-  KI: number
-  KEIYAKUSYA_CD: number
+  KI: number | undefined
+  KEIYAKUSYA_CD: number | undefined
   NOJO_CD: number | undefined
   KEIYAKUSYA_CD_NAME_LIST: DaSelectorModel[]
 }>()

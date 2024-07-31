@@ -1,7 +1,10 @@
 <template>
   <div>
     <div v-show="status === PageSatatus.List" class="h-full">
-      <ListPage :KEIYAKUSYA_CD_NAME_LIST="KEIYAKUSYA_CD_NAME_LIST" />
+      <ListPage
+        :KI="INITIAL_KI"
+        :KEIYAKUSYA_CD_NAME_LIST="KEIYAKUSYA_CD_NAME_LIST"
+      />
     </div>
     <div
       v-if="status === PageSatatus.New || status === PageSatatus.Edit"
@@ -20,7 +23,7 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, reactive, ref, watch } from 'vue'
+import { onMounted, ref, watch } from 'vue'
 import { useRoute } from 'vue-router'
 import { PageSatatus } from '@/enum'
 import ListPage from './modules/ListPage.vue'
@@ -33,14 +36,17 @@ import { Init } from './service'
 const route = useRoute()
 const props = defineProps<{
   status: PageSatatus
-  KI: number
-  KEIYAKUSYA_CD: number
+  KI: number | undefined
+  KEIYAKUSYA_CD: number | undefined
   NOJO_CD: number | undefined
 }>()
 const status = ref(props.status)
 const KI = ref(props.KI)
 const KEIYAKUSYA_CD = ref(props.KEIYAKUSYA_CD)
 const NOJO_CD = ref(props.NOJO_CD)
+
+//TODO
+const INITIAL_KI = ref<number>(8)
 
 const KEIYAKUSYA_CD_NAME_LIST = ref<DaSelectorModel[]>([])
 
@@ -49,6 +55,7 @@ const KEIYAKUSYA_CD_NAME_LIST = ref<DaSelectorModel[]>([])
 //--------------------------------------------------------------------------
 onMounted(() => {
   status.value = PageSatatus.List
+  getInitData()
   if (route.query.status) {
     status.value = +route.query.status
   }
@@ -61,7 +68,6 @@ onMounted(() => {
   if (route.query.NOJO_CD) {
     NOJO_CD.value = +route.query.NOJO_CD
   }
-  getInitData()
 })
 
 //---------------------------------------------------------------------------
@@ -93,6 +99,7 @@ watch(
 //初期化処理
 const getInitData = () => {
   Init().then((res) => {
+    INITIAL_KI.value = res.KI
     KEIYAKUSYA_CD_NAME_LIST.value = res.KEIYAKUSYA_CD_NAME_LIST
   })
 }

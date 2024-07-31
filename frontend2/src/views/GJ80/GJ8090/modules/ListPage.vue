@@ -9,24 +9,28 @@
           <a-col v-bind="layout">
             <th class="required">期</th>
             <td>
-              <a-input-number
-                v-model:value="searchParams.KI"
-                :min="1"
-                :max="99"
-                :maxlength="2"
-                class="w-full"
-              ></a-input-number>
+              <a-form-item v-bind="validateInfos.KI">
+                <a-input-number
+                  v-model:value="searchParams.KI"
+                  :min="1"
+                  :max="99"
+                  :maxlength="2"
+                  class="w-full"
+                ></a-input-number>
+              </a-form-item>
             </td>
           </a-col>
           <a-col v-bind="layout">
             <th class="required">契約者</th>
             <td>
-              <ai-select
-                v-model:value="searchParams.KEIYAKUSYA_CD"
-                :options="KEIYAKUSYA_CD_NAME_LIST"
-                style="width: 100%"
-                type="number"
-              ></ai-select>
+              <a-form-item v-bind="validateInfos.KEIYAKUSYA_CD">
+                <ai-select
+                  v-model:value="searchParams.KEIYAKUSYA_CD"
+                  :options="KEIYAKUSYA_CD_NAME_LIST"
+                  style="width: 100%"
+                  type="number"
+                ></ai-select>
+              </a-form-item>
             </td>
           </a-col>
           <a-col v-bind="layout">
@@ -63,7 +67,7 @@
       </div>
       <div class="flex">
         <a-space>
-          <a-button type="primary" @click="search">検索</a-button>
+          <a-button type="primary" @click="searchData">検索</a-button>
           <a-button type="primary" @click="forwardNew">新規</a-button>
           <a-button type="primary" @click="reset">クリア</a-button>
         </a-space>
@@ -116,7 +120,7 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, reactive, toRef, watch } from 'vue'
+import { ref, reactive, toRef, watch, onMounted } from 'vue'
 import { useRouter, useRoute, onBeforeRouteUpdate } from 'vue-router'
 import { EnumAndOr, PageSatatus } from '@/enum'
 import useSearch from '@/hooks/useSearch'
@@ -127,6 +131,7 @@ import { useTabStore } from '@/store/modules/tab'
 import { useElementSize } from '@vueuse/core'
 import { KeiyakuNojoSearchVM, SearchRequest } from '@/views/GJ80/GJ8090/type'
 import { Search } from '../service'
+import { Form } from 'ant-design-vue'
 
 //--------------------------------------------------------------------------
 //データ定義
@@ -135,13 +140,18 @@ const router = useRouter()
 const route = useRoute()
 const tabStore = useTabStore()
 
+onMounted(() => {
+  console.log(props.KI)
+})
+
 const props = defineProps<{
+  KI: number
   KEIYAKUSYA_CD_NAME_LIST: DaSelectorModel[]
 }>()
 
 const createDefaultParams = (): SearchRequest => {
   return {
-    KI: 8,
+    KI: props.KI,
     KEIYAKUSYA_CD: undefined,
     NOJO_CD: undefined,
     NOJO_NAME: '',
@@ -151,30 +161,46 @@ const createDefaultParams = (): SearchRequest => {
 
 const searchParams = reactive(createDefaultParams())
 
-const tableDefault = (): KeiyakuNojoSearchVM[] => {
-  return [
+const rules = reactive({
+  KI: [
+    { required: true, message: ITEM_REQUIRE_ERROR.Msg.replace('{0}', '期') },
+  ],
+  KEIYAKUSYA_CD: [
     {
-      NOJO_CD: 100,
-      NOJO_NAME: '東京都千代田区農場',
-      ADDR: '〒100-0001 東京都千代田区丸の内1丁目1-1',
+      required: true,
+      message: ITEM_REQUIRE_ERROR.Msg.replace('{0}', '契約者コード'),
     },
-    {
-      NOJO_CD: 101,
-      NOJO_NAME: '大阪府大阪市北区農場',
-      ADDR: '〒530-0001 大阪府大阪市北区梅田3丁目1-1',
-    },
-    {
-      NOJO_CD: 102,
-      NOJO_NAME: '京都府京都市下農場',
-      ADDR: '〒600-8216 京都府京都市下京区東塩小路町901',
-    },
-    {
-      NOJO_CD: 103,
-      NOJO_NAME: '福岡県福岡市博多区農場',
-      ADDR: '〒812-0011 福岡県福岡市博多区博多駅前3丁目2-1',
-    },
-  ]
-}
+  ],
+})
+const { validate, clearValidate, validateInfos } = Form.useForm(
+  searchParams,
+  rules
+)
+
+// const tableDefault = (): KeiyakuNojoSearchVM[] => {
+//   return [
+//     {
+//       NOJO_CD: 100,
+//       NOJO_NAME: '東京都千代田区農場',
+//       ADDR: '〒100-0001 東京都千代田区丸の内1丁目1-1',
+//     },
+//     {
+//       NOJO_CD: 101,
+//       NOJO_NAME: '大阪府大阪市北区農場',
+//       ADDR: '〒530-0001 大阪府大阪市北区梅田3丁目1-1',
+//     },
+//     {
+//       NOJO_CD: 102,
+//       NOJO_NAME: '京都府京都市下農場',
+//       ADDR: '〒600-8216 京都府京都市下京区東塩小路町901',
+//     },
+//     {
+//       NOJO_CD: 103,
+//       NOJO_NAME: '福岡県福岡市博多区農場',
+//       ADDR: '〒812-0011 福岡県福岡市博多区博多駅前3丁目2-1',
+//     },
+//   ]
+// }
 
 const tableData = ref<KeiyakuNojoSearchVM[]>([])
 
@@ -188,7 +214,7 @@ const layout = {
 }
 
 const { pageParams, totalCount, searchData, clear } = useSearch({
-  service: undefined,
+  service: Search,
   source: tableData,
   params: toRef(() => searchParams),
 })
@@ -273,6 +299,8 @@ function search() {
 
 //クリア処理
 function reset() {
+  console.log('666')
+  console.log(tableData.value)
   Object.assign(searchParams, createDefaultParams())
   tableData.value = []
 }
