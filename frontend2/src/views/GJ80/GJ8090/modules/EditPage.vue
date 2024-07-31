@@ -137,7 +137,7 @@
 
 <script setup lang="ts">
 import { PageSatatus } from '@/enum'
-import { computed, nextTick, onMounted, reactive, ref, watch } from 'vue'
+import {  nextTick, onMounted, reactive, ref, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { showDeleteModal, showInfoModal } from '@/utils/modal'
 import {
@@ -159,10 +159,9 @@ import { InitDetail, SearchDetail } from '../service'
 //---------------------------------------------------------------------------
 const props = defineProps<{
   status: PageSatatus
-  KI: number
-  KEIYAKUSYA_CD: number
-  NOJO_CD: number
-  KEIYAKUSYA_CD_NAME_LIST: DaSelectorModel[]
+  KI: number|undefined
+  KEIYAKUSYA_CD: number|undefined
+  NOJO_CD: number|undefined
 }>()
 
 //--------------------------------------------------------------------------

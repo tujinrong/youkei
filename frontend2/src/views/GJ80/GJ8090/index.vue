@@ -16,7 +16,6 @@
         :KI="KI"
         :KEIYAKUSYA_CD="KEIYAKUSYA_CD"
         :NOJO_CD="NOJO_CD"
-        :KEIYAKUSYA_CD_NAME_LIST="KEIYAKUSYA_CD_NAME_LIST"
       />
     </div>
   </div>
@@ -34,16 +33,11 @@ import { Init } from './service'
 //データ定義
 //--------------------------------------------------------------------------
 const route = useRoute()
-const props = defineProps<{
-  status: PageSatatus
-  KI: number
-  KEIYAKUSYA_CD: number
-  NOJO_CD: number
-}>()
-const status = ref(props.status)
-const KI = ref(props.KI)
-const KEIYAKUSYA_CD = ref(props.KEIYAKUSYA_CD)
-const NOJO_CD = ref(props.NOJO_CD)
+
+const status = ref(PageSatatus.List)
+const KI = ref<number>()
+const KEIYAKUSYA_CD = ref<number>()
+const NOJO_CD = ref<number>()
 
 //TODO
 const INITIAL_KI = ref<number>(8)
@@ -54,7 +48,6 @@ const KEIYAKUSYA_CD_NAME_LIST = ref<DaSelectorModel[]>([])
 //フック関数
 //--------------------------------------------------------------------------
 onMounted(() => {
-  status.value = PageSatatus.List
   getInitData()
   if (route.query.status) {
     status.value = +route.query.status
