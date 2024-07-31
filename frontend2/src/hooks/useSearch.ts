@@ -5,12 +5,15 @@ export default function useSearch({
   params,
   source,
   listname = 'KEKKA_LIST',
+  validate,
 }: {
   service: (request) => Promise<CmSearchResponseBase & { [prop: string]: any }>
   params: Ref<{ [prop: string]: any }> | null
   source: Ref<{ [prop: string]: any }[]>
   /**結果一覧フィールド名 */
   listname?: string
+  /**検索前のバリデーション */
+  validate?: () => Promise<any>
 }) {
   const loading = ref(false)
   const totalCount = ref(0)
@@ -28,6 +31,8 @@ export default function useSearch({
   })
 
   const searchData = async () => {
+    if (validate) await validate()
+
     loading.value = true
     try {
       const res = await service({

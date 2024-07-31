@@ -217,6 +217,7 @@ const { pageParams, totalCount, searchData, clear } = useSearch({
   service: Search,
   source: tableData,
   params: toRef(() => searchParams),
+  validate,
 })
 
 // const KEIYAKUSYA_CD_NAME_LIST = ref<DaSelectorModel[]>([
