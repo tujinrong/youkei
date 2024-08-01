@@ -7,7 +7,7 @@ import type { RequestInstanceState } from './type'
 import { EnumServiceResult } from '@/enum'
 import { showConfirmModal, showInfoModal } from '@/utils/modal'
 import { Modal } from 'ant-design-vue'
-import { CM_LOGINTIMEOUT_ERROR } from '@/constants/msg'
+import { CM_AUTH_ERROR } from '@/constants/msg'
 import { router } from '@/router'
 import type { InternalAxiosRequestConfig } from 'axios'
 
@@ -125,7 +125,7 @@ export const request = createRequest<
         Modal.destroyAll()
         showInfoModal({
           type: 'warning',
-          content: CM_LOGINTIMEOUT_ERROR.Msg,
+          content: CM_AUTH_ERROR.Msg,
           onOk: () => handleLogout(),
         })
       }
