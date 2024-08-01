@@ -222,7 +222,11 @@ function onPreview() {
     const left = window.screen.width / 2 - width / 2
     const top = window.screen.height / 2 - height / 2
     const features = `width=${width},height=${height},left=${left},top=${top},toolbar=no,menubar=no,location=no,status=no`
-    window.open(`http://localhost:9527/gj1031`, '_blank', features)
+    const host = window.location.href.includes('localhost')
+      ? 'localhost:9527'
+      : '61.213.76.155:65534'
+
+    window.open(`http://${host}/gj1031`, '_blank', features)
   }
   if (validateSearchParams()) {
     openNew()

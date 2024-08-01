@@ -120,7 +120,11 @@ const openNew = () => {
   const left = window.screen.width / 2 - width / 2
   const top = window.screen.height / 2 - height / 2
   const features = `width=${width},height=${height},left=${left},top=${top},toolbar=yes,menubar=yes,location=yes,status=yes`
-  window.open(`http://localhost:9527${currentPath}`, '_blank', features)
+  const host = window.location.href.includes('localhost')
+    ? 'localhost:9527'
+    : '61.213.76.155:65534'
+
+  window.open(`http://${host}${currentPath}`, '_blank', features)
 }
 //---------------------------------------------------------------------
 </script>
