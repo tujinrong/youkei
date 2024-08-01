@@ -1,0 +1,33 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OptionInfer>On</OptionInfer>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <DefaultItemExcludes>$(DefaultItemExcludes);$(ProjectDir)**\*.cs</DefaultItemExcludes>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Remove="00.システム共有\メニュー\**" />
+    <Compile Remove="システム共通\**" />
+    <EmbeddedResource Remove="00.システム共有\メニュー\**" />
+    <EmbeddedResource Remove="システム共通\**" />
+    <None Remove="00.システム共有\メニュー\**" />
+    <None Remove="システム共通\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="ICSharpCode.SharpZipLib.Patched" Version="1.2.0.9" />
+    <PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="8.0.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="Oracle.ManagedDataAccess.Core" Version="23.5.0" />
+    <PackageReference Include="TSQL.Parser" Version="2.6.0" />
+    <PackageReference Include="Ude.NetStandard" Version="1.2.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <Using Include="Jbd.Gjs.Db" />
+    <Using Include="System.ComponentModel" />
+    <Using Include="System.Data" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="00.システム共有\002.メニュー\" />
+  </ItemGroup>
+</Project>

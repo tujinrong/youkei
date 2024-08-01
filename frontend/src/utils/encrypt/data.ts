@@ -1,5 +1,5 @@
 /** -----------------------------------------------------------------
- * 業務名称　: 養鶏-互助防疫システム
+ * 業務名称　: 健康管理システム
  * 機能概要　: DBデータ項目
  * 　　　　　  データ暗号化
  * 作成日　　: 2023.04.05
@@ -22,7 +22,7 @@ interface EncryptionParams {
 }
 export const encryptKeys = {
   key: 'aeskeyxxx',
-  iv: 'aesivxxx'
+  iv: 'aesivxxx',
 }
 
 const RsaPublicKeyPem = `-----BEGIN PUBLIC KEY-----
@@ -53,7 +53,7 @@ export class AesEncryption {
     return {
       mode: ECB,
       padding: pkcs7,
-      iv: this.iv
+      iv: this.iv,
     }
   }
 

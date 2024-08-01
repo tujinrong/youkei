@@ -18,7 +18,7 @@
   >
     <slot></slot>
 
-    <a-select-option
+    <ai-select-option
       v-for="opt in options"
       :key="opt"
       :value="opt.value ? opt.value + ' : ' + opt.label : opt.value"
@@ -26,7 +26,7 @@
       :disabled="opt.disabled"
     >
       {{ opt.value ? opt.value + ' : ' + opt.label : opt.label }}
-    </a-select-option>
+    </ai-select-option>
   </a-select>
 </template>
 
@@ -48,7 +48,7 @@ interface Props {
 const props = withDefaults(defineProps<Props>(), {
   options: () => [],
   splitVal: false,
-  type: 'string'
+  type: 'string',
 })
 const emit = defineEmits(['update:value', 'change'])
 
@@ -81,13 +81,16 @@ const curVal = computed({
     }
     emit('update:value', v)
     emit('change', v, curOpt, oldVal)
-  }
+  },
 })
 
 //--------------------------------------------------------------------------
 //メソッド
 //--------------------------------------------------------------------------
 const filterOption = (input, option) => {
-  return option.key.label.indexOf(input) >= 0 || String(option.key.value ?? '').indexOf(input) >= 0
+  return (
+    option.key.label.indexOf(input) >= 0 ||
+    String(option.key.value ?? '').indexOf(input) >= 0
+  )
 }
 </script>

@@ -1,46 +1,36 @@
-/** -----------------------------------------------------------------
- * 業務名称　: 養鶏-互助防疫システム
- * 機能概要　: ルーター作成
- * 　　　　　  ルーター関連
- * 作成日　　: 2023.04.05
- * 作成者　　: 李
- * 変更履歴　:
- * -----------------------------------------------------------------*/
-import { RouteRecordRaw, createRouter, createWebHistory } from 'vue-router'
-import { setupBeforeEach, setupAfterEach } from './router-guard'
-import { commonRoutes } from './common-routes'
-// import generateAsyncRoutes from './generate-async-routes'
-import { ss } from '@/utils/storage'
-import { ACCESS_TOKEN } from '@/constants/mutation-types'
+import type { App } from 'vue'
+import {
+  type RouterHistory,
+  createMemoryHistory,
+  createRouter,
+  createWebHashHistory,
+  createWebHistory,
+} from 'vue-router'
+import { createBuiltinVueRoutes } from './routes/builtin'
+import { createRouterGuard } from './guard'
 import { stringifyQuery, parseQuery } from '@/utils/encrypt/parameter'
-const env = {
-  VITE_PUBLIC_PATH: import.meta.env.VITE_PUBLIC_PATH
+const { VITE_ROUTER_HISTORY_MODE = 'history', VITE_BASE_URL } = import.meta.env
+
+const historyCreatorMap: Record<
+  Env.RouterHistoryMode,
+  (base?: string) => RouterHistory
+> = {
+  hash: createWebHashHistory,
+  history: createWebHistory,
+  memory: createMemoryHistory,
 }
-const router = createRouter({
-  history: createWebHistory(env.VITE_PUBLIC_PATH === '/' ? '' : env.VITE_PUBLIC_PATH),
+
+export const router = createRouter({
+  history: historyCreatorMap[VITE_ROUTER_HISTORY_MODE](VITE_BASE_URL),
   // 暗号化
   stringifyQuery: stringifyQuery,
   parseQuery: parseQuery,
-  routes: commonRoutes as unknown as RouteRecordRaw[]
+  routes: createBuiltinVueRoutes(),
 })
 
-router.onError((error, to) => {
-  console.log('error: ', error)
-  if (error.message.includes('Failed to fetch dynamically imported module')) {
-    window.location.href = to.fullPath
-  }
-})
-
-window.addEventListener('vite:preloadError', (event) => {
-  window.location.reload()
-})
-
-setupBeforeEach(router)
-
-setupAfterEach(router)
-
-if (ss.get(ACCESS_TOKEN)) {
-  // generateAsyncRoutes()
+/** Setup Vue Router */
+export async function setupRouter(app: App) {
+  app.use(router)
+  createRouterGuard(router)
+  await router.isReady()
 }
-
-export default router

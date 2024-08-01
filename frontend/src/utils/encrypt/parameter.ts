@@ -1,18 +1,23 @@
 /** -----------------------------------------------------------------
- * 業務名称　: 養鶏-互助防疫システム
+ * 業務名称　: 健康管理システム
  * 機能概要　: URL引数
  * 　　　　　  データ暗号化
  * 作成日　　: 2023.04.05
  * 作成者　　: 李
  * 変更履歴　:
  * -----------------------------------------------------------------*/
-import { encryptByBase64 as encrypt, decodeByBase64 as decrypt } from '@/utils/encrypt/data'
+import {
+  encryptByBase64 as encrypt,
+  decodeByBase64 as decrypt,
+} from '@/utils/encrypt/data'
 const encodeReserveRE = /[!'()*]/g
-const encodeReserveReplacer = (c) => '%' + c.charCodeAt(0).toString(16)
+const encodeReserveReplacer = (c: any) => '%' + c.charCodeAt(0).toString(16)
 const commaRE = /%2C/g
 
 const encode = (str: string) =>
-  encodeURIComponent(str).replace(encodeReserveRE, encodeReserveReplacer).replace(commaRE, ',')
+  encodeURIComponent(str)
+    .replace(encodeReserveRE, encodeReserveReplacer)
+    .replace(commaRE, ',')
 
 const decode = decodeURIComponent
 
@@ -55,7 +60,7 @@ export const stringifyQuery = (obj: any) => {
 }
 
 export const parseQuery = (query: string) => {
-  const res = {}
+  const res: any = {}
 
   query = query.trim().replace(/^(\?|#|&)/, '')
 
@@ -68,7 +73,7 @@ export const parseQuery = (query: string) => {
 
   query.split('&').forEach((param) => {
     const parts = param.replace(/\+/g, ' ').split('=')
-    const key = decode(parts.shift())
+    const key = decode(parts.shift() ?? '')
     const val = parts.length > 0 ? decode(parts.join('=')) : null
 
     if (res[key] === undefined) {

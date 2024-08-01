@@ -1,5 +1,5 @@
 <!------------------------------------------------------------------
- * 業務名称　: 養鶏-互助防疫システム
+ * 業務名称　: 健康管理システム
  * 機能概要　: 和暦(日付)
  * 　　　　　  共通コンポーネント
  * 作成日　　: 2023.04.04
@@ -21,9 +21,9 @@
 import { computed, ref, onMounted, watch, nextTick } from 'vue'
 import dayjs from 'dayjs'
 import { DatePadZero, getDateJpText, getUnKnownDateJpText } from '@/utils/util'
-import { ERA_YEARS } from '@/constants/constant'
 import { showInfoModal } from '@/utils/modal'
 import { E001013 } from '@/constants/msg'
+import { ERA_YEARS } from '@/constants/business'
 //---------------------------------------------------------------------------
 //属性
 //---------------------------------------------------------------------------
@@ -68,7 +68,7 @@ const curVal = computed({
   set(v) {
     emit('update:value', v && props.format ? dayjs(v).format(props.format) : v)
     emit('change', v)
-  }
+  },
 })
 //---------------------------------------------------------------------------
 //監視定義
@@ -197,7 +197,7 @@ function showErrorModal() {
     onOk() {
       dateRef.value?.focus()
       inputText = ''
-    }
+    },
   })
 }
 
@@ -237,7 +237,8 @@ function disabledDate(current) {
   if (props.hanif && props.hanit) {
     return (
       current &&
-      (current > dayjs(props.hanit).endOf('day') || current < dayjs(props.hanif).startOf('day'))
+      (current > dayjs(props.hanit).endOf('day') ||
+        current < dayjs(props.hanif).startOf('day'))
     )
   }
   if (props.hanif) {

@@ -1,138 +1,14 @@
-<!------------------------------------------------------------------
- * 業務名称　: 養鶏-互助防疫システム
- * 機能概要　: ベース
- * 　　　　　  デフォルトページ
- * 作成日　　: 2023.04.04
- * 作成者　　: 李
- * 変更履歴　:
- * ----------------------------------------------------------------->
-<!DOCTYPE html>
-<html lang="ja" id="html">
+<!doctype html>
+<html lang="ja">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" href="/logo.png" />
-    <link rel="stylesheet" href="/luckysheet/plugins/css/pluginsCss.css" />
-    <link rel="stylesheet" href="/luckysheet/plugins/plugins.css" />
-    <link rel="stylesheet" href="/luckysheet/css/luckysheet.css" />
-    <link rel="stylesheet" href="/luckysheet/assets/iconfont/iconfont.css" />
-    <script src="/luckysheet/plugins/js/plugin.js"></script>
-    <script src="/luckysheet/luckysheet.umd.js"></script>
+    <link rel="icon" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>養鶏-互助防疫</title>
-    <style>
-      .first-loading-wrp {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
-        min-height: 420px;
-      }
-      .first-loading-wrp > h1 {
-        font-family: Avenir, 'Helvetica Neue', Arial, Helvetica, sans-serif;
-        font-weight: 600;
-        font-size: 36px;
-        margin-top: 200px;
-      }
-      .first-loading-wrp .loading-wrp {
-        padding: 98px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-      }
-      .dot {
-        animation: antRotate 1.2s infinite linear;
-        transform: rotate(45deg);
-        position: relative;
-        display: inline-block;
-        font-size: 32px;
-        width: 32px;
-        height: 32px;
-        box-sizing: border-box;
-      }
-      .dot i {
-        width: 14px;
-        height: 14px;
-        position: absolute;
-        display: block;
-        background-color: #1890ff;
-        border-radius: 100%;
-        transform: scale(0.75);
-        transform-origin: 50% 50%;
-        opacity: 0.3;
-        animation: antSpinMove 1s infinite linear alternate;
-      }
-      .dot i:nth-child(1) {
-        top: 0;
-        left: 0;
-      }
-      .dot i:nth-child(2) {
-        top: 0;
-        right: 0;
-        -webkit-animation-delay: 0.4s;
-        animation-delay: 0.4s;
-      }
-      .dot i:nth-child(3) {
-        right: 0;
-        bottom: 0;
-        -webkit-animation-delay: 0.8s;
-        animation-delay: 0.8s;
-      }
-      .dot i:nth-child(4) {
-        bottom: 0;
-        left: 0;
-        -webkit-animation-delay: 1.2s;
-        animation-delay: 1.2s;
-      }
-      @keyframes antRotate {
-        to {
-          -webkit-transform: rotate(405deg);
-          transform: rotate(405deg);
-        }
-      }
-      @-webkit-keyframes antRotate {
-        to {
-          -webkit-transform: rotate(405deg);
-          transform: rotate(405deg);
-        }
-      }
-      @keyframes antSpinMove {
-        to {
-          opacity: 1;
-        }
-      }
-      @-webkit-keyframes antSpinMove {
-        to {
-          opacity: 1;
-        }
-      }
-    </style>
+    <meta name="color-scheme" content="light dark" />
+    <title>%VITE_APP_TITLE%</title>
   </head>
-  <script>
-    //セッションクリア
-    var loadTime = function () {
-      const gap = new Date().getTime() - (localStorage.getItem('unload_time') || 0)
-      if (gap > 2000) {
-        // sessionStorage.clear()
-      }
-    }
-    loadTime()
-  </script>
   <body>
-    <div id="app">
-      <div class="first-loading-wrp">
-        <h1>互助防疫システム</h1>
-        <div class="loading-wrp">
-          <span class="dot dot-spin"><i></i><i></i><i></i><i></i></span>
-        </div>
-      </div>
-    </div>
-    <script type="module" src="/src/main.tsx"></script>
-    <link rel="stylesheet" type="text/css" id="themeCss" />
+    <div id="app"></div>
+    <script type="module" src="/src/main.ts"></script>
   </body>
-  <script>
-    window.onunload = function () {
-      unload_time = new Date().getTime()
-      localStorage.setItem('unload_time', new Date().getTime())
-    }
-  </script>
 </html>

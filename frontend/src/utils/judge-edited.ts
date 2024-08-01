@@ -1,8 +1,8 @@
 /** -----------------------------------------------------------------
- * 業務名称　: 養鶏-互助防疫システム
+ * 業務名称　: 健康管理システム
  * 機能概要　: 共通処理
  * 　　　　　  画面データ編集判断
- * 作成日　　: 2023.03.28
+ * 作成日　　: 2024.07.30
  * 作成者　　: 屠
  * 変更履歴　:
  * -----------------------------------------------------------------*/
@@ -10,6 +10,7 @@ import { CLOSE_CONFIRM } from '@/constants/msg'
 import { useEventListener } from '@vueuse/core'
 import { judgeStore } from '@/store'
 import { showConfirmModal } from './modal'
+import { Modal } from 'ant-design-vue'
 
 /**画面データ編集判断Class */
 export class Judgement {
@@ -47,12 +48,13 @@ export class Judgement {
   public judgeIsEdited(onOk: () => void, message?: string): void {
     // console.log('judgeIsEdited', this.isEdited)
     if (this.isEdited) {
+      Modal.destroyAll()
       showConfirmModal({
         content: message ?? CLOSE_CONFIRM.Msg,
         onOk: async () => {
           this.reset()
           onOk()
-        }
+        },
       })
     } else {
       onOk()

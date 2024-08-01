@@ -1,5 +1,5 @@
 /** -----------------------------------------------------------------
- * 業務名称　: 養鶏-互助防疫システム
+ * 業務名称　: 健康管理システム
  * 機能概要　: カンファーム
  * 　　　　　  確認処理
  * 作成日　　: 2023.03.29
@@ -7,15 +7,18 @@
  * 変更履歴　:
  * -----------------------------------------------------------------*/
 import { Modal, ModalFuncProps } from 'ant-design-vue'
-import emitter from '@/utils/event-bus'
-import { SAVE_CONFIRM, DELETE_CONFIRM, LOGIC_DELETE_CONFIRM } from '../constants/msg'
-import { cancelRequest } from './http/common-service'
+import {
+  SAVE_CONFIRM,
+  DELETE_CONFIRM,
+  LOGIC_DELETE_CONFIRM,
+} from '../constants/msg'
+import { request } from '@/service/request'
 import { h } from 'vue'
 import {
   QuestionCircleOutlined,
   WarningOutlined,
   CloseCircleOutlined,
-  InfoCircleOutlined
+  InfoCircleOutlined,
 } from '@ant-design/icons-vue'
 
 interface Options extends ModalFuncProps {
@@ -49,9 +52,9 @@ export function showConfirmModal(options: Options): void {
     style: { 'white-space': 'pre-wrap' },
     content: options.content.Msg || options.content,
     onCancel() {
-      cancelRequest()
+      request.cancelAllRequest()
       options.onCancel?.()
-    }
+    },
   })
 }
 /**
@@ -62,13 +65,21 @@ export function showInfoModal(options: Options): void {
   Modal[options.type || 'info']({
     okText: 'は い',
     icon:
-      options.type === 'warning' ? icon_warn : options.type === 'error' ? icon_error : icon_info,
+      options.type === 'warning'
+        ? icon_warn
+        : options.type === 'error'
+          ? icon_error
+          : icon_info,
     ...options,
     title:
       options.title ??
-      (options.type === 'warning' ? 'アラート' : options.type === 'error' ? 'エラー' : '情報'),
+      (options.type === 'warning'
+        ? 'アラート'
+        : options.type === 'error'
+          ? 'エラー'
+          : '情報'),
     style: { 'white-space': 'pre-wrap' },
-    content: options.content.Msg || options.content
+    content: options.content.Msg || options.content,
   })
 }
 
@@ -85,9 +96,9 @@ export function showSaveModal(options: Options): void {
     style: { 'white-space': 'pre-wrap' },
     content: options.content || SAVE_CONFIRM.Msg,
     onCancel() {
-      cancelRequest()
+      request.cancelAllRequest()
       options.onCancel?.()
-    }
+    },
   })
 }
 
@@ -114,20 +125,8 @@ export function showDeleteModal(options: Options): void {
     style: { 'white-space': 'pre-wrap' },
     content,
     onCancel() {
-      cancelRequest()
+      request.cancelAllRequest()
       options.onCancel?.()
-    }
-  })
-}
-
-/** パスワードの有効期限確認 */
-export function showPsdExpiredModal(message: string): void {
-  showConfirmModal({
-    title: 'パスワードの有効期限確認',
-    content: message,
-    onOk() {
-      Modal.destroyAll()
-      emitter.emit('openPwdChangeModal')
-    }
+    },
   })
 }
