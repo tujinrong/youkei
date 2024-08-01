@@ -5,6 +5,14 @@
  */
 declare namespace Api {
   namespace Common {
+    /**requestの追加構成 */
+    interface RequestConfigExtra {
+      onNextOk?: (data?: DaResponseBase) => void
+      onNextCancel?: (data?: DaResponseBase) => void
+      /**Global Loading */
+      loading?: boolean
+    }
+
     /**
      * enable status
      *

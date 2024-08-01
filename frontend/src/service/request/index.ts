@@ -10,6 +10,7 @@ import { Modal } from 'ant-design-vue'
 import { CM_AUTH_ERROR } from '@/constants/msg'
 import { router } from '@/router'
 import type { InternalAxiosRequestConfig } from 'axios'
+import { useAppStore } from '@/store/modules/app'
 
 const isHttpProxy =
   import.meta.env.DEV && import.meta.env.VITE_HTTP_PROXY === 'Y'
@@ -19,10 +20,7 @@ const { baseURL, otherBaseURL } = getServiceBaseURL(
 )
 
 type RequestConfig = InternalAxiosRequestConfig & {
-  extra?: {
-    onNextOk?: (data?: DaResponseBase) => void
-    onNextCancel?: (data?: DaResponseBase) => void
-  }
+  extra?: Api.Common.RequestConfigExtra
 }
 
 export const request = createRequest<
@@ -41,19 +39,37 @@ export const request = createRequest<
       const { headers } = config
 
       const token = localStg.get('token')
-      // const authStore = useAuthStore()
-      // const userid = authStore.userInfo.userName
-      // Object.assign(headers, { token, userid })
       Object.assign(headers, { token })
+
+      //Global Loading
+      const { extra } = config as RequestConfig
+      if (extra?.loading) {
+        const appStore = useAppStore()
+        appStore.setLoading(true)
+      }
 
       return config
     },
     isBackendSuccess(response) {
+      //Global Loading
+      const { extra } = response.config as RequestConfig
+      if (extra?.loading) {
+        const appStore = useAppStore()
+        appStore.setLoading(false)
+      }
+
       return response.data.RETURN_CODE === EnumServiceResult.OK
     },
     async onBackendFail(response, instance) {
       const { extra } = response.config as RequestConfig
+      const appStore = useAppStore()
       const authStore = useAuthStore()
+
+      //Global Loading
+      if (extra?.loading) {
+        appStore.setLoading(false)
+      }
+
       function handleLogout() {
         authStore.resetStore()
       }

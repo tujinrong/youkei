@@ -31,7 +31,7 @@ export const Init = (): Promise<InitResponse> => {
 /** 検索処理(一覧画面) */
 export const Search = (params: SearchRequest): Promise<SearchResponse> => {
   const methodname = 'Search'
-  return api2(servicename, methodname, params)
+  return api2(servicename, methodname, params, undefined, { loading: true })
 }
 
 /** 削除処理(一覧画面) */

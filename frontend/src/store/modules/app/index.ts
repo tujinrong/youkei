@@ -155,6 +155,12 @@ export const useAppStore = defineStore(SetupStoreId.App, () => {
   // init
   init()
 
+  //Global Loading
+  const loading = ref(false)
+  function setLoading(val: boolean) {
+    loading.value = val
+  }
+
   return {
     isMobile,
     reloadFlag,
@@ -175,5 +181,7 @@ export const useAppStore = defineStore(SetupStoreId.App, () => {
     mixSiderFixed,
     setMixSiderFixed,
     toggleMixSiderFixed,
+    loading,
+    setLoading,
   }
 })

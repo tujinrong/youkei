@@ -35,10 +35,7 @@ export function api(
   METHOD_NAME: string,
   data?: any,
   headers?: AxiosRequestHeaders,
-  extra?: {
-    onNextOk?: (data?: DaResponseBase) => void
-    onNextCancel?: (data?: DaResponseBase) => void
-  }
+  extra?: Api.Common.RequestConfigExtra
 ): Promise<any> {
   const body = {
     SERVICE_NAME,
@@ -61,10 +58,7 @@ export function api2(
   METHOD_NAME: string,
   data?: any,
   headers?: AxiosRequestHeaders,
-  extra?: {
-    onNextOk?: (data?: DaResponseBase) => void
-    onNextCancel?: (data?: DaResponseBase) => void
-  }
+  extra?: Api.Common.RequestConfigExtra
 ): Promise<any> {
   const body = {
     SERVICE_NAME,
