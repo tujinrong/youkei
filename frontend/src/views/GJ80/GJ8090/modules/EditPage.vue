@@ -320,8 +320,8 @@ watch(
 //画面遷移
 const goList = () => {
   editJudge.judgeIsEdited(() => {
-    clearValidate()
-    resetFields()
+    // clearValidate()
+    // resetFields()
     router.push({ name: route.name as string })
   })
 }
