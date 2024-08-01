@@ -21,10 +21,10 @@ export const useAuthStore = defineStore(SetupStoreId.Auth, () => {
   const token = ref(getToken())
 
   const userInfo: Api.Auth.UserInfo = reactive({
-    userid: '',
-    userName: '',
-    roles: [],
-    buttons: [],
+    // userid: '',
+    USER_NAME: '',
+    ROLES: [],
+    // buttons: [],
   })
 
   /** is super role in static route */
@@ -33,7 +33,7 @@ export const useAuthStore = defineStore(SetupStoreId.Auth, () => {
 
     return (
       VITE_AUTH_ROUTE_MODE === 'static' &&
-      userInfo.roles.includes(VITE_STATIC_SUPER_ROLE)
+      userInfo.ROLES.includes(VITE_STATIC_SUPER_ROLE)
     )
   })
 
@@ -88,7 +88,7 @@ export const useAuthStore = defineStore(SetupStoreId.Auth, () => {
             window.$notification?.success({
               message: $t('page.login.common.loginSuccess'),
               description: $t('page.login.common.welcomeBack', {
-                userName: userInfo.userName,
+                userName: userInfo.USER_NAME,
               }),
             })
           }
@@ -122,6 +122,7 @@ export const useAuthStore = defineStore(SetupStoreId.Auth, () => {
       const data = await fetchGetUserInfo()
 
       if (data) {
+        console.log
         // update store
         Object.assign(userInfo, data)
 

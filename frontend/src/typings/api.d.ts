@@ -26,11 +26,11 @@ declare namespace Api {
 
     interface UserInfo {
       /** ユーザID */
-      userid: string
+      // userid: string
       /** ユーザー名 */
-      userName: string
-      roles: string[]
-      buttons: string[]
+      USER_NAME: string
+      ROLES: string[]
+      // buttons: string[]
     }
 
     /** ログイン処理 */

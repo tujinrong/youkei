@@ -234,7 +234,7 @@ export const useRouteStore = defineStore(SetupStoreId.Route, () => {
     } else {
       const filteredAuthRoutes = filterAuthRoutesByRoles(
         staticAuthRoutes,
-        authStore.userInfo.roles
+        authStore.userInfo.ROLES
       )
 
       addAuthRoutes(filteredAuthRoutes)
