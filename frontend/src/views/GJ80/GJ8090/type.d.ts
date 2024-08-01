@@ -13,6 +13,12 @@ import { EnumAndOr } from '@/enum'
 //リクエスト
 //-------------------------------------------------------------------
 
+/**初期化処理(一覧画面) */
+export interface InitRequest extends DaRequestBase {
+  /**期 */
+  KI: number
+}
+
 /**検索処理(一覧画面) */
 export interface SearchRequest extends CmSearchRequestBase {
   /**期 */

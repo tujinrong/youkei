@@ -217,9 +217,14 @@ onMounted(() => {
 })
 
 //初期化処理
-const getInitData = () => {
-  Init().then((res) => {
-    searchParams.KI = res.KI
+const getInitData = (KI) => {
+  Init(KI).then((res) => {
+    // TODO
+    if (KI) {
+      searchParams.KI = res.KI
+    } else {
+      searchParams.KI = res.KI
+    }
     KEIYAKUSYA_CD_NAME_LIST.value = res.KEIYAKUSYA_CD_NAME_LIST
   })
 }
@@ -242,7 +247,6 @@ async function forwardNew() {
       KEIYAKUSYA_CD: searchParams.KEIYAKUSYA_CD,
     },
   })
-  // }
 }
 async function forwardEdit(NOJO_CD) {
   await validate()
@@ -288,9 +292,13 @@ watch(
   () => searchParams.KI,
   (newVal) => {
     if (newVal) {
+      getInitData(newVal)
+      searchParams.KEIYAKUSYA_CD = undefined
+      tableData.value = ''
     }
   }
 )
+
 watch(
   () => searchParams.KEIYAKUSYA_CD,
   (newVal) => {
