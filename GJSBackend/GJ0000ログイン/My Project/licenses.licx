@@ -1,0 +1,18 @@
+﻿GrapeCity.ActiveReports.SectionReport, GrapeCity.ActiveReports
+JBD.Gjs.Win.GcComboBox, JbdGjsLib, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+GrapeCity.Win.Editors.GcDateValidator, GrapeCity.Win.Editors.v120
+JBD.Gjs.Win.GcMask, JbdGjsLib, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+JBD.Gjs.Win.GcDate, JbdGjsLib, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+GrapeCity.ActiveReports.Export.Pdf.Section.PdfExport, GrapeCity.ActiveReports.Export.Pdf
+JBD.Gjs.Win.GcTextBox, JbdGjsLib, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+GrapeCity.Win.Editors.GcMask, GrapeCity.Win.Editors.v120
+GrapeCity.Win.Editors.GcComboBox, GrapeCity.Win.Editors.v120
+GrapeCity.Win.Editors.GcDate, GrapeCity.Win.Editors.v120
+GrapeCity.Win.Editors.GcNumberValidator, GrapeCity.Win.Editors.v120
+GrapeCity.Win.Editors.GcListBox, GrapeCity.Win.Editors.v120
+JBD.Gjs.Win.GcNumber, JbdGjsLib, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+GrapeCity.Win.Editors.GcRichTextBox, GrapeCity.Win.Editors.v120
+GrapeCity.Win.Editors.GcShortcut, GrapeCity.Win.Editors.v120
+GrapeCity.Win.Editors.GcTextBox, GrapeCity.Win.Editors.v120
+GrapeCity.ActiveReports.Viewer.Win.Viewer, GrapeCity.ActiveReports.Viewer.Win
+GrapeCity.Win.Editors.GcNumber, GrapeCity.Win.Editors.v120

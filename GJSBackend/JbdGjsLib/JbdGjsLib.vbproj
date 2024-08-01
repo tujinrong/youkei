@@ -1,0 +1,128 @@
+﻿
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Platform Condition=" '$(Platform)' == '' ">x64</Platform>
+    <OutputType>Library</OutputType>
+    <RootNamespace>JBD.Gjs.Win</RootNamespace>
+    <MyType>Windows</MyType>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <UseWindowsForms>true</UseWindowsForms>
+    <ImportWindowsDesktopTargets>true</ImportWindowsDesktopTargets>
+    <AssemblyTitle>JbdGjsLib</AssemblyTitle>
+    <Company>日本経営データ・センター</Company>
+    <Product>JbdGjsLib</Product>
+    <Copyright>Copyright c 日本経営データ・センター 2015, 2019</Copyright>
+    <AssemblyVersion>3.0.0.0</AssemblyVersion>
+    <FileVersion>3.0.0.0</FileVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DocumentationFile>JbdGjsLib.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DefineDebug>false</DefineDebug>
+    <OutputPath>..\GJS\bin\Release\</OutputPath>
+    <DocumentationFile>JbdGjsLib.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <OutputPath>..\GJS\bin\Release</OutputPath>
+    <DocumentationFile>JbdGjsLib.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>..\GJS\bin\Release\</OutputPath>
+    <DocumentationFile>JbdGjsLib.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Update="DB_Info.Designer.vb">
+      <DependentUpon>DB_Info.vb</DependentUpon>
+    </Compile>
+    <Compile Update="JButton.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Button.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="CheckBox.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="DataGrid.vb" />
+    <Compile Update="DataGridView.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="GcComboBox.vb" />
+    <Compile Update="GcDate.vb" />
+    <Compile Update="GcListBox.vb" />
+    <Compile Update="GcMask.vb" />
+    <Compile Update="GcNumber.vb" />
+    <Compile Update="GcRichTextBox.vb" />
+    <Compile Update="GcTextBox.vb" />
+    <Compile Update="GroupBox.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="JLabel.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="LinkLabel.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Label.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="ListBox.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="My Project\Application.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Application.myapp</DependentUpon>
+    </Compile>
+    <Compile Update="My Project\Resources.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Update="My Project\Settings.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Update="RadioButton.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="TabControl.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="TextBox.vb">
+      <SubType>Component</SubType>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="My Project\Application.myapp">
+      <Generator>MyApplicationCodeGenerator</Generator>
+      <LastGenOutput>Application.Designer.vb</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\niwatori.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bird_youkeijo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="MESCIUS.Win.InputMan" Version="12.0.0" />
+    <PackageReference Include="Oracle.ManagedDataAccess.Core" Version="23.4.0" />
+    <PackageReference Include="System.Data.DataSetExtensions" Version="4.5.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\JbdGjsCommon\JbdGjsCommon.vbproj" />
+  </ItemGroup>
+</Project>
