@@ -217,7 +217,7 @@
           <a-col span="24">
             <th>金融機関入力情報有無</th>
             <td>
-              <a-radio-group v-model:value="value" class="ml-2 pt-1">
+              <a-radio-group v-model:value="value" 　class="ml-2 pt-1">
                 <a-radio value="1">有</a-radio>
                 <a-radio value="2">無</a-radio>
               </a-radio-group>
@@ -311,8 +311,8 @@
           </a-col>
           <a-col :span="12"
             ><th>備考</th>
-            　
-            <td><a-textarea v-model:value="formData.a" /></td
+            <td>
+              <a-textarea v-model:value="formData.a" /></td
           ></a-col>
         </a-row>
       </a-form>

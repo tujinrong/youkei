@@ -82,8 +82,8 @@
     </a-card>
     <a-card :bordered="false" class="sm:flex-1-hidden" ref="cardRef">
       <a-pagination
-        v-model:current="pageParams.pagenum"
-        v-model:page-size="pageParams.pagesize"
+        v-model:current="pageParams.PAGE_NUM"
+        v-model:page-size="pageParams.PAGE_SIZE"
         :total="totalCount"
         :page-size-options="['10', '25', '50', '100']"
         show-less-items
@@ -96,10 +96,10 @@
         :height="height - 64"
         :row-config="{ isCurrent: true, isHover: true }"
         :data="tableData"
-        :sort-config="{ trigger: 'cell', orders: ['desc', 'asc'] }"
+        :sort-config="{ trigger: 'cell' }"
         :empty-render="{ name: 'NotData' }"
         @cell-dblclick="({ row }) => forwardEdit(row.NOJO_CD)"
-        @sort-change="(e) => changeTableSort(e, toRef(pageParams, 'orderby'))"
+        @sort-change="(e) => changeTableSort(e, toRef(pageParams, 'ORDER_BY'))"
       >
         <vxe-column field="noujyocd" title="農場番号" width="200" sortable>
           <template #default="{ row }">
