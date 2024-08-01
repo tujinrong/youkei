@@ -159,10 +159,10 @@
         :height="height - 70"
         :row-config="{ isCurrent: true, isHover: true }"
         :data="tableData"
-        :sort-config="{ trigger: 'cell' }"
+        :sort-config="{ trigger: 'cell', orders: ['desc', 'asc'] }"
         :empty-render="{ name: 'NotData' }"
         @cell-dblclick="({ row }) => forwardEdit(row)"
-        @sort-change="(e) => changeTableSort(e, toRef(pageParams, 'orderby'))"
+        @sort-change="(e) => changeTableSort(e, toRef(pageParams, 'ORDER_BY'))"
       >
         <vxe-column
           field="KEIYAKUSYA_CD"
