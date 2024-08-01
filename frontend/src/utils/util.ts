@@ -45,13 +45,17 @@ export function getUnKnownDateJpText(value: string): string {
     if (year === Enum日付不明区分.不明年) {
       eraYear = '不明年'
     } else {
-      eraYear = new Intl.DateTimeFormat('ja-JP-u-ca-japanese', {
-        era: 'long',
-        year: '2-digit',
-      })
-        .format(new Date(+year, +month ? +month - 1 : 1, +day || 1))
-        .replace(/\//, '年')
-        .replace(/\b(\d)\b/g, '0$1') //0埋め
+      try {
+        eraYear = new Intl.DateTimeFormat('ja-JP-u-ca-japanese', {
+          era: 'long',
+          year: '2-digit',
+        })
+          .format(new Date(+year, +month ? +month - 1 : 1, +day || 1))
+          .replace(/\//, '年')
+          .replace(/\b(\d)\b/g, '0$1') //0埋め
+      } catch (error) {
+        return value
+      }
     }
 
     if (month === Enum日付不明区分.不明月) {
@@ -192,68 +196,6 @@ export const yearFormatter = (value: number): string => {
   }
 
   return yearName + yearNum + '年度'
-}
-
-/**和暦取得(年 不詳あり) */
-export const yearFormatter_unknown = (value: any): string => {
-  if (!value) return ''
-  if (value === Enum日付不明区分.不明年) {
-    return '不明年'
-  } else if (value === 9999) {
-    return '生涯一回'
-  } else {
-    return yearFormatter(+value)
-  }
-}
-
-/**和暦取得(年月) */
-export const yearMonthFormatter = (value: string): string => {
-  let year, month
-  //年と月取得
-  if (value.includes('-')) {
-    ;[year, month] = value.split('-')
-  } else if (value.length === 6) {
-    year = value.substring(0, 4)
-    month = value.substring(4)
-  }
-  //年処理
-  year = yearFormatter(+year)
-  //月処理
-  month += '月'
-  return year + month
-}
-
-/**和暦取得(年月 不詳あり) */
-export const yearMonthFormatter_unknown = (value: string): string => {
-  let year, month
-  //年と月取得
-  if (value.includes('-')) {
-    ;[year, month] = value.split('-')
-  } else if (value.length === 6) {
-    year = value.substring(0, 4)
-    month = value.substring(4)
-  }
-  //年処理
-  if (year === Enum日付不明区分.不明年) {
-    year = '不明年'
-  } else {
-    year = yearFormatter(+year)
-  }
-  //月処理
-  if (month === Enum日付不明区分.不明月) {
-    month = '不明月'
-  } else if (month === Enum日付不明区分.春) {
-    month = '春'
-  } else if (month === Enum日付不明区分.夏) {
-    month = '夏'
-  } else if (month === Enum日付不明区分.秋) {
-    month = '秋'
-  } else if (month === Enum日付不明区分.冬) {
-    month = '冬'
-  } else {
-    month += '月'
-  }
-  return year + month
 }
 
 //--------------------------------------------------------------------------

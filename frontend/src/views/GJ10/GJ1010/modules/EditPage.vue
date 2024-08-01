@@ -70,7 +70,7 @@
             <th>契約日</th>
             <td>
               <a-form-item v-bind="validateInfos.KEIYAKUSYA_CD">
-                <DateJp v-model:value="formData.b" unknown format="YYYY-MM-DD"
+                <DateJp v-model:value="formData.b"
               /></a-form-item>
             </td>
           </a-col>
@@ -300,11 +300,7 @@
               <a-col class="w-full">
                 <th>廃業日</th>
                 <td>
-                  <DateJp
-                    v-model:value="formData.b"
-                    unknown
-                    format="YYYY-MM-DD"
-                  />
+                  <DateJp v-model:value="formData.b" />
                 </td>
               </a-col>
             </a-row>

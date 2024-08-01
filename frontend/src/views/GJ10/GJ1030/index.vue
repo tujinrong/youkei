@@ -22,12 +22,7 @@
             <a-col v-bind="layout">
               <th class="required">対象日(現在)</th>
               <td>
-                <DateJp
-                  v-model:value="formData.TAISYOBI_YMD"
-                  unknown
-                  format="YYYY-MM-DD"
-                  class="w-full"
-                />
+                <DateJp v-model:value="formData.TAISYOBI_YMD" class="w-full" />
               </td>
             </a-col>
             <a-col v-bind="layout">

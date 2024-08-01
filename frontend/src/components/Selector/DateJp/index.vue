@@ -32,7 +32,6 @@ const props = defineProps<{
   unknown?: boolean
   hanif?: string
   hanit?: string
-  format?: string
 }>()
 
 //--------------------------------------------------------------------------
@@ -66,7 +65,7 @@ const curVal = computed({
     return props.value ? dayjs(props.value) : props.value
   },
   set(v) {
-    emit('update:value', v && props.format ? dayjs(v).format(props.format) : v)
+    emit('update:value', v ? dayjs(v).format('YYYY-MM-DD') : v)
     emit('change', v)
   },
 })
