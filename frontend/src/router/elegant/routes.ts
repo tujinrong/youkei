@@ -133,6 +133,7 @@ export const generatedRoutes: GeneratedRoute[] = [
     component: 'layout.blank$view.gj1031',
     meta: {
       title: 'gj1031',
+      hideInMenu: true,
       i18nKey: 'route.gj1031',
     },
   },
