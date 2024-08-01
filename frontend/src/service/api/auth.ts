@@ -16,5 +16,5 @@ export const Login = (
 
 export const fetchGetUserInfo = (): Promise<Api.Auth.UserInfo> => {
   const methodname = 'GetUserInfo'
-  return api(servicename, methodname, {})
+  return api(servicename, methodname)
 }
