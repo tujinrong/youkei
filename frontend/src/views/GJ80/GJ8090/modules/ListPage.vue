@@ -217,7 +217,7 @@ onMounted(() => {
 })
 
 //初期化処理
-const getInitData = (KI) => {
+const getInitData = (KI?) => {
   Init(KI).then((res) => {
     // TODO
     if (KI) {

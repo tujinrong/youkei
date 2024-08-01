@@ -11,6 +11,7 @@ import { api, api2 } from '@/service/request/common-service'
 import {
   DeleteRequest,
   InitDetailResponse,
+  InitRequest,
   InitResponse,
   SaveRequest,
   SearchDetailRequest,
@@ -23,9 +24,9 @@ const servicename = 'GJ8090'
 const servicename2 = 'GJ8091'
 
 /** 初期化処理(一覧画面) */
-export const Init = (): Promise<InitResponse> => {
+export const Init = (params: InitRequest): Promise<InitResponse> => {
   const methodname = 'Init'
-  return api2(servicename, methodname)
+  return api2(servicename, methodname, params)
 }
 
 /** 検索処理(一覧画面) */
@@ -51,7 +52,7 @@ export const SearchDetail = (
   params: SearchDetailRequest
 ): Promise<SearchDetailResponse> => {
   const methodname = 'SearchDetail'
-  return api2(servicename2, methodname, params)
+  return api2(servicename2, methodname, params, undefined, { loading: true })
 }
 
 /** 保存処理(詳細画面) */
