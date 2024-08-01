@@ -713,9 +713,9 @@ declare namespace App {
     /** The backend service response data */
     type Response<T = unknown> = {
       /** The backend service response code */
-      returncode: number
+      RETURN_CODE: number
       /** The backend service response message */
-      message: string
+      MESSAGE: string
     } & T
 
     /** The demo backend service response data */

@@ -69,8 +69,8 @@ export const useAuthStore = defineStore(SetupStoreId.Auth, () => {
     try {
       //get token
       const loginToken = await Login({
-        userid: userName,
-        pword: password,
+        USER_ID: userName,
+        PWORD: password,
       })
 
       if (loginToken) {

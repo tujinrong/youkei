@@ -11,15 +11,15 @@ import { request } from './index'
 
 /** ログイン処理 */
 export async function login(
-  servicename: string,
-  methodname: string,
+  SERVICE_NAME: string,
+  METHOD_NAME: string,
   data: any
 ): Promise<any> {
   const body = {
-    servicename,
-    methodname,
-    bizrequest: {
-      data: JSON.stringify(data),
+    SERVICE_NAME,
+    METHOD_NAME,
+    BIZ_REQUEST: {
+      DATA: JSON.stringify(data),
     },
   }
   return request({
@@ -31,8 +31,8 @@ export async function login(
 
 /** Web共通 */
 export function api(
-  servicename: string,
-  methodname: string,
+  SERVICE_NAME: string,
+  METHOD_NAME: string,
   data?: any,
   headers?: AxiosRequestHeaders,
   extra?: {
@@ -41,10 +41,10 @@ export function api(
   }
 ): Promise<any> {
   const body = {
-    servicename,
-    methodname,
-    bizrequest: {
-      data: JSON.stringify(data) || '',
+    SERVICE_NAME,
+    METHOD_NAME,
+    BIZ_REQUEST: {
+      DATA: JSON.stringify(data) || '',
     },
   }
   return request({
@@ -57,8 +57,8 @@ export function api(
 }
 /** Web共通モック */
 export function api2(
-  servicename: string,
-  methodname: string,
+  SERVICE_NAME: string,
+  METHOD_NAME: string,
   data?: any,
   headers?: AxiosRequestHeaders,
   extra?: {
@@ -67,14 +67,14 @@ export function api2(
   }
 ): Promise<any> {
   const body = {
-    servicename,
-    methodname,
-    bizrequest: {
-      data: JSON.stringify(data) || '',
+    SERVICE_NAME,
+    METHOD_NAME,
+    BIZ_REQUEST: {
+      DATA: JSON.stringify(data) || '',
     },
   }
   return request({
-    url: '/youkei/WebRequest/' + servicename + '/' + methodname,
+    url: '/youkei/WebRequest/' + SERVICE_NAME + '/' + METHOD_NAME,
     method: 'post',
     data: body,
     headers,

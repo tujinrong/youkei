@@ -49,7 +49,7 @@ export const request = createRequest<
       return config
     },
     isBackendSuccess(response) {
-      return response.data.returncode === EnumServiceResult.OK
+      return response.data.RETURN_CODE === EnumServiceResult.OK
     },
     async onBackendFail(response, instance) {
       const { extra } = response.config as RequestConfig
@@ -59,8 +59,8 @@ export const request = createRequest<
       }
 
       const { data } = response
-      const message = data?.message
-      const code = data?.returncode
+      const message = data?.MESSAGE
+      const code = data?.RETURN_CODE
       // インターフェイス要求が間違っている場合、統一されたエラーメッセージが表示されます。
       if (code === EnumServiceResult.ServiceError) {
         showInfoModal({

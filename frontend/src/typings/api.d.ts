@@ -36,7 +36,7 @@ declare namespace Api {
     /** ログイン処理 */
     interface LoginRequest extends DaRequestBase {
       /** パスワード */
-      pword: string
+      PWORD: string
     }
     /** ログイン処理(成功) */
     export interface LoginResponse extends DaResponseBase {
