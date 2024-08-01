@@ -116,7 +116,7 @@ export const request = createRequest<
       let message = error.message
       // get backend error message and code
       if (error.code === BACKEND_ERROR_CODE) {
-        message = error.response?.data?.message || message
+        message = error.response?.data?.MESSAGE || message
       } else {
         showErrorMsg(request.state, message)
       }
