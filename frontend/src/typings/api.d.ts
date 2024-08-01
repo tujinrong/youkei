@@ -21,7 +21,7 @@ declare namespace Api {
    */
   namespace Auth {
     interface LoginToken {
-      token: string
+      TOKEN: string
     }
 
     interface UserInfo {
@@ -41,7 +41,7 @@ declare namespace Api {
     /** ログイン処理(成功) */
     export interface LoginResponse extends DaResponseBase {
       /** トークン(ベースロジック) */
-      token: string
+      TOKEN: string
     }
   }
 

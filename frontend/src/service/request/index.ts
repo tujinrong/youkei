@@ -41,7 +41,7 @@ export const request = createRequest<
       const { headers } = config
 
       const token = localStg.get('token')
-      const authStore = useAuthStore()
+      // const authStore = useAuthStore()
       // const userid = authStore.userInfo.userName
       // Object.assign(headers, { token, userid })
       Object.assign(headers, { token })
