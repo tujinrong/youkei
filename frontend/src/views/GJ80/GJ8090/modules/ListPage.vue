@@ -240,7 +240,7 @@ onBeforeRouteUpdate((to, from) => {
 async function forwardNew() {
   await validate()
   router.push({
-    name: route.name as string,
+    name: route.name,
     query: {
       status: PageSatatus.New,
       KI: searchParams.KI,
@@ -251,7 +251,7 @@ async function forwardNew() {
 async function forwardEdit(NOJO_CD) {
   await validate()
   router.push({
-    name: route.name as string,
+    name: route.name,
     query: {
       status: PageSatatus.Edit,
       KI: searchParams.KI,

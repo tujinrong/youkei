@@ -320,7 +320,7 @@ function forwardEdit(row) {
     return
   } else {
     router.push({
-      name: route.name as string,
+      name: route.name,
       query: {
         status: PageSatatus.Edit,
       },
@@ -337,7 +337,7 @@ function forwardNew() {
     return
   } else {
     router.push({
-      name: route.name as string,
+      name: route.name,
       query: {
         status: PageSatatus.New,
       },

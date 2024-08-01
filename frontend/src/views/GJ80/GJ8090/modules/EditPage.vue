@@ -322,7 +322,7 @@ const goList = () => {
   editJudge.judgeIsEdited(() => {
     // clearValidate()
     // resetFields()
-    router.push({ name: route.name as string })
+    router.push({ name: route.name })
   })
 }
 const saveData = async () => {
@@ -343,7 +343,7 @@ const saveData = async () => {
     showSaveModal({
       content: 'データを登録します。\nよろしいですか？',
       onOk: () => {
-        router.push({ name: route.name as string })
+        router.push({ name: route.name })
         message.success(SAVE_OK_INFO.Msg)
       },
     })
@@ -352,7 +352,7 @@ const saveData = async () => {
     showSaveModal({
       content: 'データを更新します。\nよろしいですか？',
       onOk: () => {
-        router.push({ name: route.name as string })
+        router.push({ name: route.name })
         message.success(SAVE_OK_INFO.Msg)
       },
     })
@@ -363,7 +363,7 @@ const deleteData = () => {
     handleDB: true,
     content: '指定されたデータを削除します。\nよろしいですか？',
     onOk() {
-      router.push({ name: route.name as string })
+      router.push({ name: route.name })
       message.success(DELETE_OK_INFO.Msg)
     },
   })

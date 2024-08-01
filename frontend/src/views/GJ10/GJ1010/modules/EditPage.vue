@@ -357,7 +357,7 @@ const goList = () => {
   editJudge.judgeIsEdited(() => {
     clearValidate()
     resetFields()
-    router.push({ name: route.name as string })
+    router.push({ name: route.name })
   })
 }
 </script>
