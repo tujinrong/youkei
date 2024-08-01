@@ -9,7 +9,7 @@ export const Login = (
 ): Promise<Api.Auth.LoginResponse> => {
   const params = JSON.parse(JSON.stringify(data))
   //パスワード暗号化
-  params.PWORD = encryptBySHA256(data.PWORD, data.USER_ID)
+  params.PASS = encryptBySHA256(data.PASS, data.USER_ID)
   const methodname = 'Login'
   return login(servicename, methodname, params)
 }

@@ -1,59 +1,8 @@
-<script setup lang="ts">
-import { reactive } from 'vue'
-import { $t } from '@/locales'
-import { useAntdForm } from '@/hooks/common/form'
-import { useAuthStore } from '@/store/modules/auth'
-import { UserOutlined, LockOutlined } from '@ant-design/icons-vue'
-import { ITEM_REQUIRE_ERROR } from '@/constants/msg'
-
-defineOptions({
-  name: 'PwdLogin',
-})
-
-const authStore = useAuthStore()
-const { formRef, validate } = useAntdForm()
-
-interface FormModel {
-  userid: string
-  pword: string
-}
-
-const model: FormModel = reactive({
-  userid: '',
-  pword: '',
-})
-
-const rules = reactive<Record<keyof FormModel, App.Global.FormRule[]>>({
-  userid: [
-    {
-      required: true,
-      message: ITEM_REQUIRE_ERROR.Msg.replace(
-        '{0}',
-        $t('page.login.common.userNamePlaceholder')
-      ),
-      transform: (val) => val?.trim(),
-    },
-  ],
-  pword: [
-    {
-      required: true,
-      message: `${ITEM_REQUIRE_ERROR.Msg.replace('{0}', $t('page.login.common.passwordPlaceholder'))}`,
-      transform: (val) => val?.trim(),
-    },
-  ],
-})
-
-async function handleSubmit() {
-  await validate()
-  await authStore.login(model.userid, model.pword)
-}
-</script>
-
 <template>
   <AForm ref="formRef" :model="model" :rules="rules">
     <AFormItem name="userid">
       <AInput
-        v-model:value="model.userid"
+        v-model:value="model.USER_ID"
         size="large"
         :placeholder="$t('page.login.common.userNamePlaceholder')"
       >
@@ -62,9 +11,9 @@ async function handleSubmit() {
         </template>
       </AInput>
     </AFormItem>
-    <AFormItem name="pword">
+    <AFormItem name="PASS">
       <AInputPassword
-        v-model:value="model.pword"
+        v-model:value="model.PASS"
         size="large"
         :placeholder="$t('page.login.common.passwordPlaceholder')"
       >
@@ -86,5 +35,56 @@ async function handleSubmit() {
     </AButton>
   </AForm>
 </template>
+
+<script setup lang="ts">
+import { reactive } from 'vue'
+import { $t } from '@/locales'
+import { useAntdForm } from '@/hooks/common/form'
+import { useAuthStore } from '@/store/modules/auth'
+import { UserOutlined, LockOutlined } from '@ant-design/icons-vue'
+import { ITEM_REQUIRE_ERROR } from '@/constants/msg'
+
+defineOptions({
+  name: 'PwdLogin',
+})
+
+const authStore = useAuthStore()
+const { formRef, validate } = useAntdForm()
+
+interface FormModel {
+  USER_ID: string
+  PASS: string
+}
+
+const model: FormModel = reactive({
+  USER_ID: '',
+  PASS: '',
+})
+
+const rules = reactive<Record<keyof FormModel, App.Global.FormRule[]>>({
+  USER_ID: [
+    {
+      required: true,
+      message: ITEM_REQUIRE_ERROR.Msg.replace(
+        '{0}',
+        $t('page.login.common.userNamePlaceholder')
+      ),
+      transform: (val) => val?.trim(),
+    },
+  ],
+  PASS: [
+    {
+      required: true,
+      message: `${ITEM_REQUIRE_ERROR.Msg.replace('{0}', $t('page.login.common.passwordPlaceholder'))}`,
+      transform: (val) => val?.trim(),
+    },
+  ],
+})
+
+async function handleSubmit() {
+  await validate()
+  await authStore.login(model.USER_ID, model.PASS)
+}
+</script>
 
 <style scoped></style>
