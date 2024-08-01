@@ -250,12 +250,33 @@ function onPreview() {
 //--------------------------------------------------------------------------
 //監視定義
 //--------------------------------------------------------------------------
-//契約者区分の値が変った時の処理
+//契約者区分、事業委託先及び契約番号の値が変った時の処理
 watch(
-  () => [formData.KEIYAKU_KBN_CD_FM, formData.KEIYAKU_KBN_CD_TO],
+  () => [
+    formData.KEIYAKU_KBN_CD_FM,
+    formData.KEIYAKU_KBN_CD_TO,
+    formData.ITAKU_CD_FM,
+    formData.ITAKU_CD_TO,
+    formData.KEIYAKUSYA_CD_FM,
+    formData.KEIYAKUSYA_CD_TO,
+  ],
   (
-    [newKeiyakuKbnCdFm, newKeiyakuKbnCdTo],
-    [oldKeiyakuKbnCdFm, oldKeiyakuKbnCdTo]
+    [
+      newKeiyakuKbnCdFm,
+      newKeiyakuKbnCdTo,
+      newItakuCdFm,
+      newItakuCdTo,
+      newKeiyakusyaCdFm,
+      newKeiyakusyaCdTo,
+    ],
+    [
+      oldKeiyakuKbnCdFm,
+      oldKeiyakuKbnCdTo,
+      oldItakuCdFm,
+      oldItakuCdTo,
+      oldKeiyakusyaCdFm,
+      oldKeiyakusyaCdTo,
+    ]
   ) => {
     if (newKeiyakuKbnCdFm !== oldKeiyakuKbnCdFm) {
       if (newKeiyakuKbnCdFm && !newKeiyakuKbnCdTo) {
@@ -267,12 +288,6 @@ watch(
         formData.KEIYAKU_KBN_CD_FM = newKeiyakuKbnCdTo
       }
     }
-  }
-)
-//事業委託先の値が変った時の処理
-watch(
-  () => [formData.ITAKU_CD_FM, formData.ITAKU_CD_TO],
-  ([newItakuCdFm, newItakuCdTo], [oldItakuCdFm, oldItakuCdTo]) => {
     if (newItakuCdFm !== oldItakuCdFm) {
       if (newItakuCdFm && !newItakuCdTo) {
         formData.ITAKU_CD_TO = newItakuCdFm
@@ -283,15 +298,6 @@ watch(
         formData.ITAKU_CD_FM = newItakuCdTo
       }
     }
-  }
-)
-//契約番号の値が変った時の処理
-watch(
-  () => [formData.KEIYAKUSYA_CD_FM, formData.KEIYAKUSYA_CD_TO],
-  (
-    [newKeiyakusyaCdFm, newKeiyakusyaCdTo],
-    [oldKeiyakusyaCdFm, oldKeiyakusyaCdTo]
-  ) => {
     if (newKeiyakusyaCdFm !== oldKeiyakusyaCdFm) {
       if (newKeiyakusyaCdFm && !newKeiyakusyaCdTo) {
         formData.KEIYAKUSYA_CD_TO = newKeiyakusyaCdFm
