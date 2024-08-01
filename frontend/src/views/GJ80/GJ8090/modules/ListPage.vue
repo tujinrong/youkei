@@ -221,7 +221,7 @@ const getInitData = (KI) => {
   Init(KI).then((res) => {
     // TODO
     if (KI) {
-      searchParams.KI = res.KI
+      searchParams.KI = KI
     } else {
       searchParams.KI = res.KI
     }
@@ -292,9 +292,10 @@ watch(
   () => searchParams.KI,
   (newVal) => {
     if (newVal) {
+      console.log(newVal)
       getInitData(newVal)
       searchParams.KEIYAKUSYA_CD = undefined
-      tableData.value = ''
+      tableData.value = []
     }
   }
 )
