@@ -216,25 +216,29 @@ const clear = () => {
 
 //プレビューボタンを押す時
 function onPreview() {
+  const openNew = () => {
+    window.open(`http://localhost:9527/gj1031`, '_blank')
+  }
   if (validateSearchParams()) {
-    // フォント記述子の定義
-    const fonts = [
-      { name: 'ＭＳ ゴシック', source: '/fonts/MSGOTHIC.TTF' },
-      { name: '游明朝', source: '/fonts/yumin.ttf' },
-      { name: '游ゴシック', source: '/fonts/yugothib.ttf' },
-      { name: 'IPAゴシック', source: '/fonts/ipaexg.ttf' },
-      { name: 'Arial', source: '/fonts/Arial.ttf' },
-      { name: 'Arial Italic', source: '/fonts/Arialbi.ttf' },
-      { name: 'Arial Bold', source: '/fonts/Arialbd.ttf' },
-      { name: 'Arial Bold Italic', source: '/fonts/Arialbi.ttf' },
-      { name: 'Arial Black', source: '/fonts/Ariblk.ttf' },
-    ]
-    const viewer = new ReportViewer.Viewer('#viewer-host', { language: 'ja' })
-    viewer.open('/report/keyakusya.rdlx-json')
-    // サイドバーのエクスポート機能を有効化
-    viewer.availableExports = ['pdf', 'xlsx', 'html']
-    // 定義済みのフォント記述子を登録する
-    Core.FontStore.registerFonts(...fonts)
+    openNew()
+    // // フォント記述子の定義
+    // const fonts = [
+    //   { name: 'ＭＳ ゴシック', source: '/fonts/MSGOTHIC.TTF' },
+    //   { name: '游明朝', source: '/fonts/yumin.ttf' },
+    //   { name: '游ゴシック', source: '/fonts/yugothib.ttf' },
+    //   { name: 'IPAゴシック', source: '/fonts/ipaexg.ttf' },
+    //   { name: 'Arial', source: '/fonts/Arial.ttf' },
+    //   { name: 'Arial Italic', source: '/fonts/Arialbi.ttf' },
+    //   { name: 'Arial Bold', source: '/fonts/Arialbd.ttf' },
+    //   { name: 'Arial Bold Italic', source: '/fonts/Arialbi.ttf' },
+    //   { name: 'Arial Black', source: '/fonts/Ariblk.ttf' },
+    // ]
+    // const viewer = new ReportViewer.Viewer('#viewer-host', { language: 'ja' })
+    // viewer.open('/report/keyakusya.rdlx-json')
+    // // サイドバーのエクスポート機能を有効化
+    // viewer.availableExports = ['pdf', 'xlsx', 'html']
+    // // 定義済みのフォント記述子を登録する
+    // Core.FontStore.registerFonts(...fonts)
   }
 }
 

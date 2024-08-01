@@ -172,6 +172,7 @@ const routeMap: RouteMap = {
   "gj10_gj1050": "/gj10/gj1050",
   "gj10_gj1060": "/gj10/gj1060",
   "gj10_gj1070": "/gj10/gj1070",
+  "gj1031": "/gj1031",
   "gj20": "/gj20",
   "gj20_gj2010": "/gj20/gj2010",
   "gj20_gj2020": "/gj20/gj2020",
