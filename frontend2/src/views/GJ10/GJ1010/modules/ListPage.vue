@@ -145,8 +145,8 @@
     </a-card>
     <a-card :bordered="false" class="sm:flex-1-hidden" ref="cardRef">
       <a-pagination
-        v-model:current="pageParams.PAGE_NUM"
-        v-model:page-size="pageParams.PAGE_SIZE"
+        v-model:current="pageParams.pagenum"
+        v-model:page-size="pageParams.pagesize"
         :total="totalCount"
         :page-size-options="['10', '25', '50', '100']"
         show-less-items
@@ -159,7 +159,7 @@
         :height="height - 70"
         :row-config="{ isCurrent: true, isHover: true }"
         :data="tableData"
-        :sort-config="{ trigger: 'cell' }"
+        :sort-config="{ trigger: 'cell', orders: ['desc', 'asc'] }"
         :empty-render="{ name: 'NotData' }"
         @cell-dblclick="({ row }) => forwardEdit(row)"
         @sort-change="(e) => changeTableSort(e, toRef(pageParams, 'orderby'))"

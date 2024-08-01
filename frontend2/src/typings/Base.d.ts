@@ -13,23 +13,23 @@
 /** 共通ベース：参照用、実質データ格納しない、httpのヘッダーに格納する */
 interface DaRequestBase {
   /** ユーザーID */
-  USER_ID?: string
+  userid?: string
 }
 
 /** 登録処理 */
 interface CmSaveRequestBase extends DaRequestBase {
   /** チェックフラグ */
-  CHECK_FLG: boolean
+  checkflg: boolean
 }
 
 /** 検索処理 */
 interface CmSearchRequestBase extends DaRequestBase {
   /** ページサイズ */
-  PAGE_SIZE: number
+  pagesize: number
   /** ページNo. */
-  PAGE_NUM: number
+  pagenum: number
   /** 並び順 */
-  ORDER_BY?: number
+  orderby?: number
 }
 
 /** upload file */
