@@ -221,7 +221,7 @@ function onPreview() {
     const height = 900
     const left = window.screen.width / 2 - width / 2
     const top = window.screen.height / 2 - height / 2
-    const features = `width=${width},height=${height},left=${left},top=${top},toolbar=yes,menubar=yes,location=yes,status=yes`
+    const features = `width=${width},height=${height},left=${left},top=${top},toolbar=no,menubar=no,location=no,status=no`
     window.open(`http://localhost:9527/gj1031`, '_blank', features)
   }
   if (validateSearchParams()) {
