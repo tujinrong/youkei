@@ -281,8 +281,8 @@ onMounted(async () => {
       formData.ADDR_4 = res.KEIYAKUSYA_NOJO.ADDR_4
       formData.MEISAINO = res.KEIYAKUSYA_NOJO.MEISAINO
     })
-    nextTick(() => editJudge.reset())
   }
+  nextTick(() => editJudge.reset())
 })
 
 //--------------------------------------------------------------------------
