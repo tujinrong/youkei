@@ -1,10 +1,13 @@
 <template>
   <AForm ref="formRef" :model="model" :rules="rules">
-    <AFormItem name="userid">
+    <AFormItem name="USER_ID">
       <AInput
+        id="USER_ID"
         v-model:value="model.USER_ID"
         size="large"
+        :maxlength="10"
         :placeholder="$t('page.login.common.userNamePlaceholder')"
+        @input="handleInput"
       >
         <template #prefix>
           <UserOutlined class="c-gray" />
@@ -15,6 +18,7 @@
       <AInputPassword
         v-model:value="model.PASS"
         size="large"
+        :maxlength="20"
         :placeholder="$t('page.login.common.passwordPlaceholder')"
       >
         <template #prefix>
@@ -37,10 +41,11 @@
 </template>
 
 <script setup lang="ts">
-import { reactive } from 'vue'
+import { onMounted, reactive } from 'vue'
 import { $t } from '@/locales'
 import { useAntdForm } from '@/hooks/common/form'
 import { useAuthStore } from '@/store/modules/auth'
+import { convertToHalfWidth } from '@/utils/util'
 import { UserOutlined, LockOutlined } from '@ant-design/icons-vue'
 import { ITEM_REQUIRE_ERROR } from '@/constants/msg'
 
@@ -75,11 +80,24 @@ const rules = reactive<Record<keyof FormModel, App.Global.FormRule[]>>({
   PASS: [
     {
       required: true,
-      message: `${ITEM_REQUIRE_ERROR.Msg.replace('{0}', $t('page.login.common.passwordPlaceholder'))}`,
+      message: ITEM_REQUIRE_ERROR.Msg.replace(
+        '{0}',
+        $t('page.login.common.passwordPlaceholder')
+      ),
       transform: (val) => val?.trim(),
     },
   ],
 })
+
+onMounted(() => {
+  const userid = document.getElementById('USER_ID')
+  if (userid) userid.focus()
+})
+
+const handleInput = () => {
+  model.USER_ID = convertToHalfWidth(model.USER_ID)
+  model.PASS = convertToHalfWidth(model.PASS)
+}
 
 async function handleSubmit() {
   await validate()

@@ -289,3 +289,10 @@ export function convertToFullWidth(input: string): string {
     .replace(/[!-~]/g, (ch) => String.fromCharCode(ch.charCodeAt(0) + 0xfee0))
     .replace(/ /g, '　')
 }
+
+/**全角のアルファペット、数字、スペース及び記号を半角に変換*/
+export function convertToHalfWidth(input: string): string {
+  return input
+    .replace(/[！-～]/g, (ch) => String.fromCharCode(ch.charCodeAt(0) - 0xfee0))
+    .replace(/　/g, ' ')
+}
