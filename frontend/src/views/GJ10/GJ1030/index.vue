@@ -106,13 +106,13 @@
           </a-row>
         </div>
       </div>
-      <div id="viewer-host" class="flex-1"></div>
+      <!-- <div id="viewer-host" class="flex-1 mt-10"></div> -->
     </a-card>
   </div>
 </template>
 
 <script setup lang="ts">
-import { reactive, ref, watch } from 'vue'
+import { reactive, ref, watch, computed } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useTabStore } from '@/store/modules/tab'
 import DateJp from '@/components/Selector/DateJp/index.vue'
@@ -174,6 +174,13 @@ const layout = {
   xl: 24,
   xxl: 12,
 }
+
+const host = window.location.href.includes('localhost')
+  ? 'localhost:9527'
+  : '61.213.76.155:65534'
+const URL = computed(() => {
+  return `http://${host}/preview`
+})
 //--------------------------------------------------------------------------
 //メソッド
 //--------------------------------------------------------------------------
@@ -217,20 +224,12 @@ const clear = () => {
 //プレビューボタンを押す時
 function onPreview() {
   const openNew = () => {
-    const width = 1600
-    const height = 900
-    const left = window.screen.width / 2 - width / 2
-    const top = window.screen.height / 2 - height / 2
-    const features = `width=${width},height=${height},left=${left},top=${top},toolbar=no,menubar=no,location=no,status=no`
-    const host = window.location.href.includes('localhost')
-      ? 'localhost:9527'
-      : '61.213.76.155:65534'
-
-    window.open(`http://${host}/preview`, '_blank', features)
+    window.open(URL.value, '_blank')
   }
   if (validateSearchParams()) {
     openNew()
-    // // フォント記述子の定義
+    // previewVisible.value = true
+    // フォント記述子の定義
     // const fonts = [
     //   { name: 'ＭＳ ゴシック', source: '/fonts/MSGOTHIC.TTF' },
     //   { name: '游明朝', source: '/fonts/yumin.ttf' },
