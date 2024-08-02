@@ -13,6 +13,7 @@
       :maxlength="3"
       style="width: 64px; text-align: center; border-right: 0"
       @blur="onBlur"
+      @focus="onFocus"
     >
       <template #prefix> 〒 </template>
     </a-input>
@@ -69,10 +70,13 @@ watchEffect(() => {
 //--------------------------------------------------------------------------
 //メソッド
 //--------------------------------------------------------------------------
+function onFocus() {
+  value1.value = value1.value.replace(/[^0-9]/g, '')
+}
 function onBlur() {
   value1.value = value1.value.replace(/[^0-9]/g, '')
   value2.value = value2.value.replace(/[^0-9]/g, '')
-  const code = `${value1.value}-${value2.value}`
+  const code = `${value1.value.padEnd(3, ' ')}-${value2.value}`
   emit('update:value', code === '-' ? '' : code.replace('-', ''))
 
   formItemContext.onFieldChange()

@@ -322,6 +322,9 @@ import { Form } from 'ant-design-vue'
 import { reactive, nextTick, onMounted } from 'vue'
 import DateJp from '@/components/Selector/DateJp/index.vue'
 import { Judgement } from '@/utils/judge-edited'
+//--------------------------------------------------------------------------
+//データ定義
+//--------------------------------------------------------------------------
 const props = defineProps<{
   status: PageSatatus
 }>()

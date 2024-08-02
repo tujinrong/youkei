@@ -220,7 +220,7 @@ const rules = reactive({
           return Promise.reject(
             ITEM_REQUIRE_ERROR.Msg.replace('{0}', '郵便番号')
           )
-        } else if (value.length < 7) {
+        } else if (value.replace(/[^0-9]/g, '').length < 7) {
           return Promise.reject(
             ITEM_ILLEGAL_ERROR.Msg.replace('{0}', '郵便番号')
           )
