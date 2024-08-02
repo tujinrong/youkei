@@ -29,7 +29,6 @@ onMounted(() => {
     { name: 'Arial Bold Italic', source: '/fonts/Arialbi.ttf' },
     { name: 'Arial Black', source: '/fonts/Ariblk.ttf' },
   ]
-  debugger
   const viewer = new ReportViewer.Viewer('#viewer-host', { language: 'ja' })
   viewer.open('/report/keyakusya.rdlx-json')
   // サイドバーのエクスポート機能を有効化

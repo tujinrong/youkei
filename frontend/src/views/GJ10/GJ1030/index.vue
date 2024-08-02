@@ -226,7 +226,7 @@ function onPreview() {
       ? 'localhost:9527'
       : '61.213.76.155:65534'
 
-    window.open(`http://${host}/gj1031`, '_blank', features)
+    window.open(`http://${host}/preview`, '_blank', features)
   }
   if (validateSearchParams()) {
     openNew()

@@ -22,7 +22,6 @@ export const views: Record<LastLevelRouteKey, RouteComponent | (() => Promise<Ro
   gj10_gj1050: () => import("@/views/GJ10/GJ1050/index.vue"),
   gj10_gj1060: () => import("@/views/GJ10/GJ1060/index.vue"),
   gj10_gj1070: () => import("@/views/GJ10/GJ1070/index.vue"),
-  gj1031: () => import("@/views/GJ1031/index.vue"),
   gj20_gj2010: () => import("@/views/GJ20/GJ2010/index.vue"),
   gj20_gj2020: () => import("@/views/GJ20/GJ2020/index.vue"),
   gj20_gj2030: () => import("@/views/GJ20/GJ2030/index.vue"),
@@ -71,5 +70,6 @@ export const views: Record<LastLevelRouteKey, RouteComponent | (() => Promise<Ro
   login: () => import("@/views/_builtin/login/index.vue"),
   todo: () => import("@/views/_builtin/todo/index.vue"),
   home: () => import("@/views/home/index.vue"),
+  preview: () => import("@/views/preview/index.vue"),
   "user-center": () => import("@/views/user-center/index.vue"),
 };
