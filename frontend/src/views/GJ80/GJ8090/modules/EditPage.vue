@@ -193,6 +193,11 @@ const formData = reactive({
   NOJO_CD: number
   KEIYAKUSYA_NAME: string
 })
+const keyakusyaList = ref<DaSelectorModel[]>([
+  { value: 1, label: '永玉田中' },
+  { value: 2, label: '尾三玉田' },
+  { value: 3, label: '史玉浅海' },
+])
 
 const rules = reactive({
   NOJO_CD: [
@@ -263,7 +268,10 @@ onMounted(async () => {
   }
   await InitDetail().then((res) => {
     formData.KEIYAKUSYA_NAME =
-      formData.KEIYAKUSYA_CD + ' : ' + res.KEIYAKUSYA_NAME
+      formData.KEIYAKUSYA_CD +
+      ' : ' +
+      keyakusyaList.value.find((el) => el.value == formData.KEIYAKUSYA_CD)
+        ?.label
     KEN_CD_NAME_LIST.value = res.KEN_CD_NAME_LIST
   })
   if (props.status === PageSatatus.Edit) {
