@@ -124,7 +124,7 @@ const openNew = () => {
     ? 'localhost:9527'
     : '61.213.76.155:65534'
 
-  window.open(`http://${host}${currentPath}`, '_blank', features)
+  window.open(`http://${host}${currentPath}`, '_blank')
 }
 //---------------------------------------------------------------------
 </script>
