@@ -381,7 +381,4 @@ h1 {
   width: 100%;
   margin-bottom: 0;
 }
-:deep(.ant-input-number-input:disabled) {
-  color: #b8b8b8;
-}
 </style>

@@ -99,3 +99,6 @@ a {
     color: rgb(var(--primary-300-color));
   }
 }
+:deep(:disabled) {
+  color: black;
+}
