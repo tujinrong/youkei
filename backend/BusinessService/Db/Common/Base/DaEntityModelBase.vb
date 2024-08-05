@@ -8,7 +8,7 @@
 ' *******************************************************************
 Imports Microsoft.VisualBasic.CompilerServices
 
-Namespace Jbd.Gjs.Db
+Namespace JBD.GJS.Db
     Public Class DaEntityModelBase
         Public Function Copy() As Object
             Return MemberwiseClone()

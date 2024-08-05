@@ -6,10 +6,10 @@
 // 作成者　　: AIPlus
 // 変更履歴　:
 // *******************************************************************
-using Jbd.Gjs.Common;
+using JBD.GJS.Common;
 using Microsoft.OpenApi.Models;
 
-namespace Jbd.Gjs.WebService.Config;
+namespace JBD.GJS.WebService.Config;
 
 public static class SwaggerConfig
 {

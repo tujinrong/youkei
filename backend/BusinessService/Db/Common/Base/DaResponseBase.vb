@@ -8,7 +8,7 @@
 ' *******************************************************************
 Imports System.Text.Json.Serialization
 
-Namespace Jbd.Gjs.Db
+Namespace JBD.GJS.Db
     Public Class DaResponseBase
         <JsonPropertyName("RETURN_CODE")>
         Public Property returncode As EnumServiceResult = EnumServiceResult.OK   'レスポンス状態区別

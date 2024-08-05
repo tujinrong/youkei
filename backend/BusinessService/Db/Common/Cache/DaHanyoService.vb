@@ -7,7 +7,7 @@
 ' 変更履歴　:
 ' *******************************************************************
 
-Namespace Jbd.Gjs.Db
+Namespace JBD.GJS.Db
     Public Module DaHanyoService
         ''' <summary>
         ''' 汎用データ(1件)

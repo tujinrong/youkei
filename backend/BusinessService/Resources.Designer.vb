@@ -8,13 +8,10 @@
 ' </auto-generated>
 ' ------------------------------------------------------------------------------
 
-
-Imports System.Diagnostics
 Imports System.Globalization
 Imports System.Runtime.CompilerServices
-Imports Microsoft.VisualBasic
 
-Namespace Jbd.Gjs.Service.My.Resources
+Namespace JBD.GJS.Service.My.Resources
 
     ' このクラスは StronglyTypedResourceBuilder クラスが ResGen
     ' または Visual Studio のようなツールを使用して自動生成されました。

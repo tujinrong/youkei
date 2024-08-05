@@ -7,7 +7,7 @@
 ' 変更履歴　:
 ' *******************************************************************
 
-Namespace Jbd.Gjs.Service.Common
+Namespace JBD.GJS.Service.Common
     Public Class Wraper
         Inherits CmWraperBase
         ''' <summary>

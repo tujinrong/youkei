@@ -7,13 +7,13 @@
 // 変更履歴　:
 // *******************************************************************
 using System.Globalization;
-using Jbd.Gjs.WebService;
-using Jbd.Gjs.WebService.Config;
+using JBD.GJS.WebService;
+using JBD.GJS.WebService.Config;
 using Hangfire;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
 using WebService.Common.Base.Response;
 using WebService.Config;
-using BusinessService.Jbd.Gjs.Db;
+using BusinessService.JBD.GJS.Db;
 
 
 CultureInfo.DefaultThreadCurrentCulture = new CultureInfo("ja-JP");
@@ -29,8 +29,8 @@ var configuration = builder.Configuration;
 //System Start Up log
 using (var db = new DaDbContext())
 {
-    db.Session.SessionData[BusinessService.Jbd.Gjs.Db.DaConst.SessionID] = -1L;
-    db.Session.UserID = BusinessService.Jbd.Gjs.Db.DaConst.SYSTEM;
+    db.Session.SessionData[BusinessService.JBD.GJS.Db.DaConst.SessionID] = -1L;
+    db.Session.UserID = BusinessService.JBD.GJS.Db.DaConst.SYSTEM;
     DaDbLogService.WriteDbMessage
         (db, "System Start Up");
 }
@@ -74,7 +74,7 @@ builder.Services.AddCors(options =>
             }
 
             // Download Header need open
-            policy.WithExposedHeaders(BusinessService.Jbd.Gjs.Db.DaConst.Content_Disposition,
+            policy.WithExposedHeaders(BusinessService.JBD.GJS.Db.DaConst.Content_Disposition,
                 nameof(CmDownloadResponseBase.returncode),
                 nameof(CmDownloadResponseBase.message));
         });

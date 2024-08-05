@@ -9,7 +9,7 @@
 Imports System.Text.Json.Serialization
 Imports Oracle.ManagedDataAccess.Client
 
-Namespace Jbd.Gjs.Db
+Namespace JBD.GJS.Db
     Public Class DaDbLogService
         Private Const MAX_CHARS As Integer = 120
 
@@ -143,7 +143,7 @@ Namespace Jbd.Gjs.Db
 
             'データを取得
             'var dto = db.tt_aflog.SELECT.WHERE.ByKey(sessionSeq).GetDto();
-            ' Dim serviceType As Type = GetType(Jbd.Gjs.Service.GJ0000)
+            ' Dim serviceType As Type = GetType(JBD.GJS.Service.GJ0000)
             '' 获取所有的方法
             'Dim methods As MethodInfo() = serviceType.GetMethods(BindingFlags.Public Or BindingFlags.Instance Or BindingFlags.DeclaredOnly)
 
@@ -376,12 +376,12 @@ Namespace Jbd.Gjs.Db
         ''''    場所 ICSharpCode.CodeConverter.VB.CommentConvertingMethodBodyVisitor.DefaultVisit(SyntaxNode node)
         '''' 
         '''' Input:
-        ''''             Jbd.Gjs.Db.tt_afbatchlogDto dto = new()
+        ''''             JBD.GJS.Db.tt_afbatchlogDto dto = new()
         ''''             {
-        ''''                 syoridttmf = Jbd.Gjs.Db.DaUtil.Now,
+        ''''                 syoridttmf = JBD.GJS.Db.DaUtil.Now,
         ''''                 msg = msg,
         ''''                 pram = @param,
-        ''''                 regdttm = Jbd.Gjs.Db.DaUtil.Now
+        ''''                 regdttm = JBD.GJS.Db.DaUtil.Now
         ''''             };
         '''' 
         '''' 

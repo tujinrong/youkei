@@ -3,7 +3,7 @@ Imports System.Reflection
 Imports System.Text
 Imports Oracle.ManagedDataAccess.Client
 
-Namespace Jbd.Gjs.Db
+Namespace JBD.GJS.Db
 
     Public Class SessionContext
         Public Connection As OracleConnection

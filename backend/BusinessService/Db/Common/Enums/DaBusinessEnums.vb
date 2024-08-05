@@ -8,7 +8,7 @@
 ' *******************************************************************
 
 
-Namespace Jbd.Gjs.Db
+Namespace JBD.GJS.Db
     Public Enum Enum特殊一覧検索機能
         AWSH001        '成人検診
         AWKK00101G     '住民・住登外

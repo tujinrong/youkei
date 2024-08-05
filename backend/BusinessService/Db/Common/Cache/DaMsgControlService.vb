@@ -6,7 +6,7 @@
 ' 作成者　　: 
 ' 変更履歴　:
 ' *******************************************************************
-Namespace Jbd.Gjs.Db
+Namespace JBD.GJS.Db
     Public Module DaMsgControlService
         Private Const CacheMinutes As Double = 3R
                 ''' Cannot convert FieldDeclarationSyntax, System.InvalidCastException: 型 'Microsoft.CodeAnalysis.VisualBasic.Syntax.EmptyStatementSyntax' のオブジェクトを型 'Microsoft.CodeAnalysis.VisualBasic.Syntax.ExpressionSyntax' にキャストできません。
@@ -26,7 +26,7 @@ Namespace Jbd.Gjs.Db
 '''    場所 ICSharpCode.CodeConverter.VB.CommentConvertingVisitorWrapper`1.Accept(SyntaxNode csNode, Boolean addSourceMapping)
 ''' 
 ''' Input:
-'''         private static System.Collections.Generic.Dictionary<string, Jbd.Gjs.Db.tm_afmsgctrlDto> _dic = new();
+'''         private static System.Collections.Generic.Dictionary<string, JBD.GJS.Db.tm_afmsgctrlDto> _dic = new();
 ''' 
 ''' 
         Private _lastTime As Date

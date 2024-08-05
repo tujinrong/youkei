@@ -11,7 +11,7 @@
 
 Imports Oracle.ManagedDataAccess.Client
 
-Namespace Jbd.Gjs.Db
+Namespace JBD.GJS.Db
     Public Class ProcModel
         Public Property ProcName As String
         Public ParamList As List(Of Object) = New List(Of Object)()

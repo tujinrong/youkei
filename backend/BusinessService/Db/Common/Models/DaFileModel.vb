@@ -9,7 +9,7 @@
 Imports System.Text.Json.Serialization
 Imports Newtonsoft.Json
 
-Namespace Jbd.Gjs.Db
+Namespace JBD.GJS.Db
     Public Class DaFileModel
         Public Property filenm As String = String.Empty             'ファイル名
         Public Property filetype As String = String.Empty           'ファイルタイプ

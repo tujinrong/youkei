@@ -7,14 +7,14 @@
 // 変更履歴　:
 // *******************************************************************
 using System.Net;
-using BusinessService.Jbd.Gjs.Db;
+using BusinessService.JBD.GJS.Db;
 
-//using Jbd.Gjs.Common;
+//using JBD.GJS.Common;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Primitives;
 using WebService.Common.Base.Response;
 
-namespace Jbd.Gjs.WebService
+namespace JBD.GJS.WebService
 {
     [Authorize]
     [ApiController]

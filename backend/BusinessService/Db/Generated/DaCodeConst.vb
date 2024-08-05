@@ -6,7 +6,7 @@
 ' 作成者　　: AIPlus
 ' 変更履歴　:
 ' *******************************************************************
-Namespace Jbd.Gjs.Db
+Namespace JBD.GJS.Db
     Public Class DaCodeConst
         ''' <summary>
         ''' 名称マスタ

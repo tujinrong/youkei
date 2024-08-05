@@ -11,7 +11,7 @@
 ' using System.Diagnostics;
 ' using System.Reflection;
 ' 
-' namespace Jbd.Gjs.Db
+' namespace JBD.GJS.Db
 ' {
 ' public class DaJobService
 ' {

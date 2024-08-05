@@ -6,11 +6,11 @@
 // 作成者　　: AIPlus
 // 変更履歴　:
 // *******************************************************************
-using BusinessService.Jbd.Gjs.Db;
-using BusinessService.Jbd.Gjs.Service.GJ0000;
+using BusinessService.JBD.GJS.Db;
+using BusinessService.JBD.GJS.Service.GJ0000;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Jbd.Gjs.WebService
+namespace JBD.GJS.WebService
 {
     [Authorize]
     [ApiController]

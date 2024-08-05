@@ -6,10 +6,10 @@
 // 作成者　　: AIPlus
 // 変更履歴　:
 // *******************************************************************
-using BusinessService.Jbd.Gjs.Db;
+using BusinessService.JBD.GJS.Db;
 using Newtonsoft.Json;
 
-namespace Jbd.Gjs.WebService
+namespace JBD.GJS.WebService
 {
     public class RequestFactory
     {

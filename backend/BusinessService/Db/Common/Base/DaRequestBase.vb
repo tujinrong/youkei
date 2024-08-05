@@ -10,7 +10,7 @@ Imports Newtonsoft.Json
 Imports System.Reflection
 Imports System.Text.Json.Serialization
 
-Namespace Jbd.Gjs.Db
+Namespace JBD.GJS.Db
     Public Class DaRequestBase
         Public Service As String                      '機能ID
         Public ServiceDesc As String                  'サービス日本語名

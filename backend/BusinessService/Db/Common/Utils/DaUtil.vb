@@ -10,7 +10,7 @@
 Imports System.ComponentModel
 Imports System.Reflection
 
-Namespace Jbd.Gjs.Db
+Namespace JBD.GJS.Db
 
 
 

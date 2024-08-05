@@ -7,7 +7,7 @@
 ' *******************************************************************
 Imports Newtonsoft.Json
 
-Namespace Jbd.Gjs.Db
+Namespace JBD.GJS.Db
     Public Class DaTokenService
         ''' <summary>
         ''' ログインの時に呼び出し
@@ -145,7 +145,7 @@ Namespace Jbd.Gjs.Db
                 '''                 //dto.kanrisyaflg = syozokuDto.kanrisyaflg;                                                                   //管理者フラグ
                 '''                 //dto.pnoeditflg = syozokuDto.pnoeditflg;                                                                     //個人番号操作権限付与フラグ
                 '''                 //dto.alertviewflg = syozokuDto.alertviewflg;                                                                 //警告参照フラグ
-                '''                 dto.sisyocd = string.Join(Jbd.Gjs.Db.DaStrPool.COMMA, Jbd.Gjs.Db.DaTokenService.GetSisyoList(db, Jbd.Gjs.Db.Enumロール区分.所属, userDto.syozokucd!))
+                '''                 dto.sisyocd = string.Join(JBD.GJS.Db.DaStrPool.COMMA, JBD.GJS.Db.DaTokenService.GetSisyoList(db, JBD.GJS.Db.Enumロール区分.所属, userDto.syozokucd!))
                 ''' 
                 ''' Cannot convert AssignmentExpressionSyntax, System.InvalidCastException: 型 'Microsoft.CodeAnalysis.VisualBasic.Syntax.EmptyStatementSyntax' のオブジェクトを型 'Microsoft.CodeAnalysis.VisualBasic.Syntax.ExpressionSyntax' にキャストできません。
                 '''    場所 ICSharpCode.CodeConverter.VB.NodesVisitor.VisitAssignmentExpression(AssignmentExpressionSyntax node)
@@ -153,7 +153,7 @@ Namespace Jbd.Gjs.Db
                 '''    場所 ICSharpCode.CodeConverter.VB.CommentConvertingVisitorWrapper`1.Accept(SyntaxNode csNode, Boolean addSourceMapping)
                 ''' 
                 ''' Input:
-                '''                 dto.gamenauth = Newtonsoft.Json.JsonConvert.SerializeObject(Jbd.Gjs.Db.DaTokenService.GetGamenAuthList(db, Jbd.Gjs.Db.Enumロール区分.所属, userDto.syozokucd!))
+                '''                 dto.gamenauth = Newtonsoft.Json.JsonConvert.SerializeObject(JBD.GJS.Db.DaTokenService.GetGamenAuthList(db, JBD.GJS.Db.Enumロール区分.所属, userDto.syozokucd!))
                 ''' 
             End If
             Return dto
@@ -191,7 +191,7 @@ Namespace Jbd.Gjs.Db
                 '''                 //dto.kanrisyaflg = syozokuDto.kanrisyaflg;                                                                   //管理者フラグ
                 '''                 //dto.pnoeditflg = syozokuDto.pnoeditflg;                                                                     //個人番号操作権限付与フラグ
                 '''                 //dto.alertviewflg = syozokuDto.alertviewflg;                                                                 //警告参照フラグ
-                '''                 dto.sisyocd = string.Join(Jbd.Gjs.Db.DaStrPool.COMMA, Jbd.Gjs.Db.DaTokenService.GetSisyoList(db, Jbd.Gjs.Db.Enumロール区分.所属, userDto.syozokucd!))
+                '''                 dto.sisyocd = string.Join(JBD.GJS.Db.DaStrPool.COMMA, JBD.GJS.Db.DaTokenService.GetSisyoList(db, JBD.GJS.Db.Enumロール区分.所属, userDto.syozokucd!))
                 ''' 
                 ''' Cannot convert AssignmentExpressionSyntax, System.InvalidCastException: 型 'Microsoft.CodeAnalysis.VisualBasic.Syntax.EmptyStatementSyntax' のオブジェクトを型 'Microsoft.CodeAnalysis.VisualBasic.Syntax.ExpressionSyntax' にキャストできません。
                 '''    場所 ICSharpCode.CodeConverter.VB.NodesVisitor.VisitAssignmentExpression(AssignmentExpressionSyntax node)
@@ -199,7 +199,7 @@ Namespace Jbd.Gjs.Db
                 '''    場所 ICSharpCode.CodeConverter.VB.CommentConvertingVisitorWrapper`1.Accept(SyntaxNode csNode, Boolean addSourceMapping)
                 ''' 
                 ''' Input:
-                '''                 dto.gamenauth = Newtonsoft.Json.JsonConvert.SerializeObject(Jbd.Gjs.Db.DaTokenService.GetGamenAuthList(db, Jbd.Gjs.Db.Enumロール区分.所属, userDto.syozokucd!))
+                '''                 dto.gamenauth = Newtonsoft.Json.JsonConvert.SerializeObject(JBD.GJS.Db.DaTokenService.GetGamenAuthList(db, JBD.GJS.Db.Enumロール区分.所属, userDto.syozokucd!))
                 ''' 
             'End If
             Return dto

@@ -6,7 +6,7 @@
 ' 作成者　　: 
 ' 変更履歴　:
 ' *******************************************************************
-Namespace Jbd.Gjs.Service.Common
+Namespace JBD.GJS.Service.Common
     ''' <summary>
     ''' 初期化処理(パスワードポリシー)
     ''' </summary>

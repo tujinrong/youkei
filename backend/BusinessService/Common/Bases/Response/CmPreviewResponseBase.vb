@@ -9,7 +9,7 @@
 Imports System.Text.Json.Serialization
 Imports Newtonsoft.Json
 
-Namespace Jbd.Gjs.Service
+Namespace JBD.GJS.Service
     Public Class CmPreviewResponseBase
         Inherits Db.DaResponseBase
         Public Property filenm As String                                          'ファイル名

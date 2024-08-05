@@ -6,10 +6,10 @@
 ' 作成者　　: 
 ' 変更履歴　:
 ' *******************************************************************
-Imports BusinessService.Jbd.Gjs.Service.Common
-Imports BusinessService.Jbd.Gjs.Db.DaCodeConst
+Imports BusinessService.JBD.GJS.Service.Common
+Imports BusinessService.JBD.GJS.Db.DaCodeConst
 
-Namespace Jbd.Gjs.Service
+Namespace JBD.GJS.Service
     Public Module CmLogicUtil
         '予約状態
         Public Const YOYAKUSTATUS1 As String = "空"
@@ -990,7 +990,7 @@ Namespace Jbd.Gjs.Service
             ''' Input:
             ''' 
             '''             //入力区分関連情報を取得
-            '''             var nmDto = datatypes.Find(x => x.nmcd == Jbd.Gjs.Db.DaConvertUtil.EnumToStr(inputtype))!;
+            '''             var nmDto = datatypes.Find(x => x.nmcd == JBD.GJS.Db.DaConvertUtil.EnumToStr(inputtype))!;
             ''' 
             ''' 
             ''' Cannot convert LocalDeclarationStatementSyntax, System.InvalidCastException: 型 'Microsoft.CodeAnalysis.VisualBasic.Syntax.EmptyStatementSyntax' のオブジェクトを型 'Microsoft.CodeAnalysis.VisualBasic.Syntax.ExpressionSyntax' にキャストできません。
@@ -1001,7 +1001,7 @@ Namespace Jbd.Gjs.Service
             ''' 
             ''' Input:
             '''             //保存型取得
-            '''             var savekbn = (Jbd.Gjs.Service.Enum入力値保存型)Jbd.Gjs.Db.DaConvertUtil.CInt(nmDto.hanyokbn1!);
+            '''             var savekbn = (JBD.GJS.Service.Enum入力値保存型)JBD.GJS.Db.DaConvertUtil.CInt(nmDto.hanyokbn1!);
             ''' 
             ''' 
 
@@ -1012,7 +1012,7 @@ Namespace Jbd.Gjs.Service
             ''' 
             ''' Input:
             ''' 
-            '''             vm.inputkbn = (Jbd.Gjs.Service.Enum画面項目入力)Jbd.Gjs.Db.DaConvertUtil.CInt(nmDto.hanyokbn3!)
+            '''             vm.inputkbn = (JBD.GJS.Service.Enum画面項目入力)JBD.GJS.Db.DaConvertUtil.CInt(nmDto.hanyokbn3!)
             ''' 
 
             '初期値
@@ -1023,7 +1023,7 @@ Namespace Jbd.Gjs.Service
                 '''    場所 ICSharpCode.CodeConverter.VB.CommentConvertingVisitorWrapper`1.Accept(SyntaxNode csNode, Boolean addSourceMapping)
                 ''' 
                 ''' Input:
-                '''                 vm.syokiti = Jbd.Gjs.Service.CmLogicUtil.GetFreeItemCdNm(db, syokiti!, kbn, inputtype, codejoken1, codejoken2, codejoken3, Jbd.Gjs.Db.Enum名称区分.名称, kinoid, patternno)
+                '''                 vm.syokiti = JBD.GJS.Service.CmLogicUtil.GetFreeItemCdNm(db, syokiti!, kbn, inputtype, codejoken1, codejoken2, codejoken3, JBD.GJS.Db.Enum名称区分.名称, kinoid, patternno)
                 ''' 
             Else
                 vm.syokiti = Gjs.Db.DaConvertUtil.CStr(syokiti)
@@ -1044,7 +1044,7 @@ Namespace Jbd.Gjs.Service
             '                '''    場所 ICSharpCode.CodeConverter.VB.CommentConvertingVisitorWrapper`1.Accept(SyntaxNode csNode, Boolean addSourceMapping)
             '                ''' 
             '                ''' Input:
-            '                '''                             vm.value = Jbd.Gjs.Service.CmLogicUtil.GetFreeItemCdNm(db, strvalue!, kbn, inputtype, codejoken1, codejoken2, codejoken3, Jbd.Gjs.Db.Enum名称区分.名称, kinoid, patternno)
+            '                '''                             vm.value = JBD.GJS.Service.CmLogicUtil.GetFreeItemCdNm(db, strvalue!, kbn, inputtype, codejoken1, codejoken2, codejoken3, JBD.GJS.Db.Enum名称区分.名称, kinoid, patternno)
             '                ''' 
             '            End If
 
@@ -1441,8 +1441,8 @@ Namespace Jbd.Gjs.Service
                 '''    場所 ICSharpCode.CodeConverter.VB.CommentConvertingVisitorWrapper`1.Accept(SyntaxNode csNode, Boolean addSourceMapping)
                 ''' 
                 ''' Input:
-                '''                 keyList = Jbd.Gjs.Service.CmLogicUtil.GetJigyocdList(db, kbn == Jbd.Gjs.Db.Enum参照ダイアログ項目区分.事業従事者 
-                '''                                         Jbd.Gjs.Service.Enum事業コード区分.事業従事者 : Jbd.Gjs.Service.Enum事業コード区分.医療機関, kinoid!, patternno, false)
+                '''                 keyList = JBD.GJS.Service.CmLogicUtil.GetJigyocdList(db, kbn == JBD.GJS.Db.Enum参照ダイアログ項目区分.事業従事者 
+                '''                                         JBD.GJS.Service.Enum事業コード区分.事業従事者 : JBD.GJS.Service.Enum事業コード区分.医療機関, kinoid!, patternno, false)
                 ''' 
 
                 '参照画面項目一覧取得(詳細条件)

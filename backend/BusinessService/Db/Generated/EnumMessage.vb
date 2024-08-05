@@ -6,7 +6,7 @@
 '作成者　　 : AIPlus
 ' 変更履歴　:
 ' *******************************************************************
-Namespace Jbd.Gjs.Db
+Namespace JBD.GJS.Db
     Public Enum EnumMessage
         ''' <summary>
         ''' サーバーとの接続に失敗しました。

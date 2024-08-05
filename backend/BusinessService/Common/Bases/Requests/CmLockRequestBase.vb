@@ -6,7 +6,7 @@
 ' 作成者　　: 
 ' 変更履歴　:
 ' *******************************************************************
-Namespace Jbd.Gjs.Service
+Namespace JBD.GJS.Service
     Public Class CmLockRequestBase
         Inherits Db.DaRequestBase
         Public Property timestamp As Date    'タイムスタンプ

@@ -6,7 +6,7 @@
 ' 作成者　　: 
 ' 変更履歴　:
 ' *******************************************************************
-Namespace Jbd.Gjs.Service
+Namespace JBD.GJS.Service
     Public Class CmSearchRequestBase
         Inherits Db.DaRequestBase
         Public Property pagesize As Integer = 20             'ページサイズ

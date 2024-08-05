@@ -8,7 +8,7 @@
 // *******************************************************************
 using Hangfire.Dashboard;
 
-namespace Jbd.Gjs.WebService;
+namespace JBD.GJS.WebService;
 
 public class HangfireAuthFilter : IDashboardAuthorizationFilter
 {

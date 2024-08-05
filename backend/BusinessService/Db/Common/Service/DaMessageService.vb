@@ -9,7 +9,7 @@
 Imports System.Text
 Imports System.Text.RegularExpressions
 
-Namespace Jbd.Gjs.Db
+Namespace JBD.GJS.Db
     Public Class DaMessageService
         Private Shared MsgDic As Dictionary(Of String, MessageModel)
         Private Shared MsgNoDic As Dictionary(Of String, MessageModel)
@@ -42,7 +42,7 @@ Namespace Jbd.Gjs.Db
             '''    場所 ICSharpCode.CodeConverter.VB.CommentConvertingMethodBodyVisitor.DefaultVisit(SyntaxNode node)
             ''' 
             ''' Input:
-            '''             string key = System.Enum.GetName(typeof(Jbd.Gjs.Db.EnumMessage), id)!;
+            '''             string key = System.Enum.GetName(typeof(JBD.GJS.Db.EnumMessage), id)!;
             ''' 
             ''' 
             'If MsgDic.ContainsKey(key) = False Then

@@ -9,7 +9,7 @@
 
 'using NpgsqlTypes;
 
-Namespace Jbd.Gjs.Db
+Namespace JBD.GJS.Db
     Public Class DaGlobal
         Public Shared WriteExcelLog As Boolean = False
         Private Shared _ConnectionString As String

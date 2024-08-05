@@ -8,7 +8,7 @@
 ' *******************************************************************
 Imports Microsoft.Extensions.Caching.Memory
 
-Namespace Jbd.Gjs.Db
+Namespace JBD.GJS.Db
     Public Class DaNameService
         Private Shared _cache As MemoryCache
         Const CACHE_MINIUTE As Integer = 5
@@ -163,13 +163,13 @@ Namespace Jbd.Gjs.Db
 '''    場所 ICSharpCode.CodeConverter.VB.CommentConvertingMethodBodyVisitor.DefaultVisit(SyntaxNode node)
 ''' 
 ''' Input:
-'''             if (!Jbd.Gjs.Db.DaNameService._cache.TryGetValue(key, out data!))
+'''             if (!JBD.GJS.Db.DaNameService._cache.TryGetValue(key, out data!))
 '''             {
-'''                 string sql = $"SELECT * FROM {Jbd.Gjs.Db.tm_afmeisyoDto.TABLE_NAME} " +
-'''                     $"WHERE {nameof(Jbd.Gjs.Db.tm_afmeisyoDto.nmmaincd)}='{maincd}' AND {nameof(Jbd.Gjs.Db.tm_afmeisyoDto.nmsubcd)}={subcd} " +
-'''                     $"ORDER BY {nameof(Jbd.Gjs.Db.tm_afmeisyoDto.nmmaincd)}, {nameof(Jbd.Gjs.Db.tm_afmeisyoDto.nmsubcd)}";
+'''                 string sql = $"SELECT * FROM {JBD.GJS.Db.tm_afmeisyoDto.TABLE_NAME} " +
+'''                     $"WHERE {nameof(JBD.GJS.Db.tm_afmeisyoDto.nmmaincd)}='{maincd}' AND {nameof(JBD.GJS.Db.tm_afmeisyoDto.nmsubcd)}={subcd} " +
+'''                     $"ORDER BY {nameof(JBD.GJS.Db.tm_afmeisyoDto.nmmaincd)}, {nameof(JBD.GJS.Db.tm_afmeisyoDto.nmsubcd)}";
 '''                 //data = db.Session.Query<tm_afmeisyoDto>(sql);
-'''                 Jbd.Gjs.Db.DaNameService._cache.Set(key, data, System.TimeSpan.FromMinutes(Jbd.Gjs.Db.DaNameService.CACHE_MINIUTE));
+'''                 JBD.GJS.Db.DaNameService._cache.Set(key, data, System.TimeSpan.FromMinutes(JBD.GJS.Db.DaNameService.CACHE_MINIUTE));
 '''             }
 ''' 
 ''' 

@@ -8,7 +8,7 @@
 // *******************************************************************
 using Microsoft.Net.Http.Headers;
 
-namespace Jbd.Gjs.WebService
+namespace JBD.GJS.WebService
 {
     public static class MultipartRequestHelper
     {

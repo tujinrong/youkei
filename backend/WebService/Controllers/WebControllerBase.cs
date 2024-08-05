@@ -7,10 +7,10 @@
 // 変更履歴　:
 // *******************************************************************
 
-using BusinessService.Jbd.Gjs.Db;
+using BusinessService.JBD.GJS.Db;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Jbd.Gjs.WebService
+namespace JBD.GJS.WebService
 {
     public class WebControllerBase : Controller
     {

@@ -7,9 +7,9 @@
 ' 変更履歴　:
 ' *******************************************************************
 Imports System.Text.Json.Serialization
-Imports BusinessService.Jbd.Gjs.Service.Common
+Imports BusinessService.JBD.GJS.Service.Common
 
-Namespace Jbd.Gjs.Service.GJ0000
+Namespace JBD.GJS.Service.GJ0000
     ''' <summary>
     ''' ログイン処理(成功)
     ''' </summary>

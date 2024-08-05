@@ -6,7 +6,7 @@
 ' 作成者　　: 蔣
 ' 変更履歴　:
 ' *******************************************************************
-Namespace Jbd.Gjs.Service
+Namespace JBD.GJS.Service
     Public Class CmDownloadResponseBase
         Inherits CmPreviewResponseBase
         Public Property downloadtype As EnumDownloadType = EnumDownloadType.Data 'ファイルタイプ

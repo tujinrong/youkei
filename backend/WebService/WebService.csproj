@@ -4,7 +4,7 @@
     <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-    <AssemblyName>Jbd.Gjs.WebService</AssemblyName>
+    <AssemblyName>JBD.GJS.WebService</AssemblyName>
     <UserSecretsId>3aae0b41-975a-4d68-a760-50cf95df17cc</UserSecretsId>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
   </PropertyGroup>

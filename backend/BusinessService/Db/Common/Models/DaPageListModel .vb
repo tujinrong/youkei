@@ -6,7 +6,7 @@
 ' 作成者　　: 
 ' 変更履歴　:
 ' *******************************************************************
-Namespace Jbd.Gjs.Db
+Namespace JBD.GJS.Db
     Public Class DaPageListModel
         Public TotalCount As Integer
         Public Property dataTable As Data.DataTable = New Data.DataTable()

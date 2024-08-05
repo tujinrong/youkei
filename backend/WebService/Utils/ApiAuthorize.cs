@@ -14,7 +14,7 @@ public enum Role
     Everyone
 }
 
-namespace Jbd.Gjs.WebService
+namespace JBD.GJS.WebService
 {
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method)]
     public class AuthorizeAttribute : Attribute, IAuthorizationFilter

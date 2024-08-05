@@ -6,7 +6,7 @@
 ' 作成者　　: 蔣
 ' 変更履歴　:
 ' *******************************************************************
-Namespace Jbd.Gjs.Service
+Namespace JBD.GJS.Service
     Public Module CmPreviewService
         ''' <summary>
         ''' 単一ファイルプレビュー応答

@@ -14,7 +14,7 @@ Imports System.Text
 'using Org.BouncyCastle.OpenSsl;
 'using Org.BouncyCastle.Security;
 
-Namespace Jbd.Gjs.Db
+Namespace JBD.GJS.Db
     Public Module DaEncryptUtil
         Private ReadOnly AesKey As String
         Private ReadOnly AesIv As String

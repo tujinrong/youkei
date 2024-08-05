@@ -6,7 +6,7 @@
 ' 作成者　　: 
 ' 変更履歴　:
 ' *******************************************************************
-Namespace Jbd.Gjs.Db
+Namespace JBD.GJS.Db
     Public Class GamenCommonModel
         Public Property menuid As String        'メニューID
         Public Property addflg As Boolean          '追加権限フラグ

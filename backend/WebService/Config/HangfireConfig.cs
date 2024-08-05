@@ -8,7 +8,7 @@
 // *******************************************************************
 using Hangfire;
 
-namespace Jbd.Gjs.WebService;
+namespace JBD.GJS.WebService;
 
 public static class HangfireConfig
 {

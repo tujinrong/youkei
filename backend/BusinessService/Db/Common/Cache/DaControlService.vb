@@ -8,7 +8,7 @@
 ' *******************************************************************
 Imports Microsoft.Extensions.Caching.Memory
 
-Namespace Jbd.Gjs.Db
+Namespace JBD.GJS.Db
     Public Class DaControlService
 
         Private Shared _cache As MemoryCache
@@ -70,10 +70,10 @@ Namespace Jbd.Gjs.Db
             '''    場所 ICSharpCode.CodeConverter.VB.CommentConvertingMethodBodyVisitor.DefaultVisit(SyntaxNode node)
             ''' 
             ''' Input:
-            '''             if (!Jbd.Gjs.Db.DaControlService._cache.TryGetValue("LIST", out list!))
+            '''             if (!JBD.GJS.Db.DaControlService._cache.TryGetValue("LIST", out list!))
             '''             {
             '''                // list = db.tm_afctrl.SELECT.GetDtoList().Select(x => new tm_afctrlDtoEx(x)).ToList();
-            '''                 Jbd.Gjs.Db.DaControlService._cache.Set("LIST", list, System.TimeSpan.FromMinutes(Jbd.Gjs.Db.DaControlService.CACHE_MINIUTE));
+            '''                 JBD.GJS.Db.DaControlService._cache.Set("LIST", list, System.TimeSpan.FromMinutes(JBD.GJS.Db.DaControlService.CACHE_MINIUTE));
             ''' 
             '''             }
             ''' 
@@ -174,7 +174,7 @@ Namespace Jbd.Gjs.Db
         ''' 
         ''' Input:
         ''' 
-        '''         public int nIntValue1 => (this.EnumDataType == Jbd.Gjs.Db.EnumDataType.整数)  Jbd.Gjs.Db.DaConvertUtil.CNInt(base.value1) : throw new System.ArgumentException();
+        '''         public int nIntValue1 => (this.EnumDataType == JBD.GJS.Db.EnumDataType.整数)  JBD.GJS.Db.DaConvertUtil.CNInt(base.value1) : throw new System.ArgumentException();
         ''' 
         ''' 
         ''' Cannot convert PropertyDeclarationSyntax, System.InvalidCastException: 型 'Microsoft.CodeAnalysis.VisualBasic.Syntax.EmptyStatementSyntax' のオブジェクトを型 'Microsoft.CodeAnalysis.VisualBasic.Syntax.ExpressionSyntax' にキャストできません。
@@ -184,7 +184,7 @@ Namespace Jbd.Gjs.Db
         '''    場所 ICSharpCode.CodeConverter.VB.CommentConvertingVisitorWrapper`1.Accept(SyntaxNode csNode, Boolean addSourceMapping)
         ''' 
         ''' Input:
-        '''         public int nIntValue2 => (this.EnumDataType == Jbd.Gjs.Db.EnumDataType.整数 && base.rangeflg)  Jbd.Gjs.Db.DaConvertUtil.CNInt(base.value2) : throw new System.ArgumentException();
+        '''         public int nIntValue2 => (this.EnumDataType == JBD.GJS.Db.EnumDataType.整数 && base.rangeflg)  JBD.GJS.Db.DaConvertUtil.CNInt(base.value2) : throw new System.ArgumentException();
         ''' 
         ''' 
         ''' Cannot convert PropertyDeclarationSyntax, System.InvalidCastException: 型 'Microsoft.CodeAnalysis.VisualBasic.Syntax.EmptyStatementSyntax' のオブジェクトを型 'Microsoft.CodeAnalysis.VisualBasic.Syntax.ExpressionSyntax' にキャストできません。
@@ -194,7 +194,7 @@ Namespace Jbd.Gjs.Db
         '''    場所 ICSharpCode.CodeConverter.VB.CommentConvertingVisitorWrapper`1.Accept(SyntaxNode csNode, Boolean addSourceMapping)
         ''' 
         ''' Input:
-        '''         public decimal nDecValue1 => (this.EnumDataType == Jbd.Gjs.Db.EnumDataType.小数)  Jbd.Gjs.Db.DaConvertUtil.CNDec(base.value1) : throw new System.ArgumentException();
+        '''         public decimal nDecValue1 => (this.EnumDataType == JBD.GJS.Db.EnumDataType.小数)  JBD.GJS.Db.DaConvertUtil.CNDec(base.value1) : throw new System.ArgumentException();
         ''' 
         ''' 
         ''' Cannot convert PropertyDeclarationSyntax, System.InvalidCastException: 型 'Microsoft.CodeAnalysis.VisualBasic.Syntax.EmptyStatementSyntax' のオブジェクトを型 'Microsoft.CodeAnalysis.VisualBasic.Syntax.ExpressionSyntax' にキャストできません。
@@ -204,7 +204,7 @@ Namespace Jbd.Gjs.Db
         '''    場所 ICSharpCode.CodeConverter.VB.CommentConvertingVisitorWrapper`1.Accept(SyntaxNode csNode, Boolean addSourceMapping)
         ''' 
         ''' Input:
-        '''         public decimal nDecValue2 => (this.EnumDataType == Jbd.Gjs.Db.EnumDataType.小数 && base.rangeflg)  Jbd.Gjs.Db.DaConvertUtil.CNDec(base.value2) : throw new System.ArgumentException();
+        '''         public decimal nDecValue2 => (this.EnumDataType == JBD.GJS.Db.EnumDataType.小数 && base.rangeflg)  JBD.GJS.Db.DaConvertUtil.CNDec(base.value2) : throw new System.ArgumentException();
         ''' 
         ''' 
         Public ReadOnly Property nStringValue1 As String
@@ -225,7 +225,7 @@ Namespace Jbd.Gjs.Db
         '''    場所 ICSharpCode.CodeConverter.VB.CommentConvertingVisitorWrapper`1.Accept(SyntaxNode csNode, Boolean addSourceMapping)
         ''' 
         ''' Input:
-        '''         public System.DateTime nDateTimeValue1 => (this.EnumDataType == Jbd.Gjs.Db.EnumDataType.日付)  Jbd.Gjs.Db.DaConvertUtil.CNDate(base.value1) : throw new System.ArgumentException();
+        '''         public System.DateTime nDateTimeValue1 => (this.EnumDataType == JBD.GJS.Db.EnumDataType.日付)  JBD.GJS.Db.DaConvertUtil.CNDate(base.value1) : throw new System.ArgumentException();
         ''' 
         ''' 
         ''' Cannot convert PropertyDeclarationSyntax, System.InvalidCastException: 型 'Microsoft.CodeAnalysis.VisualBasic.Syntax.EmptyStatementSyntax' のオブジェクトを型 'Microsoft.CodeAnalysis.VisualBasic.Syntax.ExpressionSyntax' にキャストできません。
@@ -235,7 +235,7 @@ Namespace Jbd.Gjs.Db
         '''    場所 ICSharpCode.CodeConverter.VB.CommentConvertingVisitorWrapper`1.Accept(SyntaxNode csNode, Boolean addSourceMapping)
         ''' 
         ''' Input:
-        '''         public System.DateTime nDateTimeValue2 => ((this.EnumDataType == Jbd.Gjs.Db.EnumDataType.日付) && base.rangeflg)  Jbd.Gjs.Db.DaConvertUtil.CNDate(base.value2) : throw new System.ArgumentException();
+        '''         public System.DateTime nDateTimeValue2 => ((this.EnumDataType == JBD.GJS.Db.EnumDataType.日付) && base.rangeflg)  JBD.GJS.Db.DaConvertUtil.CNDate(base.value2) : throw new System.ArgumentException();
         ''' 
         ''' 
         ''' Cannot convert PropertyDeclarationSyntax, System.InvalidCastException: 型 'Microsoft.CodeAnalysis.VisualBasic.Syntax.EmptyStatementSyntax' のオブジェクトを型 'Microsoft.CodeAnalysis.VisualBasic.Syntax.ExpressionSyntax' にキャストできません。
@@ -245,7 +245,7 @@ Namespace Jbd.Gjs.Db
         '''    場所 ICSharpCode.CodeConverter.VB.CommentConvertingVisitorWrapper`1.Accept(SyntaxNode csNode, Boolean addSourceMapping)
         ''' 
         ''' Input:
-        '''         public System.TimeSpan nTimeSpanValue1 => (this.EnumDataType == Jbd.Gjs.Db.EnumDataType.時間)  Jbd.Gjs.Db.DaConvertUtil.CNTimeSpan(base.value1) : throw new System.ArgumentException();
+        '''         public System.TimeSpan nTimeSpanValue1 => (this.EnumDataType == JBD.GJS.Db.EnumDataType.時間)  JBD.GJS.Db.DaConvertUtil.CNTimeSpan(base.value1) : throw new System.ArgumentException();
         ''' 
         ''' 
         ''' Cannot convert PropertyDeclarationSyntax, System.InvalidCastException: 型 'Microsoft.CodeAnalysis.VisualBasic.Syntax.EmptyStatementSyntax' のオブジェクトを型 'Microsoft.CodeAnalysis.VisualBasic.Syntax.ExpressionSyntax' にキャストできません。
@@ -255,7 +255,7 @@ Namespace Jbd.Gjs.Db
         '''    場所 ICSharpCode.CodeConverter.VB.CommentConvertingVisitorWrapper`1.Accept(SyntaxNode csNode, Boolean addSourceMapping)
         ''' 
         ''' Input:
-        '''         public System.TimeSpan nTimeSpanValue2 => ((this.EnumDataType == Jbd.Gjs.Db.EnumDataType.時間) && base.rangeflg)  Jbd.Gjs.Db.DaConvertUtil.CNTimeSpan(base.value2) : throw new System.ArgumentException();
+        '''         public System.TimeSpan nTimeSpanValue2 => ((this.EnumDataType == JBD.GJS.Db.EnumDataType.時間) && base.rangeflg)  JBD.GJS.Db.DaConvertUtil.CNTimeSpan(base.value2) : throw new System.ArgumentException();
         ''' 
         ''' 
         ''' Cannot convert PropertyDeclarationSyntax, System.InvalidCastException: 型 'Microsoft.CodeAnalysis.VisualBasic.Syntax.EmptyStatementSyntax' のオブジェクトを型 'Microsoft.CodeAnalysis.VisualBasic.Syntax.ExpressionSyntax' にキャストできません。
@@ -265,7 +265,7 @@ Namespace Jbd.Gjs.Db
         '''    場所 ICSharpCode.CodeConverter.VB.CommentConvertingVisitorWrapper`1.Accept(SyntaxNode csNode, Boolean addSourceMapping)
         ''' 
         ''' Input:
-        '''         public bool nBoolValue1 => (this.EnumDataType == Jbd.Gjs.Db.EnumDataType.フラグ)  Jbd.Gjs.Db.DaConvertUtil.CNBool(base.value1) : throw new System.ArgumentException();
+        '''         public bool nBoolValue1 => (this.EnumDataType == JBD.GJS.Db.EnumDataType.フラグ)  JBD.GJS.Db.DaConvertUtil.CNBool(base.value1) : throw new System.ArgumentException();
         ''' 
         ''' 
         ''' Cannot convert PropertyDeclarationSyntax, System.InvalidCastException: 型 'Microsoft.CodeAnalysis.VisualBasic.Syntax.EmptyStatementSyntax' のオブジェクトを型 'Microsoft.CodeAnalysis.VisualBasic.Syntax.ExpressionSyntax' にキャストできません。
@@ -275,7 +275,7 @@ Namespace Jbd.Gjs.Db
         '''    場所 ICSharpCode.CodeConverter.VB.CommentConvertingVisitorWrapper`1.Accept(SyntaxNode csNode, Boolean addSourceMapping)
         ''' 
         ''' Input:
-        '''         public bool nBoolValue2 => ((this.EnumDataType == Jbd.Gjs.Db.EnumDataType.フラグ) && base.rangeflg)  Jbd.Gjs.Db.DaConvertUtil.CNBool(base.value2) : throw new System.ArgumentException();
+        '''         public bool nBoolValue2 => ((this.EnumDataType == JBD.GJS.Db.EnumDataType.フラグ) && base.rangeflg)  JBD.GJS.Db.DaConvertUtil.CNBool(base.value2) : throw new System.ArgumentException();
         ''' 
         ''' 
 

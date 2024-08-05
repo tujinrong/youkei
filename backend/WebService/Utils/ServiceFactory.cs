@@ -7,7 +7,7 @@
 // 変更履歴　:
 // *******************************************************************
 
-namespace Jbd.Gjs.WebService
+namespace JBD.GJS.WebService
 {
     public class ServiceFactory
     {
@@ -16,8 +16,8 @@ namespace Jbd.Gjs.WebService
         public object GetService(string svcName)
         {
             var serviceFullName = svcName.StartsWith("Common.")
-                ? $"BusinessService.Jbd.Gjs.Service.{svcName}"
-                : $"BusinessService.Jbd.Gjs.Service.{svcName}.Service";
+                ? $"BusinessService.JBD.GJS.Service.{svcName}"
+                : $"BusinessService.JBD.GJS.Service.{svcName}.Service";
 
             if (_businessServices.TryGetValue(serviceFullName, out var service))
             {

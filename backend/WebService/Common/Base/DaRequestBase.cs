@@ -9,7 +9,7 @@
 using Newtonsoft.Json;
 using System.Reflection;
 
-namespace Jbd.Gjs.Common
+namespace JBD.GJS.Common
 {
     public class DaRequestBase
     {

@@ -6,14 +6,14 @@
 ' 作成者　　: 
 ' 変更履歴　:
 ' *******************************************************************
-Imports BusinessService.Jbd.Gjs.Db
-Imports BusinessService.Jbd.Gjs.Service.GJ0000
+Imports BusinessService.JBD.GJS.Db
+Imports BusinessService.JBD.GJS.Service.GJ0000
 Imports Oracle.ManagedDataAccess.Client
 Imports System.Data
 Imports System.Text
 Imports System.Security.Cryptography
 
-Namespace Jbd.Gjs.Service
+Namespace JBD.GJS.Service
     Public Module JbdGjsLogicUtil
         '------------------------------------------------------------------
         'プロシージャ名  :f_Search_SQLMake

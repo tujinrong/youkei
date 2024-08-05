@@ -8,7 +8,7 @@
 // *******************************************************************
 using Microsoft.AspNetCore.Mvc;
 
-namespace Jbd.Gjs.WebService
+namespace JBD.GJS.WebService
 {
     [Authorize]
     [ApiController]

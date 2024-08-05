@@ -9,7 +9,7 @@
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
-namespace Jbd.Gjs.WebService
+namespace JBD.GJS.WebService
 {
     public class CustomHeaderSwaggerAttribute : IOperationFilter
     {

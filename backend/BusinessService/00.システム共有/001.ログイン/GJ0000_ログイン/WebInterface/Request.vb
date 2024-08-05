@@ -6,7 +6,7 @@
 ' 作成者　　: 
 ' 変更履歴　:
 ' *******************************************************************
-Namespace Jbd.Gjs.Service.GJ0000
+Namespace JBD.GJS.Service.GJ0000
     ''' <summary>
     ''' ログイン処理
     ''' </summary>

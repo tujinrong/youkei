@@ -7,7 +7,7 @@
 // 変更履歴　:
 // *******************************************************************
 
-namespace Jbd.Gjs.WebService
+namespace JBD.GJS.WebService
 {
     public class WebRequestModel
     {

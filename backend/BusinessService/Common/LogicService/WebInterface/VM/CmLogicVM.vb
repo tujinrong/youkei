@@ -9,7 +9,7 @@
 Imports System.Text.Json.Serialization
 Imports Newtonsoft.Json
 
-Namespace Jbd.Gjs.Service.Common
+Namespace JBD.GJS.Service.Common
     ''' <summary>
     ''' 権限モデル
     ''' </summary>

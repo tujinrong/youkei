@@ -6,7 +6,7 @@
 ' 作成者　　: 蔣
 ' 変更履歴　:
 ' *******************************************************************
-Namespace Jbd.Gjs.Service
+Namespace JBD.GJS.Service
     Public Class CmUploadRequestBase
         Inherits Db.DaRequestBase
         Public Property files As List(Of Db.DaFileModel) = New List(Of Db.DaFileModel)()     ' ファイルリスト

@@ -6,10 +6,10 @@
 ' 作成者　　: 
 ' 変更履歴　:
 ' *******************************************************************
-Imports BusinessService.Jbd.Gjs.Db
+Imports BusinessService.JBD.GJS.Db
 Imports System.Reflection
 
-Namespace Jbd.Gjs.Service
+Namespace JBD.GJS.Service
     Public Class CmServiceBase
 
         Private _currentMethod As System.Reflection.MethodBase

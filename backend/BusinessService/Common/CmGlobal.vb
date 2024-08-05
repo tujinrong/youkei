@@ -6,7 +6,7 @@
 ' 作成者　　: 
 ' 変更履歴　:
 ' *******************************************************************
-Namespace Jbd.Gjs.Service
+Namespace JBD.GJS.Service
     Public Class CmGlobal
         Private Shared _RuntimeMode As EnumRuntimeMode = EnumRuntimeMode.NORMAL
 

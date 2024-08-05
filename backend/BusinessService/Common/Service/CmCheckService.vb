@@ -6,7 +6,7 @@
 ' 作成者　　: 
 ' 変更履歴　:
 ' *******************************************************************
-Namespace Jbd.Gjs.Service
+Namespace JBD.GJS.Service
     Public Class CmCheckService
         ''' <summary>
         ''' 存在チェック
@@ -63,7 +63,7 @@ Namespace Jbd.Gjs.Service
                     '''    場所 ICSharpCode.CodeConverter.VB.CommentConvertingMethodBodyVisitor.DefaultVisit(SyntaxNode node)
                     ''' 
                     ''' Input:
-                    '''                     bool stopflg = (bool)(dto.GetType().GetProperty((System.String)(nameof((System.Boolean)(Jbd.Gjs.Db.tm_afuserDto.stopflg))))!.GetValue(dto)!);
+                    '''                     bool stopflg = (bool)(dto.GetType().GetProperty((System.String)(nameof((System.Boolean)(JBD.GJS.Db.tm_afuserDto.stopflg))))!.GetValue(dto)!);
                     ''' 
                     ''' 
                     'If stopflg Then

@@ -9,7 +9,7 @@
 Imports System.Text
 Imports System.Text.RegularExpressions
 
-Namespace Jbd.Gjs.Db
+Namespace JBD.GJS.Db
     Public Module DaConvertUtil
         ''' <summary>
         ''' objectを文字列に変換

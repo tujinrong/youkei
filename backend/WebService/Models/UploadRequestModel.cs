@@ -6,7 +6,7 @@
 // 作成者　　: AIPlus
 // 変更履歴　:
 // *******************************************************************
-namespace Jbd.Gjs.WebService
+namespace JBD.GJS.WebService
 {
     public class UploadRequestModel
     {

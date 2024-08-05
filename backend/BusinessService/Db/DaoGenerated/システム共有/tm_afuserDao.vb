@@ -6,9 +6,9 @@
 ' 作成者　　: 
 ' 変更履歴  :
 ' *******************************************************************
-Imports BusinessService.Jbd.Gjs.Db
+Imports BusinessService.JBD.GJS.Db
 
-Namespace Jbd.Gjs.Db
+Namespace JBD.GJS.Db
     Public Class tm_afuserDao
         Inherits DaDaoBase
         ''' <summary>

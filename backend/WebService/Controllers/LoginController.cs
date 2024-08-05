@@ -6,11 +6,11 @@
 // 作成者　　: AIPlus
 // 変更履歴　:
 // *******************************************************************
-using BusinessService.Jbd.Gjs.Db;
-using BusinessService.Jbd.Gjs.Service.GJ0000;
+using BusinessService.JBD.GJS.Db;
+using BusinessService.JBD.GJS.Service.GJ0000;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Jbd.Gjs.WebService
+namespace JBD.GJS.WebService
 {
     [ApiController]
     [Route("api/AFCT/[controller]")]
@@ -32,7 +32,7 @@ namespace Jbd.Gjs.WebService
             var bizReq = RequestFactory.GetRequestObject(webReq.BIZ_REQUEST, method.GetParameters()[0].ParameterType);
 
             // 获取 Service 类型
-            //Type vbClassType = Type.GetType("BusinessService.Jbd.Gjs.Service." + webReq.servicename + ".Service, BusinessService");
+            //Type vbClassType = Type.GetType("BusinessService.JBD.GJS.Service." + webReq.servicename + ".Service, BusinessService");
 
             //// 创建 Service 类实例
             //object vbClassInstance = Activator.CreateInstance(vbClassType);

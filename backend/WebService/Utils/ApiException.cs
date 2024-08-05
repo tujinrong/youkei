@@ -8,7 +8,7 @@
 // *******************************************************************
 using Microsoft.AspNetCore.Mvc.Filters;
 
-namespace Jbd.Gjs.WebService
+namespace JBD.GJS.WebService
 {
     public class WebApiExceptionFilterAttribute : ExceptionFilterAttribute
     {

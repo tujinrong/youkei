@@ -7,7 +7,7 @@
 // 変更履歴　:
 // *******************************************************************
 
-using Jbd.Gjs.WebService;
+using JBD.GJS.WebService;
 using WebService.Common.Base;
 
 namespace WebService.Config;

@@ -7,14 +7,14 @@
 // 変更履歴　:
 // *******************************************************************
 
-using Jbd.Gjs.WebService;
+using JBD.GJS.WebService;
 
 namespace WebService.Config;
 
 public static class VbBussinessConfig
 {
     private static readonly IEnumerable<Type> VBBUSSINESS_SERVICE_TYPES = AppDomain.CurrentDomain.GetAssemblies().SelectMany(assembly => assembly.GetTypes())
-        .Where(type => typeof(BusinessService.Jbd.Gjs.Service.CmServiceBase).IsAssignableFrom(type) && !type.IsAbstract && !string.IsNullOrEmpty(type.FullName));
+        .Where(type => typeof(BusinessService.JBD.GJS.Service.CmServiceBase).IsAssignableFrom(type) && !type.IsAbstract && !string.IsNullOrEmpty(type.FullName));
 
     public static void ConfigureVbBussinessServiceGen(this IServiceCollection services)
     {

@@ -9,7 +9,7 @@
 using System.ComponentModel;
 using System.Reflection;
 
-namespace Jbd.Gjs.Common
+namespace JBD.GJS.Common
 {
     public class DaUtil
     {

@@ -8,7 +8,7 @@
 '*******************************************************************
 Imports Oracle.ManagedDataAccess.Client
 
-Namespace Jbd.Gjs.Db
+Namespace JBD.GJS.Db
     Public Class DaDbContext
         Implements IDisposable
         Public Property Session As SessionContext = New SessionContext()

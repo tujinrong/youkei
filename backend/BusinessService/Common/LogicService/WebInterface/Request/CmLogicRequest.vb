@@ -6,7 +6,7 @@
 ' 作成者　　: 
 ' 変更履歴　:
 ' *******************************************************************
-Namespace Jbd.Gjs.Service.Common
+Namespace JBD.GJS.Service.Common
     ''' <summary>
     ''' 検索処理(一覧画面：受診者を探す場合)
     ''' </summary>

@@ -9,7 +9,7 @@
 using System.Text;
 using System.Text.RegularExpressions;
 
-namespace Jbd.Gjs.Common
+namespace JBD.GJS.Common
 {
     public class DaMessageService
     {

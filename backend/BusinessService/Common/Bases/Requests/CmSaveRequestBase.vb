@@ -6,7 +6,7 @@
 ' 作成者　　: 魏
 ' 変更履歴　:
 ' *******************************************************************
-Namespace Jbd.Gjs.Service
+Namespace JBD.GJS.Service
     Public Class CmSaveRequestBase
         Inherits Db.DaRequestBase
         Public Property checkflg As Boolean = False         'チェックフラグ

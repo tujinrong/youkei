@@ -6,7 +6,7 @@
 ' 作成者　　: 
 ' 変更履歴　:
 ' *******************************************************************
-Namespace Jbd.Gjs.Db
+Namespace JBD.GJS.Db
     Public Class DaNameModel
         Public Property nmcd As String = String.Empty   '名称コード
         Public Property nm As String = String.Empty     '名称

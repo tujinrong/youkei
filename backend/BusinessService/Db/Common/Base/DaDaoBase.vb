@@ -7,7 +7,7 @@
 ' 変更履歴　:
 ' *******************************************************************
 
-Namespace Jbd.Gjs.Db
+Namespace JBD.GJS.Db
     Public Class DaDaoBase
         'public AiSessionContext Session { get; set; }
 

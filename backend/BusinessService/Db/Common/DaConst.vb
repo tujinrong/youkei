@@ -8,7 +8,7 @@
 ' *******************************************************************
 'using NodaTime;
 
-Namespace Jbd.Gjs.Db
+Namespace JBD.GJS.Db
     Public Class DaConst
         'システムユーザー：ユーザーIDとして使用
         Public Shared ReadOnly SYSTEM As String = "system"

@@ -8,7 +8,7 @@
 // *******************************************************************
 using Newtonsoft.Json;
 
-namespace Jbd.Gjs.Common
+namespace JBD.GJS.Common
 {
     public class DaResponseBase
     {

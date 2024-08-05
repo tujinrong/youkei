@@ -9,7 +9,7 @@
 Imports System.IO
 Imports ICSharpCode.SharpZipLib.Zip
 
-Namespace Jbd.Gjs.Service
+Namespace JBD.GJS.Service
     Public Module CmDownloadService
         ''' <summary>
         ''' 単一ファイルのダウンロード応答を取得

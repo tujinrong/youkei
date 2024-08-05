@@ -9,7 +9,7 @@
 Imports Microsoft.VisualBasic.CompilerServices
 Imports System.Runtime.CompilerServices
 
-Namespace Jbd.Gjs.Db
+Namespace JBD.GJS.Db
     '    Public Module DaExtension
     '        ''' <summary>
     '        ''' 画面表示にラッピング処理

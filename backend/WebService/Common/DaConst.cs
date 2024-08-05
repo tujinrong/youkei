@@ -6,7 +6,7 @@
 // 作成者　　: AIPlus
 // 変更履歴　:
 // *******************************************************************
-namespace Jbd.Gjs.Common
+namespace JBD.GJS.Common
 {
     public class DaConst
     {

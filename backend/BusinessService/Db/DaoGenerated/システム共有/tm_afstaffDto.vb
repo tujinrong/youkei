@@ -6,7 +6,7 @@
 ' 作成者　　: 
 ' 変更履歴　:
 ' *******************************************************************
-Namespace Jbd.Gjs.Db
+Namespace JBD.GJS.Db
     Public Class tm_afstaffDto
         Inherits DaEntityModelBase
         Public Const TABLE_NAME As String = "tm_afstaff"

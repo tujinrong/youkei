@@ -69,4 +69,4 @@ ENV LD_LIBRARY_PATH=/usr/lib/:$LD_LIBRARY_PATH
 ENV ASPNETCORE_ENVIRONMENT=Production
 
 #コンテナの起動時に実行されるコマンドを設定します。
-ENTRYPOINT ["dotnet", "Jbd.Gjs.WebService.dll"]
+ENTRYPOINT ["dotnet", "JBD.GJS.WebService.dll"]
