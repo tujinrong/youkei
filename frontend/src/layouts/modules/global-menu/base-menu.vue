@@ -107,10 +107,14 @@ function showMenu(event) {
   menuStyle.top = `${event.clientY}px`
   menuStyle.left = `${event.clientX}px`
   menuVisible.value = true
+  let scrollDom = document.querySelector('.simplebar-content-wrapper')
+  if (scrollDom) scrollDom.addEventListener('scroll', hideMenu)
   document.addEventListener('click', hideMenu)
 }
 function hideMenu() {
   menuVisible.value = false
+  let scrollDom = document.querySelector('.simplebar-content-wrapper')
+  if (scrollDom) scrollDom.removeEventListener('scroll', hideMenu)
   document.removeEventListener('click', hideMenu)
 }
 
