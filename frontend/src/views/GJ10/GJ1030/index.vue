@@ -8,41 +8,53 @@
             <a-col v-bind="layout">
               <th class="required">対象期</th>
               <td>
-                <span class="mt-1">第</span>
-                <a-input-number
-                  v-model:value="formData.KI"
-                  :min="1"
-                  :max="99"
-                  :maxlength="2"
-                  style="width: 120px"
-                ></a-input-number>
-                <span class="mt-1">期</span>
+                <a-form-item v-bind="validateInfos.KI">
+                  <span class="mt-1">第</span>
+                  <a-input-number
+                    v-model:value="formData.KI"
+                    :min="1"
+                    :max="99"
+                    :maxlength="2"
+                    style="width: 120px"
+                  ></a-input-number>
+                  <span class="mt-1">期</span>
+                </a-form-item>
               </td>
             </a-col>
             <a-col v-bind="layout">
               <th class="required">対象日(現在)</th>
               <td>
-                <DateJp v-model:value="formData.TAISYOBI_YMD" class="w-full" />
+                <a-form-item v-bind="validateInfos.TAISYOBI_YMD">
+                  <DateJp
+                    v-model:value="formData.TAISYOBI_YMD"
+                    class="w-full"
+                  />
+                </a-form-item>
               </td>
             </a-col>
             <a-col v-bind="layout">
               <th>契約区分</th>
               <td class="flex">
+                <!-- <a-form-item v-bind="validateInfos.KEIYAKU_KBN_CD_FM"> -->
                 <ai-select
                   v-model:value="formData.KEIYAKU_KBN_CD_FM"
                   split-val
                   :options="KEIYAKU_KBN_CD_NAME_LIST"
                   type="number"
-                ></ai-select
-                >～<ai-select
+                ></ai-select>
+                <!-- </a-form-item> -->
+                ～
+                <!-- <a-form-item v-bind="validateInfos.KEIYAKU_KBN_CD_TO"> -->
+                <ai-select
                   v-model:value="formData.KEIYAKU_KBN_CD_TO"
                   :options="KEIYAKU_KBN_CD_NAME_LIST"
                   type="number"
                 ></ai-select>
+                <!-- </a-form-item> -->
               </td>
             </a-col>
             <a-col v-bind="layout">
-              <th class="required">契約状態</th>
+              <th class="required">契約状況</th>
               <td>
                 <a-space class="flex-wrap">
                   <a-checkbox v-model:checked="formData.KEIYAKU_JYOKYO_SHINKI"
@@ -67,8 +79,9 @@
                   v-model:value="formData.ITAKU_CD_FM"
                   :options="ITAKU_CD_NAME_LIST"
                   type="number"
-                ></ai-select
-                >～<ai-select
+                ></ai-select>
+                ～
+                <ai-select
                   v-model:value="formData.ITAKU_CD_TO"
                   :options="ITAKU_CD_NAME_LIST"
                   type="number"
@@ -82,8 +95,9 @@
                   v-model:value="formData.KEIYAKUSYA_CD_FM"
                   :options="KEIYAKUSYA_CD_NAME_LIST"
                   type="number"
-                ></ai-select
-                >～<ai-select
+                ></ai-select>
+                ～
+                <ai-select
                   v-model:value="formData.KEIYAKUSYA_CD_TO"
                   :options="KEIYAKUSYA_CD_NAME_LIST"
                   type="number"
@@ -116,13 +130,13 @@ import { reactive, ref, watch, computed } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useTabStore } from '@/store/modules/tab'
 import DateJp from '@/components/Selector/DateJp/index.vue'
-import { ReportViewer, Core } from '@grapecity/activereports'
 import '@grapecity/activereports/styles/ar-js-ui.css'
 import '@grapecity/activereports/styles/ar-js-viewer.css'
 import '@grapecity/activereports-localization'
 import { showInfoModal } from '@/utils/modal'
 import { ITEM_REQUIRE_ERROR } from '@/constants/msg'
 import { PreviewRequest } from './type'
+import { Form } from 'ant-design-vue'
 
 //--------------------------------------------------------------------------
 //データ定義
@@ -185,23 +199,55 @@ const URL = computed(() => {
 //メソッド
 //--------------------------------------------------------------------------
 
+const rules = reactive({
+  KI: [
+    {
+      required: true,
+      message: ITEM_REQUIRE_ERROR.Msg.replace('{0}', '対象期'),
+    },
+  ],
+  TAISYOBI_YMD: [
+    {
+      required: true,
+      message: ITEM_REQUIRE_ERROR.Msg.replace('{0}', '対象日(現在)'),
+    },
+  ],
+  // KEIYAKU_KBN_CD_FM: [
+  //   {
+  //     validator: (_rule, value: number) => {
+  //       if (formData.KEIYAKU_KBN_CD_TO) {
+  //         if (!value) {
+  //           return Promise.reject(
+  //             ITEM_REQUIRE_ERROR.Msg.replace('{0}', '契約区分From')
+  //           )
+  //         }
+  //       }
+  //       return Promise.resolve()
+  //     },
+  //   },
+  // ],
+  // KEIYAKU_KBN_CD_TO: [
+  //   {
+  //     validator: (_rule, value: number) => {
+  //       if (formData.KEIYAKU_KBN_CD_FM) {
+  //         if (!value) {
+  //           return Promise.reject(
+  //             ITEM_REQUIRE_ERROR.Msg.replace('{0}', '契約区分To')
+  //           )
+  //         }
+  //       }else{
+  //         return Promise.resolve()
+  //       }
+  //       return Promise.resolve()
+  //     },
+  //   },
+  // ],
+})
+const { validate, clearValidate, validateInfos } = Form.useForm(formData, rules)
+
 function validateSearchParams() {
   let flag = true
-  if (!formData.KI) {
-    showInfoModal({
-      type: 'error',
-      title: 'エラー',
-      content: ITEM_REQUIRE_ERROR.Msg.replace('{0}', '対象期'),
-    })
-    flag = false
-  } else if (!formData.TAISYOBI_YMD) {
-    showInfoModal({
-      type: 'error',
-      title: 'エラー',
-      content: ITEM_REQUIRE_ERROR.Msg.replace('{0}', '対象日(現在)'),
-    })
-    flag = false
-  } else if (
+  if (
     !formData.KEIYAKU_JYOKYO_SHINKI &&
     !formData.KEIYAKU_JYOKYO_KEIZOKU &&
     !formData.KEIYAKU_JYOKYO_CHUSHI &&
@@ -214,6 +260,62 @@ function validateSearchParams() {
     })
     flag = false
   }
+
+  if (flag == true) {
+    flag = validateRequiredItemAndRange(
+      formData.KEIYAKU_KBN_CD_FM,
+      formData.KEIYAKU_KBN_CD_TO,
+      '契約区分'
+    )
+  }
+  if (flag == true) {
+    flag = validateRequiredItemAndRange(
+      formData.ITAKU_CD_FM,
+      formData.ITAKU_CD_TO,
+      '事務委託先'
+    )
+  }
+  if (flag == true) {
+    flag = validateRequiredItemAndRange(
+      formData.KEIYAKUSYA_CD_FM,
+      formData.KEIYAKUSYA_CD_TO,
+      '契約者番号'
+    )
+  }
+
+  return flag
+}
+
+const validateRequiredItemAndRange = (
+  from: number | undefined,
+  to: number | undefined,
+  itemName: string
+) => {
+  let flag = true
+  if (from && !to) {
+    showInfoModal({
+      type: 'error',
+      title: 'エラー',
+      content: ITEM_REQUIRE_ERROR.Msg.replace('{0}', itemName + 'To'),
+    })
+    flag = false
+  } else if (!from && to) {
+    showInfoModal({
+      type: 'error',
+      title: 'エラー',
+      content: ITEM_REQUIRE_ERROR.Msg.replace('{0}', itemName + 'From'),
+    })
+    flag = false
+  } else if (from && to) {
+    if (from > to) {
+      showInfoModal({
+        type: 'error',
+        title: 'エラー',
+        content: '指定された' + itemName + 'の範囲が正しくありません。',
+      })
+      flag = false
+    }
+  }
   return flag
 }
 
@@ -222,10 +324,11 @@ const clear = () => {
 }
 
 //プレビューボタンを押す時
-function onPreview() {
+async function onPreview() {
   const openNew = () => {
     window.open(URL.value, '_blank')
   }
+  await validate()
   if (validateSearchParams()) {
     openNew()
     // previewVisible.value = true
@@ -326,5 +429,9 @@ h1 {
   height: 100%;
   display: flex;
   flex-direction: column;
+}
+:deep(.ant-form-item) {
+  margin-bottom: 0;
+  width: 100%;
 }
 </style>
