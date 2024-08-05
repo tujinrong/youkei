@@ -20,6 +20,7 @@
         size="large"
         :maxlength="20"
         :placeholder="$t('page.login.common.passwordPlaceholder')"
+        @input="handleInput"
       >
         <template #prefix>
           <LockOutlined class="c-gray" />
