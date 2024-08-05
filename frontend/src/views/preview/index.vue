@@ -30,7 +30,7 @@ onMounted(() => {
     { name: 'Arial Black', source: '/fonts/Ariblk.ttf' },
   ]
   const viewer = new ReportViewer.Viewer('#viewer-host', { language: 'ja' })
-  viewer.open('/report/keyakusya.rdlx-json')
+  viewer.open('/report/keiyakusya.rdlx-json')
   // サイドバーのエクスポート機能を有効化
   viewer.availableExports = ['pdf', 'xlsx', 'html']
   // 定義済みのフォント記述子を登録する
