@@ -9,7 +9,7 @@
               <th class="required">対象期</th>
               <td>
                 <a-form-item v-bind="validateInfos.KI">
-                  <span class="mt-1">第</span>
+                  <span class="!align-middle">第</span>
                   <a-input-number
                     v-model:value="formData.KI"
                     :min="1"
@@ -17,7 +17,7 @@
                     :maxlength="2"
                     style="width: 120px"
                   ></a-input-number>
-                  <span class="mt-1">期</span>
+                  <span class="!align-middle">期</span>
                 </a-form-item>
               </td>
             </a-col>

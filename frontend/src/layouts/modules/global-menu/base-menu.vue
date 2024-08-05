@@ -149,7 +149,7 @@ const openNew = () => {
     />
     <Teleport to="body">
       <a-menu v-if="menuVisible" :style="menuStyle" class="context-menu">
-        <a-menu-item @click="openNew">新しいタブを開く</a-menu-item>
+        <a-menu-item @click="openNew">新しいタブで開く</a-menu-item>
       </a-menu>
     </Teleport>
   </SimpleScrollbar>
