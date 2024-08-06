@@ -280,14 +280,7 @@ onMounted(async () => {
       KEIYAKUSYA_CD: formData.KEIYAKUSYA_CD,
       NOJO_CD: formData.NOJO_CD,
     }).then((res) => {
-      formData.NOJO_NAME = res.KEIYAKUSYA_NOJO.NOJO_NAME
-      formData.KEN_CD = res.KEIYAKUSYA_NOJO.KEN_CD
-      formData.ADDR_POST = res.KEIYAKUSYA_NOJO.ADDR_POST
-      formData.ADDR_1 = res.KEIYAKUSYA_NOJO.ADDR_1
-      formData.ADDR_2 = res.KEIYAKUSYA_NOJO.ADDR_2
-      formData.ADDR_3 = res.KEIYAKUSYA_NOJO.ADDR_3
-      formData.ADDR_4 = res.KEIYAKUSYA_NOJO.ADDR_4
-      formData.MEISAINO = res.KEIYAKUSYA_NOJO.MEISAINO
+      Object.assign(res.KEIYAKUSYA_NOJO, formData)
     })
   }
   nextTick(() => editJudge.reset())
