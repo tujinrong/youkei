@@ -237,7 +237,7 @@ const rules = reactive({
   ADDR_2: [
     {
       required: true,
-      message: ITEM_REQUIRE_ERROR.Msg.replace('{0}', '住所2'),
+      message: ITEM_REQUIRE_ERROR.Msg.replace('{0}', '住所２'),
     },
   ],
   MEISAINO: [
