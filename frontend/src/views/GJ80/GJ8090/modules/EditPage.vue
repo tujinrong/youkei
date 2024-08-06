@@ -280,7 +280,7 @@ onMounted(async () => {
       KEIYAKUSYA_CD: formData.KEIYAKUSYA_CD,
       NOJO_CD: formData.NOJO_CD,
     }).then((res) => {
-      Object.assign(res.KEIYAKUSYA_NOJO, formData)
+      Object.assign(formData, res.KEIYAKUSYA_NOJO)
     })
   }
   nextTick(() => editJudge.reset())
