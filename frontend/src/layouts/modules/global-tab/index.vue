@@ -9,6 +9,9 @@ import { useThemeStore } from '@/store/modules/theme'
 import { useRouteStore } from '@/store/modules/route'
 import { useTabStore } from '@/store/modules/tab'
 import ContextMenu from './context-menu.vue'
+import { judgeStore } from '@/store'
+import { showConfirmModal } from '@/utils/modal'
+import { CLOSE_CONFIRM } from '@/constants/msg'
 
 defineOptions({
   name: 'GlobalTab',
@@ -83,8 +86,25 @@ function getContextMenuDisabledKeys(tabId: string) {
 }
 
 async function handleCloseTab(tab: App.Global.Tab) {
-  await tabStore.removeTab(tab.id)
-  await routeStore.reCacheRoutesByKey(tab.routeKey)
+  for (let key in judgeStore) {
+    if (judgeStore[key] === false) {
+      delete judgeStore[key]
+    }
+  }
+  const arr: string[] = Object.keys(judgeStore)
+  const isShowModal = arr.some((el) => tab.id.includes(el.toLowerCase()))
+  if (isShowModal) {
+    showConfirmModal({
+      content: CLOSE_CONFIRM.Msg,
+      onOk: async () => {
+        await tabStore.removeTab(tab.id)
+        await routeStore.reCacheRoutesByKey(tab.routeKey)
+      },
+    })
+  } else {
+    await tabStore.removeTab(tab.id)
+    await routeStore.reCacheRoutesByKey(tab.routeKey)
+  }
 }
 
 async function refresh() {

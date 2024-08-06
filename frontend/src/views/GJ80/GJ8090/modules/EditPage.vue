@@ -170,7 +170,7 @@ const props = defineProps<{
 const router = useRouter()
 const route = useRoute()
 const isNew = props.status === PageSatatus.New
-const editJudge = new Judgement()
+const editJudge = new Judgement('GJ8090')
 
 const KEN_CD_NAME_LIST = ref<DaSelectorModel[]>([])
 
