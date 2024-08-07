@@ -166,6 +166,7 @@ init()
               :dark-mode="themeStore.darkMode"
               :active="tab.id === tabStore.activeTabId"
               :active-color="themeStore.themeColor"
+              :title="tab.label"
               :closable="!tabStore.isTabRetain(tab.id)"
               @click="tabStore.switchRouteByTab(tab)"
               @close="handleCloseTab(tab)"
