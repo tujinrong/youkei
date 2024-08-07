@@ -8,26 +8,13 @@ import '@grapecity/ar-viewer-ja/dist/jsViewer.min.css'
 import '@grapecity/ar-viewer-ja'
 import { createViewer } from '@grapecity/ar-viewer-ja'
 
-let viewer
-onMounted(() => {
-  debugger
-  viewer = createViewer({
-    element: '#viewerContainer',
-  })
-  viewer.openReport('/report/3.rdlx')
-})
-const onFileChange = (event) => {
-  const file = event.target.files[0]
-  if (file) {
-    const reader = new FileReader()
-    reader.onload = (e) => {
-      debugger
-      const reportContent = e.target?.result
-      viewer.openReport({ definition: reportContent })
-    }
-    reader.readAsText(file)
-  }
-}
+// let viewer
+// onMounted(() => {
+//   viewer = createViewer({
+//     element: '#viewerContainer',
+//   })
+//   viewer.openReport('/report/3.rdlx')
+// })
 </script>
 
 <template>
@@ -36,7 +23,6 @@ const onFileChange = (event) => {
     <CardData class="h-185" />
   </ASpace> -->
 
-  <!-- <input type="file" @change="onFileChange" accept=".rdlx" /> -->
   <div id="viewerContainer" class="h-full w-full"></div>
 </template>
 
