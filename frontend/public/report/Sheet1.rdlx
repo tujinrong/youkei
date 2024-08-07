@@ -1,0 +1,61 @@
+﻿<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2005/01/reportdefinition">
+	<dd:Name xmlns:dd="http://schemas.datadynamics.com/reporting/2005/02/reportdefinition">Sheet1.rdlx</dd:Name>
+	<Body>
+		<Height>0in</Height>
+		<ReportItems>
+			<FixedPage Name="FixedPage1">
+				<Pages>
+					<Page>
+						<ReportItems>
+							<Textbox Name="TextBox1">
+								<Top>0.15875cm</Top>
+								<Left>0.2910417cm</Left>
+								<Width>5.185833cm</Width>
+								<Height>0.8202083cm</Height>
+								<Style>
+									<FontFamily>メイリオ</FontFamily>
+									<FontSize>14pt</FontSize>
+									<FontStyle>Normal</FontStyle>
+									<FontWeight>400</FontWeight>
+									<PaddingBottom>2pt</PaddingBottom>
+									<PaddingLeft>2pt</PaddingLeft>
+									<PaddingRight>2pt</PaddingRight>
+									<PaddingTop>2pt</PaddingTop>
+								</Style>
+								<ZIndex>1</ZIndex>
+								<Value>test
+</Value>
+							</Textbox>
+							<Textbox Name="TextBox2">
+								<Top>1.666875cm</Top>
+								<Left>0.6085417cm</Left>
+								<Width>7.3025cm</Width>
+								<Height>1.217083cm</Height>
+								<Style>
+									<FontFamily>メイリオ</FontFamily>
+									<FontSize>14pt</FontSize>
+									<FontStyle>Normal</FontStyle>
+									<FontWeight>400</FontWeight>
+									<PaddingBottom>2pt</PaddingBottom>
+									<PaddingLeft>2pt</PaddingLeft>
+									<PaddingRight>2pt</PaddingRight>
+									<PaddingTop>2pt</PaddingTop>
+								</Style>
+								<ZIndex>2</ZIndex>
+								<Value>test2</Value>
+							</Textbox>
+						</ReportItems>
+						<PaperOrientation>Portrait</PaperOrientation>
+						<Width>8.27in</Width>
+						<Height>11.69in</Height>
+						<LeftMargin>0.7in</LeftMargin>
+						<TopMargin>0.75in</TopMargin>
+						<RightMargin>0.7in</RightMargin>
+						<BottomMargin>0.75in</BottomMargin>
+					</Page>
+				</Pages>
+			</FixedPage>
+		</ReportItems>
+	</Body>
+	<Width>0in</Width>
+</Report>
