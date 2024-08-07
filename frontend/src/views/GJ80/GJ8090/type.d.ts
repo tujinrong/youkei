@@ -128,6 +128,14 @@ export interface KeiyakuNojoSearchVM {
 }
 
 export interface KeiyakuNojoSearchDetailVM {
+  /**期 */
+  KI: number
+  /**契約者番号 */
+  KEIYAKUSYA_CD: number
+  /**契約者名 */
+  KEIYAKUSYA_NAME: string
+  /**農場コード */
+  NOJO_CD: number
   /**農場名称 */
   NOJO_NAME: string
   /**都道府県コード */
