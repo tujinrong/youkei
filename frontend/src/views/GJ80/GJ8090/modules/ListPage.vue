@@ -292,7 +292,6 @@ watch(
   () => searchParams.KI,
   (newVal) => {
     if (newVal) {
-      console.log(newVal)
       getInitData(newVal)
       searchParams.KEIYAKUSYA_CD = undefined
       tableData.value = []
@@ -304,7 +303,7 @@ watch(
   () => searchParams.KEIYAKUSYA_CD,
   (newVal) => {
     if (newVal && tableData.value.length > 0) {
-      searchData()
+      tableData.value = []
     }
   }
 )
