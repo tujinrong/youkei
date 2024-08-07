@@ -33,7 +33,7 @@ function handleClickMenu(key: RouteKey) {
     }
   }
   const arr: string[] = Object.keys(judgeStore)
-  if (arr) {
+  if (arr.length > 0) {
     showConfirmModal({
       content: MOVE_CONFIRM.Msg,
       onOk: async () => {
