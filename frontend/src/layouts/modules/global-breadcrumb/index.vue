@@ -5,9 +5,6 @@ import type { RouteKey } from '@elegant-router/types'
 import { useThemeStore } from '@/store/modules/theme'
 import { useRouteStore } from '@/store/modules/route'
 import { useRouterPush } from '@/hooks/common/router'
-import { judgeStore } from '@/store'
-import { showConfirmModal } from '@/utils/modal'
-import { MOVE_CONFIRM } from '@/constants/msg'
 
 defineOptions({
   name: 'GlobalBreadcrumb',
@@ -27,22 +24,7 @@ const [DefineBreadcrumbContent, BreadcrumbContent] =
   createReusableTemplate<BreadcrumbContentProps>()
 
 function handleClickMenu(key: RouteKey) {
-  for (let key in judgeStore) {
-    if (judgeStore[key] === false) {
-      delete judgeStore[key]
-    }
-  }
-  const arr: string[] = Object.keys(judgeStore)
-  if (arr.length > 0) {
-    showConfirmModal({
-      content: MOVE_CONFIRM.Msg,
-      onOk: async () => {
-        routerPushByKey(key)
-      },
-    })
-  } else {
-    routerPushByKey(key)
-  }
+  routerPushByKey(key)
 }
 </script>
 
@@ -66,13 +48,14 @@ function handleClickMenu(key: RouteKey) {
 
       <template v-if="item.children?.length" #overlay>
         <AMenu>
-          <AMenuItem
-            v-for="option in item.children"
-            :key="option.key"
-            @click="handleClickMenu(option.routeKey)"
-          >
-            <BreadcrumbContent :breadcrumb="option" />
-          </AMenuItem>
+          <template v-for="option in item.children" :key="option.key">
+            <AMenuItem
+              :disabled="option.disabled"
+              @click="handleClickMenu(option.routeKey)"
+            >
+              <BreadcrumbContent :breadcrumb="option" />
+            </AMenuItem>
+          </template>
         </AMenu>
       </template>
     </ABreadcrumbItem>
