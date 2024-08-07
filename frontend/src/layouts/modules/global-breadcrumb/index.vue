@@ -5,6 +5,9 @@ import type { RouteKey } from '@elegant-router/types'
 import { useThemeStore } from '@/store/modules/theme'
 import { useRouteStore } from '@/store/modules/route'
 import { useRouterPush } from '@/hooks/common/router'
+import { judgeStore } from '@/store'
+import { showConfirmModal } from '@/utils/modal'
+import { MOVE_CONFIRM } from '@/constants/msg'
 
 defineOptions({
   name: 'GlobalBreadcrumb',
@@ -24,7 +27,22 @@ const [DefineBreadcrumbContent, BreadcrumbContent] =
   createReusableTemplate<BreadcrumbContentProps>()
 
 function handleClickMenu(key: RouteKey) {
-  routerPushByKey(key)
+  for (let key in judgeStore) {
+    if (judgeStore[key] === false) {
+      delete judgeStore[key]
+    }
+  }
+  const arr: string[] = Object.keys(judgeStore)
+  if (arr) {
+    showConfirmModal({
+      content: MOVE_CONFIRM.Msg,
+      onOk: async () => {
+        routerPushByKey(key)
+      },
+    })
+  } else {
+    routerPushByKey(key)
+  }
 }
 </script>
 
