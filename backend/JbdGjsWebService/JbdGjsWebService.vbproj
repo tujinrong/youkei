@@ -1,0 +1,78 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <OptionInfer>On</OptionInfer>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <AssemblyName>JBD.GJS.WebService</AssemblyName>
+    <UserSecretsId>3aae0b41-975a-4d68-a760-50cf95df17cc</UserSecretsId>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    <DefaultItemExcludes>$(DefaultItemExcludes);$(ProjectDir)**\*.cs</DefaultItemExcludes>
+    <ImportedNamespaces>JbdGjsService.JBD.GJS.Db=False,JbdGjsService.JBD.GJS.Service=False,JbdGjsWebService.JBD.GJS.WebService=False,Microsoft.AspNetCore.Builder=False,Microsoft.AspNetCore.Mvc=False,Microsoft.AspNetCore.Mvc.Filters=False,Microsoft.AspNetCore.Server.Kestrel.Core=False,Microsoft.Extensions.Configuration=False,Microsoft.Extensions.DependencyInjection=False,Microsoft.Extensions.Hosting=False,Newtonsoft.Json=False,System.Globalization=False,System.Runtime.CompilerServices=False,System.Text=False,System.Text.Json=False,System.Text.RegularExpressions=False,Microsoft.VisualBasic=True,System=True,System.Collections=True,System.Collections.Generic=True,System.Diagnostics=True,System.Linq=True,System.Xml.Linq=True,System.Threading.Tasks=True,JbdGjsWebService=True</ImportedNamespaces>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="App_Data\templates\**">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Import Include="JbdGjsService.JBD.GJS.Db" />
+    <Import Include="JbdGjsService.JBD.GJS.Service" />
+    <Import Include="JbdGjsWebService.JBD.GJS.WebService" />
+    <Import Include="Microsoft.AspNetCore.Builder" />
+    <Import Include="Microsoft.AspNetCore.Mvc" />
+    <Import Include="Microsoft.AspNetCore.Mvc.Filters" />
+    <Import Include="Microsoft.AspNetCore.Server.Kestrel.Core" />
+    <Import Include="Microsoft.Extensions.Configuration" />
+    <Import Include="Microsoft.Extensions.DependencyInjection" />
+    <Import Include="Microsoft.Extensions.Hosting" />
+    <Import Include="Newtonsoft.Json" />
+    <Import Include="System.Globalization" />
+    <Import Include="System.Runtime.CompilerServices" />
+    <Import Include="System.Text" />
+    <Import Include="System.Text.Json" />
+    <Import Include="System.Text.RegularExpressions" />
+    <PackageReference Include="Hangfire.AspNetCore" Version="1.8.11" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\JbdGjsService\JbdGjsService.vbproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="acgjm.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="App_Data\Test\その他Templates\はがき.xlsx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="App_Data\Test\その他Templates\アドレスシール.xlsx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="App_Data\Test\その他Templates\バーコード.xlsx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="App_Data\Test\その他Templates\件数表年齢.xlsx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="App_Data\Test\その他Templates\件数表行政区.xlsx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="App_Data\Test\その他Templates\可変長集計表.xlsx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="App_Data\Test\その他Templates\宛名台帳.xlsx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Views\" />
+  </ItemGroup>
+
+  <ProjectExtensions><VisualStudio><UserProperties appsettings_1development_1json__JsonSchema="https://appsemble.app/api.json" /></VisualStudio></ProjectExtensions>
+
+</Project>

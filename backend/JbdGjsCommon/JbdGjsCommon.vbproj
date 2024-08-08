@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <RootNamespace>JbdGjsCommon</RootNamespace>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImportedNamespaces>Oracle.ManagedDataAccess.Client=False,System.Data=False,System.Drawing=False,System.IO=False,System.Runtime.InteropServices=False,Microsoft.VisualBasic=True,System=True,System.Collections=True,System.Collections.Generic=True,System.Diagnostics=True,System.Linq=True,System.Xml.Linq=True,System.Threading.Tasks=True,JbdGjsCommon=True</ImportedNamespaces>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Import Include="Oracle.ManagedDataAccess.Client" />
+    <Import Include="System.Data" />
+    <Import Include="System.Drawing" />
+    <Import Include="System.IO" />
+    <Import Include="System.Runtime.InteropServices" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\JbdGjsDb\JbdGjsDb.vbproj" />
+  </ItemGroup>
+
+</Project>
