@@ -56,6 +56,7 @@ declare module 'vue' {
     ATree: typeof import('ant-design-vue/es')['Tree']
     BetterScroll: typeof import('./../components/custom/better-scroll.vue')['default']
     ButtonIcon: typeof import('./../components/custom/button-icon.vue')['default']
+    ClosePage: typeof import('./../components/Button/ClosePage/index.vue')['default']
     CountTo: typeof import('./../components/custom/count-to.vue')['default']
     DarkModeContainer: typeof import('./../components/common/dark-mode-container.vue')['default']
     DateJp: typeof import('./../components/Selector/DateJp/index.vue')['default']

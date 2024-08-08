@@ -75,9 +75,7 @@
           <a-button type="primary" @click="forwardNew">新規</a-button>
           <a-button type="primary" @click="reset">クリア</a-button>
         </a-space>
-        <AButton type="primary" class="ml-a" @click="tabStore.removeActiveTab">
-          閉じる
-        </AButton>
+        <close-page />
       </div>
     </a-card>
     <a-card :bordered="false" class="sm:flex-1-hidden" ref="cardRef">
