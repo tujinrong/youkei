@@ -20,10 +20,16 @@ import { createViewer } from '@grapecity/ar-viewer-ja'
 //--------------------------------------------------------------------------
 const route = useRoute()
 
+const channel = new BroadcastChannel('channel_preview')
+channel.onmessage = (event) => {
+  console.log('Received:', event.data)
+}
 //--------------------------------------------------------------------------
 //フック関数
 //--------------------------------------------------------------------------
 onMounted(() => {
+  channel.postMessage({ isMounted: true })
+
   //ReportViewer
 
   // // フォント記述子の定義

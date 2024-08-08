@@ -125,7 +125,7 @@
 </template>
 
 <script setup lang="ts">
-import { reactive, ref, watch, computed } from 'vue'
+import { reactive, ref, watch, computed, onUnmounted } from 'vue'
 import DateJp from '@/components/Selector/DateJp/index.vue'
 import { showInfoModal } from '@/utils/modal'
 import { ITEM_REQUIRE_ERROR } from '@/constants/msg'
@@ -357,6 +357,18 @@ watch(
     }
   }
 )
+
+//-----------------------------------------------------
+const channel = new BroadcastChannel('channel_preview')
+channel.onmessage = (event) => {
+  if (event.data.isMounted) {
+    channel.postMessage({ xxx: 'Hello, World!' })
+  }
+}
+onUnmounted(() => {
+  channel.close()
+})
+//-----------------------------------------------------
 </script>
 
 <style scoped lang="scss">
