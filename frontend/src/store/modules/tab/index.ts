@@ -81,8 +81,15 @@ export const useTabStore = defineStore(SetupStoreId.Tab, () => {
 
     const isHomeTab = tab.id === homeTab.value?.id
 
-    if (!isHomeTab && !isTabInTabs(tab.id, tabs.value)) {
-      tabs.value.push(tab)
+    if (!isHomeTab) {
+      if (!isTabInTabs(tab.id, tabs.value)) {
+        tabs.value.push(tab)
+      } else {
+        const sameTab = tabs.value.find((item) => item.id === tab.id)
+        if (sameTab && sameTab.fullPath !== tab.fullPath) {
+          sameTab.fullPath = tab.fullPath
+        }
+      }
     }
 
     if (active) {

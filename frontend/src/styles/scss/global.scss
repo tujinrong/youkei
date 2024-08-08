@@ -64,21 +64,6 @@
 }
 
 //DB登録ボタン
-//<a-button type="warn"/>
-.ant-btn-warn {
-  color: #fff;
-  background-color: #e6a23c;
-  border-color: #e6a23c;
-  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.12);
-  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.045);
-}
-.ant-btn-warn:focus,
-.ant-btn-warn:hover {
-  background: #e6c79a !important;
-  border-color: #e6c79a !important;
-  color: #fff !important;
-}
-//or <a-button class="warning-btn"/>
 .warning-btn {
   color: #fff;
   background-color: #e6a23c;
