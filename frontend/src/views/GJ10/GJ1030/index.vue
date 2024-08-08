@@ -120,19 +120,13 @@
           </a-row>
         </div>
       </div>
-      <!-- <div id="viewer-host" class="flex-1 mt-10"></div> -->
     </a-card>
   </div>
 </template>
 
 <script setup lang="ts">
 import { reactive, ref, watch, computed } from 'vue'
-import { useRoute, useRouter } from 'vue-router'
-import { useTabStore } from '@/store/modules/tab'
 import DateJp from '@/components/Selector/DateJp/index.vue'
-import '@grapecity/activereports/styles/ar-js-ui.css'
-import '@grapecity/activereports/styles/ar-js-viewer.css'
-import '@grapecity/activereports-localization'
 import { showInfoModal } from '@/utils/modal'
 import { ITEM_REQUIRE_ERROR } from '@/constants/msg'
 import { PreviewRequest } from './type'
@@ -141,10 +135,6 @@ import { Form } from 'ant-design-vue'
 //--------------------------------------------------------------------------
 //データ定義
 //--------------------------------------------------------------------------
-const router = useRouter()
-const route = useRoute()
-const tabStore = useTabStore()
-
 const createDefaultParams = (): PreviewRequest => {
   return {
     KI: 8,
@@ -161,7 +151,6 @@ const createDefaultParams = (): PreviewRequest => {
     KEIYAKUSYA_CD_TO: undefined,
   } as PreviewRequest
 }
-
 const formData = reactive(createDefaultParams())
 
 const KEIYAKU_KBN_CD_NAME_LIST = ref<DaSelectorModel[]>([
@@ -188,7 +177,6 @@ const layout = {
   xl: 24,
   xxl: 12,
 }
-
 const host = window.location.href.includes('localhost')
   ? 'localhost:9527'
   : '61.213.76.155:65534'
@@ -212,38 +200,9 @@ const rules = reactive({
       message: ITEM_REQUIRE_ERROR.Msg.replace('{0}', '対象日(現在)'),
     },
   ],
-  // KEIYAKU_KBN_CD_FM: [
-  //   {
-  //     validator: (_rule, value: number) => {
-  //       if (formData.KEIYAKU_KBN_CD_TO) {
-  //         if (!value) {
-  //           return Promise.reject(
-  //             ITEM_REQUIRE_ERROR.Msg.replace('{0}', '契約区分From')
-  //           )
-  //         }
-  //       }
-  //       return Promise.resolve()
-  //     },
-  //   },
-  // ],
-  // KEIYAKU_KBN_CD_TO: [
-  //   {
-  //     validator: (_rule, value: number) => {
-  //       if (formData.KEIYAKU_KBN_CD_FM) {
-  //         if (!value) {
-  //           return Promise.reject(
-  //             ITEM_REQUIRE_ERROR.Msg.replace('{0}', '契約区分To')
-  //           )
-  //         }
-  //       }else{
-  //         return Promise.resolve()
-  //       }
-  //       return Promise.resolve()
-  //     },
-  //   },
-  // ],
 })
-const { validate, clearValidate, validateInfos } = Form.useForm(formData, rules)
+
+const { validate, validateInfos } = Form.useForm(formData, rules)
 
 function validateSearchParams() {
   let flag = true
@@ -331,31 +290,13 @@ async function onPreview() {
   await validate()
   if (validateSearchParams()) {
     openNew()
-    // previewVisible.value = true
-    // フォント記述子の定義
-    // const fonts = [
-    //   { name: 'ＭＳ ゴシック', source: '/fonts/MSGOTHIC.TTF' },
-    //   { name: '游明朝', source: '/fonts/yumin.ttf' },
-    //   { name: '游ゴシック', source: '/fonts/yugothib.ttf' },
-    //   { name: 'IPAゴシック', source: '/fonts/ipaexg.ttf' },
-    //   { name: 'Arial', source: '/fonts/Arial.ttf' },
-    //   { name: 'Arial Italic', source: '/fonts/Arialbi.ttf' },
-    //   { name: 'Arial Bold', source: '/fonts/Arialbd.ttf' },
-    //   { name: 'Arial Bold Italic', source: '/fonts/Arialbi.ttf' },
-    //   { name: 'Arial Black', source: '/fonts/Ariblk.ttf' },
-    // ]
-    // const viewer = new ReportViewer.Viewer('#viewer-host', { language: 'ja' })
-    // viewer.open('/report/keyakusya.rdlx-json')
-    // // サイドバーのエクスポート機能を有効化
-    // viewer.availableExports = ['pdf', 'xlsx', 'html']
-    // // 定義済みのフォント記述子を登録する
-    // Core.FontStore.registerFonts(...fonts)
   }
 }
 
 //--------------------------------------------------------------------------
 //監視定義
 //--------------------------------------------------------------------------
+
 //契約者区分、事業委託先及び契約番号の値が変った時の処理
 watch(
   () => [
