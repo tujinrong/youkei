@@ -1,0 +1,53 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OptionInfer>On</OptionInfer>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <DefaultItemExcludes>$(DefaultItemExcludes);$(ProjectDir)**\*.cs</DefaultItemExcludes>
+    <ImportedNamespaces>JbdGjsService.JBD.GJS.Db=False,Oracle.ManagedDataAccess.Client=False,System.ComponentModel=False,System.Data=False,System.Reflection=False,System.Security.Cryptography=False,System.Text=False,System.Text.Json.Serialization=False,Microsoft.VisualBasic=True,System=True,System.Collections=True,System.Collections.Generic=True,System.Diagnostics=True,System.Linq=True,System.Xml.Linq=True,System.Threading.Tasks=True,JbdGjsService=True</ImportedNamespaces>
+    <OptionStrict>On</OptionStrict>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Remove="00.システム機能\002.メニュー\**" />
+    <Compile Remove="00.システム機能\メニュー\**" />
+    <Compile Remove="システム共通\**" />
+    <EmbeddedResource Remove="00.システム機能\002.メニュー\**" />
+    <EmbeddedResource Remove="00.システム機能\メニュー\**" />
+    <EmbeddedResource Remove="システム共通\**" />
+    <None Remove="00.システム機能\002.メニュー\**" />
+    <None Remove="00.システム機能\メニュー\**" />
+    <None Remove="システム共通\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="Common\Utils\JbdGjsDataSetUtil.vb" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="ICSharpCode.SharpZipLib.Patched" Version="1.2.0.9" />
+    <PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="8.0.0" />
+    <PackageReference Include="Oracle.ManagedDataAccess.Core" Version="23.5.0" />
+    <PackageReference Include="TSQL.Parser" Version="2.6.0" />
+    <PackageReference Include="Ude.NetStandard" Version="1.2.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <Using Include="JBD.GJS.Db" />
+    <Using Include="System.ComponentModel" />
+    <Using Include="System.Data" />
+  </ItemGroup>
+  <ItemGroup>
+    <Import Include="JbdGjsService.JBD.GJS.Db" />
+    <Import Include="Oracle.ManagedDataAccess.Client" />
+    <Import Include="System.ComponentModel" />
+    <Import Include="System.Data" />
+    <Import Include="System.Reflection" />
+    <Import Include="System.Security.Cryptography" />
+    <Import Include="System.Text" />
+    <Import Include="System.Text.Json.Serialization" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Common\Utils\JbdGjsDataSetUtil.vb" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\JbdGjsCommon\JbdGjsCommon.vbproj" />
+  </ItemGroup>
+</Project>
