@@ -7,26 +7,13 @@
 ' 変更履歴　:
 ' *******************************************************************
 
-Namespace JBD.GJS.Service.GJ8090
+Namespace JBD.GJS.Service.GJ8091
 
     ''' <summary>
-    ''' 初期化処理_一覧画面処理
+    ''' 検索処理_詳細画面処理
     ''' </summary>
-    Public Class InitRequest
-        Inherits Db.DaRequestBase
-
-        ''' <summary>
-        ''' 期
-        ''' </summary>
-        Public Property KI As Integer = Nothing
-
-    End Class
-
-    ''' <summary>
-    ''' 検索処理_一覧画面処理
-    ''' </summary>
-    Public Class SearchRequest
-        Inherits CmSearchRequestBase
+    Public Class SearchDetailRequest
+        Inherits DaRequestBase
 
         ''' <summary>
         ''' 期
@@ -41,17 +28,7 @@ Namespace JBD.GJS.Service.GJ8090
         ''' <summary>
         ''' 農場番号
         ''' </summary>
-        Public Property NOJO_CD As Integer? = Nothing
-
-        ''' <summary>
-        ''' 農場名
-        ''' </summary>
-        Public Property NOJO_NAME As String = String.Empty
-
-        ''' <summary>
-        ''' 検索方法
-        ''' </summary>
-        Public Property SEARCH_METHOD As EnumAndOr? = EnumAndOr.AndCode
+        Public Property NOJO_CD As Integer = Nothing
 
     End Class
 End Namespace

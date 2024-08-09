@@ -10,6 +10,7 @@
 Imports System.Diagnostics.Eventing
 Imports System.Globalization
 Imports JbdGjsService.JBD.GJS.Service.GJ8090
+Imports JbdGjsService.JBD.GJS.Service.GJ8091
 Imports OracleInternal.Json
 
 Namespace JBD.GJS.Service
@@ -38,16 +39,16 @@ Namespace JBD.GJS.Service
             sql += " WHERE" & vbCrLf
             sql += "    (U.USER_ID = '" & userId.TrimEnd & "')" & vbCrLf
             Return sql
-End Function
+        End Function
 
 #Region "f_Search_SQLMake ＳＱＬ作成処理"
-'------------------------------------------------------------------
-'プロシージャ名  :f_Search_SQLMake
-'説明            :ＳＱＬ作成処理
-'引数            :なし
-'戻り値          :Boolean(正常True/エラーFalse)
-'------------------------------------------------------------------
-        Public Function f_Search_SQLMake(wKbn As SearchRequest) As String
+        '------------------------------------------------------------------
+        'プロシージャ名  :f_Search_SQLMake
+        '説明            :ＳＱＬ作成処理
+        '引数            :なし
+        '戻り値          :Boolean(正常True/エラーFalse)
+        '------------------------------------------------------------------
+        Public Function f_Search_SQLMakeNew(wKbn As SearchRequest) As String
             Dim wkANDorOR As String = String.Empty
             Dim wkWhere As String = String.Empty
             Dim wSql As String = String.Empty
@@ -121,12 +122,12 @@ End Function
         End Function
 #End Region
 
-'------------------------------------------------------------------
-'プロシージャ名  :f_Search_SQLMake
-'説明            :ＳＱＬ作成処理
-'引数            :なし
-'戻り値          :Boolean(正常True/エラーFalse)
-'------------------------------------------------------------------
+        '------------------------------------------------------------------
+        'プロシージャ名  :f_Search_SQLMake
+        '説明            :ＳＱＬ作成処理
+        '引数            :なし
+        '戻り値          :Boolean(正常True/エラーFalse)
+        '------------------------------------------------------------------
         Public Function f_Search_SQLMakePage(psize As Integer, pnum As Integer, sql As String) As String
             '==SQL作成====================
             Dim wSql = ""
@@ -136,12 +137,12 @@ End Function
             wSql &= "        T1.NOJO_NAME,                            "
             wSql &= "        T1.ADDR,                                 "
             wSql &= "        COUNT(1) OVER() AS RCNT,               "
-            wSql &= "        CEIL(COUNT(1) OVER()/ " &   psize &  " ) AS PCNT   , ROWNUM AS RM  "
+            wSql &= "        CEIL(COUNT(1) OVER()/ " & psize & " ) AS PCNT   , ROWNUM AS RM  "
             wSql &= " FROM                                            "
-            wSql &= " ( " &   sql &  " ) "
+            wSql &= " ( " & sql & " ) "
             wSql &= "  T1  )  "
-            wSql &= " WHERE RM <= (" &   psize &  " * " &   pnum &  " )    "
-            wSql &= "   AND RM >  (" &   psize &  " * " &   pnum &  " - " &   psize &  ") "
+            wSql &= " WHERE RM <= (" & psize & " * " & pnum & " )    "
+            wSql &= "   AND RM >  (" & psize & " * " & pnum & " - " & psize & ") "
             Return wSql
         End Function
 
@@ -156,28 +157,28 @@ End Function
         '更新日          :
         '------------------------------------------------------------------
         Public Function f_User_Check(dt As DataTable, pw As String, uid As String) As String
-        Dim ret As String = String.Empty
-        With dt
-            'パスワードチェック
-            Dim spw = WordHenkan("N", "S", .Rows(0)("PASS")).ToString.TrimEnd
-            Dim spw256 = ComputeSHA256Hash(spw, uid)
-            If pw.TrimEnd.ToUpper() <> spw256 Then
-                ret = "ユーザーＩＤ、パスワードが正しくありません。"
-            End If
+            Dim ret As String = String.Empty
+            With dt
+                'パスワードチェック
+                Dim spw = WordHenkan("N", "S", .Rows(0)("PASS")).ToString.TrimEnd
+                Dim spw256 = ComputeSHA256Hash(spw, uid)
+                If pw.TrimEnd.ToUpper() <> spw256 Then
+                    ret = "ユーザーＩＤ、パスワードが正しくありません。"
+                End If
 
-            'パスワード有効期限チェック
-            If Convert.ToDateTime(.Rows(0)("PASS_KIGEN_DATE")) < Now Then
-                'パスワード有効期限切れ
-                ret = "使用できません。管理者に確認してください。"
-            End If
+                'パスワード有効期限チェック
+                If Convert.ToDateTime(.Rows(0)("PASS_KIGEN_DATE")) < Now Then
+                    'パスワード有効期限切れ
+                    ret = "使用できません。管理者に確認してください。"
+                End If
 
-            '利用停止チェック
-            If Not .Rows(0)("TEISI_DATE") Is DBNull.Value Then
-                '利用停止ユーザー
-                ret = "使用できません。管理者に確認してください 。"
-            End If
-        End With
-        Return ret
+                '利用停止チェック
+                If Not .Rows(0)("TEISI_DATE") Is DBNull.Value Then
+                    '利用停止ユーザー
+                    ret = "使用できません。管理者に確認してください 。"
+                End If
+            End With
+            Return ret
         End Function
 
 
@@ -214,77 +215,77 @@ End Function
             On Error GoTo Error_WordHenkan
             'NULLからZEROへの変換
             If strFrom = "N" And strTo = "Z" Then
-            If IsDBNull(vardata) Then
-                WordHenkan = 0
-            ElseIf CStr(vardata) = "null" Then
-                WordHenkan = IIf(vardata.ToString() = "null", "0", RTrim(vardata.ToString()))
-            Else
-                WordHenkan = IIf(IsDBNull(vardata), "0", RTrim(vardata.ToString()))
-            End If
-            Exit Function
+                If IsDBNull(vardata) Then
+                    WordHenkan = 0
+                ElseIf CStr(vardata) = "null" Then
+                    WordHenkan = IIf(vardata.ToString() = "null", "0", RTrim(vardata.ToString()))
+                Else
+                    WordHenkan = IIf(IsDBNull(vardata), "0", RTrim(vardata.ToString()))
+                End If
+                Exit Function
 
-            'NULLからSPACEへの変換
+                'NULLからSPACEへの変換
             ElseIf strFrom = "N" And strTo = "S" Then
-            If IsDBNull(vardata) Then
-                WordHenkan = ""
-            ElseIf CStr(vardata) = "null" Then
-                WordHenkan = IIf(vardata.ToString() = "null", "", RTrim(vardata.ToString()))
-            Else
-                WordHenkan = IIf(IsDBNull(vardata), "", RTrim(vardata.ToString()))
-            End If
-            Exit Function
-            'ZEROからNULLへの変換
+                If IsDBNull(vardata) Then
+                    WordHenkan = ""
+                ElseIf CStr(vardata) = "null" Then
+                    WordHenkan = IIf(vardata.ToString() = "null", "", RTrim(vardata.ToString()))
+                Else
+                    WordHenkan = IIf(IsDBNull(vardata), "", RTrim(vardata.ToString()))
+                End If
+                Exit Function
+                'ZEROからNULLへの変換
             ElseIf strFrom = "Z" And strTo = "N" Then
-            If IsDBNull(vardata) Or vardata.ToString() = "0" Then
-                WordHenkan = System.DBNull.Value
-            Else
-                WordHenkan = vardata
-            End If
-            Exit Function
+                If IsDBNull(vardata) Or vardata.ToString() = "0" Then
+                    WordHenkan = System.DBNull.Value
+                Else
+                    WordHenkan = vardata
+                End If
+                Exit Function
 
-            'ZEROからSPACEへの変換
+                'ZEROからSPACEへの変換
             ElseIf strFrom = "Z" And strTo = "S" Then
-            If IsDBNull(vardata) Or vardata.ToString() = "0" Then
-                WordHenkan = ""
-            Else
-                WordHenkan = vardata
-            End If
-            Exit Function
-            'SPACEからNULLへの変換
+                If IsDBNull(vardata) Or vardata.ToString() = "0" Then
+                    WordHenkan = ""
+                Else
+                    WordHenkan = vardata
+                End If
+                Exit Function
+                'SPACEからNULLへの変換
             ElseIf strFrom = "S" And strTo = "N" Then
-            If IsDBNull(vardata) Or Len(RTrim(vardata.ToString())) = 0 Then
-                WordHenkan = System.DBNull.Value
-            Else
-                WordHenkan = vardata
-            End If
-            Exit Function
-            'SPACEからZEROへの変換
+                If IsDBNull(vardata) Or Len(RTrim(vardata.ToString())) = 0 Then
+                    WordHenkan = System.DBNull.Value
+                Else
+                    WordHenkan = vardata
+                End If
+                Exit Function
+                'SPACEからZEROへの変換
             ElseIf strFrom = "S" And strTo = "Z" Then
-            If IsDBNull(vardata) Or Len(RTrim(vardata.ToString())) = 0 Then
-                WordHenkan = "0"
-            Else
-                WordHenkan = vardata
-            End If
-            Exit Function
+                If IsDBNull(vardata) Or Len(RTrim(vardata.ToString())) = 0 Then
+                    WordHenkan = "0"
+                Else
+                    WordHenkan = vardata
+                End If
+                Exit Function
             Else
                 'それ以外(指定ミス)
                 WordHenkan = vardata
             End If
-            
-            Error_WordHenkan:
+
+Error_WordHenkan:
             If strFrom = "N" And strTo = "Z" Then
-            WordHenkan = IIf(IsDBNull(vardata), 0, RTrim(vardata.ToString()))
-            'WordHenkan = "0"
+                WordHenkan = IIf(IsDBNull(vardata), 0, RTrim(vardata.ToString()))
+                'WordHenkan = "0"
             ElseIf strFrom = "N" And strTo = "S" Then
-            WordHenkan = ""
+                WordHenkan = ""
             ElseIf strFrom = "Z" And strTo = "N" Then
-            WordHenkan = System.DBNull.Value
+                WordHenkan = System.DBNull.Value
             ElseIf strFrom = "Z" And strTo = "S" Then
-            WordHenkan = ""
+                WordHenkan = ""
             ElseIf strFrom = "S" And strTo = "N" Then
-            WordHenkan = System.DBNull.Value
+                WordHenkan = System.DBNull.Value
             ElseIf strFrom = "S" And strTo = "Z" Then
-            WordHenkan = "0"
+                WordHenkan = "0"
             End If
             Exit Function
         End Function
@@ -296,7 +297,7 @@ End Function
         '           :② salt       i,  String  
         '------------------------------------------------------------------
         Function ComputeSHA256Hash(data As String, salt As String) As String
-        Dim inputBytes As Byte() = Encoding.UTF8.GetBytes(data & salt)
+            Dim inputBytes As Byte() = Encoding.UTF8.GetBytes(data & salt)
             Using sha256 As SHA256 = SHA256.Create()
                 Dim hashBytes As Byte() = sha256.ComputeHash(inputBytes)
                 Return BitConverter.ToString(hashBytes).Replace("-", "")
@@ -334,6 +335,19 @@ End Function
                 Return String.Empty
             End If
         End Function
+
+        Public Function f_SetForm_Data_New(req As SearchDetailRequest) As String
+            Dim ret As Boolean = False
+            Dim wkDS As New DataSet
+            Dim wSql As String = String.Empty
+            'SQL
+            wSql = "SELECT * FROM TM_KEIYAKU_NOJO" & _
+                    " WHERE KI = " & req.KI & _
+                    "  AND KEIYAKUSYA_CD = " & req.KEIYAKUSYA_CD & _
+                    "  AND NOJO_CD = " & req.NOJO_CD
+            Return wSql
+        End Function
+
     End Module
 
 End Namespace

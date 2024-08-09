@@ -9,17 +9,17 @@
 
 Imports JbdGjsCommon.JBD.GJS.Common.JbdGjsCommon
 
-Namespace JBD.GJS.Service.GJ8090
+Namespace JBD.GJS.Service.GJ8091
 
     ''' <summary>
-    ''' 初期化処理_一覧画面
+    ''' 初期化処理_詳細画面
     ''' </summary>
-    <DisplayName("初期化処理_一覧画面")>
+    <DisplayName("初期化処理_詳細画面")>
     Public Class Service
         Inherits CmServiceBase
 
-        <DisplayName("初期化処理_一覧画面処理")>
-        Public Shared Function Init(req As InitRequest) As InitResponse
+        <DisplayName("初期化処理_詳細画面処理")>
+        Public Shared Function InitDetail(req As DaRequestBase) As InitDetailResponse
             Return Nolock(req,
                 Function(db)
 
@@ -36,28 +36,22 @@ Namespace JBD.GJS.Service.GJ8090
                     '-------------------------------------------------------------
                     'チェックトークン
                     Dim uid = CheckToken(req.token)
-                    If String.IsNullOrEmpty(uid) Then Return New InitResponse("トークンが正しくありません。")
+                    If String.IsNullOrEmpty(uid) Then Return New InitDetailResponse("トークンが正しくありません。")
 
                     '-------------------------------------------------------------
                     '4.ビジネスロジック処理
                     '-------------------------------------------------------------
-                    'データ結果判定
-                    If req.KI = 0 Then
-                        Dim ki =Cint(New Obj_TM_SYORI_NENDO_KI().pKI)
-                        Dim ret As New InitResponse With {
-                            .KI = ki
-                        }
-                        Return ret
-                    End If
-
                     'データクエリ
-                    Dim dt = f_Keiyaku_Data_Select_New(req.KI, True, String.Empty)
+                    Dim sql = f_Ken_Data_Select_New()
+
+                    'データSelect 
+                    Dim ds = f_Select_ODP(db, sql)
+                    Dim dt = ds.Tables(0)
 
                     '-------------------------------------------------------------
                     '5.データ加工処理
                     '-------------------------------------------------------------
-                    Dim res = Wraper.GetInitResponse(dt)
-                    res.KI =  req.KI
+                    Dim res = Wraper.GetInitDetailResponse(dt)
 
                     '-------------------------------------------------------------
                     '6.正常返し
@@ -68,8 +62,8 @@ Namespace JBD.GJS.Service.GJ8090
 
         End Function
 
-        <DisplayName("検索処理_一覧画面処理")>
-        Public Shared Function Search(req As SearchRequest) As SearchResponse
+        <DisplayName("検索処理_詳細画面処理")>
+        Public Shared Function SearchDetail(req As SearchDetailRequest) As SearchDetailResponse
             Return Nolock(req,
                 Function(db)
 
@@ -86,27 +80,22 @@ Namespace JBD.GJS.Service.GJ8090
                     '-------------------------------------------------------------
                     'チェックトークン
                     Dim uid = CheckToken(req.token)
-                    If String.IsNullOrEmpty(uid) Then Return New SearchResponse("トークンが正しくありません。")
-                    
+                    If String.IsNullOrEmpty(uid) Then Return New SearchDetailResponse("トークンが正しくありません。")
+
                     '-------------------------------------------------------------
                     '4.ビジネスロジック処理
                     '-------------------------------------------------------------
                     '検索結果出力用ＳＱＬ作成
-                    Dim sql = f_Search_SQLMakeNew(req)
-
-                    '元の SQL をページ分割されたデータ出力に変換する
-                    Dim psql = f_Search_SQLMakePage(req.PAGE_SIZE, req.PAGE_NUM, sql)
+                    Dim sql = f_SetForm_Data_New(req)
 
                     'データSelect 
-                    Dim ds = f_Select_ODP(db, psql)
+                    Dim ds = f_Select_ODP(db, sql)
                     Dim dt = ds.Tables(0)
 
                     '-------------------------------------------------------------
                     '5.データ加工処理
                     '-------------------------------------------------------------
-                    Dim res = Wraper.SearchResponse(dt)
-                    res.KI = req.KI
-                    res.KEIYAKUSYA_CD = req.KEIYAKUSYA_CD
+                    Dim res = Wraper.SearchDetailResponse(dt)
 
                     '-------------------------------------------------------------
                     '6.正常返し

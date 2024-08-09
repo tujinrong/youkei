@@ -3425,6 +3425,22 @@ ACoDateCheckEdit_Exit3:
             End Try
 
         End Function
+    #End Region
+
+    #Region "f_Ken_Data_Select 県データ取得"
+        Public Function f_Ken_Data_Select_New() As String
+            Dim sSql As String = String.Empty
+            sSql = " SELECT " & vbCrLf
+            sSql = sSql & "  MEISYO_CD," & vbCrLf
+            sSql = sSql & "  MEISYO" & vbCrLf
+            sSql = sSql & " FROM" & vbCrLf
+            sSql = sSql & "  TM_CODE" & vbCrLf
+            sSql = sSql & " WHERE" & vbCrLf
+            sSql = sSql & "  SYURUI_KBN = 5" & vbCrLf
+            sSql = sSql & " ORDER BY MEISYO_CD" & vbCrLf
+            Return sSql
+        End Function
+
         Public Function f_Ken_Data_Select(ByRef cmbKenCd As String, _
                                       ByRef cmbKenMei As String, _
                                       ByRef blnNullAddFlg As Boolean) As Boolean
@@ -3444,6 +3460,7 @@ ACoDateCheckEdit_Exit3:
         End Function
 
     #End Region
+
     #Region "f_Itaku_Data_Select 代理人データ取得"
         '------------------------------------------------------------------
         'プロシージャ名  :f_Itaku_Data_Select

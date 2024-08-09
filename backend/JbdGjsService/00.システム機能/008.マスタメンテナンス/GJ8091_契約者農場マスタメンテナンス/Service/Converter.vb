@@ -7,7 +7,7 @@
 ' 変更履歴　:
 ' *******************************************************************
 
-Namespace JBD.GJS.Service.GJ8090
+Namespace JBD.GJS.Service.GJ8091
 
     ''' <summary>
     ''' 初期化処理_一覧画面
