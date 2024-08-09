@@ -36,13 +36,13 @@ Namespace JBD.GJS.Service.GJ8090
                     '-------------------------------------------------------------
                     'チェックトークン
                     Dim uid = CheckToken(req.token)
-                    If String.IsNullOrEmpty(uid) Then Return New InitResponse("W019 トークンが正しくありません。")
+                    If String.IsNullOrEmpty(uid) Then Return New InitResponse("トークンが正しくありません。")
 
                     '-------------------------------------------------------------
                     '4.ビジネスロジック処理
                     '-------------------------------------------------------------
                     'データ結果判定
-                    If Not(req.KI.HasValue)
+                    If Not(req.KI.HasValue)Then
                         Dim ki =Cint(New Obj_TM_SYORI_NENDO_KI().pKI)
                         Dim ret As New InitResponse With {
                             .KI = ki
@@ -86,7 +86,7 @@ Namespace JBD.GJS.Service.GJ8090
                     '-------------------------------------------------------------
                     'チェックトークン
                     Dim uid = CheckToken(req.token)
-                    If String.IsNullOrEmpty(uid) Then Return New UserInfoResponse("W019 トークンが正しくありません。")
+                    If String.IsNullOrEmpty(uid) Then Return New UserInfoResponse("トークンが正しくありません。")
 
                     '-------------------------------------------------------------
                     '4.ビジネスロジック処理

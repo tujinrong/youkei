@@ -52,19 +52,19 @@ Namespace JBD.GJS.Service
                 Dim spw = WordHenkan("N", "S", .Rows(0)("PASS")).ToString.TrimEnd
                 Dim spw256 = ComputeSHA256Hash(spw, uid)
                 If pw.TrimEnd.ToUpper() <> spw256 Then
-                    ret = "W019 ユーザーＩＤ、パスワードが正しくありません。"
+                    ret = "ユーザーＩＤ、パスワードが正しくありません。"
                 End If
 
                 'パスワード有効期限チェック
                 If Convert.ToDateTime(.Rows(0)("PASS_KIGEN_DATE")) < Now Then
                     'パスワード有効期限切れ
-                    ret = "W019 使用できません。管理者に確認してください。"
+                    ret = "使用できません。管理者に確認してください。"
                 End If
 
                 '利用停止チェック
                 If Not .Rows(0)("TEISI_DATE") Is DBNull.Value Then
                     '利用停止ユーザー
-                    ret = "W019 使用できません。管理者に確認してください 。"
+                    ret = "使用できません。管理者に確認してください 。"
                 End If
             End With
             Return ret

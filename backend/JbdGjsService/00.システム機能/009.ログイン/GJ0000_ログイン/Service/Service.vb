@@ -51,7 +51,7 @@ Namespace JBD.GJS.Service.GJ0000
                         End If
                     Else
                         'データ存在なし
-                        Return New LoginResponse("W019 ユーザーＩＤ、パスワードが正しくありません。")
+                        Return New LoginResponse("ユーザーＩＤ、パスワードが正しくありません。")
                     End If
 
                     '-------------------------------------------------------------
@@ -86,7 +86,7 @@ Namespace JBD.GJS.Service.GJ0000
                     '-------------------------------------------------------------
                     'チェックトークン
                     Dim uid = CheckToken(req.token)
-                    If String.IsNullOrEmpty(uid) Then Return New UserInfoResponse("W019 トークンが正しくありません。")
+                    If String.IsNullOrEmpty(uid) Then Return New UserInfoResponse("トークンが正しくありません。")
 
 
                     '-------------------------------------------------------------
