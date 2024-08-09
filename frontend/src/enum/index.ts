@@ -79,3 +79,8 @@ export enum EnumAndOr {
   /**いずれかを含む(OR) */
   Or,
 }
+/** 編集区分 */
+export enum Enum編集区分 {
+  新規 = 1,
+  変更,
+}

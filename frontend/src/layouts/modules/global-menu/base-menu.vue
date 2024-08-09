@@ -119,11 +119,6 @@ function hideMenu() {
 }
 
 const openNew = () => {
-  const width = 1600
-  const height = 900
-  const left = window.screen.width / 2 - width / 2
-  const top = window.screen.height / 2 - height / 2
-  const features = `width=${width},height=${height},left=${left},top=${top},toolbar=yes,menubar=yes,location=yes,status=yes`
   const host = window.location.href.includes('localhost')
     ? 'localhost:9527'
     : '61.213.76.155:65534'
@@ -179,7 +174,7 @@ const openNew = () => {
     }
 
     .ant-menu-submenu-title {
-      padding-inline: calc(50% - 14px);
+      padding-inline: calc(50% - 18px);
     }
   }
 

@@ -7,7 +7,7 @@
  * 変更履歴　:
  * -----------------------------------------------------------------*/
 
-import { EnumAndOr } from '@/enum'
+import { EnumAndOr, Enum編集区分 } from '@/enum'
 
 //-------------------------------------------------------------------
 //リクエスト
@@ -53,56 +53,14 @@ export interface SearchDetailRequest extends DaRequestBase {
   NOJO_CD: number
 }
 
-/**新規処理(詳細画面) */
-export interface AddRequest extends DaRequestBase {
-  /**期 */
-  KI: number
-  /**契約者番号 */
-  KEIYAKUSYA_CD: number
-  /**契約者農場 */
-  NOJO_CD: number
-  /**農場名称 */
-  NOJO_NAME: string
-  /**都道府県コード */
-  KEN_CD: number
-  /**郵便番号 */
-  ADDR_POST: string
-  /**住所1 */
-  ADDR_1: string
-  /**住所2 */
-  ADDR_2: string
-  /**住所3 */
-  ADDR_3: string
-  /**住所4 */
-  ADDR_4: string
-  /**明細番号 */
-  MEISAINO: number
-}
-
-/**更新処理(詳細画面) */
-export interface UpdateRequest extends DaRequestBase {
-  /**期 */
-  KI: number
-  /**契約者番号 */
-  KEIYAKUSYA_CD: number
-  /**契約者農場 */
-  NOJO_CD: number
-  /**農場名称 */
-  NOJO_NAME: string
-  /**都道府県コード */
-  KEN_CD: number
-  /**郵便番号 */
-  ADDR_POST: string
-  /**住所1 */
-  ADDR_1: string
-  /**住所2 */
-  ADDR_2: string
-  /**住所3 */
-  ADDR_3: string
-  /**住所4 */
-  ADDR_4: string
-  /**明細番号 */
-  MEISAINO: number
+/**登録処理(詳細画面) */
+export interface SaveRequest extends DaRequestBase {
+  /**契約者農場情報 */
+  DetailVM: DetailVM
+  /**編集区分 */
+  EDIT_KBN: Enum編集区分
+  /**更新時間 */
+  UP_DATE?: Date
 }
 
 //-------------------------------------------------------------------
@@ -137,7 +95,10 @@ export interface InitDetailResponse extends DaResponseBase {
 
 /**検索処理(詳細画面) */
 export interface SearchDetailResponse extends DaResponseBase {
-  KEIYAKUSYA_NOJO: KeiyakuNojoSearchDetailVM
+  /**契約者農場情報 */
+  DetailVM: DetailVM
+  /**更新時間 */
+  UP_DATE?: Date
 }
 
 //-------------------------------------------------------------------
@@ -153,7 +114,8 @@ export interface KeiyakuNojoSearchVM {
   ADDR: string
 }
 
-export interface KeiyakuNojoSearchDetailVM {
+/**契約者農場情報 */
+export interface DetailVM {
   /**期 */
   KI: number
   /**契約者番号 */

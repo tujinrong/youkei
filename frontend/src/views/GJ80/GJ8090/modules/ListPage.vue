@@ -10,14 +10,13 @@
             <th class="required">期</th>
             <td>
               <a-form-item v-bind="validateInfos.KI">
-                <a-input
+                <a-input-number
                   v-model:value="searchParams.KI"
                   :min="1"
                   :max="99"
                   :maxlength="2"
-                  type="number"
                   class="w-full"
-                ></a-input>
+                ></a-input-number>
               </a-form-item>
             </td>
           </a-col>
@@ -72,9 +71,9 @@
       </div>
       <div class="flex">
         <a-space>
-          <a-button type="primary" @click="searchData">検索</a-button>
+          <a-button type="primary" @click="searchAll">検索</a-button>
           <a-button type="primary" @click="forwardNew">新規</a-button>
-          <a-button type="primary" @click="reset">クリア</a-button>
+          <a-button type="primary" @click="clear">クリア</a-button>
         </a-space>
         <close-page />
       </div>
@@ -100,12 +99,24 @@
         @cell-dblclick="({ row }) => forwardEdit(row.NOJO_CD)"
         @sort-change="(e) => changeTableSort(e, toRef(pageParams, 'ORDER_BY'))"
       >
-        <vxe-column field="noujyocd" title="農場番号" width="200" sortable>
+        <vxe-column
+          field="noujyocd"
+          title="農場番号"
+          width="200"
+          sortable
+          :params="{ order: 1 }"
+        >
           <template #default="{ row }">
             <a @click="forwardEdit(row.NOJO_CD)">{{ row.NOJO_CD }}</a>
           </template>
         </vxe-column>
-        <vxe-column field="noujyomei" title="農場名" min-width="400" sortable>
+        <vxe-column
+          field="noujyomei"
+          title="農場名"
+          min-width="400"
+          sortable
+          :params="{ order: 2 }"
+        >
           <template #default="{ row }">
             <a @click="forwardEdit(row.NOJO_CD)">{{ row.NOJO_NAME }}</a>
           </template>
@@ -115,6 +126,7 @@
           title="農場住所"
           min-width="700"
           sortable
+          :params="{ order: 3 }"
           :resizable="false"
         ></vxe-column>
       </vxe-table>
@@ -123,7 +135,7 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, reactive, toRef, watch, onMounted } from 'vue'
+import { ref, reactive, toRef, watch, onMounted, computed } from 'vue'
 import { useRouter, useRoute, onBeforeRouteUpdate } from 'vue-router'
 import { EnumAndOr, PageSatatus } from '@/enum'
 import useSearch from '@/hooks/useSearch'
@@ -134,6 +146,7 @@ import { useElementSize } from '@vueuse/core'
 import { KeiyakuNojoSearchVM, SearchRequest } from '@/views/GJ80/GJ8090/type'
 import { Init, Search } from '../service'
 import { Form } from 'ant-design-vue'
+import { number } from 'echarts'
 
 //--------------------------------------------------------------------------
 //データ定義
@@ -152,6 +165,11 @@ const createDefaultParams = (): SearchRequest => {
   } as SearchRequest
 }
 const searchParams = reactive(createDefaultParams())
+const keyList = reactive({
+  KI: undefined,
+  KEIYAKUSYA_CD: undefined,
+  KEIYAKUSYA_NAME: '',
+})
 const KEIYAKUSYA_CD_NAME_LIST = ref<CodeNameModel[]>([])
 const tableData = ref<KeiyakuNojoSearchVM[]>([])
 
@@ -165,9 +183,6 @@ const layout = {
 }
 const cardRef = ref()
 const { height } = useElementSize(cardRef)
-//--------------------------------------------------------------------------
-//計算定義
-//--------------------------------------------------------------------------
 
 const rules = reactive({
   KI: [
@@ -184,6 +199,17 @@ const { validate, clearValidate, validateInfos } = Form.useForm(
   searchParams,
   rules
 )
+//--------------------------------------------------------------------------
+//計算定義
+//--------------------------------------------------------------------------
+const KEIYAKUSYA_NAME = computed(() => {
+  return (
+    keyList.KEIYAKUSYA_NAME ||
+    KEIYAKUSYA_CD_NAME_LIST.value.find(
+      (el) => Number(el.CODE) === searchParams.KEIYAKUSYA_CD
+    )?.NAME
+  )
+})
 //---------------------------------------------------------------------------
 //フック関数
 //--------------------------------------------------------------------------
@@ -194,12 +220,7 @@ onMounted(() => {
 //初期化処理
 const getInitData = (KI?) => {
   Init({ KI: KI }).then((res) => {
-    // TODO
-    if (KI) {
-      searchParams.KI = KI
-    } else {
-      searchParams.KI = res.KI
-    }
+    searchParams.KI = res.KI
     KEIYAKUSYA_CD_NAME_LIST.value = res.KEIYAKUSYA_CD_NAME_LIST
   })
 }
@@ -214,12 +235,14 @@ onBeforeRouteUpdate((to, from) => {
 
 async function forwardNew() {
   await validate()
+
   router.push({
     name: route.name,
     query: {
       status: PageSatatus.New,
-      KI: searchParams.KI,
-      KEIYAKUSYA_CD: searchParams.KEIYAKUSYA_CD,
+      KI: keyList.KI || searchParams.KI,
+      KEIYAKUSYA_CD: keyList.KEIYAKUSYA_CD || searchParams.KEIYAKUSYA_CD,
+      KEIYAKUSYA_NAME: KEIYAKUSYA_NAME.value,
     },
   })
 }
@@ -229,18 +252,12 @@ async function forwardEdit(NOJO_CD) {
     name: route.name,
     query: {
       status: PageSatatus.Edit,
-      KI: searchParams.KI,
-      KEIYAKUSYA_CD: searchParams.KEIYAKUSYA_CD,
+      KI: keyList.KI || searchParams.KI,
+      KEIYAKUSYA_CD: keyList.KEIYAKUSYA_CD || searchParams.KEIYAKUSYA_CD,
+      KEIYAKUSYA_NAME: KEIYAKUSYA_NAME.value,
       NOJO_CD: NOJO_CD,
     },
   })
-}
-
-//クリア処理
-function reset() {
-  Object.assign(searchParams, createDefaultParams())
-  searchParams.KI = 8
-  tableData.value = []
 }
 
 //検索処理
@@ -251,6 +268,14 @@ const { pageParams, totalCount, searchData, clear } = useSearch({
   validate,
 })
 
+const searchAll = async () => {
+  const res = await searchData()
+  keyList.KI = res.KI
+  keyList.KEIYAKUSYA_CD = res.KEIYAKUSYA_CD
+  keyList.KEIYAKUSYA_NAME =
+    KEIYAKUSYA_CD_NAME_LIST.value.find((el) => el.CODE === res.KEIYAKUSYA_CD)
+      ?.NAME || ''
+}
 //--------------------------------------------------------------------------
 //監視定義
 //--------------------------------------------------------------------------
@@ -268,17 +293,6 @@ watch(
   (newVal) => {
     if (newVal) {
       getInitData(newVal)
-      searchParams.KEIYAKUSYA_CD = undefined
-      tableData.value = []
-    }
-  }
-)
-
-watch(
-  () => searchParams.KEIYAKUSYA_CD,
-  (newVal) => {
-    if (newVal && tableData.value.length > 0) {
-      tableData.value = []
     }
   }
 )

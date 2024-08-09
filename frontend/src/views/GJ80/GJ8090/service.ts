@@ -9,16 +9,15 @@
 import { api, api2 } from '@/service/request/common-service'
 
 import {
-  AddRequest,
   DeleteRequest,
   InitDetailResponse,
   InitRequest,
   InitResponse,
+  SaveRequest,
   SearchDetailRequest,
   SearchDetailResponse,
   SearchRequest,
   SearchResponse,
-  UpdateRequest,
 } from './type'
 
 const servicename = 'GJ8090'
@@ -33,7 +32,7 @@ export const Init = (params: InitRequest): Promise<InitResponse> => {
 /** 検索処理(一覧画面) */
 export const Search = (params: SearchRequest): Promise<SearchResponse> => {
   const methodname = 'Search'
-  return api2(servicename, methodname, params, undefined, { loading: true })
+  return api(servicename, methodname, params, undefined, { loading: true })
 }
 
 /** 初期化処理(詳細画面) */
@@ -50,15 +49,9 @@ export const SearchDetail = (
   return api2(servicename2, methodname, params, undefined, { loading: true })
 }
 
-/** 新規処理(詳細画面) */
-export const Add = (params: AddRequest): Promise<DaResponseBase> => {
-  const methodname = 'Add'
-  return api2(servicename2, methodname, params)
-}
-
-/** 新規処理(詳細画面) */
-export const Update = (params: UpdateRequest): Promise<DaResponseBase> => {
-  const methodname = 'Update'
+/** 登録処理(詳細画面) */
+export const Save = (params: SaveRequest): Promise<DaResponseBase> => {
+  const methodname = 'Save'
   return api2(servicename2, methodname, params)
 }
 

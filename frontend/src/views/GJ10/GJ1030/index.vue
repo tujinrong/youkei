@@ -35,22 +35,11 @@
             <a-col v-bind="layout">
               <th>契約区分</th>
               <td class="flex">
-                <!-- <a-form-item v-bind="validateInfos.KEIYAKU_KBN_CD_FM"> -->
-                <ai-select
-                  v-model:value="formData.KEIYAKU_KBN_CD_FM"
-                  split-val
-                  :options="KEIYAKU_KBN_CD_NAME_LIST"
-                  type="number"
-                ></ai-select>
-                <!-- </a-form-item> -->
-                ～
-                <!-- <a-form-item v-bind="validateInfos.KEIYAKU_KBN_CD_TO"> -->
-                <ai-select
-                  v-model:value="formData.KEIYAKU_KBN_CD_TO"
-                  :options="KEIYAKU_KBN_CD_NAME_LIST"
-                  type="number"
-                ></ai-select>
-                <!-- </a-form-item> -->
+                <a-form-item v-bind="validateInfos.KEIYAKU_KBN_CD">
+                  <range-select
+                    v-model:value="formData.KEIYAKU_KBN_CD"
+                    :options="KEIYAKU_KBN_CD_NAME_LIST"
+                /></a-form-item>
               </td>
             </a-col>
             <a-col v-bind="layout">
@@ -75,33 +64,21 @@
             <a-col v-bind="layout">
               <th>事業委託先</th>
               <td class="flex">
-                <ai-select
-                  v-model:value="formData.ITAKU_CD_FM"
-                  :options="ITAKU_CD_NAME_LIST"
-                  type="number"
-                ></ai-select>
-                ～
-                <ai-select
-                  v-model:value="formData.ITAKU_CD_TO"
-                  :options="ITAKU_CD_NAME_LIST"
-                  type="number"
-                ></ai-select>
+                <a-form-item v-bind="validateInfos.ITAKU_CD">
+                  <range-select
+                    v-model:value="formData.ITAKU_CD"
+                    :options="ITAKU_CD_NAME_LIST"
+                /></a-form-item>
               </td>
             </a-col>
             <a-col v-bind="layout">
               <th>契約者番号</th>
               <td class="flex">
-                <ai-select
-                  v-model:value="formData.KEIYAKUSYA_CD_FM"
-                  :options="KEIYAKUSYA_CD_NAME_LIST"
-                  type="number"
-                ></ai-select>
-                ～
-                <ai-select
-                  v-model:value="formData.KEIYAKUSYA_CD_TO"
-                  :options="KEIYAKUSYA_CD_NAME_LIST"
-                  type="number"
-                ></ai-select>
+                <a-form-item v-bind="validateInfos.KEIYAKUSYA_CD">
+                  <range-select
+                    v-model:value="formData.KEIYAKUSYA_CD"
+                    :options="KEIYAKUSYA_CD_NAME_LIST"
+                /></a-form-item>
               </td>
             </a-col>
           </a-row>
@@ -129,46 +106,51 @@ import { reactive, ref, watch, computed, onUnmounted } from 'vue'
 import DateJp from '@/components/Selector/DateJp/index.vue'
 import { showInfoModal } from '@/utils/modal'
 import { ITEM_REQUIRE_ERROR } from '@/constants/msg'
-import { PreviewRequest } from './type'
 import { Form } from 'ant-design-vue'
 
 //--------------------------------------------------------------------------
 //データ定義
 //--------------------------------------------------------------------------
-const createDefaultParams = (): PreviewRequest => {
+const createDefaultParams = () => {
   return {
     KI: 8,
     TAISYOBI_YMD: new Date().toISOString().split('T')[0],
-    KEIYAKU_KBN_CD_FM: undefined,
-    KEIYAKU_KBN_CD_TO: undefined,
+    KEIYAKU_KBN_CD: {
+      FROM: undefined,
+      TO: undefined,
+    },
     KEIYAKU_JYOKYO_SHINKI: true,
     KEIYAKU_JYOKYO_KEIZOKU: true,
     KEIYAKU_JYOKYO_CHUSHI: true,
     KEIYAKU_JYOKYO_HAIGYO: true,
-    ITAKU_CD_FM: undefined,
-    ITAKU_CD_TO: undefined,
-    KEIYAKUSYA_CD_FM: undefined,
-    KEIYAKUSYA_CD_TO: undefined,
-  } as PreviewRequest
+    ITAKU_CD: {
+      FROM: undefined,
+      TO: undefined,
+    },
+    KEIYAKUSYA_CD: {
+      FROM: undefined,
+      TO: undefined,
+    },
+  }
 }
 const formData = reactive(createDefaultParams())
 
-const KEIYAKU_KBN_CD_NAME_LIST = ref<DaSelectorModel[]>([
-  { value: 1, label: '家族' },
-  { value: 2, label: '企業' },
-  { value: 3, label: '鶏以外' },
+const KEIYAKU_KBN_CD_NAME_LIST = ref<CodeNameModel[]>([
+  { CODE: 1, NAME: '家族' },
+  { CODE: 2, NAME: '企業' },
+  { CODE: 3, NAME: '鶏以外' },
 ])
 
-const ITAKU_CD_NAME_LIST = ref<DaSelectorModel[]>([
-  { value: 1, label: '永玉さん' },
-  { value: 2, label: '尾三さん' },
-  { value: 3, label: '史玉さん' },
+const ITAKU_CD_NAME_LIST = ref<CodeNameModel[]>([
+  { CODE: 1, NAME: '永玉さん' },
+  { CODE: 2, NAME: '尾三さん' },
+  { CODE: 3, NAME: '史玉さん' },
 ])
 
-const KEIYAKUSYA_CD_NAME_LIST = ref<DaSelectorModel[]>([
-  { value: 1, label: '田中さん' },
-  { value: 2, label: '玉田さん' },
-  { value: 3, label: '浅海さん' },
+const KEIYAKUSYA_CD_NAME_LIST = ref<CodeNameModel[]>([
+  { CODE: 1, NAME: '田中さん' },
+  { CODE: 2, NAME: '玉田さん' },
+  { CODE: 3, NAME: '浅海さん' },
 ])
 
 const layout = {
@@ -192,6 +174,88 @@ const rules = reactive({
     {
       required: true,
       message: ITEM_REQUIRE_ERROR.Msg.replace('{0}', '対象期'),
+    },
+  ],
+  KEIYAKU_KBN_CD: [
+    {
+      validator: (
+        _rule,
+        value: {
+          FROM
+          TO
+        }
+      ) => {
+        if (value.FROM && !value.TO) {
+          return Promise.reject(
+            ITEM_REQUIRE_ERROR.Msg.replace('{0}', '契約区分To')
+          )
+        }
+        if (!value.FROM && value.TO) {
+          return Promise.reject(
+            ITEM_REQUIRE_ERROR.Msg.replace('{0}', '契約区分From')
+          )
+        }
+        if (value.FROM > value.TO) {
+          return Promise.reject('指定された契約区分の範囲が正しくありません。')
+        }
+        return Promise.resolve()
+      },
+    },
+  ],
+  ITAKU_CD: [
+    {
+      validator: (
+        _rule,
+        value: {
+          FROM
+          TO
+        }
+      ) => {
+        if (value.FROM && !value.TO) {
+          return Promise.reject(
+            ITEM_REQUIRE_ERROR.Msg.replace('{0}', '事業委託先To')
+          )
+        }
+        if (!value.FROM && value.TO) {
+          return Promise.reject(
+            ITEM_REQUIRE_ERROR.Msg.replace('{0}', '事業委託先From')
+          )
+        }
+        if (value.FROM > value.TO) {
+          return Promise.reject(
+            '指定された事業委託先の範囲が正しくありません。'
+          )
+        }
+        return Promise.resolve()
+      },
+    },
+  ],
+  KEIYAKUSYA_CD: [
+    {
+      validator: (
+        _rule,
+        value: {
+          FROM
+          TO
+        }
+      ) => {
+        if (value.FROM && !value.TO) {
+          return Promise.reject(
+            ITEM_REQUIRE_ERROR.Msg.replace('{0}', '契約者番号To')
+          )
+        }
+        if (!value.FROM && value.TO) {
+          return Promise.reject(
+            ITEM_REQUIRE_ERROR.Msg.replace('{0}', '契約者番号From')
+          )
+        }
+        if (value.FROM > value.TO) {
+          return Promise.reject(
+            '指定された契約者番号の範囲が正しくありません。'
+          )
+        }
+        return Promise.resolve()
+      },
     },
   ],
   TAISYOBI_YMD: [
@@ -219,29 +283,6 @@ function validateSearchParams() {
     })
     flag = false
   }
-
-  if (flag == true) {
-    flag = validateRequiredItemAndRange(
-      formData.KEIYAKU_KBN_CD_FM,
-      formData.KEIYAKU_KBN_CD_TO,
-      '契約区分'
-    )
-  }
-  if (flag == true) {
-    flag = validateRequiredItemAndRange(
-      formData.ITAKU_CD_FM,
-      formData.ITAKU_CD_TO,
-      '事務委託先'
-    )
-  }
-  if (flag == true) {
-    flag = validateRequiredItemAndRange(
-      formData.KEIYAKUSYA_CD_FM,
-      formData.KEIYAKUSYA_CD_TO,
-      '契約者番号'
-    )
-  }
-
   return flag
 }
 
@@ -296,67 +337,6 @@ async function onPreview() {
 //--------------------------------------------------------------------------
 //監視定義
 //--------------------------------------------------------------------------
-
-//契約者区分、事業委託先及び契約番号の値が変った時の処理
-watch(
-  () => [
-    formData.KEIYAKU_KBN_CD_FM,
-    formData.KEIYAKU_KBN_CD_TO,
-    formData.ITAKU_CD_FM,
-    formData.ITAKU_CD_TO,
-    formData.KEIYAKUSYA_CD_FM,
-    formData.KEIYAKUSYA_CD_TO,
-  ],
-  (
-    [
-      newKeiyakuKbnCdFm,
-      newKeiyakuKbnCdTo,
-      newItakuCdFm,
-      newItakuCdTo,
-      newKeiyakusyaCdFm,
-      newKeiyakusyaCdTo,
-    ],
-    [
-      oldKeiyakuKbnCdFm,
-      oldKeiyakuKbnCdTo,
-      oldItakuCdFm,
-      oldItakuCdTo,
-      oldKeiyakusyaCdFm,
-      oldKeiyakusyaCdTo,
-    ]
-  ) => {
-    if (newKeiyakuKbnCdFm !== oldKeiyakuKbnCdFm) {
-      if (newKeiyakuKbnCdFm && !newKeiyakuKbnCdTo) {
-        formData.KEIYAKU_KBN_CD_TO = newKeiyakuKbnCdFm
-      }
-    }
-    if (newKeiyakuKbnCdTo !== oldKeiyakuKbnCdTo) {
-      if (newKeiyakuKbnCdTo && !newKeiyakuKbnCdFm) {
-        formData.KEIYAKU_KBN_CD_FM = newKeiyakuKbnCdTo
-      }
-    }
-    if (newItakuCdFm !== oldItakuCdFm) {
-      if (newItakuCdFm && !newItakuCdTo) {
-        formData.ITAKU_CD_TO = newItakuCdFm
-      }
-    }
-    if (newItakuCdTo !== oldItakuCdTo) {
-      if (newItakuCdTo && !newItakuCdFm) {
-        formData.ITAKU_CD_FM = newItakuCdTo
-      }
-    }
-    if (newKeiyakusyaCdFm !== oldKeiyakusyaCdFm) {
-      if (newKeiyakusyaCdFm && !newKeiyakusyaCdTo) {
-        formData.KEIYAKUSYA_CD_TO = newKeiyakusyaCdFm
-      }
-    }
-    if (newKeiyakusyaCdTo !== oldKeiyakusyaCdTo) {
-      if (newKeiyakusyaCdTo && !newKeiyakusyaCdFm) {
-        formData.KEIYAKUSYA_CD_FM = newKeiyakusyaCdTo
-      }
-    }
-  }
-)
 
 //-----------------------------------------------------
 const channel = new BroadcastChannel('channel_preview')
