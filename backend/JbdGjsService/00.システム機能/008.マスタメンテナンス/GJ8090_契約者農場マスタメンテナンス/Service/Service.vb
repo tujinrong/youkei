@@ -69,7 +69,7 @@ Namespace JBD.GJS.Service.GJ8090
         End Function
 
         <DisplayName("検索処理_一覧画面処理")>
-        Public Shared Function GetUserInfo(req As DaRequestBase) As UserInfoResponse
+        Public Shared Function Search(req As SearchRequest) As SearchResponse
             Return Nolock(req,
                 Function(db)
 
@@ -86,23 +86,28 @@ Namespace JBD.GJS.Service.GJ8090
                     '-------------------------------------------------------------
                     'チェックトークン
                     Dim uid = CheckToken(req.token)
-                    If String.IsNullOrEmpty(uid) Then Return New UserInfoResponse("トークンが正しくありません。")
-
+                    If String.IsNullOrEmpty(uid) Then Return New SearchResponse("トークンが正しくありません。")
+                    
                     '-------------------------------------------------------------
                     '4.ビジネスロジック処理
                     '-------------------------------------------------------------
                     '検索結果出力用ＳＱＬ作成
-                    Dim sql = f_Search_SQLMake(uid)
+                    Dim sql = f_Search_SQLMake(req)
+
+                    '元の SQL をページ分割されたデータ出力に変換する
+                    Dim psql = f_Search_SQLMakePage(req.PAGE_SIZE, req.PAGE_NUM, sql)
 
                     'データSelect 
-                    Dim ds = f_Select_ODP(db, sql)
+                    Dim ds = f_Select_ODP(db, psql)
                     Dim dt = ds.Tables(0)
 
                     '-------------------------------------------------------------
                     '5.データ加工処理
                     '-------------------------------------------------------------
-                    'Dim res = Wraper.GetUserResponse(dt)
-                    Dim res As UserInfoResponse
+                    Dim res = Wraper.SearchResponse(dt)
+                    res.KI = req.KI
+                    res.KEIYAKUSYA_CD = req.KEIYAKUSYA_CD
+
                     '-------------------------------------------------------------
                     '6.正常返し
                     '-------------------------------------------------------------

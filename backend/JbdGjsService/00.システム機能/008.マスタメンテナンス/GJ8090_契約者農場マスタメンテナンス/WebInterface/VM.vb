@@ -10,24 +10,24 @@
 Namespace JBD.GJS.Service.GJ8090
 
     ''' <summary>
-    ''' ユーザー共通
+    ''' 契約者農場情報
     ''' </summary>
-    Public Class UserInfoVM
+    Public Class KeiyakuNojo
 
         ''' <summary>
-        ''' ユーザID
+        ''' 農場コード
         ''' </summary>
-        Public Property USER_ID As String = String.Empty
+        Public Property NOJO_CD As Integer = Nothing
 
         ''' <summary>
-        ''' ユーザー名
+        ''' 農場名
         ''' </summary>
-        Public Property USER_NAME As String = String.Empty
+        Public Property NOJO_NAME As String = String.Empty
 
         ''' <summary>
-        ''' 权限
+        ''' 住所
         ''' </summary>
-        Public Property ROLES As List(Of String) = New List(Of String)
+        Public Property ADDR As String = String.Empty
 
     End Class
 End Namespace

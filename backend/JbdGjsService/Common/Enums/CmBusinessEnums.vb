@@ -222,8 +222,8 @@ Namespace JBD.GJS.Service
         コード3
     End Enum
 
-    Public Enum Enum抽出モード
-        全体抽出 = 1
-        個別抽出
+    Public Enum EnumAndOr
+        AndCode
+        OrCode
     End Enum
 End Namespace

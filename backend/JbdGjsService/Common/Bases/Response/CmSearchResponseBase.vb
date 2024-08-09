@@ -9,37 +9,45 @@
 Namespace JBD.GJS.Service
     Public Class CmSearchResponseBase
         Inherits Db.DaResponseBase
-        Public Property totalpagecount As Integer     'ページ数
-        Public Property totalrowcount As Integer      '総件数
+        Public Property TOTAL_PAGE_COUNT As Integer = Nothing     'ページ数
+        Public Property TOTAL_ROW_COUNT As Integer  = Nothing    '総件数
 
         ''' <summary>
         ''' ページャー設定
         ''' </summary>
         Public Sub SetPageInfo(total As Integer, pagesize As Integer)
-            totalpagecount = CInt((total + pagesize - 1) / pagesize)    'ページ数
-            totalrowcount = total                                 '総件数
+            TOTAL_PAGE_COUNT = CInt((total + pagesize - 1) / pagesize)    'ページ数
+            TOTAL_ROW_COUNT = total                                 '総件数
         End Sub
 
         ''' <summary>
         ''' 上限件数チェック
         ''' </summary>
         Public Function CheckTotal(total As Integer, queryflg As Boolean) As Boolean
-            totalrowcount = total
+            TOTAL_PAGE_COUNT = total
             'todo warning num and error num
             Const waringNum = 20
             Const errorNum = 2 * waringNum
-            If totalrowcount >= errorNum Then
+            If TOTAL_PAGE_COUNT >= errorNum Then
                 'todo error msg
                 SetServiceError("error msg")
                 Return False
             End If
 
-            If queryflg = True OrElse totalrowcount < waringNum Then Return True
+            If queryflg = True OrElse TOTAL_PAGE_COUNT < waringNum Then Return True
 
             'todo warning msg
             SetServiceAlert("warning msg")
 
             Return False
         End Function
+
+        Public Sub New(msg As String)
+            MyBase.New(msg)
+        End Sub
+
+        Public Sub New()
+
+        End Sub
     End Class
 End Namespace

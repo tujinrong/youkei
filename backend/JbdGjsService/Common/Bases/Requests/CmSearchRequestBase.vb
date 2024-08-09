@@ -9,9 +9,9 @@
 Namespace JBD.GJS.Service
     Public Class CmSearchRequestBase
         Inherits Db.DaRequestBase
-        Public Property pagesize As Integer = 20             'ページサイズ
-        Public Property pagenum As Integer = 1               'ページNo.
-        Public Property orderby As Integer = 0               '並び順
+        Public Property PAGE_SIZE As Integer = 20             'ページサイズ
+        Public Property PAGE_NUM As Integer = 1               'ページNo.
+        Public Property ORDER_BY As Integer = 0               '並び順
 
         Public Overridable Property personalno As String     '個人番号
         Public Sub SetPersonalno()

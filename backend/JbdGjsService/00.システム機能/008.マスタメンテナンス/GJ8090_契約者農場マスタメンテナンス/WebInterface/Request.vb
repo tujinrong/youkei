@@ -21,4 +21,37 @@ Namespace JBD.GJS.Service.GJ8090
         Public Property KI As Integer? = Nothing
 
     End Class
+
+    ''' <summary>
+    ''' 検索処理_一覧画面処理
+    ''' </summary>
+    Public Class SearchRequest
+        Inherits CmSearchRequestBase
+
+        ''' <summary>
+        ''' 期
+        ''' </summary>
+        Public Property KI As Integer = Nothing
+
+        ''' <summary>
+        ''' 契約者番号
+        ''' </summary>
+        Public Property KEIYAKUSYA_CD As Integer = Nothing
+
+        ''' <summary>
+        ''' 農場番号
+        ''' </summary>
+        Public Property NOJO_CD As Integer? = Nothing
+
+        ''' <summary>
+        ''' 農場名
+        ''' </summary>
+        Public Property NOJO_NAME As String = String.Empty
+
+        ''' <summary>
+        ''' 検索方法
+        ''' </summary>
+        Public Property SEARCH_METHOD As EnumAndOr? = EnumAndOr.AndCode
+
+    End Class
 End Namespace

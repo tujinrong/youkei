@@ -33,33 +33,28 @@ Namespace JBD.GJS.Service.GJ8090
             MyBase.New(msg)
         End Sub
 
-        Public Sub New(ki As Integer)
-            KI = ki
-        End Sub
-
     End Class
 
     ''' <summary>
-    ''' ユーザ情報処理(成功)
+    ''' 検索処理_一覧画面処理処理(成功)
     ''' </summary>
-    Public Class UserInfoResponse
-        Inherits Db.DaResponseBase
-
-        'Public UserInfo As UserInfoVM
-        ''' <summary>
-        ''' ユーザID
-        ''' </summary>
-        Public Property USER_ID As String = String.Empty
+    Public Class SearchResponse
+        Inherits CmSearchResponseBase
 
         ''' <summary>
-        ''' ユーザー名
+        ''' 期
         ''' </summary>
-        Public Property USER_NAME As String = String.Empty
+        Public Property KI As Integer = Nothing
 
         ''' <summary>
-        ''' 权限
+        ''' 契約者番号
         ''' </summary>
-        Public Property ROLES As List(Of String) = New List(Of String)
+        Public Property KEIYAKUSYA_CD As Integer = Nothing
+
+        ''' <summary>
+        ''' 契約者農場情報リスト
+        ''' </summary>
+        Public Property KEKKA_LIST As List(Of KeiyakuNojo) = New List(Of KeiyakuNojo)
 
 
         Public Sub New()
