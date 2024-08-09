@@ -136,12 +136,12 @@ End Function
             wSql &= "        T1.NOJO_NAME,                            "
             wSql &= "        T1.ADDR,                                 "
             wSql &= "        COUNT(1) OVER() AS RCNT,               "
-            wSql &= "        CEIL(COUNT(1) OVER()/ " &   psize &  " ) AS PCNT     "
+            wSql &= "        CEIL(COUNT(1) OVER()/ " &   psize &  " ) AS PCNT   , ROWNUM AS RM  "
             wSql &= " FROM                                            "
             wSql &= " ( " &   sql &  " ) "
             wSql &= "  T1  )  "
-            wSql &= " WHERE ROWNUM <= (" &   psize &  " * " &   pnum &  " )    "
-            wSql &= "   AND ROWNUM >  (" &   psize &  " * " &   pnum &  " - " &   psize &  ") "
+            wSql &= " WHERE RM <= (" &   psize &  " * " &   pnum &  " )    "
+            wSql &= "   AND RM >  (" &   psize &  " * " &   pnum &  " - " &   psize &  ") "
             Return wSql
         End Function
 
