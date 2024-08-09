@@ -272,7 +272,7 @@ const route = useRoute()
 const tabStore = useTabStore()
 const cardRef = ref()
 const { height } = useElementSize(cardRef)
-const KEIYAKU_KBN_CD_NAME_LIST = ref<DaSelectorModel[]>([
+const KEIYAKU_KBN_CD_NAME_LIST = ref<CodeNameModel[]>([
   { value: 1, label: '家族' },
   { value: 2, label: '企業' },
   { value: 3, label: '鶏以外' },

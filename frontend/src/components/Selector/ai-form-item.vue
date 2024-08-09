@@ -62,7 +62,7 @@ const props = defineProps<{
   /**最小値 */
   min?: number
   /**選択肢 */
-  options?: DaSelectorModel[]
+  options?: CodeNameModel[]
 }>()
 </script>
 

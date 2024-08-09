@@ -22,7 +22,7 @@ export interface InitRequest extends DaRequestBase {
 /**検索処理(一覧画面) */
 export interface SearchRequest extends CmSearchRequestBase {
   /**期 */
-  KI: number
+  KI: number | undefined
   /**契約者番号 */
   KEIYAKUSYA_CD?: number
   /**農場番号 */
@@ -88,7 +88,7 @@ export interface InitResponse extends DaResponseBase {
   /**対象期 */
   KI: number
   /**契約者情報プルダウンリスト */
-  KEIYAKUSYA_CD_NAME_LIST: DaSelectorModel[]
+  KEIYAKUSYA_CD_NAME_LIST: CodeNameModel[]
 }
 
 /**検索処理(一覧画面) */
@@ -106,7 +106,7 @@ export interface InitDetailResponse extends DaResponseBase {
   /**契約者名 */
   KEIYAKUSYA_NAME: string
   /**都道府県情報プルダウンリスト */
-  KEN_CD_NAME_LIST: DaSelectorModel[]
+  KEN_CD_NAME_LIST: CodeNameModel[]
 }
 
 /**検索処理(詳細画面) */

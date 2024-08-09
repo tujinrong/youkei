@@ -10,13 +10,14 @@
             <th class="required">期</th>
             <td>
               <a-form-item v-bind="validateInfos.KI">
-                <a-input-number
+                <a-input
                   v-model:value="searchParams.KI"
                   :min="1"
                   :max="99"
                   :maxlength="2"
+                  type="number"
                   class="w-full"
-                ></a-input-number>
+                ></a-input>
               </a-form-item>
             </td>
           </a-col>
@@ -143,7 +144,7 @@ const tabStore = useTabStore()
 
 const createDefaultParams = (): SearchRequest => {
   return {
-    KI: undefined as number | undefined,
+    KI: undefined,
     KEIYAKUSYA_CD: undefined,
     NOJO_CD: undefined,
     NOJO_NAME: undefined,
@@ -151,7 +152,7 @@ const createDefaultParams = (): SearchRequest => {
   } as SearchRequest
 }
 const searchParams = reactive(createDefaultParams())
-const KEIYAKUSYA_CD_NAME_LIST = ref<DaSelectorModel[]>([])
+const KEIYAKUSYA_CD_NAME_LIST = ref<CodeNameModel[]>([])
 const tableData = ref<KeiyakuNojoSearchVM[]>([])
 
 //表の高さ
@@ -171,36 +172,12 @@ const { height } = useElementSize(cardRef)
 const rules = reactive({
   KI: [
     { required: true, message: ITEM_REQUIRE_ERROR.Msg.replace('{0}', '期') },
-    // {
-    //   validator: (_rule, value: string) => {
-    //     if (!value) {
-    //       showInfoModal({
-    //         type: 'error',
-    //         title: 'エラー',
-    //         content: ITEM_REQUIRE_ERROR.Msg.replace('{0}', '期'),
-    //       })
-    //     }
-    //     return Promise.resolve()
-    //   },
-    // },
   ],
   KEIYAKUSYA_CD: [
     {
       required: true,
       message: ITEM_REQUIRE_ERROR.Msg.replace('{0}', '契約者'),
     },
-    // {
-    //   validator: (_rule, value: string) => {
-    //     if (!value) {
-    //       showInfoModal({
-    //         type: 'error',
-    //         title: 'エラー',
-    //         content: ITEM_REQUIRE_ERROR.Msg.replace('{0}', '契約者'),
-    //       })
-    //     }
-    //     return Promise.resolve()
-    //   },
-    // },
   ],
 })
 const { validate, clearValidate, validateInfos } = Form.useForm(
@@ -211,12 +188,12 @@ const { validate, clearValidate, validateInfos } = Form.useForm(
 //フック関数
 //--------------------------------------------------------------------------
 onMounted(() => {
-  getInitData()
+  getInitData(searchParams.KI)
 })
 
 //初期化処理
 const getInitData = (KI?) => {
-  Init(KI).then((res) => {
+  Init({ KI: KI }).then((res) => {
     // TODO
     if (KI) {
       searchParams.KI = KI
