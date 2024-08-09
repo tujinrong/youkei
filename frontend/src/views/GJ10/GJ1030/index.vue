@@ -35,22 +35,11 @@
             <a-col v-bind="layout">
               <th>契約区分</th>
               <td class="flex">
-                <!-- <a-form-item v-bind="validateInfos.KEIYAKU_KBN_CD_FM"> -->
-                <ai-select
-                  v-model:value="formData.KEIYAKU_KBN_CD_FM"
-                  split-val
-                  :options="KEIYAKU_KBN_CD_NAME_LIST"
-                  type="number"
-                ></ai-select>
-                <!-- </a-form-item> -->
-                ～
-                <!-- <a-form-item v-bind="validateInfos.KEIYAKU_KBN_CD_TO"> -->
-                <ai-select
-                  v-model:value="formData.KEIYAKU_KBN_CD_TO"
-                  :options="KEIYAKU_KBN_CD_NAME_LIST"
-                  type="number"
-                ></ai-select>
-                <!-- </a-form-item> -->
+                <a-form-item v-bind="validateInfos.KEIYAKU_KBN_CD">
+                  <range-select
+                    v-model:value="formData.KEIYAKU_KBN_CD"
+                    :options="KEIYAKU_KBN_CD_NAME_LIST"
+                /></a-form-item>
               </td>
             </a-col>
             <a-col v-bind="layout">
@@ -75,17 +64,11 @@
             <a-col v-bind="layout">
               <th>事業委託先</th>
               <td class="flex">
-                <ai-select
-                  v-model:value="formData.ITAKU_CD_FM"
-                  :options="ITAKU_CD_NAME_LIST"
-                  type="number"
-                ></ai-select>
-                ～
-                <ai-select
-                  v-model:value="formData.ITAKU_CD_TO"
-                  :options="ITAKU_CD_NAME_LIST"
-                  type="number"
-                ></ai-select>
+                <a-form-item v-bind="validateInfos.ITAKU_CD">
+                  <range-select
+                    v-model:value="formData.ITAKU_CD"
+                    :options="ITAKU_CD_NAME_LIST"
+                /></a-form-item>
               </td>
             </a-col>
             <a-col v-bind="layout">
@@ -132,14 +115,18 @@ const createDefaultParams = () => {
   return {
     KI: 8,
     TAISYOBI_YMD: new Date().toISOString().split('T')[0],
-    KEIYAKU_KBN_CD_FM: undefined,
-    KEIYAKU_KBN_CD_TO: undefined,
+    KEIYAKU_KBN_CD: {
+      FROM: undefined,
+      TO: undefined,
+    },
     KEIYAKU_JYOKYO_SHINKI: true,
     KEIYAKU_JYOKYO_KEIZOKU: true,
     KEIYAKU_JYOKYO_CHUSHI: true,
     KEIYAKU_JYOKYO_HAIGYO: true,
-    ITAKU_CD_FM: undefined,
-    ITAKU_CD_TO: undefined,
+    ITAKU_CD: {
+      FROM: undefined,
+      TO: undefined,
+    },
     KEIYAKUSYA_CD: {
       FROM: undefined,
       TO: undefined,
@@ -189,6 +176,60 @@ const rules = reactive({
       message: ITEM_REQUIRE_ERROR.Msg.replace('{0}', '対象期'),
     },
   ],
+  KEIYAKU_KBN_CD: [
+    {
+      validator: (
+        _rule,
+        value: {
+          FROM
+          TO
+        }
+      ) => {
+        if (value.FROM && !value.TO) {
+          return Promise.reject(
+            ITEM_REQUIRE_ERROR.Msg.replace('{0}', '契約区分To')
+          )
+        }
+        if (!value.FROM && value.TO) {
+          return Promise.reject(
+            ITEM_REQUIRE_ERROR.Msg.replace('{0}', '契約区分From')
+          )
+        }
+        if (value.FROM > value.TO) {
+          return Promise.reject('指定された契約区分の範囲が正しくありません。')
+        }
+        return Promise.resolve()
+      },
+    },
+  ],
+  ITAKU_CD: [
+    {
+      validator: (
+        _rule,
+        value: {
+          FROM
+          TO
+        }
+      ) => {
+        if (value.FROM && !value.TO) {
+          return Promise.reject(
+            ITEM_REQUIRE_ERROR.Msg.replace('{0}', '事業委託先To')
+          )
+        }
+        if (!value.FROM && value.TO) {
+          return Promise.reject(
+            ITEM_REQUIRE_ERROR.Msg.replace('{0}', '事業委託先From')
+          )
+        }
+        if (value.FROM > value.TO) {
+          return Promise.reject(
+            '指定された事業委託先の範囲が正しくありません。'
+          )
+        }
+        return Promise.resolve()
+      },
+    },
+  ],
   KEIYAKUSYA_CD: [
     {
       validator: (
@@ -199,10 +240,14 @@ const rules = reactive({
         }
       ) => {
         if (value.FROM && !value.TO) {
-          return Promise.reject('契約者番号Toは必須入力項目です。')
+          return Promise.reject(
+            ITEM_REQUIRE_ERROR.Msg.replace('{0}', '契約者番号To')
+          )
         }
         if (!value.FROM && value.TO) {
-          return Promise.reject('契約者番号Fromは必須入力項目です。')
+          return Promise.reject(
+            ITEM_REQUIRE_ERROR.Msg.replace('{0}', '契約者番号From')
+          )
         }
         if (value.FROM > value.TO) {
           return Promise.reject(
@@ -238,29 +283,6 @@ function validateSearchParams() {
     })
     flag = false
   }
-
-  if (flag == true) {
-    flag = validateRequiredItemAndRange(
-      formData.KEIYAKU_KBN_CD_FM,
-      formData.KEIYAKU_KBN_CD_TO,
-      '契約区分'
-    )
-  }
-  if (flag == true) {
-    flag = validateRequiredItemAndRange(
-      formData.ITAKU_CD_FM,
-      formData.ITAKU_CD_TO,
-      '事務委託先'
-    )
-  }
-  if (flag == true) {
-    flag = validateRequiredItemAndRange(
-      formData.KEIYAKUSYA_CD.FROM,
-      formData.KEIYAKUSYA_CD.TO,
-      '契約者番号'
-    )
-  }
-
   return flag
 }
 
