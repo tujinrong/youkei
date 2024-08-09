@@ -48,11 +48,11 @@ export interface InitResponse extends DaResponseBase {
   /**対象期 */
   KI: number
   /**契約区分情報プルダウンリスト */
-  KEIYAKU_KBN_CD_NAME_LIST: DaSelectorModel
+  KEIYAKU_KBN_CD_NAME_LIST: CodeNameModel
   /**事務委託先情報プルダウンリスト */
-  ITAKU_CD_NAME_LIST: DaSelectorModel
+  ITAKU_CD_NAME_LIST: CodeNameModel
   /**契約者番号情報プルダウンリスト */
-  KEIYAKUSYA_CD_NAME_LIST: DaSelectorModel
+  KEIYAKUSYA_CD_NAME_LIST: CodeNameModel
 }
 
 //-------------------------------------------------------------------

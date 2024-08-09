@@ -18,7 +18,7 @@ export const Init = (): Promise<InitResponse> => {
 }
 
 /** プレビュー処理(プレビュー画面) */
-export const Search = (params: PreviewRequest): Promise<DaResponseBase> => {
+export const Preview = (params: PreviewRequest): Promise<DaResponseBase> => {
   const methodname = 'Preview'
   return api(servicename, methodname, params)
 }

@@ -9,7 +9,7 @@ import { ReportViewer, Core } from '@grapecity/activereports'
 import '@grapecity/activereports/styles/ar-js-ui.css'
 import '@grapecity/activereports/styles/ar-js-viewer.css'
 import '@grapecity/activereports-localization'
-
+import { Preview } from '../GJ10/GJ1030/service'
 //JSViewer
 import '@grapecity/ar-viewer-ja/dist/jsViewer.min.js'
 import '@grapecity/ar-viewer-ja/dist/jsViewer.min.css'
@@ -52,6 +52,7 @@ onMounted(() => {
   // Core.FontStore.registerFonts(...fonts)
 
   //JSViewer
+  // await Preview
   let viewer
   viewer = createViewer({
     element: '#viewerContainer',
