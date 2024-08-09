@@ -63,7 +63,7 @@ interface CmSearchResponseBase extends DaResponseBase {
 /** ドロップダウンリスト */
 interface CodeNameModel {
   /** 名称 */
-  CODE: string
+  CODE: string | number
   /** コード */
   NAME: string
   /** 無効属性 */

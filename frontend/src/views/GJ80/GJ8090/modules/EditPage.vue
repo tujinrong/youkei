@@ -136,7 +136,7 @@
 </template>
 
 <script setup lang="ts">
-import { PageSatatus } from '@/enum'
+import { Enum編集区分, PageSatatus } from '@/enum'
 import { nextTick, onMounted, reactive, ref, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { showDeleteModal, showInfoModal } from '@/utils/modal'
@@ -151,17 +151,14 @@ import { Form, message } from 'ant-design-vue'
 import { showSaveModal } from '@/utils/modal'
 import PostCode from '@/components/Selector/PostCode/index.vue'
 import { convertToFullWidth } from '@/utils/util'
-import { KeiyakuNojoSearchDetailVM } from '../type'
+import { DetailVM } from '../type'
 import { Judgement } from '@/utils/judge-edited'
-import { InitDetail, SearchDetail } from '../service'
+import { InitDetail, Save, SearchDetail } from '../service'
 //---------------------------------------------------------------------------
 //属性
 //---------------------------------------------------------------------------
 const props = defineProps<{
   status: PageSatatus
-  // KI: number|undefined
-  // KEIYAKUSYA_CD: number|undefined
-  // NOJO_CD: number|undefined
 }>()
 
 //--------------------------------------------------------------------------
@@ -172,8 +169,8 @@ const route = useRoute()
 const isNew = props.status === PageSatatus.New
 const editJudge = new Judgement('GJ8090')
 
-const KEN_CD_NAME_LIST = ref<DaSelectorModel[]>([])
-
+const KEN_CD_NAME_LIST = ref<CodeNameModel[]>([])
+let upddttm
 const formData = reactive({
   KI: undefined as number | undefined,
   KEIYAKUSYA_CD: undefined as number | undefined,
@@ -187,17 +184,7 @@ const formData = reactive({
   ADDR_3: '',
   ADDR_4: '',
   MEISAINO: undefined as number | undefined,
-} as KeiyakuNojoSearchDetailVM & {
-  KI: number
-  KEIYAKUSYA_CD: number
-  NOJO_CD: number
-  KEIYAKUSYA_NAME: string
-})
-const keyakusyaList = ref<DaSelectorModel[]>([
-  { value: 1, label: '永玉田中' },
-  { value: 2, label: '尾三玉田' },
-  { value: 3, label: '史玉浅海' },
-])
+} as DetailVM)
 
 const rules = reactive({
   NOJO_CD: [
@@ -257,33 +244,30 @@ const { validate, clearValidate, validateInfos, resetFields } = Form.useForm(
 //フック関数
 //--------------------------------------------------------------------------
 onMounted(async () => {
-  if (route.query.KI) {
-    formData.KI = +route.query.KI
-  }
-  if (route.query.KEIYAKUSYA_CD) {
-    formData.KEIYAKUSYA_CD = +route.query.KEIYAKUSYA_CD
-  }
-  if (route.query.NOJO_CD) {
-    formData.NOJO_CD = +route.query.NOJO_CD
-  }
-  await InitDetail().then((res) => {
-    formData.KEIYAKUSYA_NAME =
-      formData.KEIYAKUSYA_CD +
-      ' : ' +
-      keyakusyaList.value.find((el) => el.value == formData.KEIYAKUSYA_CD)
-        ?.label
+  formData.KI = Number(route.query.KI)
+  formData.KEIYAKUSYA_CD = Number(route.query.KEIYAKUSYA_CD)
+  formData.KEIYAKUSYA_NAME =
+    route.query.KEIYAKUSYA_CD + ':' + route.query.KEIYAKUSYA_NAME
+  if (!isNew) formData.NOJO_CD = Number(route.query.NOJO_CD)
+
+  //都道府県プルダウンリスト
+  InitDetail().then((res) => {
     KEN_CD_NAME_LIST.value = res.KEN_CD_NAME_LIST
+    nextTick(() => editJudge.reset())
   })
-  if (props.status === PageSatatus.Edit) {
-    await SearchDetail({
+
+  //農場情報
+  if (!isNew) {
+    SearchDetail({
       KI: formData.KI,
       KEIYAKUSYA_CD: formData.KEIYAKUSYA_CD,
       NOJO_CD: formData.NOJO_CD,
     }).then((res) => {
-      Object.assign(formData, res.KEIYAKUSYA_NOJO)
+      Object.assign(formData, res.DetailVM)
+      upddttm = res.UP_DATE
+      nextTick(() => editJudge.reset())
     })
   }
-  nextTick(() => editJudge.reset())
 })
 
 //--------------------------------------------------------------------------
@@ -301,7 +285,7 @@ watch(
   () => formData.KEN_CD,
   (newVal) => {
     formData.ADDR_1 =
-      KEN_CD_NAME_LIST.value.find((item) => item.value === newVal)?.label || ''
+      KEN_CD_NAME_LIST.value.find((item) => item.CODE === newVal)?.NAME || ''
   }
 )
 
@@ -328,6 +312,7 @@ const goList = () => {
 }
 const saveData = async () => {
   if (isNew) {
+    //農場番号重複チェック
     switch (formData.NOJO_CD) {
       case 100:
       case 101:
@@ -343,7 +328,8 @@ const saveData = async () => {
     await validate()
     showSaveModal({
       content: 'データを登録します。\nよろしいですか？',
-      onOk: () => {
+      onOk: async () => {
+        await Save({ DetailVM: { ...formData }, EDIT_KBN: Enum編集区分.新規 })
         router.push({ name: route.name })
         message.success(SAVE_OK_INFO.Msg)
       },
@@ -352,7 +338,12 @@ const saveData = async () => {
     await validate()
     showSaveModal({
       content: 'データを更新します。\nよろしいですか？',
-      onOk: () => {
+      onOk: async () => {
+        await Save({
+          DetailVM: { ...formData },
+          EDIT_KBN: Enum編集区分.変更,
+          UP_DATE: upddttm,
+        })
         router.push({ name: route.name })
         message.success(SAVE_OK_INFO.Msg)
       },
