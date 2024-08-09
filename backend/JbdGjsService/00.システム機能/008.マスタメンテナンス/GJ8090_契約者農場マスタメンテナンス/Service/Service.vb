@@ -36,7 +36,7 @@ Namespace JBD.GJS.Service.GJ8090
                     '-------------------------------------------------------------
                     'チェックトークン
                     Dim uid = CheckToken(req.token)
-                    If String.IsNullOrEmpty(uid) Then Return New InitResponse("W019 トークンが正しくありません。")
+                    If String.IsNullOrEmpty(uid) Then Return New InitResponse("トークンが正しくありません。")
 
                     '-------------------------------------------------------------
                     '4.ビジネスロジック処理
@@ -86,7 +86,7 @@ Namespace JBD.GJS.Service.GJ8090
                     '-------------------------------------------------------------
                     'チェックトークン
                     Dim uid = CheckToken(req.token)
-                    If String.IsNullOrEmpty(uid) Then Return New UserInfoResponse("W019 トークンが正しくありません。")
+                    If String.IsNullOrEmpty(uid) Then Return New UserInfoResponse("トークンが正しくありません。")
 
                     '-------------------------------------------------------------
                     '4.ビジネスロジック処理
