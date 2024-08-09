@@ -51,29 +51,19 @@ export const request = createRequest<
       return config
     },
     isBackendSuccess(response) {
-      //Global Loading
-      const { extra } = response.config as RequestConfig
-      if (extra?.loading) {
-        const appStore = useAppStore()
-        appStore.setLoading(false)
-      }
+      closeGlobalLoading(response.config)
 
       return response.data.RETURN_CODE === EnumServiceResult.OK
     },
     async onBackendFail(response, instance) {
-      const { extra } = response.config as RequestConfig
-      const appStore = useAppStore()
+      closeGlobalLoading(response.config)
+
       const authStore = useAuthStore()
-
-      //Global Loading
-      if (extra?.loading) {
-        appStore.setLoading(false)
-      }
-
       function handleLogout() {
         authStore.resetStore()
       }
 
+      const { extra } = response.config as RequestConfig
       const { data } = response
       const message = data?.MESSAGE
       const code = data?.RETURN_CODE
@@ -123,6 +113,8 @@ export const request = createRequest<
       return response.data
     },
     onError(error) {
+      closeGlobalLoading(error.response?.config)
+
       // when the request is fail, you can show error message
       const authStore = useAuthStore()
       function handleLogout() {
@@ -154,3 +146,14 @@ export const request = createRequest<
     },
   }
 )
+
+//close global loading
+function closeGlobalLoading(config?: InternalAxiosRequestConfig) {
+  if (!config) return
+
+  const { extra } = config as RequestConfig
+  if (extra?.loading) {
+    const appStore = useAppStore()
+    appStore.setLoading(false)
+  }
+}
