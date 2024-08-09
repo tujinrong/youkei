@@ -247,34 +247,34 @@ export function table2Opts(list: any[], field: string) {
 }
 
 /**ドロップダウンリスト検索 */
-export function filterOption(input: string, option: DaSelectorModel) {
+export function filterOption(input: string, option: CodeNameModel) {
   return (
-    option.label.toLowerCase().includes(input.toLowerCase()) ||
-    option.value.toLowerCase().includes(input.toLowerCase())
+    option.NAME.toLowerCase().includes(input.toLowerCase()) ||
+    option.CODE.toLowerCase().includes(input.toLowerCase())
   )
 }
 
 /**コードで名称を取得  (ドロップダウンリスト)*/
 export function getLabelByValue(
   value = '',
-  options: (DaSelectorModel & { key?: string })[] = [],
+  options: (CodeNameModel & { key?: string })[] = [],
   /** キー項目(連動フィルター用) */
   key?: string
 ) {
   return (
     options.find((item) => {
       if (key) {
-        return item.value === value && item.key === key
+        return item.CODE === value && item.key === key
       }
-      return item.value === value
-    })?.label ?? value
+      return item.CODE === value
+    })?.NAME ?? value
   )
 }
 
 /**コードで名称を取得  (複数選択ドロップダウンリスト)*/
 export function getMultipleLabel(
   list: string[] = [],
-  options: (DaSelectorModel | DaSelectorKeyModel)[] = []
+  options: (CodeNameModel | DaSelectorKeyModel)[] = []
 ) {
   if (list.length > 0) {
     const arr = list.map((el) => getLabelByValue(el, options))

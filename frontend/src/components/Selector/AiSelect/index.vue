@@ -21,11 +21,11 @@
     <ai-select-option
       v-for="opt in options"
       :key="opt"
-      :value="opt.value ? opt.value + ' : ' + opt.label : opt.value"
-      :title="opt.label"
+      :value="opt.NAME ? opt.CODE + ' : ' + opt.NAME : opt.CODE"
+      :title="opt.NAME"
       :disabled="opt.disabled"
     >
-      {{ opt.value ? opt.value + ' : ' + opt.label : opt.label }}
+      {{ opt.CODE ? opt.CODE + ' : ' + opt.NAME : opt.NAME }}
     </ai-select-option>
   </a-select>
 </template>
@@ -39,7 +39,7 @@ import { computed } from 'vue'
 interface Props {
   /**'value' and 'value : label' both OK*/
   value: any
-  options: DaSelectorModel[]
+  options: CodeNameModel[]
   /**切値: 'value' or 'value : label'*/
   splitVal?: boolean
   /**'number'が設定されている場合、最終的に数値の値を出力します*/
@@ -58,10 +58,10 @@ const emit = defineEmits(['update:value', 'change'])
 const curVal = computed({
   get() {
     const item = props.options?.find((item) => {
-      return item.value == props.value
+      return item.CODE == props.value
     })
     if (item) {
-      return item.value ? item.value + ' : ' + item.label : ''
+      return item.CODE ? item.CODE + ' : ' + item.NAME : ''
     }
     return props.value
   },
@@ -71,7 +71,7 @@ const curVal = computed({
     const curOpt = props.options.find((item) => {
       const value = val?.split(' : ')[0]
       const label = val?.split(' : ')[1]
-      return item.value === value && item.label === label
+      return item.CODE === value && item.NAME === label
     })
     let v: string | number | undefined
     if (props.type === 'number') {
@@ -89,8 +89,8 @@ const curVal = computed({
 //--------------------------------------------------------------------------
 const filterOption = (input, option) => {
   return (
-    option.key.label.indexOf(input) >= 0 ||
-    String(option.key.value ?? '').indexOf(input) >= 0
+    option.key.NAME.indexOf(input) >= 0 ||
+    String(option.key.CODE ?? '').indexOf(input) >= 0
   )
 }
 </script>

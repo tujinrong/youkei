@@ -22,7 +22,7 @@ export interface InitRequest extends DaRequestBase {
 /**検索処理(一覧画面) */
 export interface SearchRequest extends CmSearchRequestBase {
   /**期 */
-  KI: number
+  KI: number | undefined
   /**契約者番号 */
   KEIYAKUSYA_CD?: number
   /**農場番号 */
@@ -53,8 +53,34 @@ export interface SearchDetailRequest extends DaRequestBase {
   NOJO_CD: number
 }
 
-/**保存処理(詳細画面) */
-export interface SaveRequest extends DaRequestBase {
+/**新規処理(詳細画面) */
+export interface AddRequest extends DaRequestBase {
+  /**期 */
+  KI: number
+  /**契約者番号 */
+  KEIYAKUSYA_CD: number
+  /**契約者農場 */
+  NOJO_CD: number
+  /**農場名称 */
+  NOJO_NAME: string
+  /**都道府県コード */
+  KEN_CD: number
+  /**郵便番号 */
+  ADDR_POST: string
+  /**住所1 */
+  ADDR_1: string
+  /**住所2 */
+  ADDR_2: string
+  /**住所3 */
+  ADDR_3: string
+  /**住所4 */
+  ADDR_4: string
+  /**明細番号 */
+  MEISAINO: number
+}
+
+/**更新処理(詳細画面) */
+export interface UpdateRequest extends DaRequestBase {
   /**期 */
   KI: number
   /**契約者番号 */
@@ -88,7 +114,7 @@ export interface InitResponse extends DaResponseBase {
   /**対象期 */
   KI: number
   /**契約者情報プルダウンリスト */
-  KEIYAKUSYA_CD_NAME_LIST: DaSelectorModel[]
+  KEIYAKUSYA_CD_NAME_LIST: CodeNameModel[]
 }
 
 /**検索処理(一覧画面) */
@@ -106,7 +132,7 @@ export interface InitDetailResponse extends DaResponseBase {
   /**契約者名 */
   KEIYAKUSYA_NAME: string
   /**都道府県情報プルダウンリスト */
-  KEN_CD_NAME_LIST: DaSelectorModel[]
+  KEN_CD_NAME_LIST: CodeNameModel[]
 }
 
 /**検索処理(詳細画面) */
