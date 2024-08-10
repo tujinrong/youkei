@@ -348,6 +348,183 @@ Error_WordHenkan:
             Return wSql
         End Function
 
+#Region "f_Data_Deleate 契約者農場削除処理"
+    '------------------------------------------------------------------
+    'プロシージャ名  :f_Data_Deleate
+    '説明            :契約者農場削除処理
+    '引数            :なし
+    '戻り値          :Boolean(正常True/エラーFalse)
+    '------------------------------------------------------------------
+    Public Function f_Data_Deleate_Gj8091(db As DaDbContext, wNojoCd As DeleteRequest) As DaResponseBase
+
+        Dim wkCmd As New OracleCommand
+        Dim wkSql As String = String.Empty
+        Dim wkRet As Boolean = False
+
+
+
+            'ストアドプロシージャの呼び出し
+            wkCmd.Connection = db.Session.Connection
+            wkCmd.CommandType = CommandType.StoredProcedure
+            '
+            wkCmd.CommandText = "PKG_GJ8091.GJ8091_KEIYAKU_NOJO_DEL"
+
+            '引き渡し
+            'グループコード
+            Dim paraKI As OracleParameter = wkCmd.Parameters.Add("IN_KI", wNojoCd.KI)
+            Dim paraKEIYAKU_CD As OracleParameter = wkCmd.Parameters.Add("IN_KEIYAKU", wNojoCd.KEIYAKUSYA_CD)
+            Dim paraNOJO_CD As OracleParameter = wkCmd.Parameters.Add("IN_NOJO_CD", wNojoCd.NOJO_CD)
+
+            '戻り
+            Dim p_MSGCD As OracleParameter = wkCmd.Parameters.Add("OU_MSGCD", OracleDbType.Varchar2, 255, DBNull.Value, ParameterDirection.Output)
+            Dim p_MSGNM As OracleParameter = wkCmd.Parameters.Add("OU_MSGNM", OracleDbType.Varchar2, 255, DBNull.Value, ParameterDirection.Output)
+
+            wkCmd.ExecuteNonQuery()
+
+            Debug.Print(wkCmd.Parameters("OU_MSGCD").Value.ToString())
+            If wkCmd.Parameters("OU_MSGCD").Value.ToString() <> "0" Then
+                If wkCmd.Parameters("OU_MSGCD").Value.ToString() = "99" Then
+                    '削除済みは政情終了とみなす
+                    wkRet = True
+                End If
+                Throw New Exception(wkCmd.Parameters("OU_MSGCD").Value.ToString() & ":" & wkCmd.Parameters("OU_MSGNM").Value.ToString())
+            End If
+
+            wkRet = True
+
+            'データベースへの接続を閉じる
+            If Not wkCmd Is Nothing Then
+                wkCmd.Dispose()
+            End If
+
+        Return New DaResponseBase
+
+
+    End Function
+#End Region
+
+#Region "f_Data_Insert 契約者農場更新処理"
+    '------------------------------------------------------------------
+    'プロシージャ名  :f_Data_Insert
+    '説明            :契約者農場更新処理
+    '引数            :なし
+    '戻り値          :Boolean(正常True/エラーFalse)
+    '------------------------------------------------------------------
+    Public Function f_Data_Update(db As DaDbContext, wNojoCd As SaveRequest) As DaResponseBase
+        Dim Cmd As New OracleCommand
+        Dim ret As Boolean = False
+
+        'Try
+
+            'ストアドプロシージャの呼び出し
+            Cmd.Connection = db.Session.Connection
+            Cmd.CommandType = CommandType.StoredProcedure
+
+
+            Select Case wNojoCd.EDIT_KBN
+                Case Enum編集区分.変更       '変更入力
+                    Cmd.CommandText = "PKG_GJ8091.GJ8091_KEIYAKU_NOJO_UPD"
+                Case Enum編集区分.新規       '新規入力
+                    Cmd.CommandText = "PKG_GJ8091.GJ8091_KEIYAKU_NOJO_INS"
+            End Select
+
+
+            '引き渡し
+
+            '期 
+            Cmd.Parameters.Add("IN_KI", wNojoCd.KEIYAKUSYA_NOJO.KI)
+            '契約者番号
+            Cmd.Parameters.Add("IN_KEIYAKUSYA_CD", wNojoCd.KEIYAKUSYA_NOJO.KEIYAKUSYA_CD
+                               )
+            '農場番号 
+            Cmd.Parameters.Add("IN_NOJO_CD", wNojoCd.KEIYAKUSYA_NOJO.NOJO_CD
+                               )
+            '都道府県コード
+            Cmd.Parameters.Add("IN_KEN_CD", wNojoCd.KEIYAKUSYA_NOJO.KEN_CD
+                               )
+            '農場名
+            Cmd.Parameters.Add("IN_NOJO_NAME", wNojoCd.KEIYAKUSYA_NOJO.NOJO_NAME
+                               )
+
+            '郵便番号
+            Cmd.Parameters.Add("IN_ADDR_POST", wNojoCd.KEIYAKUSYA_NOJO.ADDR_POST
+                               )
+            '住所１
+            Cmd.Parameters.Add("IN_ADDR_1", wNojoCd.KEIYAKUSYA_NOJO.ADDR_1
+                               )
+            '住所２
+            Cmd.Parameters.Add("IN_ADDR_2", wNojoCd.KEIYAKUSYA_NOJO.ADDR_2
+                               )
+            '住所３
+            If wNojoCd.KEIYAKUSYA_NOJO.ADDR_3.Trim = "" Then
+                Cmd.Parameters.Add("IN_ADDR_3", DBNull.Value)
+            Else
+                Cmd.Parameters.Add("IN_ADDR_3", wNojoCd.KEIYAKUSYA_NOJO.ADDR_3)
+            End If
+            '住所４
+            If wNojoCd.KEIYAKUSYA_NOJO.ADDR_4.Trim = "" Then
+                Cmd.Parameters.Add("IN_ADDR_4", DBNull.Value)
+            Else
+                Cmd.Parameters.Add("IN_ADDR_4", wNojoCd.KEIYAKUSYA_NOJO.ADDR_4)
+            End If
+
+            '電話番号
+            Cmd.Parameters.Add("IN_MEISAI_NO", wNojoCd.KEIYAKUSYA_NOJO.MEISAI_NO)
+
+            ''共通
+            'If pSyoriKbn = Enu_SyoriKubun.Insert Then
+            '    'データ登録日
+            '    Cmd.Parameters.Add("IN_REG_DATE", Now)
+            '    'データ登録ＩＤ
+            '    Cmd.Parameters.Add("IN_REG_ID", wNojoCd.USER_ID)
+            'End If
+            Select Case wNojoCd.EDIT_KBN
+                Case Enum編集区分.新規       '新規入力
+                'データ登録日
+                Cmd.Parameters.Add("IN_REG_DATE", Now)
+                'データ登録ＩＤ
+                Cmd.Parameters.Add("IN_REG_ID", wNojoCd.USER_ID)
+            End Select
+
+            'データ更新日
+            Cmd.Parameters.Add("IN_UP_DATE", Now)
+            'データ更新ＩＤ
+            Cmd.Parameters.Add("IN_UP_ID", wNojoCd.USER_ID)
+            'コンピュータ名
+            Cmd.Parameters.Add("IN_COM_NAME", wNojoCd.USER_ID)
+
+            '戻り
+            Dim p_MSGCD As OracleParameter = Cmd.Parameters.Add("OU_MSGCD", OracleDbType.Varchar2, 255, DBNull.Value, ParameterDirection.Output)
+            Dim p_MSGNM As OracleParameter = Cmd.Parameters.Add("OU_MSGNM", OracleDbType.Varchar2, 255, DBNull.Value, ParameterDirection.Output)
+
+            Cmd.ExecuteNonQuery()
+            Debug.Print(Cmd.Parameters("OU_MSGCD").Value.ToString())
+            If Cmd.Parameters("OU_MSGCD").Value.ToString() <> "0" Then
+                Throw New Exception(Cmd.Parameters("OU_MSGCD").Value.ToString() & ":" & Cmd.Parameters("OU_MSGNM").Value.ToString())
+            End If
+
+            'データベースへの接続を閉じる
+            If Not Cmd Is Nothing Then
+                Cmd.Dispose()
+            End If
+
+            ret = True
+
+        'Catch ex As Exception
+        '    '共通例外処理
+        '    If ex.Message <> "Err" Then
+        '        Show_MessageBox("", ex.Message)
+        '    End If
+        '    If Not Cmd Is Nothing Then
+        '        Cmd.Dispose()
+        '    End If
+        'End Try
+
+        Return New DaResponseBase
+    End Function
+
+#End Region
+
     End Module
 
 End Namespace

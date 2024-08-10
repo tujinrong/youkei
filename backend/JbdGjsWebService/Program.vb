@@ -13,11 +13,8 @@ Public Class Program
         CultureInfo.DefaultThreadCurrentUICulture = CultureInfo.DefaultThreadCurrentCulture
         'LinuxでSystem.Drawing.Commonを通常に使用するために必要な設定
         AppContext.SetSwitch("System.Drawing.EnableUnixSupport", True)
-
         Dim builder = WebApplication.CreateBuilder(args)
-
         MvcServiceCollectionExtensions.AddControllers(builder.Services).AddJsonOptions(Sub(options) options.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.SnakeCaseUpper)
-
         Dim configuration = builder.Configuration
         StartFactory.Start(configuration)
 
@@ -29,7 +26,6 @@ Public Class Program
         End Using
 
         builder.Services.AddControllers(Sub(options) options.Filters.Add(GetType(JBD.GJS.WebService.WebApiExceptionFilterAttribute)))
-
         Dim maxRequestBodySize = configuration.GetValue(Of Long)("MaxRequestBodySize")
         If maxRequestBodySize > 0L Then
             builder.Services.Configure(Of KestrelServerOptions)(Sub(options) options.Limits.MaxRequestBodySize = maxRequestBodySize) ' if don't set default value is: 30 MB

@@ -13,7 +13,7 @@ Namespace JBD.GJS.Service.GJ8091
     ''' 初期化処理_詳細画面処理(成功)
     ''' </summary>
     Public Class InitDetailResponse
-        Inherits Db.DaResponseBase
+        Inherits DaResponseBase
 
         ''' <summary>
         ''' 都道府県情報プルダウンリスト
@@ -34,7 +34,7 @@ Namespace JBD.GJS.Service.GJ8091
     ''' 検索処理_詳細画面処理(成功)
     ''' </summary>
     Public Class SearchDetailResponse
-        Inherits Db.DaResponseBase
+        Inherits DaResponseBase
 
         ''' <summary>
         ''' 契約者農場情報

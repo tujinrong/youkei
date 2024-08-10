@@ -226,4 +226,5 @@ Namespace JBD.GJS.Service
         AndCode
         OrCode
     End Enum
+
 End Namespace

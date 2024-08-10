@@ -56,8 +56,8 @@ Namespace JBD.GJS.Service
         ''' トランザクション NEW
         ''' </summary>
         <DebuggerStepThrough()>
-        Public Function Transction(Of R As DaResponseBase)(req As DaRequestBase, f As Func(Of DaDbContext, R)) As R
-            currentMethod = new System.Diagnostics.StackTrace().GetFrame(1).GetMethod()
+        Public Shared Function Transction(Of R As DaResponseBase)(req As DaRequestBase, f As Func(Of DaDbContext, R)) As R
+            Dim currentMethod = new System.Diagnostics.StackTrace().GetFrame(1).GetMethod()
              Using db = New DaDbContext(req)
                 ' トランザクション
                 Using tran = db.Session.Connection.BeginTransaction()
@@ -87,14 +87,6 @@ Namespace JBD.GJS.Service
         ''' </summary>
         Public Shared Sub BeforeAction(db As DaDbContext, req As DaRequestBase)
             db.Session.SessionData(DaConst.SessionID) = req.sessionid
-            If String.IsNullOrEmpty(req.USER_ID) Then
-                req.USER_ID = req.sessionid.ToString()
-                If Not String.IsNullOrEmpty(req.token) Then
-                    Dim userIdStr = JbdGjsTokenService.GetTokenUDGjs(req.token, "gjs", "gjs")
-                    Dim userId = userIdStr.Split("|")
-                    db.Session.UserID = userId(0)
-                End If
-            End If
             DaDbLogService.WriteDbMessage(db, "Begin Service")
         End Sub
 
