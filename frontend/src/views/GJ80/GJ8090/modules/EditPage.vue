@@ -121,7 +121,7 @@
             <td>
               <a-form-item v-bind="validateInfos.MEISAINO">
                 <a-input-number
-                  v-model:value="formData.MEISAINO"
+                  v-model:value="formData.MEISAI_NO"
                   :min="0"
                   :max="999"
                   :maxlength="3"
@@ -139,21 +139,21 @@
 import { Enum編集区分, PageSatatus } from '@/enum'
 import { nextTick, onMounted, reactive, ref, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
-import { showDeleteModal, showInfoModal } from '@/utils/modal'
+import { showDeleteModal, showSaveModal } from '@/utils/modal'
 import {
+  DELETE_CONFIRM,
   DELETE_OK_INFO,
   ITEM_ILLEGAL_ERROR,
   ITEM_REQUIRE_ERROR,
+  SAVE_CONFIRM,
   SAVE_OK_INFO,
 } from '@/constants/msg'
-// import { KEN_CD_NAME_LIST } from '../constant'
 import { Form, message } from 'ant-design-vue'
-import { showSaveModal } from '@/utils/modal'
 import PostCode from '@/components/Selector/PostCode/index.vue'
 import { convertToFullWidth } from '@/utils/util'
 import { DetailVM } from '../type'
 import { Judgement } from '@/utils/judge-edited'
-import { InitDetail, Save, SearchDetail } from '../service'
+import { InitDetail, Save, SearchDetail, Delete } from '../service'
 //---------------------------------------------------------------------------
 //属性
 //---------------------------------------------------------------------------
@@ -183,7 +183,7 @@ const formData = reactive({
   ADDR_2: '',
   ADDR_3: '',
   ADDR_4: '',
-  MEISAINO: undefined as number | undefined,
+  MEISAI_NO: undefined as number | undefined,
 } as DetailVM)
 
 const rules = reactive({
@@ -253,7 +253,6 @@ onMounted(async () => {
   //都道府県プルダウンリスト
   InitDetail().then((res) => {
     KEN_CD_NAME_LIST.value = res.KEN_CD_NAME_LIST
-    nextTick(() => editJudge.reset())
   })
 
   //農場情報
@@ -263,8 +262,7 @@ onMounted(async () => {
       KEIYAKUSYA_CD: formData.KEIYAKUSYA_CD,
       NOJO_CD: formData.NOJO_CD,
     }).then((res) => {
-      Object.assign(formData, res.DetailVM)
-      upddttm = res.UP_DATE
+      Object.assign(formData, res.KEIYAKUSYA_NOJO)
       nextTick(() => editJudge.reset())
     })
   }
@@ -305,57 +303,35 @@ watch(
 //画面遷移
 const goList = () => {
   editJudge.judgeIsEdited(() => {
-    // clearValidate()
-    // resetFields()
+    resetFields()
     router.push({ name: route.name })
   })
 }
 const saveData = async () => {
-  if (isNew) {
-    //農場番号重複チェック
-    switch (formData.NOJO_CD) {
-      case 100:
-      case 101:
-      case 102:
-      case 103:
-        showInfoModal({
-          type: 'error',
-          title: 'エラー',
-          content: '入力されたコードは、すでに登録されています。',
-        })
-        return
-    }
-    await validate()
-    showSaveModal({
-      content: 'データを登録します。\nよろしいですか？',
-      onOk: async () => {
-        await Save({ DetailVM: { ...formData }, EDIT_KBN: Enum編集区分.新規 })
-        router.push({ name: route.name })
-        message.success(SAVE_OK_INFO.Msg)
-      },
-    })
-  } else {
-    await validate()
-    showSaveModal({
-      content: 'データを更新します。\nよろしいですか？',
-      onOk: async () => {
-        await Save({
-          DetailVM: { ...formData },
-          EDIT_KBN: Enum編集区分.変更,
-          UP_DATE: upddttm,
-        })
-        router.push({ name: route.name })
-        message.success(SAVE_OK_INFO.Msg)
-      },
-    })
-  }
+  await validate()
+  showSaveModal({
+    content: SAVE_CONFIRM.Msg,
+    onOk: async () => {
+      await Save({
+        KEIYAKUSYA_NOJO: { ...formData, UP_DATE: isNew ? undefined : upddttm },
+        EDIT_KBN: isNew ? Enum編集区分.新規 : Enum編集区分.変更,
+      })
+      router.push({ name: route.name as string, query: { refresh: '1' } })
+      message.success(SAVE_OK_INFO.Msg)
+    },
+  })
 }
 const deleteData = () => {
   showDeleteModal({
     handleDB: true,
-    content: '指定されたデータを削除します。\nよろしいですか？',
-    onOk() {
-      router.push({ name: route.name })
+    content: DELETE_CONFIRM.Msg,
+    onOk: async () => {
+      await Delete({
+        KI: formData.KI,
+        KEIYAKUSYA_CD: formData.KEIYAKUSYA_CD,
+        NOJO_CD: formData.NOJO_CD,
+      })
+      router.push({ name: route.name as string, query: { refresh: '1' } })
       message.success(DELETE_OK_INFO.Msg)
     },
   })

@@ -38,7 +38,7 @@ export const Search = (params: SearchRequest): Promise<SearchResponse> => {
 /** 初期化処理(詳細画面) */
 export const InitDetail = (): Promise<InitDetailResponse> => {
   const methodname = 'InitDetail'
-  return api2(servicename2, methodname)
+  return api(servicename2, methodname)
 }
 
 /** 検索処理(詳細画面) */
@@ -46,13 +46,13 @@ export const SearchDetail = (
   params: SearchDetailRequest
 ): Promise<SearchDetailResponse> => {
   const methodname = 'SearchDetail'
-  return api2(servicename2, methodname, params, undefined, { loading: true })
+  return api(servicename2, methodname, params, undefined, { loading: true })
 }
 
 /** 登録処理(詳細画面) */
 export const Save = (params: SaveRequest): Promise<DaResponseBase> => {
   const methodname = 'Save'
-  return api2(servicename2, methodname, params)
+  return api(servicename2, methodname, params)
 }
 
 /** 削除処理(詳細画面) */

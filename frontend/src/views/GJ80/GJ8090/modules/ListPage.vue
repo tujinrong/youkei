@@ -143,10 +143,9 @@ import { ITEM_REQUIRE_ERROR } from '@/constants/msg'
 import { changeTableSort, convertToFullWidth } from '@/utils/util'
 import { useTabStore } from '@/store/modules/tab'
 import { useElementSize } from '@vueuse/core'
-import { KeiyakuNojoSearchVM, SearchRequest } from '@/views/GJ80/GJ8090/type'
+import { SearchRowVM, SearchRequest } from '@/views/GJ80/GJ8090/type'
 import { Init, Search } from '../service'
 import { Form } from 'ant-design-vue'
-import { number } from 'echarts'
 
 //--------------------------------------------------------------------------
 //データ定義
@@ -157,7 +156,7 @@ const tabStore = useTabStore()
 
 const createDefaultParams = (): SearchRequest => {
   return {
-    KI: undefined,
+    KI: 0,
     KEIYAKUSYA_CD: undefined,
     NOJO_CD: undefined,
     NOJO_NAME: undefined,
@@ -171,7 +170,7 @@ const keyList = reactive({
   KEIYAKUSYA_NAME: '',
 })
 const KEIYAKUSYA_CD_NAME_LIST = ref<CodeNameModel[]>([])
-const tableData = ref<KeiyakuNojoSearchVM[]>([])
+const tableData = ref<SearchRowVM[]>([])
 
 //表の高さ
 const headRef = ref(null)
@@ -227,6 +226,8 @@ const getInitData = (KI?) => {
 
 onBeforeRouteUpdate((to, from) => {
   if (to.query.refresh) {
+    pageParams.PAGE_NUM = 1
+    searchAll()
   }
 })
 //--------------------------------------------------------------------------
