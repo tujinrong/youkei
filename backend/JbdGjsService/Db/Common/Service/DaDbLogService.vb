@@ -43,7 +43,9 @@ Namespace JBD.GJS.Db
     .regdttm = DaUtil.Now
 }
                 dto.reguserid = If(r.USER_ID, String.Empty)
-                dto.sessionseq = CLng(DateTime.Now.ToString("yyyyMMddHHmmssfff"))
+                Dim rand As New Random()
+                Dim randomValue As Integer = rand.Next(0, 100)
+                dto.sessionseq = CLng(DateTime.Now.ToString("yyyyMMddHHmmssfff") & randomValue)
                 'db.tt_aflog.INSERT.Execute(dto)
                 DaDbLogService.InsertDto(db.Session, dto)
                 Return dto.sessionseq
@@ -648,8 +650,9 @@ Try
             If _conn.State = Data.ConnectionState.Closed Then
                 _conn.Open()
             End If
-            Dim insertSql As String = "INSERT INTO tt_aflog (sessionseq, syoridttmf, syoridttmt, milisec, statuscd, kinoid, service, method, methodnm, reguserid, regdttm ) VALUES ( tt_aflog_seq.nextval, :syoridttmf, :syoridttmt, :milisec, :statuscd, :kinoid, :service, :method, :methodnm, :reguserid, :regdttm)"
+            Dim insertSql As String = "INSERT INTO tt_aflog (sessionseq, syoridttmf, syoridttmt, milisec, statuscd, kinoid, service, method, methodnm, reguserid, regdttm ) VALUES ( :sessionseq, :syoridttmf, :syoridttmt, :milisec, :statuscd, :kinoid, :service, :method, :methodnm, :reguserid, :regdttm)"
             Dim insertParams As New List(Of OracleParameter) From {
+                New OracleParameter("sessionseq", dto.sessionseq),
                 New OracleParameter("syoridttmf", dto.syoridttmf),
                 New OracleParameter("syoridttmt", dto.syoridttmt ),
                 New OracleParameter("milisec", dto.milisec),
