@@ -102,7 +102,7 @@
         <vxe-column
           field="noujyocd"
           title="農場番号"
-          width="200"
+          min-width="80"
           sortable
           :params="{ order: 1 }"
           :resizable="true"
@@ -114,7 +114,7 @@
         <vxe-column
           field="noujyomei"
           title="農場名"
-          min-width="400"
+          min-width="160"
           sortable
           :params="{ order: 2 }"
           :resizable="true"
@@ -126,10 +126,10 @@
         <vxe-column
           field="ADDR"
           title="農場住所"
-          min-width="700"
+          min-width="400"
           sortable
           :params="{ order: 3 }"
-          :resizable="true"
+          :resizable="false"
         ></vxe-column>
       </vxe-table>
     </a-card>
