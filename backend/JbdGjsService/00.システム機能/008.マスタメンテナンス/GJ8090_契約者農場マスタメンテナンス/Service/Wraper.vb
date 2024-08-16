@@ -7,6 +7,8 @@
 ' 変更履歴　:
 ' *******************************************************************
 
+Imports JbdGjsService.JBD.GJS.Service.GJ0000
+
 Namespace JBD.GJS.Service.GJ8090
 
     ''' <summary>
@@ -36,17 +38,20 @@ Namespace JBD.GJS.Service.GJ8090
         ''' </summary>
         Public Shared Function SearchResponse(dt As DataTable) As SearchResponse
             Dim res = New SearchResponse()
-            res.TOTAL_ROW_COUNT = Cint(dt.Rows(0)("RCNT").ToString())
-            res.TOTAL_PAGE_COUNT = Cint(dt.Rows(0)("PCNT").ToString())
-            res.KEKKA_LIST = New List(Of KeiyakuNojo)
-            ' dt をループし、List にデータを追加します。
-            For Each row As DataRow In dt.Rows
-                Dim item As New KeiyakuNojo
-                item.NOJO_CD = Cint(row("NOJO_CD").ToString())
-                item.NOJO_NAME = row("NOJO_NAME").ToString()
-                item.ADDR = row("ADDR").ToString()
-                res.KEKKA_LIST.Add(item)
-            Next
+            'データ結果判定
+            If dt.Rows.Count > 0 Then
+                res.TOTAL_ROW_COUNT = Cint(dt.Rows(0)("RCNT").ToString())
+                res.TOTAL_PAGE_COUNT = Cint(dt.Rows(0)("PCNT").ToString())
+                res.KEKKA_LIST = New List(Of KeiyakuNojo)
+                ' dt をループし、List にデータを追加します。
+                For Each row As DataRow In dt.Rows
+                    Dim item As New KeiyakuNojo
+                    item.NOJO_CD = Cint(row("NOJO_CD").ToString())
+                    item.NOJO_NAME = row("NOJO_NAME").ToString()
+                    item.ADDR = row("ADDR").ToString()
+                    res.KEKKA_LIST.Add(item)
+                Next
+            End If
             Return res
         End Function
     End Class

@@ -619,10 +619,9 @@ End Sub
             If _conn.State = Data.ConnectionState.Closed Then
                 _conn.Open()
             End If
-            Dim dblogseq = DateTime.Now.ToString("yyyyMMddHHmmssfff")
-            Dim insertSql As String = "INSERT INTO tt_aflogdb (dblogseq, sessionseq, sql, msg, reguserid, regdttm ) VALUES ( :dblogseq, :sessionseq, :sql, :msg, :reguserid, :regdttm)"
+            'Dim dblogseq = DateTime.Now.ToString("yyyyMMddHHmmssfff")
+            Dim insertSql As String = "INSERT INTO tt_aflogdb (dblogseq, sessionseq, sql, msg, reguserid, regdttm ) VALUES ( tt_aflogdb_seq.nextval, :sessionseq, :sql, :msg, :reguserid, :regdttm)"
             Dim insertParams As New List(Of OracleParameter) From {
-                New OracleParameter("dblogseq", dblogseq),
                 New OracleParameter("sessionseq", dto.sessionseq),
                 New OracleParameter("sql", dto.sql ),
                 New OracleParameter("msg", dto.msg),
@@ -649,9 +648,8 @@ Try
             If _conn.State = Data.ConnectionState.Closed Then
                 _conn.Open()
             End If
-            Dim insertSql As String = "INSERT INTO tt_aflog (sessionseq, syoridttmf, syoridttmt, milisec, statuscd, kinoid, service, method, methodnm, reguserid, regdttm ) VALUES ( :sessionseq, :syoridttmf, :syoridttmt, :milisec, :statuscd, :kinoid, :service, :method, :methodnm, :reguserid, :regdttm)"
+            Dim insertSql As String = "INSERT INTO tt_aflog (sessionseq, syoridttmf, syoridttmt, milisec, statuscd, kinoid, service, method, methodnm, reguserid, regdttm ) VALUES ( tt_aflog_seq.nextval, :syoridttmf, :syoridttmt, :milisec, :statuscd, :kinoid, :service, :method, :methodnm, :reguserid, :regdttm)"
             Dim insertParams As New List(Of OracleParameter) From {
-                New OracleParameter("sessionseq", dto.sessionseq),
                 New OracleParameter("syoridttmf", dto.syoridttmf),
                 New OracleParameter("syoridttmt", dto.syoridttmt ),
                 New OracleParameter("milisec", dto.milisec),
@@ -683,10 +681,9 @@ Try
             If _conn.State = Data.ConnectionState.Closed Then
                 _conn.Open()
             End If
-            Dim dblogseq = DateTime.Now.ToString("yyyyMMddHHmmssfff")
-            Dim insertSql As String = "INSERT INTO tt_aftusinlog (tusinlogseq, sessionseq, syoridttmf, syoridttmt, msg, request, response , ipadrs, os, browser,  reguserid, regdttm ) VALUES ( :tusinlogseq, :sessionseq, :syoridttmf, :syoridttmt, :msg, :request, :response , :ipadrs, :os, :browser, :reguserid, :regdttm)"
+            'Dim dblogseq = DateTime.Now.ToString("yyyyMMddHHmmssfff")
+            Dim insertSql As String = "INSERT INTO tt_aftusinlog (tusinlogseq, sessionseq, syoridttmf, syoridttmt, msg, request, response , ipadrs, os, browser,  reguserid, regdttm ) VALUES ( tt_aftusinlog_seq.nextval, :sessionseq, :syoridttmf, :syoridttmt, :msg, :request, :response , :ipadrs, :os, :browser, :reguserid, :regdttm)"
             Dim insertParams As New List(Of OracleParameter) From {
-                New OracleParameter("tusinlogseq", dblogseq),
                 New OracleParameter("sessionseq", dto.sessionseq),
                 New OracleParameter("syoridttmf", dto.syoridttmf ),
                 New OracleParameter("syoridttmt", dto.syoridttmt),

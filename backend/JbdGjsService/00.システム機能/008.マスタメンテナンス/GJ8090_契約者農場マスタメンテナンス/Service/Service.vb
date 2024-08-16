@@ -8,6 +8,7 @@
 ' *******************************************************************
 
 Imports JbdGjsCommon.JBD.GJS.Common.JbdGjsCommon
+Imports JbdGjsService.JBD.GJS.Service.GJ0000
 
 Namespace JBD.GJS.Service.GJ8090
 
@@ -38,11 +39,11 @@ Namespace JBD.GJS.Service.GJ8090
                     Dim uid = CheckToken(req.token)
                     If String.IsNullOrEmpty(uid) Then Return New InitResponse("トークンが正しくありません。")
 
-                    '-------------------------------------------------------------
-                    '4.ビジネスロジック処理
-                    '-------------------------------------------------------------
-                    'データ結果判定
-                    If req.KI = 0 Then
+'-------------------------------------------------------------
+'4.ビジネスロジック処理
+'-------------------------------------------------------------
+'データ結果判定
+If req.KI = 0 Then
                         Dim ki =Cint(New Obj_TM_SYORI_NENDO_KI().pKI)
                         Dim ret As New InitResponse With {
                             .KI = ki
@@ -59,9 +60,9 @@ Namespace JBD.GJS.Service.GJ8090
                     Dim res = Wraper.GetInitResponse(dt)
                     res.KI =  req.KI
 
-                    '-------------------------------------------------------------
-                    '6.正常返し
-                    '-------------------------------------------------------------
+'-------------------------------------------------------------
+'6.正常返し
+'-------------------------------------------------------------
                     Return res
 
                 End Function)
@@ -87,7 +88,7 @@ Namespace JBD.GJS.Service.GJ8090
                     'チェックトークン
                     Dim uid = CheckToken(req.token)
                     If String.IsNullOrEmpty(uid) Then Return New SearchResponse("トークンが正しくありません。")
-                    
+
                     '-------------------------------------------------------------
                     '4.ビジネスロジック処理
                     '-------------------------------------------------------------
