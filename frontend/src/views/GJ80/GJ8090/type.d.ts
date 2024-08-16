@@ -22,7 +22,7 @@ export interface InitRequest extends DaRequestBase {
 /**検索処理(一覧画面) */
 export interface SearchRequest extends CmSearchRequestBase {
   /**期 */
-  KI: number | undefined
+  KI: number
   /**契約者番号 */
   KEIYAKUSYA_CD?: number
   /**農場番号 */
@@ -41,6 +41,8 @@ export interface DeleteRequest extends DaRequestBase {
   KEIYAKUSYA_CD: number
   /**農場コード */
   NOJO_CD: number
+  /**更新時間 */
+  UP_DATE: Date
 }
 
 /**検索処理(詳細画面) */
@@ -56,11 +58,9 @@ export interface SearchDetailRequest extends DaRequestBase {
 /**登録処理(詳細画面) */
 export interface SaveRequest extends DaRequestBase {
   /**契約者農場情報 */
-  DetailVM: DetailVM
+  KEIYAKUSYA_NOJO: DetailVM
   /**編集区分 */
   EDIT_KBN: Enum編集区分
-  /**更新時間 */
-  UP_DATE?: Date
 }
 
 //-------------------------------------------------------------------
@@ -82,7 +82,7 @@ export interface SearchResponse extends CmSearchResponseBase {
   /**契約者番号 */
   KEIYAKUSYA_CD: number
   /**契約者農場情報リスト */
-  KEKKA_LIST: KeiyakuNojoSearchVM[]
+  KEKKA_LIST: SearchRowVM[]
 }
 
 /**初期化処理(詳細画面) */
@@ -96,16 +96,14 @@ export interface InitDetailResponse extends DaResponseBase {
 /**検索処理(詳細画面) */
 export interface SearchDetailResponse extends DaResponseBase {
   /**契約者農場情報 */
-  DetailVM: DetailVM
-  /**更新時間 */
-  UP_DATE?: Date
+  KEIYAKUSYA_NOJO: DetailVM
 }
 
 //-------------------------------------------------------------------
 //ビューモデル
 //-------------------------------------------------------------------
 
-export interface KeiyakuNojoSearchVM {
+export interface SearchRowVM {
   /**農場コード */
   NOJO_CD: number
   /**農場名 */
@@ -139,5 +137,7 @@ export interface DetailVM {
   /**住所4 */
   ADDR_4: string
   /**明細番号 */
-  MEISAINO: number
+  MEISAI_NO: number
+  /**更新時間 */
+  UP_DATE: Date
 }
