@@ -17,9 +17,9 @@ export class Judgement {
   private isEdited: boolean
   private kinoid: string
 
-  constructor(id = '') {
+  constructor(kinoid = '') {
     this.isEdited = false
-    this.kinoid = id
+    this.kinoid = kinoid
   }
 
   public setEdited(): void {

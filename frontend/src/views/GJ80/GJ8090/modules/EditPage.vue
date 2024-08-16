@@ -266,6 +266,8 @@ onMounted(async () => {
       upddttm = res.KEIYAKUSYA_NOJO.UP_DATE
       nextTick(() => editJudge.reset())
     })
+  } else {
+    nextTick(() => editJudge.reset())
   }
 })
 
