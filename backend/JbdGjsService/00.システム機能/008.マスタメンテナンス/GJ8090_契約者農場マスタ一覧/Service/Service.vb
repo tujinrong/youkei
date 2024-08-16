@@ -1,14 +1,11 @@
 ﻿' *******************************************************************
 ' 業務名称　: 互助防疫システム
-' 機能概要　: 契約者農場マスタメンテナンス
+' 機能概要　: 契約者農場マスタ一覧
 '             サービス処理
 ' 作成日　　: 2024.07.21
 ' 作成者　　: 宋
 ' 変更履歴　:
 ' *******************************************************************
-
-Imports JbdGjsCommon.JBD.GJS.Common.JbdGjsCommon
-Imports JbdGjsService.JBD.GJS.Service.GJ0000
 
 Namespace JBD.GJS.Service.GJ8090
 
@@ -39,11 +36,11 @@ Namespace JBD.GJS.Service.GJ8090
                     Dim uid = CheckToken(req.token)
                     If String.IsNullOrEmpty(uid) Then Return New InitResponse("トークンが正しくありません。")
 
-'-------------------------------------------------------------
-'4.ビジネスロジック処理
-'-------------------------------------------------------------
-'データ結果判定
-If req.KI = 0 Then
+                    '-------------------------------------------------------------
+                    '4.ビジネスロジック処理
+                    '-------------------------------------------------------------
+                    'データ結果判定
+                    If req.KI = 0 Then
                         Dim ki =Cint(New Obj_TM_SYORI_NENDO_KI().pKI)
                         Dim ret As New InitResponse With {
                             .KI = ki
@@ -52,7 +49,7 @@ If req.KI = 0 Then
                     End If
 
                     'データクエリ
-                    Dim dt = f_Keiyaku_Data_Select_New(req.KI, True, String.Empty)
+                    Dim dt = f_Keiyaku_Data_Select(req.KI, True, String.Empty)
 
                     '-------------------------------------------------------------
                     '5.データ加工処理
@@ -60,9 +57,9 @@ If req.KI = 0 Then
                     Dim res = Wraper.GetInitResponse(dt)
                     res.KI =  req.KI
 
-'-------------------------------------------------------------
-'6.正常返し
-'-------------------------------------------------------------
+                    '-------------------------------------------------------------
+                    '6.正常返し
+                    '-------------------------------------------------------------
                     Return res
 
                 End Function)
@@ -93,7 +90,7 @@ If req.KI = 0 Then
                     '4.ビジネスロジック処理
                     '-------------------------------------------------------------
                     '検索結果出力用ＳＱＬ作成
-                    Dim sql = f_Search_SQLMakeNew(req)
+                    Dim sql = f_Search_SQLMake(req)
 
                     '元の SQL をページ分割されたデータ出力に変換する
                     Dim psql = f_Search_SQLMakePage(req.PAGE_SIZE, req.PAGE_NUM, sql)

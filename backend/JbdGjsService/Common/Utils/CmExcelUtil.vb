@@ -13,7 +13,7 @@ Option Explicit On
 
 
 
-Public Class JbdGjsExcelUtil
+Public Class CmExcelUtil
 
     '≪EXCEL≫
     Dim Xlapp As Object

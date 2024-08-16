@@ -3234,8 +3234,7 @@ ACoDateCheckEdit_Exit3:
         End Function
 #End Region
 
-
-    #Region "*** マスタデータ取得 ***"
+#Region "*** マスタデータ取得 ***"
     #Region "f_CodeMaster_Data_Select コードマスタデータ取得"
         '------------------------------------------------------------------
         'プロシージャ名  :f_CodeMaster_Data_Select
@@ -3331,104 +3330,111 @@ ACoDateCheckEdit_Exit3:
         End Function
 
     #End Region
+
+    '#Region "f_Ken_Data_Select 県データ取得"
+    '    '------------------------------------------------------------------
+    '    'プロシージャ名  :f_Ken_Data_Select
+    '    '説明            :県データ取得
+    '    '引数            :1.cmbKenCd        String      県コードコンボボックス
+    '    '                 2.cmbKenMei       String      県名コンボボックス
+    '    '                 3.blnNullAddFlg   Boolean                     スペース項目をコンボに追加するかしないかのフラグ(False(既定):スペース項目を追加しない　True:スペース項目を追加する)
+    '    '                 4.sDATA_KBN       Integer(Optional)           データ区分(Default:5　←県データ)
+    '    '戻り値          :Boolean(正常True/エラーFalse)
+    '    '------------------------------------------------------------------
+    '    Public Function f_Ken_Data_Select(ByRef cmbKenCd As String, _
+    '                                      ByRef cmbKenMei As String, _
+    '                                      ByRef blnNullAddFlg As Boolean, _
+    '                                      ByVal nDATA_KBN As Integer) As Boolean
+
+    '        Dim sSql As String = String.Empty
+    '        Dim dstDataKenCd As New DataSet
+    '        Dim dstDataKenNm As New DataSet
+    '        'Dim subItem1 As New GrapeCity.Win.Editors.SubItem()
+    '        'Dim subItem2 As New GrapeCity.Win.Editors.SubItem()
+
+    '        f_Ken_Data_Select = False
+
+    '        Try
+
+    '            sSql = " SELECT " & vbCrLf
+    '            sSql = sSql & "  MEISYO_CD," & vbCrLf
+    '            '2015/01/21 JBD368 UPD ↓↓↓ 都道府県名は正式名称を使用する
+    '            'sSql = sSql & "  RYAKUSYO" & vbCrLf
+    '            sSql = sSql & "  MEISYO" & vbCrLf
+    '            '2015/01/21 JBD368 UPD ↑↑↑
+    '            sSql = sSql & " FROM" & vbCrLf
+    '            sSql = sSql & "  TM_CODE" & vbCrLf
+    '            'If nDATA_KBN <> "" Then
+    '            sSql = sSql & " WHERE" & vbCrLf
+    '            sSql = sSql & "  SYURUI_KBN = " & nDATA_KBN & "" & vbCrLf
+    '            'End If
+    '            sSql = sSql & " ORDER BY MEISYO_CD" & vbCrLf
+
+    '            Call f_Select_ODP(dstDataKenCd, sSql)
+
+    '            'cmbKenCd.Items.Clear()
+    '            'cmbKenMei.Items.Clear()
+
+    '            'With dstDataKenCd.Tables(0)
+    '            '    If .Rows.Count > 0 Then
+
+    '            '        'cmbKenCd.AutoGenerateColumns = True
+    '            '        'cmbKenCd.DataSource = dstDataKenCd
+    '            '        'cmbKenCd.DataMember = "MEISYO_CD"
+
+    '            '        'cmbKenMei.ListColumns.Add(New GrapeCity.Win.Editors.ListColumn("MEISYO_CD"))
+    '            '        'cmbKenMei.ListColumns.Add(New GrapeCity.Win.Editors.ListColumn("RYAKUSYO"))
+
+    '            '        For i As Integer = 0 To .Rows.Count - 1
+    '            '            cmbKenCd.Items.Add(WordHenkan("N", "S", .Rows(i)("MEISYO_CD")))
+    '            '            '2015/01/21 JBD368 UPD ↓↓↓ 都道府県名は正式名称を使用する
+    '            '            'cmbKenMei.Items.Add(WordHenkan("N", "S", .Rows(i)("RYAKUSYO")))
+    '            '            cmbKenMei.Items.Add(WordHenkan("N", "S", .Rows(i)("MEISYO")))
+    '            '            '2015/02/21 JBD368 UPD ↑↑↑
+
+    '            '            'subItem1.Value = WordHenkan("N", "S", .Rows(i)("MEISYO_CD"))
+    '            '            'subItem2.Value = WordHenkan("N", "S", .Rows(i)("RYAKUSYO"))
+    '            '            'cmbKenMei.Items.AddRange(New GrapeCity.Win.Editors.ListItem(New GrapeCity.Win.Editors.SubItem() {subItem1, subItem2}))
+
+    '            '            'cmbKenMei.Items.Add("")
+    '            '            'cmbKenMei.ListColumns.Item(0).DataPropertyName = WordHenkan("N", "S", .Rows(i)("MEISYO_CD"))
+    '            '            'cmbKenMei.ListColumns.Item(1).DataPropertyName = WordHenkan("N", "S", .Rows(i)("RYAKUSYO"))
+
+    '            '        Next
+
+    '            '        '↓***** 2010/09/15 JBD200 ADD 第3引数=Trueの時、空白項目を追加するよう追加 *****↓
+    '            '        If blnNullAddFlg Then
+    '            '            '県マスタコンボ空白項目追加
+    '            '            cmbKenCd.Items.Insert(0, New GrapeCity.Win.Editors.ListItem()) : cmbKenMei.Items.Insert(0, New GrapeCity.Win.Editors.ListItem())
+    '            '        End If
+    '            '        '↑***** 2010/09/15 JBD200 ADD 第3引数=Trueの時、空白項目を追加するよう追加 *****↑
+
+    '            '    Else
+    '            '        'エラーリスト出力なし
+    '            '        'Show_MessageBox("I002", "") '該当データが存在しません。
+    '            '        ''Show_MessageBox("該当データが存在しません。", C_MSGICON_INFORMATION) '該当データが存在しません。
+    '            '    End If
+    '            'End With
+
+
+    '            f_Ken_Data_Select = True
+
+    '        Catch ex As Exception
+    '            '共通例外処理
+    '            'Show_MessageBox("", ex.Message)
+    '        End Try
+
+    '    End Function
+    '#End Region
+
     #Region "f_Ken_Data_Select 県データ取得"
-        '------------------------------------------------------------------
-        'プロシージャ名  :f_Ken_Data_Select
-        '説明            :県データ取得
-        '引数            :1.cmbKenCd        String      県コードコンボボックス
-        '                 2.cmbKenMei       String      県名コンボボックス
-        '                 3.blnNullAddFlg   Boolean                     スペース項目をコンボに追加するかしないかのフラグ(False(既定):スペース項目を追加しない　True:スペース項目を追加する)
-        '                 4.sDATA_KBN       Integer(Optional)           データ区分(Default:5　←県データ)
-        '戻り値          :Boolean(正常True/エラーFalse)
-        '------------------------------------------------------------------
-        Public Function f_Ken_Data_Select(ByRef cmbKenCd As String, _
-                                          ByRef cmbKenMei As String, _
-                                          ByRef blnNullAddFlg As Boolean, _
-                                          ByVal nDATA_KBN As Integer) As Boolean
-
-            Dim sSql As String = String.Empty
-            Dim dstDataKenCd As New DataSet
-            Dim dstDataKenNm As New DataSet
-            'Dim subItem1 As New GrapeCity.Win.Editors.SubItem()
-            'Dim subItem2 As New GrapeCity.Win.Editors.SubItem()
-
-            f_Ken_Data_Select = False
-
-            Try
-
-                sSql = " SELECT " & vbCrLf
-                sSql = sSql & "  MEISYO_CD," & vbCrLf
-                '2015/01/21 JBD368 UPD ↓↓↓ 都道府県名は正式名称を使用する
-                'sSql = sSql & "  RYAKUSYO" & vbCrLf
-                sSql = sSql & "  MEISYO" & vbCrLf
-                '2015/01/21 JBD368 UPD ↑↑↑
-                sSql = sSql & " FROM" & vbCrLf
-                sSql = sSql & "  TM_CODE" & vbCrLf
-                'If nDATA_KBN <> "" Then
-                sSql = sSql & " WHERE" & vbCrLf
-                sSql = sSql & "  SYURUI_KBN = " & nDATA_KBN & "" & vbCrLf
-                'End If
-                sSql = sSql & " ORDER BY MEISYO_CD" & vbCrLf
-
-                Call f_Select_ODP(dstDataKenCd, sSql)
-
-                'cmbKenCd.Items.Clear()
-                'cmbKenMei.Items.Clear()
-
-                'With dstDataKenCd.Tables(0)
-                '    If .Rows.Count > 0 Then
-
-                '        'cmbKenCd.AutoGenerateColumns = True
-                '        'cmbKenCd.DataSource = dstDataKenCd
-                '        'cmbKenCd.DataMember = "MEISYO_CD"
-
-                '        'cmbKenMei.ListColumns.Add(New GrapeCity.Win.Editors.ListColumn("MEISYO_CD"))
-                '        'cmbKenMei.ListColumns.Add(New GrapeCity.Win.Editors.ListColumn("RYAKUSYO"))
-
-                '        For i As Integer = 0 To .Rows.Count - 1
-                '            cmbKenCd.Items.Add(WordHenkan("N", "S", .Rows(i)("MEISYO_CD")))
-                '            '2015/01/21 JBD368 UPD ↓↓↓ 都道府県名は正式名称を使用する
-                '            'cmbKenMei.Items.Add(WordHenkan("N", "S", .Rows(i)("RYAKUSYO")))
-                '            cmbKenMei.Items.Add(WordHenkan("N", "S", .Rows(i)("MEISYO")))
-                '            '2015/02/21 JBD368 UPD ↑↑↑
-
-                '            'subItem1.Value = WordHenkan("N", "S", .Rows(i)("MEISYO_CD"))
-                '            'subItem2.Value = WordHenkan("N", "S", .Rows(i)("RYAKUSYO"))
-                '            'cmbKenMei.Items.AddRange(New GrapeCity.Win.Editors.ListItem(New GrapeCity.Win.Editors.SubItem() {subItem1, subItem2}))
-
-                '            'cmbKenMei.Items.Add("")
-                '            'cmbKenMei.ListColumns.Item(0).DataPropertyName = WordHenkan("N", "S", .Rows(i)("MEISYO_CD"))
-                '            'cmbKenMei.ListColumns.Item(1).DataPropertyName = WordHenkan("N", "S", .Rows(i)("RYAKUSYO"))
-
-                '        Next
-
-                '        '↓***** 2010/09/15 JBD200 ADD 第3引数=Trueの時、空白項目を追加するよう追加 *****↓
-                '        If blnNullAddFlg Then
-                '            '県マスタコンボ空白項目追加
-                '            cmbKenCd.Items.Insert(0, New GrapeCity.Win.Editors.ListItem()) : cmbKenMei.Items.Insert(0, New GrapeCity.Win.Editors.ListItem())
-                '        End If
-                '        '↑***** 2010/09/15 JBD200 ADD 第3引数=Trueの時、空白項目を追加するよう追加 *****↑
-
-                '    Else
-                '        'エラーリスト出力なし
-                '        'Show_MessageBox("I002", "") '該当データが存在しません。
-                '        ''Show_MessageBox("該当データが存在しません。", C_MSGICON_INFORMATION) '該当データが存在しません。
-                '    End If
-                'End With
-
-
-                f_Ken_Data_Select = True
-
-            Catch ex As Exception
-                '共通例外処理
-                'Show_MessageBox("", ex.Message)
-            End Try
-
-        End Function
-    #End Region
-
-    #Region "f_Ken_Data_Select 県データ取得"
-        Public Function f_Ken_Data_Select_New() As String
+    '    '------------------------------------------------------------------
+    '    'プロシージャ名  :f_Ken_Data_Select
+    '    '説明            :県データ取得
+    '    '引数            :
+    '    '戻り値          :Boolean(正常True/エラーFalse)
+    '    '------------------------------------------------------------------
+        Public Function f_Ken_Data_Select() As String
             Dim sSql As String = String.Empty
             sSql = " SELECT " & vbCrLf
             sSql = sSql & "  MEISYO_CD," & vbCrLf
@@ -3441,23 +3447,23 @@ ACoDateCheckEdit_Exit3:
             Return sSql
         End Function
 
-        Public Function f_Ken_Data_Select(ByRef cmbKenCd As String, _
-                                      ByRef cmbKenMei As String, _
-                                      ByRef blnNullAddFlg As Boolean) As Boolean
-            If Not f_Ken_Data_Select(cmbKenCd, cmbKenMei, blnNullAddFlg, 5) Then
-                Return False
-            End If
+        'Public Function f_Ken_Data_Select(ByRef cmbKenCd As String, _
+        '                              ByRef cmbKenMei As String, _
+        '                              ByRef blnNullAddFlg As Boolean) As Boolean
+        '    If Not f_Ken_Data_Select(cmbKenCd, cmbKenMei, blnNullAddFlg, 5) Then
+        '        Return False
+        '    End If
 
-            Return True
-        End Function
-        Public Function f_Ken_Data_Select(ByRef cmbKenCd As String, _
-                                      ByRef cmbKenMei As String) As Boolean
-            If Not f_Ken_Data_Select(cmbKenCd, cmbKenMei, False, 5) Then
-                Return False
-            End If
+        '    Return True
+        'End Function
+        'Public Function f_Ken_Data_Select(ByRef cmbKenCd As String, _
+        '                              ByRef cmbKenMei As String) As Boolean
+        '    If Not f_Ken_Data_Select(cmbKenCd, cmbKenMei, False, 5) Then
+        '        Return False
+        '    End If
 
-            Return True
-        End Function
+        '    Return True
+        'End Function
 
     #End Region
 
@@ -3534,6 +3540,7 @@ ACoDateCheckEdit_Exit3:
         End Function
 
     #End Region
+
     #Region "f_Seisansya_Data_Select 生産者データ取得"
         '------------------------------------------------------------------
         'プロシージャ名  :f_Seisansya_Data_Select
@@ -3665,6 +3672,7 @@ ACoDateCheckEdit_Exit3:
         End Function
 
     #End Region
+
     #Region "f_Itaku_Seisansya_Data_Select 代理人コードに紐付く生産者データ取得"
         '------------------------------------------------------------------
         'プロシージャ名  :f_Itaku_Seisansya_Data_Select
@@ -3852,6 +3860,7 @@ ACoDateCheckEdit_Exit3:
         End Function
 
     #End Region
+
     #Region "f_Itaku_Data_Select 金融機関データ取得"
         '------------------------------------------------------------------
         'プロシージャ名  :f_Itaku_Data_Select
@@ -3948,6 +3957,7 @@ ACoDateCheckEdit_Exit3:
         End Function
 
     #End Region
+
     #Region "f_BankShop_Data_Select 金融機関支店データ取得"
         '------------------------------------------------------------------
         'プロシージャ名  :f_BankShop_Data_Select
@@ -4055,6 +4065,7 @@ ACoDateCheckEdit_Exit3:
         End Function
 
     #End Region
+
     #Region "f_Doitu_Seisansya_Data_Select 同一生産者グループデータ取得"
         '------------------------------------------------------------------
         'プロシージャ名  :f_Doitu_Seisansya_Data_Select
@@ -4132,6 +4143,7 @@ ACoDateCheckEdit_Exit3:
         End Function
 
     #End Region
+
     #Region "f_Syokcyo_Data_Select 食鳥処理場データ取得"
         '------------------------------------------------------------------
         'プロシージャ名  :f_Syokcyo_Data_Select
@@ -4209,6 +4221,7 @@ ACoDateCheckEdit_Exit3:
         End Function
 
     #End Region
+
     #Region "f_User_Data_Select 担当者データ取得"
         '------------------------------------------------------------------
         'プロシージャ名  :f_User_Data_Select
@@ -4286,6 +4299,7 @@ ACoDateCheckEdit_Exit3:
         End Function
 
     #End Region
+
     #Region "f_Keiyaku_Data_Select 契約者データ取得(防疫互助)"
         '------------------------------------------------------------------
         'プロシージャ名  :f_Keiyaku_Data_Select
@@ -4298,164 +4312,157 @@ ACoDateCheckEdit_Exit3:
         '                 6.strUser       Boolean                   　他スキーマのデータが必要な時、スキーマをセット(""のとき、自スキーマ)   '2017/07/07追加
         '戻り値          :Boolean(正常True/エラーFalse)
         '------------------------------------------------------------------
-        Public Function f_Keiyaku_Data_Select(ByRef cmbKeiyakuCd As String, _
-                                              ByRef cmbKeiyakuMei As String, _
-                                              ByVal strWhere As String, _
-                                              ByVal blnNullAddFlg As Boolean, _
-                                              ByVal blnEnable As Boolean, _
-                                              ByVal strUser As String) As Boolean
+        'Public Function f_Keiyaku_Data_Select(ByRef cmbKeiyakuCd As String, _
+        '                                      ByRef cmbKeiyakuMei As String, _
+        '                                      ByVal strWhere As String, _
+        '                                      ByVal blnNullAddFlg As Boolean, _
+        '                                      ByVal blnEnable As Boolean, _
+        '                                      ByVal strUser As String) As Boolean
 
-            '2015/03/03 JBD368 UPD ↓↓↓
-            'Dim sSql As String = String.Empty
-            'Dim dstDataSanka As New DataSet
+        '    '2015/03/03 JBD368 UPD ↓↓↓
+        '    'Dim sSql As String = String.Empty
+        '    'Dim dstDataSanka As New DataSet
 
-            'f_Keiyaku_Data_Select = False
+        '    'f_Keiyaku_Data_Select = False
 
-            'Try
+        '    'Try
 
-            '    sSql = "SELECT "
-            '    sSql = sSql & "  KEIYAKUSYA_CD,"
-            '    sSql = sSql & "  KEIYAKUSYA_NAME"
-            '    sSql = sSql & " FROM"
-            '    sSql = sSql & "  TM_KEIYAKU"
+        '    '    sSql = "SELECT "
+        '    '    sSql = sSql & "  KEIYAKUSYA_CD,"
+        '    '    sSql = sSql & "  KEIYAKUSYA_NAME"
+        '    '    sSql = sSql & " FROM"
+        '    '    sSql = sSql & "  TM_KEIYAKU"
 
-            '    If strWhere <> "" Then
-            '        sSql = sSql & " WHERE"
-            '        sSql = sSql & " " & strWhere
-            '    End If
+        '    '    If strWhere <> "" Then
+        '    '        sSql = sSql & " WHERE"
+        '    '        sSql = sSql & " " & strWhere
+        '    '    End If
 
-            '    sSql = sSql & " ORDER BY KEIYAKUSYA_CD"
+        '    '    sSql = sSql & " ORDER BY KEIYAKUSYA_CD"
 
-            '    Call f_Select_ODP(dstDataSanka, sSql)
+        '    '    Call f_Select_ODP(dstDataSanka, sSql)
 
-            '    cmbKeiyakuCd.Items.Clear()
-            '    cmbKeiyakuMei.Items.Clear()
+        '    '    cmbKeiyakuCd.Items.Clear()
+        '    '    cmbKeiyakuMei.Items.Clear()
 
-            '    With dstDataSanka.Tables(0)
-            '        If .Rows.Count > 0 Then
-            '            For i As Integer = 0 To .Rows.Count - 1
-            '                cmbKeiyakuCd.Items.Add(WordHenkan("N", "S", .Rows(i)("KEIYAKUSYA_CD")))
-            '                cmbKeiyakuMei.Items.Add(WordHenkan("N", "S", .Rows(i)("KEIYAKUSYA_NAME")))
-            '            Next
+        '    '    With dstDataSanka.Tables(0)
+        '    '        If .Rows.Count > 0 Then
+        '    '            For i As Integer = 0 To .Rows.Count - 1
+        '    '                cmbKeiyakuCd.Items.Add(WordHenkan("N", "S", .Rows(i)("KEIYAKUSYA_CD")))
+        '    '                cmbKeiyakuMei.Items.Add(WordHenkan("N", "S", .Rows(i)("KEIYAKUSYA_NAME")))
+        '    '            Next
 
-            '            '↓***** 2010/09/15 JBD200 ADD 第3引数=Trueの時、空白項目を追加するよう追加 *****↓
-            '            If blnNullAddFlg Then
-            '                'コンボ空白項目追加
-            '                cmbKeiyakuCd.Items.Insert(0, New GrapeCity.Win.Editors.ListItem()) : cmbKeiyakuMei.Items.Insert(0, New GrapeCity.Win.Editors.ListItem())
-            '            End If
-            '            '↑***** 2010/09/15 JBD200 ADD 第3引数=Trueの時、空白項目を追加するよう追加 *****↑
+        '    '            '↓***** 2010/09/15 JBD200 ADD 第3引数=Trueの時、空白項目を追加するよう追加 *****↓
+        '    '            If blnNullAddFlg Then
+        '    '                'コンボ空白項目追加
+        '    '                cmbKeiyakuCd.Items.Insert(0, New GrapeCity.Win.Editors.ListItem()) : cmbKeiyakuMei.Items.Insert(0, New GrapeCity.Win.Editors.ListItem())
+        '    '            End If
+        '    '            '↑***** 2010/09/15 JBD200 ADD 第3引数=Trueの時、空白項目を追加するよう追加 *****↑
 
-            '        End If
-            '    End With
+        '    '        End If
+        '    '    End With
 
-            '    '契約者コード使用可
-            '    cmbKeiyakuCd.Enabled = blnEnable
-            '    cmbKeiyakuMei.Enabled = blnEnable
+        '    '    '契約者コード使用可
+        '    '    cmbKeiyakuCd.Enabled = blnEnable
+        '    '    cmbKeiyakuMei.Enabled = blnEnable
 
-            '    f_Keiyaku_Data_Select = True
+        '    '    f_Keiyaku_Data_Select = True
 
-            'Catch ex As Exception
-            '    '共通例外処理
-            '    'Show_MessageBox("", ex.Message)
-            'End Try
+        '    'Catch ex As Exception
+        '    '    '共通例外処理
+        '    '    'Show_MessageBox("", ex.Message)
+        '    'End Try
 
 
-            Dim sSql As String = String.Empty
-            Dim sSqlWhere As String = String.Empty  '2015/04/02 JBD368 ADD
-            Dim dstDataSanka As New DataSet
+        '    Dim sSql As String = String.Empty
+        '    Dim sSqlWhere As String = String.Empty  '2015/04/02 JBD368 ADD
+        '    Dim dstDataSanka As New DataSet
 
-            f_Keiyaku_Data_Select = False
+        '    f_Keiyaku_Data_Select = False
 
-            Try
+        '    Try
 
-                sSql = ""
-                If blnNullAddFlg Then   '第3引数=Trueの時、空白項目を追加
-                    'コンボ空白項目追加
-                    sSql = "SELECT "
-                    sSql = sSql & "NULL AS KEIYAKUSYA_CD, NULL AS KEIYAKUSYA_NAME "
-                    sSql = sSql & "FROM DUAL "
-                    sSql = sSql & "UNION ALL "
-                End If
-                sSql = sSql & "SELECT "
-                sSql = sSql & "  KEIYAKUSYA_CD,"
-                sSql = sSql & "  KEIYAKUSYA_NAME"
-                sSql = sSql & " FROM"
-                If strUser = "" Then
-                    sSql = sSql & "  TM_KEIYAKU"
-                Else
-                    sSql = sSql & "  " & strUser & ".TM_KEIYAKU"
-                End If
+        '        sSql = ""
+        '        If blnNullAddFlg Then   '第3引数=Trueの時、空白項目を追加
+        '            'コンボ空白項目追加
+        '            sSql = "SELECT "
+        '            sSql = sSql & "NULL AS KEIYAKUSYA_CD, NULL AS KEIYAKUSYA_NAME "
+        '            sSql = sSql & "FROM DUAL "
+        '            sSql = sSql & "UNION ALL "
+        '        End If
+        '        sSql = sSql & "SELECT "
+        '        sSql = sSql & "  KEIYAKUSYA_CD,"
+        '        sSql = sSql & "  KEIYAKUSYA_NAME"
+        '        sSql = sSql & " FROM"
+        '        If strUser = "" Then
+        '            sSql = sSql & "  TM_KEIYAKU"
+        '        Else
+        '            sSql = sSql & "  " & strUser & ".TM_KEIYAKU"
+        '        End If
 
-                '↓2015/04/02 JBD368 UPD
-                'If strWhere <> "" Then
-                '    sSql = sSql & " WHERE"
-                '    sSql = sSql & " " & strWhere
-                'End If
-                sSqlWhere = ""
-                sSqlWhere = sSqlWhere & " WHERE"
-                '契約区分がNULLのデータは未参加の契約者とみなし、コンボボックスには追加しない。
-                sSqlWhere = sSqlWhere & "   KEIYAKU_KBN IS NOT NULL"
+        '        '↓2015/04/02 JBD368 UPD
+        '        'If strWhere <> "" Then
+        '        '    sSql = sSql & " WHERE"
+        '        '    sSql = sSql & " " & strWhere
+        '        'End If
+        '        sSqlWhere = ""
+        '        sSqlWhere = sSqlWhere & " WHERE"
+        '        '契約区分がNULLのデータは未参加の契約者とみなし、コンボボックスには追加しない。
+        '        sSqlWhere = sSqlWhere & "   KEIYAKU_KBN IS NOT NULL"
 
-                If strWhere <> "" Then
-                    sSqlWhere = sSqlWhere & " AND " & strWhere
-                End If
-                sSql = sSql & sSqlWhere
-                '↑2015/04/02 JBD368 UPD
+        '        If strWhere <> "" Then
+        '            sSqlWhere = sSqlWhere & " AND " & strWhere
+        '        End If
+        '        sSql = sSql & sSqlWhere
+        '        '↑2015/04/02 JBD368 UPD
 
-                If blnNullAddFlg Then   '第3引数=Trueの時、空白項目を追加のため空白を先頭にする
-                    sSql = sSql & " ORDER BY KEIYAKUSYA_CD NULLS FIRST"
-                Else
-                    sSql = sSql & " ORDER BY KEIYAKUSYA_CD"
-                End If
+        '        If blnNullAddFlg Then   '第3引数=Trueの時、空白項目を追加のため空白を先頭にする
+        '            sSql = sSql & " ORDER BY KEIYAKUSYA_CD NULLS FIRST"
+        '        Else
+        '            sSql = sSql & " ORDER BY KEIYAKUSYA_CD"
+        '        End If
 
-                Call f_Select_ODP(dstDataSanka, sSql)
+        '        Call f_Select_ODP(dstDataSanka, sSql)
 
-                'cmbKeiyakuCd.Clear()
-                'cmbKeiyakuMei.Clear()
+        '        'cmbKeiyakuCd.Clear()
+        '        'cmbKeiyakuMei.Clear()
 
-                'With dstDataSanka.Tables(0)
-                '    If .Rows.Count > 0 Then
+        '        'With dstDataSanka.Tables(0)
+        '        '    If .Rows.Count > 0 Then
 
-                '        'コンボボックスにデータをバインド
-                '        cmbKeiyakuCd.DataSource = dstDataSanka.Tables(0)
-                '        '不要なカラムを削除する
-                '        cmbKeiyakuCd.ListColumns.RemoveAt(1)
+        '        '        'コンボボックスにデータをバインド
+        '        '        cmbKeiyakuCd.DataSource = dstDataSanka.Tables(0)
+        '        '        '不要なカラムを削除する
+        '        '        cmbKeiyakuCd.ListColumns.RemoveAt(1)
 
-                '        'コンボボックスにデータをバインド
-                '        cmbKeiyakuMei.DataSource = dstDataSanka.Tables(0)
-                '        '不要なカラムを削除する
-                '        cmbKeiyakuMei.ListColumns.RemoveAt(0)
-                '        '名称のコンボボックスの幅を設定
-                '        cmbKeiyakuMei.ListColumns(0).Width = cmbKeiyakuMei.Width
+        '        '        'コンボボックスにデータをバインド
+        '        '        cmbKeiyakuMei.DataSource = dstDataSanka.Tables(0)
+        '        '        '不要なカラムを削除する
+        '        '        cmbKeiyakuMei.ListColumns.RemoveAt(0)
+        '        '        '名称のコンボボックスの幅を設定
+        '        '        cmbKeiyakuMei.ListColumns(0).Width = cmbKeiyakuMei.Width
 
-                '    End If
-                'End With
+        '        '    End If
+        '        'End With
 
-                ''契約者コード使用可
-                'cmbKeiyakuCd.Enabled = blnEnable
-                'cmbKeiyakuMei.Enabled = blnEnable
+        '        ''契約者コード使用可
+        '        'cmbKeiyakuCd.Enabled = blnEnable
+        '        'cmbKeiyakuMei.Enabled = blnEnable
 
-                f_Keiyaku_Data_Select = True
+        '        f_Keiyaku_Data_Select = True
 
-            Catch ex As Exception
-                '共通例外処理
-                'Show_MessageBox("", ex.Message)
-            End Try
+        '    Catch ex As Exception
+        '        '共通例外処理
+        '        'Show_MessageBox("", ex.Message)
+        '    End Try
 
-        End Function
+        'End Function
 
-        Public Function f_Keiyaku_Data_Select_New(ki As Integer, blnNullAddFlg As Boolean, strUser As String) As DataTable
+        Public Function f_Keiyaku_Data_Select(ki As Integer, blnNullAddFlg As Boolean, strUser As String) As DataTable
             Dim sSql As String = String.Empty
             Dim sSqlWhere As String = String.Empty  '2015/04/02 JBD368 ADD
             Dim dstDataSanka As New DataSet
             sSql = ""
-            'If blnNullAddFlg Then   '第3引数=Trueの時、空白項目を追加
-            '    'コンボ空白項目追加
-            '    sSql = "SELECT "
-            '    sSql = sSql & "NULL AS KEIYAKUSYA_CD, NULL AS KEIYAKUSYA_NAME "
-            '    sSql = sSql & "FROM DUAL "
-            '    sSql = sSql & "UNION ALL "
-            'End If
             sSql = sSql & "SELECT "
             sSql = sSql & "  KEIYAKUSYA_CD,"
             sSql = sSql & "  KEIYAKUSYA_NAME"
@@ -4501,19 +4508,19 @@ ACoDateCheckEdit_Exit3:
         '                 5.blnEnable       Boolean                   コンボの入力可否(TRUE:入力可能 FALSE:入力不可)
         '戻り値          :Boolean(正常True/エラーFalse)
         '------------------------------------------------------------------
-        Public Function f_Keiyaku_Data_Select(ByRef cmbKeiyakuCd As String, _
-                                              ByRef cmbKeiyakuMei As String, _
-                                              ByVal strWhere As String, _
-                                              ByVal blnNullAddFlg As Boolean, _
-                                              ByVal blnEnable As Boolean) As Boolean
+        'Public Function f_Keiyaku_Data_Select(ByRef cmbKeiyakuCd As String, _
+        '                                      ByRef cmbKeiyakuMei As String, _
+        '                                      ByVal strWhere As String, _
+        '                                      ByVal blnNullAddFlg As Boolean, _
+        '                                      ByVal blnEnable As Boolean) As Boolean
 
-            If Not f_Keiyaku_Data_Select(cmbKeiyakuCd, cmbKeiyakuMei, strWhere, blnNullAddFlg, blnEnable, "") Then
-                Return False
-            End If
+        '    If Not f_Keiyaku_Data_Select(cmbKeiyakuCd, cmbKeiyakuMei, strWhere, blnNullAddFlg, blnEnable, "") Then
+        '        Return False
+        '    End If
 
-            Return True
+        '    Return True
 
-        End Function
+        'End Function
 
 
         '------------------------------------------------------------------
@@ -4525,18 +4532,18 @@ ACoDateCheckEdit_Exit3:
         '                 4.blnNullAddFlg   Boolean                   スペース項目をコンボに追加するかしないかのフラグ(False(既定):スペース項目を追加しない　True:スペース項目を追加する)
         '戻り値          :Boolean(正常True/エラーFalse)
         '------------------------------------------------------------------
-        Public Function f_Keiyaku_Data_Select(ByRef cmbKeiyakuCd As String, _
-                                                    ByRef cmbKeiyakuMei As String, _
-                                                    ByVal strWhere As String, _
-                                                    ByVal blnNullAddFlg As Boolean) As Boolean
+        'Public Function f_Keiyaku_Data_Select(ByRef cmbKeiyakuCd As String, _
+        '                                            ByRef cmbKeiyakuMei As String, _
+        '                                            ByVal strWhere As String, _
+        '                                            ByVal blnNullAddFlg As Boolean) As Boolean
 
-            If Not f_Keiyaku_Data_Select(cmbKeiyakuCd, cmbKeiyakuMei, strWhere, blnNullAddFlg, True) Then
-                Return False
-            End If
+        '    If Not f_Keiyaku_Data_Select(cmbKeiyakuCd, cmbKeiyakuMei, strWhere, blnNullAddFlg, True) Then
+        '        Return False
+        '    End If
 
-            Return True
+        '    Return True
 
-        End Function
+        'End Function
 
         '------------------------------------------------------------------
         'プロシージャ名  :f_Keiyaku_Data_Select
@@ -4546,17 +4553,17 @@ ACoDateCheckEdit_Exit3:
         '                 3.strWhere        String                    契約者マスタ検索条件 WHERE句を指定する
         '戻り値          :Boolean(正常True/エラーFalse)
         '------------------------------------------------------------------
-        Public Function f_Keiyaku_Data_Select(ByRef cmbKeiyakuCd As String, _
-                                                    ByRef cmbKeiyakuMei As String, _
-                                                    ByVal strWhere As String) As Boolean
+        'Public Function f_Keiyaku_Data_Select(ByRef cmbKeiyakuCd As String, _
+        '                                            ByRef cmbKeiyakuMei As String, _
+        '                                            ByVal strWhere As String) As Boolean
 
-            If Not f_Keiyaku_Data_Select(cmbKeiyakuCd, cmbKeiyakuMei, strWhere, False, True) Then
-                Return False
-            End If
+        '    If Not f_Keiyaku_Data_Select(cmbKeiyakuCd, cmbKeiyakuMei, strWhere, False, True) Then
+        '        Return False
+        '    End If
 
-            Return True
+        '    Return True
 
-        End Function
+        'End Function
 
         '------------------------------------------------------------------
         'プロシージャ名  :f_Keiyaku_Data_Select
@@ -4565,18 +4572,19 @@ ACoDateCheckEdit_Exit3:
         '                 2.cmbKeiyakuMei    String   契約者名コンボボックス
         '戻り値          :Boolean(正常True/エラーFalse)
         '------------------------------------------------------------------
-        Public Function f_Keiyaku_Data_Select(ByRef cmbKeiyakuCd As String, _
-                                                 ByRef cmbKeiyakuMei As String) As Boolean
+        'Public Function f_Keiyaku_Data_Select(ByRef cmbKeiyakuCd As String, _
+        '                                         ByRef cmbKeiyakuMei As String) As Boolean
 
-            If Not f_Keiyaku_Data_Select(cmbKeiyakuCd, cmbKeiyakuMei, "", False, True) Then
-                Return False
-            End If
+        '    If Not f_Keiyaku_Data_Select(cmbKeiyakuCd, cmbKeiyakuMei, "", False, True) Then
+        '        Return False
+        '    End If
 
-            Return True
+        '    Return True
 
-        End Function
+        'End Function
 
     #End Region
+
     #Region "f_JimuItaku_Data_Select 事務委託先データ取得(防疫互助)"
         '------------------------------------------------------------------
         'プロシージャ名  :f_JimuItaku_Data_Select
@@ -4774,6 +4782,7 @@ ACoDateCheckEdit_Exit3:
         End Function
 
     #End Region
+
     #Region "f_KeiyakuNojo_Data_Select 契約農場データ取得(防疫互助)"
         '------------------------------------------------------------------
         'プロシージャ名  :f_KeiyakuNojo_Data_Select
@@ -4905,7 +4914,6 @@ ACoDateCheckEdit_Exit3:
         End Function
 
     #End Region
-
 
     #End Region
 

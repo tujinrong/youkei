@@ -1,13 +1,11 @@
 ﻿' *******************************************************************
 ' 業務名称　: 互助防疫システム
 ' 機能概要　: 契約者農場マスタメンテナンス
-'             サービス処理
+'            サービス処理
 ' 作成日　　: 2024.07.21
 ' 作成者　　: 宋
 ' 変更履歴　:
 ' *******************************************************************
-
-Imports JbdGjsCommon.JBD.GJS.Common.JbdGjsCommon
 
 Namespace JBD.GJS.Service.GJ8091
 
@@ -42,7 +40,7 @@ Namespace JBD.GJS.Service.GJ8091
                     '4.ビジネスロジック処理
                     '-------------------------------------------------------------
                     'データクエリ
-                    Dim sql = f_Ken_Data_Select_New()
+                    Dim sql = f_Ken_Data_Select()
 
                     'データSelect 
                     Dim ds = f_Select_ODP(db, sql)
@@ -86,7 +84,7 @@ Namespace JBD.GJS.Service.GJ8091
                     '4.ビジネスロジック処理
                     '-------------------------------------------------------------
                     '検索結果出力用ＳＱＬ作成
-                    Dim sql = f_SetForm_Data_New(req)
+                    Dim sql = f_SetForm_Data(req)
 
                     'データSelect 
                     Dim ds = f_Select_ODP(db, sql)
@@ -130,7 +128,7 @@ Namespace JBD.GJS.Service.GJ8091
                     '4.ビジネスロジック処理
                     '-------------------------------------------------------------
                     '"削除結果出力用ＳＱＬ作成
-                    Dim res = f_Data_Deleate_Gj8091(db, req)
+                    Dim res = f_Data_Deleate(db, req)
 
                     '-------------------------------------------------------------
                     '5.データ加工処理
@@ -173,15 +171,19 @@ Namespace JBD.GJS.Service.GJ8091
                     sReq.KI = req.KEIYAKUSYA_NOJO.KI
                     sReq.KEIYAKUSYA_CD = req.KEIYAKUSYA_NOJO.KEIYAKUSYA_CD
                     sReq.NOJO_CD = req.KEIYAKUSYA_NOJO.NOJO_CD
-                    Dim sql = f_SetForm_Data_New(sReq)
+                    Dim sql = f_SetForm_Data(sReq)
 
                     'データSelect 
                     Dim ds = f_Select_ODP(db, sql)
                     Dim dt = ds.Tables(0)
 
-                    If CDate(dt.Rows(0)("UP_DATE")) <>  req.KEIYAKUSYA_NOJO.UP_DATE
-                        Return New DaResponseBase("データを更新できません。\n他のユーザーによって変更された可能性があります。")
-                    End If
+                    'データの独占性
+                    Select Case req.EDIT_KBN
+                        Case Enum編集区分.変更       '変更入力
+                        If CDate(dt.Rows(0)("UP_DATE")) > req.KEIYAKUSYA_NOJO.UP_DATE
+                            Return New DaResponseBase("データを更新できません。\n他のユーザーによって変更された可能性があります。")
+                        End If
+                    End Select
 
                     '保存処理
                     Dim res = f_Data_Update(db, req)

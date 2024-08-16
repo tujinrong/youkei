@@ -7,7 +7,7 @@
 ' *******************************************************************
 
 Namespace JBD.GJS.Db
-    Public Class JbdGjsTokenService
+    Public Class CmTokenService
         ''' <summary>
         ''' ログインの時に呼び出し
         ''' </summary>

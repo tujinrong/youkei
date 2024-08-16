@@ -39,7 +39,7 @@ Namespace JBD.GJS.Service
         ''' <returns></returns>
         Public Function GetPersonalnoDB(personalno As String) As String
             If Not String.IsNullOrEmpty(personalno) Then
-                Return Db.JbdGjsEncryptUtil.RsaDecryptAndAesEncrypt(personalno)
+                Return Db.CmEncryptUtil.RsaDecryptAndAesEncrypt(personalno)
             End If
             Return Nothing
         End Function
@@ -730,7 +730,7 @@ Namespace JBD.GJS.Service
         ''' ログイン時権限データ取得
         ''' </summary>
         Private Function GetDto(db As Db.DaDbContext, token As String, userid As String, regsisyo As String) As Db.tt_aftokenDto
-            Dim tokenseq = Gjs.Db.JbdGjsTokenService.GetTokenUD(token, userid, regsisyo)
+            Dim tokenseq = Gjs.Db.CmTokenService.GetTokenUD(token, userid, regsisyo)
             Dim dto As Db.tt_aftokenDto = New Db.tt_aftokenDto()
             Return dto
             'return db.tt_aftoken.GetDtoByKey(tokenseq);

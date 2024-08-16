@@ -29,7 +29,7 @@ Namespace JBD.GJS.Service.Common
         Public Shared Function GetHeaderVM(db As Db.DaDbContext, vm As GamenHeaderBaseVM, dto As Db.tt_afatenaDto, personalflg As Boolean, publickey As String) As GamenHeaderBaseVM
             ' vm = (GamenHeaderBaseVM)GetHeaderVM(db, vm, dto);
 
-            vm.personalno = If(personalflg AndAlso Not String.IsNullOrEmpty(dto.personalno), Gjs.Db.JbdGjsEncryptUtil.AesDecryptAndRsaEncrypt(dto.personalno, publickey), String.Empty)        '個人番号(暗号化)
+            vm.personalno = If(personalflg AndAlso Not String.IsNullOrEmpty(dto.personalno), Gjs.Db.CmEncryptUtil.AesDecryptAndRsaEncrypt(dto.personalno, publickey), String.Empty)        '個人番号(暗号化)
 
             Return vm
         End Function

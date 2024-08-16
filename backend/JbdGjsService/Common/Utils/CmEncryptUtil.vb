@@ -15,7 +15,7 @@ Imports System.Text
 'using Org.BouncyCastle.Security;
 
 Namespace JBD.GJS.Db
-    Public Module JbdGjsEncryptUtil
+    Public Module CmEncryptUtil
         Private ReadOnly AesKey As String
         Private ReadOnly AesIv As String
         Private ReadOnly RsaPublicKeyPem As String
@@ -53,7 +53,7 @@ Namespace JBD.GJS.Db
         ''' </summary>
         Public Function AesDecryptAndRsaEncrypt(value As String, publicKeyPem As String, Optional key As String = Nothing, Optional iv As String = Nothing) As String
             'DBデータをAES復号化して、RSA暗号化
-            Return JbdGjsEncryptUtil.RsaEncrypt(AesDecrypt(value, key, iv), publicKeyPem)
+            Return CmEncryptUtil.RsaEncrypt(AesDecrypt(value, key, iv), publicKeyPem)
         End Function
 
         ''' <summary>

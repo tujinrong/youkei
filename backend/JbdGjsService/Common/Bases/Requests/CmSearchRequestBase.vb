@@ -17,7 +17,7 @@ Namespace JBD.GJS.Service
         Public Sub SetPersonalno()
             If Not String.IsNullOrEmpty(personalno) Then
                 '復号化
-                personalno = Db.JbdGjsEncryptUtil.RsaDecrypt(personalno)
+                personalno = Db.CmEncryptUtil.RsaDecrypt(personalno)
             End If
         End Sub
     End Class
