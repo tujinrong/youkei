@@ -47,7 +47,6 @@ Namespace JBD.GJS.Service.GJ8091
         'ストアドプロシージャの呼び出し
         wkCmd.Connection = db.Session.Connection
         wkCmd.CommandType = CommandType.StoredProcedure
-        '
         wkCmd.CommandText = "PKG_GJ8091.GJ8091_KEIYAKU_NOJO_DEL"
 
         '引き渡し
@@ -67,8 +66,8 @@ Namespace JBD.GJS.Service.GJ8091
             If wkCmd.Parameters("OU_MSGCD").Value.ToString() = "99" Then
                 '削除済みは政情終了とみなす
                 wkRet = True
+                Return New DaResponseBase(wkCmd.Parameters("OU_MSGNM").Value.ToString() & "。")
             End If
-            Throw New Exception(wkCmd.Parameters("OU_MSGCD").Value.ToString() & ":" & wkCmd.Parameters("OU_MSGNM").Value.ToString())
         End If
 
         wkRet = True

@@ -24,11 +24,6 @@ Namespace JBD.GJS.Service.GJ8091
         ''' </summary>
         Public Property KEIYAKUSYA_CD As Integer = Nothing
 
-        '''' <summary>
-        '''' 契約者名
-        '''' </summary>
-        'Public Property KEIYAKUSYA_NAME As String = String.Empty
-
         ''' <summary>
         ''' 契約者農場
         ''' </summary>

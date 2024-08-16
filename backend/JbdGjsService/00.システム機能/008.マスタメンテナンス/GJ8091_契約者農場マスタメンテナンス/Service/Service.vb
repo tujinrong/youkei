@@ -127,7 +127,7 @@ Namespace JBD.GJS.Service.GJ8091
                     '-------------------------------------------------------------
                     '4.ビジネスロジック処理
                     '-------------------------------------------------------------
-                    '"削除結果出力用ＳＱＬ作成
+                    '削除結果出力用ＳＱＬ作成
                     Dim res = f_Data_Deleate(db, req)
 
                     '-------------------------------------------------------------
@@ -176,6 +176,9 @@ Namespace JBD.GJS.Service.GJ8091
                     'データSelect 
                     Dim ds = f_Select_ODP(db, sql)
                     Dim dt = ds.Tables(0)
+                    If dt.Rows.Count ＝ 0 Then
+                        Return New DaResponseBase("データを更新できません。\n他のユーザーによって変更された可能性があります。")
+                    End If
 
                     'データの独占性
                     Select Case req.EDIT_KBN
