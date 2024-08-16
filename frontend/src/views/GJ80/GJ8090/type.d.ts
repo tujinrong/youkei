@@ -41,6 +41,8 @@ export interface DeleteRequest extends DaRequestBase {
   KEIYAKUSYA_CD: number
   /**農場コード */
   NOJO_CD: number
+  /**更新時間 */
+  UP_DATE: Date
 }
 
 /**検索処理(詳細画面) */

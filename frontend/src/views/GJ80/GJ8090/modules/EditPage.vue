@@ -263,6 +263,7 @@ onMounted(async () => {
       NOJO_CD: formData.NOJO_CD,
     }).then((res) => {
       Object.assign(formData, res.KEIYAKUSYA_NOJO)
+      upddttm = res.KEIYAKUSYA_NOJO.UP_DATE
       nextTick(() => editJudge.reset())
     })
   }
@@ -307,6 +308,8 @@ const goList = () => {
     router.push({ name: route.name })
   })
 }
+
+//登録処理
 const saveData = async () => {
   await validate()
   showSaveModal({
@@ -321,6 +324,8 @@ const saveData = async () => {
     },
   })
 }
+
+//削除処理
 const deleteData = () => {
   showDeleteModal({
     handleDB: true,
@@ -330,6 +335,7 @@ const deleteData = () => {
         KI: formData.KI,
         KEIYAKUSYA_CD: formData.KEIYAKUSYA_CD,
         NOJO_CD: formData.NOJO_CD,
+        UP_DATE: upddttm,
       })
       router.push({ name: route.name as string, query: { refresh: '1' } })
       message.success(DELETE_OK_INFO.Msg)
