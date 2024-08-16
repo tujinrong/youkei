@@ -217,9 +217,10 @@ onMounted(() => {
 })
 
 //初期化処理
-const getInitData = (KI?) => {
+const getInitData = (KI) => {
   Init({ KI: KI }).then((res) => {
     searchParams.KI = res.KI
+    searchParams.KEIYAKUSYA_CD = undefined
     KEIYAKUSYA_CD_NAME_LIST.value = res.KEIYAKUSYA_CD_NAME_LIST
   })
 }
