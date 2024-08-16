@@ -413,11 +413,11 @@ export const I060002 = {
 }
 export const SAVE_CONFIRM = {
   No: 'C001001',
-  Msg: '登録処理を行います。\nよろしいですか？',
+  Msg: '保存します。よろしいですか？',
 }
 export const CLOSE_CONFIRM = {
   No: 'C001002',
-  Msg: '登録処理を行っていません。\n画面を閉じてもよろしいですか？\n（入力はキャンセルされます）',
+  Msg: 'データが変更されています。よろしいですか？',
 }
 export const MOVE_CONFIRM = {
   No: 'C001003',
@@ -425,7 +425,7 @@ export const MOVE_CONFIRM = {
 }
 export const DELETE_CONFIRM = {
   No: 'C001004',
-  Msg: '削除処理を行います。\nよろしいですか？',
+  Msg: '指定されたデータを削除します。よろしいですか？',
 }
 export const CLEAR_CONFIRM = {
   No: 'C001005',

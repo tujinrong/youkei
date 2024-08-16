@@ -119,7 +119,7 @@
           <a-col span="24">
             <th class="required">明細番号</th>
             <td>
-              <a-form-item v-bind="validateInfos.MEISAINO">
+              <a-form-item v-bind="validateInfos.MEISAI_NO">
                 <a-input-number
                   v-model:value="formData.MEISAI_NO"
                   :min="0"
@@ -143,7 +143,6 @@ import { showDeleteModal, showSaveModal } from '@/utils/modal'
 import {
   DELETE_CONFIRM,
   DELETE_OK_INFO,
-  ITEM_ILLEGAL_ERROR,
   ITEM_REQUIRE_ERROR,
   SAVE_CONFIRM,
   SAVE_OK_INFO,
@@ -214,7 +213,8 @@ const rules = reactive({
           )
         } else if (value.replace(/[^0-9]/g, '').length < 7) {
           return Promise.reject(
-            ITEM_ILLEGAL_ERROR.Msg.replace('{0}', '郵便番号')
+            // ITEM_ILLEGAL_ERROR.Msg.replace('{0}', '郵便番号')
+            ITEM_REQUIRE_ERROR.Msg.replace('{0}', '郵便番号')
           )
         }
         return Promise.resolve()
@@ -227,7 +227,7 @@ const rules = reactive({
       message: ITEM_REQUIRE_ERROR.Msg.replace('{0}', '住所２'),
     },
   ],
-  MEISAINO: [
+  MEISAI_NO: [
     {
       required: true,
       message: ITEM_REQUIRE_ERROR.Msg.replace('{0}', '明細番号'),
@@ -247,7 +247,7 @@ onMounted(async () => {
   formData.KI = Number(route.query.KI)
   formData.KEIYAKUSYA_CD = Number(route.query.KEIYAKUSYA_CD)
   formData.KEIYAKUSYA_NAME =
-    route.query.KEIYAKUSYA_CD + ':' + route.query.KEIYAKUSYA_NAME
+    route.query.KEIYAKUSYA_CD + ' : ' + route.query.KEIYAKUSYA_NAME
   if (!isNew) formData.NOJO_CD = Number(route.query.NOJO_CD)
 
   //都道府県プルダウンリスト

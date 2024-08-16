@@ -101,7 +101,7 @@
       >
         <vxe-column
           field="NOJO_CD"
-          title="農場番号"
+          title="農場コード"
           min-width="80"
           sortable
           :params="{ order: 1 }"
