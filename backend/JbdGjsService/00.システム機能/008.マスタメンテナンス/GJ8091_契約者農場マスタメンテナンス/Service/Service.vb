@@ -129,7 +129,7 @@ Namespace JBD.GJS.Service.GJ8091
                     '-------------------------------------------------------------
                     '4.ビジネスロジック処理
                     '-------------------------------------------------------------
-                    '検索結果出力用ＳＱＬ作成
+                    '"削除結果出力用ＳＱＬ作成
                     Dim res = f_Data_Deleate_Gj8091(db, req)
 
                     '-------------------------------------------------------------
@@ -163,12 +163,27 @@ Namespace JBD.GJS.Service.GJ8091
                     '-------------------------------------------------------------
                     'チェックトークン
                     Dim uid = CheckToken(req.token)
-                    If String.IsNullOrEmpty(uid) Then Return New SearchDetailResponse("トークンが正しくありません。")
+                    If String.IsNullOrEmpty(uid) Then Return New DaResponseBase("トークンが正しくありません。")
 
                     '-------------------------------------------------------------
                     '4.ビジネスロジック処理
                     '-------------------------------------------------------------
                     '検索結果出力用ＳＱＬ作成
+                    Dim sReq = New SearchDetailRequest
+                    sReq.KI = req.KEIYAKUSYA_NOJO.KI
+                    sReq.KEIYAKUSYA_CD = req.KEIYAKUSYA_NOJO.KEIYAKUSYA_CD
+                    sReq.NOJO_CD = req.KEIYAKUSYA_NOJO.NOJO_CD
+                    Dim sql = f_SetForm_Data_New(sReq)
+
+                    'データSelect 
+                    Dim ds = f_Select_ODP(db, sql)
+                    Dim dt = ds.Tables(0)
+
+                    If CDate(dt.Rows(0)("UP_DATE")) <>  req.KEIYAKUSYA_NOJO.UP_DATE
+                        Return New DaResponseBase("データを更新できません。\n他のユーザーによって変更された可能性があります。")
+                    End If
+
+                    '保存処理
                     Dim res = f_Data_Update(db, req)
 
                     '-------------------------------------------------------------
