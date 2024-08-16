@@ -329,8 +329,12 @@ const saveData = async () => {
           },
           EDIT_KBN: isNew ? Enum編集区分.新規 : Enum編集区分.変更,
         })
-        router.push({ name: route.name as string, query: { refresh: '1' } })
-        message.success(SAVE_OK_INFO.Msg)
+          .then(() => {
+            message.success(SAVE_OK_INFO.Msg)
+          })
+          .finally(() => {
+            router.push({ name: route.name as string, query: { refresh: '1' } })
+          })
       } catch (error) {}
     },
   })
@@ -349,8 +353,12 @@ const deleteData = () => {
           NOJO_CD: formData.NOJO_CD,
           UP_DATE: upddttm,
         })
-        router.push({ name: route.name as string, query: { refresh: '1' } })
-        message.success(DELETE_OK_INFO.Msg)
+          .then(() => {
+            message.success(DELETE_OK_INFO.Msg)
+          })
+          .finally(() => {
+            router.push({ name: route.name as string, query: { refresh: '1' } })
+          })
       } catch (error) {}
     },
   })
