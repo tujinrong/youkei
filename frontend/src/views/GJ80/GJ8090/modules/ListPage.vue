@@ -105,6 +105,7 @@
           width="200"
           sortable
           :params="{ order: 1 }"
+          :resizable="true"
         >
           <template #default="{ row }">
             <a @click="forwardEdit(row.NOJO_CD)">{{ row.NOJO_CD }}</a>
@@ -116,6 +117,7 @@
           min-width="400"
           sortable
           :params="{ order: 2 }"
+          :resizable="true"
         >
           <template #default="{ row }">
             <a @click="forwardEdit(row.NOJO_CD)">{{ row.NOJO_NAME }}</a>
@@ -127,7 +129,7 @@
           min-width="700"
           sortable
           :params="{ order: 3 }"
-          :resizable="false"
+          :resizable="true"
         ></vxe-column>
       </vxe-table>
     </a-card>
