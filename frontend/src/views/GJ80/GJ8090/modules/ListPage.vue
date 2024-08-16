@@ -73,7 +73,7 @@
         <a-space>
           <a-button type="primary" @click="searchAll">検索</a-button>
           <a-button type="primary" @click="forwardNew">新規</a-button>
-          <a-button type="primary" @click="clear">クリア</a-button>
+          <a-button type="primary" @click="reset">クリア</a-button>
         </a-space>
         <close-page />
       </div>
@@ -166,6 +166,7 @@ const createDefaultParams = (): SearchRequest => {
   } as SearchRequest
 }
 const searchParams = reactive(createDefaultParams())
+
 const keyList = reactive({
   KI: undefined,
   KEIYAKUSYA_CD: undefined,
@@ -271,6 +272,14 @@ const { pageParams, totalCount, searchData, clear } = useSearch({
   params: toRef(() => searchParams),
   validate,
 })
+
+//クリア
+async function reset() {
+  Object.assign(searchParams, createDefaultParams())
+  await getInitData(0)
+  await clear()
+  await clearValidate()
+}
 
 const searchAll = async () => {
   const res = await searchData()
