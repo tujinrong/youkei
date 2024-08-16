@@ -261,11 +261,15 @@ onMounted(async () => {
       KI: formData.KI,
       KEIYAKUSYA_CD: formData.KEIYAKUSYA_CD,
       NOJO_CD: formData.NOJO_CD,
-    }).then((res) => {
-      Object.assign(formData, res.KEIYAKUSYA_NOJO)
-      upddttm = res.KEIYAKUSYA_NOJO.UP_DATE
-      nextTick(() => editJudge.reset())
     })
+      .then((res) => {
+        Object.assign(formData, res.KEIYAKUSYA_NOJO)
+        upddttm = res.KEIYAKUSYA_NOJO.UP_DATE
+        nextTick(() => editJudge.reset())
+      })
+      .catch((error) => {
+        router.push({ name: route.name as string, query: { refresh: '1' } })
+      })
   } else {
     nextTick(() => editJudge.reset())
   }
@@ -317,12 +321,17 @@ const saveData = async () => {
   showSaveModal({
     content: SAVE_CONFIRM.Msg,
     onOk: async () => {
-      await Save({
-        KEIYAKUSYA_NOJO: { ...formData, UP_DATE: isNew ? undefined : upddttm },
-        EDIT_KBN: isNew ? Enum編集区分.新規 : Enum編集区分.変更,
-      })
-      router.push({ name: route.name as string, query: { refresh: '1' } })
-      message.success(SAVE_OK_INFO.Msg)
+      try {
+        await Save({
+          KEIYAKUSYA_NOJO: {
+            ...formData,
+            UP_DATE: isNew ? undefined : upddttm,
+          },
+          EDIT_KBN: isNew ? Enum編集区分.新規 : Enum編集区分.変更,
+        })
+        router.push({ name: route.name as string, query: { refresh: '1' } })
+        message.success(SAVE_OK_INFO.Msg)
+      } catch (error) {}
     },
   })
 }
@@ -333,14 +342,16 @@ const deleteData = () => {
     handleDB: true,
     content: DELETE_CONFIRM.Msg,
     onOk: async () => {
-      await Delete({
-        KI: formData.KI,
-        KEIYAKUSYA_CD: formData.KEIYAKUSYA_CD,
-        NOJO_CD: formData.NOJO_CD,
-        UP_DATE: upddttm,
-      })
-      router.push({ name: route.name as string, query: { refresh: '1' } })
-      message.success(DELETE_OK_INFO.Msg)
+      try {
+        await Delete({
+          KI: formData.KI,
+          KEIYAKUSYA_CD: formData.KEIYAKUSYA_CD,
+          NOJO_CD: formData.NOJO_CD,
+          UP_DATE: upddttm,
+        })
+        router.push({ name: route.name as string, query: { refresh: '1' } })
+        message.success(DELETE_OK_INFO.Msg)
+      } catch (error) {}
     },
   })
 }
