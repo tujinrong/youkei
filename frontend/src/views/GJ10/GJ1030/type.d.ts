@@ -17,26 +17,28 @@ export interface PreviewRequest extends CmSearchRequestBase {
   KI: number
   /**対象日(現在) */
   TAISYOBI_YMD: string
-  /**契約者区分コードFROM */
-  KEIYAKU_KBN_CD_FM?: number
-  /**契約者区分コードTO */
-  KEIYAKU_KBN_CD_TO?: number
-  /**契約状況[新規契約者] */
-  KEIYAKU_JYOKYO_SHINKI: boolean
-  /**契約状況[継続契約者] */
-  KEIYAKU_JYOKYO_KEIZOKU: boolean
-  /**契約状況[中止契約者] */
-  KEIYAKU_JYOKYO_CHUSHI: boolean
-  /**契約状況[廃業者] */
-  KEIYAKU_JYOKYO_HAIGYO: boolean
-  /**事務委託先番号コードFROM */
-  ITAKU_CD_FM?: number
-  /**事務委託先番号コードTO */
-  ITAKU_CD_TO?: number
-  /**契約者番号コードFROM */
-  KEIYAKUSYA_CD_FM?: number
-  /**契約者番号コードTO */
-  KEIYAKUSYA_CD_TO?: number
+  /**契約者区分コード */
+  KEIYAKU_KBN_CD: {
+    FROM?: number
+    TO?: number
+  }
+  /**契約状況 */
+  KEIYAKU_JYOKYO: {
+    SHINKI: boolean
+    KEIZOKU: boolean
+    CHUSHI: boolean
+    HAIGYO: boolean
+  }
+  /**事務委託先番号コード */
+  ITAKU_CD: {
+    FROM?: number
+    TO?: number
+  }
+  /**契約者番号コード */
+  KEIYAKUSYA_CD: {
+    FROM?: number
+    TO?: number
+  }
 }
 
 //-------------------------------------------------------------------
@@ -48,11 +50,11 @@ export interface InitResponse extends DaResponseBase {
   /**対象期 */
   KI: number
   /**契約区分情報プルダウンリスト */
-  KEIYAKU_KBN_CD_NAME_LIST: CodeNameModel
+  KEIYAKU_KBN_CD_NAME_LIST: CodeNameModel[]
   /**事務委託先情報プルダウンリスト */
-  ITAKU_CD_NAME_LIST: CodeNameModel
+  ITAKU_CD_NAME_LIST: CodeNameModel[]
   /**契約者番号情報プルダウンリスト */
-  KEIYAKUSYA_CD_NAME_LIST: CodeNameModel
+  KEIYAKUSYA_CD_NAME_LIST: CodeNameModel[]
 }
 
 //-------------------------------------------------------------------

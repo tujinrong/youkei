@@ -22,7 +22,8 @@ const route = useRoute()
 
 const channel = new BroadcastChannel('channel_preview')
 channel.onmessage = (event) => {
-  console.log('Received:', event.data)
+  const data = JSON.parse(event.data)
+  console.log(data)
 }
 //--------------------------------------------------------------------------
 //フック関数

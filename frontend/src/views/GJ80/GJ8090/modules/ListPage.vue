@@ -100,7 +100,7 @@
         @sort-change="(e) => changeTableSort(e, toRef(pageParams, 'ORDER_BY'))"
       >
         <vxe-column
-          field="noujyocd"
+          field="NOJO_CD"
           title="農場番号"
           min-width="80"
           sortable
@@ -112,7 +112,7 @@
           </template>
         </vxe-column>
         <vxe-column
-          field="noujyomei"
+          field="NOJO_NAME"
           title="農場名"
           min-width="160"
           sortable

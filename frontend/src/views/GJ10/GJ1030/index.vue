@@ -99,11 +99,11 @@
 </template>
 
 <script setup lang="ts">
-import { reactive, ref, watch, computed, onUnmounted } from 'vue'
+import { reactive, ref, watch, computed, onMounted, onUnmounted } from 'vue'
 import DateJp from '@/components/Selector/DateJp/index.vue'
-import { showInfoModal } from '@/utils/modal'
 import { ITEM_REQUIRE_ERROR } from '@/constants/msg'
 import { Form } from 'ant-design-vue'
+import { Init } from './service'
 
 //--------------------------------------------------------------------------
 //データ定義
@@ -171,6 +171,19 @@ const host = window.location.href.includes('localhost')
 const URL = computed(() => {
   return `http://${host}/preview`
 })
+
+//---------------------------------------------------------------------------
+//フック関数
+//--------------------------------------------------------------------------
+onMounted(() => {
+  // Init().then((res) => {
+  //   formData.KI = res.KI //対象期
+  //   KEIYAKU_KBN_CD_NAME_LIST.value = res.KEIYAKU_KBN_CD_NAME_LIST //契約区分
+  //   ITAKU_CD_NAME_LIST.value = res.ITAKU_CD_NAME_LIST //事務委託先
+  //   KEIYAKUSYA_CD_NAME_LIST.value = res.KEIYAKUSYA_CD_NAME_LIST //契約者番号
+  // })
+})
+
 //--------------------------------------------------------------------------
 //メソッド
 //--------------------------------------------------------------------------
@@ -288,7 +301,8 @@ async function onPreview() {
 const channel = new BroadcastChannel('channel_preview')
 channel.onmessage = (event) => {
   if (event.data.isMounted) {
-    channel.postMessage({ xxx: 'Hello, World!' })
+    debugger
+    channel.postMessage(JSON.stringify(formData))
   }
 }
 onUnmounted(() => {
