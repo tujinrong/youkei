@@ -45,20 +45,17 @@
             <a-col v-bind="layout">
               <th class="required">契約状況</th>
               <td>
-                <a-space class="flex-wrap">
-                  <a-checkbox v-model:checked="formData.KEIYAKU_JYOKYO_SHINKI"
-                    >新規契約者</a-checkbox
-                  >
-                  <a-checkbox v-model:checked="formData.KEIYAKU_JYOKYO_KEIZOKU"
-                    >継続契約者</a-checkbox
-                  >
-                  <a-checkbox v-model:checked="formData.KEIYAKU_JYOKYO_CHUSHI"
-                    >中止者</a-checkbox
-                  >
-                  <a-checkbox v-model:checked="formData.KEIYAKU_JYOKYO_HAIGYO"
-                    >廃業者</a-checkbox
-                  >
-                </a-space>
+                <a-form-item v-bind="validateInfos.KEIYAKU_JYOKYO">
+                  <a-space class="flex-wrap">
+                    <a-checkbox
+                      v-for="(label, key) in KEIYAKU_JYOKYO_LABELS"
+                      :key="key"
+                      v-model:checked="formData.KEIYAKU_JYOKYO[key]"
+                    >
+                      {{ label }}
+                    </a-checkbox></a-space
+                  ></a-form-item
+                >
               </td>
             </a-col>
             <a-col v-bind="layout">
@@ -119,10 +116,12 @@ const createDefaultParams = () => {
       FROM: undefined,
       TO: undefined,
     },
-    KEIYAKU_JYOKYO_SHINKI: true,
-    KEIYAKU_JYOKYO_KEIZOKU: true,
-    KEIYAKU_JYOKYO_CHUSHI: true,
-    KEIYAKU_JYOKYO_HAIGYO: true,
+    KEIYAKU_JYOKYO: {
+      SHINKI: true,
+      KEIZOKU: true,
+      CHUSHI: true,
+      HAIGYO: true,
+    },
     ITAKU_CD: {
       FROM: undefined,
       TO: undefined,
@@ -134,6 +133,13 @@ const createDefaultParams = () => {
   }
 }
 const formData = reactive(createDefaultParams())
+
+const KEIYAKU_JYOKYO_LABELS = {
+  SHINKI: '新規契約者',
+  KEIZOKU: '継続契約者',
+  CHUSHI: '中止者',
+  HAIGYO: '廃業者',
+}
 
 const KEIYAKU_KBN_CD_NAME_LIST = ref<CodeNameModel[]>([
   { CODE: 1, NAME: '家族' },
@@ -185,19 +191,8 @@ const rules = reactive({
           TO
         }
       ) => {
-        if (value.FROM && !value.TO) {
-          return Promise.reject(
-            ITEM_REQUIRE_ERROR.Msg.replace('{0}', '契約区分To')
-          )
-        }
-        if (!value.FROM && value.TO) {
-          return Promise.reject(
-            ITEM_REQUIRE_ERROR.Msg.replace('{0}', '契約区分From')
-          )
-        }
-        if (value.FROM > value.TO) {
-          return Promise.reject('指定された契約区分の範囲が正しくありません。')
-        }
+        const result = rangeCheck(value.FROM, value.TO, '契約区分')
+        if (!result.flag) return Promise.reject(result.content)
         return Promise.resolve()
       },
     },
@@ -211,21 +206,8 @@ const rules = reactive({
           TO
         }
       ) => {
-        if (value.FROM && !value.TO) {
-          return Promise.reject(
-            ITEM_REQUIRE_ERROR.Msg.replace('{0}', '事業委託先To')
-          )
-        }
-        if (!value.FROM && value.TO) {
-          return Promise.reject(
-            ITEM_REQUIRE_ERROR.Msg.replace('{0}', '事業委託先From')
-          )
-        }
-        if (value.FROM > value.TO) {
-          return Promise.reject(
-            '指定された事業委託先の範囲が正しくありません。'
-          )
-        }
+        const result = rangeCheck(value.FROM, value.TO, '事業委託先')
+        if (!result.flag) return Promise.reject(result.content)
         return Promise.resolve()
       },
     },
@@ -239,19 +221,19 @@ const rules = reactive({
           TO
         }
       ) => {
-        if (value.FROM && !value.TO) {
+        const result = rangeCheck(value.FROM, value.TO, '契約者番号')
+        if (!result.flag) return Promise.reject(result.content)
+        return Promise.resolve()
+      },
+    },
+  ],
+  KEIYAKU_JYOKYO: [
+    {
+      validator: (_rule, value) => {
+        const values = Object.values(value)
+        if (!values.some((el) => el === true)) {
           return Promise.reject(
-            ITEM_REQUIRE_ERROR.Msg.replace('{0}', '契約者番号To')
-          )
-        }
-        if (!value.FROM && value.TO) {
-          return Promise.reject(
-            ITEM_REQUIRE_ERROR.Msg.replace('{0}', '契約者番号From')
-          )
-        }
-        if (value.FROM > value.TO) {
-          return Promise.reject(
-            '指定された契約者番号の範囲が正しくありません。'
+            ITEM_REQUIRE_ERROR.Msg.replace('{0}', '契約状況')
           )
         }
         return Promise.resolve()
@@ -268,55 +250,21 @@ const rules = reactive({
 
 const { validate, validateInfos } = Form.useForm(formData, rules)
 
-function validateSearchParams() {
-  let flag = true
-  if (
-    !formData.KEIYAKU_JYOKYO_SHINKI &&
-    !formData.KEIYAKU_JYOKYO_KEIZOKU &&
-    !formData.KEIYAKU_JYOKYO_CHUSHI &&
-    !formData.KEIYAKU_JYOKYO_HAIGYO
-  ) {
-    showInfoModal({
-      type: 'error',
-      title: 'エラー',
-      content: ITEM_REQUIRE_ERROR.Msg.replace('{0}', '契約状況'),
-    })
-    flag = false
-  }
-  return flag
-}
-
-const validateRequiredItemAndRange = (
-  from: number | undefined,
-  to: number | undefined,
-  itemName: string
-) => {
-  let flag = true
+const rangeCheck = (from: number, to: number, itemName: string) => {
+  let result = { flag: true, content: '' }
   if (from && !to) {
-    showInfoModal({
-      type: 'error',
-      title: 'エラー',
-      content: ITEM_REQUIRE_ERROR.Msg.replace('{0}', itemName + 'To'),
-    })
-    flag = false
-  } else if (!from && to) {
-    showInfoModal({
-      type: 'error',
-      title: 'エラー',
-      content: ITEM_REQUIRE_ERROR.Msg.replace('{0}', itemName + 'From'),
-    })
-    flag = false
-  } else if (from && to) {
-    if (from > to) {
-      showInfoModal({
-        type: 'error',
-        title: 'エラー',
-        content: '指定された' + itemName + 'の範囲が正しくありません。',
-      })
-      flag = false
-    }
+    result.flag = false
+    result.content = ITEM_REQUIRE_ERROR.Msg.replace('{0}', itemName + 'To')
   }
-  return flag
+  if (!from && to) {
+    result.flag = false
+    result.content = ITEM_REQUIRE_ERROR.Msg.replace('{0}', itemName + 'From')
+  }
+  if (from > to) {
+    result.flag = false
+    result.content = '指定された' + itemName + 'の範囲が正しくありません。'
+  }
+  return result
 }
 
 const clear = () => {
@@ -325,13 +273,11 @@ const clear = () => {
 
 //プレビューボタンを押す時
 async function onPreview() {
+  await validate()
   const openNew = () => {
     window.open(URL.value, '_blank')
   }
-  await validate()
-  if (validateSearchParams()) {
-    openNew()
-  }
+  openNew()
 }
 
 //--------------------------------------------------------------------------
