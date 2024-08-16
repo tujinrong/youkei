@@ -276,8 +276,8 @@ const { pageParams, totalCount, searchData, clear } = useSearch({
 //クリア
 async function reset() {
   Object.assign(searchParams, createDefaultParams())
-  await getInitData(0)
   await clear()
+  await getInitData(0)
   await clearValidate()
 }
 
@@ -306,6 +306,7 @@ watch(
   (newVal) => {
     if (newVal) {
       getInitData(newVal)
+      clearValidate()
     }
   }
 )
