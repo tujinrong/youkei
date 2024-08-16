@@ -176,16 +176,20 @@ Namespace JBD.GJS.Service.GJ8091
                     'データSelect 
                     Dim ds = f_Select_ODP(db, sql)
                     Dim dt = ds.Tables(0)
-                    If dt.Rows.Count ＝ 0 Then
-                        Return New DaResponseBase("データを更新できません。\n他のユーザーによって変更された可能性があります。")
-                    End If
 
                     'データの独占性
                     Select Case req.EDIT_KBN
                         Case Enum編集区分.変更       '変更入力
-                        If CDate(dt.Rows(0)("UP_DATE")) > req.KEIYAKUSYA_NOJO.UP_DATE
-                            Return New DaResponseBase("データを更新できません。\n他のユーザーによって変更された可能性があります。")
-                        End If
+                            If dt.Rows.Count ＝ 0 Then
+                                Return New DaResponseBase("既に削除されています。")
+                            End If
+                            If CDate(dt.Rows(0)("UP_DATE")) > req.KEIYAKUSYA_NOJO.UP_DATE
+                                Return New DaResponseBase("データを更新できません。他のユーザーによって変更された可能性があります。")
+                            End If
+                        Case Enum編集区分.新規       '新規入力
+                            If dt.Rows.Count > 0 Then
+                                Return New DaResponseBase("データは既に登録されています。")
+                            End If
                     End Select
 
                     '保存処理

@@ -35,22 +35,27 @@ Namespace JBD.GJS.Service.GJ8091
         ''' 検索処理_詳細画面処理
         ''' </summary>
         Public Shared Function SearchDetailResponse(dt As DataTable) As SearchDetailResponse
-            Dim item = New SearchDetailResponse()
-            ' dt をループし、List にデータを追加します。
-            Dim row As DataRow = dt.Rows(0)
-            item.KEIYAKUSYA_NOJO.KI = Cint(row("KI").ToString())
-            item.KEIYAKUSYA_NOJO.KEIYAKUSYA_CD = Cint(row("KEIYAKUSYA_CD").ToString())
-            item.KEIYAKUSYA_NOJO.NOJO_CD = Cint(row("NOJO_CD").ToString())
-            item.KEIYAKUSYA_NOJO.NOJO_NAME = row("NOJO_NAME").ToString()
-            item.KEIYAKUSYA_NOJO.KEN_CD = Cint(row("KEN_CD").ToString())
-            item.KEIYAKUSYA_NOJO.ADDR_POST = row("ADDR_POST").ToString()
-            item.KEIYAKUSYA_NOJO.ADDR_1 = row("ADDR_1").ToString()
-            item.KEIYAKUSYA_NOJO.ADDR_2 = row("ADDR_2").ToString()           
-            item.KEIYAKUSYA_NOJO.ADDR_3 = row("ADDR_3").ToString()  
-            item.KEIYAKUSYA_NOJO.ADDR_4 = row("ADDR_4").ToString()  
-            item.KEIYAKUSYA_NOJO.MEISAI_NO = Cint(row("MEISAI_NO").ToString())
-            item.KEIYAKUSYA_NOJO.UP_DATE = Cdate(row("UP_DATE"))  
-            Return item
+            'データ結果判定
+            If dt.Rows.Count > 0 Then
+                ' dt をループし、List にデータを追加します。
+                Dim row As DataRow = dt.Rows(0)
+                Dim item = New SearchDetailResponse()
+                item.KEIYAKUSYA_NOJO.KI = Cint(row("KI").ToString())
+                item.KEIYAKUSYA_NOJO.KEIYAKUSYA_CD = Cint(row("KEIYAKUSYA_CD").ToString())
+                item.KEIYAKUSYA_NOJO.NOJO_CD = Cint(row("NOJO_CD").ToString())
+                item.KEIYAKUSYA_NOJO.NOJO_NAME = row("NOJO_NAME").ToString()
+                item.KEIYAKUSYA_NOJO.KEN_CD = Cint(row("KEN_CD").ToString())
+                item.KEIYAKUSYA_NOJO.ADDR_POST = row("ADDR_POST").ToString()
+                item.KEIYAKUSYA_NOJO.ADDR_1 = row("ADDR_1").ToString()
+                item.KEIYAKUSYA_NOJO.ADDR_2 = row("ADDR_2").ToString()           
+                item.KEIYAKUSYA_NOJO.ADDR_3 = row("ADDR_3").ToString()  
+                item.KEIYAKUSYA_NOJO.ADDR_4 = row("ADDR_4").ToString()  
+                item.KEIYAKUSYA_NOJO.MEISAI_NO = Cint(row("MEISAI_NO").ToString())
+                item.KEIYAKUSYA_NOJO.UP_DATE = Cdate(row("UP_DATE"))
+                Return item
+            Else
+                Return New SearchDetailResponse("該当デ一タが存在しませんでした。")
+            End If
         End Function
     End Class
 End Namespace

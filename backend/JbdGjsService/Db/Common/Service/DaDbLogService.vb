@@ -666,7 +666,7 @@ Try
             }
             Using cmd As New OracleCommand(insertSql, _conn)
                 cmd.Parameters.AddRange(insertParams.ToArray())
-Try
+                Try
                     Dim result = cmd.ExecuteNonQuery()
                 Catch ex As Exception
                     Console.WriteLine(ex.Message)
