@@ -226,7 +226,7 @@ const getInitData = (KI: number, initflg: boolean) => {
     if (initflg) searchParams.KI = res.KI
     searchParams.KEIYAKUSYA_CD = undefined
     KEIYAKUSYA_CD_NAME_LIST.value = res.KEIYAKUSYA_CD_NAME_LIST
-    nextTick(() => clearValidate)
+    nextTick(() => clearValidate())
   })
 }
 
