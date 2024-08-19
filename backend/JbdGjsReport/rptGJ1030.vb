@@ -1,4 +1,6 @@
 ﻿
+Imports System.Data
+
 Interface InterfaceRptGJ1030
     Sub sub1(wkDSRep As DataSet)
 End Interface
@@ -57,7 +59,7 @@ Public Class rptGJ1030
             'ヘッダ用の値を保管
             wkAR.pKIKIN2 = pKIKIN2      '2017/07/14　追加
             ' 用紙サイズを A4横 に設定します。
-            wkAR.PageSettings.PaperKind = System.Drawing.Printing.PaperKind.A4
+            wkAR.PageSettings.PaperKind = 9
             wkAR.PageSettings.Orientation = GrapeCity.ActiveReports.Document.Section.PageOrientation.Landscape
             ' 上下の余白を 1.0cm に設定します。
             wkAR.PageSettings.Margins.Top = GrapeCity.ActiveReports.SectionReport.CmToInch(myYOHAKU_UP)

@@ -621,7 +621,6 @@ End Sub
             If _conn.State = Data.ConnectionState.Closed Then
                 _conn.Open()
             End If
-            'Dim dblogseq = DateTime.Now.ToString("yyyyMMddHHmmssfff")
             Dim insertSql As String = "INSERT INTO tt_aflogdb (dblogseq, sessionseq, sql, msg, reguserid, regdttm ) VALUES ( tt_aflogdb_seq.nextval, :sessionseq, :sql, :msg, :reguserid, :regdttm)"
             Dim insertParams As New List(Of OracleParameter) From {
                 New OracleParameter("sessionseq", dto.sessionseq),
@@ -684,7 +683,6 @@ Try
             If _conn.State = Data.ConnectionState.Closed Then
                 _conn.Open()
             End If
-            'Dim dblogseq = DateTime.Now.ToString("yyyyMMddHHmmssfff")
             Dim insertSql As String = "INSERT INTO tt_aftusinlog (tusinlogseq, sessionseq, syoridttmf, syoridttmt, msg, request, response , ipadrs, os, browser,  reguserid, regdttm ) VALUES ( tt_aftusinlog_seq.nextval, :sessionseq, :syoridttmf, :syoridttmt, :msg, :request, :response , :ipadrs, :os, :browser, :reguserid, :regdttm)"
             Dim insertParams As New List(Of OracleParameter) From {
                 New OracleParameter("sessionseq", dto.sessionseq),
@@ -692,7 +690,7 @@ Try
                 New OracleParameter("syoridttmt", dto.syoridttmt),
                 New OracleParameter("msg", dto.msg),
                 New OracleParameter("request", dto.request),
-                New OracleParameter("response", dto.response),
+                New OracleParameter("response", dto.response.Substring(0, 2000) ),
                 New OracleParameter("ipadrs", dto.ipadrs),
                 New OracleParameter("os", dto.os),
                 New OracleParameter("browser", dto.browser),

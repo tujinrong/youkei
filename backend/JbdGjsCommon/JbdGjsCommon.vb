@@ -3248,86 +3248,124 @@ ACoDateCheckEdit_Exit3:
         '                 5.nRYAKU_KBN  Integer                 正式名称、略称区分  0:正式名称(既定)  1:略称
         '戻り値          :Boolean(正常True/エラーFalse)
         '------------------------------------------------------------------
-        Public Function f_CodeMaster_Data_Select(ByRef cmbCd As String, _
-                                                 ByRef cmbMei As String, _
-                                                 ByVal nDATA_KBN As Integer, _
-                                                 ByVal blnNullAddFlg As Boolean, _
-                                                 ByVal nRYAKU_KBN As Integer) As Boolean
+        'Public Function f_CodeMaster_Data_Select(ByRef cmbCd As String, _
+        '                                         ByRef cmbMei As String, _
+        '                                         ByVal nDATA_KBN As Integer, _
+        '                                         ByVal blnNullAddFlg As Boolean, _
+        '                                         ByVal nRYAKU_KBN As Integer) As Boolean
+
+        '    Dim sSql As String = String.Empty
+        '    Dim dstDataKen As New DataSet
+
+        '    f_CodeMaster_Data_Select = False
+
+        '    Try
+
+        '        sSql = " SELECT " & vbCrLf
+        '        sSql = sSql & "  MEISYO_CD," & vbCrLf
+        '        If nRYAKU_KBN = 0 Then
+        '            sSql = sSql & "  MEISYO MEISYO" & vbCrLf
+        '        Else
+        '            sSql = sSql & "  RYAKUSYO MEISYO" & vbCrLf
+        '        End If
+        '        sSql = sSql & " FROM" & vbCrLf
+        '        sSql = sSql & "  TM_CODE" & vbCrLf
+        '        'If nDATA_KBN <> "" Then
+        '        sSql = sSql & " WHERE" & vbCrLf
+        '        sSql = sSql & "  SYURUI_KBN = " & nDATA_KBN & "" & vbCrLf
+        '        'End If
+        '        sSql = sSql & " ORDER BY MEISYO_CD" & vbCrLf
+
+        '        'Call f_Select_ODP(dstDataKen, sSql)
+
+        '        'cmbCd.Items.Clear()
+        '        'cmbMei.Items.Clear()
+
+        '        'With dstDataKen.Tables(0)
+        '        '    If .Rows.Count > 0 Then
+        '        '        For i As Integer = 0 To .Rows.Count - 1
+        '        '            cmbCd.Items.Add(WordHenkan("N", "S", .Rows(i)("MEISYO_CD")))
+        '        '            cmbMei.Items.Add(WordHenkan("N", "S", .Rows(i)("MEISYO")))
+        '        '        Next
+
+        '        '        '↓***** 2010/09/15 JBD200 ADD 第3引数=Trueの時、空白項目を追加するよう追加 *****↓
+        '        '        If blnNullAddFlg Then
+        '        '            'コンボ空白項目追加
+        '        '            cmbCd.Items.Insert(0, New GrapeCity.Win.Editors.ListItem()) : cmbMei.Items.Insert(0, New GrapeCity.Win.Editors.ListItem())
+        '        '        End If
+        '        '        '↑***** 2010/09/15 JBD200 ADD 第3引数=Trueの時、空白項目を追加するよう追加 *****↑
+
+        '        '    Else
+        '        '        'エラーリスト出力なし
+        '        '        'Show_MessageBox("I002", "") '該当データが存在しません。
+        '        '    End If
+        '        'End With
+
+        '        f_CodeMaster_Data_Select = True
+
+        '    Catch ex As Exception
+        '        '共通例外処理
+        '        'Show_MessageBox("", ex.Message)
+        '    End Try
+
+        'End Function
+        
+        '------------------------------------------------------------------
+        'プロシージャ名  :f_CodeMaster_Data_Select
+        '説明            :コードマスタより引数で渡されたデータ区分に該当する
+        '                 コードと名称を取得し、コンボボックスにセットする
+        '
+        '引数            : 1.sDATA_KBN   String(Optional)        データ区分(4:口座種別データ 5:都道府県データ)
+        '                 2.nRYAKU_KBN  Integer                 正式名称、略称区分  0:正式名称(既定)  1:略称
+        '戻り値          : Sql String 
+        '------------------------------------------------------------------
+        Public Function f_CodeMaster_Data_Select(ByVal nDATA_KBN As Integer, _
+                                                 ByVal nRYAKU_KBN As Integer) As DataTable
 
             Dim sSql As String = String.Empty
             Dim dstDataKen As New DataSet
 
-            f_CodeMaster_Data_Select = False
-
-            Try
-
-                sSql = " SELECT " & vbCrLf
-                sSql = sSql & "  MEISYO_CD," & vbCrLf
-                If nRYAKU_KBN = 0 Then
-                    sSql = sSql & "  MEISYO MEISYO" & vbCrLf
-                Else
-                    sSql = sSql & "  RYAKUSYO MEISYO" & vbCrLf
-                End If
-                sSql = sSql & " FROM" & vbCrLf
-                sSql = sSql & "  TM_CODE" & vbCrLf
-                'If nDATA_KBN <> "" Then
-                sSql = sSql & " WHERE" & vbCrLf
-                sSql = sSql & "  SYURUI_KBN = " & nDATA_KBN & "" & vbCrLf
-                'End If
-                sSql = sSql & " ORDER BY MEISYO_CD" & vbCrLf
-
-                Call f_Select_ODP(dstDataKen, sSql)
-
-                'cmbCd.Items.Clear()
-                'cmbMei.Items.Clear()
-
-                'With dstDataKen.Tables(0)
-                '    If .Rows.Count > 0 Then
-                '        For i As Integer = 0 To .Rows.Count - 1
-                '            cmbCd.Items.Add(WordHenkan("N", "S", .Rows(i)("MEISYO_CD")))
-                '            cmbMei.Items.Add(WordHenkan("N", "S", .Rows(i)("MEISYO")))
-                '        Next
-
-                '        '↓***** 2010/09/15 JBD200 ADD 第3引数=Trueの時、空白項目を追加するよう追加 *****↓
-                '        If blnNullAddFlg Then
-                '            'コンボ空白項目追加
-                '            cmbCd.Items.Insert(0, New GrapeCity.Win.Editors.ListItem()) : cmbMei.Items.Insert(0, New GrapeCity.Win.Editors.ListItem())
-                '        End If
-                '        '↑***** 2010/09/15 JBD200 ADD 第3引数=Trueの時、空白項目を追加するよう追加 *****↑
-
-                '    Else
-                '        'エラーリスト出力なし
-                '        'Show_MessageBox("I002", "") '該当データが存在しません。
-                '    End If
-                'End With
-
-                f_CodeMaster_Data_Select = True
-
-            Catch ex As Exception
-                '共通例外処理
-                'Show_MessageBox("", ex.Message)
-            End Try
-
-        End Function
-        Public Function f_CodeMaster_Data_Select(ByRef cmbCd As String, _
-                                             ByRef cmbMei As String, _
-                                             ByVal nDATA_KBN As Integer, _
-                                             ByVal blnNullAddFlg As Boolean) As Boolean
-            If Not f_CodeMaster_Data_Select(cmbCd, cmbMei, nDATA_KBN, blnNullAddFlg, 0) Then
-                Return False
+            sSql = " SELECT " & vbCrLf
+            sSql = sSql & "  MEISYO_CD," & vbCrLf
+            If nRYAKU_KBN = 0 Then
+                sSql = sSql & "  MEISYO MEISYO" & vbCrLf
+            Else
+                sSql = sSql & "  RYAKUSYO MEISYO" & vbCrLf
             End If
+            sSql = sSql & " FROM" & vbCrLf
+            sSql = sSql & "  TM_CODE" & vbCrLf
+            'If nDATA_KBN <> "" Then
+            sSql = sSql & " WHERE" & vbCrLf
+            sSql = sSql & "  SYURUI_KBN = " & nDATA_KBN & "" & vbCrLf
+            'End If
+            sSql = sSql & " ORDER BY MEISYO_CD" & vbCrLf
 
-            Return True
-        End Function
-        Public Function f_CodeMaster_Data_Select(ByRef cmbCd As String, _
-                                             ByRef cmbMei As String, _
-                                             ByVal nDATA_KBN As Integer) As Boolean
-            If Not f_CodeMaster_Data_Select(cmbCd, cmbMei, nDATA_KBN, False, 0) Then
-                Return False
-            End If
+            Using db = New DaDbContext()
+                f_Select_ODP_New(db,dstDataKen, sSql)
+            End Using
+            Dim dt = dstDataKen.Tables(0)
+            Return dt
 
-            Return True
-        End Function
+        End Function        
+        'Public Function f_CodeMaster_Data_Select(ByRef cmbCd As String, _
+        '                                     ByRef cmbMei As String, _
+        '                                     ByVal nDATA_KBN As Integer, _
+        '                                     ByVal blnNullAddFlg As Boolean) As Boolean
+        '    If Not f_CodeMaster_Data_Select(cmbCd, cmbMei, nDATA_KBN, blnNullAddFlg, 0) Then
+        '        Return False
+        '    End If
+
+        '    Return True
+        'End Function
+        'Public Function f_CodeMaster_Data_Select(ByRef cmbCd As String, _
+        '                                     ByRef cmbMei As String, _
+        '                                     ByVal nDATA_KBN As Integer) As Boolean
+        '    If Not f_CodeMaster_Data_Select(cmbCd, cmbMei, nDATA_KBN, False, 0) Then
+        '        Return False
+        '    End If
+
+        '    Return True
+        'End Function
 
     #End Region
 
@@ -4497,6 +4535,44 @@ ACoDateCheckEdit_Exit3:
             Return dt
         End Function
 
+      Public Function f_Keiyaku_Data_Select_New(ki As Integer, blnNullAddFlg As Boolean, strUser As String) As DataTable
+            Dim sSql As String = String.Empty
+            Dim sSqlWhere As String = String.Empty  '2015/04/02 JBD368 ADD
+            Dim dstDataSanka As New DataSet
+            sSql = ""
+            sSql = sSql & "SELECT "
+            sSql = sSql & "  KEIYAKUSYA_CD,"
+            sSql = sSql & "  KEIYAKUSYA_NAME"
+            sSql = sSql & " FROM"
+            If strUser = "" Then
+                sSql = sSql & "  TM_KEIYAKU"
+            Else
+                sSql = sSql & "  " & strUser & ".TM_KEIYAKU"
+            End If
+
+            sSqlWhere = ""
+            sSqlWhere = sSqlWhere & " WHERE"
+            '契約区分がNULLのデータは未参加の契約者とみなし、コンボボックスには追加しない。
+            sSqlWhere = sSqlWhere & "   KEIYAKU_KBN IS NOT NULL"
+
+            If ki.ToString() <> "" Then
+                sSqlWhere = sSqlWhere & " AND " & "KI = " & ki.ToString()
+            End If
+            sSql = sSql & sSqlWhere
+            '↑2015/04/02 JBD368 UPD
+
+            If blnNullAddFlg Then   '第3引数=Trueの時、空白項目を追加のため空白を先頭にする
+                sSql = sSql & " ORDER BY KEIYAKUSYA_CD NULLS FIRST"
+            Else
+                sSql = sSql & " ORDER BY KEIYAKUSYA_CD"
+            End If
+
+            Using db = New DaDbContext()
+                f_Select_ODP_New(db,dstDataSanka, sSql)
+            End Using
+            Dim dt = dstDataSanka.Tables(0)
+            Return dt
+        End Function
 
         '------------------------------------------------------------------
         'プロシージャ名  :f_Keiyaku_Data_Select
@@ -4595,133 +4671,166 @@ ACoDateCheckEdit_Exit3:
         '                 4.blnNullAddFlg   Boolean                     スペース項目をコンボに追加するかしないかのフラグ(False(既定):スペース項目を追加しない　True:スペース項目を追加する)
         '戻り値          :Boolean(正常True/エラーFalse)
         '------------------------------------------------------------------
-        Public Function f_JimuItaku_Data_Select(ByRef cmbJimuItakuCd As String, _
-                                                ByRef cmbJimuItakuMei As String, _
-                                                ByVal strWhere As String, _
-                                                ByVal blnNullAddFlg As Boolean, _
-                                                ByVal blnEnable As Boolean) As Boolean
+        'Public Function f_JimuItaku_Data_Select(ByRef cmbJimuItakuCd As String, _
+        '                                        ByRef cmbJimuItakuMei As String, _
+        '                                        ByVal strWhere As String, _
+        '                                        ByVal blnNullAddFlg As Boolean, _
+        '                                        ByVal blnEnable As Boolean) As Boolean
 
-            '2015/03/03 JBD368 UPD ↓↓↓ コンボボックスへのセット方法を変更
-            'Dim sSql As String = String.Empty
-            'Dim dstDataSanka As New DataSet
+        '    '2015/03/03 JBD368 UPD ↓↓↓ コンボボックスへのセット方法を変更
+        '    'Dim sSql As String = String.Empty
+        '    'Dim dstDataSanka As New DataSet
 
-            'f_JimuItaku_Data_Select = False
+        '    'f_JimuItaku_Data_Select = False
 
-            'Try
+        '    'Try
 
-            '    sSql = "SELECT "
-            '    sSql = sSql & "  ITAKU_CD,"
-            '    sSql = sSql & "  ITAKU_NAME"
-            '    sSql = sSql & " FROM"
-            '    sSql = sSql & "  TM_JIMUITAKU"
+        '    '    sSql = "SELECT "
+        '    '    sSql = sSql & "  ITAKU_CD,"
+        '    '    sSql = sSql & "  ITAKU_NAME"
+        '    '    sSql = sSql & " FROM"
+        '    '    sSql = sSql & "  TM_JIMUITAKU"
 
-            '    If strWhere <> "" Then
-            '        sSql = sSql & " WHERE"
-            '        sSql = sSql & " " & strWhere
-            '    End If
+        '    '    If strWhere <> "" Then
+        '    '        sSql = sSql & " WHERE"
+        '    '        sSql = sSql & " " & strWhere
+        '    '    End If
 
-            '    sSql = sSql & " ORDER BY ITAKU_CD"
+        '    '    sSql = sSql & " ORDER BY ITAKU_CD"
 
-            '    Call f_Select_ODP(dstDataSanka, sSql)
+        '    '    Call f_Select_ODP(dstDataSanka, sSql)
 
-            '    cmbJimuItakuCd.Items.Clear()
-            '    cmbJimuItakuMei.Items.Clear()
+        '    '    cmbJimuItakuCd.Items.Clear()
+        '    '    cmbJimuItakuMei.Items.Clear()
 
-            '    With dstDataSanka.Tables(0)
-            '        If .Rows.Count > 0 Then
-            '            For i As Integer = 0 To .Rows.Count - 1
-            '                cmbJimuItakuCd.Items.Add(WordHenkan("N", "S", .Rows(i)("ITAKU_CD")))
-            '                cmbJimuItakuMei.Items.Add(WordHenkan("N", "S", .Rows(i)("ITAKU_NAME")))
-            '            Next
+        '    '    With dstDataSanka.Tables(0)
+        '    '        If .Rows.Count > 0 Then
+        '    '            For i As Integer = 0 To .Rows.Count - 1
+        '    '                cmbJimuItakuCd.Items.Add(WordHenkan("N", "S", .Rows(i)("ITAKU_CD")))
+        '    '                cmbJimuItakuMei.Items.Add(WordHenkan("N", "S", .Rows(i)("ITAKU_NAME")))
+        '    '            Next
 
-            '            '↓***** 2010/09/15 JBD200 ADD 第3引数=Trueの時、空白項目を追加するよう追加 *****↓
-            '            If blnNullAddFlg Then
-            '                'コンボ空白項目追加
-            '                cmbJimuItakuCd.Items.Insert(0, New GrapeCity.Win.Editors.ListItem()) : cmbJimuItakuMei.Items.Insert(0, New GrapeCity.Win.Editors.ListItem())
-            '            End If
-            '            '↑***** 2010/09/15 JBD200 ADD 第3引数=Trueの時、空白項目を追加するよう追加 *****↑
+        '    '            '↓***** 2010/09/15 JBD200 ADD 第3引数=Trueの時、空白項目を追加するよう追加 *****↓
+        '    '            If blnNullAddFlg Then
+        '    '                'コンボ空白項目追加
+        '    '                cmbJimuItakuCd.Items.Insert(0, New GrapeCity.Win.Editors.ListItem()) : cmbJimuItakuMei.Items.Insert(0, New GrapeCity.Win.Editors.ListItem())
+        '    '            End If
+        '    '            '↑***** 2010/09/15 JBD200 ADD 第3引数=Trueの時、空白項目を追加するよう追加 *****↑
 
-            '        End If
-            '    End With
+        '    '        End If
+        '    '    End With
 
-            '    '事務委託先コード使用可
-            '    cmbJimuItakuCd.Enabled = blnEnable
-            '    cmbJimuItakuMei.Enabled = blnEnable
+        '    '    '事務委託先コード使用可
+        '    '    cmbJimuItakuCd.Enabled = blnEnable
+        '    '    cmbJimuItakuMei.Enabled = blnEnable
 
-            '    f_JimuItaku_Data_Select = True
+        '    '    f_JimuItaku_Data_Select = True
 
-            'Catch ex As Exception
-            '    '共通例外処理
-            '    'Show_MessageBox("", ex.Message)
-            'End Try
+        '    'Catch ex As Exception
+        '    '    '共通例外処理
+        '    '    'Show_MessageBox("", ex.Message)
+        '    'End Try
 
+
+        '    Dim sSql As String = String.Empty
+        '    Dim dstDataSanka As New DataSet
+
+        '    f_JimuItaku_Data_Select = False
+
+        '    Try
+
+        '        sSql = ""
+        '        If blnNullAddFlg Then   '第3引数=Trueの時、空白項目を追加
+        '            'コンボ空白項目追加
+        '            sSql = "SELECT "
+        '            sSql = sSql & "NULL AS ITAKU_CD, NULL AS ITAKU_NAME "
+        '            sSql = sSql & "FROM DUAL "
+        '            sSql = sSql & "UNION ALL "
+        '        End If
+        '        sSql = sSql & "SELECT "
+        '        sSql = sSql & "  ITAKU_CD,"
+        '        sSql = sSql & "  ITAKU_NAME"
+        '        sSql = sSql & " FROM"
+        '        sSql = sSql & "  TM_JIMUITAKU"
+
+        '        If strWhere <> "" Then
+        '            sSql = sSql & " WHERE"
+        '            sSql = sSql & " " & strWhere
+        '        End If
+
+        '        If blnNullAddFlg Then   '第3引数=Trueの時、空白項目を先頭に表示する
+        '            sSql = sSql & " ORDER BY ITAKU_CD NULLS FIRST"
+        '        Else
+        '            sSql = sSql & " ORDER BY ITAKU_CD"
+        '        End If
+
+        '        Call f_Select_ODP(dstDataSanka, sSql)
+
+        '        'cmbJimuItakuCd.Clear()
+        '        'cmbJimuItakuMei.Clear()
+
+        '        'With dstDataSanka.Tables(0)
+        '        '    If .Rows.Count > 0 Then
+        '        '        'コンボボックスにデータをバインド
+        '        '        cmbJimuItakuCd.DataSource = dstDataSanka.Tables(0)
+        '        '        '不要なカラムを削除する
+        '        '        cmbJimuItakuCd.ListColumns.RemoveAt(1)
+
+        '        '        'コンボボックスにデータをバインド
+        '        '        cmbJimuItakuMei.DataSource = dstDataSanka.Tables(0)
+        '        '        '不要なカラムを削除する
+        '        '        cmbJimuItakuMei.ListColumns.RemoveAt(0)
+        '        '        '名称のコンボボックスの幅を設定
+        '        '        cmbJimuItakuMei.ListColumns(0).Width = cmbJimuItakuMei.Width
+        '        '    End If
+        '        'End With
+
+        '        ''事務委託先コード使用可
+        '        'cmbJimuItakuCd.Enabled = blnEnable
+        '        'cmbJimuItakuMei.Enabled = blnEnable
+
+        '        f_JimuItaku_Data_Select = True
+
+        '    Catch ex As Exception
+        '        '共通例外処理
+        '        'Show_MessageBox("", ex.Message)
+        '    End Try
+        '    '2015/03/03 JBD368 UPD ↑↑↑
+
+        'End Function
+
+        '------------------------------------------------------------------
+        'プロシージャ名  :f_JimuItaku_Data_Select_New
+        '説明            :事務委託先データ取得(防疫互助)
+        '引数            :1.strWhere        String                      事務委託先マスタ検索条件 WHERE句を指定する
+        '戻り値          :Sql  String
+        '------------------------------------------------------------------
+        Public Function f_JimuItaku_Data_Select(ByVal strWhere As String) As DataTable
 
             Dim sSql As String = String.Empty
             Dim dstDataSanka As New DataSet
 
-            f_JimuItaku_Data_Select = False
+            sSql = ""
+            sSql = sSql & "SELECT "
+            sSql = sSql & "  ITAKU_CD,"
+            sSql = sSql & "  ITAKU_NAME"
+            sSql = sSql & " FROM"
+            sSql = sSql & "  TM_JIMUITAKU"
 
-            Try
+            If strWhere <> "" Then
+                sSql = sSql & " WHERE"
+                sSql = sSql & " " & strWhere
+            End If
 
-                sSql = ""
-                If blnNullAddFlg Then   '第3引数=Trueの時、空白項目を追加
-                    'コンボ空白項目追加
-                    sSql = "SELECT "
-                    sSql = sSql & "NULL AS ITAKU_CD, NULL AS ITAKU_NAME "
-                    sSql = sSql & "FROM DUAL "
-                    sSql = sSql & "UNION ALL "
-                End If
-                sSql = sSql & "SELECT "
-                sSql = sSql & "  ITAKU_CD,"
-                sSql = sSql & "  ITAKU_NAME"
-                sSql = sSql & " FROM"
-                sSql = sSql & "  TM_JIMUITAKU"
+            sSql = sSql & " ORDER BY ITAKU_CD"
 
-                If strWhere <> "" Then
-                    sSql = sSql & " WHERE"
-                    sSql = sSql & " " & strWhere
-                End If
-
-                If blnNullAddFlg Then   '第3引数=Trueの時、空白項目を先頭に表示する
-                    sSql = sSql & " ORDER BY ITAKU_CD NULLS FIRST"
-                Else
-                    sSql = sSql & " ORDER BY ITAKU_CD"
-                End If
-
-                Call f_Select_ODP(dstDataSanka, sSql)
-
-                'cmbJimuItakuCd.Clear()
-                'cmbJimuItakuMei.Clear()
-
-                'With dstDataSanka.Tables(0)
-                '    If .Rows.Count > 0 Then
-                '        'コンボボックスにデータをバインド
-                '        cmbJimuItakuCd.DataSource = dstDataSanka.Tables(0)
-                '        '不要なカラムを削除する
-                '        cmbJimuItakuCd.ListColumns.RemoveAt(1)
-
-                '        'コンボボックスにデータをバインド
-                '        cmbJimuItakuMei.DataSource = dstDataSanka.Tables(0)
-                '        '不要なカラムを削除する
-                '        cmbJimuItakuMei.ListColumns.RemoveAt(0)
-                '        '名称のコンボボックスの幅を設定
-                '        cmbJimuItakuMei.ListColumns(0).Width = cmbJimuItakuMei.Width
-                '    End If
-                'End With
-
-                ''事務委託先コード使用可
-                'cmbJimuItakuCd.Enabled = blnEnable
-                'cmbJimuItakuMei.Enabled = blnEnable
-
-                f_JimuItaku_Data_Select = True
-
-            Catch ex As Exception
-                '共通例外処理
-                'Show_MessageBox("", ex.Message)
-            End Try
-            '2015/03/03 JBD368 UPD ↑↑↑
-
+            Using db = New DaDbContext()
+                f_Select_ODP_New(db,dstDataSanka, sSql)
+            End Using
+            Dim dt = dstDataSanka.Tables(0)
+            Return dt
         End Function
+
 
         '------------------------------------------------------------------
         'プロシージャ名  :f_JimuItaku_Data_Select
@@ -4731,18 +4840,18 @@ ACoDateCheckEdit_Exit3:
         '                 3.strWhere        String                    事務委託先マスタ検索条件 WHERE句を指定する
         '戻り値          :Boolean(正常True/エラーFalse)
         '------------------------------------------------------------------
-        Public Function f_JimuItaku_Data_Select(ByRef cmbJimuItakuCd As String, _
-                                                    ByRef cmbJimuItakuMei As String, _
-                                                    ByVal strWhere As String, _
-                                                    ByVal blnNullAddFlg As Boolean) As Boolean
+        'Public Function f_JimuItaku_Data_Select(ByRef cmbJimuItakuCd As String, _
+        '                                            ByRef cmbJimuItakuMei As String, _
+        '                                            ByVal strWhere As String, _
+        '                                            ByVal blnNullAddFlg As Boolean) As Boolean
 
-            If Not f_JimuItaku_Data_Select(cmbJimuItakuCd, cmbJimuItakuMei, strWhere, blnNullAddFlg, True) Then
-                Return False
-            End If
+        '    If Not f_JimuItaku_Data_Select(cmbJimuItakuCd, cmbJimuItakuMei, strWhere, blnNullAddFlg, True) Then
+        '        Return False
+        '    End If
 
-            Return True
+        '    Return True
 
-        End Function
+        'End Function
         '------------------------------------------------------------------
         'プロシージャ名  :f_JimuItaku_Data_Select
         '説明            :事務委託先データ取得
@@ -4751,17 +4860,17 @@ ACoDateCheckEdit_Exit3:
         '                 3.strWhere        String                    事務委託先マスタ検索条件 WHERE句を指定する
         '戻り値          :Boolean(正常True/エラーFalse)
         '------------------------------------------------------------------
-        Public Function f_JimuItaku_Data_Select(ByRef cmbJimuItakuCd As String, _
-                                                    ByRef cmbJimuItakuMei As String, _
-                                                    ByVal strWhere As String) As Boolean
+        'Public Function f_JimuItaku_Data_Select(ByRef cmbJimuItakuCd As String, _
+        '                                            ByRef cmbJimuItakuMei As String, _
+        '                                            ByVal strWhere As String) As Boolean
 
-            If Not f_JimuItaku_Data_Select(cmbJimuItakuCd, cmbJimuItakuMei, strWhere, False, True) Then
-                Return False
-            End If
+        '    If Not f_JimuItaku_Data_Select(cmbJimuItakuCd, cmbJimuItakuMei, strWhere, False, True) Then
+        '        Return False
+        '    End If
 
-            Return True
+        '    Return True
 
-        End Function
+        'End Function
 
         '------------------------------------------------------------------
         'プロシージャ名  :f_JimuItaku_Data_Select
@@ -4770,16 +4879,16 @@ ACoDateCheckEdit_Exit3:
         '                 2.cmbJimuItakuMei    String   事務委託先名コンボボックス
         '戻り値          :Boolean(正常True/エラーFalse)
         '------------------------------------------------------------------
-        Public Function f_JimuItaku_Data_Select(ByRef cmbJimuItakuCd As String, _
-                                                 ByRef cmbJimuItakuMei As String) As Boolean
+        'Public Function f_JimuItaku_Data_Select(ByRef cmbJimuItakuCd As String, _
+        '                                         ByRef cmbJimuItakuMei As String) As Boolean
 
-            If Not f_JimuItaku_Data_Select(cmbJimuItakuCd, cmbJimuItakuMei, "", False, True) Then
-                Return False
-            End If
+        '    If Not f_JimuItaku_Data_Select(cmbJimuItakuCd, cmbJimuItakuMei, "", False, True) Then
+        '        Return False
+        '    End If
 
-            Return True
+        '    Return True
 
-        End Function
+        'End Function
 
     #End Region
 

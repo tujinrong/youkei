@@ -1,4 +1,5 @@
-﻿
+﻿Imports JbdGjsCommon
+Imports Oracle.ManagedDataAccess.Client
 Interface InterfaceRptGJ1030
     Sub sub1(wkDSRep As DataSet)
 End Interface
@@ -85,6 +86,11 @@ Public Class rptGJ1030
                 End Using
             End If
 
+            '--------------------------------------------------
+            'プレビュー表示
+            '--------------------------------------------------
+            Dim wkForm As New frmViewer(wkAR, pAPP & con_ReportName) '※このプレビューは関数を抜けたあとも生き残る。
+            wkForm.Show()
         End Using
     End Sub
 End Class
