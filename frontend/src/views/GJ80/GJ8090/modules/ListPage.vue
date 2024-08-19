@@ -16,6 +16,7 @@
                   :max="99"
                   :maxlength="2"
                   class="w-full"
+                  @change="getInitData(searchParams.KI, false)"
                 ></a-input-number>
               </a-form-item>
             </td>
@@ -298,15 +299,6 @@ watch(
   (newVal) => {
     if (newVal) {
       searchParams.NOJO_NAME = convertToFullWidth(newVal)
-    }
-  }
-)
-
-watch(
-  () => searchParams.KI,
-  (newVal) => {
-    if (newVal) {
-      getInitData(newVal, false)
     }
   }
 )
