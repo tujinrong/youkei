@@ -28,7 +28,7 @@
                   v-model:value="searchParams.KEIYAKUSYA_CD"
                   :options="KEIYAKUSYA_CD_NAME_LIST"
                   style="width: 100%"
-                  type="number"
+                  split-val
                 ></ai-select>
               </a-form-item>
             </td>

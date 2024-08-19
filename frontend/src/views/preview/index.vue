@@ -71,4 +71,4 @@ onMounted(() => {
 //監視定義
 //--------------------------------------------------------------------------
 </script>
-<style lang="less" scoped></style>
+<style lang="scss" scoped></style>

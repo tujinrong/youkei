@@ -12,6 +12,7 @@
 
 <script lang="ts" setup>
 import { useTabStore } from '@/store/modules/tab'
+import { showConfirmModal } from '@/utils/modal'
 //--------------------------------------------------------------------------
 //データ定義
 //--------------------------------------------------------------------------
@@ -20,7 +21,12 @@ const tabStore = useTabStore()
 //メソッド
 //--------------------------------------------------------------------------
 const close = async () => {
-  tabStore.removeActiveTab()
+  showConfirmModal({
+    content: '終了しました、よろしいですか？',
+    onOk: async () => {
+      tabStore.removeActiveTab()
+    },
+  })
 }
 
 defineExpose({ close })
