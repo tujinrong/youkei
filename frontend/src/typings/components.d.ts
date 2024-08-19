@@ -92,5 +92,6 @@ declare module 'vue' {
     TableTD: typeof import('./../components/TableTD/index.vue')['default']
     ThemeSchemaSwitch: typeof import('./../components/common/theme-schema-switch.vue')['default']
     WaveBg: typeof import('./../components/custom/wave-bg.vue')['default']
+    YearJp: typeof import('./../components/YearJp/index.vue')['default']
   }
 }
