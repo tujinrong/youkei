@@ -9,7 +9,7 @@
 <template>
   <div class="flex items-center w-full">
     <ai-select
-      :value="value.FROM"
+      :value="value.VALUE_FM"
       :options="options"
       split-val
       :disabled="disabled"
@@ -17,7 +17,7 @@
     />
     <span>～</span>
     <ai-select
-      :value="value.TO"
+      :value="value.VALUE_TO"
       :options="options"
       split-val
       :disabled="disabled"
@@ -33,8 +33,8 @@ import { Form } from 'ant-design-vue'
 //---------------------------------------------------------------------------
 const props = defineProps<{
   value: {
-    FROM: string | number | undefined
-    TO: string | number | undefined
+    VALUE_FM: string | number | undefined
+    VALUE_TO: string | number | undefined
   }
   options: CodeNameModel[]
   disabled?: boolean
@@ -51,15 +51,15 @@ const formItemContext = Form.useInjectFormItemContext()
 //--------------------------------------------------------------------------
 function change1(val) {
   emit('update:value', {
-    FROM: val,
-    TO: props.value.TO ? props.value.TO : val,
+    VALUE_FM: val,
+    VALUE_TO: props.value.VALUE_TO ? props.value.VALUE_TO : val,
   })
   formItemContext.onFieldChange()
 }
 function change2(val) {
   emit('update:value', {
-    FROM: props.value.FROM ? props.value.FROM : val,
-    TO: val,
+    VALUE_FM: props.value.VALUE_FM ? props.value.VALUE_FM : val,
+    VALUE_TO: val,
   })
   formItemContext.onFieldChange()
 }

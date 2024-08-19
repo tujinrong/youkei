@@ -104,7 +104,7 @@ import { reactive, ref, watch, computed, onMounted, onUnmounted } from 'vue'
 import DateJp from '@/components/Selector/DateJp/index.vue'
 import { ITEM_REQUIRE_ERROR } from '@/constants/msg'
 import { Form } from 'ant-design-vue'
-import { Init } from './service'
+import { Init, Preview } from './service'
 
 //--------------------------------------------------------------------------
 //データ定義
@@ -114,8 +114,8 @@ const createDefaultParams = () => {
     KI: -1,
     TAISYOBI_YMD: new Date().toISOString().split('T')[0],
     KEIYAKU_KBN_CD: {
-      FROM: undefined,
-      TO: undefined,
+      VALUE_FM: undefined,
+      VALUE_TO: undefined,
     },
     KEIYAKU_JYOKYO: {
       SHINKI: true,
@@ -124,21 +124,20 @@ const createDefaultParams = () => {
       HAIGYO: true,
     },
     ITAKU_CD: {
-      FROM: undefined,
-      TO: undefined,
+      VALUE_FM: undefined,
+      VALUE_TO: undefined,
     },
     KEIYAKUSYA_CD: {
-      FROM: undefined,
-      TO: undefined,
+      VALUE_FM: undefined,
+      VALUE_TO: undefined,
     },
   }
 }
-const clearFromToValue = {
-  FROM: undefined,
-  TO: undefined,
-}
 const formData = reactive(createDefaultParams())
-
+const clearFromToValue = {
+  VALUE_FM: undefined,
+  VALUE_TO: undefined,
+}
 const KEIYAKU_JYOKYO_LABELS = {
   SHINKI: '新規契約者',
   KEIZOKU: '継続契約者',
@@ -188,11 +187,11 @@ const rules = reactive({
       validator: (
         _rule,
         value: {
-          FROM
-          TO
+          VALUE_FM
+          VALUE_TO
         }
       ) => {
-        const result = rangeCheck(value.FROM, value.TO, '契約区分')
+        const result = rangeCheck(value.VALUE_FM, value.VALUE_TO, '契約区分')
         if (!result.flag) return Promise.reject(result.content)
         return Promise.resolve()
       },
@@ -203,11 +202,11 @@ const rules = reactive({
       validator: (
         _rule,
         value: {
-          FROM
-          TO
+          VALUE_FM
+          VALUE_TO
         }
       ) => {
-        const result = rangeCheck(value.FROM, value.TO, '事業委託先')
+        const result = rangeCheck(value.VALUE_FM, value.VALUE_TO, '事業委託先')
         if (!result.flag) return Promise.reject(result.content)
         return Promise.resolve()
       },
@@ -218,11 +217,11 @@ const rules = reactive({
       validator: (
         _rule,
         value: {
-          FROM
-          TO
+          VALUE_FM
+          VALUE_TO
         }
       ) => {
-        const result = rangeCheck(value.FROM, value.TO, '契約者番号')
+        const result = rangeCheck(value.VALUE_FM, value.VALUE_TO, '契約者番号')
         if (!result.flag) return Promise.reject(result.content)
         return Promise.resolve()
       },
@@ -288,10 +287,11 @@ const clear = () => {
 //プレビューボタンを押す時
 async function onPreview() {
   await validate()
-  const openNew = () => {
-    window.open(URL.value, '_blank')
-  }
-  openNew()
+  Preview({ ...formData })
+  // const openNew = () => {
+  //   window.open(URL.value, '_blank')
+  // }
+  // openNew()
 }
 
 //--------------------------------------------------------------------------
@@ -302,7 +302,6 @@ async function onPreview() {
 const channel = new BroadcastChannel('channel_preview')
 channel.onmessage = (event) => {
   if (event.data.isMounted) {
-    debugger
     channel.postMessage(JSON.stringify(formData))
   }
 }

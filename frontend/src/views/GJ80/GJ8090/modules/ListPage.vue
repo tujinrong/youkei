@@ -103,7 +103,7 @@
         <vxe-column
           field="NOJO_CD"
           title="農場コード"
-          min-width="80"
+          min-width="100"
           sortable
           :params="{ order: 1 }"
           :resizable="true"

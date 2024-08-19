@@ -18,15 +18,15 @@ export interface InitRequest extends DaRequestBase {
 }
 
 /**プレビュー処理(プレビュー画面) */
-export interface PreviewRequest extends CmSearchRequestBase {
+export interface PreviewRequest extends DaRequestBase {
   /**対象期 */
   KI: number
   /**対象日(現在) */
   TAISYOBI_YMD: string
   /**契約者区分コード */
-  KEIYAKU_KBN_CD: {
-    FROM?: number
-    TO?: number
+  KEIYAKU_KBN_CD?: {
+    VALUE_FM: number
+    VALUE_TO: number
   }
   /**契約状況 */
   KEIYAKU_JYOKYO: {
@@ -36,14 +36,14 @@ export interface PreviewRequest extends CmSearchRequestBase {
     HAIGYO: boolean
   }
   /**事務委託先番号コード */
-  ITAKU_CD: {
-    FROM?: number
-    TO?: number
+  ITAKU_CD?: {
+    VALUE_FM: number
+    VALUE_TO: number
   }
   /**契約者番号コード */
-  KEIYAKUSYA_CD: {
-    FROM?: number
-    TO?: number
+  KEIYAKUSYA_CD?: {
+    VALUE_FM: number
+    VALUE_TO: number
   }
 }
 

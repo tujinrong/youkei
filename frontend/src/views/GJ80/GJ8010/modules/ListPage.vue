@@ -40,7 +40,7 @@
         :data="tableData"
         :sort-config="{ trigger: 'cell', orders: ['desc', 'asc'] }"
         :empty-render="{ name: 'NotData' }"
-        @cell-dblclick="({ row }) => forwardEdit(row.NOJO_CD)"
+        @cell-dblclick="({ row }) => forwardEdit(row.MEISYO_CD)"
         @sort-change="(e) => changeTableSort(e, toRef(pageParams, 'ORDER_BY'))"
       >
         <vxe-column
@@ -92,6 +92,9 @@ import { SearchRequest, SearchRowVM } from '../type'
 import { Init, Search } from '../service'
 import { Form } from 'ant-design-vue'
 
+//--------------------------------------------------------------------------
+//データ定義
+//--------------------------------------------------------------------------
 const router = useRouter()
 const route = useRoute()
 const createDefaultParams = (): SearchRequest => {
@@ -135,7 +138,7 @@ const { pageParams, searchData } = useSearch({
   params: toRef(() => searchParams),
 })
 
-async function forwardNew() {
+function forwardNew() {
   router.push({
     name: route.name,
     query: {
@@ -144,7 +147,7 @@ async function forwardNew() {
     },
   })
 }
-async function forwardEdit(MEISYO_CD) {
+function forwardEdit(MEISYO_CD) {
   router.push({
     name: route.name,
     query: {

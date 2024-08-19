@@ -296,3 +296,7 @@ export function convertToHalfWidth(input: string): string {
     .replace(/[！-～]/g, (ch) => String.fromCharCode(ch.charCodeAt(0) - 0xfee0))
     .replace(/　/g, ' ')
 }
+/**カナに変換*/
+export function convertToKaNa(input: string): string {
+  return input.replace(/[^\u3040-\u309F\u30A0-\u30FF\uFF00-\uFFEF\s]/g, '')
+}

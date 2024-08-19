@@ -102,3 +102,6 @@ a {
 :deep(:disabled) {
   color: black;
 }
+::-ms-reveal {
+  display: none;
+}
