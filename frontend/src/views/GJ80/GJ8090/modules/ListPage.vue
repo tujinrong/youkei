@@ -137,7 +137,7 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, reactive, toRef, watch, onMounted, computed } from 'vue'
+import { ref, reactive, toRef, watch, onMounted, computed, nextTick } from 'vue'
 import { useRouter, useRoute, onBeforeRouteUpdate } from 'vue-router'
 import { EnumAndOr, PageSatatus } from '@/enum'
 import useSearch from '@/hooks/useSearch'
@@ -216,15 +216,16 @@ const KEIYAKUSYA_NAME = computed(() => {
 //フック関数
 //--------------------------------------------------------------------------
 onMounted(() => {
-  getInitData(searchParams.KI)
+  getInitData(searchParams.KI, true)
 })
 
 //初期化処理
-const getInitData = (KI) => {
+const getInitData = (KI: number, initflg: boolean) => {
   Init({ KI: KI }).then((res) => {
-    searchParams.KI = res.KI
+    if (initflg) searchParams.KI = res.KI
     searchParams.KEIYAKUSYA_CD = undefined
     KEIYAKUSYA_CD_NAME_LIST.value = res.KEIYAKUSYA_CD_NAME_LIST
+    nextTick(() => clearValidate)
   })
 }
 
@@ -274,10 +275,11 @@ const { pageParams, totalCount, searchData, clear } = useSearch({
 
 //クリア
 async function reset() {
-  Object.assign(searchParams, createDefaultParams())
-  await clear()
-  await getInitData(0)
-  await clearValidate()
+  searchParams.NOJO_CD = undefined
+  searchParams.NOJO_NAME = undefined
+  searchParams.SEARCH_METHOD = EnumAndOr.And
+  getInitData(-1, true)
+  clear()
 }
 
 const searchAll = async () => {
@@ -304,8 +306,7 @@ watch(
   () => searchParams.KI,
   (newVal) => {
     if (newVal) {
-      getInitData(newVal)
-      clearValidate()
+      getInitData(newVal, false)
     }
   }
 )

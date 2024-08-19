@@ -16,6 +16,7 @@
                     :max="99"
                     :maxlength="2"
                     style="width: 120px"
+                    @change="handleKI(false)"
                   ></a-input-number>
                   <span class="!align-middle">期</span>
                 </a-form-item>
@@ -132,6 +133,10 @@ const createDefaultParams = () => {
     },
   }
 }
+const clearFromToValue = {
+  FROM: undefined,
+  TO: undefined,
+}
 const formData = reactive(createDefaultParams())
 
 const KEIYAKU_JYOKYO_LABELS = {
@@ -141,23 +146,11 @@ const KEIYAKU_JYOKYO_LABELS = {
   HAIGYO: '廃業者',
 }
 
-const KEIYAKU_KBN_CD_NAME_LIST = ref<CodeNameModel[]>([
-  { CODE: 1, NAME: '家族' },
-  { CODE: 2, NAME: '企業' },
-  { CODE: 3, NAME: '鶏以外' },
-])
+const KEIYAKU_KBN_CD_NAME_LIST = ref<CodeNameModel[]>([])
 
-const ITAKU_CD_NAME_LIST = ref<CodeNameModel[]>([
-  { CODE: 1, NAME: '永玉さん' },
-  { CODE: 2, NAME: '尾三さん' },
-  { CODE: 3, NAME: '史玉さん' },
-])
+const ITAKU_CD_NAME_LIST = ref<CodeNameModel[]>([])
 
-const KEIYAKUSYA_CD_NAME_LIST = ref<CodeNameModel[]>([
-  { CODE: 1, NAME: '田中さん' },
-  { CODE: 2, NAME: '玉田さん' },
-  { CODE: 3, NAME: '浅海さん' },
-])
+const KEIYAKUSYA_CD_NAME_LIST = ref<CodeNameModel[]>([])
 
 const layout = {
   md: 24,
@@ -176,12 +169,7 @@ const URL = computed(() => {
 //フック関数
 //--------------------------------------------------------------------------
 onMounted(() => {
-  Init({ KI: formData.KI }).then((res) => {
-    formData.KI = res.KI //対象期
-    KEIYAKU_KBN_CD_NAME_LIST.value = res.KEIYAKU_KBN_CD_NAME_LIST //契約区分
-    ITAKU_CD_NAME_LIST.value = res.ITAKU_CD_NAME_LIST //事務委託先
-    KEIYAKUSYA_CD_NAME_LIST.value = res.KEIYAKUSYA_CD_NAME_LIST //契約者番号
-  })
+  handleKI(true)
 })
 
 //--------------------------------------------------------------------------
@@ -280,6 +268,19 @@ const rangeCheck = (from: number, to: number, itemName: string) => {
   return result
 }
 
+const handleKI = (initflg: boolean) => {
+  Init({ KI: formData.KI }).then((res) => {
+    if (!initflg) {
+      formData.KEIYAKU_KBN_CD = clearFromToValue
+      formData.ITAKU_CD = clearFromToValue
+      formData.KEIYAKUSYA_CD = clearFromToValue
+    }
+    if (initflg) formData.KI = res.KI //対象期
+    KEIYAKU_KBN_CD_NAME_LIST.value = res.KEIYAKU_KBN_CD_NAME_LIST //契約区分
+    ITAKU_CD_NAME_LIST.value = res.ITAKU_CD_NAME_LIST //事務委託先
+    KEIYAKUSYA_CD_NAME_LIST.value = res.KEIYAKUSYA_CD_NAME_LIST //契約者番号
+  })
+}
 const clear = () => {
   Object.assign(formData, createDefaultParams())
 }
