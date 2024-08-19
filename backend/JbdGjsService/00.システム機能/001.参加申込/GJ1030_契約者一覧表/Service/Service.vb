@@ -10,13 +10,13 @@
 Namespace JBD.GJS.Service.GJ1030
 
     ''' <summary>
-    ''' 初期化処理_一覧画面
+    ''' 契約者一覧表
     ''' </summary>
-    <DisplayName("初期化処理_一覧画面")>
+    <DisplayName("契約者一覧表")>
     Public Class Service
         Inherits CmServiceBase
 
-        <DisplayName("初期化処理_一覧画面処理")>
+        <DisplayName("初期化処理_プレビュー画面")>
         Public Shared Function Init(req As InitRequest) As InitResponse
             Return Nolock(req,
                 Function(db)
@@ -62,8 +62,8 @@ Namespace JBD.GJS.Service.GJ1030
 
         End Function
 
-        <DisplayName("検索処理_一覧画面処理")>
-        Public Shared Function Search(req As SearchRequest) As SearchResponse
+        <DisplayName("プレビュー処理_プレビュー画面")>
+        Public Shared Function Preview(req As PreviewRequest) As SearchResponse
             Return Nolock(req,
                 Function(db)
 

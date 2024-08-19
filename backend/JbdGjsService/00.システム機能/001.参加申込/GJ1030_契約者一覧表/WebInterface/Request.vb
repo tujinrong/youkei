@@ -10,43 +10,63 @@
 Namespace JBD.GJS.Service.GJ1030
 
     ''' <summary>
-    ''' 初期化処理_一覧画面処理
+    ''' 初期化処理_プレビュー画面処理
     ''' </summary>
     Public Class InitRequest
         Inherits Db.DaRequestBase
 
         ''' <summary>
-        ''' 期
+        ''' 対象期
         ''' </summary>
         Public Property KI As Integer = Nothing
 
     End Class
 
     ''' <summary>
-    ''' 検索処理_一覧画面処理
+    ''' プレビュー処理_プレビュー画面処理
     ''' </summary>
-    Public Class SearchRequest
-        Inherits CmSearchRequestBase
+    Public Class PreviewRequest
+        Inherits Db.DaRequestBase
 
         ''' <summary>
-        ''' 期
+        ''' 対象期
         ''' </summary>
         Public Property KI As Integer = Nothing
 
         ''' <summary>
-        ''' 契約者番号
+        ''' 対象日(現在)
         ''' </summary>
-        Public Property KEIYAKUSYA_CD As Integer = Nothing
+        Public Property TAISYOBI_YMD As DateTime
 
         ''' <summary>
-        ''' 農場番号
+        ''' 契約区分コードFROM
         ''' </summary>
-        Public Property NOJO_CD As Integer? = Nothing
+        Public Property KEIYAKU_KBN_CD_FM As Integer? = Nothing
 
         ''' <summary>
-        ''' 農場名
+        ''' 契約区分コードTO
         ''' </summary>
-        Public Property NOJO_NAME As String = String.Empty
+        Public Property KEIYAKU_KBN_CD_TO As Integer? = Nothing
+
+        ''' <summary>
+        ''' 契約状況[新規契約者]
+        ''' </summary>
+        Public Property KEIYAKU_JYOKYO_SHINKI As Boolean= False
+
+        ''' <summary>
+        ''' 契約状況[継続契約者]
+        ''' </summary>
+        Public Property KEIYAKU_JYOKYO_KEIZOKU As Boolean= False
+
+        ''' <summary>
+        ''' 契約状況[中止契約者]
+        ''' </summary>
+        Public Property KEIYAKU_JYOKYO_CHUSHI As Boolean= False
+
+        ''' <summary>
+        ''' 契約状況[廃業者]                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+        ''' </summary>
+        Public Property KEIYAKU_JYOKYO_HAIGYO As Boolean= False
 
         ''' <summary>
         ''' 検索方法
