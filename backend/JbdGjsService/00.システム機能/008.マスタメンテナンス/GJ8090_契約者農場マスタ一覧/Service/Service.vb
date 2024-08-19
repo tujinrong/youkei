@@ -41,11 +41,7 @@ Namespace JBD.GJS.Service.GJ8090
                     '-------------------------------------------------------------
                     'データ結果判定
                     If req.KI = -1 Then
-                        Dim ki =Cint(New Obj_TM_SYORI_NENDO_KI().pKI)
-                        Dim ret As New InitResponse With {
-                            .KI = ki
-                        }
-                        Return ret
+                        req.KI =Cint(New Obj_TM_SYORI_NENDO_KI().pKI)
                     End If
 
                     'データクエリ
