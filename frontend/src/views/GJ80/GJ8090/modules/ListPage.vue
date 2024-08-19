@@ -12,7 +12,7 @@
               <a-form-item v-bind="validateInfos.KI">
                 <a-input-number
                   v-model:value="searchParams.KI"
-                  :min="1"
+                  :min="0"
                   :max="99"
                   :maxlength="2"
                   class="w-full"
