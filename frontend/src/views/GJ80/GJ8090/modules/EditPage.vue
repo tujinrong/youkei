@@ -268,7 +268,7 @@ onMounted(async () => {
         nextTick(() => editJudge.reset())
       })
       .catch((error) => {
-        router.push({ name: route.name as string, query: { refresh: '1' } })
+        router.push({ name: route.name, query: { refresh: '1' } })
       })
   } else {
     nextTick(() => editJudge.reset())
@@ -311,7 +311,7 @@ watch(
 const goList = () => {
   editJudge.judgeIsEdited(() => {
     resetFields()
-    router.push({ name: route.name })
+    router.push({ name: route.name, query: { refresh: '1' } })
   })
 }
 
@@ -329,7 +329,7 @@ const saveData = async () => {
           },
           EDIT_KBN: isNew ? Enum編集区分.新規 : Enum編集区分.変更,
         })
-        router.push({ name: route.name as string, query: { refresh: '1' } })
+        router.push({ name: route.name, query: { refresh: '1' } })
         message.success(SAVE_OK_INFO.Msg)
       } catch (error) {}
     },
@@ -349,7 +349,7 @@ const deleteData = () => {
           NOJO_CD: formData.NOJO_CD,
           UP_DATE: upddttm,
         })
-        router.push({ name: route.name as string, query: { refresh: '1' } })
+        router.push({ name: route.name, query: { refresh: '1' } })
         message.success(DELETE_OK_INFO.Msg)
       } catch (error) {}
     },
