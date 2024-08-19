@@ -7,14 +7,14 @@
  * 変更履歴　:
  * -----------------------------------------------------------------*/
 import { api } from '@/service/request/common-service'
-import { InitResponse, PreviewRequest } from './type'
+import { InitRequest, InitResponse, PreviewRequest } from './type'
 
 const servicename = 'GJ1030'
 
 /** 初期化処理(プレビュー画面) */
-export const Init = (): Promise<InitResponse> => {
+export const Init = (params: InitRequest): Promise<InitResponse> => {
   const methodname = 'Init'
-  return api(servicename, methodname)
+  return api(servicename, methodname, params)
 }
 
 /** プレビュー処理(プレビュー画面) */

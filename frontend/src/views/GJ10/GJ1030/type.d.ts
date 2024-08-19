@@ -11,6 +11,12 @@
 //リクエスト
 //-------------------------------------------------------------------
 
+/**初期化処理(プレビュー画面) */
+export interface InitRequest extends DaRequestBase {
+  /**対象期 */
+  KI: number
+}
+
 /**プレビュー処理(プレビュー画面) */
 export interface PreviewRequest extends CmSearchRequestBase {
   /**対象期 */

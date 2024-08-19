@@ -158,7 +158,7 @@ const tabStore = useTabStore()
 
 const createDefaultParams = (): SearchRequest => {
   return {
-    KI: 0,
+    KI: -1,
     KEIYAKUSYA_CD: undefined,
     NOJO_CD: undefined,
     NOJO_NAME: undefined,

@@ -110,7 +110,7 @@ import { Init } from './service'
 //--------------------------------------------------------------------------
 const createDefaultParams = () => {
   return {
-    KI: 8,
+    KI: -1,
     TAISYOBI_YMD: new Date().toISOString().split('T')[0],
     KEIYAKU_KBN_CD: {
       FROM: undefined,
@@ -176,12 +176,12 @@ const URL = computed(() => {
 //フック関数
 //--------------------------------------------------------------------------
 onMounted(() => {
-  // Init().then((res) => {
-  //   formData.KI = res.KI //対象期
-  //   KEIYAKU_KBN_CD_NAME_LIST.value = res.KEIYAKU_KBN_CD_NAME_LIST //契約区分
-  //   ITAKU_CD_NAME_LIST.value = res.ITAKU_CD_NAME_LIST //事務委託先
-  //   KEIYAKUSYA_CD_NAME_LIST.value = res.KEIYAKUSYA_CD_NAME_LIST //契約者番号
-  // })
+  Init({ KI: formData.KI }).then((res) => {
+    formData.KI = res.KI //対象期
+    KEIYAKU_KBN_CD_NAME_LIST.value = res.KEIYAKU_KBN_CD_NAME_LIST //契約区分
+    ITAKU_CD_NAME_LIST.value = res.ITAKU_CD_NAME_LIST //事務委託先
+    KEIYAKUSYA_CD_NAME_LIST.value = res.KEIYAKUSYA_CD_NAME_LIST //契約者番号
+  })
 })
 
 //--------------------------------------------------------------------------
