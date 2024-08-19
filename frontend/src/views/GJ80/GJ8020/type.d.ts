@@ -7,7 +7,7 @@
  * 変更履歴　:
  * -----------------------------------------------------------------*/
 
-import { Enum編集区分 } from '@/enum'
+import { EnumEditKbn } from '@/enum'
 
 //-------------------------------------------------------------------
 //リクエスト
@@ -18,7 +18,7 @@ export interface SaveRequest extends DaRequestBase {
   /** */
   KEKKA: DetailVM
   /**編集区分 */
-  EDIT_KBN: Enum編集区分
+  EDIT_KBN: EnumEditKbn
 }
 
 //-------------------------------------------------------------------

@@ -7,7 +7,7 @@
  * 変更履歴　:
  * -----------------------------------------------------------------*/
 
-import { EnumAndOr, Enum編集区分 } from '@/enum'
+import { EnumAndOr, EnumEditKbn } from '@/enum'
 
 //-------------------------------------------------------------------
 //リクエスト
@@ -42,7 +42,7 @@ export interface SaveRequest extends DaRequestBase {
   /**コード情報 */
   CODE_VM: DetailVM
   /**編集区分 */
-  EDIT_KBN: Enum編集区分
+  EDIT_KBN: EnumEditKbn
 }
 
 //-------------------------------------------------------------------

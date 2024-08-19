@@ -114,7 +114,7 @@ import { Judgement } from '@/utils/judge-edited';
 import { Form } from 'ant-design-vue';
 import { reactive, watch } from 'vue';
 import { Save } from '../service';
-import { Enum編集区分 } from '@/enum';
+import { EnumEditKbn } from '@/enum';
 import { DetailVM } from '../type';
 
 const formData = reactive<DetailVM>({
@@ -148,7 +148,7 @@ watch(() => formData,
 
 const save = async () => {
   await validate()
-  await Save({KEKKA:formData,EDIT_KBN:Enum編集区分.変更})
+  await Save({KEKKA:formData,EDIT_KBN:EnumEditKbn.Edit})
 }
 
 const cancel = () => { }

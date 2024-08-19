@@ -136,7 +136,7 @@
 </template>
 
 <script setup lang="ts">
-import { Enum編集区分, PageSatatus } from '@/enum'
+import { EnumEditKbn, PageSatatus } from '@/enum'
 import { nextTick, onMounted, reactive, ref, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { showDeleteModal, showSaveModal } from '@/utils/modal'
@@ -327,7 +327,7 @@ const saveData = async () => {
             ...formData,
             UP_DATE: isNew ? undefined : upddttm,
           },
-          EDIT_KBN: isNew ? Enum編集区分.新規 : Enum編集区分.変更,
+          EDIT_KBN: isNew ? EnumEditKbn.Add : EnumEditKbn.Edit,
         })
         router.push({ name: route.name, query: { refresh: '1' } })
         message.success(SAVE_OK_INFO.Msg)
