@@ -179,7 +179,7 @@ const tableData = ref<SearchRowVM[]>([])
 //表の高さ
 const headRef = ref(null)
 const layout = {
-  md: 12,
+  md: 24,
   lg: 12,
   xl: 8,
   xxl: 6,
