@@ -4,6 +4,7 @@
       <AInput
         id="USER_ID"
         v-model:value="model.USER_ID"
+        class="mb-4"
         size="large"
         :maxlength="10"
         :placeholder="$t('page.login.common.userNamePlaceholder')"
@@ -17,6 +18,7 @@
     <AFormItem name="PASS">
       <AInputPassword
         v-model:value="model.PASS"
+        class="mb-4"
         size="large"
         :maxlength="20"
         :placeholder="$t('page.login.common.passwordPlaceholder')"
