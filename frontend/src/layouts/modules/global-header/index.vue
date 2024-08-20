@@ -72,7 +72,10 @@ const headerMenus = computed(() => {
         :collapsed="appStore.siderCollapse"
         @click="appStore.toggleSiderCollapse"
       />
-      <GlobalBreadcrumb v-if="!appStore.isMobile" class="ml-12px" />
+      <!-- <GlobalBreadcrumb
+        v-if="!appStore.isMobile"
+        class="ml-12px hidden sm:block"
+      /> -->
     </div>
     <div class="h-full flex-y-center justify-end">
       <!-- <FullScreen
