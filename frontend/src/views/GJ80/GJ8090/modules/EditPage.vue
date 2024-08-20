@@ -264,6 +264,7 @@ onMounted(async () => {
     })
       .then((res) => {
         Object.assign(formData, res.KEIYAKUSYA_NOJO)
+        formData.ADDR_1 = res.KEIYAKUSYA_NOJO.ADDR_1
         upddttm = res.KEIYAKUSYA_NOJO.UP_DATE
         nextTick(() => editJudge.reset())
       })
@@ -289,8 +290,9 @@ watch(formData, () => editJudge.setEdited())
 watch(
   () => formData.KEN_CD,
   (newVal) => {
-    formData.ADDR_1 =
-      KEN_CD_NAME_LIST.value.find((item) => item.CODE === newVal)?.NAME || ''
+    if (!formData.ADDR_1)
+      formData.ADDR_1 =
+        KEN_CD_NAME_LIST.value.find((item) => item.CODE === newVal)?.NAME || ''
   }
 )
 
