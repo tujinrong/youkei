@@ -1,5 +1,5 @@
 /** ----------------------------------------------------------------
- * 業務名称　: 互助防疫システム
+ * 業務名称　: 互助事業システム
  * 機能概要　: 契約者農場マスタメンテナンス
  * 　　　　　  インターフェース定義
  * 作成日　　: 2024.07.24
@@ -33,18 +33,6 @@ export interface SearchRequest extends CmSearchRequestBase {
   SEARCH_METHOD: EnumAndOr
 }
 
-/**削除処理(一覧画面) */
-export interface DeleteRequest extends DaRequestBase {
-  /**期 */
-  KI: number
-  /**契約者番号 */
-  KEIYAKUSYA_CD: number
-  /**農場コード */
-  NOJO_CD: number
-  /**更新時間 */
-  UP_DATE: Date
-}
-
 /**検索処理(詳細画面) */
 export interface SearchDetailRequest extends DaRequestBase {
   /**期 */
@@ -63,6 +51,17 @@ export interface SaveRequest extends DaRequestBase {
   EDIT_KBN: EnumEditKbn
 }
 
+/**削除処理(一覧画面) */
+export interface DeleteRequest extends DaRequestBase {
+  /**期 */
+  KI: number
+  /**契約者番号 */
+  KEIYAKUSYA_CD: number
+  /**農場コード */
+  NOJO_CD: number
+  /**更新時間 */
+  UP_DATE: Date
+}
 //-------------------------------------------------------------------
 //レスポンス
 //-------------------------------------------------------------------

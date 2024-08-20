@@ -38,7 +38,7 @@
               <td class="flex">
                 <a-form-item v-bind="validateInfos.KEIYAKU_KBN_CD">
                   <range-select
-                    v-model:value="formData.KEIYAKU_KBN_CD"
+                    v-model:value="formData.KeiyakuKbnCd"
                     :options="KEIYAKU_KBN_CD_NAME_LIST"
                 /></a-form-item>
               </td>
@@ -51,7 +51,7 @@
                     <a-checkbox
                       v-for="(label, key) in KEIYAKU_JYOKYO_LABELS"
                       :key="key"
-                      v-model:checked="formData.KEIYAKU_JYOKYO[key]"
+                      v-model:checked="formData.KeiyakuJyokyo[key]"
                     >
                       {{ label }}
                     </a-checkbox></a-space
@@ -64,7 +64,7 @@
               <td class="flex">
                 <a-form-item v-bind="validateInfos.ITAKU_CD">
                   <range-select
-                    v-model:value="formData.ITAKU_CD"
+                    v-model:value="formData.ItakuCd"
                     :options="ITAKU_CD_NAME_LIST"
                 /></a-form-item>
               </td>
@@ -74,7 +74,7 @@
               <td class="flex">
                 <a-form-item v-bind="validateInfos.KEIYAKUSYA_CD">
                   <range-select
-                    v-model:value="formData.KEIYAKUSYA_CD"
+                    v-model:value="formData.KeiyakusyaCd"
                     :options="KEIYAKUSYA_CD_NAME_LIST"
                 /></a-form-item>
               </td>
@@ -113,21 +113,21 @@ const createDefaultParams = () => {
   return {
     KI: -1,
     TAISYOBI_YMD: new Date().toISOString().split('T')[0],
-    KEIYAKU_KBN_CD: {
+    KeiyakuKbnCd: {
       VALUE_FM: undefined,
       VALUE_TO: undefined,
     },
-    KEIYAKU_JYOKYO: {
+    KeiyakuJyokyo: {
       SHINKI: true,
       KEIZOKU: true,
       CHUSHI: true,
       HAIGYO: true,
     },
-    ITAKU_CD: {
+    ItakuCd: {
       VALUE_FM: undefined,
       VALUE_TO: undefined,
     },
-    KEIYAKUSYA_CD: {
+    KeiyakusyaCd: {
       VALUE_FM: undefined,
       VALUE_TO: undefined,
     },
@@ -182,7 +182,7 @@ const rules = reactive({
       message: ITEM_REQUIRE_ERROR.Msg.replace('{0}', '対象期'),
     },
   ],
-  KEIYAKU_KBN_CD: [
+  KeiyakuKbnCd: [
     {
       validator: (
         _rule,
@@ -197,7 +197,20 @@ const rules = reactive({
       },
     },
   ],
-  ITAKU_CD: [
+  KeiyakuJyokyo: [
+    {
+      validator: (_rule, value) => {
+        const values = Object.values(value)
+        if (!values.some((el) => el === true)) {
+          return Promise.reject(
+            ITEM_REQUIRE_ERROR.Msg.replace('{0}', '契約状況')
+          )
+        }
+        return Promise.resolve()
+      },
+    },
+  ],
+  ItakuCd: [
     {
       validator: (
         _rule,
@@ -212,7 +225,7 @@ const rules = reactive({
       },
     },
   ],
-  KEIYAKUSYA_CD: [
+  KeiyakusyaCd: [
     {
       validator: (
         _rule,
@@ -223,19 +236,6 @@ const rules = reactive({
       ) => {
         const result = rangeCheck(value.VALUE_FM, value.VALUE_TO, '契約者番号')
         if (!result.flag) return Promise.reject(result.content)
-        return Promise.resolve()
-      },
-    },
-  ],
-  KEIYAKU_JYOKYO: [
-    {
-      validator: (_rule, value) => {
-        const values = Object.values(value)
-        if (!values.some((el) => el === true)) {
-          return Promise.reject(
-            ITEM_REQUIRE_ERROR.Msg.replace('{0}', '契約状況')
-          )
-        }
         return Promise.resolve()
       },
     },
@@ -270,9 +270,9 @@ const rangeCheck = (from: number, to: number, itemName: string) => {
 const handleKI = (initflg: boolean) => {
   Init({ KI: formData.KI }).then((res) => {
     if (!initflg) {
-      formData.KEIYAKU_KBN_CD = clearFromToValue
-      formData.ITAKU_CD = clearFromToValue
-      formData.KEIYAKUSYA_CD = clearFromToValue
+      formData.KeiyakuKbnCd = clearFromToValue
+      formData.ItakuCd = clearFromToValue
+      formData.KeiyakusyaCd = clearFromToValue
     }
     if (initflg) formData.KI = res.KI //対象期
     KEIYAKU_KBN_CD_NAME_LIST.value = res.KEIYAKU_KBN_CD_NAME_LIST //契約区分

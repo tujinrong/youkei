@@ -1,6 +1,6 @@
 const local: App.I18n.Schema = {
   system: {
-    title: '互助防疫システム',
+    title: '互助事業システム',
     headTitle: '日本養鶏協会',
     updateTitle: 'システムバージョン更新のお知らせ',
     updateContent:

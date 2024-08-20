@@ -1,5 +1,5 @@
 /** ----------------------------------------------------------------
- * 業務名称　: 互助防疫システム
+ * 業務名称　: 互助事業システム
  * 機能概要　: 契約者農場マスタメンテナンス
  * 　　　　　  インターフェース定義
  * 作成日　　: 2024.07.29
@@ -14,7 +14,7 @@ const servicename = 'GJ1030'
 /** 初期化処理(プレビュー画面) */
 export const Init = (params: InitRequest): Promise<InitResponse> => {
   const methodname = 'Init'
-  return api(servicename, methodname, params, undefined, { loading: true })
+  return api(servicename, methodname, params)
 }
 
 /** プレビュー処理(プレビュー画面) */
