@@ -9,15 +9,24 @@
       </div>
 
       <a-descriptions :column="1" class="mt-2">
-        <a-descriptions-item label="契約数"
+        <a-descriptions-item
+          label="契約数"
+          :content-style="{ fontSize: '24px' }"
+          :label-style="{ fontSize: '24px' }"
           >新規{{ homeData.keiyakusinki }}　継続{{
             homeData.keiyakusukeiyaku
           }}</a-descriptions-item
         >
-        <a-descriptions-item label="羽数"
+        <a-descriptions-item
+          label="羽数"
+          :content-style="{ fontSize: '24px' }"
+          :label-style="{ fontSize: '24px' }"
           >{{ homeData.hasu }} 羽</a-descriptions-item
         >
-        <a-descriptions-item label="績立金額"
+        <a-descriptions-item
+          label="績立金額"
+          :content-style="{ fontSize: '24px' }"
+          :label-style="{ fontSize: '24px' }"
           >{{ homeData.sekitatukinngaku }} 円</a-descriptions-item
         >
       </a-descriptions>
