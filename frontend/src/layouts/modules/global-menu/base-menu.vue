@@ -9,6 +9,7 @@ import { useAppStore } from '@/store/modules/app'
 import { useThemeStore } from '@/store/modules/theme'
 import { useRouteStore } from '@/store/modules/route'
 import { useRouterPush } from '@/hooks/common/router'
+import { useTabStore } from '@/store/modules/tab'
 
 defineOptions({
   name: 'BaseMenu',
@@ -75,8 +76,15 @@ const selectedBgColor = computed(() => {
 function handleClickMenu(menuInfo: MenuInfo) {
   const key = menuInfo.key as RouteKey
 
-  const query = routeStore.getRouteQueryOfMetaByKey(key)
+  //keep fullpath
+  const tabStore = useTabStore()
+  const tab = tabStore.tabs.find((tab) => tab.routeKey === key)
+  if (tab) {
+    tabStore.switchRouteByTab(tab)
+    return
+  }
 
+  const query = routeStore.getRouteQueryOfMetaByKey(key)
   routerPushByKey(key, { query })
 }
 

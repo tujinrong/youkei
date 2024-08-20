@@ -48,14 +48,14 @@ function handleClickMenu(key: RouteKey) {
 
       <template v-if="item.children?.length" #overlay>
         <AMenu>
-          <template v-for="option in item.children" :key="option.key">
-            <AMenuItem
-              :disabled="option.disabled"
-              @click="handleClickMenu(option.routeKey)"
-            >
-              <BreadcrumbContent :breadcrumb="option" />
-            </AMenuItem>
-          </template>
+          <AMenuItem
+            v-for="option in item.children"
+            :key="option.key"
+            :disabled="option.disabled"
+            @click="handleClickMenu(option.routeKey)"
+          >
+            <BreadcrumbContent :breadcrumb="option" />
+          </AMenuItem>
         </AMenu>
       </template>
     </ABreadcrumbItem>
