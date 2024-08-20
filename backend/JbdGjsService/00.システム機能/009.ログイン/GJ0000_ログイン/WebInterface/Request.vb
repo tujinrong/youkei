@@ -13,7 +13,7 @@ Namespace JBD.GJS.Service.GJ0000
     ''' ログイン処理
     ''' </summary>
     Public Class LoginRequest
-        Inherits Db.DaRequestBase
+        Inherits DaRequestBase
 
         ''' <summary>
         ''' パスワード

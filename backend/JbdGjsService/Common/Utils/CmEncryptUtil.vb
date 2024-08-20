@@ -6,15 +6,8 @@
 ' 作成者　　: 
 ' 変更履歴　:
 ' *******************************************************************
-Imports System.Security
-Imports System.Security.Cryptography
-Imports System.Text
-'using Org.BouncyCastle.Crypto;
-'using Org.BouncyCastle.Crypto.Generators;
-'using Org.BouncyCastle.OpenSsl;
-'using Org.BouncyCastle.Security;
 
-Namespace JBD.GJS.Db
+Namespace JBD.GJS.Service
     Public Module CmEncryptUtil
         Private ReadOnly AesKey As String
         Private ReadOnly AesIv As String

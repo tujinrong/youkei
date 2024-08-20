@@ -11,7 +11,7 @@ Namespace JBD.GJS.Service.Common
     ''' 初期化処理(パスワードポリシー)
     ''' </summary>
     Public Class CmPwdInitResponse
-        Inherits Db.DaResponseBase
+        Inherits DaResponseBase
         Public Property pwdflg As Boolean = False               'パスワードポリシー設定フラグ
         Public Property numflg As Boolean = False               '半角数字フラグ
         Public Property enflg As Boolean = False                '半角英字フラグ

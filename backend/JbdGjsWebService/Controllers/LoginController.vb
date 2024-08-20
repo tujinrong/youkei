@@ -37,7 +37,7 @@ Namespace JBD.GJS.WebService
             'ログを記録
             r.Service = webReq.SERVICE_NAME
             r.Method = webReq.METHOD_NAME
-            Using db = New DaDbContext(r)
+            Using db = New JbdGjsService.JBD.GJS.Service.DaDbContext(r)
                 DaDbLogService.UpdateMainLog(db, EnumLogStatus.正常終了)
                 DaDbLogService.WriteTusinLog(db, r, res, String.Empty)
             End Using

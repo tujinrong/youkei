@@ -19,7 +19,7 @@ Public Class Program
         StartFactory.Start(configuration)
 
         'System Start Up log
-        Using db = New DaDbContext()
+        Using db = New JbdGjsService.JBD.GJS.Service.DaDbContext()
             db.Session.SessionData(DaConst.SessionID) = -1L
             db.Session.UserID = DaConst.SYSTEM
             DaDbLogService.WriteDbMessage(db, "System Start Up")

@@ -8,7 +8,7 @@
 ' *******************************************************************
 Namespace JBD.GJS.Service
     Public Class CmUploadRequestBase
-        Inherits Db.DaRequestBase
-        Public Property files As List(Of Db.DaFileModel) = New List(Of Db.DaFileModel)()     ' ファイルリスト
+        Inherits DaRequestBase
+        Public Property files As List(Of DaFileModel) = New List(Of DaFileModel)()     ' ファイルリスト
     End Class
 End Namespace

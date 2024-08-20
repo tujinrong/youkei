@@ -14,35 +14,35 @@ Namespace JBD.GJS.Service
         ''' <summary>
         ''' 単一ファイルのダウンロード応答を取得
         ''' </summary>
-        Public Function GetDownloadResponse(files As List(Of Db.DaFileModel), Optional zipFileName As String = Nothing) As CmDownloadResponseBase
-            Dim res = New CmDownloadResponseBase()
-            ' ファイルがない場合
-            If files Is Nothing OrElse Not files.Any() Then
-                Throw New FileNotFoundException()
-            End If
+        'Public Function GetDownloadResponse(files As List(Of DaFileModel), Optional zipFileName As String = Nothing) As CmDownloadResponseBase
+        '    Dim res = New CmDownloadResponseBase()
+        '    ' ファイルがない場合
+        '    If files Is Nothing OrElse Not files.Any() Then
+        '        Throw New FileNotFoundException()
+        '    End If
 
-            Dim singleFile As Db.DaFileModel
-            ' 単一ファイルの場合
-            If files.Count = 1 Then
-                singleFile = files(0)
-            Else
-                ' 同じ名前のファイルの名前を変更
-                RenameSameNameFiles(files)
+        '    Dim singleFile As DaFileModel
+        '    ' 単一ファイルの場合
+        '    If files.Count = 1 Then
+        '        singleFile = files(0)
+        '    Else
+        '        ' 同じ名前のファイルの名前を変更
+        '        RenameSameNameFiles(files)
 
-                ' 複数のファイルを圧縮
-                singleFile = ZipFiles(files, zipFileName)
-            End If
-            res.filenm = $"{singleFile.filenm}{singleFile.filetype}"      'ファイル名
-            res.data = singleFile.filedata                                'ファイルデータ
-            'res.contenttype = GetMapping(singleFile.filetype)  'コンテンツタイプ
+        '        ' 複数のファイルを圧縮
+        '        singleFile = ZipFiles(files, zipFileName)
+        '    End If
+        '    res.filenm = $"{singleFile.filenm}{singleFile.filetype}"      'ファイル名
+        '    res.data = singleFile.filedata                                'ファイルデータ
+        '    'res.contenttype = GetMapping(singleFile.filetype)  'コンテンツタイプ
 
-            Return res
-        End Function
+        '    Return res
+        'End Function
 
         ''' <summary>
         ''' 単一ファイルのダウンロード応答を取得
         ''' </summary>
-        Public Function GetDownloadResponse(file As Db.DaFileModel) As CmDownloadResponseBase
+        Public Function GetDownloadResponse(file As DaFileModel) As CmDownloadResponseBase
             Dim res = New CmDownloadResponseBase()
             ' ファイルがない場合
             If file Is Nothing Then
@@ -59,7 +59,7 @@ Namespace JBD.GJS.Service
         ''' 
         ''' 同じ名前のファイルの名前を変更
         ''' </summary>
-        Private Sub RenameSameNameFiles(files As IEnumerable(Of Db.DaFileModel))
+        Private Sub RenameSameNameFiles(files As IEnumerable(Of DaFileModel))
             Dim group = files.GroupBy(Function(f) $"{f.filenm}{f.filetype}").ToDictionary(Function(f) f.Key, Function(f) f.ToList())
             For Each g In group
                 If g.Value.Count > 1 Then
@@ -74,14 +74,14 @@ Namespace JBD.GJS.Service
         ''' <summary>
         ''' 複数のファイルを1つのzipファイルに圧縮
         ''' </summary>
-        Private Function ZipFiles(files As IEnumerable(Of Db.DaFileModel), zipFileName As String) As Db.DaFileModel
+        Private Function ZipFiles(files As IEnumerable(Of DaFileModel), zipFileName As String) As DaFileModel
             Dim memoryStream = New MemoryStream()
             Dim zos = New ZipOutputStream(memoryStream)
             zos.SetLevel(9)
-            zipFileName = If(String.IsNullOrEmpty(zipFileName), Db.DaConst.DEFAULT_ZIP_FILE_NAME, zipFileName)
-            Dim now = Db.DaUtil.Now
+            zipFileName = If(String.IsNullOrEmpty(zipFileName), DaConst.DEFAULT_ZIP_FILE_NAME, zipFileName)
+            Dim now = DaUtil.Now
             For Each file In files
-                Dim entry = New ZipEntry($"{zipFileName}{Db.C_SLASH}{file.filenm}{file.filetype}") With {
+                Dim entry = New ZipEntry($"{zipFileName}{C_SLASH}{file.filenm}{file.filetype}") With {
                 .DateTime = now
 }
                 zos.PutNextEntry(entry)
@@ -89,7 +89,7 @@ Namespace JBD.GJS.Service
                 zos.Flush()
             Next
             zos.Finish()
-            Return New Db.DaFileModel(zipFileName, Db.FILE_ZIP_SUFFIX, memoryStream.ToArray())
+            Return New DaFileModel(zipFileName, FILE_ZIP_SUFFIX, memoryStream.ToArray())
         End Function
     End Module
 End Namespace

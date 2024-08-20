@@ -161,7 +161,7 @@ Namespace JBD.GJS.Service.GJ1030
             Dim sSQL As String = vbNullString
             Dim sSQL2 As String = vbNullString
             Dim sSQL3 As String = vbNullString
-            Dim dstDataSanka As DataSet
+            'Dim dstDataSanka As DataSet
 
             '#25 ADD START
             Dim sKaishiNen As String

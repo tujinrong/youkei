@@ -6,7 +6,6 @@
 ' 作成者　　: 
 ' 変更履歴　:
 ' *******************************************************************
-Imports System.Text.Json.Serialization
 
 Namespace JBD.GJS.Service.Common
     ''' <summary>
@@ -121,14 +120,14 @@ Namespace JBD.GJS.Service.Common
         Inherits FreeItemUpdBaseVM
         Public Property itemnm As String                      '項目名
         Public Property inputkbn As Enum画面項目入力          '画面項目入力区分
-        Public Property cdlist As List(Of Db.DaSelectorModel)       '一覧選択リスト
+        Public Property cdlist As List(Of DaSelectorModel)       '一覧選択リスト
         Public Property keta1 As Integer                         '入力桁(整数部/文字)
         Public Property keta2 As Integer                         '入力桁(小数部)
         Public Property hissuflg As Boolean                      '必須フラグ
         Public Property hanif As String                       '入力範囲（開始）
         Public Property hanit As String                       '入力範囲（終了）
         Public Property inputflg As Boolean                      '入力フラグ
-        Public Property msgkbn As Db.EnumMsgCtrlKbn              'メッセージ区分
+        Public Property msgkbn As EnumMsgCtrlKbn              'メッセージ区分
         Public Property syokiti As String                     '初期値
         Public Property biko As String                        '備考
     End Class
@@ -139,7 +138,7 @@ Namespace JBD.GJS.Service.Common
         Public Property itemcd As String                  '項目コード
         Public Property value As Object                  '値
         Public Property fusyoflg As Boolean                 '不詳フラグ
-        Public Property inputtypekbn As Db.Enum入力タイプ    '入力タイプ区分
+        Public Property inputtypekbn As Enum入力タイプ    '入力タイプ区分
     End Class
     ''' <summary>
     ''' 一覧列情報

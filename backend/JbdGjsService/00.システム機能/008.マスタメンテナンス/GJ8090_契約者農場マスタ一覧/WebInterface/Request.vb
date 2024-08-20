@@ -13,7 +13,7 @@ Namespace JBD.GJS.Service.GJ8090
     ''' 初期化処理_一覧画面処理
     ''' </summary>
     Public Class InitRequest
-        Inherits Db.DaRequestBase
+        Inherits DaRequestBase
 
         ''' <summary>
         ''' 期

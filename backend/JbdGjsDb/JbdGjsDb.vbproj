@@ -3,10 +3,15 @@
   <PropertyGroup>
     <RootNamespace>JbdGjsDb</RootNamespace>
     <TargetFramework>net8.0</TargetFramework>
+    <ImportedNamespaces>Oracle.ManagedDataAccess.Client=False,Microsoft.VisualBasic=True,System=True,System.Collections=True,System.Collections.Generic=True,System.Diagnostics=True,System.Linq=True,System.Xml.Linq=True,System.Threading.Tasks=True,JbdGjsDb=True</ImportedNamespaces>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Oracle.ManagedDataAccess.Core" Version="23.5.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Import Include="Oracle.ManagedDataAccess.Client" />
   </ItemGroup>
 
 </Project>

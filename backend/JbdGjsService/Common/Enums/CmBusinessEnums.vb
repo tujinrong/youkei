@@ -119,8 +119,8 @@ Namespace JBD.GJS.Service
 
     Public Enum Enum性別
         不明 = 0
-        男 = Db.EnumSex.男
-        女 = Db.EnumSex.女
+        男 = EnumSex.男
+        女 = EnumSex.女
         その他 = 9
     End Enum
     Public Enum EnumBirthSearchKbn

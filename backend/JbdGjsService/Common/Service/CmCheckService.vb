@@ -11,7 +11,7 @@ Namespace JBD.GJS.Service
         ''' <summary>
         ''' 存在チェック
         ''' </summary>
-        Public Shared Function CheckExist(obj As Object, res As Db.DaResponseBase, msg As String) As Boolean
+        Public Shared Function CheckExist(obj As Object, res As DaResponseBase, msg As String) As Boolean
             If obj Is Nothing Then
                 res.SetServiceError(msg)
                 Return False
@@ -22,7 +22,7 @@ Namespace JBD.GJS.Service
         ''' <summary>
         ''' 存在チェック
         ''' </summary>
-        Public Shared Function CheckExist(obj As Object, res As Db.DaResponseBase, msgID As Db.EnumMessage, ParamArray param As String()) As Boolean
+        Public Shared Function CheckExist(obj As Object, res As DaResponseBase, msgID As EnumMessage, ParamArray param As String()) As Boolean
             If obj Is Nothing Then
                 res.SetServiceError(msgID, param)
                 Return False
@@ -33,29 +33,29 @@ Namespace JBD.GJS.Service
         ''' <summary>
         ''' データ存在チェック
         ''' </summary>
-        Public Shared Function CheckDeleted(res As Db.DaResponseBase, dto As Object) As Boolean
-            Dim msg = Db.DaMessageService.GetMsg(Db.EnumMessage.DATA_NOTEXIST_ERROR, "更新対象", "更新")
+        Public Shared Function CheckDeleted(res As DaResponseBase, dto As Object) As Boolean
+            Dim msg = DaMessageService.GetMsg(EnumMessage.DATA_NOTEXIST_ERROR, "更新対象", "更新")
             Return CheckDeleted(res, dto, msg)
         End Function
 
         ''' <summary>
         ''' データ存在チェック
         ''' </summary>
-        Public Shared Function CheckDeleted(res As Db.DaResponseBase, dto As Object, msgID As Db.EnumMessage, ParamArray param As String()) As Boolean
-            Dim msg = Db.DaMessageService.GetMsg(msgID, param)
+        Public Shared Function CheckDeleted(res As DaResponseBase, dto As Object, msgID As EnumMessage, ParamArray param As String()) As Boolean
+            Dim msg = DaMessageService.GetMsg(msgID, param)
             Return CheckDeleted(res, dto, msg)
         End Function
 
         ''' <summary>
         ''' データ存在チェック
         ''' </summary>
-        Public Shared Function CheckDeleted(res As Db.DaResponseBase, dto As Object, msg As String) As Boolean
+        Public Shared Function CheckDeleted(res As DaResponseBase, dto As Object, msg As String) As Boolean
             If dto Is Nothing Then
                 res.SetServiceError(msg)
                 Return False
             Else
                 Dim infos = dto.GetType().GetProperties().ToList()
-                If infos.Exists(Function(x) Equals(x.Name, NameOf(Db.tm_afuserDto.stopflg))) Then
+                If infos.Exists(Function(x) Equals(x.Name, NameOf(tm_afuserDto.stopflg))) Then
                     ''' Cannot convert LocalDeclarationStatementSyntax, System.InvalidCastException: 型 'Microsoft.CodeAnalysis.VisualBasic.Syntax.EmptyStatementSyntax' のオブジェクトを型 'Microsoft.CodeAnalysis.VisualBasic.Syntax.ExpressionSyntax' にキャストできません。
                     '''    場所 ICSharpCode.CodeConverter.VB.CommonConversions.RemodelVariableDeclaration(VariableDeclarationSyntax declaration)
                     '''    場所 ICSharpCode.CodeConverter.VB.MethodBodyExecutableStatementVisitor.VisitLocalDeclarationStatement(LocalDeclarationStatementSyntax node)

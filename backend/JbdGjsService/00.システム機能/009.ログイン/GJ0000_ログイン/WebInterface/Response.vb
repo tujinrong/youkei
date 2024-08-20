@@ -13,7 +13,7 @@ Namespace JBD.GJS.Service.GJ0000
     ''' ログイン処理(成功)
     ''' </summary>
     Public Class LoginResponse
-        Inherits Db.DaResponseBase
+        Inherits DaResponseBase
 
         ''' <summary>
         ''' トークン(ベースロジック)
@@ -34,7 +34,7 @@ Namespace JBD.GJS.Service.GJ0000
     ''' ユーザ情報処理(成功)
     ''' </summary>
     Public Class UserInfoResponse
-        Inherits Db.DaResponseBase
+        Inherits DaResponseBase
 
         'Public UserInfo As UserInfoVM
         ''' <summary>

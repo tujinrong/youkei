@@ -27,12 +27,12 @@ Namespace JBD.GJS.WebService
             Try
                 If req IsNot Nothing Then
                     r = CType(req, TReq)
-                        r.ip = GetInfo(nameof(JbdGjsService.JBD.GJS.Db.DaRequestBase.ip))
-                        r.os = GetInfo(nameof(JbdGjsService.JBD.GJS.Db.DaRequestBase.os))
-                        r.browser = GetInfo(nameof(JbdGjsService.JBD.GJS.Db.DaRequestBase.browser))
+                        r.ip = GetInfo(nameof(DaRequestBase.ip))
+                        r.os = GetInfo(nameof(DaRequestBase.os))
+                        r.browser = GetInfo(nameof(DaRequestBase.browser))
                     If authflg Then
                         r.token = GetInfo("Token")
-                        r.USER_ID = GetInfo(nameof(JbdGjsService.JBD.GJS.Db.DaRequestBase.USER_ID))
+                        r.USER_ID = GetInfo(nameof(DaRequestBase.USER_ID))
                         r.kinoid = GetInfo(NameOf(DaRequestBase.kinoid))
                     End If
                 End If

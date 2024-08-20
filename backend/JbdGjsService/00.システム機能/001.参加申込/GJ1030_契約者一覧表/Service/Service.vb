@@ -7,7 +7,7 @@
 ' 変更履歴　:
 ' *******************************************************************
 
-Imports JbdGjsReport
+'Imports JbdGjsReport
 
 Namespace JBD.GJS.Service.GJ1030
 

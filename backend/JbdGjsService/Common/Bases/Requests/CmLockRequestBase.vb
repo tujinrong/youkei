@@ -8,7 +8,7 @@
 ' *******************************************************************
 Namespace JBD.GJS.Service
     Public Class CmLockRequestBase
-        Inherits Db.DaRequestBase
+        Inherits DaRequestBase
         Public Property timestamp As Date    'タイムスタンプ
     End Class
 End Namespace

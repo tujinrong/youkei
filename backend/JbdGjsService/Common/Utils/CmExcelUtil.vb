@@ -10,10 +10,8 @@
 '*******************************************************************************
 Option Strict Off
 Option Explicit On
-
-
-
-Public Class CmExcelUtil
+Namespace JBD.GJS.Service
+    Public Class CmExcelUtil
 
     '≪EXCEL≫
     Dim Xlapp As Object
@@ -660,7 +658,7 @@ Public Class CmExcelUtil
 
     End Function
 
-#Region "コメントにした関数 ※使用する場合は動作検証後、上へ移動してください。"
+    #Region "コメントにした関数 ※使用する場合は動作検証後、上へ移動してください。"
     ''***************************************************************************
     '' 概要    : クリップボード内容の貼り付け
     ''
@@ -1185,6 +1183,7 @@ Public Class CmExcelUtil
 
     'End Function
 
-#End Region
+    #End Region
 
-End Class
+    End Class
+End Namespace

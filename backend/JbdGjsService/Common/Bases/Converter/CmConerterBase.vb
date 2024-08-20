@@ -25,7 +25,7 @@ Namespace JBD.GJS.Service
                 Return Nothing
             End If
 
-            Return $"%{Db.DaConvertUtil.ToKana(value)}%"
+            Return $"%{DaConvertUtil.ToKana(value)}%"
         End Function
         ''' <summary>
         ''' 検索入力欄(氏名カナ)
@@ -33,9 +33,9 @@ Namespace JBD.GJS.Service
         Public Shared Function ToKnameLikeStr(kname As String) As String
             If Not String.IsNullOrEmpty(kname) Then
                 'カタカナへ変換
-                kname = Db.DaConvertUtil.ToKana(kname)
+                kname = DaConvertUtil.ToKana(kname)
                 '清音化
-                kname = Db.DaConvertUtil.ToSeion(kname)
+                kname = DaConvertUtil.ToSeion(kname)
                 '%変換
                 kname = kname.Replace("％", "%")
                 Return $"{kname}%"

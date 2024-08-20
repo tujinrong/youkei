@@ -13,7 +13,7 @@ Namespace JBD.GJS.Service.GJ1030
     ''' 初期化処理_一覧画面処理(成功)
     ''' </summary>
     Public Class InitResponse
-        Inherits Db.DaResponseBase
+        Inherits DaResponseBase
 
         ''' <summary>
         ''' 期

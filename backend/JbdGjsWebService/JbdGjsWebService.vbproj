@@ -9,7 +9,7 @@
     <UserSecretsId>3aae0b41-975a-4d68-a760-50cf95df17cc</UserSecretsId>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     <DefaultItemExcludes>$(DefaultItemExcludes);$(ProjectDir)**\*.cs</DefaultItemExcludes>
-    <ImportedNamespaces>JbdGjsService.JBD.GJS.Db=False,JbdGjsService.JBD.GJS.Service=False,JbdGjsWebService.JBD.GJS.WebService=False,Microsoft.AspNetCore.Builder=False,Microsoft.AspNetCore.Mvc=False,Microsoft.AspNetCore.Mvc.Filters=False,Microsoft.AspNetCore.Server.Kestrel.Core=False,Microsoft.Extensions.Configuration=False,Microsoft.Extensions.DependencyInjection=False,Microsoft.Extensions.Hosting=False,Newtonsoft.Json=False,System.Globalization=False,System.Runtime.CompilerServices=False,System.Text=False,System.Text.Json=False,System.Text.RegularExpressions=False,Microsoft.VisualBasic=True,System=True,System.Collections=True,System.Collections.Generic=True,System.Diagnostics=True,System.Linq=True,System.Xml.Linq=True,System.Threading.Tasks=True,JbdGjsWebService=True</ImportedNamespaces>
+    <ImportedNamespaces>JbdGjsDb.JBD.GJS.Db=False,JbdGjsService.JBD.GJS.Service=False,JbdGjsWebService.JBD.GJS.WebService=False,Microsoft.AspNetCore.Builder=False,Microsoft.AspNetCore.Mvc=False,Microsoft.AspNetCore.Mvc.Filters=False,Microsoft.AspNetCore.Server.Kestrel.Core=False,Microsoft.Extensions.Configuration=False,Microsoft.Extensions.DependencyInjection=False,Microsoft.Extensions.Hosting=False,Newtonsoft.Json=False,System.Globalization=False,System.Runtime.CompilerServices=False,System.Text=False,System.Text.Json=False,System.Text.RegularExpressions=False,Microsoft.VisualBasic=True,System=True,System.Collections=True,System.Collections.Generic=True,System.Diagnostics=True,System.Linq=True,System.Xml.Linq=True,System.Threading.Tasks=True,JbdGjsWebService=True</ImportedNamespaces>
   </PropertyGroup>
 
   <ItemGroup>
@@ -19,7 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Import Include="JbdGjsService.JBD.GJS.Db" />
+    <Import Include="JbdGjsDb.JBD.GJS.Db" />
     <Import Include="JbdGjsService.JBD.GJS.Service" />
     <Import Include="JbdGjsWebService.JBD.GJS.WebService" />
     <Import Include="Microsoft.AspNetCore.Builder" />

@@ -6,11 +6,10 @@
 ' 作成者　　: AIPlus
 ' 変更履歴　:
 ' *******************************************************************
-Imports System.Text.Json.Serialization
 
 Namespace JBD.GJS.Service
     Public Class CmPreviewResponseBase
-        Inherits Db.DaResponseBase
+        Inherits DaResponseBase
         Public Property filenm As String                                          'ファイル名
         <JsonIgnore>
         Public Property data As Byte()                                            'データ

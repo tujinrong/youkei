@@ -6,7 +6,6 @@
 '作成者　　 : AIPlus
 ' 変更履歴　:
 ' *******************************************************************
-Imports Oracle.ManagedDataAccess.Client
 
 Namespace JBD.GJS.Db
 

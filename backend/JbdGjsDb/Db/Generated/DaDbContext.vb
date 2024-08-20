@@ -14,7 +14,7 @@ Namespace JBD.GJS.Db
 
         Public Sub New()
             db = New DaOraDbContext(DaGlobal.ConnectionString)
-            db.DbData(DaConst.SessionID) = 0L
+            db.DbData("sessionid") = 0L
             db.DbContext = Me
             If db.Connection.State = Data.ConnectionState.Closed Then
                 db.Connection.Open()

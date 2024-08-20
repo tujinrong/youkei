@@ -8,7 +8,7 @@
 ' *******************************************************************
 Namespace JBD.GJS.Service
     Public Class CmSaveRequestBase
-        Inherits Db.DaRequestBase
+        Inherits DaRequestBase
         Public Property checkflg As Boolean = False         'チェックフラグ
     End Class
 End Namespace

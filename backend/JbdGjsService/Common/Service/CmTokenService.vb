@@ -6,7 +6,7 @@
 ' 変更履歴　:
 ' *******************************************************************
 
-Namespace JBD.GJS.Db
+Namespace JBD.GJS.Service
     Public Class CmTokenService
         ''' <summary>
         ''' ログインの時に呼び出し

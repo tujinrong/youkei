@@ -99,8 +99,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\JbdGjsControl\JbdGjsControl.vbproj" />
-    <ProjectReference Include="..\JbdGjsLib\JbdGjsLib.vbproj" />
     <ProjectReference Include="..\JbdGjsReportNoLic\JbdGjsReportNoLic.vbproj" />
   </ItemGroup>
 </Project>

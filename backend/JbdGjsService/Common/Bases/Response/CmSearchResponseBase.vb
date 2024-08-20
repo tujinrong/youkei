@@ -8,7 +8,7 @@
 ' *******************************************************************
 Namespace JBD.GJS.Service
     Public Class CmSearchResponseBase
-        Inherits Db.DaResponseBase
+        Inherits DaResponseBase
         Public Property TOTAL_PAGE_COUNT As Integer = Nothing     'ページ数
         Public Property TOTAL_ROW_COUNT As Integer  = Nothing    '総件数
 

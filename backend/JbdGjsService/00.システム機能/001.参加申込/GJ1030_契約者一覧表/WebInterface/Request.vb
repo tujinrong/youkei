@@ -13,7 +13,7 @@ Namespace JBD.GJS.Service.GJ1030
     ''' 初期化処理_プレビュー画面処理
     ''' </summary>
     Public Class InitRequest
-        Inherits Db.DaRequestBase
+        Inherits DaRequestBase
 
         ''' <summary>
         ''' 対象期
@@ -26,7 +26,7 @@ Namespace JBD.GJS.Service.GJ1030
     ''' プレビュー処理_プレビュー画面処理
     ''' </summary>
     Public Class PreviewRequest
-        Inherits Db.DaRequestBase
+        Inherits DaRequestBase
 
         ''' <summary>
         ''' 対象期

@@ -11,7 +11,7 @@ Namespace JBD.GJS.Service
         ''' <summary>
         ''' 単一ファイルプレビュー応答
         ''' </summary>
-        Public Function GetPreviewResponseBase(file As Db.DaFileModel) As CmPreviewResponseBase
+        Public Function GetPreviewResponseBase(file As DaFileModel) As CmPreviewResponseBase
             Dim res = New CmPreviewResponseBase()
             ' ファイルがない場合
             If file Is Nothing Then

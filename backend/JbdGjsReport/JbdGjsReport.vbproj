@@ -19,9 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="rptGJ1030.vb">
-      <SubType>Component</SubType>
-    </Compile>
+    <Compile Update="rptGJ1030.vb" />
   </ItemGroup>
 
 </Project>

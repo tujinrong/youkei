@@ -8,7 +8,7 @@
 ' *******************************************************************
 Namespace JBD.GJS.Service
     Public Class CmSearchRequestBase
-        Inherits Db.DaRequestBase
+        Inherits DaRequestBase
         Public Property PAGE_SIZE As Integer = 20             'ページサイズ
         Public Property PAGE_NUM As Integer = 1               'ページNo.
         Public Property ORDER_BY As Integer = 0               '並び順
@@ -17,7 +17,7 @@ Namespace JBD.GJS.Service
         Public Sub SetPersonalno()
             If Not String.IsNullOrEmpty(personalno) Then
                 '復号化
-                personalno = Db.CmEncryptUtil.RsaDecrypt(personalno)
+                personalno = CmEncryptUtil.RsaDecrypt(personalno)
             End If
         End Sub
     End Class

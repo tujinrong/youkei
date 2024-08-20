@@ -5,7 +5,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <DefaultItemExcludes>$(DefaultItemExcludes);$(ProjectDir)**\*.cs</DefaultItemExcludes>
-    <ImportedNamespaces>JbdGjsCommon.JBD.GJS.Common=False,JbdGjsService.JBD.GJS.Db=False,Oracle.ManagedDataAccess.Client=False,System.ComponentModel=False,System.Data=False,System.Globalization=False,System.Reflection=False,System.Security.Cryptography=False,System.Text=False,System.Text.Json.Serialization=False,Microsoft.VisualBasic=True,System=True,System.Collections=True,System.Collections.Generic=True,System.Diagnostics=True,System.Linq=True,System.Xml.Linq=True,System.Threading.Tasks=True,JbdGjsService=True</ImportedNamespaces>
+    <ImportedNamespaces>ICSharpCode.SharpZipLib.Zip=False,JbdGjsCommon.JBD.GJS.Common=False,JbdGjsDb.JBD.GJS.Db=False,JbdGjsService.JBD.GJS.Service=False,JbdGjsService.JBD.GJS.Service.Common=False,Microsoft.Extensions.Caching.Memory=False,Microsoft.VisualBasic.CompilerServices=False,Oracle.ManagedDataAccess.Client=False,System.ComponentModel=False,System.Data=False,System.Globalization=False,System.IO=False,System.Reflection=False,System.Security=False,System.Security.Cryptography=False,System.Text=False,System.Text.Json.Serialization=False,System.Text.RegularExpressions=False,Microsoft.VisualBasic=True,System=True,System.Collections=True,System.Collections.Generic=True,System.Diagnostics=True,System.Linq=True,System.Xml.Linq=True,System.Threading.Tasks=True,JbdGjsService=True</ImportedNamespaces>
     <OptionStrict>On</OptionStrict>
   </PropertyGroup>
   <ItemGroup>
@@ -25,7 +25,6 @@
   <ItemGroup>
     <PackageReference Include="ICSharpCode.SharpZipLib.Patched" Version="1.2.0.9" />
     <PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="8.0.0" />
-    <PackageReference Include="Oracle.ManagedDataAccess.Core" Version="23.5.0" />
     <PackageReference Include="TSQL.Parser" Version="2.6.0" />
     <PackageReference Include="Ude.NetStandard" Version="1.2.0" />
   </ItemGroup>
@@ -35,16 +34,24 @@
     <Using Include="System.Data" />
   </ItemGroup>
   <ItemGroup>
+    <Import Include="ICSharpCode.SharpZipLib.Zip" />
     <Import Include="JbdGjsCommon.JBD.GJS.Common" />
-    <Import Include="JbdGjsService.JBD.GJS.Db" />
+    <Import Include="JbdGjsDb.JBD.GJS.Db" />
+    <Import Include="JbdGjsService.JBD.GJS.Service" />
+    <Import Include="JbdGjsService.JBD.GJS.Service.Common" />
+    <Import Include="Microsoft.Extensions.Caching.Memory" />
+    <Import Include="Microsoft.VisualBasic.CompilerServices" />
     <Import Include="Oracle.ManagedDataAccess.Client" />
     <Import Include="System.ComponentModel" />
     <Import Include="System.Data" />
     <Import Include="System.Globalization" />
+    <Import Include="System.IO" />
     <Import Include="System.Reflection" />
+    <Import Include="System.Security" />
     <Import Include="System.Security.Cryptography" />
     <Import Include="System.Text" />
     <Import Include="System.Text.Json.Serialization" />
+    <Import Include="System.Text.RegularExpressions" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Common\Utils\CmDataSetUtil.vb" />
