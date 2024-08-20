@@ -80,7 +80,7 @@ export enum EnumAndOr {
   Or,
 }
 /** 編集区分 */
-export enum Enum編集区分 {
-  新規 = 1,
-  変更,
+export enum EnumEditKbn {
+  Add = 1,
+  Edit,
 }
