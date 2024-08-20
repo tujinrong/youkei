@@ -14,7 +14,7 @@ const servicename = 'GJ1030'
 /** 初期化処理(プレビュー画面) */
 export const Init = (params: InitRequest): Promise<InitResponse> => {
   const methodname = 'Init'
-  return api(servicename, methodname, params)
+  return api(servicename, methodname, params, undefined, { loading: true })
 }
 
 /** プレビュー処理(プレビュー画面) */
