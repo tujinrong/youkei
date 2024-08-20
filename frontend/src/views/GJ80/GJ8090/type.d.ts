@@ -8,6 +8,13 @@
  * -----------------------------------------------------------------*/
 
 import { EnumAndOr, EnumEditKbn } from '@/enum'
+import {
+  CmSearchRequestBase,
+  CmSearchResponseBase,
+  CodeNameModel,
+  DaRequestBase,
+  DaResponseBase,
+} from '@/typings/Base'
 
 //-------------------------------------------------------------------
 //リクエスト
@@ -33,8 +40,8 @@ export interface SearchRequest extends CmSearchRequestBase {
   SEARCH_METHOD: EnumAndOr
 }
 
-/**検索処理(詳細画面) */
-export interface SearchDetailRequest extends DaRequestBase {
+/**初期化処理(詳細画面) */
+export interface InitDetailRequest extends DaRequestBase {
   /**期 */
   KI: number
   /**契約者番号 */
@@ -90,10 +97,6 @@ export interface InitDetailResponse extends DaResponseBase {
   KEIYAKUSYA_NAME: string
   /**都道府県情報プルダウンリスト */
   KEN_CD_NAME_LIST: CodeNameModel[]
-}
-
-/**検索処理(詳細画面) */
-export interface SearchDetailResponse extends DaResponseBase {
   /**契約者農場情報 */
   KEIYAKUSYA_NOJO: DetailVM
 }

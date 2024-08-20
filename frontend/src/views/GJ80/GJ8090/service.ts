@@ -10,15 +10,15 @@ import { api, api2 } from '@/service/request/common-service'
 
 import {
   DeleteRequest,
+  InitDetailRequest,
   InitDetailResponse,
   InitRequest,
   InitResponse,
   SaveRequest,
-  SearchDetailRequest,
-  SearchDetailResponse,
   SearchRequest,
   SearchResponse,
 } from './type'
+import { DaResponseBase } from '@/typings/Base'
 
 const servicename = 'GJ8090'
 const servicename2 = 'GJ8091'
@@ -36,16 +36,10 @@ export const Search = (params: SearchRequest): Promise<SearchResponse> => {
 }
 
 /** 初期化処理(詳細画面) */
-export const InitDetail = (): Promise<InitDetailResponse> => {
+export const InitDetail = (
+  params: InitDetailRequest
+): Promise<InitDetailResponse> => {
   const methodname = 'InitDetail'
-  return api(servicename2, methodname)
-}
-
-/** 検索処理(詳細画面) */
-export const SearchDetail = (
-  params: SearchDetailRequest
-): Promise<SearchDetailResponse> => {
-  const methodname = 'SearchDetail'
   return api(servicename2, methodname, params, undefined, { loading: true })
 }
 

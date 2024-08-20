@@ -105,6 +105,7 @@ import DateJp from '@/components/Selector/DateJp/index.vue'
 import { ITEM_REQUIRE_ERROR } from '@/constants/msg'
 import { Form } from 'ant-design-vue'
 import { Init, Preview } from './service'
+import { CodeNameModel } from '@/typings/Base'
 
 //--------------------------------------------------------------------------
 //データ定義

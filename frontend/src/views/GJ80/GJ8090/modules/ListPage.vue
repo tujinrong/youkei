@@ -65,8 +65,8 @@
         <a-space
           ><span>検索方法</span>
           <a-radio-group v-model:value="searchParams.SEARCH_METHOD">
-            <a-radio :value="EnumAndOr.And">すべてを含む(AND)</a-radio>
-            <a-radio :value="EnumAndOr.Or">いずれかを含む(OR)</a-radio>
+            <a-radio :value="EnumAndOr.AndCODE">すべてを含む(AND)</a-radio>
+            <a-radio :value="EnumAndOr.OrCODE">いずれかを含む(OR)</a-radio>
           </a-radio-group></a-space
         >
       </div>
@@ -140,7 +140,7 @@
 <script lang="ts" setup>
 import { ref, reactive, toRef, watch, onMounted, computed, nextTick } from 'vue'
 import { useRouter, useRoute, onBeforeRouteUpdate } from 'vue-router'
-import { EnumAndOr, PageSatatus } from '@/enum'
+import { EnumAndOr, EnumEditKbn, PageSatatus } from '@/enum'
 import useSearch from '@/hooks/useSearch'
 import { ITEM_REQUIRE_ERROR } from '@/constants/msg'
 import { changeTableSort, convertToFullWidth } from '@/utils/util'
@@ -149,6 +149,7 @@ import { useElementSize } from '@vueuse/core'
 import { SearchRowVM, SearchRequest } from '@/views/GJ80/GJ8090/type'
 import { Init, Search } from '../service'
 import { Form } from 'ant-design-vue'
+import { CodeNameModel } from '@/typings/Base'
 
 //--------------------------------------------------------------------------
 //データ定義
@@ -163,7 +164,7 @@ const createDefaultParams = (): SearchRequest => {
     KEIYAKUSYA_CD: undefined,
     NOJO_CD: undefined,
     NOJO_NAME: undefined,
-    SEARCH_METHOD: EnumAndOr.And,
+    SEARCH_METHOD: EnumAndOr.AndCODE,
   } as SearchRequest
 }
 const searchParams = reactive(createDefaultParams())
@@ -222,7 +223,7 @@ onMounted(() => {
 
 //初期化処理
 const getInitData = (KI: number, initflg: boolean) => {
-  Init({ KI: KI }).then((res) => {
+  Init({ KI: KI, EDIT_KBN: EnumEditKbn.Add }).then((res) => {
     if (initflg) searchParams.KI = res.KI
     searchParams.KEIYAKUSYA_CD = undefined
     KEIYAKUSYA_CD_NAME_LIST.value = res.KEIYAKUSYA_CD_NAME_LIST
@@ -278,8 +279,9 @@ const { pageParams, totalCount, searchData, clear } = useSearch({
 async function reset() {
   searchParams.NOJO_CD = undefined
   searchParams.NOJO_NAME = undefined
-  searchParams.SEARCH_METHOD = EnumAndOr.And
+  searchParams.SEARCH_METHOD = EnumAndOr.AndCODE
   getInitData(-1, true)
+  pageParams.ORDER_BY = 0
   clear()
 }
 

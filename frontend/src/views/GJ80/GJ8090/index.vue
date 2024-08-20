@@ -42,7 +42,6 @@ onMounted(() => {
 watch(
   () => [route.name, route.query],
   () => {
-    console.log('route.name: ', route.name)
     if (route.name === 'gj80_gj8090') {
       status.value = route.query.status ? +route.query.status : PageSatatus.List
     }
