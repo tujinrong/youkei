@@ -93,11 +93,11 @@ Namespace JBD.GJS.Service.GJ8090
 
                     'データSelect 
                     Dim ds = f_Select_ODP(db, psql)
-                    Dim dt = ds.Tables(0)
 
                     '-------------------------------------------------------------
                     '5.データ加工処理
                     '-------------------------------------------------------------
+                    Dim dt = ds.Tables(0)
                     Dim res = Wraper.SearchResponse(dt)
                     res.KI = req.KI
                     res.KEIYAKUSYA_CD = req.KEIYAKUSYA_CD

@@ -17,17 +17,17 @@ Namespace JBD.GJS.Service.GJ8091
         ''' <summary>
         ''' 期
         ''' </summary>
-        Public Property KI As Integer = Nothing
+        Public Property KI As Integer? = Nothing
 
         ''' <summary>
         ''' 契約者番号
         ''' </summary>
-        Public Property KEIYAKUSYA_CD As Integer = Nothing
+        Public Property KEIYAKUSYA_CD As Integer? = Nothing
 
         ''' <summary>
         ''' 契約者農場
         ''' </summary>
-        Public Property NOJO_CD As Integer = Nothing
+        Public Property NOJO_CD As Integer? = Nothing
 
         ''' <summary>
         ''' 農場名称
@@ -37,7 +37,7 @@ Namespace JBD.GJS.Service.GJ8091
         ''' <summary>
         ''' 都道府県コード
         ''' </summary>
-        Public Property KEN_CD As Integer = 5
+        Public Property KEN_CD As Integer?  = Nothing
 
         ''' <summary>
         ''' 郵便番号
@@ -67,7 +67,7 @@ Namespace JBD.GJS.Service.GJ8091
         ''' <summary>
         ''' データ更新日
         ''' </summary>
-        Public Property MEISAI_NO As Integer
+        Public Property MEISAI_NO As Integer?
 
         ''' <summary>
         ''' データ更新日
