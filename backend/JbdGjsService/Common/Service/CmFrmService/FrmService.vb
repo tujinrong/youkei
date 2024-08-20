@@ -28,6 +28,16 @@ Namespace JBD.GJS.Service
             daDataAdapter.Dispose()
             Return dt
         End Function
+
+        Public Function f_Select_ODP(db As DaDbContext, sql As String, repName As String) As DataSet
+            Dim dt As DataSet = New DataSet()
+            dt.Tables.Add(repName)
+            Dim daDataAdapter As OracleDataAdapter
+            daDataAdapter = New OracleDataAdapter(sql, db.Session.Connection)
+            daDataAdapter.Fill(dt, dt.Tables(0).TableName)
+            daDataAdapter.Dispose()
+            Return dt
+        End Function
 #End Region
 
 #Region "CheckToken チェックトークン"
@@ -42,6 +52,9 @@ Namespace JBD.GJS.Service
             Dim ret = CmTokenService.GetTokenUDGjs(token, strGjs, strGjs)
             Dim uids = ret.Split("|")
             Dim uid = uids(0)
+            pLOGINUSERID = uid
+            pPCNAME = System.Net.Dns.GetHostName
+	
             ' 比較する
             If String.IsNullOrEmpty(uid) Then
                 Return String.Empty

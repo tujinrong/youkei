@@ -7,6 +7,8 @@
 ' 変更履歴　:
 ' *******************************************************************
 
+Imports JbdGjsReport
+
 Namespace JBD.GJS.Service.GJ1030
 
     ''' <summary>
@@ -42,12 +44,12 @@ Namespace JBD.GJS.Service.GJ1030
                     'データ結果判定
                     Dim wKbn As String = "K"
                     If req.KI = -1 Then
-                        req.KI = Cint(New Obj_TM_SYORI_NENDO_KI().pKI)
+                        req.KI = CInt(New Obj_TM_SYORI_NENDO_KI().pKI)
                         wKbn = "C"
                     End If
 
                     'データクエリ
-                    Dim ret = f_ComboBox_Set(wKbn,req.KI)
+                    Dim ret = f_ComboBox_Set(wKbn, req.KI)
 
                     '-------------------------------------------------------------
                     '5.データ加工処理
@@ -79,28 +81,28 @@ Namespace JBD.GJS.Service.GJ1030
                     '3.チェック処理
                     '-------------------------------------------------------------
                     'チェックトークン
-                    'Dim uid = CheckToken(req.token)
-                    'If String.IsNullOrEmpty(uid) Then Return New SearchResponse("トークンが正しくありません。")
+                    Dim uid = CheckToken(req.token)
+                    If String.IsNullOrEmpty(uid) Then Return New SearchResponse("トークンが正しくありません。")
 
                     ''-------------------------------------------------------------
                     ''4.ビジネスロジック処理
                     ''-------------------------------------------------------------
                     ''検索結果出力用ＳＱＬ作成
-                    'Dim sql = f_Search_SQLMake(req)
-
-                    ''元の SQL をページ分割されたデータ出力に変換する
-                    'Dim psql = f_Search_SQLMakePage(req.PAGE_SIZE, req.PAGE_NUM, sql)
+                    'Dim sql = f_make_SQL(req)
 
                     ''データSelect 
-                    'Dim ds = f_Select_ODP(db, psql)
-                    'Dim dt = ds.Tables(0)
+                    'Dim wkDSRep As New DataSet
+                    'Dim con_ReportName As String = "家畜防疫互助基金契約者一覧表(連絡用)"
+                    'Dim ds = f_Select_ODP(db, sql, con_ReportName)
+
+                    'If ds.Tables(0).Rows.Count > 0 Then
+                    '    Dim w As New rptGJ1030
+                    '    w.sub1(wkDSRep)
+                    'End If
 
                     ''-------------------------------------------------------------
                     ''5.データ加工処理
                     ''-------------------------------------------------------------
-                    'Dim res = Wraper.SearchResponse(dt)
-                    'res.KI = req.KI
-                    'res.KEIYAKUSYA_CD = req.KEIYAKUSYA_CD
 
                     '-------------------------------------------------------------
                     '6.正常返し

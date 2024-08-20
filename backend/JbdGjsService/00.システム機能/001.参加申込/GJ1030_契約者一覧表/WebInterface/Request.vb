@@ -39,39 +39,24 @@ Namespace JBD.GJS.Service.GJ1030
         Public Property TAISYOBI_YMD As DateTime
 
         ''' <summary>
-        ''' 契約区分コードFROM
+        ''' 契約区分コード
         ''' </summary>
-        Public Property KEIYAKU_KBN_CD_FM As Integer? = Nothing
+        Public Property KEIYAKU_KBN_CD As KEIYAKU_KBN_CD
 
         ''' <summary>
-        ''' 契約区分コードTO
+        ''' 事務委託先番号コード
         ''' </summary>
-        Public Property KEIYAKU_KBN_CD_TO As Integer? = Nothing
+        Public Property ITAKU_CD As ITAKU_CD
 
         ''' <summary>
-        ''' 契約状況[新規契約者]
+        ''' 契約者番号コード
         ''' </summary>
-        Public Property KEIYAKU_JYOKYO_SHINKI As Boolean= False
+        Public Property KEIYAKUSYA_CD As KEIYAKUSYA_CD
 
         ''' <summary>
-        ''' 契約状況[継続契約者]
+        ''' 契約状況
         ''' </summary>
-        Public Property KEIYAKU_JYOKYO_KEIZOKU As Boolean= False
-
-        ''' <summary>
-        ''' 契約状況[中止契約者]
-        ''' </summary>
-        Public Property KEIYAKU_JYOKYO_CHUSHI As Boolean= False
-
-        ''' <summary>
-        ''' 契約状況[廃業者]                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
-        ''' </summary>
-        Public Property KEIYAKU_JYOKYO_HAIGYO As Boolean= False
-
-        ''' <summary>
-        ''' 検索方法
-        ''' </summary>
-        Public Property SEARCH_METHOD As EnumAndOr? = EnumAndOr.AndCode
+        Public Property KEIYAKU_JYOKYO As KEIYAKU_JYOKYO
 
     End Class
 End Namespace

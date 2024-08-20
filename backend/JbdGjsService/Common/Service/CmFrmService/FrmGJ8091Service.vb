@@ -150,15 +150,15 @@ Namespace JBD.GJS.Service.GJ8091
             'データ登録日
             Cmd.Parameters.Add("IN_REG_DATE", Now)
             'データ登録ＩＤ
-            Cmd.Parameters.Add("IN_REG_ID", wNojoCd.USER_ID)
+            Cmd.Parameters.Add("IN_REG_ID", pLOGINUSERID)
         End Select
 
         'データ更新日
         Cmd.Parameters.Add("IN_UP_DATE", Now)
         'データ更新ＩＤ
-        Cmd.Parameters.Add("IN_UP_ID", wNojoCd.USER_ID)
+        Cmd.Parameters.Add("IN_UP_ID", pLOGINUSERID)
         'コンピュータ名
-        Cmd.Parameters.Add("IN_COM_NAME", wNojoCd.USER_ID)
+        Cmd.Parameters.Add("IN_COM_NAME",  pPCNAME )
 
         '戻り
         Dim p_MSGCD As OracleParameter = Cmd.Parameters.Add("OU_MSGCD", OracleDbType.Varchar2, 255, DBNull.Value, ParameterDirection.Output)

@@ -30,4 +30,82 @@ Namespace JBD.GJS.Service.GJ1030
         Public Property ADDR As String = String.Empty
 
     End Class
+
+    ''' <summary>
+    ''' 契約区分コード
+    ''' </summary>
+    Public Class KEIYAKU_KBN_CD
+
+        ''' <summary>
+        ''' 契約区分コードFROM
+        ''' </summary>
+        Public Property VALUE_FM As Integer? = Nothing
+
+        ''' <summary>
+        ''' 契約区分コードTO
+        ''' </summary>
+        Public Property VALUE_TO As Integer? = Nothing
+
+    End Class
+
+    ''' <summary>
+    ''' 事務委託先番号コード
+    ''' </summary>
+    Public Class ITAKU_CD
+
+        ''' <summary>
+        ''' 事務委託先番号コードFROM
+        ''' </summary>
+        Public Property VALUE_FM As Integer? = Nothing
+
+        ''' <summary>
+        ''' 事務委託先番号コードTO
+        ''' </summary>
+        Public Property VALUE_TO As Integer? = Nothing
+
+    End Class
+
+    ''' <summary>
+    ''' 契約者番号コード
+    ''' </summary>
+    Public Class KEIYAKUSYA_CD
+
+        ''' <summary>
+        ''' 契約者番号コードFROM
+        ''' </summary>
+        Public Property VALUE_FM As Integer? = Nothing
+
+        ''' <summary>
+        ''' 契約者番号コードTO
+        ''' </summary>
+        Public Property VALUE_TO As Integer? = Nothing
+
+    End Class
+
+    ''' <summary>
+    ''' 契約状況
+    ''' </summary>
+    Public Class KEIYAKU_JYOKYO
+       ''' <summary>
+        ''' 契約状況[新規契約者]
+        ''' </summary>
+        Public Property SHINKI As Boolean= True
+
+        ''' <summary>
+        ''' 契約状況[継続契約者]
+        ''' </summary>
+        Public Property KEIZOKU As Boolean= True
+
+        ''' <summary>
+        ''' 契約状況[中止契約者]
+        ''' </summary>
+        Public Property CHUSHI As Boolean= True
+
+        ''' <summary>
+        ''' 契約状況[廃業者]                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+        ''' </summary>
+        Public Property HAIGYO As Boolean= True
+
+    End Class
+
 End Namespace
