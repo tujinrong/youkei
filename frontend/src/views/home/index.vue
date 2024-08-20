@@ -3,7 +3,9 @@
     <a-card :bordered="false" class="mb-2 h-full">
       <div class="flex">
         <h1>{{ formattedDate }}現在</h1>
-        <a-button type="primary" class="ml-2 mt-1" @click="Init">更新</a-button>
+        <a-button type="primary" class="ml-2 mt-1" @click="Init" disabled
+          >更新</a-button
+        >
       </div>
 
       <a-descriptions :column="1" class="mt-2">
@@ -41,6 +43,8 @@ const homeData = reactive({
   sekitatukinngaku: undefined as number | undefined,
 })
 
-onMounted(() => {})
+onMounted(() => {
+  // Init()
+})
 </script>
 <style lang="scss" scoped></style>
