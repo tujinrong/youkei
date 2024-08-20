@@ -13,8 +13,8 @@ export const generatedRoutes: GeneratedRoute[] = [
       title: '403',
       i18nKey: 'route.403',
       constant: true,
-      hideInMenu: true,
-    },
+      hideInMenu: true
+    }
   },
   {
     name: '404',
@@ -24,8 +24,8 @@ export const generatedRoutes: GeneratedRoute[] = [
       title: '404',
       i18nKey: 'route.404',
       constant: true,
-      hideInMenu: true,
-    },
+      hideInMenu: true
+    }
   },
   {
     name: '500',
@@ -35,8 +35,8 @@ export const generatedRoutes: GeneratedRoute[] = [
       title: '500',
       i18nKey: 'route.500',
       constant: true,
-      hideInMenu: true,
-    },
+      hideInMenu: true
+    }
   },
   {
     name: 'gj10',
@@ -46,7 +46,7 @@ export const generatedRoutes: GeneratedRoute[] = [
       title: 'gj10',
       icon: '',
       i18nKey: 'route.gj10',
-      order: 2,
+      order: 2
     },
     children: [
       {
@@ -58,8 +58,8 @@ export const generatedRoutes: GeneratedRoute[] = [
           icon: '',
           roles: ['10', '20', '30'],
           i18nKey: 'route.gj10_gj1010',
-          keepAlive: true,
-        },
+          keepAlive: true
+        }
       },
       {
         name: 'gj10_gj1020',
@@ -70,8 +70,8 @@ export const generatedRoutes: GeneratedRoute[] = [
           icon: '',
           roles: ['10', '20', '30'],
           i18nKey: 'route.gj10_gj1020',
-          keepAlive: true,
-        },
+          keepAlive: true
+        }
       },
       {
         name: 'gj10_gj1030',
@@ -81,8 +81,8 @@ export const generatedRoutes: GeneratedRoute[] = [
           title: 'gj10_gj1030',
           icon: '',
           i18nKey: 'route.gj10_gj1030',
-          keepAlive: true,
-        },
+          keepAlive: true
+        }
       },
       {
         name: 'gj10_gj1040',
@@ -93,8 +93,8 @@ export const generatedRoutes: GeneratedRoute[] = [
           icon: '',
           roles: ['10', '20', '30'],
           i18nKey: 'route.gj10_gj1040',
-          keepAlive: true,
-        },
+          keepAlive: true
+        }
       },
       {
         name: 'gj10_gj1050',
@@ -105,8 +105,8 @@ export const generatedRoutes: GeneratedRoute[] = [
           icon: '',
           roles: ['10', '20', '30'],
           i18nKey: 'route.gj10_gj1050',
-          keepAlive: true,
-        },
+          keepAlive: true
+        }
       },
       {
         name: 'gj10_gj1060',
@@ -117,8 +117,8 @@ export const generatedRoutes: GeneratedRoute[] = [
           icon: '',
           roles: ['10', '20'],
           i18nKey: 'route.gj10_gj1060',
-          keepAlive: true,
-        },
+          keepAlive: true
+        }
       },
       {
         name: 'gj10_gj1070',
@@ -129,10 +129,10 @@ export const generatedRoutes: GeneratedRoute[] = [
           icon: '',
           roles: ['10', '20'],
           i18nKey: 'route.gj10_gj1070',
-          keepAlive: true,
-        },
-      },
-    ],
+          keepAlive: true
+        }
+      }
+    ]
   },
   {
     name: 'gj20',
@@ -142,7 +142,7 @@ export const generatedRoutes: GeneratedRoute[] = [
       title: 'gj20',
       icon: '',
       i18nKey: 'route.gj20',
-      order: 3,
+      order: 3
     },
     children: [
       {
@@ -154,8 +154,8 @@ export const generatedRoutes: GeneratedRoute[] = [
           icon: '',
           roles: ['10'],
           i18nKey: 'route.gj20_gj2010',
-          keepAlive: true,
-        },
+          keepAlive: true
+        }
       },
       {
         name: 'gj20_gj2020',
@@ -166,8 +166,8 @@ export const generatedRoutes: GeneratedRoute[] = [
           icon: '',
           roles: ['10', '20'],
           i18nKey: 'route.gj20_gj2020',
-          keepAlive: true,
-        },
+          keepAlive: true
+        }
       },
       {
         name: 'gj20_gj2030',
@@ -178,8 +178,8 @@ export const generatedRoutes: GeneratedRoute[] = [
           icon: '',
           roles: ['10', '20', '30'],
           i18nKey: 'route.gj20_gj2030',
-          keepAlive: true,
-        },
+          keepAlive: true
+        }
       },
       {
         name: 'gj20_gj2040',
@@ -190,8 +190,8 @@ export const generatedRoutes: GeneratedRoute[] = [
           icon: '',
           roles: ['10', '20', '30'],
           i18nKey: 'route.gj20_gj2040',
-          keepAlive: true,
-        },
+          keepAlive: true
+        }
       },
       {
         name: 'gj20_gj2050',
@@ -202,8 +202,8 @@ export const generatedRoutes: GeneratedRoute[] = [
           icon: '',
           roles: ['10', '20', '30'],
           i18nKey: 'route.gj20_gj2050',
-          keepAlive: true,
-        },
+          keepAlive: true
+        }
       },
       {
         name: 'gj20_gj2060',
@@ -214,8 +214,8 @@ export const generatedRoutes: GeneratedRoute[] = [
           icon: '',
           roles: ['10', '20', '30'],
           i18nKey: 'route.gj20_gj2060',
-          keepAlive: true,
-        },
+          keepAlive: true
+        }
       },
       {
         name: 'gj20_gj2070',
@@ -226,8 +226,8 @@ export const generatedRoutes: GeneratedRoute[] = [
           icon: '',
           roles: ['10', '20', '30'],
           i18nKey: 'route.gj20_gj2070',
-          keepAlive: true,
-        },
+          keepAlive: true
+        }
       },
       {
         name: 'gj20_gj2080',
@@ -238,8 +238,8 @@ export const generatedRoutes: GeneratedRoute[] = [
           icon: '',
           roles: ['10', '20', '30'],
           i18nKey: 'route.gj20_gj2080',
-          keepAlive: true,
-        },
+          keepAlive: true
+        }
       },
       {
         name: 'gj20_gj2090',
@@ -250,8 +250,8 @@ export const generatedRoutes: GeneratedRoute[] = [
           icon: '',
           roles: ['10', '20'],
           i18nKey: 'route.gj20_gj2090',
-          keepAlive: true,
-        },
+          keepAlive: true
+        }
       },
       {
         name: 'gj20_gj2100',
@@ -262,8 +262,8 @@ export const generatedRoutes: GeneratedRoute[] = [
           icon: '',
           roles: ['10', '20'],
           i18nKey: 'route.gj20_gj2100',
-          keepAlive: true,
-        },
+          keepAlive: true
+        }
       },
       {
         name: 'gj20_gj2110',
@@ -274,8 +274,8 @@ export const generatedRoutes: GeneratedRoute[] = [
           icon: '',
           roles: ['10', '20', '30'],
           i18nKey: 'route.gj20_gj2110',
-          keepAlive: true,
-        },
+          keepAlive: true
+        }
       },
       {
         name: 'gj20_gj2120',
@@ -286,10 +286,10 @@ export const generatedRoutes: GeneratedRoute[] = [
           icon: '',
           roles: ['10', '20', '30'],
           i18nKey: 'route.gj20_gj2120',
-          keepAlive: true,
-        },
-      },
-    ],
+          keepAlive: true
+        }
+      }
+    ]
   },
   {
     name: 'gj30',
@@ -299,7 +299,7 @@ export const generatedRoutes: GeneratedRoute[] = [
       title: 'gj30',
       icon: '',
       i18nKey: 'route.gj30',
-      order: 4,
+      order: 4
     },
     children: [
       {
@@ -311,8 +311,8 @@ export const generatedRoutes: GeneratedRoute[] = [
           icon: '',
           roles: ['10', '20', '30'],
           i18nKey: 'route.gj30_gj3010',
-          keepAlive: true,
-        },
+          keepAlive: true
+        }
       },
       {
         name: 'gj30_gj3020',
@@ -323,8 +323,8 @@ export const generatedRoutes: GeneratedRoute[] = [
           icon: '',
           roles: ['10', '20', '30'],
           i18nKey: 'route.gj30_gj3020',
-          keepAlive: true,
-        },
+          keepAlive: true
+        }
       },
       {
         name: 'gj30_gj3030',
@@ -335,10 +335,10 @@ export const generatedRoutes: GeneratedRoute[] = [
           icon: '',
           roles: ['10', '20', '30'],
           i18nKey: 'route.gj30_gj3030',
-          keepAlive: true,
-        },
-      },
-    ],
+          keepAlive: true
+        }
+      }
+    ]
   },
   {
     name: 'gj40',
@@ -348,7 +348,7 @@ export const generatedRoutes: GeneratedRoute[] = [
       title: 'gj40',
       icon: '',
       i18nKey: 'route.gj40',
-      order: 5,
+      order: 5
     },
     children: [
       {
@@ -360,8 +360,8 @@ export const generatedRoutes: GeneratedRoute[] = [
           icon: '',
           roles: ['10', '20', '30'],
           i18nKey: 'route.gj40_gj4010',
-          keepAlive: true,
-        },
+          keepAlive: true
+        }
       },
       {
         name: 'gj40_gj4020',
@@ -372,8 +372,8 @@ export const generatedRoutes: GeneratedRoute[] = [
           icon: '',
           roles: ['10', '20', '30'],
           i18nKey: 'route.gj40_gj4020',
-          keepAlive: true,
-        },
+          keepAlive: true
+        }
       },
       {
         name: 'gj40_gj4030',
@@ -384,8 +384,8 @@ export const generatedRoutes: GeneratedRoute[] = [
           icon: '',
           roles: ['10', '20'],
           i18nKey: 'route.gj40_gj4030',
-          keepAlive: true,
-        },
+          keepAlive: true
+        }
       },
       {
         name: 'gj40_gj4040',
@@ -396,8 +396,8 @@ export const generatedRoutes: GeneratedRoute[] = [
           icon: '',
           roles: ['10', '20', '30'],
           i18nKey: 'route.gj40_gj4040',
-          keepAlive: true,
-        },
+          keepAlive: true
+        }
       },
       {
         name: 'gj40_gj4050',
@@ -408,8 +408,8 @@ export const generatedRoutes: GeneratedRoute[] = [
           icon: '',
           roles: ['10', '20', '30'],
           i18nKey: 'route.gj40_gj4050',
-          keepAlive: true,
-        },
+          keepAlive: true
+        }
       },
       {
         name: 'gj40_gj4060',
@@ -420,8 +420,8 @@ export const generatedRoutes: GeneratedRoute[] = [
           icon: '',
           roles: ['10', '20', '30'],
           i18nKey: 'route.gj40_gj4060',
-          keepAlive: true,
-        },
+          keepAlive: true
+        }
       },
       {
         name: 'gj40_gj4070',
@@ -432,10 +432,10 @@ export const generatedRoutes: GeneratedRoute[] = [
           icon: '',
           roles: ['10', '20'],
           i18nKey: 'route.gj40_gj4070',
-          keepAlive: true,
-        },
-      },
-    ],
+          keepAlive: true
+        }
+      }
+    ]
   },
   {
     name: 'gj50',
@@ -445,7 +445,7 @@ export const generatedRoutes: GeneratedRoute[] = [
       title: 'gj50',
       icon: '',
       i18nKey: 'route.gj50',
-      order: 6,
+      order: 6
     },
     children: [
       {
@@ -457,10 +457,10 @@ export const generatedRoutes: GeneratedRoute[] = [
           icon: '',
           roles: ['10'],
           i18nKey: 'route.gj50_gj5010',
-          keepAlive: true,
-        },
-      },
-    ],
+          keepAlive: true
+        }
+      }
+    ]
   },
   {
     name: 'gj60',
@@ -470,7 +470,7 @@ export const generatedRoutes: GeneratedRoute[] = [
       title: 'gj60',
       icon: '',
       i18nKey: 'route.gj60',
-      order: 7,
+      order: 7
     },
     children: [
       {
@@ -483,8 +483,8 @@ export const generatedRoutes: GeneratedRoute[] = [
           roles: ['10', '20'],
           i18nKey: 'route.gj60_gj6010',
           keepAlive: true,
-          order: 1,
-        },
+          order: 1
+        }
       },
       {
         name: 'gj60_gj6020',
@@ -496,8 +496,8 @@ export const generatedRoutes: GeneratedRoute[] = [
           roles: ['666'],
           i18nKey: 'route.gj60_gj6020',
           keepAlive: true,
-          order: 2,
-        },
+          order: 2
+        }
       },
       {
         name: 'gj60_gj6021',
@@ -509,8 +509,8 @@ export const generatedRoutes: GeneratedRoute[] = [
           roles: ['10', '20', '30'],
           i18nKey: 'route.gj60_gj6021',
           keepAlive: true,
-          order: 5,
-        },
+          order: 5
+        }
       },
       {
         name: 'gj60_gj6030',
@@ -522,8 +522,8 @@ export const generatedRoutes: GeneratedRoute[] = [
           roles: ['10'],
           i18nKey: 'route.gj60_gj6030',
           keepAlive: true,
-          order: 3,
-        },
+          order: 3
+        }
       },
       {
         name: 'gj60_gj6040',
@@ -535,10 +535,10 @@ export const generatedRoutes: GeneratedRoute[] = [
           roles: ['10', '20', '30'],
           i18nKey: 'route.gj60_gj6040',
           keepAlive: true,
-          order: 4,
-        },
-      },
-    ],
+          order: 4
+        }
+      }
+    ]
   },
   {
     name: 'gj70',
@@ -548,7 +548,7 @@ export const generatedRoutes: GeneratedRoute[] = [
       title: 'gj70',
       icon: '',
       i18nKey: 'route.gj70',
-      order: 8,
+      order: 8
     },
     children: [
       {
@@ -560,8 +560,8 @@ export const generatedRoutes: GeneratedRoute[] = [
           icon: '',
           roles: ['10', '20', '30'],
           i18nKey: 'route.gj70_gj7010',
-          keepAlive: true,
-        },
+          keepAlive: true
+        }
       },
       {
         name: 'gj70_gj7020',
@@ -572,8 +572,8 @@ export const generatedRoutes: GeneratedRoute[] = [
           icon: '',
           roles: ['10', '20', '30'],
           i18nKey: 'route.gj70_gj7020',
-          keepAlive: true,
-        },
+          keepAlive: true
+        }
       },
       {
         name: 'gj70_gj7030',
@@ -584,10 +584,10 @@ export const generatedRoutes: GeneratedRoute[] = [
           icon: '',
           roles: ['10', '20', '30'],
           i18nKey: 'route.gj70_gj7030',
-          keepAlive: true,
-        },
-      },
-    ],
+          keepAlive: true
+        }
+      }
+    ]
   },
   {
     name: 'gj80',
@@ -597,7 +597,7 @@ export const generatedRoutes: GeneratedRoute[] = [
       title: 'gj80',
       icon: '',
       i18nKey: 'route.gj80',
-      order: 9,
+      order: 9
     },
     children: [
       {
@@ -609,8 +609,8 @@ export const generatedRoutes: GeneratedRoute[] = [
           icon: '',
           roles: ['10'],
           i18nKey: 'route.gj80_gj8010',
-          keepAlive: true,
-        },
+          keepAlive: true
+        }
       },
       {
         name: 'gj80_gj8020',
@@ -621,8 +621,8 @@ export const generatedRoutes: GeneratedRoute[] = [
           icon: '',
           roles: ['10'],
           i18nKey: 'route.gj80_gj8020',
-          keepAlive: true,
-        },
+          keepAlive: true
+        }
       },
       {
         name: 'gj80_gj8030',
@@ -633,8 +633,8 @@ export const generatedRoutes: GeneratedRoute[] = [
           icon: '',
           roles: ['10'],
           i18nKey: 'route.gj80_gj8030',
-          keepAlive: true,
-        },
+          keepAlive: true
+        }
       },
       {
         name: 'gj80_gj8040',
@@ -645,8 +645,8 @@ export const generatedRoutes: GeneratedRoute[] = [
           icon: '',
           roles: ['10'],
           i18nKey: 'route.gj80_gj8040',
-          keepAlive: true,
-        },
+          keepAlive: true
+        }
       },
       {
         name: 'gj80_gj8050',
@@ -657,8 +657,8 @@ export const generatedRoutes: GeneratedRoute[] = [
           icon: '',
           roles: ['10', '20'],
           i18nKey: 'route.gj80_gj8050',
-          keepAlive: true,
-        },
+          keepAlive: true
+        }
       },
       {
         name: 'gj80_gj8060',
@@ -669,8 +669,8 @@ export const generatedRoutes: GeneratedRoute[] = [
           icon: '',
           roles: ['10', '20'],
           i18nKey: 'route.gj80_gj8060',
-          keepAlive: true,
-        },
+          keepAlive: true
+        }
       },
       {
         name: 'gj80_gj8070',
@@ -681,8 +681,8 @@ export const generatedRoutes: GeneratedRoute[] = [
           icon: '',
           roles: ['10'],
           i18nKey: 'route.gj80_gj8070',
-          keepAlive: true,
-        },
+          keepAlive: true
+        }
       },
       {
         name: 'gj80_gj8080',
@@ -693,8 +693,8 @@ export const generatedRoutes: GeneratedRoute[] = [
           icon: '',
           roles: ['10'],
           i18nKey: 'route.gj80_gj8080',
-          keepAlive: true,
-        },
+          keepAlive: true
+        }
       },
       {
         name: 'gj80_gj8090',
@@ -704,8 +704,8 @@ export const generatedRoutes: GeneratedRoute[] = [
           title: 'gj80_gj8090',
           icon: '',
           i18nKey: 'route.gj80_gj8090',
-          keepAlive: true,
-        },
+          keepAlive: true
+        }
       },
       {
         name: 'gj80_gj8100',
@@ -716,10 +716,10 @@ export const generatedRoutes: GeneratedRoute[] = [
           icon: '',
           roles: ['10'],
           i18nKey: 'route.gj80_gj8100',
-          keepAlive: true,
-        },
-      },
-    ],
+          keepAlive: true
+        }
+      }
+    ]
   },
   {
     name: 'home',
@@ -729,8 +729,8 @@ export const generatedRoutes: GeneratedRoute[] = [
       title: 'home',
       i18nKey: 'route.home',
       icon: 'mdi:monitor-dashboard',
-      order: 1,
-    },
+      order: 1
+    }
   },
   {
     name: 'iframe-page',
@@ -742,8 +742,8 @@ export const generatedRoutes: GeneratedRoute[] = [
       i18nKey: 'route.iframe-page',
       constant: true,
       hideInMenu: true,
-      keepAlive: true,
-    },
+      keepAlive: true
+    }
   },
   {
     name: 'login',
@@ -754,8 +754,8 @@ export const generatedRoutes: GeneratedRoute[] = [
       title: 'login',
       i18nKey: 'route.login',
       constant: true,
-      hideInMenu: true,
-    },
+      hideInMenu: true
+    }
   },
   {
     name: 'preview',
@@ -764,8 +764,8 @@ export const generatedRoutes: GeneratedRoute[] = [
     meta: {
       title: 'preview',
       i18nKey: 'route.preview',
-      hideInMenu: true,
-    },
+      hideInMenu: true
+    }
   },
   {
     name: 'todo',
@@ -775,8 +775,8 @@ export const generatedRoutes: GeneratedRoute[] = [
       title: 'todo',
       i18nKey: 'route.todo',
       constant: true,
-      hideInMenu: true,
-    },
+      hideInMenu: true
+    }
   },
   {
     name: 'user-center',
@@ -785,7 +785,7 @@ export const generatedRoutes: GeneratedRoute[] = [
     meta: {
       title: 'user-center',
       i18nKey: 'route.user-center',
-      hideInMenu: true,
-    },
-  },
-]
+      hideInMenu: true
+    }
+  }
+];
