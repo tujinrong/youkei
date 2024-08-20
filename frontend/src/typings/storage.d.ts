@@ -1,19 +1,13 @@
 /** The storage namespace */
 declare namespace StorageType {
   interface Session {
-    /** The theme color */
-    themeColor: string
-    // /**
-    //  * the theme settings
-    //  */
-    // themeSettings: App.Theme.ThemeSetting;
+    /** The token */
+    token: string
   }
 
   interface Local {
     /** The i18n language */
     lang: App.I18n.LangType
-    /** The token */
-    token: string
     /** Fixed sider with mix-menu */
     mixSiderFixed: CommonType.YesOrNo
     /** The refresh token */

@@ -5,7 +5,7 @@ import { useLoading } from '@sa/hooks'
 import { SetupStoreId } from '@/enum'
 import { useRouterPush } from '@/hooks/common/router'
 import { fetchGetUserInfo, Login } from '@/service/api'
-import { localStg } from '@/utils/storage'
+import { sessionStg } from '@/utils/storage'
 import { $t } from '@/locales'
 import { useRouteStore } from '../route'
 import { useTabStore } from '../tab'
@@ -102,8 +102,8 @@ export const useAuthStore = defineStore(SetupStoreId.Auth, () => {
   }
 
   async function loginByToken(loginToken: Api.Auth.LoginToken) {
-    // 1. stored in the localStorage, the later requests need it in headers
-    localStg.set('token', loginToken.TOKEN)
+    // 1. stored in the sessionStorage, the later requests need it in headers
+    sessionStg.set('token', loginToken.TOKEN)
 
     // 2. get user info
     const pass = await getUserInfo()
@@ -137,10 +137,11 @@ export const useAuthStore = defineStore(SetupStoreId.Auth, () => {
 
     if (hasToken) {
       const pass = await getUserInfo()
-
       if (!pass) {
         resetStore()
       }
+    } else {
+      resetStore()
     }
   }
 

@@ -1,6 +1,6 @@
 import { BACKEND_ERROR_CODE, createRequest } from '@sa/axios'
 import { useAuthStore } from '@/store/modules/auth'
-import { localStg } from '@/utils/storage'
+import { sessionStg } from '@/utils/storage'
 import { getServiceBaseURL } from '@/utils/service'
 import { showErrorMsg } from './shared'
 import type { RequestInstanceState } from './type'
@@ -38,7 +38,7 @@ export const request = createRequest<
     async onRequest(config) {
       const { headers } = config
 
-      const token = localStg.get('token')
+      const token = sessionStg.get('token')
       Object.assign(headers, { token })
 
       //Global Loading
