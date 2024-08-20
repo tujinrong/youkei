@@ -41,22 +41,22 @@ Namespace JBD.GJS.Service.GJ1030
         ''' <summary>
         ''' 契約区分コード
         ''' </summary>
-        Public Property KEIYAKU_KBN_CD As KEIYAKU_KBN_CD
+        Public Property KEIYAKU_KBN_CD As KeiyakuKbnCd
 
         ''' <summary>
         ''' 事務委託先番号コード
         ''' </summary>
-        Public Property ITAKU_CD As ITAKU_CD
+        Public Property ITAKU_CD As ItakuCd
 
         ''' <summary>
         ''' 契約者番号コード
         ''' </summary>
-        Public Property KEIYAKUSYA_CD As KEIYAKUSYA_CD
+        Public Property KEIYAKUSYA_CD As KeiyakusyaCd
 
         ''' <summary>
         ''' 契約状況
         ''' </summary>
-        Public Property KEIYAKU_JYOKYO As KEIYAKU_JYOKYO
+        Public Property KEIYAKU_JYOKYO As KeiyakuJyokyo
 
     End Class
 End Namespace

@@ -35,6 +35,11 @@ Namespace JBD.GJS.Service
         Public Property MethodDesc As String = String.Empty                   
 
         ''' <summary>
+        ''' 編集区分
+        ''' </summary>
+        Public Property EDIT_KBN As EnumEditKbn? = EnumEditKbn.Add            
+
+        ''' <summary>
         ''' セッションID
         ''' </summary>
         Public Property sessionid As Long?                 

@@ -34,7 +34,7 @@ Namespace JBD.GJS.Service.GJ1030
     ''' <summary>
     ''' 契約区分コード
     ''' </summary>
-    Public Class KEIYAKU_KBN_CD
+    Public Class KeiyakuKbnCd
 
         ''' <summary>
         ''' 契約区分コードFROM
@@ -51,7 +51,7 @@ Namespace JBD.GJS.Service.GJ1030
     ''' <summary>
     ''' 事務委託先番号コード
     ''' </summary>
-    Public Class ITAKU_CD
+    Public Class ItakuCd
 
         ''' <summary>
         ''' 事務委託先番号コードFROM
@@ -68,7 +68,7 @@ Namespace JBD.GJS.Service.GJ1030
     ''' <summary>
     ''' 契約者番号コード
     ''' </summary>
-    Public Class KEIYAKUSYA_CD
+    Public Class KeiyakusyaCd
 
         ''' <summary>
         ''' 契約者番号コードFROM
@@ -85,7 +85,7 @@ Namespace JBD.GJS.Service.GJ1030
     ''' <summary>
     ''' 契約状況
     ''' </summary>
-    Public Class KEIYAKU_JYOKYO
+    Public Class KeiyakuJyokyo
        ''' <summary>
         ''' 契約状況[新規契約者]
         ''' </summary>

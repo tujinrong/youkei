@@ -18,7 +18,7 @@ Namespace JBD.GJS.Service.GJ8091
         '引数            :1.req SearchDetailRequest  データセット
         '戻り値          :String(SQL)
         '------------------------------------------------------------------
-        Public Function f_SetForm_Data(req As SearchDetailRequest) As String
+        Public Function f_SetForm_Data(req As InitDetailRequest) As String
             Dim ret As Boolean = False
             Dim wkDS As New DataSet
             Dim wSql As String = String.Empty
@@ -98,9 +98,9 @@ Namespace JBD.GJS.Service.GJ8091
         Cmd.CommandType = CommandType.StoredProcedure
 
         Select Case wNojoCd.EDIT_KBN
-            Case Enum編集区分.変更       '変更入力
+            Case EnumEditKbn.Edit       '変更入力
                 Cmd.CommandText = "PKG_GJ8091.GJ8091_KEIYAKU_NOJO_UPD"
-            Case Enum編集区分.新規       '新規入力
+            Case EnumEditKbn.Add       '新規入力
                 Cmd.CommandText = "PKG_GJ8091.GJ8091_KEIYAKU_NOJO_INS"
         End Select
 
@@ -146,7 +146,7 @@ Namespace JBD.GJS.Service.GJ8091
         Cmd.Parameters.Add("IN_MEISAI_NO", wNojoCd.KEIYAKUSYA_NOJO.MEISAI_NO)
 
         Select Case wNojoCd.EDIT_KBN
-            Case Enum編集区分.新規       '新規入力
+            Case EnumEditKbn.Add       '新規入力
             'データ登録日
             Cmd.Parameters.Add("IN_REG_DATE", Now)
             'データ登録ＩＤ

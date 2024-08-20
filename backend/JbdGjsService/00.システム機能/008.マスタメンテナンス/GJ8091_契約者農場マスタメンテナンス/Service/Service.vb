@@ -16,8 +16,8 @@ Namespace JBD.GJS.Service.GJ8091
     Public Class Service
         Inherits CmServiceBase
 
-        <DisplayName("初期化処理_詳細画面処理")>
-        Public Shared Function InitDetail(req As DaRequestBase) As InitDetailResponse
+        <DisplayName("初期化処理_詳細画面")>
+        Public Shared Function InitDetail(req As InitDetailRequest) As InitDetailResponse
             Return Nolock(req,
                 Function(db)
 
@@ -39,61 +39,28 @@ Namespace JBD.GJS.Service.GJ8091
                     '-------------------------------------------------------------
                     '4.ビジネスロジック処理
                     '-------------------------------------------------------------
-                    'データクエリ
+                    '都道府県情報処理
                     Dim sql = f_Ken_Data_Select()
-
-                    'データSelect 
                     Dim ds = f_Select_ODP(db, sql)
-                    Dim dt = ds.Tables(0)
+                    ds.Tables(0).TableName = "t1"
+
+                    '契約者農場情報処理
+                    Select Case req.EDIT_KBN
+                        Case EnumEditKbn.Edit       '変更入力
+
+                            '検索結果出力用ＳＱＬ作成
+                            sql = f_SetForm_Data(req)
+
+                            'データSelect 
+                            Dim dt = f_Select_ODP(db, sql).Tables(0)
+                            Dim cdt As DataTable = dt.Copy()
+                            ds.Tables.Add(cdt)
+                    End Select
 
                     '-------------------------------------------------------------
                     '5.データ加工処理
                     '-------------------------------------------------------------
-                    Dim res = Wraper.GetInitDetailResponse(dt)
-
-                    '-------------------------------------------------------------
-                    '6.正常返し
-                    '-------------------------------------------------------------
-                    Return res
-
-                End Function)
-
-        End Function
-
-        <DisplayName("検索処理_詳細画面処理")>
-        Public Shared Function SearchDetail(req As SearchDetailRequest) As SearchDetailResponse
-            Return Nolock(req,
-                Function(db)
-
-                    '-------------------------------------------------------------
-                    '1.初期化
-                    '-------------------------------------------------------------
-
-                    '-------------------------------------------------------------
-                    '2.データ取得
-                    '-------------------------------------------------------------
-
-                    '-------------------------------------------------------------
-                    '3.チェック処理
-                    '-------------------------------------------------------------
-                    'チェックトークン
-                    Dim uid = CheckToken(req.token)
-                    If String.IsNullOrEmpty(uid) Then Return New SearchDetailResponse("トークンが正しくありません。")
-
-                    '-------------------------------------------------------------
-                    '4.ビジネスロジック処理
-                    '-------------------------------------------------------------
-                    '検索結果出力用ＳＱＬ作成
-                    Dim sql = f_SetForm_Data(req)
-
-                    'データSelect 
-                    Dim ds = f_Select_ODP(db, sql)
-                    Dim dt = ds.Tables(0)
-
-                    '-------------------------------------------------------------
-                    '5.データ加工処理
-                    '-------------------------------------------------------------
-                    Dim res = Wraper.SearchDetailResponse(dt)
+                    Dim res = Wraper.InitDetailResponse(ds,req.EDIT_KBN)
 
                     '-------------------------------------------------------------
                     '6.正常返し
@@ -122,7 +89,7 @@ Namespace JBD.GJS.Service.GJ8091
                     '-------------------------------------------------------------
                     'チェックトークン
                     Dim uid = CheckToken(req.token)
-                    If String.IsNullOrEmpty(uid) Then Return New SearchDetailResponse("トークンが正しくありません。")
+                    If String.IsNullOrEmpty(uid) Then Return New DaResponseBase("トークンが正しくありません。")
 
                     '-------------------------------------------------------------
                     '4.ビジネスロジック処理
@@ -167,27 +134,26 @@ Namespace JBD.GJS.Service.GJ8091
                     '4.ビジネスロジック処理
                     '-------------------------------------------------------------
                     '検索結果出力用ＳＱＬ作成
-                    Dim sReq = New SearchDetailRequest
+                    Dim sReq As New InitDetailRequest()
                     sReq.KI = req.KEIYAKUSYA_NOJO.KI
                     sReq.KEIYAKUSYA_CD = req.KEIYAKUSYA_NOJO.KEIYAKUSYA_CD
                     sReq.NOJO_CD = req.KEIYAKUSYA_NOJO.NOJO_CD
                     Dim sql = f_SetForm_Data(sReq)
 
                     'データSelect 
-                    Dim ds = f_Select_ODP(db, sql)
-                    Dim dt = ds.Tables(0)
+                    Dim dt = f_Select_ODP(db, sql).Tables(0)
 
                     'データの独占性
                     Select Case req.EDIT_KBN
-                        Case Enum編集区分.変更       '変更入力
+                        Case EnumEditKbn.Edit       '変更入力
                             If dt.Rows.Count ＝ 0 Then
-                                Return New DaResponseBase("変更したデータはありません。")
+                                Return New DaResponseBase("データが存在しないため、データを変更できません。")
                             Else
                                 If CDate(dt.Rows(0)("UP_DATE")) > req.KEIYAKUSYA_NOJO.UP_DATE
                                     Return New DaResponseBase("データを更新できません。他のユーザーによって変更された可能性があります。")
                                 End If
                             End If
-                        Case Enum編集区分.新規       '新規入力
+                        Case EnumEditKbn.Add       '新規入力
                             If dt.Rows.Count > 0 Then
                                 Return New DaResponseBase("データは既に登録されています。")
                             End If

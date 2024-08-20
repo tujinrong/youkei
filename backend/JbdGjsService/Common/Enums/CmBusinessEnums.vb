@@ -58,9 +58,9 @@ Namespace JBD.GJS.Service
         一回目 = 1
         二回目
     End Enum
-    Public Enum Enum編集区分
-        新規 = 1
-        変更
+    Public Enum EnumEditKbn
+        Add = 1
+        Edit
     End Enum
     Public Enum Enum遷移区分
         初期化 = 1
