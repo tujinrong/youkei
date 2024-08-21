@@ -36,7 +36,7 @@
             <a-col v-bind="layout">
               <th>契約区分</th>
               <td class="flex">
-                <a-form-item v-bind="validateInfos.KEIYAKU_KBN_CD">
+                <a-form-item v-bind="validateInfos.KeiyakuKbnCd">
                   <range-select
                     v-model:value="formData.KeiyakuKbnCd"
                     :options="KEIYAKU_KBN_CD_NAME_LIST"
@@ -46,7 +46,7 @@
             <a-col v-bind="layout">
               <th class="required">契約状況</th>
               <td>
-                <a-form-item v-bind="validateInfos.KEIYAKU_JYOKYO">
+                <a-form-item v-bind="validateInfos.KeiyakuJyokyo">
                   <a-space class="flex-wrap">
                     <a-checkbox
                       v-for="(label, key) in KEIYAKU_JYOKYO_LABELS"
@@ -62,7 +62,7 @@
             <a-col v-bind="layout">
               <th>事業委託先</th>
               <td class="flex">
-                <a-form-item v-bind="validateInfos.ITAKU_CD">
+                <a-form-item v-bind="validateInfos.ItakuCd">
                   <range-select
                     v-model:value="formData.ItakuCd"
                     :options="ITAKU_CD_NAME_LIST"
@@ -72,7 +72,7 @@
             <a-col v-bind="layout">
               <th>契約者番号</th>
               <td class="flex">
-                <a-form-item v-bind="validateInfos.KEIYAKUSYA_CD">
+                <a-form-item v-bind="validateInfos.KeiyakusyaCd">
                   <range-select
                     v-model:value="formData.KeiyakusyaCd"
                     :options="KEIYAKUSYA_CD_NAME_LIST"
@@ -269,6 +269,7 @@ const rangeCheck = (from: number, to: number, itemName: string) => {
 }
 
 const handleKI = (initflg: boolean) => {
+  if (!formData.KI && formData.KI !== 0) return
   Init({ KI: formData.KI }).then((res) => {
     if (!initflg) {
       formData.KeiyakuKbnCd = clearFromToValue
@@ -283,16 +284,17 @@ const handleKI = (initflg: boolean) => {
 }
 const clear = () => {
   Object.assign(formData, createDefaultParams())
+  handleKI(true)
 }
 
 //プレビューボタンを押す時
 async function onPreview() {
   await validate()
   Preview({ ...formData })
-  // const openNew = () => {
-  //   window.open(URL.value, '_blank')
-  // }
-  // openNew()
+  const openNew = () => {
+    window.open(URL.value, '_blank')
+  }
+  openNew()
 }
 
 //--------------------------------------------------------------------------
@@ -323,9 +325,5 @@ h1 {
   height: 100%;
   display: flex;
   flex-direction: column;
-}
-:deep(.ant-form-item) {
-  margin-bottom: 0;
-  width: 100%;
 }
 </style>

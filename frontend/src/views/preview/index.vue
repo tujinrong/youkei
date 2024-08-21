@@ -3,7 +3,7 @@
   <div id="viewerContainer" class="h-full w-full"></div>
 </template>
 <script setup lang="ts">
-import { onMounted, ref, watch } from 'vue'
+import { onMounted, ref, watch, reactive } from 'vue'
 import { useRoute } from 'vue-router'
 import { ReportViewer, Core } from '@grapecity/activereports'
 import '@grapecity/activereports/styles/ar-js-ui.css'
@@ -19,48 +19,25 @@ import { createViewer } from '@grapecity/ar-viewer-ja'
 //データ定義
 //--------------------------------------------------------------------------
 const route = useRoute()
-
 const channel = new BroadcastChannel('channel_preview')
-channel.onmessage = (event) => {
-  const data = JSON.parse(event.data)
-  console.log(data)
-}
+
 //--------------------------------------------------------------------------
 //フック関数
 //--------------------------------------------------------------------------
-onMounted(() => {
+onMounted(async () => {
   channel.postMessage({ isMounted: true })
 
-  //ReportViewer
+  channel.onmessage = async (event) => {
+    console.log('event.data:' + event.data)
+    await Preview({ ...event.data })
+    let viewer
+    viewer = createViewer({
+      element: '#viewerContainer',
+      reportService: { url: 'https://localhost:55215/api/reporting' },
+    })
 
-  // // フォント記述子の定義
-  // const fonts = [
-  //   { name: 'ＭＳ ゴシック', source: '/fonts/MSGOTHIC.TTF' },
-  //   { name: '游明朝', source: '/fonts/yumin.ttf' },
-  //   { name: '游ゴシック', source: '/fonts/yugothib.ttf' },
-  //   { name: 'IPAゴシック', source: '/fonts/ipaexg.ttf' },
-  //   { name: 'Arial', source: '/fonts/Arial.ttf' },
-  //   { name: 'Arial Italic', source: '/fonts/Arialbi.ttf' },
-  //   { name: 'Arial Bold', source: '/fonts/Arialbd.ttf' },
-  //   { name: 'Arial Bold Italic', source: '/fonts/Arialbi.ttf' },
-  //   { name: 'Arial Black', source: '/fonts/Ariblk.ttf' },
-  // ]
-  // const viewer = new ReportViewer.Viewer('#viewer-host', { language: 'ja' })
-  // viewer.open('/report/keiyakusya.rdlx-json')
-  // // サイドバーのエクスポート機能を有効化
-  // viewer.availableExports = ['pdf', 'xlsx', 'html']
-  // // 定義済みのフォント記述子を登録する
-  // Core.FontStore.registerFonts(...fonts)
-
-  //JSViewer
-  // await Preview
-  let viewer
-  viewer = createViewer({
-    element: '#viewerContainer',
-    reportService: { url: 'https://localhost:55215/api/reporting' },
-  })
-
-  viewer.openReport('AcmeStore.rdlx')
+    viewer.openReport('AcmeStore.rdlx')
+  }
 })
 
 //--------------------------------------------------------------------------

@@ -8,6 +8,7 @@
  * -----------------------------------------------------------------*/
 import { api } from '@/service/request/common-service'
 import { InitRequest, InitResponse, PreviewRequest } from './type'
+import { DaResponseBase } from '@/typings/Base'
 
 const servicename = 'GJ1030'
 
