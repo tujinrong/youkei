@@ -17,17 +17,17 @@ Namespace JBD.GJS.Service.GJ8020
         ''' <summary>
         ''' 期
         ''' </summary>
-        Public Property KI As Integer = Nothing
+        Public Property KI As Integer? = Nothing
 
         ''' <summary>
         ''' 事業対象開始年度
         ''' </summary>
-        Public Property JIGYO_NENDO As Integer = Nothing
+        Public Property JIGYO_NENDO As Integer? = Nothing
 
         ''' <summary>
         ''' 事業対象終了年度
         ''' </summary>
-        Public Property JIGYO_SYURYO_NENDO As Integer = Nothing
+        Public Property JIGYO_SYURYO_NENDO As Integer? = Nothing
 
         ''' <summary>
         ''' 前期積立金取込日
@@ -62,7 +62,7 @@ Namespace JBD.GJS.Service.GJ8020
         ''' <summary>
         ''' 対象年度
         ''' </summary>
-        Public Property TAISYO_NENDO As Integer = Nothing
+        Public Property TAISYO_NENDO As Integer? = Nothing
 
         ''' <summary>
         ''' 当初対象積立金納付期限
