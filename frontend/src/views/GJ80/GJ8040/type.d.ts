@@ -1,5 +1,5 @@
 /** ----------------------------------------------------------------
- * 業務名称　: 互助事業システム
+ * 業務名称　: 互助防疫システム
  * 機能概要　: 契約者農場マスタメンテナンス
  * 　　　　　  インターフェース定義
  * 作成日　　: 2024.08.20
@@ -8,41 +8,35 @@
  * -----------------------------------------------------------------*/
 
 import { EnumAndOr, EnumEditKbn } from '@/enum'
+import {
+  CmSearchResponseBase,
+  CodeNameModel,
+  DaRequestBase,
+  DaResponseBase,
+} from '@/typings/Base'
 
 //-------------------------------------------------------------------
 //リクエスト
 //-------------------------------------------------------------------
 
-/**検索処理(一覧画面) */
-export interface SearchRequest {
-  /**種類区分 */
-  SYURUI_KBN: number
-}
-
 /**削除処理(一覧画面) */
 export interface DeleteRequest extends DaRequestBase {
-  /**種類区分 */
-  SYURUI_KBN: string
-  /**名称コード */
-  MEISYO_CD: number
+  /**ユーザID */
+  USER_ID: string
   /**更新時間 */
   UP_DATE?: Date
 }
 
 /**検索処理(詳細画面) */
-export interface SearchDetailRequest extends DaRequestBase {
-  /**種類区分 */
-  SYURUI_KBN: string
-  /**名称コード */
-  MEISYO_CD: number
+export interface InitDetailRequest extends DaRequestBase {
+  /**ユーザID */
+  USER_ID: string
 }
 
 /**登録処理(詳細画面) */
 export interface SaveRequest extends DaRequestBase {
   /**コード情報 */
   CODE_VM: DetailVM
-  /**編集区分 */
-  EDIT_KBN: EnumEditKbn
 }
 
 //-------------------------------------------------------------------
@@ -51,24 +45,16 @@ export interface SaveRequest extends DaRequestBase {
 
 /**初期化処理(一覧画面) */
 export interface InitResponse extends DaResponseBase {
-  /**種類区分プルダウンリスト */
-  SYURUI_KBN_LIST: CodeNameModel[]
-}
-
-/**検索処理(一覧画面) */
-export interface SearchResponse extends CmSearchResponseBase {
-  /**期 */
-  KI: number
-  /**契約者番号 */
-  KEIYAKUSYA_CD: number
-  /**契約者農場情報リスト */
+  /**ユーザー情報リスト */
   KEKKA_LIST: SearchRowVM[]
 }
 
 /**検索処理(詳細画面) */
-export interface SearchDetailResponse extends DaResponseBase {
+export interface InitDetailResponse extends DaResponseBase {
   /**コード情報 */
   CODE_VM: DetailVM
+  /**使用区分 */
+  SIYO_KBN_LIST: CodeNameModel[]
 }
 
 //-------------------------------------------------------------------
@@ -76,24 +62,36 @@ export interface SearchDetailResponse extends DaResponseBase {
 //-------------------------------------------------------------------
 
 export interface SearchRowVM {
-  /**名称コード */
-  MEISYO_CD: number
-  /**名称 */
-  MEISYO: string
-  /**略称 */
-  RYAKUSYO: string
+  /**ユーザID */
+  USER_ID: string
+  /**ユーザ名 */
+  USER_NAME: string
+  /**使用区分  */
+  SIYO_KBN: number
+  /**停止日  */
+  TEISI_DATE: Date | undefined
+  /**停止理由  */
+  TEISI_RIYU: string
 }
 
 /**契約者農場情報 */
 export interface DetailVM {
-  /**種類区分 */
-  SYURUI_KBN: string
-  /**名称コード */
-  MEISYO_CD: number
-  /**名称 */
-  MEISYO: string
-  /**略称 */
-  RYAKUSYO: string
+  /**ユーザID */
+  USER_ID: string
+  /**ユーザ名 */
+  USER_NAME: string
+  /**パスワード */
+  PASS: string
+  /**パスワード有効期限 */
+  PASS_KIGEN_DATE: Date
+  /**パスワード変更日 */
+  PASS_UP_DATE: Date
+  /**使用区分  */
+  SIYO_KBN: number
+  /**停止日  */
+  TEISI_DATE: Date
+  /**停止理由  */
+  TEISI_RIYU: string
   /**更新時間 */
   UP_DATE?: Date
 }

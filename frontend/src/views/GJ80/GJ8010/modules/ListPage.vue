@@ -91,6 +91,7 @@ import { useElementSize } from '@vueuse/core'
 import { SearchRequest, SearchRowVM } from '../type'
 import { Init, Search } from '../service'
 import { Form } from 'ant-design-vue'
+import { CodeNameModel } from '@/typings/Base'
 
 //--------------------------------------------------------------------------
 //データ定義
