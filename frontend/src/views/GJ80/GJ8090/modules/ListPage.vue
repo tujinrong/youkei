@@ -85,6 +85,7 @@
         v-model:page-size="pageParams.PAGE_SIZE"
         :total="totalCount"
         :page-size-options="['10', '25', '50', '100']"
+        :show-total="(total) => `抽出件数： ${total} 件`"
         show-less-items
         show-size-changer
         class="m-b-1 text-end"
