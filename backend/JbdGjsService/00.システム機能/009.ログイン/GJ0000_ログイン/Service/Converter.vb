@@ -13,7 +13,7 @@ Namespace JBD.GJS.Service.GJ0000
     ''' ログイン
     ''' </summary>
     Public Class Converter
-        Inherits JBD.GJS.Service.CmConerterBase
+        Inherits CmConerterBase
         ''' <summary>
         ''' ログイン
         ''' </summary>

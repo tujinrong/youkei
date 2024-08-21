@@ -7,8 +7,6 @@
 ' 変更履歴　:
 ' *******************************************************************
 
-Imports JbdGjsService.JBD.GJS.Service.GJ8091
-
 Namespace JBD.GJS.Service.GJ8020
 
     ''' <summary>
