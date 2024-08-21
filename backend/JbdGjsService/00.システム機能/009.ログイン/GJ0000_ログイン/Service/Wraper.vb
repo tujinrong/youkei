@@ -22,7 +22,7 @@ Namespace JBD.GJS.Service.GJ0000
             Dim res = New LoginResponse()
             'トークンの設定
             Dim loginTime = DateTime.Now.ToString("yyyyMMddHHmmss")
-            Dim tokenId = dt.Rows(0)("USER_ID").ToString() & "|" & loginTime
+            Dim tokenId = CStr(dt.Rows(0)("USER_ID")) & "|" & loginTime
             'トークンの取得
             res.TOKEN = CmTokenService.GetTokenGjs(tokenId, strGjs, strGjs)
             Return res
@@ -33,10 +33,10 @@ Namespace JBD.GJS.Service.GJ0000
         ''' </summary>
         Public Shared Function GetUserResponse(dt As DataTable) As UserInfoResponse
             Dim res = New UserInfoResponse()
-            res.USER_ID = dt.Rows(0)("USER_ID").ToString()
-            res.USER_NAME = WordHenkan("N", "S", dt.Rows(0)("USER_NAME").ToString()).ToString()
+            res.USER_ID = CStr(dt.Rows(0)("USER_ID"))
+            res.USER_NAME = CStr(WordHenkan("N", "S", CStr(dt.Rows(0)("USER_NAME"))))
             res.ROLES = New List(Of String)
-            res.ROLES.Add(dt.Rows(0)("SIYO_KBN").ToString())
+            res.ROLES.Add(CStr(dt.Rows(0)("SIYO_KBN")))
             Return res
         End Function
     End Class

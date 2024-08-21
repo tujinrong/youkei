@@ -24,8 +24,8 @@ Namespace JBD.GJS.Service.GJ8091
             ' dt をループし、List にデータを追加します。
             For Each row As DataRow In dt.Rows
                 Dim item As New CodeNameModel
-                item.CODE = Cint(row("MEISYO_CD").ToString())
-                item.NAME = row("MEISYO").ToString()
+                item.CODE = Cint(CStr(row("MEISYO_CD")))
+                item.NAME = CStr(row("MEISYO"))
                 res.KEN_CD_NAME_LIST.Add(item)
             Next
             Return res
@@ -42,8 +42,8 @@ Namespace JBD.GJS.Service.GJ8091
             item.KEN_CD_NAME_LIST = New List(Of CodeNameModel)
             For Each row As DataRow In dt.Rows
                 Dim it As New CodeNameModel
-                it.CODE = Cint(row("MEISYO_CD").ToString())
-                it.NAME = row("MEISYO").ToString()
+                it.CODE = Cint(CStr(row("MEISYO_CD")))
+                it.NAME = CStr(row("MEISYO"))
                 item.KEN_CD_NAME_LIST.Add(it)
             Next
 
@@ -53,17 +53,17 @@ Namespace JBD.GJS.Service.GJ8091
                     dt = ds.Tables(1)
                     If dt.Rows.Count > 0 Then
                         Dim row As DataRow = dt.Rows(0)
-                        item.KEIYAKUSYA_NOJO.KI = Cint(row("KI").ToString())
-                        item.KEIYAKUSYA_NOJO.KEIYAKUSYA_CD = Cint(row("KEIYAKUSYA_CD").ToString())
-                        item.KEIYAKUSYA_NOJO.NOJO_CD = Cint(row("NOJO_CD").ToString())
-                        item.KEIYAKUSYA_NOJO.NOJO_NAME = row("NOJO_NAME").ToString()
-                        item.KEIYAKUSYA_NOJO.KEN_CD = Cint(row("KEN_CD").ToString())
-                        item.KEIYAKUSYA_NOJO.ADDR_POST = row("ADDR_POST").ToString()
-                        item.KEIYAKUSYA_NOJO.ADDR_1 = row("ADDR_1").ToString()
-                        item.KEIYAKUSYA_NOJO.ADDR_2 = row("ADDR_2").ToString()           
-                        item.KEIYAKUSYA_NOJO.ADDR_3 = row("ADDR_3").ToString()  
-                        item.KEIYAKUSYA_NOJO.ADDR_4 = row("ADDR_4").ToString()  
-                        item.KEIYAKUSYA_NOJO.MEISAI_NO = Cint(row("MEISAI_NO").ToString())
+                        item.KEIYAKUSYA_NOJO.KI = Cint(CStr(row("KI")))
+                        item.KEIYAKUSYA_NOJO.KEIYAKUSYA_CD = Cint(CStr(row("KEIYAKUSYA_CD")))
+                        item.KEIYAKUSYA_NOJO.NOJO_CD = Cint(CStr(row("NOJO_CD")))
+                        item.KEIYAKUSYA_NOJO.NOJO_NAME = CStr(row("NOJO_NAME"))
+                        item.KEIYAKUSYA_NOJO.KEN_CD = Cint(CStr(row("KEN_CD")))
+                        item.KEIYAKUSYA_NOJO.ADDR_POST = CStr(row("ADDR_POST"))
+                        item.KEIYAKUSYA_NOJO.ADDR_1 = CStr(row("ADDR_1"))
+                        item.KEIYAKUSYA_NOJO.ADDR_2 = CStr(row("ADDR_2"))           
+                        item.KEIYAKUSYA_NOJO.ADDR_3 = CStr(row("ADDR_3"))  
+                        item.KEIYAKUSYA_NOJO.ADDR_4 = CStr(row("ADDR_4"))  
+                        item.KEIYAKUSYA_NOJO.MEISAI_NO = Cint(CStr(row("MEISAI_NO")))
                         item.KEIYAKUSYA_NOJO.UP_DATE = Cdate(row("UP_DATE"))
                     End If
             End Select

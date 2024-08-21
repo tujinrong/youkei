@@ -24,8 +24,8 @@ Namespace JBD.GJS.Service.GJ8090
             ' dt をループし、List にデータを追加します。
             For Each row As DataRow In dt.Rows
                 Dim item As New CodeNameModel
-                item.CODE = Cint(row("KEIYAKUSYA_CD").ToString())
-                item.NAME = row("KEIYAKUSYA_NAME").ToString()
+                item.CODE = Cint(CStr(row("KEIYAKUSYA_CD")))
+                item.NAME = CStr(row("KEIYAKUSYA_NAME"))
                 res.KEIYAKUSYA_CD_NAME_LIST.Add(item)
             Next
             Return res
@@ -38,15 +38,15 @@ Namespace JBD.GJS.Service.GJ8090
             Dim res = New SearchResponse()
             'データ結果判定
             If dt.Rows.Count > 0 Then
-                res.TOTAL_ROW_COUNT = Cint(dt.Rows(0)("RCNT").ToString())
-                res.TOTAL_PAGE_COUNT = Cint(dt.Rows(0)("PCNT").ToString())
+                res.TOTAL_ROW_COUNT = Cint(CStr(dt.Rows(0)("RCNT")))
+                res.TOTAL_PAGE_COUNT = Cint(CStr(dt.Rows(0)("PCNT")))
                 res.KEKKA_LIST = New List(Of KeiyakuNojo)
                 ' dt をループし、List にデータを追加します。
                 For Each row As DataRow In dt.Rows
                     Dim item As New KeiyakuNojo
-                    item.NOJO_CD = Cint(row("NOJO_CD").ToString())
-                    item.NOJO_NAME = row("NOJO_NAME").ToString()
-                    item.ADDR = row("ADDR").ToString()
+                    item.NOJO_CD = Cint(CStr(row("NOJO_CD")))
+                    item.NOJO_NAME = CStr(row("NOJO_NAME"))
+                    item.ADDR = CStr(row("ADDR"))
                     res.KEKKA_LIST.Add(item)
                 Next
             End If
