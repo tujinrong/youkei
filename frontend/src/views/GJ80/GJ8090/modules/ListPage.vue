@@ -91,6 +91,7 @@
       />
       <vxe-table
         class="mt-2"
+        ref="xTableRef"
         :column-config="{ resizable: true }"
         :height="height - 64"
         :row-config="{ isCurrent: true, isHover: true }"
@@ -150,6 +151,7 @@ import { SearchRowVM, SearchRequest } from '@/views/GJ80/GJ8090/type'
 import { Init, Search } from '../service'
 import { Form } from 'ant-design-vue'
 import { CodeNameModel } from '@/typings/Base'
+import { VxeTableInstance } from 'vxe-pc-ui'
 
 //--------------------------------------------------------------------------
 //データ定義
@@ -157,7 +159,7 @@ import { CodeNameModel } from '@/typings/Base'
 const router = useRouter()
 const route = useRoute()
 const tabStore = useTabStore()
-
+const xTableRef = ref<VxeTableInstance>()
 const createDefaultParams = (): SearchRequest => {
   return {
     KI: -1,
@@ -223,6 +225,9 @@ onMounted(() => {
 
 //初期化処理
 const getInitData = (KI: number, initflg: boolean) => {
+  if (!KI && KI !== 0) {
+    return
+  }
   Init({ KI: KI, EDIT_KBN: EnumEditKbn.Add }).then((res) => {
     if (initflg) searchParams.KI = res.KI
     searchParams.KEIYAKUSYA_CD = undefined
@@ -281,7 +286,7 @@ async function reset() {
   searchParams.NOJO_NAME = undefined
   searchParams.SEARCH_METHOD = EnumAndOr.AndCODE
   getInitData(-1, true)
-  pageParams.ORDER_BY = 0
+  xTableRef.value?.clearSort()
   clear()
 }
 

@@ -17,7 +17,7 @@ interface DaRequestBase {
   /** ユーザーID */
   USER_ID?: string
   /**編集区分 */
-  EDIT_KBN: EnumEditKbn
+  EDIT_KBN?: EnumEditKbn
 }
 
 /** 登録処理 */
