@@ -91,7 +91,7 @@ Namespace JBD.GJS.Service.GJ8020
                             )
 
             Select Case wNojoCd.EDIT_KBN
-                Case EnumEditKbn.Edit.Add       '新規入力
+                Case EnumEditKbn.Add       '新規入力
                     'データ登録日
                     Cmd.Parameters.Add("IN_REG_DATE", Now)
                     'データ登録ＩＤ
