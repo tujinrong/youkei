@@ -84,16 +84,12 @@ Namespace JBD.GJS.Service.GJ0000
                     '-------------------------------------------------------------
                     '3.チェック処理
                     '-------------------------------------------------------------
-                    'チェックトークン
-                    Dim uid = CheckToken(req.token)
-                    If String.IsNullOrEmpty(uid) Then Return New UserInfoResponse("トークンが正しくありません。")
-
 
                     '-------------------------------------------------------------
                     '4.ビジネスロジック処理
                     '-------------------------------------------------------------
                     '検索結果出力用ＳＱＬ作成
-                    Dim sql = f_Search_SQLMake(uid)
+                    Dim sql = f_Search_SQLMake(pLOGINUSERID)
 
                     'データSelect 
                     Dim ds = f_Select_ODP(db, sql)

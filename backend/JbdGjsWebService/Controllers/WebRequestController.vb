@@ -30,6 +30,10 @@ Namespace JBD.GJS.WebService
             'Sessionの設定
             Dim r = SetSession(Of DaRequestBase)(bizReq, True)
 
+            'チェックトークン
+            Dim uid = CheckToken(r.token)
+            If String.IsNullOrEmpty(uid) Then Return New DaResponseBase("トークンが正しくありません。")
+
             'サービス実行
             r.sessionid = DaDbLogService.WriteMainLog(r)
             Dim res = method.Invoke(service, New Object() {bizReq})

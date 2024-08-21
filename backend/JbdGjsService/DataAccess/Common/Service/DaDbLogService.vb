@@ -40,7 +40,7 @@ Namespace JBD.GJS.Service
     .statuscd = "0",
     .regdttm = DaUtil.Now
 }
-                dto.reguserid = If(r.USER_ID, String.Empty)
+                dto.reguserid = If(r.USER_ID, pLOGINUSERID)
                 Dim rand As New Random()
                 Dim randomValue As Integer = rand.Next(0, 100)
                 dto.sessionseq = CLng(DateTime.Now.ToString("yyyyMMddHHmmssfff") & randomValue)
@@ -188,7 +188,7 @@ Namespace JBD.GJS.Service
             dto.service = If(dic.ContainsKey(NameOf(DaRequestBase.ServiceDesc)), CStr(dic(NameOf(DaRequestBase.ServiceDesc))), String.Empty)
             dto.method = If(dic.ContainsKey(NameOf(DaRequestBase.Method)), CStr(dic(NameOf(DaRequestBase.Method))), String.Empty)
             dto.methodnm = If(dic.ContainsKey(NameOf(DaRequestBase.MethodDesc)), CStr(dic(NameOf(DaRequestBase.MethodDesc))), String.Empty)
-            dto.reguserid = db.Session.UserID.ToString()
+            dto.reguserid = pLOGINUSERID
 
             Dim _conn = db.Session.Connection
             If _conn.State = Data.ConnectionState.Closed Then
@@ -316,7 +316,7 @@ Namespace JBD.GJS.Service
                 dto.ipadrs = request.ip
                 dto.browser = request.browser
                 dto.os = request.os
-                dto.reguserid = CType(db.Session.UserID,String)
+                dto.reguserid = pLOGINUSERID
                 dto.regdttm = DaUtil.Now
                 DaDbLogService.InsertDto(db.Session, dto)
                 Return dto.tusinlogseq
