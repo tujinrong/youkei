@@ -100,11 +100,12 @@
                   :maxlength="15"
                 ></a-input>
               </a-form-item>
-              <a-form-item v-bind="errorInfos">
-                <a-input
-                  v-model:value="formData.ADDR_3"
-                  :maxlength="15"
-                ></a-input>
+              <a-input
+                v-model:value="formData.ADDR_3"
+                :maxlength="15"
+                @change="validate('ADDR_4')"
+              ></a-input>
+              <a-form-item v-bind="validateInfos.ADDR_4">
                 <a-input
                   v-model:value="formData.ADDR_4"
                   :maxlength="20"
@@ -135,17 +136,9 @@
 
 <script setup lang="ts">
 import { EnumEditKbn, PageSatatus } from '@/enum'
-import {
-  computed,
-  nextTick,
-  onMounted,
-  reactive,
-  ref,
-  watch,
-  watchEffect,
-} from 'vue'
+import { nextTick, onMounted, reactive, ref, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
-import { showDeleteModal, showInfoModal, showSaveModal } from '@/utils/modal'
+import { showDeleteModal, showSaveModal } from '@/utils/modal'
 import {
   DELETE_CONFIRM,
   DELETE_OK_INFO,
@@ -159,7 +152,6 @@ import { convertToFullWidth } from '@/utils/util'
 import { DetailVM } from '../type'
 import { Judgement } from '@/utils/judge-edited'
 import { InitDetail, Save, Delete } from '../service'
-import { toArray } from 'xe-utils'
 import { CodeNameModel } from '@/typings/Base'
 //---------------------------------------------------------------------------
 //属性
@@ -241,24 +233,10 @@ const rules = reactive({
       message: ITEM_REQUIRE_ERROR.Msg.replace('{0}', '明細番号'),
     },
   ],
-})
-const rules2 = reactive({
-  ADDR_3: [
-    {
-      validator: async (_rule, value: string) => {
-        if (!value && formData.ADDR_4 && !showError.value) {
-          debugger
-          return Promise.reject('前の住所入力欄が未入力です。')
-        }
-        return Promise.resolve()
-      },
-    },
-  ],
   ADDR_4: [
     {
       validator: async (_rule, value: string) => {
-        if (value && !formData.ADDR_3 && !showError.value) {
-          debugger
+        if (value && !formData.ADDR_3) {
           return Promise.reject('前の住所入力欄が未入力です。')
         }
         return Promise.resolve()
@@ -266,19 +244,11 @@ const rules2 = reactive({
     },
   ],
 })
+
 const { validate, clearValidate, validateInfos, resetFields } = Form.useForm(
   formData,
   rules
 )
-const {
-  validate: validate2,
-  validateInfos: validateInfos2,
-  mergeValidateInfo,
-} = Form.useForm(formData, rules2)
-const errorInfos = computed(() => {
-  return mergeValidateInfo(toArray(validateInfos2))
-})
-const showError = ref(false)
 
 //---------------------------------------------------------------------------
 //フック関数
@@ -340,17 +310,6 @@ watch(
   }
 )
 
-watchEffect(() => {
-  const errorElements = document.querySelectorAll(
-    '.ant-form-item-explain-error'
-  )
-  Array.from(errorElements).some(
-    (element) => element.textContent === '前の住所入力欄が未入力です。'
-  )
-    ? (showError.value = true)
-    : (showError.value = false)
-})
-
 //--------------------------------------------------------------------------
 //メソッド
 //--------------------------------------------------------------------------
@@ -364,7 +323,7 @@ const goList = () => {
 
 //登録処理
 const saveData = async () => {
-  await Promise.all([validate(), validate2()])
+  await validate()
   showSaveModal({
     content: SAVE_CONFIRM.Msg,
     onOk: async () => {
