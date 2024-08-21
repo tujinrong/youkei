@@ -95,7 +95,7 @@ Namespace JBD.GJS.Service.GJ8020
 
                     'データの独占性
                     Select Case req.EDIT_KBN
-                        Case Enum編集区分.変更       '変更入力
+                        Case EnumEditKbn.Edit       '変更入力
                             If dt.Rows.Count = 0 Then
                                 Return New DaResponseBase("変更したデータはありません。")
                             Else
@@ -103,7 +103,7 @@ Namespace JBD.GJS.Service.GJ8020
                                     Return New DaResponseBase("データを更新できません。他のユーザーによって変更された可能性があります。")
                                 End If
                             End If
-                        Case Enum編集区分.新規       '新規入力
+                        Case EnumEditKbn.Add       '新規入力
                             If dt.Rows.Count > 0 Then
                                 Return New DaResponseBase("データは既に登録されています。")
                             End If

@@ -44,9 +44,9 @@ Namespace JBD.GJS.Service.GJ8020
             Cmd.CommandType = CommandType.StoredProcedure
 
             Select Case wNojoCd.EDIT_KBN
-                Case Enum編集区分.変更       '変更入力
+                Case EnumEditKbn.Edit       '変更入力
                     Cmd.CommandText = "PKG_GJ8020.GJ8020_SYORI_KI_UPD"
-                Case Enum編集区分.新規       '新規入力
+                Case EnumEditKbn.Add       '新規入力
                     Cmd.CommandText = "PKG_GJ8020.GJ8020_SYORI_KI_INS"
             End Select
 
@@ -91,7 +91,7 @@ Namespace JBD.GJS.Service.GJ8020
                             )
 
             Select Case wNojoCd.EDIT_KBN
-                Case Enum編集区分.新規       '新規入力
+                Case EnumEditKbn.Edit.Add       '新規入力
                     'データ登録日
                     Cmd.Parameters.Add("IN_REG_DATE", Now)
                     'データ登録ＩＤ

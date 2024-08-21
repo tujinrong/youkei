@@ -30,7 +30,7 @@ Namespace JBD.GJS.Service.GJ8020
         ''' </summary>
         Public Property SYORI_KI As DetailVM = New DetailVM
 
-        Public Property EDIT_KBN As Enum編集区分 = Enum編集区分.新規
+
 
 
     End Class

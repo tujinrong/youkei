@@ -70,13 +70,15 @@ Namespace JBD.GJS.Service
         ''' <summary>
         ''' トークン
         ''' </summary>
-        Public Property token As String = String.Empty                    
+        Public Property token As String = String.Empty
 
         ''' <summary>
         ''' 機能ID(画面)
         ''' </summary>
         <JsonIgnore>
-        Public Property kinoid As String = String.Empty                       
+        Public Property kinoid As String = String.Empty
+
+
 
         Public Sub SetMethodInfo(method As MethodBase)
             Service = DaUtil.GetKinoid(method) 
