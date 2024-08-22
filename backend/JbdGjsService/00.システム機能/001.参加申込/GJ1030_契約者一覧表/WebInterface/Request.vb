@@ -31,12 +31,12 @@ Namespace JBD.GJS.Service.GJ1030
         ''' <summary>
         ''' 対象期
         ''' </summary>
-        Public Property KI As Integer = Nothing
+        Public Property KI As Integer? = Nothing
 
         ''' <summary>
         ''' 対象日(現在)
         ''' </summary>
-        Public Property TAISYOBI_YMD As DateTime
+        Public Property TAISYOBI_YMD As DateTime?
 
         ''' <summary>
         ''' 契約区分コード

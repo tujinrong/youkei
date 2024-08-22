@@ -31,7 +31,7 @@ Namespace JBD.GJS.WebService
             Dim r = SetSession(Of DaRequestBase)(bizReq, True)
 
             'チェックトークン
-            Dim uid = CheckToken(r.token)
+            Dim uid = CheckToken(r.token,Program.ReportsDirectory.ToString())
             If String.IsNullOrEmpty(uid) Then Return New DaResponseBase("トークンが正しくありません。")
 
             'サービス実行

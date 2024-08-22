@@ -44,12 +44,16 @@ Namespace JBD.GJS.Service.GJ8091
                     '契約者農場情報処理
                     Select Case req.EDIT_KBN
                         Case EnumEditKbn.Edit       '変更入力
-
                             '検索結果出力用ＳＱＬ作成
                             sql = f_SetForm_Data(req)
 
                             'データSelect 
                             Dim dt = f_Select_ODP(db, sql).Tables(0)
+
+                            'データ結果判定
+                            If dt.Rows.Count ＝ 0 Then
+                                Return New InitDetailResponse("データが存在しないため、データを変更できません。")
+                            End If
                             Dim cdt As DataTable = dt.Copy()
                             ds.Tables.Add(cdt)
                     End Select

@@ -7,7 +7,14 @@
 ' 変更履歴　:
 ' *******************************************************************
 
+Imports System.IO
+Imports System.Reflection
+
 Public Class Program
+    
+    Private Shared ReadOnly CurrentDir As String = If(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), String.Empty)
+    Public Shared ReadOnly ReportsDirectory As DirectoryInfo = New DirectoryInfo(Path.Combine(CurrentDir, "Reports"))
+
     Public Shared Sub Main(args As String())
         CultureInfo.DefaultThreadCurrentCulture = New CultureInfo("ja-JP")
         CultureInfo.DefaultThreadCurrentUICulture = CultureInfo.DefaultThreadCurrentCulture
@@ -37,24 +44,22 @@ Public Class Program
         'キャッシュを使用
         builder.Services.AddMemoryCache()
 
-        'CORS
-        builder.Services.AddCors(Sub(options)
-            options.AddDefaultPolicy(Sub(policy)
-                If builder.Environment.IsDevelopment() Then
-                    policy.AllowAnyOrigin()
-                    policy.AllowAnyHeader()
-                End If
-            End Sub)
-        End Sub)
+'CORS
+builder.Services.AddCors(Sub(options)
+options.AddDefaultPolicy(Sub(policy)
+If builder.Environment.IsDevelopment() Then
+policy.AllowAnyOrigin()
+policy.AllowAnyHeader()
+End If
+End Sub)
+End Sub)
 
-        'Business Service
-        builder.Services.ConfigureVbBussinessServiceGen()
-        Dim app = builder.Build()
-        VbBussinessConfig.Configure(app.Services)
-
-        app.UseCors()
-
-        app.UseAuthorization()
+'Business Service
+builder.Services.ConfigureVbBussinessServiceGen()
+Dim app = builder.Build()
+VbBussinessConfig.Configure(app.Services)
+app.UseCors()
+app.UseAuthorization()
 
         app.MapControllers()
 

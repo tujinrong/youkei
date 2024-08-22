@@ -5,7 +5,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <DefaultItemExcludes>$(DefaultItemExcludes);$(ProjectDir)**\*.cs</DefaultItemExcludes>
-    <ImportedNamespaces>ICSharpCode.SharpZipLib.Zip=False,JbdGjsCommon.JBD.GJS.Common=False,JbdGjsDb.JBD.GJS.Db=False,JbdGjsService.JBD.GJS.Service=False,JbdGjsService.JBD.GJS.Service.Common=False,Microsoft.Extensions.Caching.Memory=False,Microsoft.VisualBasic.CompilerServices=False,Oracle.ManagedDataAccess.Client=False,System.ComponentModel=False,System.Data=False,System.Globalization=False,System.IO=False,System.Reflection=False,System.Security=False,System.Security.Cryptography=False,System.Text=False,System.Text.Json.Serialization=False,System.Text.RegularExpressions=False,Microsoft.VisualBasic=True,System=True,System.Collections=True,System.Collections.Generic=True,System.Diagnostics=True,System.Linq=True,System.Xml.Linq=True,System.Threading.Tasks=True,JbdGjsService=True</ImportedNamespaces>
+    <ImportedNamespaces>ICSharpCode.SharpZipLib.Zip=False,JbdGjsCommon.JBD.GJS.Common=False,JbdGjsDb.JBD.GJS.Db=False,JbdGjsReport=False,JbdGjsService.JBD.GJS.Service=False,JbdGjsService.JBD.GJS.Service.Common=False,Microsoft.Extensions.Caching.Memory=False,Microsoft.VisualBasic.CompilerServices=False,Oracle.ManagedDataAccess.Client=False,System.ComponentModel=False,System.Data=False,System.Globalization=False,System.IO=False,System.Reflection=False,System.Security=False,System.Security.Cryptography=False,System.Text=False,System.Text.Json.Serialization=False,System.Text.RegularExpressions=False,Microsoft.VisualBasic=True,System=True,System.Collections=True,System.Collections.Generic=True,System.Diagnostics=True,System.Linq=True,System.Xml.Linq=True,System.Threading.Tasks=True,JbdGjsService=True</ImportedNamespaces>
     <OptionStrict>On</OptionStrict>
   </PropertyGroup>
   <ItemGroup>
@@ -37,6 +37,7 @@
     <Import Include="ICSharpCode.SharpZipLib.Zip" />
     <Import Include="JbdGjsCommon.JBD.GJS.Common" />
     <Import Include="JbdGjsDb.JBD.GJS.Db" />
+    <Import Include="JbdGjsReport" />
     <Import Include="JbdGjsService.JBD.GJS.Service" />
     <Import Include="JbdGjsService.JBD.GJS.Service.Common" />
     <Import Include="Microsoft.Extensions.Caching.Memory" />
@@ -58,5 +59,6 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\JbdGjsCommon\JbdGjsCommon.vbproj" />
+    <ProjectReference Include="..\JbdGjsReport\JbdGjsReport.vbproj" />
   </ItemGroup>
 </Project>

@@ -1,5 +1,4 @@
-﻿
-Imports System.Data
+﻿Imports System.Data
 
 Interface InterfaceRptGJ1030
     Sub sub1(wkDSRep As DataSet)
@@ -28,7 +27,6 @@ Public Class rptGJ1030
     ''' <remarks></remarks>
     Private Const con_ReportName As String = "家畜防疫互助基金契約者一覧表(連絡用)"
 
-
     Private Sub rptGJ1030_ReportStart(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.ReportStart
 
         '2017/07/14　追加開始
@@ -49,8 +47,6 @@ Public Class rptGJ1030
 
 
     End Sub
-
-
 
     Sub sub1(wkDSRep As DataSet) Implements InterfaceRptGJ1030.sub1
         ' Insert code here that implements this method.

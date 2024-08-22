@@ -60,9 +60,17 @@ Namespace JBD.GJS.Service.GJ8091
                         item.KEIYAKUSYA_NOJO.KEN_CD = Cint(CStr(row("KEN_CD")))
                         item.KEIYAKUSYA_NOJO.ADDR_POST = CStr(row("ADDR_POST"))
                         item.KEIYAKUSYA_NOJO.ADDR_1 = CStr(row("ADDR_1"))
-                        item.KEIYAKUSYA_NOJO.ADDR_2 = CStr(row("ADDR_2"))           
-                        item.KEIYAKUSYA_NOJO.ADDR_3 = CStr(row("ADDR_3"))  
-                        item.KEIYAKUSYA_NOJO.ADDR_4 = CStr(row("ADDR_4"))  
+                        item.KEIYAKUSYA_NOJO.ADDR_2 = CStr(row("ADDR_2"))
+                        If String.IsNullOrEmpty( row("ADDR_3").ToString())
+                            item.KEIYAKUSYA_NOJO.ADDR_3 = String.Empty
+                        Else
+                            item.KEIYAKUSYA_NOJO.ADDR_3 = CStr(row("ADDR_3"))  
+                        End If
+                        If String.IsNullOrEmpty( row("ADDR_4").ToString())
+                            item.KEIYAKUSYA_NOJO.ADDR_4 = String.Empty
+                        Else
+                            item.KEIYAKUSYA_NOJO.ADDR_4 = CStr(row("ADDR_4"))  
+                        End If
                         item.KEIYAKUSYA_NOJO.MEISAI_NO = Cint(CStr(row("MEISAI_NO")))
                         item.KEIYAKUSYA_NOJO.UP_DATE = Cdate(row("UP_DATE"))
                     End If

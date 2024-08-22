@@ -29,9 +29,9 @@ Namespace JBD.GJS.Service
             Return dt
         End Function
 
-        Public Function f_Select_ODP(db As DaDbContext, sql As String, repName As String) As DataSet
+        Public Function f_Select_ODP(db As DaDbContext, sql As String, rn As String) As DataSet
             Dim dt As DataSet = New DataSet()
-            dt.Tables.Add(repName)
+            dt.Tables.Add(rn)
             Dim daDataAdapter As OracleDataAdapter
             daDataAdapter = New OracleDataAdapter(sql, db.Session.Connection)
             daDataAdapter.Fill(dt, dt.Tables(0).TableName)
@@ -47,14 +47,15 @@ Namespace JBD.GJS.Service
         'ﾊﾟﾗﾒｰﾀ     :① token       i,  String  
         '           :② uid         o,  String  
         '------------------------------------------------------------------
-        Public Function CheckToken(token As String) As String
+        Public Function CheckToken(token As String, dir As String) As String
             'トークンの取得
             Dim ret = CmTokenService.GetTokenUDGjs(token, strGjs, strGjs)
             Dim uids = ret.Split("|")
             Dim uid = uids(0)
             pLOGINUSERID = uid
             pPCNAME = System.Net.Dns.GetHostName
-	
+	        myREPORT_PDF_PATH = dir
+
             ' 比較する
             If String.IsNullOrEmpty(uid) Then
                 Return String.Empty
