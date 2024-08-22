@@ -60,7 +60,7 @@ Namespace JBD.GJS.Service.GJ1030
         End Function
 
         <DisplayName("プレビュー処理_プレビュー画面")>
-        Public Shared Function Preview(req As PreviewRequest) As SearchResponse
+        Public Shared Function Preview(req As PreviewRequest) As CmPreviewResponseBase
             Return Nolock(req,
                 Function(db)
 
@@ -86,9 +86,17 @@ Namespace JBD.GJS.Service.GJ1030
                     Dim rn As String = "家畜防疫互助基金契約者一覧表(連絡用)"
                     Dim ds = f_Select_ODP(db, sql, rn)
 
+                    'データ結果判定
                     If ds.Tables(0).Rows.Count > 0 Then
                         Dim w As New rptGJ1030
-                        w.sub1(ds)
+                        Dim dt = w.report(ds)
+                        Dim ret As New CmPreviewResponseBase With {
+                            .filenm = dt.Name,
+                            .sectionDocument = dt
+                        }
+                        Return ret
+                    Else
+                        Return New CmPreviewResponseBase("該当データが存在しませんでした。")
                     End If
 
                     '-------------------------------------------------------------
@@ -98,7 +106,6 @@ Namespace JBD.GJS.Service.GJ1030
                     '-------------------------------------------------------------
                     '6.正常返し
                     '-------------------------------------------------------------
-                    Return New SearchResponse
 
                 End Function)
 

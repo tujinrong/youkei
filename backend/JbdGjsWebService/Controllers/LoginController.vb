@@ -9,7 +9,7 @@
 
 Namespace JBD.GJS.WebService
     <ApiController>
-    <Route("api/AFCT/[controller]")>
+    <Route("api/GJS/[controller]")>
     Public Class LoginController
         Inherits WebControllerBase
 

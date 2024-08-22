@@ -10,7 +10,7 @@
 Namespace JBD.GJS.WebService
     <Authorize>
     <ApiController>
-    <Route("api/AFCT/[controller]/[action]")>
+    <Route("api/GJS/[controller]/[action]")>
     Public Class DownloadController
         Inherits WebControllerBase
         Public Sub New(ByVal hostingEnvironment As Microsoft.AspNetCore.Hosting.IWebHostEnvironment, ByVal serviceFactory As ServiceFactory)

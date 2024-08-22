@@ -7,12 +7,24 @@
 ' 変更履歴　:
 ' *******************************************************************
 
+Imports GrapeCity.ActiveReports.Document
+
 Namespace JBD.GJS.Service
     Public Class CmPreviewResponseBase
         Inherits DaResponseBase
         Public Property filenm As String                                          'ファイル名
+        Public Property sectionDocument As SectionDocument
         <JsonIgnore>
         Public Property data As Byte()                                            'データ
         Public Property contenttype As String                                     'コンテンツタイプ
+
+        Public Sub New()
+
+        End Sub
+
+        Public Sub New(msg As String)
+            MyBase.New(msg)
+        End Sub
+
     End Class
 End Namespace

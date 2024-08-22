@@ -1,7 +1,8 @@
 ﻿Imports System.Data
+Imports GrapeCity.ActiveReports.Document
 
 Interface InterfaceRptGJ1030
-    Sub sub1(wkDSRep As DataSet)
+    Function report(wkDSRep As DataSet) As SectionDocument
 End Interface
 
 Public Class rptGJ1030
@@ -48,7 +49,7 @@ Public Class rptGJ1030
 
     End Sub
 
-    Sub sub1(wkDSRep As DataSet) Implements InterfaceRptGJ1030.sub1
+    Function report(wkDSRep As DataSet) As SectionDocument Implements InterfaceRptGJ1030.report
         ' Insert code here that implements this method.
         Using wkAR As New rptGJ1030
 
@@ -69,20 +70,8 @@ Public Class rptGJ1030
             wkAR.DataSource = wkDSRep
             wkAR.DataMember = wkDSRep.Tables(0).TableName
             wkAR.Run() '実行
-
-            ''--------------------------------------------------
-            ''ＰＤＦ出力
-            ''--------------------------------------------------
-            'ファイル存在ﾁｪｯｸ()
-            Dim strOutPath As String = ""
-            If Not f_ReportPath_Check(strOutPath, 0, myREPORT_PDF_PATH, pAPP & con_ReportName) Then
-                Exit Sub
-            Else
-                Using export As New GrapeCity.ActiveReports.Export.Pdf.Section.PdfExport
-                    export.Export(wkAR.Document, strOutPath)
-                End Using
-            End If
+            Return wkAR.Document
 
         End Using
-    End Sub
+    End Function
 End Class
