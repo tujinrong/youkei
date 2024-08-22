@@ -26,24 +26,24 @@ export interface PreviewRequest extends DaRequestBase {
   /**対象日(現在) */
   TAISYOBI_YMD: string
   /**契約者区分コード */
-  KeiyakuKbnCd?: {
+  KEIYAKU_KBN_CD?: {
     VALUE_FM?: number
     VALUE_TO?: number
   }
   /**契約状況 */
-  KeiyakuJyokyo: {
+  KEIYAKU_JYOKYO: {
     SHINKI: boolean
     KEIZOKU: boolean
     CHUSHI: boolean
     HAIGYO: boolean
   }
   /**事務委託先番号コード */
-  ItakuCd?: {
+  ITAKU_CD?: {
     VALUE_FM?: number
     VALUE_TO?: number
   }
   /**契約者番号コード */
-  KeiyakusyaCd?: {
+  KEIYAKUSYA_CD?: {
     VALUE_FM?: number
     VALUE_TO?: number
   }

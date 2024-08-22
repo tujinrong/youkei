@@ -138,7 +138,7 @@
 import { EnumEditKbn, PageSatatus } from '@/enum'
 import { nextTick, onMounted, reactive, ref, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
-import { showDeleteModal, showSaveModal } from '@/utils/modal'
+import { showDeleteModal, showInfoModal, showSaveModal } from '@/utils/modal'
 import {
   DELETE_CONFIRM,
   DELETE_OK_INFO,
@@ -323,6 +323,12 @@ const goList = () => {
 
 //登録処理
 const saveData = async () => {
+  if (!editJudge.isPageEdited()) {
+    showInfoModal({
+      content: '変更したデータはありません。',
+    })
+    return
+  }
   await validate()
   showSaveModal({
     content: SAVE_CONFIRM.Msg,

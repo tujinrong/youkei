@@ -36,9 +36,9 @@
             <a-col v-bind="layout">
               <th>契約区分</th>
               <td class="flex">
-                <a-form-item v-bind="validateInfos.KeiyakuKbnCd">
+                <a-form-item v-bind="validateInfos.KEIYAKU_KBN_CD">
                   <range-select
-                    v-model:value="formData.KeiyakuKbnCd"
+                    v-model:value="formData.KEIYAKU_KBN_CD"
                     :options="KEIYAKU_KBN_CD_NAME_LIST"
                 /></a-form-item>
               </td>
@@ -46,12 +46,12 @@
             <a-col v-bind="layout">
               <th class="required">契約状況</th>
               <td>
-                <a-form-item v-bind="validateInfos.KeiyakuJyokyo">
+                <a-form-item v-bind="validateInfos.KEIYAKU_JYOKYO">
                   <a-space class="flex-wrap">
                     <a-checkbox
                       v-for="(label, key) in KEIYAKU_JYOKYO_LABELS"
                       :key="key"
-                      v-model:checked="formData.KeiyakuJyokyo[key]"
+                      v-model:checked="formData.KEIYAKU_JYOKYO[key]"
                     >
                       {{ label }}
                     </a-checkbox></a-space
@@ -62,9 +62,9 @@
             <a-col v-bind="layout">
               <th>事業委託先</th>
               <td class="flex">
-                <a-form-item v-bind="validateInfos.ItakuCd">
+                <a-form-item v-bind="validateInfos.ITAKU_CD">
                   <range-select
-                    v-model:value="formData.ItakuCd"
+                    v-model:value="formData.ITAKU_CD"
                     :options="ITAKU_CD_NAME_LIST"
                 /></a-form-item>
               </td>
@@ -72,9 +72,9 @@
             <a-col v-bind="layout">
               <th>契約者番号</th>
               <td class="flex">
-                <a-form-item v-bind="validateInfos.KeiyakusyaCd">
+                <a-form-item v-bind="validateInfos.KEIYAKUSYA_CD">
                   <range-select
-                    v-model:value="formData.KeiyakusyaCd"
+                    v-model:value="formData.KEIYAKUSYA_CD"
                     :options="KEIYAKUSYA_CD_NAME_LIST"
                 /></a-form-item>
               </td>
@@ -114,21 +114,21 @@ const createDefaultParams = () => {
   return {
     KI: -1,
     TAISYOBI_YMD: new Date().toISOString().split('T')[0],
-    KeiyakuKbnCd: {
+    KEIYAKU_KBN_CD: {
       VALUE_FM: undefined,
       VALUE_TO: undefined,
     },
-    KeiyakuJyokyo: {
+    KEIYAKU_JYOKYO: {
       SHINKI: true,
       KEIZOKU: true,
       CHUSHI: true,
       HAIGYO: true,
     },
-    ItakuCd: {
+    ITAKU_CD: {
       VALUE_FM: undefined,
       VALUE_TO: undefined,
     },
-    KeiyakusyaCd: {
+    KEIYAKUSYA_CD: {
       VALUE_FM: undefined,
       VALUE_TO: undefined,
     },
@@ -183,7 +183,7 @@ const rules = reactive({
       message: ITEM_REQUIRE_ERROR.Msg.replace('{0}', '対象期'),
     },
   ],
-  KeiyakuKbnCd: [
+  KEIYAKU_KBN_CD: [
     {
       validator: (
         _rule,
@@ -198,7 +198,7 @@ const rules = reactive({
       },
     },
   ],
-  KeiyakuJyokyo: [
+  KEIYAKU_JYOKYO: [
     {
       validator: (_rule, value) => {
         const values = Object.values(value)
@@ -211,7 +211,7 @@ const rules = reactive({
       },
     },
   ],
-  ItakuCd: [
+  ITAKU_CD: [
     {
       validator: (
         _rule,
@@ -226,7 +226,7 @@ const rules = reactive({
       },
     },
   ],
-  KeiyakusyaCd: [
+  KEIYAKUSYA_CD: [
     {
       validator: (
         _rule,
@@ -272,9 +272,9 @@ const handleKI = (initflg: boolean) => {
   if (!formData.KI && formData.KI !== 0) return
   Init({ KI: formData.KI }).then((res) => {
     if (!initflg) {
-      formData.KeiyakuKbnCd = clearFromToValue
-      formData.ItakuCd = clearFromToValue
-      formData.KeiyakusyaCd = clearFromToValue
+      formData.KEIYAKU_KBN_CD = clearFromToValue
+      formData.ITAKU_CD = clearFromToValue
+      formData.KEIYAKUSYA_CD = clearFromToValue
     }
     if (initflg) formData.KI = res.KI //対象期
     KEIYAKU_KBN_CD_NAME_LIST.value = res.KEIYAKU_KBN_CD_NAME_LIST //契約区分
@@ -290,7 +290,7 @@ const clear = () => {
 //プレビューボタンを押す時
 async function onPreview() {
   await validate()
-  Preview({ ...formData })
+  // Preview({ ...formData })
   const openNew = () => {
     window.open(URL.value, '_blank')
   }

@@ -62,6 +62,8 @@ export default function useSearch({
     source.value = []
     totalCount.value = 0
     pageParams.PAGE_NUM = 1
+    pageParams.ORDER_BY = 0
+    pageParams.PAGE_SIZE = 25
   }
 
   return {
