@@ -276,7 +276,8 @@ const handleKI = (initflg: boolean) => {
       formData.KEIYAKUSYA_CD = clearFromToValue
     }
     if (initflg) formData.KI = res.KI //対象期
-    KEIYAKU_KBN_CD_NAME_LIST.value = res.KEIYAKU_KBN_CD_NAME_LIST //契約区分
+    if (initflg) KEIYAKU_KBN_CD_NAME_LIST.value = res.KEIYAKU_KBN_CD_NAME_LIST //契約区分
+
     ITAKU_CD_NAME_LIST.value = res.ITAKU_CD_NAME_LIST //事務委託先
     KEIYAKUSYA_CD_NAME_LIST.value = res.KEIYAKUSYA_CD_NAME_LIST //契約者番号
   })
