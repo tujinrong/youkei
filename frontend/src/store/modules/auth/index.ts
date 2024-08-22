@@ -15,7 +15,7 @@ export const useAuthStore = defineStore(SetupStoreId.Auth, () => {
   const route = useRoute()
   const routeStore = useRouteStore()
   const tabStore = useTabStore()
-  const { toLogin, redirectFromLogin } = useRouterPush(false)
+  const { toLogin, toHome } = useRouterPush(false)
   const { loading: loginLoading, startLoading, endLoading } = useLoading()
 
   const token = ref(getToken())
@@ -61,9 +61,8 @@ export const useAuthStore = defineStore(SetupStoreId.Auth, () => {
    *
    * @param userName User name
    * @param password Password
-   * @param [redirect=true] Whether to redirect after login. Default is `true`
    */
-  async function login(userName: string, password: string, redirect = true) {
+  async function login(userName: string, password: string) {
     startLoading()
 
     try {
@@ -80,9 +79,8 @@ export const useAuthStore = defineStore(SetupStoreId.Auth, () => {
           //menu
           await routeStore.initAuthRoute()
 
-          if (redirect) {
-            await redirectFromLogin()
-          }
+          // await redirectFromLogin()
+          await toHome()
 
           if (routeStore.isInitAuthRoute) {
             window.$notification?.success({

@@ -99,6 +99,7 @@ export function useRouterPush(inSetup = true) {
     routerBack,
     routerPushByKey,
     toLogin,
+    toHome,
     toggleLoginModule,
     redirectFromLogin,
   }
