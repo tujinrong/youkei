@@ -53,7 +53,7 @@ Namespace JBD.GJS.WebService
                 Return Ok(New With {Key .report = ret.sectionDocument})
             End If
 
-            Return Ok()
+            Return ret
         End Function
     End Class
 End Namespace
