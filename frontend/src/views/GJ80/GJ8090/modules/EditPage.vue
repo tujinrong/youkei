@@ -1,6 +1,6 @@
 <template>
   <a-card :bordered="false" class="mb-2 h-full">
-    <h1>契約者農場マスタメンテナンス</h1>
+    <h1>(GJ8091)契約者農場マスタメンテナンス</h1>
     <div class="self_adaption_table form max-w-160">
       <b>第{{ formData.KI }}期</b>
       <a-form>
