@@ -15,7 +15,6 @@ import {
   InitResponse,
   SaveRequest,
 } from './type'
-import { DaResponseBase } from '@/typings/Base'
 
 const servicename = 'GJ8040'
 const servicename2 = 'GJ8041'

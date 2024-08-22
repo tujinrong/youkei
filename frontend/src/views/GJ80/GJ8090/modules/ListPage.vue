@@ -151,8 +151,7 @@ import { useElementSize } from '@vueuse/core'
 import { SearchRowVM, SearchRequest } from '@/views/GJ80/GJ8090/type'
 import { Init, Search } from '../service'
 import { Form } from 'ant-design-vue'
-import { CodeNameModel } from '@/typings/Base'
-import { VxeTableInstance } from 'vxe-pc-ui'
+import { VxeTableInstance } from 'vxe-table'
 
 //--------------------------------------------------------------------------
 //データ定義

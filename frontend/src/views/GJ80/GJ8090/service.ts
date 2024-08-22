@@ -18,7 +18,6 @@ import {
   SearchRequest,
   SearchResponse,
 } from './type'
-import { DaResponseBase } from '@/typings/Base'
 
 const servicename = 'GJ8090'
 const servicename2 = 'GJ8091'

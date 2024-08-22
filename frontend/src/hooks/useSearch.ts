@@ -1,4 +1,3 @@
-import { CmSearchRequestBase, CmSearchResponseBase } from '@/typings/Base'
 import { Ref, reactive, ref, unref, watch, nextTick } from 'vue'
 
 export default function useSearch({

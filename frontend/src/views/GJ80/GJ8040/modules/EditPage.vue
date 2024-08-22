@@ -113,7 +113,6 @@ import {
   SAVE_OK_INFO,
 } from '@/constants/msg'
 import { EnumEditKbn, PageSatatus } from '@/enum'
-import { CodeNameModel } from '@/typings/Base'
 import { showDeleteModal, showSaveModal } from '@/utils/modal'
 import { Form, message } from 'ant-design-vue'
 import { nextTick, onMounted, reactive, ref } from 'vue'

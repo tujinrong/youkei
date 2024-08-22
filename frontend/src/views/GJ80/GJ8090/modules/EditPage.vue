@@ -152,7 +152,6 @@ import { convertToFullWidth } from '@/utils/util'
 import { DetailVM } from '../type'
 import { Judgement } from '@/utils/judge-edited'
 import { InitDetail, Save, Delete } from '../service'
-import { CodeNameModel } from '@/typings/Base'
 //---------------------------------------------------------------------------
 //属性
 //---------------------------------------------------------------------------

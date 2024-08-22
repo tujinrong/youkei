@@ -8,7 +8,6 @@
  * -----------------------------------------------------------------*/
 import { ERA_YEARS } from '@/constants/business'
 import { Enum日付不明区分 } from '@/enum'
-import { CodeNameModel } from '@/typings/Base'
 import { Ref } from 'vue'
 
 /**  /4/1 or -4-1 => 0401 */

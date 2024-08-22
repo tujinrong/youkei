@@ -8,13 +8,6 @@
  * -----------------------------------------------------------------*/
 
 import { EnumAndOr, EnumEditKbn } from '@/enum'
-import {
-  CmSearchRequestBase,
-  CmSearchResponseBase,
-  CodeNameModel,
-  DaRequestBase,
-  DaResponseBase,
-} from '@/typings/Base'
 
 //-------------------------------------------------------------------
 //リクエスト

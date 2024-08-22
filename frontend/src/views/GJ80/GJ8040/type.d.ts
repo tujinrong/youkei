@@ -7,14 +7,6 @@
  * 変更履歴　:
  * -----------------------------------------------------------------*/
 
-import { EnumAndOr, EnumEditKbn } from '@/enum'
-import {
-  CmSearchResponseBase,
-  CodeNameModel,
-  DaRequestBase,
-  DaResponseBase,
-} from '@/typings/Base'
-
 //-------------------------------------------------------------------
 //リクエスト
 //-------------------------------------------------------------------
