@@ -4,25 +4,41 @@
       <ListPage />
     </div>
     <div
-      v-if="status === PageSatatus.New || status === PageSatatus.Edit"
+      v-if="
+        (status === PageSatatus.New || status === PageSatatus.Edit) &&
+        editPage === 1
+      "
       class="h-full"
     >
       <EditPage :status="status" />
     </div>
+    <div
+      v-if="
+        (status === PageSatatus.New || status === PageSatatus.Edit) &&
+        editPage === 2
+      "
+      class="h-full"
+    >
+      <EditPage2 :status="status" />
+    </div>
   </div>
 </template>
+
 <script setup lang="ts">
 import { onMounted, ref, watch } from 'vue'
 import { useRoute } from 'vue-router'
 import { PageSatatus } from '@/enum'
 import ListPage from './modules/ListPage.vue'
 import EditPage from './modules/EditPage.vue'
+import EditPage2 from './modules/EditPage2.vue'
 
 //--------------------------------------------------------------------------
 //データ定義
 //--------------------------------------------------------------------------
 const route = useRoute()
+
 const status = ref(PageSatatus.List)
+const editPage = ref()
 
 //--------------------------------------------------------------------------
 //フック関数
@@ -33,10 +49,6 @@ onMounted(() => {
   }
 })
 
-//--------------------------------------------------------------------------
-//計算定義
-//--------------------------------------------------------------------------
-
 //---------------------------------------------------------------------------
 //監視定義
 //--------------------------------------------------------------------------
@@ -45,9 +57,15 @@ watch(
   () => {
     if (route.name === 'gj80_gj8050') {
       status.value = route.query.status ? +route.query.status : PageSatatus.List
+      editPage.value = route.query.editPage
     }
   },
   { deep: true }
 )
+
+//--------------------------------------------------------------------------
+//メソッド
+//--------------------------------------------------------------------------
 </script>
+
 <style lang="scss" scoped></style>

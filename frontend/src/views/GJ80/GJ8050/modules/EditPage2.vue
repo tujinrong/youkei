@@ -1,6 +1,6 @@
 <template>
   <a-card :bordered="false" class="mb-2 h-full">
-    <h1>金融機関マスタメンテナンス</h1>
+    <h1>支店マスタメンテナンス</h1>
     <div class="self_adaption_table form max-w-160">
       <div class="my-2 header_operation flex justify-between w-full">
         <a-space :size="20">
@@ -16,29 +16,37 @@
       <a-form>
         <a-row>
           <a-col span="24">
-            <th :class="!isNew ? 'bg-readonly' : 'required'">金融機関コード</th>
+            <th class="bg-readonly">金融機関コード</th>
             <td>
               <a-form-item v-bind="validateInfos.BANK_CD">
+                <a-input v-model:value="formData.BANK_CD" disabled></a-input>
+              </a-form-item>
+            </td>
+          </a-col>
+          <a-col span="24">
+            <th :class="!isNew ? 'bg-readonly' : 'required'">支店コード</th>
+            <td>
+              <a-form-item v-bind="validateInfos.SITEN_CD">
                 <a-input
-                  v-model:value="formData.BANK_CD"
+                  v-model:value="formData.SITEN_CD"
                   :disabled="!isNew"
                 ></a-input>
               </a-form-item>
             </td>
           </a-col>
           <a-col span="24">
-            <th class="required">金融機関名（ｶﾅ）</th>
+            <th class="required">支店名（ｶﾅ）</th>
             <td>
-              <a-form-item v-bind="validateInfos.BANK_KANA">
-                <a-input v-model:value="formData.BANK_KANA"></a-input>
+              <a-form-item v-bind="validateInfos.SITEN_KANA">
+                <a-input v-model:value="formData.SITEN_KANA"></a-input>
               </a-form-item>
             </td>
           </a-col>
           <a-col span="24">
-            <th class="required">金融機関名（漢字）</th>
+            <th class="required">支店名（漢字）</th>
             <td>
-              <a-form-item v-bind="validateInfos.BANK_NAME">
-                <a-input v-model:value="formData.BANK_NAME"></a-input>
+              <a-form-item v-bind="validateInfos.SITEN_NAME">
+                <a-input v-model:value="formData.SITEN_NAME"></a-input>
               </a-form-item>
             </td>
           </a-col>
@@ -73,13 +81,14 @@ const props = defineProps<{
 const router = useRouter()
 const route = useRoute()
 const isNew = props.status === PageSatatus.New
-const editJudge = new Judgement('GJ8051')
+const editJudge = new Judgement('GJ8052')
 let upddttm
 
 const formData = reactive({
   BANK_CD: '',
-  BANK_KANA: '',
-  BANK_NAME: '',
+  SITEN_CD: '',
+  SITEN_KANA: '',
+  SITEN_NAME: '',
 })
 
 const rules = reactive({
@@ -89,16 +98,22 @@ const rules = reactive({
       message: ITEM_REQUIRE_ERROR.Msg.replace('{0}', '金融機関コード'),
     },
   ],
-  BANK_KANA: [
+  SITEN_CD: [
     {
       required: true,
-      message: ITEM_REQUIRE_ERROR.Msg.replace('{0}', '金融機関（ｶﾅ）'),
+      message: ITEM_REQUIRE_ERROR.Msg.replace('{0}', '支店コード'),
     },
   ],
-  BANK_NAME: [
+  SITEN_KANA: [
     {
       required: true,
-      message: ITEM_REQUIRE_ERROR.Msg.replace('{0}', '農場名称（漢字）'),
+      message: ITEM_REQUIRE_ERROR.Msg.replace('{0}', '支店名（ｶﾅ）'),
+    },
+  ],
+  SITEN_NAME: [
+    {
+      required: true,
+      message: ITEM_REQUIRE_ERROR.Msg.replace('{0}', '支店名（漢字）'),
     },
   ],
 })
@@ -112,8 +127,11 @@ const { validate, clearValidate, validateInfos, resetFields } = Form.useForm(
 //フック関数
 //--------------------------------------------------------------------------
 onMounted(async () => {
+  formData.BANK_CD = String(route.query.BANK_CD)
+  console.log(formData.BANK_CD)
+
   if (!isNew) {
-    formData.BANK_CD = String(route.query.BANK_CD)
+    formData.SITEN_CD = String(route.query.SITEN_CD)
   }
   nextTick(() => editJudge.reset())
   // InitDetail({

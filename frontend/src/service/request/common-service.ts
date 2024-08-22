@@ -23,7 +23,7 @@ export async function login(
     },
   }
   return request({
-    url: '/AFCT/Login',
+    url: '/GJS/Login',
     method: 'post',
     data: body,
   })
@@ -45,7 +45,7 @@ export function api(
     },
   }
   return request({
-    url: '/AFCT/WebRequest',
+    url: '/GJS/WebRequest',
     method: 'post',
     data: body,
     headers,

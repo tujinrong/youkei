@@ -65,8 +65,8 @@
         <a-space
           ><span>検索方法</span>
           <a-radio-group v-model:value="searchParams.SEARCH_METHOD">
-            <a-radio :value="EnumAndOr.AndCODE">すべてを含む(AND)</a-radio>
-            <a-radio :value="EnumAndOr.OrCODE">いずれかを含む(OR)</a-radio>
+            <a-radio :value="EnumAndOr.AndCode">すべてを含む(AND)</a-radio>
+            <a-radio :value="EnumAndOr.OrCode">いずれかを含む(OR)</a-radio>
           </a-radio-group></a-space
         >
       </div>
@@ -166,7 +166,7 @@ const createDefaultParams = (): SearchRequest => {
     KEIYAKUSYA_CD: undefined,
     NOJO_CD: undefined,
     NOJO_NAME: undefined,
-    SEARCH_METHOD: EnumAndOr.AndCODE,
+    SEARCH_METHOD: EnumAndOr.AndCode,
   } as SearchRequest
 }
 const searchParams = reactive(createDefaultParams())
@@ -284,7 +284,7 @@ const { pageParams, totalCount, searchData, clear } = useSearch({
 async function reset() {
   searchParams.NOJO_CD = undefined
   searchParams.NOJO_NAME = undefined
-  searchParams.SEARCH_METHOD = EnumAndOr.AndCODE
+  searchParams.SEARCH_METHOD = EnumAndOr.AndCode
   getInitData(-1, true)
   xTableRef.value?.clearSort()
   clear()

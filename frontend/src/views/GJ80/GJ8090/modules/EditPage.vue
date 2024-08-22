@@ -322,11 +322,13 @@ const goList = () => {
 
 //登録処理
 const saveData = async () => {
-  if (!editJudge.isPageEdited()) {
-    showInfoModal({
-      content: '変更したデータはありません。',
-    })
-    return
+  if (!isNew) {
+    if (!editJudge.isPageEdited()) {
+      showInfoModal({
+        content: '変更したデータはありません。',
+      })
+      return
+    }
   }
   await validate()
   showSaveModal({

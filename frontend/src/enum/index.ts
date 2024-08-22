@@ -75,9 +75,9 @@ export enum PageSatatus {
 /** EnumAndOr(検索方法) */
 export enum EnumAndOr {
   /**すべてを含む(AND) */
-  AndCODE,
+  AndCode,
   /**いずれかを含む(OR) */
-  OrCODE,
+  OrCode,
 }
 /** 編集区分 */
 export enum EnumEditKbn {
