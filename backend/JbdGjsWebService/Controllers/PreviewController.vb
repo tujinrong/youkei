@@ -33,7 +33,7 @@ Namespace JBD.GJS.WebService
 
             'チェックトークン
             Dim uid = CheckToken(r.token, Program.ReportsDirectory.ToString())
-            If String.IsNullOrEmpty(uid) Then Return New DaResponseBase("トークンが正しくありません。")
+            If String.IsNullOrEmpty(uid) Then Return New CmPreviewResponseBase("トークンが正しくありません。")
 
             'サービス実行
             r.sessionid = DaDbLogService.WriteMainLog(r)
