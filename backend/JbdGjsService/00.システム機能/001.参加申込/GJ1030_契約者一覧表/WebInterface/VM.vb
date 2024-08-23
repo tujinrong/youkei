@@ -32,57 +32,6 @@ Namespace JBD.GJS.Service.GJ1030
     End Class
 
     ''' <summary>
-    ''' 契約区分コード
-    ''' </summary>
-    Public Class KeiyakuKbnCd
-
-        ''' <summary>
-        ''' 契約区分コードFROM
-        ''' </summary>
-        Public Property VALUE_FM As Integer? = Nothing
-
-        ''' <summary>
-        ''' 契約区分コードTO
-        ''' </summary>
-        Public Property VALUE_TO As Integer? = Nothing
-
-    End Class
-
-    ''' <summary>
-    ''' 事務委託先番号コード
-    ''' </summary>
-    Public Class ItakuCd
-
-        ''' <summary>
-        ''' 事務委託先番号コードFROM
-        ''' </summary>
-        Public Property VALUE_FM As Integer? = Nothing
-
-        ''' <summary>
-        ''' 事務委託先番号コードTO
-        ''' </summary>
-        Public Property VALUE_TO As Integer? = Nothing
-
-    End Class
-
-    ''' <summary>
-    ''' 契約者番号コード
-    ''' </summary>
-    Public Class KeiyakusyaCd
-
-        ''' <summary>
-        ''' 契約者番号コードFROM
-        ''' </summary>
-        Public Property VALUE_FM As Integer? = Nothing
-
-        ''' <summary>
-        ''' 契約者番号コードTO
-        ''' </summary>
-        Public Property VALUE_TO As Integer? = Nothing
-
-    End Class
-
-    ''' <summary>
     ''' 契約状況
     ''' </summary>
     Public Class KeiyakuJyokyo

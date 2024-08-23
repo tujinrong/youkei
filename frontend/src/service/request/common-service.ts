@@ -52,6 +52,31 @@ export function api(
     extra,
   })
 }
+
+/** Web共通 */
+export function papi(
+  SERVICE_NAME: string,
+  METHOD_NAME: string,
+  data?: any,
+  headers?: AxiosRequestHeaders,
+  extra?: Api.Common.RequestConfigExtra
+): Promise<any> {
+  const body = {
+    SERVICE_NAME,
+    METHOD_NAME,
+    BIZ_REQUEST: {
+      DATA: JSON.stringify(data) || '',
+    },
+  }
+  return request({
+    url: '/GJS/Preview',
+    method: 'post',
+    data: body,
+    headers,
+    extra,
+  })
+}
+
 /** Web共通モック */
 export function api2(
   SERVICE_NAME: string,

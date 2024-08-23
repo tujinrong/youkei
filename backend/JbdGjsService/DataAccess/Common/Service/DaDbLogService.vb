@@ -306,9 +306,10 @@ Namespace JBD.GJS.Service
                 Dim dto As tt_aftusinlogDto = New tt_aftusinlogDto()
                 dto.sessionseq = request.sessionid
                 dto.request = System.Text.Json.JsonSerializer.Serialize(request)
-                dto.response = System.Text.Json.JsonSerializer.Serialize(response)
                 If dto.response.Length > 2000 Then
                     dto.response = dto.response.Substring(0,2000)
+                Else
+                dto.response = System.Text.Json.JsonSerializer.Serialize(response)
                 End If
                 dto.syoridttmf = DaUtil.Now
                 dto.syoridttmt = DaUtil.Now                

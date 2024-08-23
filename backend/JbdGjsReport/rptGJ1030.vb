@@ -1,4 +1,5 @@
 ﻿Imports System.Data
+Imports System.Xml
 Imports GrapeCity.ActiveReports.Document
 
 Interface InterfaceRptGJ1030
@@ -70,6 +71,11 @@ Public Class rptGJ1030
             wkAR.DataSource = wkDSRep
             wkAR.DataMember = wkDSRep.Tables(0).TableName
             wkAR.Run() '実行
+
+            Using writer As XmlWriter = XmlWriter.Create("path_to_save_file.rpx", Nothing)
+                 wkAR.SaveLayout(writer)
+            End Using
+
             Return wkAR.Document
 
         End Using

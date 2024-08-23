@@ -29,7 +29,7 @@ onMounted(async () => {
 
   channel.onmessage = async (event) => {
     console.log('event.data:' + event.data)
-    await Preview({ ...event.data })
+    await Preview({ ...JSON.parse(event.data) })
     let viewer
     viewer = createViewer({
       element: '#viewerContainer',
