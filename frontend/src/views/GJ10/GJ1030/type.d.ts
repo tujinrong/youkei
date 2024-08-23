@@ -24,10 +24,7 @@ export interface PreviewRequest extends DaRequestBase {
   /**対象日(現在) */
   TAISYOBI_YMD: string
   /**契約者区分コード */
-  KEIYAKU_KBN_CD?: {
-    VALUE_FM?: number
-    VALUE_TO?: number
-  }
+  KEIYAKU_KBN_CD?: FmToModel
   /**契約状況 */
   KEIYAKU_JYOKYO: {
     SHINKI: boolean
@@ -36,15 +33,9 @@ export interface PreviewRequest extends DaRequestBase {
     HAIGYO: boolean
   }
   /**事務委託先番号コード */
-  ITAKU_CD?: {
-    VALUE_FM?: number
-    VALUE_TO?: number
-  }
+  ITAKU_CD?: FmToModel
   /**契約者番号コード */
-  KEIYAKUSYA_CD?: {
-    VALUE_FM?: number
-    VALUE_TO?: number
-  }
+  KEIYAKUSYA_CD?: FmToModel
 }
 
 //-------------------------------------------------------------------
@@ -66,3 +57,7 @@ export interface InitResponse extends DaResponseBase {
 //-------------------------------------------------------------------
 //ビューモデル
 //-------------------------------------------------------------------
+export interface FmToModel {
+  VALUE_FM?: number
+  VALUE_TO?: number
+}
