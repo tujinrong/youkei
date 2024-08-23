@@ -127,15 +127,20 @@
         <a-space
           ><span>検索方法</span>
           <a-radio-group v-model:value="searchParams.SEARCH_METHOD">
-            <a-radio :value="EnumAndOr.And">すべてを含む(AND)</a-radio>
-            <a-radio :value="EnumAndOr.Or">いずれかを含む(OR)</a-radio>
+            <a-radio :value="EnumAndOr.AndCode">すべてを含む(AND)</a-radio>
+            <a-radio :value="EnumAndOr.OrCode">いずれかを含む(OR)</a-radio>
           </a-radio-group></a-space
         >
       </div>
       <div class="flex">
         <a-space>
           <a-button type="primary" @click="search">検索</a-button>
-          <a-button type="primary" @click="forwardNew">新規</a-button>
+          <a-button type="primary" @click="goForward(PageStatus.New)"
+            >新規</a-button
+          >
+          <a-button type="primary" @click="goForward(PageStatus.Detail)"
+            >契約情報登録</a-button
+          >
           <a-button type="primary" @click="clear">クリア</a-button>
         </a-space>
         <AButton type="primary" class="ml-a" @click="tabStore.removeActiveTab">
@@ -149,6 +154,7 @@
         v-model:page-size="pageParams.PAGE_SIZE"
         :total="totalCount"
         :page-size-options="['10', '25', '50', '100']"
+        :show-total="(total) => `抽出件数： ${total} 件`"
         show-less-items
         show-size-changer
         class="m-b-1 text-end"
@@ -161,7 +167,7 @@
         :data="tableData"
         :sort-config="{ trigger: 'cell', orders: ['desc', 'asc'] }"
         :empty-render="{ name: 'NotData' }"
-        @cell-dblclick="({ row }) => forwardEdit(row)"
+        @cell-dblclick="({ row }) => goForward(PageStatus.Edit, row)"
         @sort-change="(e) => changeTableSort(e, toRef(pageParams, 'ORDER_BY'))"
       >
         <vxe-column
@@ -171,7 +177,9 @@
           sortable
         >
           <template #default="{ row }">
-            <a @click="forwardEdit(row)">{{ row.KEIYAKUSYA_CD }}</a>
+            <a @click="goForward(PageStatus.Edit, row)">{{
+              row.KEIYAKUSYA_CD
+            }}</a>
           </template>
         </vxe-column>
         <vxe-column
@@ -181,7 +189,9 @@
           sortable
         >
           <template #default="{ row }">
-            <a @click="forwardEdit(row)">{{ row.KEIYAKUSYA_NAME }}</a>
+            <a @click="goForward(PageStatus.Edit, row)">{{
+              row.KEIYAKUSYA_NAME
+            }}</a>
           </template>
         </vxe-column>
         <vxe-column
@@ -191,7 +201,9 @@
           sortable
         >
           <template #default="{ row }">
-            <a @click="forwardEdit(row)">{{ row.KEIYAKUSYA_KANA }}</a>
+            <a @click="goForward(PageStatus.Edit, row)">{{
+              row.KEIYAKUSYA_KANA
+            }}</a>
           </template>
         </vxe-column>
         <vxe-column
@@ -230,9 +242,8 @@
   </div>
 </template>
 <script setup lang="ts">
-import { EnumAndOr, PageSatatus } from '@/enum'
+import { EnumAndOr, PageStatus } from '@/enum'
 import { reactive, ref, toRef } from 'vue'
-import { KEN_CD_NAME_LIST } from '@/views/GJ80/GJ8090/constant'
 import { showInfoModal } from '@/utils/modal'
 import { ITEM_REQUIRE_ERROR } from '@/constants/msg'
 import useSearch from '@/hooks/useSearch'
@@ -257,7 +268,7 @@ const createDefaultParams = () => {
     ADDR_TEL: '',
     JIMUITAKU_CD1: '',
     JIMUITAKU_CD2: '',
-    SEARCH_METHOD: EnumAndOr.And,
+    SEARCH_METHOD: EnumAndOr.AndCode,
   }
 }
 const searchParams = reactive(createDefaultParams())
@@ -273,10 +284,11 @@ const tabStore = useTabStore()
 const cardRef = ref()
 const { height } = useElementSize(cardRef)
 const KEIYAKU_KBN_CD_NAME_LIST = ref<CodeNameModel[]>([
-  { value: 1, label: '家族' },
-  { value: 2, label: '企業' },
-  { value: 3, label: '鶏以外' },
+  { CODE: 1, NAME: '家族' },
+  { CODE: 2, NAME: '企業' },
+  { CODE: 3, NAME: '鶏以外' },
 ])
+const KEN_CD_NAME_LIST = ref<CodeNameModel[]>([])
 const tableData = ref<any>([])
 const tableDefault = {
   KEIYAKUSYA_CD: '1003',
@@ -299,55 +311,21 @@ const { pageParams, totalCount, searchData, clear } = useSearch({
 
 //検索処理
 function search() {
-  if (!searchParams.KI) {
-    showInfoModal({
-      type: 'error',
-      title: 'エラー',
-      content: ITEM_REQUIRE_ERROR.Msg.replace('{0}', '期'),
-    })
-    return
-  }
   tableData.value.push(tableDefault)
 }
 
-function forwardEdit(row) {
-  if (!searchParams.KI) {
-    showInfoModal({
-      type: 'error',
-      title: 'エラー',
-      content: ITEM_REQUIRE_ERROR.Msg.replace('{0}', '期'),
-    })
-    return
-  } else {
-    router.push({
-      name: route.name,
-      query: {
-        status: PageSatatus.Edit,
-      },
-    })
-  }
-}
-function forwardNew() {
-  if (!searchParams.KI) {
-    showInfoModal({
-      type: 'error',
-      title: 'エラー',
-      content: ITEM_REQUIRE_ERROR.Msg.replace('{0}', '期'),
-    })
-    return
-  } else {
-    router.push({
-      name: route.name,
-      query: {
-        status: PageSatatus.New,
-      },
-    })
-  }
+function goForward(status: PageStatus, row?: any) {
+  router.push({
+    name: route.name,
+    query: {
+      status: status,
+    },
+  })
 }
 </script>
 <style lang="scss" scoped>
 :deep(th) {
-  min-width: 100px;
+  min-width: 140px;
 }
 h1 {
   font-size: 24px;

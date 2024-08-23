@@ -74,7 +74,7 @@
   </a-card>
 </template>
 <script setup lang="ts">
-import { EnumEditKbn, PageSatatus } from '@/enum'
+import { EnumEditKbn, PageStatus } from '@/enum'
 import { Judgement } from '@/utils/judge-edited'
 import { reactive, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
@@ -91,11 +91,11 @@ import { showDeleteModal, showSaveModal } from '@/utils/modal'
 import { Delete, Save } from '../service'
 
 const props = defineProps<{
-  status: PageSatatus
+  status: PageStatus
 }>()
 const router = useRouter()
 const route = useRoute()
-const isNew = props.status === PageSatatus.New
+const isNew = props.status === PageStatus.New
 const editJudge = new Judgement('GJ8010')
 let upddttm
 const formData = reactive({

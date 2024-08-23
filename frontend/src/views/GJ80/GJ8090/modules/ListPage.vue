@@ -142,7 +142,7 @@
 <script lang="ts" setup>
 import { ref, reactive, toRef, watch, onMounted, computed, nextTick } from 'vue'
 import { useRouter, useRoute, onBeforeRouteUpdate } from 'vue-router'
-import { EnumAndOr, EnumEditKbn, PageSatatus } from '@/enum'
+import { EnumAndOr, EnumEditKbn, PageStatus } from '@/enum'
 import useSearch from '@/hooks/useSearch'
 import { ITEM_REQUIRE_ERROR } from '@/constants/msg'
 import { changeTableSort, convertToFullWidth } from '@/utils/util'
@@ -251,7 +251,7 @@ async function forwardNew() {
   router.push({
     name: route.name,
     query: {
-      status: PageSatatus.New,
+      status: PageStatus.New,
       KI: keyList.KI || searchParams.KI,
       KEIYAKUSYA_CD: keyList.KEIYAKUSYA_CD || searchParams.KEIYAKUSYA_CD,
       KEIYAKUSYA_NAME: KEIYAKUSYA_NAME.value,
@@ -263,7 +263,7 @@ async function forwardEdit(NOJO_CD) {
   router.push({
     name: route.name,
     query: {
-      status: PageSatatus.Edit,
+      status: PageStatus.Edit,
       KI: keyList.KI,
       KEIYAKUSYA_CD: keyList.KEIYAKUSYA_CD,
       KEIYAKUSYA_NAME: KEIYAKUSYA_NAME.value,

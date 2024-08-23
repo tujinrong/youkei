@@ -1,28 +1,31 @@
 <template>
   <div>
-    <div v-show="status === PageSatatus.List" class="h-full">
+    <div v-show="status === PageStatus.List" class="h-full">
       <ListPage />
     </div>
     <div
-      v-if="status === PageSatatus.New || status === PageSatatus.Edit"
+      v-if="status === PageStatus.New || status === PageStatus.Edit"
       class="h-full"
     >
       <EditPage :status="status" />
+    </div>
+    <div v-else-if="status === PageStatus.Detail" class="h-full">
+      <DetailInfo />
     </div>
   </div>
 </template>
 <script setup lang="ts">
 import { onMounted, ref, watch } from 'vue'
 import { useRoute } from 'vue-router'
-import { PageSatatus } from '@/enum'
+import { PageStatus } from '@/enum'
 import ListPage from './modules/ListPage.vue'
 import EditPage from './modules/EditPage.vue'
-
+import DetailInfo from './modules/DetailInfo.vue'
 //--------------------------------------------------------------------------
 //データ定義
 //--------------------------------------------------------------------------
 const route = useRoute()
-const status = ref(PageSatatus.List)
+const status = ref(PageStatus.List)
 
 //--------------------------------------------------------------------------
 //フック関数
@@ -44,7 +47,7 @@ watch(
   () => [route.name, route.query],
   () => {
     if (route.name === 'gj10_gj1010') {
-      status.value = route.query.status ? +route.query.status : PageSatatus.List
+      status.value = route.query.status ? +route.query.status : PageStatus.List
     }
   },
   { deep: true }

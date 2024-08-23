@@ -135,7 +135,7 @@
 </template>
 
 <script setup lang="ts">
-import { EnumEditKbn, PageSatatus } from '@/enum'
+import { EnumEditKbn, PageStatus } from '@/enum'
 import { nextTick, onMounted, reactive, ref, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { showDeleteModal, showInfoModal, showSaveModal } from '@/utils/modal'
@@ -156,7 +156,7 @@ import { InitDetail, Save, Delete } from '../service'
 //属性
 //---------------------------------------------------------------------------
 const props = defineProps<{
-  status: PageSatatus
+  status: PageStatus
 }>()
 
 //--------------------------------------------------------------------------
@@ -164,7 +164,7 @@ const props = defineProps<{
 //--------------------------------------------------------------------------
 const router = useRouter()
 const route = useRoute()
-const isNew = props.status === PageSatatus.New
+const isNew = props.status === PageStatus.New
 const editJudge = new Judgement('GJ8090')
 
 const KEN_CD_NAME_LIST = ref<CodeNameModel[]>([])

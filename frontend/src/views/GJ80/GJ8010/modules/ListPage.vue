@@ -82,7 +82,7 @@
 <script setup lang="ts">
 import { ref, reactive, toRef, watch, onMounted, computed } from 'vue'
 import { useRouter, useRoute, onBeforeRouteUpdate } from 'vue-router'
-import { PageSatatus } from '@/enum'
+import { PageStatus } from '@/enum'
 import useSearch from '@/hooks/useSearch'
 import { ITEM_REQUIRE_ERROR } from '@/constants/msg'
 import { changeTableSort, convertToFullWidth } from '@/utils/util'
@@ -99,7 +99,7 @@ const router = useRouter()
 const route = useRoute()
 const createDefaultParams = (): SearchRequest => {
   return {
-    SYURUI_KBN: 0,
+    SYURUI_KBN: 1,
   } as SearchRequest
 }
 const SYURUI_KBN_LIST = ref<CodeNameModel[]>([])
@@ -142,7 +142,7 @@ function forwardNew() {
   router.push({
     name: route.name,
     query: {
-      status: PageSatatus.New,
+      status: PageStatus.New,
       SYURUI_KBN: searchParams.SYURUI_KBN,
     },
   })
@@ -151,7 +151,7 @@ function forwardEdit(MEISYO_CD) {
   router.push({
     name: route.name,
     query: {
-      status: PageSatatus.Edit,
+      status: PageStatus.Edit,
       SYURUI_KBN: searchParams.SYURUI_KBN,
       MEISYO_CD: MEISYO_CD,
     },

@@ -1,7 +1,7 @@
 <template>
   <a-card :bordered="false" class="mb2 h-full">
     <h1>互助基金契約者マスタメンテナンス（基本情報入力）</h1>
-    <div class="self_adaption_table form ml-5">
+    <div class="self_adaption_table form">
       <b>第8期</b>
       <div class="mb-2 header_operation flex justify-between w-full">
         <a-space :size="20">
@@ -316,7 +316,7 @@
   </a-card>
 </template>
 <script setup lang="ts">
-import { PageSatatus } from '@/enum'
+import { PageStatus } from '@/enum'
 import { useRoute, useRouter } from 'vue-router'
 import { Form } from 'ant-design-vue'
 import { reactive, nextTick, onMounted } from 'vue'
@@ -326,11 +326,11 @@ import { Judgement } from '@/utils/judge-edited'
 //データ定義
 //--------------------------------------------------------------------------
 const props = defineProps<{
-  status: PageSatatus
+  status: PageStatus
 }>()
 const router = useRouter()
 const route = useRoute()
-const isNew = props.status === PageSatatus.New
+const isNew = props.status === PageStatus.New
 const editJudge = new Judgement()
 const createDefaultParams = reactive({})
 const formData = reactive(createDefaultParams)

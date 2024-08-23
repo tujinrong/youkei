@@ -1,11 +1,11 @@
 <template>
   <div>
-    <div v-show="status === PageSatatus.List" class="h-full">
+    <div v-show="status === PageStatus.List" class="h-full">
       <ListPage />
     </div>
     <div
       v-if="
-        (status === PageSatatus.New || status === PageSatatus.Edit) &&
+        (status === PageStatus.New || status === PageStatus.Edit) &&
         editPage === 1
       "
       class="h-full"
@@ -14,7 +14,7 @@
     </div>
     <div
       v-if="
-        (status === PageSatatus.New || status === PageSatatus.Edit) &&
+        (status === PageStatus.New || status === PageStatus.Edit) &&
         editPage === 2
       "
       class="h-full"
@@ -27,7 +27,7 @@
 <script setup lang="ts">
 import { onMounted, ref, watch } from 'vue'
 import { useRoute } from 'vue-router'
-import { PageSatatus } from '@/enum'
+import { PageStatus } from '@/enum'
 import ListPage from './modules/ListPage.vue'
 import EditPage from './modules/EditPage.vue'
 import EditPage2 from './modules/EditPage2.vue'
@@ -37,7 +37,7 @@ import EditPage2 from './modules/EditPage2.vue'
 //--------------------------------------------------------------------------
 const route = useRoute()
 
-const status = ref(PageSatatus.List)
+const status = ref(PageStatus.List)
 const editPage = ref()
 
 //--------------------------------------------------------------------------
@@ -56,7 +56,7 @@ watch(
   () => [route.name, route.query],
   () => {
     if (route.name === 'gj80_gj8050') {
-      status.value = route.query.status ? +route.query.status : PageSatatus.List
+      status.value = route.query.status ? +route.query.status : PageStatus.List
       editPage.value = route.query.editPage
     }
   },

@@ -112,7 +112,7 @@ import {
   SAVE_CONFIRM,
   SAVE_OK_INFO,
 } from '@/constants/msg'
-import { EnumEditKbn, PageSatatus } from '@/enum'
+import { EnumEditKbn, PageStatus } from '@/enum'
 import { showDeleteModal, showSaveModal } from '@/utils/modal'
 import { Form, message } from 'ant-design-vue'
 import { nextTick, onMounted, reactive, ref } from 'vue'
@@ -123,14 +123,14 @@ import { Judgement } from '@/utils/judge-edited'
 //属性
 //---------------------------------------------------------------------------
 const props = defineProps<{
-  status: PageSatatus
+  status: PageStatus
 }>()
 //--------------------------------------------------------------------------
 //データ定義
 //--------------------------------------------------------------------------
 const router = useRouter()
 const route = useRoute()
-const isNew = props.status === PageSatatus.New
+const isNew = props.status === PageStatus.New
 const editJudge = new Judgement('GJ8040')
 let upddttm
 const formData = reactive({

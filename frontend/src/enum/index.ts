@@ -61,7 +61,7 @@ export enum Enum日付不明区分 {
 }
 
 /** 画面モード */
-export enum PageSatatus {
+export enum PageStatus {
   /**一覧画面 */
   List,
   /**詳細画面 */

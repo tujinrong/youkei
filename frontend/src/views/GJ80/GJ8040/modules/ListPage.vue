@@ -78,7 +78,7 @@ import { useElementSize } from '@vueuse/core'
 import { reactive, ref, toRef } from 'vue'
 import { onBeforeRouteUpdate, useRoute, useRouter } from 'vue-router'
 import { SearchRowVM } from '../type'
-import { PageSatatus } from '@/enum'
+import { PageStatus } from '@/enum'
 import { changeTableSort } from '@/utils/util'
 
 //--------------------------------------------------------------------------
@@ -109,7 +109,7 @@ function forwardEdit(USER_ID) {
   router.push({
     name: route.name,
     query: {
-      status: PageSatatus.Edit,
+      status: PageStatus.Edit,
       USER_ID: USER_ID,
     },
   })
@@ -118,7 +118,7 @@ function forwardNew() {
   router.push({
     name: route.name,
     query: {
-      status: PageSatatus.New,
+      status: PageStatus.New,
     },
   })
 }

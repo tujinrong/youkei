@@ -4,8 +4,14 @@
     display: 'flex',
     flexDirection: 'column',
   }">
-    <div class="flex-1">
-      <h1>処理年度マスタメンテナンス</h1>
+    <h1>処理年度マスタメンテナンス</h1>
+    <div class="mb-2 flex justify-between">
+      <a-space :size="20">
+        <a-button class="warning-btn" @click="save">保存</a-button>
+        <a-button type="primary" danger @click="cancel">キャンセル</a-button>
+      </a-space>
+      <close-page />
+    </div>
       <div class="self_adaption_table form max-w-240">
         <a-row :gutter="[0, 16]">
           <a-col span="24">
@@ -99,14 +105,6 @@
           </a-col>
         </a-row>
       </div>
-    </div>
-    <div class="mb-2 flex justify-between">
-      <a-space :size="20">
-        <a-button class="warning-btn" @click="save">保存</a-button>
-        <a-button type="primary" danger @click="cancel">キャンセル</a-button>
-      </a-space>
-      <close-page />
-    </div>
   </a-card>
 </template>
 <script setup lang="ts">
