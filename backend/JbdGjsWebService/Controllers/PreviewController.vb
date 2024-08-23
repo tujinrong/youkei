@@ -48,7 +48,7 @@ Namespace JBD.GJS.WebService
             r.Method = webReq.METHOD_NAME
             Using db = New JbdGjsService.JBD.GJS.Service.DaDbContext(r)
                 DaDbLogService.UpdateMainLog(db, EnumLogStatus.正常終了)
-                DaDbLogService.WriteTusinLog(db, r, res, String.Empty)
+                'DaDbLogService.WriteTusinLog(db, r, res, String.Empty)
             End Using
 
             If ret.RETURN_CODE = EnumServiceResult.OK Then
