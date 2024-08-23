@@ -58,7 +58,7 @@ Namespace JBD.GJS.Service
 
             ' 比較する
             If String.IsNullOrEmpty(uid) Then
-                Return String.Empty
+                Return "|トークンが正しくありません。"
             End If
 
             Dim time = uids(1)
@@ -71,9 +71,9 @@ Namespace JBD.GJS.Service
             Dim currentTime As DateTime = DateTime.Now
             ' 比较
             If dateValue > currentTime Then
-                Return uid
+                Return uid & "|"
             Else
-                Return String.Empty
+                Return "|長時間未操作のため、再びログインしてください。"
             End If
         End Function
 #End Region

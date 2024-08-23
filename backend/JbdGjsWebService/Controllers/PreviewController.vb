@@ -32,8 +32,11 @@ Namespace JBD.GJS.WebService
             Dim r = SetSession(Of DaRequestBase)(bizReq, True)
 
             'チェックトークン
-            Dim uid = CheckToken(r.token, Program.ReportsDirectory.ToString())
-            If String.IsNullOrEmpty(uid) Then Return New CmPreviewResponseBase("トークンが正しくありません。")
+            Dim rst = CheckToken(r.token, Program.ReportsDirectory.ToString())
+            Dim rar As String() = rst.Split("|")
+            Dim uid = rar(0)
+            Dim err = rar(1)
+            If String.IsNullOrEmpty(uid) Then Return New CmPreviewResponseBase(err)
 
             'サービス実行
             r.sessionid = DaDbLogService.WriteMainLog(r)
