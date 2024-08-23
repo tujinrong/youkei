@@ -72,7 +72,7 @@ Public Class rptGJ1030
             wkAR.DataMember = wkDSRep.Tables(0).TableName
             wkAR.Run() '実行
 
-            Using writer As XmlWriter = XmlWriter.Create("path_to_save_file.rpx", Nothing)
+            Using writer As XmlWriter = XmlWriter.Create(myREPORT_PDF_PATH & "path_to_save_file.rpx", Nothing)
                  wkAR.SaveLayout(writer)
             End Using
 
