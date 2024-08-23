@@ -252,7 +252,7 @@
 <script lang="ts" setup>
 import { ref, reactive, toRef, watch, onMounted, computed, nextTick } from 'vue'
 import { useRouter, useRoute, onBeforeRouteUpdate } from 'vue-router'
-import { EnumAndOr, EnumEditKbn, PageSatatus } from '@/enum'
+import { EnumAndOr, EnumEditKbn, PageStatus } from '@/enum'
 import useSearch from '@/hooks/useSearch'
 import { changeTableSort } from '@/utils/util'
 import { useTabStore } from '@/store/modules/tab'
@@ -459,7 +459,7 @@ async function forwardNew() {
   router.push({
     name: route.name,
     query: {
-      status: PageSatatus.New,
+      status: PageStatus.New,
       editPage: 1,
     },
   })
@@ -470,7 +470,7 @@ async function forwardEdit(BANK_CD) {
   router.push({
     name: route.name,
     query: {
-      status: PageSatatus.Edit,
+      status: PageStatus.Edit,
       editPage: 1,
       BANK_CD: BANK_CD,
     },
@@ -517,7 +517,7 @@ async function forwardNew2() {
   router.push({
     name: route.name,
     query: {
-      status: PageSatatus.New,
+      status: PageStatus.New,
       editPage: 2,
       BANK_CD: keyList.BANK_CD,
     },
@@ -528,7 +528,7 @@ async function forwardEdit2(BANK_CD, SITEN_CD) {
   router.push({
     name: route.name,
     query: {
-      status: PageSatatus.Edit,
+      status: PageStatus.Edit,
       editPage: 2,
       BANK_CD: BANK_CD,
       SITEN_CD: SITEN_CD,

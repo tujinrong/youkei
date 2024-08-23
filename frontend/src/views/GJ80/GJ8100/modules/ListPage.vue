@@ -48,7 +48,7 @@
   </a-card>
 </template>
 <script setup lang="ts">
-import { PageSatatus } from '@/enum'
+import { PageStatus } from '@/enum'
 import { ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { VxeTableInstance } from 'vxe-pc-ui'
@@ -67,7 +67,7 @@ const add = () => {
   router.push({
     name: route.name,
     query: {
-      status: PageSatatus.New,
+      status: PageStatus.New,
     },
   })
 }
