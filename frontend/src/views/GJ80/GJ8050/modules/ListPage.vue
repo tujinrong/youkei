@@ -167,7 +167,8 @@
         </a-space>
         <close-page />
       </div>
-    </a-card>
+      <div v-if="!isSelectBank" class="search-disabled-mask bg-disabled"></div
+    ></a-card>
     <a-card :bordered="false" ref="cardRef">
       <a-pagination
         v-model:current="pageParams2.PAGE_NUM"
@@ -243,6 +244,7 @@
         >
         </vxe-column>
       </vxe-table>
+      <div v-if="!isSelectBank" class="search-disabled-mask bg-disabled"></div>
     </a-card>
   </div>
 </template>
@@ -258,6 +260,7 @@ import { useElementSize } from '@vueuse/core'
 import { VxeTableInstance } from 'vxe-pc-ui'
 import { Row } from 'ant-design-vue'
 import { rowProps } from 'ant-design-vue/es/grid/Row'
+import { SearchBankRowVM } from '../type'
 
 //--------------------------------------------------------------------------
 //データ定義
@@ -286,7 +289,7 @@ const keyList = reactive({
 
 // const tableData = []
 
-const tableData = reactive([])
+const tableData = ref<SearchBankRowVM[]>([])
 
 const createDefaultParams2 = () => {
   return {
@@ -354,7 +357,8 @@ const layout = {
 }
 const cardRef = ref()
 const { height } = useElementSize(cardRef)
-
+const currentRow = ref<SearchBankRowVM | null>(null)
+const isSelectBank = computed(() => currentRow.value !== null)
 //--------------------------------------------------------------------------
 //計算定義
 //--------------------------------------------------------------------------
@@ -365,6 +369,12 @@ const { height } = useElementSize(cardRef)
 // onMounted(() => {
 //   getInitData(searchParams.KI, true)
 // })
+watch(
+  () => xTableRef.value?.getCurrentRecord(),
+  (val) => {
+    currentRow.value = val
+  }
+)
 
 //初期化処理
 
@@ -422,7 +432,7 @@ const exampleData = [
 ]
 
 const searchAll = async () => {
-  Object.assign(tableData, exampleData)
+  tableData.value = exampleData
 
   // const res = await searchData()
   // keyList.KI = res.KI
@@ -439,6 +449,8 @@ async function reset() {
   searchParams.BANK_NAME = undefined
   searchParams.SEARCH_METHOD = EnumAndOr.AndCode
   xTableRef.value?.clearSort()
+  tableData.value = []
+
   clear()
 }
 
@@ -538,5 +550,15 @@ h1 {
 :deep(.ant-form-item) {
   margin-bottom: 0;
   width: 100%;
+}
+
+.search-disabled-mask {
+  position: absolute;
+  background-color: #fff;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  z-index: 99;
+  opacity: 0.5;
 }
 </style>
