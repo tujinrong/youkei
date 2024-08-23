@@ -52,7 +52,7 @@ Namespace JBD.GJS.Service.GJ8091
 
                             'データ結果判定
                             If dt.Rows.Count ＝ 0 Then
-                                Return New InitDetailResponse("データが存在しないため、データを変更できません。")
+                                Return New InitDetailResponse("該当データが存在しませんでした。")
                             End If
                             Dim cdt As DataTable = dt.Copy()
                             ds.Tables.Add(cdt)
