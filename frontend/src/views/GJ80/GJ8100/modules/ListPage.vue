@@ -8,6 +8,15 @@
       flexDirection: 'column',
     }"
   >
+    <h1>(GJ1030)消費税率一覧</h1>
+    <div class="my-2 flex justify-between">
+      <a-space :size="20">
+        <a-button type="primary" @click="add">新規登録</a-button>
+        <a-button type="primary" @click="edit">変更（表示）</a-button>
+        <a-button type="primary" danger @click="delete">削除</a-button>
+      </a-space>
+      <close-page />
+    </div>
     <vxe-table
       class="h-full flex-1"
       ref="xTableRef"
@@ -37,14 +46,6 @@
         :resizable="true"
       ></vxe-column>
     </vxe-table>
-    <div class="my-2 flex justify-between">
-      <a-space :size="20">
-        <a-button type="primary" @click="add">新規登録</a-button>
-        <a-button type="primary" @click="edit">変更（表示）</a-button>
-        <a-button type="primary" danger @click="delete">削除</a-button>
-      </a-space>
-      <close-page />
-    </div>
   </a-card>
 </template>
 <script setup lang="ts">

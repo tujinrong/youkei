@@ -6,6 +6,13 @@
   }">
     <div class="flex-1">
       <h1>契約者別基本情報・農場登録情報のＣＳＶデータ作成</h1>
+      <div class="mb-2 flex justify-between">
+      <a-space :size="20">
+        <a-button class="warning-btn" @click="save">保存</a-button>
+        <a-button type="primary" danger @click="cancel">キャンセル</a-button>
+      </a-space>
+      <close-page />
+    </div>
       <div class="self_adaption_table form">
         <a-row>
           <a-col span="12">
@@ -246,13 +253,7 @@
           </a-col></a-row>
       </div>
     </div>
-    <div class="mb-2 flex justify-between">
-      <a-space :size="20">
-        <a-button class="warning-btn" @click="save">保存</a-button>
-        <a-button type="primary" danger @click="cancel">キャンセル</a-button>
-      </a-space>
-      <close-page />
-    </div>
+
   </a-card>
 </template>
 <script setup lang="ts">
