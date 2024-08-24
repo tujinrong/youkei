@@ -37,8 +37,8 @@ let rawData = ''
 onMounted(async () => {
   channel.postMessage({ isMounted: true })
 
-  channel.onmessage = (event) => {
-    await Preview({ ...JSON.parse(event.data) })
+  channel.onmessage = async (event) => {
+    // await Preview({ ...JSON.parse(event.data) })
     parsedData.value = JSON.parse(event.data)
     rawData = event.data
     let params = [{ name: '1', values: ['2'] }]

@@ -21,5 +21,5 @@ export const Init = (params: InitRequest): Promise<InitResponse> => {
 /** プレビュー処理(プレビュー画面) */
 export const Preview = (params: PreviewRequest): Promise<DaResponseBase> => {
   const methodname = 'Preview'
-  return papi(servicename, methodname, params)
+  return api(servicename, methodname, params)
 }
