@@ -1,6 +1,6 @@
 export interface InitResponse {
-  keiyakusinki?: number
-  keiyakusukeiyaku?: number
-  hasu?: number
-  sekitatukinngaku?: number
+  SHINKI?: string
+  KEI?: string
+  HASU?: string
+  TUMI?: string
 }

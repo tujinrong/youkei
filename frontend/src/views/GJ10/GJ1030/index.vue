@@ -12,7 +12,7 @@
                   <span class="!align-middle">第</span>
                   <a-input-number
                     v-model:value="formData.KI"
-                    :min="0"
+                    :min="1"
                     :max="99"
                     :maxlength="2"
                     style="width: 120px"

@@ -3,9 +3,7 @@
     <a-card :bordered="false" class="mb-2 h-full">
       <div class="flex">
         <h1>{{ formattedDate }}現在</h1>
-        <a-button type="primary" class="ml-2 mt-1" @click="Init" disabled
-          >更新</a-button
-        >
+        <a-button type="primary" class="ml-2 mt-1" @click="Init">更新</a-button>
       </div>
 
       <a-descriptions :column="1" class="mt-2">
@@ -13,24 +11,21 @@
           label="契約数"
           :content-style="{ fontSize: '24px' }"
           :label-style="{ fontSize: '24px' }"
-          >(新規{{ homeData.keiyakusinki ?? '182' }}　継続{{
-            homeData.keiyakusukeiyaku ?? '1, 531'
+          >(新規{{ homeData.SHINKI }}　継続{{
+            homeData.KEI
           }})</a-descriptions-item
         >
         <a-descriptions-item
           label="羽数"
           :content-style="{ fontSize: '24px' }"
           :label-style="{ fontSize: '24px' }"
-          >{{ homeData.hasu ?? '284, 526, 895' }} 羽</a-descriptions-item
+          >{{ homeData.HASU }} 羽</a-descriptions-item
         >
         <a-descriptions-item
           label="績立金額"
           :content-style="{ fontSize: '24px' }"
           :label-style="{ fontSize: '24px' }"
-          >{{
-            homeData.sekitatukinngaku ?? '1, 609, 998, 377'
-          }}
-          円</a-descriptions-item
+          >{{ homeData.TUMI }} 円</a-descriptions-item
         >
       </a-descriptions>
       <img
@@ -60,14 +55,16 @@ const formattedDate = computed(() => {
 })
 
 const homeData = reactive({
-  keiyakusinki: undefined as number | undefined,
-  keiyakusukeiyaku: undefined as number | undefined,
-  hasu: undefined as number | undefined,
-  sekitatukinngaku: undefined as number | undefined,
+  SHINKI: undefined as number | undefined,
+  KEI: undefined as number | undefined,
+  HASU: undefined as number | undefined,
+  TUMI: undefined as number | undefined,
 })
 
 onMounted(() => {
-  // Init()
+  Init().then((res) => {
+    Object.assign(homeData, res)
+  })
 })
 </script>
 <style lang="scss" scoped></style>
