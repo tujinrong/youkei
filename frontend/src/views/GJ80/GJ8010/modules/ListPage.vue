@@ -158,8 +158,4 @@ function forwardEdit(MEISYO_CD) {
   })
 }
 </script>
-<style lang="scss" scoped>
-h1 {
-  font-size: 24px;
-}
-</style>
+<style lang="scss" scoped></style>

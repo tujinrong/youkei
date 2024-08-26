@@ -315,9 +315,7 @@ watch(
 :deep(th) {
   min-width: 100px;
 }
-h1 {
-  font-size: 24px;
-}
+
 :deep(.ant-form-item) {
   margin-bottom: 0;
   width: 100%;

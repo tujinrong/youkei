@@ -128,7 +128,5 @@ onBeforeRouteUpdate((to, from) => {
 })
 </script>
 <style lang="scss" scoped>
-h1 {
-  font-size: 24px;
-}
+
 </style>

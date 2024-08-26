@@ -284,7 +284,7 @@ async function forwardNew() {
     name: route.name,
     query: {
       status: PageStatus.New,
-      KI: searchParams.KI
+      KI: searchParams.KI,
     },
   })
 }
@@ -294,7 +294,7 @@ async function forwardEdit(NOJO_CD) {
     name: route.name,
     query: {
       status: PageStatus.Edit,
-      ITAKU_CD: NOJO_CD
+      ITAKU_CD: NOJO_CD,
     },
   })
 }
@@ -309,7 +309,7 @@ const { pageParams, totalCount, searchData, clear } = useSearch({
 
 //クリア
 async function reset() {
-  searchParams.KI =  -1
+  searchParams.KI = -1
   searchParams.KEN_CD = undefined
   searchParams.ITAKU_NAME = undefined
   searchParams.ITAKU_CD = undefined
@@ -324,8 +324,8 @@ const searchAll = async () => {
   // keyList.KI = res.KI
   // keyList.KEIYAKUSYA_CD = res.KEIYAKUSYA_CD
   // keyList.KEIYAKUSYA_NAME =
-    KEIYAKUSYA_CD_NAME_LIST.value.find((el) => el.CODE === res.KEIYAKUSYA_CD)
-      ?.NAME || ''
+  KEIYAKUSYA_CD_NAME_LIST.value.find((el) => el.CODE === res.KEIYAKUSYA_CD)
+    ?.NAME || ''
 }
 //--------------------------------------------------------------------------
 //監視定義
@@ -344,9 +344,7 @@ const searchAll = async () => {
 :deep(th) {
   min-width: 100px;
 }
-h1 {
-  font-size: 24px;
-}
+
 :deep(.ant-form-item) {
   margin-bottom: 0;
   width: 100%;

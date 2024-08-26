@@ -321,9 +321,7 @@ onUnmounted(() => {
 th {
   width: 130px;
 }
-h1 {
-  font-size: 24px;
-}
+
 :deep(.ant-card-body) {
   height: 100%;
   display: flex;
