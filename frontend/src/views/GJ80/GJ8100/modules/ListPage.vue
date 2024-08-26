@@ -1,13 +1,5 @@
 <template>
-  <a-card
-    :bordered="false"
-    class="mb-2 h-full"
-    :body-style="{
-      height: '100%',
-      display: 'flex',
-      flexDirection: 'column',
-    }"
-  >
+  <a-card :bordered="false" class="mb-2 h-full">
     <h1>(GJ8100)消費税率一覧</h1>
     <div class="my-2 flex justify-between">
       <a-space :size="20">
@@ -18,7 +10,7 @@
       <close-page />
     </div>
     <vxe-table
-      class="h-full flex-1"
+      class="h-full"
       ref="xTableRef"
       :column-config="{ resizable: true }"
       :row-config="{ isCurrent: true, isHover: true }"

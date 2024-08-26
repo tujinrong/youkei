@@ -1,12 +1,7 @@
 <template>
-  <a-card :bordered="false" class="mb-2 h-full" :body-style="{
-    height: '100%',
-    display: 'flex',
-    flexDirection: 'column',
-  }">
-    <div class="flex-1">
+  <a-card :bordered="false" class="mb-4 h-full" >
       <h1>契約者別基本情報・農場登録情報のＣＳＶデータ作成</h1>
-      <div class="mb-2 flex justify-between">
+      <div class="my-4 flex justify-between">
       <a-space :size="20">
         <a-button class="warning-btn" @click="save">保存</a-button>
         <a-button type="primary" danger @click="cancel">キャンセル</a-button>
@@ -53,7 +48,7 @@
               </a-form-item>
             </td>
           </a-col></a-row><a-row>
-          <a-col span="6">
+          <a-col span="8">
             <th class="required">住所</th>
             <td>
               <a-input v-model:value="formData.POST"  :maxlength="8"/>
@@ -252,8 +247,6 @@
             </td>
           </a-col></a-row>
       </div>
-    </div>
-
   </a-card>
 </template>
 <script setup lang="ts">

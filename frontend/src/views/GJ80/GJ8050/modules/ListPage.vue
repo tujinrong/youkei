@@ -552,7 +552,7 @@ async function forwardEdit2(BANK_CD, SITEN_CD) {
 
 .search-disabled-mask {
   position: absolute;
-  background-color: #fff;
+  background-color: #f5f5f5;
   width: 100%;
   height: 100%;
   top: 0;

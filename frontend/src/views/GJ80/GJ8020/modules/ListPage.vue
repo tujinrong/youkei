@@ -1,11 +1,7 @@
 <template>
-  <a-card :bordered="false" class="mb-2 h-full" :body-style="{
-    height: '100%',
-    display: 'flex',
-    flexDirection: 'column',
-  }">
+  <a-card :bordered="false" class="mb-4 h-full">
     <h1>処理年度マスタメンテナンス</h1>
-    <div class="mb-2 flex justify-between">
+    <div class="my-4 flex justify-between">
       <a-space :size="20">
         <a-button class="warning-btn" @click="save">保存</a-button>
         <a-button type="primary" danger @click="cancel">キャンセル</a-button>
@@ -21,11 +17,11 @@
                 <template #addonAfter>期</template>
               </a-input-number>
               <YearJp v-model:value="formData.JIGYO_NENDO" style="width: 33.3%" /><span>～</span>
-              <YearJp v-model:value="formData.JIGYO_SYURYO_NENDO" style="width: 33.3%" />
+              <YearJp v-model:value="formData.JIGYO_SYURYO_NENDO" style="width: 33.3%" disabled />
             </td>
           </a-col>
           <a-col span="24">
-            <th class="required">1.前期積立金取込日</th>
+            <th>1.前期積立金取込日</th>
             <td>
               <a-form-item>
                 <DateJp v-model:value="formData.ZENKI_TUMITATE_DATE" style="width: 33.3%" />
@@ -33,7 +29,7 @@
             </td>
           </a-col>
           <a-col span="24">
-            <th class="required">2.前期交付金取込日</th>
+            <th>2.前期交付金取込日</th>
             <td>
               <a-form-item>
                 <DateJp v-model:value="formData.ZENKI_KOFU_DATE" style="width: 33.3%" />
@@ -41,7 +37,7 @@
             </td>
           </a-col>
           <a-col span="24">
-            <th class="required">3.返還金計算日</th>
+            <th>3.返還金計算日</th>
             <td>
               <a-form-item>
                 <DateJp v-model:value="formData.HENKAN_KEISAN_DATE" style="width: 33.3%" />
@@ -49,26 +45,26 @@
             </td>
           </a-col>
           <a-col span="24">
-            <th class="required">積立金返還人数</th>
+            <th>積立金返還人数</th>
             <td>
               <a-form-item>
-                <a-input-number v-model:value="formData.HENKAN_NINZU" style="width: 33.3%" :max="9999" :min="0">
+                <a-input-number v-model:value="formData.HENKAN_NINZU" style="width: 33.3%" :max="9999" :min="0" disabled>
                   <template #addonAfter> (人) </template></a-input-number>
               </a-form-item>
             </td>
           </a-col>
           <a-col span="24">
-            <th class="required">積立金返還額合計</th>
+            <th>積立金返還額合計</th>
             <td class="flex items-center">
-              <a-input-number v-model:value="formData.HENKAN_GOKEI" style="width: 33.3%" :max="999999999" :min="0">
+              <a-input-number v-model:value="formData.HENKAN_GOKEI" style="width: 33.3%" :max="999999999" :min="0" disabled>
                 <template #addonAfter> (円) </template> </a-input-number><span>(左記項目は積立金返還処理で算定した结果を保存、表示)</span>
             </td>
           </a-col><a-col span="24">
-            <th class="required">前期積立金返還率</th>
+            <th>前期積立金返還率</th>
             <td>
               <a-form-item>
                 <a-input-number v-model:value="formData.HENKAN_RITU" style="width: 33.3%" :precision="7"
-                  :max="99.9999999" :min="0"></a-input-number>
+                  :max="99.9999999" :min="0" disabled></a-input-number>
               </a-form-item>
             </td>
           </a-col>
@@ -141,6 +137,14 @@ watch(() => formData,
 () => {
   editJudge.setEdited()
 },
+)
+
+watch(() => formData.JIGYO_NENDO,
+(newValue) => {
+  if (newValue) {
+    formData.JIGYO_SYURYO_NENDO = newValue + 2
+  }
+},{immediate:true}
 )
 
 
