@@ -93,5 +93,12 @@ Namespace JBD.GJS.Service
                 RETURN_CODE = EnumServiceResult.ServiceError
             End If
         End Sub
+
+        Public Sub New(recode As EnumServiceResult, msg As String)
+            If String.IsNullOrEmpty(msg) = False Then
+                MESSAGE = msg
+                RETURN_CODE = recode
+            End If
+        End Sub
     End Class
 End Namespace

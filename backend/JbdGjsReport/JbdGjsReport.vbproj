@@ -3,7 +3,7 @@
   <PropertyGroup>
     <RootNamespace>JbdGjsReport</RootNamespace>
     <TargetFramework>net8.0</TargetFramework>
-    <ImportedNamespaces>JbdGjsCommon.JBD.GJS.Common=False,Microsoft.VisualBasic=True,System=True,System.Collections=True,System.Collections.Generic=True,System.Diagnostics=True,System.Linq=True,System.Xml.Linq=True,System.Threading.Tasks=True,JbdGjsReport=True</ImportedNamespaces>
+    <ImportedNamespaces>JbdGjsCommon.JBD.GJS.Common=False,System.Data=False,System.IO=False,System.Reflection=False,Microsoft.VisualBasic=True,System=True,System.Collections=True,System.Collections.Generic=True,System.Diagnostics=True,System.Linq=True,System.Xml.Linq=True,System.Threading.Tasks=True,JbdGjsReport=True</ImportedNamespaces>
   </PropertyGroup>
 
   <ItemGroup>
@@ -12,6 +12,9 @@
 
   <ItemGroup>
     <Import Include="JbdGjsCommon.JBD.GJS.Common" />
+    <Import Include="System.Data" />
+    <Import Include="System.IO" />
+    <Import Include="System.Reflection" />
   </ItemGroup>
 
   <ItemGroup>

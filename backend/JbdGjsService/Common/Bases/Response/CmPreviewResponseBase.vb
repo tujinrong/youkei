@@ -13,7 +13,7 @@ Namespace JBD.GJS.Service
     Public Class CmPreviewResponseBase
         Inherits DaResponseBase
         Public Property filenm As String                                          'ファイル名
-        Public Property sectionDocument As SectionDocument
+
         <JsonIgnore>
         Public Property data As Byte()                                            'データ
         Public Property contenttype As String                                     'コンテンツタイプ
@@ -24,6 +24,10 @@ Namespace JBD.GJS.Service
 
         Public Sub New(msg As String)
             MyBase.New(msg)
+        End Sub
+
+        Public Sub New(recode As EnumServiceResult,msg As String)
+            MyBase.New(recode, msg)
         End Sub
 
     End Class

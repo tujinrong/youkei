@@ -7,11 +7,13 @@
 ' 変更履歴　:
 ' *******************************************************************
 
-Imports System.IO
-Imports System.Reflection
+Imports GrapeCity.ActiveReports.Aspnetcore.Viewer
+Imports GrapeCity.ActiveReports.Web.Viewer
+Imports JbdGjsReport
+Imports JbdGjsService.JBD.GJS.Service.GJ1030
 
 Public Class Program
-    
+
     Private Shared ReadOnly CurrentDir As String = If(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), String.Empty)
     Public Shared ReadOnly ReportsDirectory As DirectoryInfo = New DirectoryInfo(Path.Combine(CurrentDir, "Reports"))
 
@@ -44,26 +46,54 @@ Public Class Program
         'キャッシュを使用
         builder.Services.AddMemoryCache()
 
-'CORS
-builder.Services.AddCors(Sub(options)
-options.AddDefaultPolicy(Sub(policy)
-If builder.Environment.IsDevelopment() Then
-policy.AllowAnyOrigin()
-policy.AllowAnyHeader()
-End If
-End Sub)
-End Sub)
+        'CORS
+        builder.Services.AddCors(Sub(options)
+                                     options.AddDefaultPolicy(Sub(policy)
+                                                                  If builder.Environment.IsDevelopment() Then
+                                                                      policy.AllowAnyOrigin()
+                                                                      policy.AllowAnyHeader()
+                                                                  End If
+                                                              End Sub)
+                                 End Sub)
 
-'Business Service
-builder.Services.ConfigureVbBussinessServiceGen()
-Dim app = builder.Build()
-VbBussinessConfig.Configure(app.Services)
-app.UseCors()
-app.UseAuthorization()
+        'Business Service
+        builder.Services.ConfigureVbBussinessServiceGen()
+        Dim app = builder.Build()
+        VbBussinessConfig.Configure(app.Services)
+
+        app.UseCors(Sub(cors)
+                        cors.SetIsOriginAllowed(Function(origin) Equals(New Uri(origin).Host, "localhost")).AllowAnyMethod().AllowAnyHeader().AllowCredentials().WithExposedHeaders("Content-Disposition")
+                    End Sub)
+        app.UseReportViewer(Sub(settings)
+                                settings.UseReportProvider(New ReportProvider)
+                            End Sub)
+        app.UseAuthorization()
 
         app.MapControllers()
 
         app.Run()
     End Sub
+
+End Class
+Public Class ReportProvider
+    Implements IReportProvider
+    Public Function GetReport(reportId As String) As Stream Implements IReportProvider.GetReport
+        Dim rar As String() = reportId.Split("|")
+        Dim svcId = rar(0)
+        Dim param = rar(1)
+
+        Select Case svcId
+            Case "GJ1030"
+                Dim ms = FrmGJ1030Service.f_Report_Output(param)
+                Return ms
+        End Select
+        Return New MemoryStream
+    End Function
+
+    Public Function GetReportDescriptor(reportId As String) As ReportDescriptor Implements IReportProvider.GetReportDescriptor
+
+        Return New ReportDescriptor(ReportType.Rdf)
+
+    End Function
 
 End Class

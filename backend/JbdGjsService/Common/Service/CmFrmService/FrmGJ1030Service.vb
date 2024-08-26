@@ -108,37 +108,25 @@ Namespace JBD.GJS.Service.GJ1030
         '' </summary>
         '' <returns></returns>
         '' <remarks></remarks>
-        Private Function f_Report_Output(ByVal req As PreviewRequest) As Boolean
+        Public Function f_Report_Output(ByVal param As String) As MemoryStream
+            Dim pr = System.Text.Json.JsonSerializer.Deserialize(Of PreviewRequest)(param)
+            '検索結果出力用ＳＱＬ作成
+            Dim sql = f_make_SQL(pr)
 
-            'Dim wkDSRep As New DataSet
+            'データSelect 
+            Dim rn As String = "家畜防疫互助基金契約者一覧表(連絡用)"
+            Using db = New DaDbContext()
+                Dim ds = f_Select_ODP(db, sql, rn)
+                'データ結果判定
+                Dim dt = ds.Tables(0)
+                If dt.Rows.Count > 0 Then
+                    Dim w As New rptGJ1030
+                    Dim ms = w.report(ds)
+                    Return ms
+                End If
+            End Using    
+            Return New MemoryStream
 
-                ''--------------------------------------------------
-                ''データ取得
-                ''--------------------------------------------------
-                'wkDSRep.Tables.Add(con_ReportName)
-
-                'SQL
-                Dim wkSql = f_make_SQL(req)
-
-                ''データ取得
-                'Using db = New DaDbContext()
-                '    f_Select_ODP_New(db, wkDSRep, wkSql)
-                'End Using
-
-                'Using wkAdp As New OracleDataAdapter(wkSql, Cnn)
-                '    wkAdp.Fill(wkDSRep, wkDSRep.Tables(0).TableName)
-                'End Using
-
-                'If wkDSRep.Tables(0).Rows.Count > 0 Then
-                '    Dim w As New rptGJ1030
-                '    w.sub1(wkDSRep)
-
- 
-                'Else
-                '    Return False
-                'End If
-
-            Return True
         End Function
 #End Region
 #Region "f_make_SQL 帳票データ出力用ＳＱＬ作成"

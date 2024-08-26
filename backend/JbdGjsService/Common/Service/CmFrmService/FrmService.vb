@@ -76,6 +76,35 @@ Namespace JBD.GJS.Service
                 Return "|長時間未操作のため、再びログインしてください。"
             End If
         End Function
+
+        Public Function CheckToken(token As String) As String
+            'トークンの取得
+            Dim ret = CmTokenService.GetTokenUDGjs(token, strGjs, strGjs)
+            Dim uids = ret.Split("|")
+            Dim uid = uids(0)
+            pLOGINUSERID = uid
+            pPCNAME = System.Net.Dns.GetHostName
+
+            ' 比較する
+            If String.IsNullOrEmpty(uid) Then
+                Return "|トークンが正しくありません。"
+            End If
+
+            Dim time = uids(1)
+            Dim format As String = "yyyyMMddHHmmss"
+            Dim dateValue As DateTime
+            dateValue = DateTime.ParseExact(time, format, CultureInfo.InvariantCulture)
+            '24時間を追加
+            dateValue = dateValue.AddHours(24)
+            '現在時刻を取得する
+            Dim currentTime As DateTime = DateTime.Now
+            ' 比较
+            If dateValue > currentTime Then
+                Return uid & "|"
+            Else
+                Return "|長時間未操作のため、再びログインしてください。"
+            End If
+        End Function
 #End Region
 
 #Region "f_Search_SQLMakePage ページ分割されたデータＳＱＬ作成処理"

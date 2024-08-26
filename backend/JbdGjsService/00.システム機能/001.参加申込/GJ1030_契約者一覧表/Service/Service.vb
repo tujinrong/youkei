@@ -87,14 +87,9 @@ Namespace JBD.GJS.Service.GJ1030
                     Dim ds = f_Select_ODP(db, sql, rn)
 
                     'データ結果判定
-                    If ds.Tables(0).Rows.Count > 0 Then
-                        Dim w As New rptGJ1030
-                        Dim dt = w.report(ds)
-                        Dim ret As New CmPreviewResponseBase With {
-                            .filenm = dt.Name,
-                            .sectionDocument = dt
-                        }
-                        Return ret
+                    Dim dt = ds.Tables(0)
+                    If dt.Rows.Count > 0 Then
+                        Return New CmPreviewResponseBase(EnumServiceResult.OK,sql)
                     Else
                         Return New CmPreviewResponseBase("該当データが存在しませんでした。")
                     End If

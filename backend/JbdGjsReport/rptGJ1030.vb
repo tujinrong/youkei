@@ -1,9 +1,8 @@
-﻿Imports System.Data
-Imports System.Xml
-Imports GrapeCity.ActiveReports.Document
+﻿
+Imports GrapeCity.ActiveReports.Document.Section
 
 Interface InterfaceRptGJ1030
-    Function report(wkDSRep As DataSet) As SectionDocument
+    Function report(wkDSRep As DataSet) As MemoryStream
 End Interface
 
 Public Class rptGJ1030
@@ -50,7 +49,7 @@ Public Class rptGJ1030
 
     End Sub
 
-    Function report(wkDSRep As DataSet) As SectionDocument Implements InterfaceRptGJ1030.report
+    Function report(wkDSRep As DataSet) As MemoryStream Implements InterfaceRptGJ1030.report
         ' Insert code here that implements this method.
         Using wkAR As New rptGJ1030
 
@@ -72,11 +71,10 @@ Public Class rptGJ1030
             wkAR.DataMember = wkDSRep.Tables(0).TableName
             wkAR.Run() '実行
 
-            'Using writer As XmlWriter = XmlWriter.Create(myREPORT_PDF_PATH & "path_to_save_file.rpx", Nothing)
-            '     wkAR.SaveLayout(writer)
-            'End Using
-
-            Return wkAR.Document
+            Dim ms As New MemoryStream()
+            wkAR.Document.Save(ms, RdfFormat.ARNet)
+            ms.Position = 0
+            Return ms
 
         End Using
     End Function

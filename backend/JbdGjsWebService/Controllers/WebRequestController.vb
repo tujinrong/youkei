@@ -7,8 +7,6 @@
 ' 変更履歴　:
 ' *******************************************************************
 
-Imports System.Security.Cryptography
-
 Namespace JBD.GJS.WebService
     <Authorize>
     <ApiController>
