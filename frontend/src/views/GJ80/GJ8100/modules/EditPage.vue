@@ -1,14 +1,5 @@
 <template>
-  <a-card
-    :bordered="false"
-    class="mb-2 h-full"
-    :body-style="{
-      height: '100%',
-      display: 'flex',
-      flexDirection: 'column',
-    }"
-  >
-    <h1>互助基金契約者マスタメンテナンス（基本情報入力）</h1>
+  <a-card :bordered="false" class="mb-2 h-full">
     <div class="self_adaption_table form max-w-160 flex-1">
       <a-row>
         <a-col span="24">
@@ -34,17 +25,15 @@
           </td> </a-col
       ></a-row>
     </div>
-    <div class="mb-2 flex justify-between">
-      <a-space :size="20">
-        <a-button class="warning-btn" @click="save">保存</a-button>
-      </a-space>
-      <a-button type="primary" @click="goList">戻る</a-button>
+    <div class="my-2 max-w-160 flex justify-between">
+      <a-button class="warning-btn" @click="save">保存</a-button>
+      <a-button type="primary" @click="goList">一覧へ</a-button>
     </div>
   </a-card>
 </template>
 <script setup lang="ts">
 import { Judgement } from '@/utils/judge-edited'
-import { reactive } from 'vue'
+import { nextTick, onMounted, reactive } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 
 const route = useRoute()
@@ -55,6 +44,13 @@ const formData = reactive({
   TAX_DATE_TO: undefined,
   TAX_RITU: undefined,
 })
+
+onMounted(() => {
+  Object.assign(formData, route.query)
+  nextTick(() => editJudge.reset())
+})
+
+const save = () => {}
 
 const goList = () => {
   editJudge.judgeIsEdited(() => {

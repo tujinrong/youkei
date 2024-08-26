@@ -8,7 +8,7 @@
       flexDirection: 'column',
     }"
   >
-    <h1>(GJ1030)消費税率一覧</h1>
+    <h1>(GJ8100)消費税率一覧</h1>
     <div class="my-2 flex justify-between">
       <a-space :size="20">
         <a-button type="primary" @click="add">新規登録</a-button>
@@ -73,6 +73,20 @@ const add = () => {
   })
 }
 const edit = () => {
+  const currentRow = xTableRef.value?.getCurrentRecord()
+  if (currentRow) {
+    router.push({
+      name: route.name,
+      query: {
+        status: PageStatus.Edit,
+        TAX_DATE_FROM: currentRow.TAX_DATE_FROM,
+        TAX_DATE_TO: currentRow.TAX_DATE_TO,
+        TAX_RITU: currentRow.TAX_RITU,
+      },
+    })
+  } else {
+    console.log('请选择一行')
+  }
   console.log('edit')
 }
 </script>
