@@ -208,14 +208,7 @@ const { validate, clearValidate, validateInfos } = Form.useForm(
 //--------------------------------------------------------------------------
 //計算定義
 //--------------------------------------------------------------------------
-const KEIYAKUSYA_NAME = computed(() => {
-  return (
-    keyList.KEIYAKUSYA_NAME ||
-    KEIYAKUSYA_CD_NAME_LIST.value.find(
-      (el) => Number(el.CODE) === searchParams.KEIYAKUSYA_CD
-    )?.NAME
-  )
-})
+
 //---------------------------------------------------------------------------
 //フック関数
 //--------------------------------------------------------------------------
@@ -252,9 +245,11 @@ async function forwardNew() {
     name: route.name,
     query: {
       status: PageStatus.New,
-      KI: keyList.KI || searchParams.KI,
-      KEIYAKUSYA_CD: keyList.KEIYAKUSYA_CD || searchParams.KEIYAKUSYA_CD,
-      KEIYAKUSYA_NAME: KEIYAKUSYA_NAME.value,
+      KI: searchParams.KI,
+      KEIYAKUSYA_CD: searchParams.KEIYAKUSYA_CD,
+      KEIYAKUSYA_NAME: KEIYAKUSYA_CD_NAME_LIST.value.find(
+        (el) => Number(el.CODE) === Number(searchParams.KEIYAKUSYA_CD)
+      )?.NAME,
     },
   })
 }
@@ -266,7 +261,7 @@ async function forwardEdit(NOJO_CD) {
       status: PageStatus.Edit,
       KI: keyList.KI,
       KEIYAKUSYA_CD: keyList.KEIYAKUSYA_CD,
-      KEIYAKUSYA_NAME: KEIYAKUSYA_NAME.value,
+      KEIYAKUSYA_NAME: keyList.KEIYAKUSYA_NAME,
       NOJO_CD: NOJO_CD,
     },
   })

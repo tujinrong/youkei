@@ -316,7 +316,7 @@ watch(
 const goList = () => {
   editJudge.judgeIsEdited(() => {
     resetFields()
-    router.push({ name: route.name, query: { refresh: '1' } })
+    router.push({ name: route.name })
   })
 }
 
