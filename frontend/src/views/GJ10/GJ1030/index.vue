@@ -105,6 +105,7 @@ import DateJp from '@/components/Selector/DateJp/index.vue'
 import { ITEM_REQUIRE_ERROR } from '@/constants/msg'
 import { Form } from 'ant-design-vue'
 import { Init, Preview } from './service'
+import { PreviewRequest } from './type'
 
 //--------------------------------------------------------------------------
 //データ定義
@@ -114,8 +115,8 @@ const createDefaultParams = () => {
     KI: -1,
     TAISYOBI_YMD: new Date().toISOString().split('T')[0],
     KEIYAKU_KBN_CD: {
-      VALUE_FM: undefined,
-      VALUE_TO: undefined,
+      VALUE_FM: undefined as number | undefined,
+      VALUE_TO: undefined as number | undefined,
     },
     KEIYAKU_JYOKYO: {
       SHINKI: true,
@@ -124,16 +125,16 @@ const createDefaultParams = () => {
       HAIGYO: true,
     },
     ITAKU_CD: {
-      VALUE_FM: undefined,
-      VALUE_TO: undefined,
+      VALUE_FM: undefined as number | undefined,
+      VALUE_TO: undefined as number | undefined,
     },
     KEIYAKUSYA_CD: {
-      VALUE_FM: undefined,
-      VALUE_TO: undefined,
+      VALUE_FM: undefined as number | undefined,
+      VALUE_TO: undefined as number | undefined,
     },
   }
 }
-const formData = reactive(createDefaultParams())
+const formData = reactive(createDefaultParams() as PreviewRequest)
 const clearFromToValue = {
   VALUE_FM: undefined,
   VALUE_TO: undefined,
@@ -290,11 +291,13 @@ const clear = () => {
 //プレビューボタンを押す時
 async function onPreview() {
   await validate()
-  // Preview({ ...formData })
-  const openNew = () => {
-    window.open(URL.value, '_blank')
-  }
-  openNew()
+  try {
+    await Preview({ ...formData })
+    const openNew = () => {
+      window.open(URL.value, '_blank')
+    }
+    openNew()
+  } catch (error) {}
 }
 
 //--------------------------------------------------------------------------

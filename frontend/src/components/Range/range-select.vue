@@ -33,8 +33,8 @@ import { Form } from 'ant-design-vue'
 //---------------------------------------------------------------------------
 const props = defineProps<{
   value: {
-    VALUE_FM: string | number | undefined
-    VALUE_TO: string | number | undefined
+    VALUE_FM: number | undefined
+    VALUE_TO: number | undefined
   }
   options: CodeNameModel[]
   disabled?: boolean
@@ -51,15 +51,23 @@ const formItemContext = Form.useInjectFormItemContext()
 //--------------------------------------------------------------------------
 function change1(val) {
   emit('update:value', {
-    VALUE_FM: val,
-    VALUE_TO: props.value.VALUE_TO ? props.value.VALUE_TO : val,
+    VALUE_FM: val ? Number(val) : undefined,
+    VALUE_TO: props.value.VALUE_TO
+      ? Number(props.value.VALUE_TO)
+      : val
+        ? Number(val)
+        : undefined,
   })
   formItemContext.onFieldChange()
 }
 function change2(val) {
   emit('update:value', {
-    VALUE_FM: props.value.VALUE_FM ? props.value.VALUE_FM : val,
-    VALUE_TO: val,
+    VALUE_FM: props.value.VALUE_FM
+      ? Number(props.value.VALUE_FM)
+      : val
+        ? Number(val)
+        : undefined,
+    VALUE_TO: val ? Number(val) : undefined,
   })
   formItemContext.onFieldChange()
 }
