@@ -13,23 +13,37 @@
           label="契約数"
           :content-style="{ fontSize: '24px' }"
           :label-style="{ fontSize: '24px' }"
-          >新規{{ homeData.keiyakusinki }}　継続{{
-            homeData.keiyakusukeiyaku
-          }}</a-descriptions-item
+          >(新規{{ homeData.keiyakusinki ?? '182' }}　継続{{
+            homeData.keiyakusukeiyaku ?? '1, 531'
+          }})</a-descriptions-item
         >
         <a-descriptions-item
           label="羽数"
           :content-style="{ fontSize: '24px' }"
           :label-style="{ fontSize: '24px' }"
-          >{{ homeData.hasu }} 羽</a-descriptions-item
+          >{{ homeData.hasu ?? '284, 526, 895' }} 羽</a-descriptions-item
         >
         <a-descriptions-item
           label="績立金額"
           :content-style="{ fontSize: '24px' }"
           :label-style="{ fontSize: '24px' }"
-          >{{ homeData.sekitatukinngaku }} 円</a-descriptions-item
+          >{{
+            homeData.sekitatukinngaku ?? '1, 609, 998, 377'
+          }}
+          円</a-descriptions-item
         >
       </a-descriptions>
+      <img
+        src="/logo.png"
+        alt="Image"
+        style="
+          position: absolute;
+          bottom: 20px;
+          right: 50px;
+          width: 30%;
+          height: 50%;
+        "
+      />
     </a-card>
   </div>
 </template>
