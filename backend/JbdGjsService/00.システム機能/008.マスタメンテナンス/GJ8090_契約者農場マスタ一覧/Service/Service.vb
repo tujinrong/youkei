@@ -95,6 +95,9 @@ Namespace JBD.GJS.Service.GJ8090
                     Dim res = Wraper.SearchResponse(dt)
                     res.KI = req.KI
                     res.KEIYAKUSYA_CD = req.KEIYAKUSYA_CD
+                    If dt.Rows.Count = 0 Then
+                        res.MESSAGE = "指定された条件に一致するデータは存在しません。"
+                    End If
 
                     '-------------------------------------------------------------
                     '6.正常返し
