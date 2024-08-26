@@ -39,5 +39,19 @@ Namespace JBD.GJS.Service.GJ0000
             res.ROLES.Add(CStr(dt.Rows(0)("SIYO_KBN")))
             Return res
         End Function
+
+        ''' <summary>
+        ''' ホーム情報処理
+        ''' </summary>
+        Public Shared Function GetHomeResponse(dt As DataTable) As HomeInfoResponse
+            Dim res = New HomeInfoResponse()
+            If dt.Rows.Count > 0 Then
+                res.SHINKI = CStr(dt.Rows(0)("CNT_SHINKI"))
+                res.KEI = CStr(dt.Rows(0)("CNT_KEI"))
+                res.HASU = CStr(dt.Rows(0)("HASU"))
+                res.TUMI = CStr(dt.Rows(0)("TUMI"))
+            End If
+            Return res
+        End Function
     End Class
 End Namespace
