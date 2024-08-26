@@ -32,12 +32,16 @@ Namespace JBD.GJS.Service.GJ0000
         ''' ログイン処理
         ''' </summary>
         Public Shared Function GetUserResponse(dt As DataTable) As UserInfoResponse
-            Dim res = New UserInfoResponse()
-            res.USER_ID = CStr(dt.Rows(0)("USER_ID"))
-            res.USER_NAME = CStr(WordHenkan("N", "S", CStr(dt.Rows(0)("USER_NAME"))))
-            res.ROLES = New List(Of String)
-            res.ROLES.Add(CStr(dt.Rows(0)("SIYO_KBN")))
-            Return res
+            If dt.Rows.Count > 0 Then
+                Dim res = New UserInfoResponse()
+                res.USER_ID = CStr(dt.Rows(0)("USER_ID"))
+                res.USER_NAME = CStr(WordHenkan("N", "S", CStr(dt.Rows(0)("USER_NAME"))))
+                res.ROLES = New List(Of String)
+                res.ROLES.Add(CStr(dt.Rows(0)("SIYO_KBN")))
+                Return res
+            Else
+                Return New UserInfoResponse("ユーザーＩＤ、パスワードが正しくありません。")
+            End If
         End Function
 
         ''' <summary>
