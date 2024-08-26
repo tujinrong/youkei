@@ -51,15 +51,23 @@ const formItemContext = Form.useInjectFormItemContext()
 //--------------------------------------------------------------------------
 function change1(val) {
   emit('update:value', {
-    VALUE_FM: Number(val),
-    VALUE_TO: props.value.VALUE_TO ? Number(props.value.VALUE_TO) : Number(val),
+    VALUE_FM: val ? Number(val) : undefined,
+    VALUE_TO: props.value.VALUE_TO
+      ? Number(props.value.VALUE_TO)
+      : val
+        ? Number(val)
+        : undefined,
   })
   formItemContext.onFieldChange()
 }
 function change2(val) {
   emit('update:value', {
-    VALUE_FM: props.value.VALUE_FM ? Number(props.value.VALUE_FM) : Number(val),
-    VALUE_TO: Number(val),
+    VALUE_FM: props.value.VALUE_FM
+      ? Number(props.value.VALUE_FM)
+      : val
+        ? Number(val)
+        : undefined,
+    VALUE_TO: val ? Number(val) : undefined,
   })
   formItemContext.onFieldChange()
 }

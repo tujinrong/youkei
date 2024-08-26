@@ -58,6 +58,6 @@ export interface InitResponse extends DaResponseBase {
 //ビューモデル
 //-------------------------------------------------------------------
 export interface FmToModel {
-  VALUE_FM?: number
-  VALUE_TO?: number
+  VALUE_FM: number | undefined
+  VALUE_TO: number | undefined
 }

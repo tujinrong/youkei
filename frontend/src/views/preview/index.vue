@@ -23,9 +23,9 @@ let rawData = ''
 //--------------------------------------------------------------------------
 //フック関数
 //--------------------------------------------------------------------------
-onMounted(async () => {
+onMounted(() => {
   channel.postMessage({ isMounted: true })
-  channel.onmessage = async (event) => {
+  channel.onmessage = (event) => {
     try {
       rawData = event.data
       let params = [{ name: '1', values: ['2'] }]
