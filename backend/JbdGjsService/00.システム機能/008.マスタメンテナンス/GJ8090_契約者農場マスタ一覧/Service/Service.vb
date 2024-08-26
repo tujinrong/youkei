@@ -92,12 +92,12 @@ Namespace JBD.GJS.Service.GJ8090
                     '5.データ加工処理
                     '-------------------------------------------------------------
                     Dim dt = ds.Tables(0)
+                    If dt.Rows.Count = 0 Then
+                        Return New SearchResponse(EnumServiceResult.ServiceAlert2,"指定された条件に一致するデータは存在しません。")
+                    End If
                     Dim res = Wraper.SearchResponse(dt)
                     res.KI = req.KI
                     res.KEIYAKUSYA_CD = req.KEIYAKUSYA_CD
-                    If dt.Rows.Count = 0 Then
-                        res.MESSAGE = "指定された条件に一致するデータは存在しません。"
-                    End If
 
                     '-------------------------------------------------------------
                     '6.正常返し

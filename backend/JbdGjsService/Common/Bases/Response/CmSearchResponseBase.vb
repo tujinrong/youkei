@@ -49,5 +49,9 @@ Namespace JBD.GJS.Service
         Public Sub New()
 
         End Sub
+
+        Public Sub New(recode As EnumServiceResult,msg As String)
+            MyBase.New(recode, msg)
+        End Sub
     End Class
 End Namespace
