@@ -308,7 +308,7 @@ async function onPreview() {
 const channel = new BroadcastChannel('channel_preview')
 channel.onmessage = (event) => {
   if (event.data.isMounted) {
-    channel.postMessage(JSON.stringify(formData))
+    channel.postMessage({ params: JSON.stringify(formData) })
   }
 }
 onUnmounted(() => {

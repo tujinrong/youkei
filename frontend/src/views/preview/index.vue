@@ -13,21 +13,23 @@ import { sessionStg } from '@/utils/storage'
 //データ定義
 //--------------------------------------------------------------------------
 const channel = new BroadcastChannel('channel_preview')
+
 const host = window.location.href.includes('localhost')
   ? 'localhost'
   : '61.213.76.155'
 const URL = computed(() => {
   return `http://${host}:5109/api/reporting`
 })
-let rawData = ''
 //--------------------------------------------------------------------------
 //フック関数
 //--------------------------------------------------------------------------
 onMounted(() => {
   channel.postMessage({ isMounted: true })
-  channel.onmessage = (event) => {
+})
+
+channel.onmessage = (event) => {
+  if (event.data.params) {
     try {
-      rawData = event.data
       let params = [{ name: '1', values: ['2'] }]
       let viewer = createViewer({
         element: '#viewerContainer',
@@ -44,11 +46,11 @@ onMounted(() => {
         },
       })
       // let token = sessionStg.get('token')
-      let name = 'GJ1030|' + rawData
+      let name = 'GJ1030|' + event.data.params
       viewer.openReport(name, params)
     } catch (error) {}
   }
-})
+}
 
 //--------------------------------------------------------------------------
 //計算定義
