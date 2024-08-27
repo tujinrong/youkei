@@ -37,7 +37,8 @@ Namespace JBD.GJS.Service.GJ8020
                     '4.ビジネスロジック処理
                     '-------------------------------------------------------------
                     'データクエリ
-                    Dim sql = f_Ken_Data_Select()
+                    Dim sReq = New DaRequestBase
+                    Dim sql = f_SetForm_Data(sReq)
 
                     'データSelect 
                     Dim ds = f_Select_ODP(db, sql)
@@ -46,6 +47,9 @@ Namespace JBD.GJS.Service.GJ8020
                     '-------------------------------------------------------------
                     '5.データ加工処理
                     '-------------------------------------------------------------
+                    If dt.Rows.Count = 0 Then
+                        Return New InitDetailResponse()
+                    End If
                     Dim res = Wraper.GetInitDetailResponse(dt)
 
                     '-------------------------------------------------------------
