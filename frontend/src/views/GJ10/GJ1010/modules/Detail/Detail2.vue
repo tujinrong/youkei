@@ -174,10 +174,7 @@ import { DetailStatus } from '../../constant'
 //--------------------------------------------------------------------------
 const router = useRouter()
 const route = useRoute()
-const props = defineProps<{
-  detailKbn: DetailStatus
-}>()
-const emit = defineEmits(['update:detailKbn'])
+
 const editJudge = new Judgement('GJ1013')
 const formData = reactive({
   KI: undefined as number | undefined,
@@ -282,11 +279,12 @@ onMounted(() => {})
 //--------------------------------------------------------------------------
 //メソッド
 //--------------------------------------------------------------------------
+const detailKbn = defineModel<DetailStatus>('detailKbn')
+
 const goList = () => {
   editJudge.judgeIsEdited(() => {
     resetFields()
-    debugger
-    emit('update:detailKbn', DetailStatus.Detail1)
+    detailKbn.value = DetailStatus.Detail1
   })
 }
 const saveData = () => {}
