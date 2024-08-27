@@ -205,7 +205,9 @@ watch(
 
 const save = async () => {
   await validate()
-  await Save({ KEKKA: formData, EDIT_KBN: EnumEditKbn.Edit })
+  try {
+    await Save({ KEKKA: formData })
+  } catch (error) {}
 }
 
 const cancel = () => {}

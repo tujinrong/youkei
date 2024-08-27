@@ -17,8 +17,6 @@ import { EnumEditKbn } from '@/enum'
 export interface SaveRequest extends DaRequestBase {
   /** */
   KEKKA: DetailVM
-  /**編集区分 */
-  EDIT_KBN: EnumEditKbn
 }
 
 //-------------------------------------------------------------------
