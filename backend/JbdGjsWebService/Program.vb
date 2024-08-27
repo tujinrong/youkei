@@ -3,14 +3,12 @@
 ' 機能概要　: システムメイン処理
 '
 ' 作成日　　: 2024.07.17
-' 作成者　　: 宋
+' 作成者　　: 宋 峰
 ' 変更履歴　:
 ' *******************************************************************
 
 Imports GrapeCity.ActiveReports.Aspnetcore.Viewer
 Imports GrapeCity.ActiveReports.Web.Viewer
-Imports JbdGjsReport
-Imports JbdGjsService.JBD.GJS.Service.GJ1030
 
 Public Class Program
 
