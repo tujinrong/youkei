@@ -3,19 +3,17 @@
 </template>
 <script setup lang="ts">
 import { onMounted, computed } from 'vue'
-//JSViewer
 import '@grapecity/ar-viewer-ja/dist/jsViewer.min.js'
 import '@grapecity/ar-viewer-ja/dist/jsViewer.min.css'
 import '@grapecity/ar-viewer-ja'
 import { createViewer } from '@grapecity/ar-viewer-ja'
 import { sessionStg } from '@/utils/storage'
+
 //--------------------------------------------------------------------------
 //データ定義
 //--------------------------------------------------------------------------
-const channel = new BroadcastChannel('channel_preview')
-
 const host = window.location.href.includes('localhost')
-  ? 'localhost'
+  ? '192.168.1.65'
   : '61.213.76.155'
 const URL = computed(() => {
   return `http://${host}:5109/api/reporting`
@@ -27,8 +25,11 @@ onMounted(() => {
   channel.postMessage({ isMounted: true })
 })
 
+let count = 0
+const channel = new BroadcastChannel('channel_preview')
 channel.onmessage = (event) => {
-  if (event.data.params) {
+  if (event.data.params && count === 0) {
+    count++
     try {
       let params = [{ name: '1', values: ['2'] }]
       let viewer = createViewer({
@@ -51,13 +52,5 @@ channel.onmessage = (event) => {
     } catch (error) {}
   }
 }
-
-//--------------------------------------------------------------------------
-//計算定義
-//--------------------------------------------------------------------------
-
-//---------------------------------------------------------------------------
-//監視定義
-//--------------------------------------------------------------------------
 </script>
 <style lang="scss" scoped></style>
