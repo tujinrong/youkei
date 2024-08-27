@@ -13,9 +13,14 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Include="App_Data\templates\**">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
+    <Compile Remove="Reports\**" />
+    <Compile Remove="Views\**" />
+    <Content Remove="Reports\**" />
+    <Content Remove="Views\**" />
+    <EmbeddedResource Remove="Reports\**" />
+    <EmbeddedResource Remove="Views\**" />
+    <None Remove="Reports\**" />
+    <None Remove="Views\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -44,38 +49,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\JbdGjsService\JbdGjsService.vbproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Update="acgjm.ttf">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="App_Data\Test\その他Templates\はがき.xlsx">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="App_Data\Test\その他Templates\アドレスシール.xlsx">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="App_Data\Test\その他Templates\バーコード.xlsx">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="App_Data\Test\その他Templates\件数表年齢.xlsx">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="App_Data\Test\その他Templates\件数表行政区.xlsx">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="App_Data\Test\その他Templates\可変長集計表.xlsx">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="App_Data\Test\その他Templates\宛名台帳.xlsx">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Views\" />
-    <Folder Include="Reports\" />
   </ItemGroup>
 
   <ProjectExtensions><VisualStudio><UserProperties appsettings_1development_1json__JsonSchema="https://appsemble.app/api.json" /></VisualStudio></ProjectExtensions>
