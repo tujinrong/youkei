@@ -18,6 +18,17 @@ const host = window.location.href.includes('localhost')
 const URL = computed(() => {
   return `http://${host}:5109/api/reporting`
 })
+const getCurrentFormattedTime = () => {
+  const now = new Date()
+  const year = now.getFullYear().toString()
+  const month = (now.getMonth() + 1).toString().padStart(2, '0')
+  const day = now.getDate().toString().padStart(2, '0')
+  const hours = now.getHours().toString().padStart(2, '0')
+  const minutes = now.getMinutes().toString().padStart(2, '0')
+  const seconds = now.getSeconds().toString().padStart(2, '0')
+
+  return year + month + day + hours + minutes + seconds
+}
 //--------------------------------------------------------------------------
 //フック関数
 //--------------------------------------------------------------------------
@@ -40,11 +51,30 @@ channel.onmessage = (event) => {
         defaultExportSettings: {
           pdf: {
             FileName: {
-              value: '家庭防疫互助基金契約者一覧表',
+              value:
+                'GJ1030家庭防疫互助基金契約者一覧表(連絡用)_' +
+                getCurrentFormattedTime(),
+              visible: true,
+            },
+          },
+          xls: {
+            FileName: {
+              value:
+                'GJ1030家庭防疫互助基金契約者一覧表(連絡用)_' +
+                getCurrentFormattedTime(),
+              visible: true,
+            },
+          },
+          xlsx: {
+            FileName: {
+              value:
+                'GJ1030家庭防疫互助基金契約者一覧表(連絡用)_' +
+                getCurrentFormattedTime(),
               visible: true,
             },
           },
         },
+        availableExports: ['Pdf', 'Xls', 'Xlsx'],
       })
       // let token = sessionStg.get('token')
       let name = 'GJ1030|' + event.data.params
