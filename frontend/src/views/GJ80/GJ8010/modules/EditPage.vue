@@ -79,6 +79,7 @@ import { Judgement } from '@/utils/judge-edited'
 import { reactive, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { DetailVM } from '../type'
+import { convertToFullWidth } from '@/utils/util'
 import {
   DELETE_CONFIRM,
   DELETE_OK_INFO,
@@ -136,6 +137,20 @@ const { validate, clearValidate, validateInfos, resetFields } = Form.useForm(
 //--------------------------------------------------------------------------
 
 watch(formData, () => editJudge.setEdited())
+
+watch(
+  () => formData.MEISYO,
+  (newValue) => {
+    if (newValue) formData.MEISYO = convertToFullWidth(newValue)
+  }
+)
+
+watch(
+  () => formData.RYAKUSYO,
+  (newValue) => {
+    if (newValue) formData.RYAKUSYO = convertToFullWidth(newValue)
+  }
+)
 
 //--------------------------------------------------------------------------
 //メソッド

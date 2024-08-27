@@ -99,10 +99,12 @@ const router = useRouter()
 const route = useRoute()
 const createDefaultParams = (): SearchRequest => {
   return {
-    SYURUI_KBN: 1,
+    SYURUI_KBN: undefined,
   } as SearchRequest
 }
-const SYURUI_KBN_LIST = ref<CodeNameModel[]>([])
+const SYURUI_KBN_LIST = ref<CodeNameModel[]>([
+  { CODE: '1', NAME: '契約者区分' },
+])
 const searchParams = reactive(createDefaultParams())
 const cardRef = ref()
 const { height } = useElementSize(cardRef)
@@ -129,7 +131,14 @@ onBeforeRouteUpdate((to, from) => {
 })
 
 const changeKbn = () => {
-  searchData()
+  // searchData()
+  tableData.value = [
+    {
+      MEISYO_CD: 1,
+      MEISYO: '家族',
+      RYAKUSYO: '家',
+    },
+  ]
 }
 //検索処理
 const { pageParams, searchData } = useSearch({

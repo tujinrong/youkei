@@ -8,13 +8,6 @@
  * -----------------------------------------------------------------*/
 
 import { EnumAndOr, EnumEditKbn } from '@/enum'
-import {
-  CmSearchResponseBase,
-  CodeNameModel,
-  DaRequestBase,
-  DaResponseBase,
-} from '@/typings/Base'
-
 //-------------------------------------------------------------------
 //リクエスト
 //-------------------------------------------------------------------
@@ -22,7 +15,7 @@ import {
 /**検索処理(一覧画面) */
 export interface SearchRequest {
   /**種類区分 */
-  SYURUI_KBN: number
+  SYURUI_KBN: number | undefined
 }
 
 /**削除処理(一覧画面) */
