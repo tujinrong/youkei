@@ -35,3 +35,12 @@ export interface DetailRowVM {
   /**備考 */
   BIKO: string
 }
+
+export interface NoJoRowVM {
+  /**農場コード */
+  NOJO_CD: number
+  /**農場名 */
+  NOJO_NAME: string
+  /**住所 */
+  ADDR: string
+}

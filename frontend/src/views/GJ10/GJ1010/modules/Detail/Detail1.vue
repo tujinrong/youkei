@@ -1,5 +1,17 @@
+<!------------------------------------------------------------------
+ * 業務名称　: 互助防疫システム
+ * 機能概要　: 互助基金契約者マスタ
+ * 　　　　　  画面レイアウト・処理
+ * 作成日　　: 2024.08.27
+ * 作成者　　: wx
+ * 変更履歴　:
+ * ----------------------------------------------------------------->
 <template>
-  <a-card :bordered="false" ref="cardRef">
+  <a-card
+    v-show="detailKbn === DetailStatus.Detail1"
+    :bordered="false"
+    ref="cardRef"
+  >
     <h1>(GJ1012)互助基金契約者マスタメンテナンス(契約情報入力)</h1>
     <div class="self_adaption_table form">
       <b>第{{ formData.KI ?? 8 }}期</b>
@@ -169,10 +181,12 @@
               <ai-select
                 v-model:value="formData.NOJO_CD"
                 :options="NOJO_CD_CD_NAME_LIST"
-                class="w-full"
                 split-val
               ></ai-select>
             </a-form-item>
+            <a-button class="ml-2" type="primary" @click="addNoJo"
+              >農場登録</a-button
+            >
           </td>
         </a-col>
       </a-row>
@@ -251,23 +265,31 @@
       </a-row>
     </div>
   </a-card>
+  <Detail2
+    v-if="detailKbn === DetailStatus.Detail2"
+    v-model:detailKbn="detailKbn"
+  />
 </template>
 <script setup lang="ts">
 import useSearch from '@/hooks/useSearch'
 import { Judgement } from '@/utils/judge-edited'
 import { reactive, ref, toRef, computed } from 'vue'
-import { DetailRowVM } from '../type'
+import { DetailRowVM } from '../../type'
+import Detail2 from './Detail2.vue'
 import { changeTableSort } from '@/utils/util'
 import { useElementSize } from '@vueuse/core'
 import { PageStatus } from '@/enum'
 import { Form } from 'ant-design-vue'
 import { ITEM_REQUIRE_ERROR } from '@/constants/msg'
 import { useRoute, useRouter } from 'vue-router'
+import { DetailStatus } from '../../constant'
 //--------------------------------------------------------------------------
 //データ定義
 //--------------------------------------------------------------------------
 const router = useRouter()
 const route = useRoute()
+
+const detailKbn = ref(DetailStatus.Detail1)
 const formData = reactive({
   KI: undefined as number | undefined,
   KEIYAKUSYA_NAME: '',
@@ -341,6 +363,9 @@ const goList = () => {
     router.push({ name: route.name })
   })
 }
+const addNoJo = () => {
+  detailKbn.value = DetailStatus.Detail2
+}
 </script>
 <style lang="scss" scoped>
 th {
@@ -359,4 +384,3 @@ tr td {
   width: 0.8rem !important;
 }
 </style>
-../../type

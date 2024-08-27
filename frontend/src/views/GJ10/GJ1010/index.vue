@@ -10,7 +10,7 @@
       <EditPage :status="status" />
     </div>
     <div v-else-if="status === PageStatus.Detail" class="h-full">
-      <DetailInfo />
+      <Detail />
     </div>
   </div>
 </template>
@@ -20,7 +20,7 @@ import { useRoute } from 'vue-router'
 import { PageStatus } from '@/enum'
 import ListPage from './modules/ListPage.vue'
 import EditPage from './modules/Detail/EditPage.vue'
-import DetailInfo from './modules/Detail/Detail1.vue'
+import Detail from './modules/Detail/Detail1.vue'
 //--------------------------------------------------------------------------
 //データ定義
 //--------------------------------------------------------------------------
