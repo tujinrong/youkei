@@ -29,7 +29,7 @@ export class Judgement {
     }
     this.isEdited = true
 
-    console.log('setEdited', this.isEdited)
+    // console.log('setEdited', this.isEdited)
   }
 
   public isPageEdited(): boolean {
@@ -42,7 +42,7 @@ export class Judgement {
       // console.log('judgeStore: ', judgeStore)
     }
     this.isEdited = false
-    console.log('reset', this.isEdited)
+    // console.log('reset', this.isEdited)
   }
 
   public judgeIsEdited(onOk: () => void, message?: string): void {

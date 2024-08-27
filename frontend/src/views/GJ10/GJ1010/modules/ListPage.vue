@@ -3,7 +3,7 @@
     class="h-full min-h-500px flex-col-stretch gap-12px overflow-hidden lt-sm:overflow-auto"
   >
     <a-card ref="headRef" :bordered="false">
-      <h1>互助基金契約者マスタ一覧</h1>
+      <h1>(GJ1010)互助基金契約者マスタ一覧</h1>
       <div class="self_adaption_table form mt-1">
         <a-row>
           <a-col v-bind="layout">
@@ -33,8 +33,9 @@
                 class="w-full"
                 type="number"
               ></ai-select>
-            </td>
-          </a-col>
+            </td> </a-col
+        ></a-row>
+        <a-row>
           <a-col v-bind="layout">
             <th>契約者番号</th>
             <td>
@@ -54,8 +55,9 @@
                 class="w-full"
                 type="number"
               ></ai-select>
-            </td>
-          </a-col>
+            </td> </a-col
+        ></a-row>
+        <a-row>
           <a-col v-bind="layout">
             <th>契約状況</th>
             <td>
@@ -74,8 +76,9 @@
                 v-model:value="searchParams.KEIYAKUSYA_NAME"
                 class="w-full"
               ></a-input>
-            </td>
-          </a-col>
+            </td> </a-col
+        ></a-row>
+        <a-row>
           <a-col v-bind="layout">
             <th>契約者名(フリガナ)</th>
             <td>
@@ -83,18 +86,18 @@
                 v-model:value="searchParams.KEIYAKUSYA_KANA"
                 class="w-full"
               ></a-input>
-            </td> </a-col
-        ></a-row>
-        <a-row
-          ><a-col v-bind="layout">
+            </td>
+          </a-col>
+          <a-col v-bind="layout">
             <th>住所</th>
             <td>
               <a-input
                 v-model:value="searchParams.ADDR"
                 class="w-full"
               ></a-input>
-            </td>
-          </a-col>
+            </td> </a-col
+        ></a-row>
+        <a-row>
           <a-col v-bind="layout">
             <th>電話番号</th>
             <td>
@@ -138,7 +141,10 @@
           <a-button type="primary" @click="goForward(PageStatus.New)"
             >新規</a-button
           >
-          <a-button type="primary" @click="goForward(PageStatus.Detail)"
+          <a-button
+            type="primary"
+            :disabled="isDataSelected"
+            @click="goForward(PageStatus.Detail)"
             >契約情報登録</a-button
           >
           <a-button type="primary" @click="clear">クリア</a-button>
@@ -225,7 +231,7 @@
           sortable
         ></vxe-column>
         <vxe-column
-          field="KEN_CD1"
+          field="KEN_CD"
           title="都道府県"
           min-width="150"
           sortable
@@ -243,7 +249,7 @@
 </template>
 <script setup lang="ts">
 import { EnumAndOr, PageStatus } from '@/enum'
-import { reactive, ref, toRef } from 'vue'
+import { computed, reactive, ref, toRef } from 'vue'
 import { showInfoModal } from '@/utils/modal'
 import { ITEM_REQUIRE_ERROR } from '@/constants/msg'
 import useSearch from '@/hooks/useSearch'
@@ -251,6 +257,7 @@ import { useElementSize } from '@vueuse/core'
 import { changeTableSort } from '@/utils/util'
 import { useRoute, useRouter } from 'vue-router'
 import { useTabStore } from '@/store/modules/tab'
+import { ListRowVM } from '../type'
 //--------------------------------------------------------------------------
 //データ定義
 //--------------------------------------------------------------------------
@@ -276,7 +283,7 @@ const layout = {
   md: 12,
   lg: 12,
   xl: 8,
-  xxl: 6,
+  xxl: 8,
 }
 const router = useRouter()
 const route = useRoute()
@@ -289,21 +296,24 @@ const KEIYAKU_KBN_CD_NAME_LIST = ref<CodeNameModel[]>([
   { CODE: 3, NAME: '鶏以外' },
 ])
 const KEN_CD_NAME_LIST = ref<CodeNameModel[]>([])
-const tableData = ref<any>([])
+const tableData = ref<ListRowVM[]>([])
 const tableDefault = {
-  KEIYAKUSYA_CD: '1003',
+  KEIYAKUSYA_CD: 1003,
   KEIYAKUSYA_NAME: '亜伊伊伊伊伊伊伊亜伊',
   KEIYAKUSYA_KANA: 'ｲｲｱｱｱｲｱｲｱｲｱｱｱｲｱｱｲｱｱｱｲｱｱｱ',
   KEIYAKU_KBN: '企業',
   KEIYAKU_JYOKYO: '継続',
   ADDR_TEL: '1111-21-1121',
-  KEN_CD1: '1北海道',
+  KEN_CD: '1北海道',
   JIMUITAKU_CD1: '（宇）宇亜宇伊亜宇伊',
 }
 const { pageParams, totalCount, searchData, clear } = useSearch({
   service: undefined,
   source: tableData,
   params: toRef(() => searchParams),
+})
+const isDataSelected = computed(() => {
+  return tableData.value.length <= 0
 })
 //--------------------------------------------------------------------------
 //メソッド
@@ -326,8 +336,5 @@ function goForward(status: PageStatus, row?: any) {
 <style lang="scss" scoped>
 :deep(th) {
   min-width: 140px;
-}
-h1 {
-  font-size: 24px;
 }
 </style>

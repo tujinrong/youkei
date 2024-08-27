@@ -19,8 +19,8 @@ import { onMounted, ref, watch } from 'vue'
 import { useRoute } from 'vue-router'
 import { PageStatus } from '@/enum'
 import ListPage from './modules/ListPage.vue'
-import EditPage from './modules/EditPage.vue'
-import DetailInfo from './modules/DetailInfo.vue'
+import EditPage from './modules/Detail/EditPage.vue'
+import DetailInfo from './modules/Detail/Detail1.vue'
 //--------------------------------------------------------------------------
 //データ定義
 //--------------------------------------------------------------------------
