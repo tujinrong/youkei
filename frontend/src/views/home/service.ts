@@ -1,8 +1,17 @@
+/** ----------------------------------------------------------------
+ * 業務名称　: 互助事業システム
+ * 機能概要　: ホーム
+ * 　　　　　  インターフェース定義
+ * 作成日　　: 2024.07.26
+ * 作成者　　: wx
+ * 変更履歴　:
+ * -----------------------------------------------------------------*/
 import { api } from '@/service/request/common-service'
 import { InitResponse } from './type'
 
 const servicename = 'GJ0000'
-/** 初期化処理 */
+
+/** 取得処理(ホーム画面) */
 export const Init = (): Promise<InitResponse> => {
   const methodname = 'Home'
   const params = undefined
