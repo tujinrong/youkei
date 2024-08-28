@@ -16,7 +16,7 @@
       <a-form>
         <a-row>
           <a-col span="24">
-            <th :class="!isNew ? 'bg-readonly' : 'required'">金融機関コード</th>
+            <th class="required">金融機関コード</th>
             <td>
               <a-form-item v-bind="validateInfos.BANK_CD">
                 <a-input

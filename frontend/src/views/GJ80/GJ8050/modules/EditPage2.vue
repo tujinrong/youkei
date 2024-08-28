@@ -16,7 +16,7 @@
       <a-form>
         <a-row>
           <a-col span="24">
-            <th class="bg-readonly">金融機関コード</th>
+            <th class="required">金融機関コード</th>
             <td>
               <a-form-item v-bind="validateInfos.BANK_CD">
                 <a-input v-model:value="formData.BANK_CD" disabled></a-input>
@@ -24,7 +24,7 @@
             </td>
           </a-col>
           <a-col span="24">
-            <th :class="!isNew ? 'bg-readonly' : 'required'">支店コード</th>
+            <th class="required">支店コード</th>
             <td>
               <a-form-item v-bind="validateInfos.SITEN_CD">
                 <a-input
