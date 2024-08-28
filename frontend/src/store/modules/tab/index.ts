@@ -102,7 +102,7 @@ export const useTabStore = defineStore(SetupStoreId.Tab, () => {
    *
    * @param tabId Tab id
    */
-  async function removeTab(tabId: string) {
+  async function removeTab(tabId: string, tohome?: boolean) {
     const isRemoveActiveTab = activeTabId.value === tabId
     const updatedTabs = filterTabsById(tabId, tabs.value)
 
@@ -115,7 +115,9 @@ export const useTabStore = defineStore(SetupStoreId.Tab, () => {
       return
     }
 
-    const activeTab = updatedTabs.at(-1) || homeTab.value
+    const activeTab = tohome
+      ? homeTab.value
+      : updatedTabs.at(-1) || homeTab.value
 
     if (activeTab) {
       await switchRouteByTab(activeTab)
@@ -125,7 +127,7 @@ export const useTabStore = defineStore(SetupStoreId.Tab, () => {
 
   /** remove active tab */
   async function removeActiveTab() {
-    await removeTab(activeTabId.value)
+    await removeTab(activeTabId.value, true)
   }
 
   /**
