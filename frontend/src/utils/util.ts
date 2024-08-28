@@ -296,6 +296,14 @@ export function convertToHalfWidth(input: string): string {
     .replace(/[！-～]/g, (ch) => String.fromCharCode(ch.charCodeAt(0) - 0xfee0))
     .replace(/　/g, ' ')
 }
+
+/**半角数字に変換*/
+export function convertToHalfNumber(input: string) {
+  return input
+    .replace(/[！-～]/g, (ch) => String.fromCharCode(ch.charCodeAt(0) - 0xfee0))
+    .replace(/　/g, ' ')
+    .replace(/[^0-9]/g, '')
+}
 /**カナに変換*/
 export function convertToKaNa(input: string): string {
   return input.replace(/[^\u3040-\u309F\u30A0-\u30FF\uFF00-\uFFEF\s]/g, '')

@@ -23,7 +23,7 @@
         >
       </div>
       <h2>申請者基本情報1</h2>
-      <a-form class="mb-2">
+      <a-form class="mb-1">
         <a-row>
           <a-col span="12">
             <th class="required">契約者番号</th>
@@ -115,7 +115,7 @@
         </a-row>
       </a-form>
       <h2>申請者基本情報2</h2>
-      <a-form class="mb-2">
+      <a-form class="mb-1">
         <a-row>
           <a-col span="8">
             <th class="required">申込者名(フリガナ)</th>
@@ -146,24 +146,28 @@
           <a-col span="24">
             <th class="required">住所</th>
             <td class="flex-col">
-              <a-form-item v-bind="validateInfos.ADDR_POST">
-                <PostCode v-model:value="formData.ADDR_POST">
-                  <a-input
-                    v-model:value="formData.ADDR_1"
-                    class="!w-40"
-                  ></a-input
-                ></PostCode>
-              </a-form-item>
-              <a-form-item v-bind="validateInfos.ADDR_2">
-                <a-input
-                  v-model:value="formData.ADDR_2"
-                  :maxlength="15"
-                ></a-input>
-              </a-form-item>
+              <a-row>
+                <a-col
+                  ><a-form-item v-bind="validateInfos.ADDR_POST">
+                    <PostCode v-model:value="formData.ADDR_POST">
+                      <a-input
+                        v-model:value="formData.ADDR_1"
+                        class="!w-40"
+                        disabled
+                      ></a-input
+                    ></PostCode> </a-form-item></a-col
+                ><a-col class="flex-1">
+                  <a-form-item v-bind="validateInfos.ADDR_2">
+                    <a-input
+                      v-model:value="formData.ADDR_2"
+                      :maxlength="15"
+                    ></a-input> </a-form-item></a-col
+              ></a-row>
               <a-form-item v-bind="validateInfos.ADDR_3">
                 <a-input
                   v-model:value="formData.ADDR_3"
                   :maxlength="15"
+                  @change="validate('ADDR_4')"
                 ></a-input>
               </a-form-item>
               <a-form-item v-bind="validateInfos.ADDR_4">
@@ -364,7 +368,11 @@ import { reactive, nextTick, onMounted, ref } from 'vue'
 import DateJp from '@/components/Selector/DateJp/index.vue'
 import { Judgement } from '@/utils/judge-edited'
 import { showDeleteModal, showInfoModal } from '@/utils/modal'
-import { DELETE_CONFIRM, DELETE_OK_INFO } from '@/constants/msg'
+import {
+  DELETE_CONFIRM,
+  DELETE_OK_INFO,
+  ITEM_REQUIRE_ERROR,
+} from '@/constants/msg'
 //--------------------------------------------------------------------------
 //データ定義
 //--------------------------------------------------------------------------
@@ -421,6 +429,43 @@ const rules = reactive({
   KEIYAKUSYA_CD: [
     {
       required: true,
+      message: ITEM_REQUIRE_ERROR.Msg.replace(
+        '{0}',
+        '経営安定対策事業生産者番号'
+      ),
+    },
+  ],
+  ADDR_POST: [
+    {
+      validator: async (_rule, value: string) => {
+        if (!value) {
+          return Promise.reject(
+            ITEM_REQUIRE_ERROR.Msg.replace('{0}', '郵便番号')
+          )
+        } else if (value.replace(/[^0-9]/g, '').length < 7) {
+          return Promise.reject(
+            // ITEM_ILLEGAL_ERROR.Msg.replace('{0}', '郵便番号')
+            ITEM_REQUIRE_ERROR.Msg.replace('{0}', '郵便番号')
+          )
+        }
+        return Promise.resolve()
+      },
+    },
+  ],
+  ADDR_2: [
+    {
+      required: true,
+      message: ITEM_REQUIRE_ERROR.Msg.replace('{0}', '住所２'),
+    },
+  ],
+  ADDR_4: [
+    {
+      validator: async (_rule, value: string) => {
+        if (value && !formData.ADDR_3) {
+          return Promise.reject('前の住所入力欄が未入力です。')
+        }
+        return Promise.resolve()
+      },
     },
   ],
 })

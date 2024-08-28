@@ -29,6 +29,11 @@
           <a-col v-bind="layout">
             <th>都道府県</th>
             <td>
+              <!-- <range-select
+                v-model:value="formData.KEIYAKU_KBN_CD"
+                :options="KEIYAKU_KBN_CD_NAME_LIST"
+              />
+              <range-select> -->
               <ai-select
                 v-model:value="searchParams.KEN_CD1"
                 :options="KEN_CD_NAME_LIST"
@@ -83,6 +88,7 @@
               <a-input
                 v-model:value="searchParams.KEIYAKUSYA_NAME"
                 class="w-full"
+                :maxlength="50"
               ></a-input>
             </td> </a-col
         ></a-row>
@@ -93,6 +99,7 @@
               <a-input
                 v-model:value="searchParams.KEIYAKUSYA_KANA"
                 class="w-full"
+                :maxlength="50"
               ></a-input>
             </td>
           </a-col>
@@ -102,6 +109,7 @@
               <a-input
                 v-model:value="searchParams.ADDR"
                 class="w-full"
+                :maxlength="80"
               ></a-input>
             </td> </a-col
         ></a-row>
@@ -112,6 +120,8 @@
               <a-input
                 v-model:value="searchParams.ADDR_TEL"
                 class="w-full"
+                :maxlength="14"
+                @input="handleTel"
               ></a-input>
             </td>
           </a-col>
@@ -152,7 +162,7 @@
           >
           <a-button
             type="primary"
-            :disabled="isDataSelected"
+            :disabled="!isDataSelected"
             @click="goForward(PageStatus.Detail)"
             >契約情報登録</a-button
           >
@@ -175,6 +185,7 @@
         class="m-b-1 text-end"
       />
       <vxe-table
+        ref="xTableRef"
         class="mt-2"
         :column-config="{ resizable: true }"
         :height="height - 70"
@@ -258,7 +269,7 @@
 </template>
 <script setup lang="ts">
 import { EnumAndOr, PageStatus } from '@/enum'
-import { computed, reactive, ref, toRef } from 'vue'
+import { computed, reactive, ref, toRef, nextTick } from 'vue'
 import { showInfoModal } from '@/utils/modal'
 import { ITEM_REQUIRE_ERROR } from '@/constants/msg'
 import useSearch from '@/hooks/useSearch'
@@ -267,6 +278,8 @@ import { changeTableSort } from '@/utils/util'
 import { useRoute, useRouter } from 'vue-router'
 import { useTabStore } from '@/store/modules/tab'
 import { ListRowVM } from '../type'
+import { VxeTableInstance } from 'vxe-table'
+import { convertToHalfNumber } from '@/utils/util'
 //--------------------------------------------------------------------------
 //データ定義
 //--------------------------------------------------------------------------
@@ -298,6 +311,7 @@ const router = useRouter()
 const route = useRoute()
 const tabStore = useTabStore()
 const cardRef = ref()
+const xTableRef = ref<VxeTableInstance>()
 const { height } = useElementSize(cardRef)
 const KEIYAKU_KBN_CD_NAME_LIST = ref<CmCodeNameModel[]>([
   { CODE: 1, NAME: '家族' },
@@ -322,12 +336,20 @@ const { pageParams, totalCount, searchData, clear } = useSearch({
   params: toRef(() => searchParams),
 })
 const isDataSelected = computed(() => {
-  return tableData.value.length <= 0
+  return tableData.value.length > 0 && xTableRef.value?.getCurrentRecord()
 })
+//--------------------------------------------------------------------------
+//監視定義
+//--------------------------------------------------------------------------
+
 //--------------------------------------------------------------------------
 //メソッド
 //--------------------------------------------------------------------------
-
+const handleTel = () => {
+  nextTick(
+    () => (searchParams.ADDR_TEL = convertToHalfNumber(searchParams.ADDR_TEL))
+  )
+}
 //検索処理
 function search() {
   tableData.value.push(tableDefault)
