@@ -7,9 +7,9 @@
 ' 変更履歴　:
 ' *******************************************************************
 
-Namespace JBD.GJS.Service.GJ8020
+Namespace JBD.GJS.Service.GJ8030
 
-    Public Module FrmGJ8020Service
+    Public Module FrmGJ8030Service
 
 #Region "f_SetForm_Data データ取得SQL"
         '------------------------------------------------------------------
@@ -23,15 +23,15 @@ Namespace JBD.GJS.Service.GJ8020
             Dim wkDS As New DataSet
             Dim wSql As String = String.Empty
             'SQL
-            wSql = "SELECT * FROM TM_SYORI_KI"
+            wSql = "SELECT * FROM TM_KYOKAI"
             Return wSql
         End Function
 #End Region
 
-#Region "f_Data_Insert 処理対象期・年度マスタメンテナンス更新処理"
+#Region "f_Data_Insert 協会マスタデータ更新処理"
         '------------------------------------------------------------------
         'プロシージャ名  :f_Data_Insert
-        '説明            :処理対象期・年度マスタメンテナンス更新処理
+        '説明            :協会マスタデータ更新処理
         '引数            :なし
         '戻り値          :Boolean(正常True/エラーFalse)
         '------------------------------------------------------------------
@@ -45,49 +45,58 @@ Namespace JBD.GJS.Service.GJ8020
 
             Select Case wNojoCd.EDIT_KBN
                 Case EnumEditKbn.Edit       '変更入力
-                    Cmd.CommandText = "PKG_GJ8020.GJ8020_SYORI_KI_UPD"
+                    Cmd.CommandText = "PKG_GJ8030.GJ8030_KYOKAI_UPD"
                 Case EnumEditKbn.Add       '新規入力
-                    Cmd.CommandText = "PKG_GJ8020.GJ8020_SYORI_KI_INS"
+                    Cmd.CommandText = "PKG_GJ8030.GJ8030_KYOKAI_INS"
             End Select
 
             '引き渡し
-            '期 
-            Cmd.Parameters.Add("IN_KI", wNojoCd.SYORI_KI.KI)
-            '事業対象開始年度
-            Cmd.Parameters.Add("IN_JIGYO_NENDO", wNojoCd.SYORI_KI.JIGYO_NENDO
+            '協会区分 １を固定で設定 
+            Cmd.Parameters.Add("IN_KYOKAI_KBN", 1)
+            '協会名称 ”社団法人　日本養鶏協会”
+            Cmd.Parameters.Add("IN_KYOKAI_NAME", wNojoCd.KYOKAI.KYOKAI_NAME
                             )
-            '事業対象終了年度 
-            Cmd.Parameters.Add("IN_JIGYO_SYURYO_NENDO", wNojoCd.SYORI_KI.JIGYO_SYURYO_NENDO
+            '役職名 ”会長”
+            Cmd.Parameters.Add("IN_YAKUMEI", wNojoCd.KYOKAI.YAKUMEI
                             )
-            '前期積立金取込日
-            Cmd.Parameters.Add("IN_ZENKI_TUMITATE_DATE", wNojoCd.SYORI_KI.ZENKI_TUMITATE_DATE
+            '会長名 ”木下　寛之”
+            Cmd.Parameters.Add("IN_KAICHO_NAME", wNojoCd.KYOKAI.KAICHO_NAME
                             )
-            '前期交付金取込日
-            Cmd.Parameters.Add("IN_ZENKI_KOFU_DATE", wNojoCd.SYORI_KI.ZENKI_KOFU_DATE
+            '事業名
+            Cmd.Parameters.Add("IN_JIGYO_NAME", wNojoCd.KYOKAI.JIGYO_NAME
                             )
-            '返還金計算日
-            Cmd.Parameters.Add("IN_HENKAN_KEISAN_DATE", wNojoCd.SYORI_KI.HENKAN_KEISAN_DATE
+            '予備1
+            Cmd.Parameters.Add("IN_YOBI1", wNojoCd.KYOKAI.YOBI1
                             )
-            '積立金返還人数
-            Cmd.Parameters.Add("IN_HENKAN_NINZU", wNojoCd.SYORI_KI.HENKAN_NINZU
+            '郵便番号
+            Cmd.Parameters.Add("IN_POST", wNojoCd.KYOKAI.POST
                             )
-            '積立金返還額合計
-            Cmd.Parameters.Add("IN_HENKAN_GOKEI", wNojoCd.SYORI_KI.HENKAN_GOKEI
+            '住所１
+            Cmd.Parameters.Add("IN_ADDR1", wNojoCd.KYOKAI.ADDR1
                             )
-            '前期積立金返還率
-            Cmd.Parameters.Add("IN_HENKAN_RITU", wNojoCd.SYORI_KI.HENKAN_RITU
+            '住所２
+            Cmd.Parameters.Add("IN_ADDR2", wNojoCd.KYOKAI.ADDR2
                             )
-            '対象年度
-            Cmd.Parameters.Add("IN_TAISYO_NENDO", wNojoCd.SYORI_KI.TAISYO_NENDO
+            '電話番号１ 連絡先１
+            Cmd.Parameters.Add("IN_TEL1", wNojoCd.KYOKAI.TEL1
                             )
-            '当初対象積立金納付期限
-            Cmd.Parameters.Add("IN_NOFU_KIGEN", wNojoCd.SYORI_KI.NOFU_KIGEN
+            'ＦＡＸ１
+            Cmd.Parameters.Add("IN_FAX1", wNojoCd.KYOKAI.FAX1
                             )
-            '現在の認定回数
-            Cmd.Parameters.Add("IN_HASSEI_KAISU", wNojoCd.SYORI_KI.HASSEI_KAISU
+            'Ｅ－ｍａｉｌ１
+            Cmd.Parameters.Add("IN_E_MAIL1", wNojoCd.KYOKAI.E_MAIL1
                             )
-            '備考
-            Cmd.Parameters.Add("IN_BIKO", wNojoCd.SYORI_KI.BIKO
+            '電話番号２ 連絡先２
+            Cmd.Parameters.Add("IN_TEL2", wNojoCd.KYOKAI.TEL2
+                            )
+            'ＦＡＸ２
+            Cmd.Parameters.Add("IN_FAX2", wNojoCd.KYOKAI.FAX2
+                            )
+            'Ｅ－ｍａｉｌ２
+            Cmd.Parameters.Add("IN_E_MAIL2", wNojoCd.KYOKAI.E_MAIL2
+                            )
+            'ホームページURL
+            Cmd.Parameters.Add("IN_HP_URL", wNojoCd.KYOKAI.HP_URL
                             )
 
             Select Case wNojoCd.EDIT_KBN

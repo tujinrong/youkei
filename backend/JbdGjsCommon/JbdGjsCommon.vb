@@ -3897,106 +3897,238 @@ ACoDateCheckEdit_Exit3:
             Return True
         End Function
 
-    #End Region
+#End Region
 
-    #Region "f_Itaku_Data_Select 金融機関データ取得"
+        '#Region "f_Itaku_Data_Select 金融機関データ取得"
+        '        '------------------------------------------------------------------
+        '        'プロシージャ名  :f_Itaku_Data_Select
+        '        '説明            :金融機関データ取得
+        '        '引数            :1.cmbBankCd  String       金融機関コードコンボボックス
+        '        '                 2.cmbBankMei String       金融機関名コンボボックス
+        '        '                 3.blnNullAddFlg   Boolean                 スペース項目をコンボに追加するかしないかのフラグ(False(既定):スペース項目を追加しない　True:スペース項目を追加する)
+        '        '                 4.sDATA_KBN   String(Optional)            データ区分(Default:"")
+        '        '戻り値          :Boolean(正常True/エラーFalse)
+        '        '------------------------------------------------------------------
+        '        Public Function f_Bank_Data_Select(ByRef cmbBankCd As String,
+        '                                           ByRef cmbBankMei As String,
+        '                                           ByVal blnNullAddFlg As Boolean,
+        '                                           ByVal sDATA_KBN As String) As Boolean
+
+        '            Dim sSql As String = String.Empty
+        '            Dim dstDataSet As New DataSet
+
+        '            f_Bank_Data_Select = False
+
+        '            Try
+
+        '                sSql = " SELECT " & vbCrLf
+        '                sSql = sSql & "  BANK_CD," & vbCrLf
+        '                sSql = sSql & "  BANK_NAME" & vbCrLf
+        '                sSql = sSql & " FROM" & vbCrLf
+        '                sSql = sSql & "  TM_BANK" & vbCrLf
+        '                'If sDATA_KBN <> "" Then
+        '                '    sSql = sSql & " WHERE" & vbCrLf
+        '                '    sSql = sSql & "  DATA_KBN = '" & sDATA_KBN & "'" & vbCrLf
+        '                'End If
+        '                sSql = sSql & " ORDER BY BANK_CD" & vbCrLf
+
+        '                Call f_Select_ODP(dstDataSet, sSql)
+
+        '                'cmbBankCd.Items.Clear()
+        '                'cmbBankMei.Items.Clear()
+
+        '                'With dstDataSet.Tables(0)
+        '                '    If .Rows.Count > 0 Then
+
+        '                '        For i As Integer = 0 To .Rows.Count - 1
+        '                '            cmbBankCd.Items.Add(WordHenkan("N", "S", .Rows(i)("BANK_CD")))
+        '                '            cmbBankMei.Items.Add(WordHenkan("N", "S", .Rows(i)("BANK_NAME")))
+        '                '        Next
+
+        '                '        '↓***** 2010/09/15 JBD200 ADD 第3引数=Trueの時、空白項目を追加するよう追加 *****↓
+        '                '        If blnNullAddFlg Then
+        '                '            'コンボ空白項目追加
+        '                '            cmbBankCd.Items.Insert(0, New GrapeCity.Win.Editors.ListItem()) : cmbBankMei.Items.Insert(0, New GrapeCity.Win.Editors.ListItem())
+        '                '        End If
+        '                '        '↑***** 2010/09/15 JBD200 ADD 第3引数=Trueの時、空白項目を追加するよう追加 *****↑
+
+        '                '    Else
+        '                '        'エラーリスト出力なし
+        '                '        'Show_MessageBox("I002", "") '該当データが存在しません。
+        '                '        ''Show_MessageBox("該当データが存在しません。", C_MSGICON_INFORMATION)
+        '                '    End If
+        '                'End With
+
+        '                f_Bank_Data_Select = True
+
+        '            Catch ex As Exception
+        '                '共通例外処理
+        '                'Show_MessageBox("", ex.Message)
+        '            Finally
+        '                dstDataSet.Dispose()
+        '            End Try
+
+
+        '        End Function
+
+
+        '        Public Function f_Bank_Data_Select(ByRef cmbBankCd As String, _
+        '                                           ByRef cmbBankMei As String, _
+        '                                           ByVal blnNullAddFlg As Boolean) As Boolean
+
+        '            If Not f_Bank_Data_Select(cmbBankCd,
+        '                                      cmbBankMei,
+        '                                      blnNullAddFlg,
+        '                                      "") Then
+        '                Return False
+        '            End If
+        '            Return True
+        '        End Function
+        '        Public Function f_Bank_Data_Select(ByRef cmbBankCd As String, _
+        '                                           ByRef cmbBankMei As String) As Boolean
+
+        '            If Not f_Bank_Data_Select(cmbBankCd,
+        '                                      cmbBankMei,
+        '                                      False,
+        '                                      "") Then
+        '                Return False
+        '            End If
+        '            Return True
+        '        End Function
+
+        '#End Region
+
+
+
+#Region "f_Itaku_Data_Select 金融機関データ取得"
         '------------------------------------------------------------------
         'プロシージャ名  :f_Itaku_Data_Select
         '説明            :金融機関データ取得
-        '引数            :1.cmbBankCd  String       金融機関コードコンボボックス
-        '                 2.cmbBankMei String       金融機関名コンボボックス
-        '                 3.blnNullAddFlg   Boolean                 スペース項目をコンボに追加するかしないかのフラグ(False(既定):スペース項目を追加しない　True:スペース項目を追加する)
-        '                 4.sDATA_KBN   String(Optional)            データ区分(Default:"")
+        '引数            :
         '戻り値          :Boolean(正常True/エラーFalse)
         '------------------------------------------------------------------
-        Public Function f_Bank_Data_Select(ByRef cmbBankCd As String, _
-                                           ByRef cmbBankMei As String, _
-                                           ByVal blnNullAddFlg As Boolean, _
-                                           ByVal sDATA_KBN As String) As Boolean
-
+        Public Function f_Bank_Data_Select() As String
             Dim sSql As String = String.Empty
-            Dim dstDataSet As New DataSet
-
-            f_Bank_Data_Select = False
-
-            Try
-
-                sSql = " SELECT " & vbCrLf
-                sSql = sSql & "  BANK_CD," & vbCrLf
-                sSql = sSql & "  BANK_NAME" & vbCrLf
-                sSql = sSql & " FROM" & vbCrLf
-                sSql = sSql & "  TM_BANK" & vbCrLf
-                'If sDATA_KBN <> "" Then
-                '    sSql = sSql & " WHERE" & vbCrLf
-                '    sSql = sSql & "  DATA_KBN = '" & sDATA_KBN & "'" & vbCrLf
-                'End If
-                sSql = sSql & " ORDER BY BANK_CD" & vbCrLf
-
-                Call f_Select_ODP(dstDataSet, sSql)
-
-                'cmbBankCd.Items.Clear()
-                'cmbBankMei.Items.Clear()
-
-                'With dstDataSet.Tables(0)
-                '    If .Rows.Count > 0 Then
-
-                '        For i As Integer = 0 To .Rows.Count - 1
-                '            cmbBankCd.Items.Add(WordHenkan("N", "S", .Rows(i)("BANK_CD")))
-                '            cmbBankMei.Items.Add(WordHenkan("N", "S", .Rows(i)("BANK_NAME")))
-                '        Next
-
-                '        '↓***** 2010/09/15 JBD200 ADD 第3引数=Trueの時、空白項目を追加するよう追加 *****↓
-                '        If blnNullAddFlg Then
-                '            'コンボ空白項目追加
-                '            cmbBankCd.Items.Insert(0, New GrapeCity.Win.Editors.ListItem()) : cmbBankMei.Items.Insert(0, New GrapeCity.Win.Editors.ListItem())
-                '        End If
-                '        '↑***** 2010/09/15 JBD200 ADD 第3引数=Trueの時、空白項目を追加するよう追加 *****↑
-
-                '    Else
-                '        'エラーリスト出力なし
-                '        'Show_MessageBox("I002", "") '該当データが存在しません。
-                '        ''Show_MessageBox("該当データが存在しません。", C_MSGICON_INFORMATION)
-                '    End If
-                'End With
-
-                f_Bank_Data_Select = True
-
-            Catch ex As Exception
-                '共通例外処理
-                'Show_MessageBox("", ex.Message)
-            Finally
-                dstDataSet.Dispose()
-            End Try
-
-
-        End Function
-        Public Function f_Bank_Data_Select(ByRef cmbBankCd As String, _
-                                           ByRef cmbBankMei As String, _
-                                           ByVal blnNullAddFlg As Boolean) As Boolean
-
-            If Not f_Bank_Data_Select(cmbBankCd,
-                                      cmbBankMei,
-                                      blnNullAddFlg,
-                                      "") Then
-                Return False
-            End If
-            Return True
-        End Function
-        Public Function f_Bank_Data_Select(ByRef cmbBankCd As String, _
-                                           ByRef cmbBankMei As String) As Boolean
-
-            If Not f_Bank_Data_Select(cmbBankCd,
-                                      cmbBankMei,
-                                      False,
-                                      "") Then
-                Return False
-            End If
-            Return True
+            sSql = " SELECT " & vbCrLf
+            sSql = sSql & "  BANK_CD," & vbCrLf
+            sSql = sSql & "  BANK_NAME" & vbCrLf
+            sSql = sSql & " FROM" & vbCrLf
+            sSql = sSql & "  TM_BANK" & vbCrLf
+            sSql = sSql & " ORDER BY BANK_CD" & vbCrLf
+            Return sSql
         End Function
 
-    #End Region
+#End Region
 
-    #Region "f_BankShop_Data_Select 金融機関支店データ取得"
+        '#Region "f_BankShop_Data_Select 金融機関支店データ取得"
+        '        '------------------------------------------------------------------
+        '        'プロシージャ名  :f_BankShop_Data_Select
+        '        '説明            :金融機関支店データ取得
+        '        '引数            :1.cmbShopCd  String       金融機関支店コードコンボボックス
+        '        '                 2.cmbShopMei String       金融機関支店名コンボボックス
+        '        '                 3.sBankCD     String                      金融機関コード
+        '        '                 4.blnNullAddFlg   Boolean                 スペース項目をコンボに追加するかしないかのフラグ(False(既定):スペース項目を追加しない　True:スペース項目を追加する)
+        '        '                 5.sDATA_KBN   String(Optional)            データ区分(Default:"")
+        '        '戻り値          :Boolean(正常True/エラーFalse)
+        '        '------------------------------------------------------------------
+        '        Public Function f_BankShop_Data_Select(ByRef cmbShopCd As String, _
+        '                                           ByRef cmbShopMei As String, _
+        '                                           ByVal sBankCD As String, _
+        '                                           ByVal blnNullAddFlg As Boolean, _
+        '                                           ByVal sDATA_KBN As String) As Boolean
+
+        '            Dim sSql As String = String.Empty
+        '            Dim sWhere As String = String.Empty
+        '            Dim dstDataSet As New DataSet
+
+        '            f_BankShop_Data_Select = False
+
+        '            Try
+
+        '                sSql = " SELECT " & vbCrLf
+        '                sSql = sSql & "  SITEN_CD," & vbCrLf
+        '                sSql = sSql & "  SITEN_NAME" & vbCrLf
+        '                sSql = sSql & " FROM" & vbCrLf
+        '                sSql = sSql & "  TM_SITEN" & vbCrLf
+        '                'If sDATA_KBN <> "" Then
+        '                '    sWhere = sWhere & "  DATA_KBN = '" & sDATA_KBN & "'" & vbCrLf
+        '                'End If
+        '                If sBankCD <> "" Then
+        '                    If sWhere <> "" Then
+        '                        sWhere = sWhere & "  AND"
+        '                    End If
+        '                    sWhere = sWhere & " BANK_CD = '" & sBankCD & "'" & vbCrLf
+        '                End If
+        '                If sWhere <> "" Then
+        '                    sSql = sSql & " WHERE" & vbCrLf
+        '                    sSql = sSql & sWhere
+        '                End If
+        '                sSql = sSql & " ORDER BY BANK_CD, SITEN_CD" & vbCrLf
+
+        '                Call f_Select_ODP(dstDataSet, sSql)
+
+        '                'cmbShopCd.Items.Clear()
+        '                'cmbShopMei.Items.Clear()
+
+        '                'With dstDataSet.Tables(0)
+        '                '    If .Rows.Count > 0 Then
+
+        '                '        For i As Integer = 0 To .Rows.Count - 1
+        '                '            cmbShopCd.Items.Add(WordHenkan("N", "S", .Rows(i)("SITEN_CD")))
+        '                '            cmbShopMei.Items.Add(WordHenkan("N", "S", .Rows(i)("SITEN_NAME")))
+        '                '        Next
+
+        '                '        '↓***** 2010/09/15 JBD200 ADD 第3引数=Trueの時、空白項目を追加するよう追加 *****↓
+        '                '        If blnNullAddFlg Then
+        '                '            'コンボ空白項目追加
+        '                '            cmbShopCd.Items.Insert(0, New GrapeCity.Win.Editors.ListItem()) : cmbShopMei.Items.Insert(0, New GrapeCity.Win.Editors.ListItem())
+        '                '        End If
+        '                '        '↑***** 2010/09/15 JBD200 ADD 第3引数=Trueの時、空白項目を追加するよう追加 *****↑
+
+        '                '    End If
+        '                'End With
+
+        '                f_BankShop_Data_Select = True
+
+        '            Catch ex As Exception
+        '                '共通例外処理
+        '                'Show_MessageBox("", ex.Message)
+        '            Finally
+        '                dstDataSet.Dispose()
+        '            End Try
+
+        '        End Function
+        '        Public Function f_BankShop_Data_Select(ByRef cmbShopCd As String, _
+        '                                           ByRef cmbShopMei As String, _
+        '                                           ByVal sBankCD As String, _
+        '                                           ByVal blnNullAddFlg As Boolean) As Boolean
+
+        '            If Not f_BankShop_Data_Select(cmbShopCd,
+        '                                          cmbShopMei,
+        '                                          sBankCD,
+        '                                          blnNullAddFlg,
+        '                                          "") Then
+        '                Return False
+        '            End If
+        '            Return True
+        '        End Function
+        '        Public Function f_BankShop_Data_Select(ByRef cmbShopCd As String, _
+        '                                           ByRef cmbShopMei As String, _
+        '                                           ByVal sBankCD As String) As Boolean
+
+        '            If Not f_BankShop_Data_Select(cmbShopCd,
+        '                                          cmbShopMei,
+        '                                          sBankCD,
+        '                                          False,
+        '                                          "") Then
+        '                Return False
+        '            End If
+        '            Return True
+        '        End Function
+
+        '#End Region
+
+#Region "f_BankShop_Data_Select 金融機関支店データ取得"
         '------------------------------------------------------------------
         'プロシージャ名  :f_BankShop_Data_Select
         '説明            :金融機関支店データ取得
@@ -4007,104 +4139,32 @@ ACoDateCheckEdit_Exit3:
         '                 5.sDATA_KBN   String(Optional)            データ区分(Default:"")
         '戻り値          :Boolean(正常True/エラーFalse)
         '------------------------------------------------------------------
-        Public Function f_BankShop_Data_Select(ByRef cmbShopCd As String, _
-                                           ByRef cmbShopMei As String, _
-                                           ByVal sBankCD As String, _
-                                           ByVal blnNullAddFlg As Boolean, _
-                                           ByVal sDATA_KBN As String) As Boolean
+        Public Function f_BankShop_Data_Select(
+                                           ByVal sBankCD As String) As String
 
             Dim sSql As String = String.Empty
             Dim sWhere As String = String.Empty
-            Dim dstDataSet As New DataSet
-
-            f_BankShop_Data_Select = False
-
-            Try
-
-                sSql = " SELECT " & vbCrLf
-                sSql = sSql & "  SITEN_CD," & vbCrLf
-                sSql = sSql & "  SITEN_NAME" & vbCrLf
-                sSql = sSql & " FROM" & vbCrLf
-                sSql = sSql & "  TM_SITEN" & vbCrLf
-                'If sDATA_KBN <> "" Then
-                '    sWhere = sWhere & "  DATA_KBN = '" & sDATA_KBN & "'" & vbCrLf
-                'End If
-                If sBankCD <> "" Then
-                    If sWhere <> "" Then
-                        sWhere = sWhere & "  AND"
-                    End If
-                    sWhere = sWhere & " BANK_CD = '" & sBankCD & "'" & vbCrLf
-                End If
+            sSql = " SELECT " & vbCrLf
+            sSql = sSql & "  SITEN_CD," & vbCrLf
+            sSql = sSql & "  SITEN_NAME" & vbCrLf
+            sSql = sSql & " FROM" & vbCrLf
+            sSql = sSql & "  TM_SITEN" & vbCrLf
+            If sBankCD <> "" Then
                 If sWhere <> "" Then
-                    sSql = sSql & " WHERE" & vbCrLf
-                    sSql = sSql & sWhere
+                    sWhere = sWhere & "  AND"
                 End If
-                sSql = sSql & " ORDER BY BANK_CD, SITEN_CD" & vbCrLf
-
-                Call f_Select_ODP(dstDataSet, sSql)
-
-                'cmbShopCd.Items.Clear()
-                'cmbShopMei.Items.Clear()
-
-                'With dstDataSet.Tables(0)
-                '    If .Rows.Count > 0 Then
-
-                '        For i As Integer = 0 To .Rows.Count - 1
-                '            cmbShopCd.Items.Add(WordHenkan("N", "S", .Rows(i)("SITEN_CD")))
-                '            cmbShopMei.Items.Add(WordHenkan("N", "S", .Rows(i)("SITEN_NAME")))
-                '        Next
-
-                '        '↓***** 2010/09/15 JBD200 ADD 第3引数=Trueの時、空白項目を追加するよう追加 *****↓
-                '        If blnNullAddFlg Then
-                '            'コンボ空白項目追加
-                '            cmbShopCd.Items.Insert(0, New GrapeCity.Win.Editors.ListItem()) : cmbShopMei.Items.Insert(0, New GrapeCity.Win.Editors.ListItem())
-                '        End If
-                '        '↑***** 2010/09/15 JBD200 ADD 第3引数=Trueの時、空白項目を追加するよう追加 *****↑
-
-                '    End If
-                'End With
-
-                f_BankShop_Data_Select = True
-
-            Catch ex As Exception
-                '共通例外処理
-                'Show_MessageBox("", ex.Message)
-            Finally
-                dstDataSet.Dispose()
-            End Try
-
-        End Function
-        Public Function f_BankShop_Data_Select(ByRef cmbShopCd As String, _
-                                           ByRef cmbShopMei As String, _
-                                           ByVal sBankCD As String, _
-                                           ByVal blnNullAddFlg As Boolean) As Boolean
-
-            If Not f_BankShop_Data_Select(cmbShopCd,
-                                          cmbShopMei,
-                                          sBankCD,
-                                          blnNullAddFlg,
-                                          "") Then
-                Return False
+                sWhere = sWhere & " BANK_CD = '" & sBankCD & "'" & vbCrLf
             End If
-            Return True
-        End Function
-        Public Function f_BankShop_Data_Select(ByRef cmbShopCd As String, _
-                                           ByRef cmbShopMei As String, _
-                                           ByVal sBankCD As String) As Boolean
-
-            If Not f_BankShop_Data_Select(cmbShopCd,
-                                          cmbShopMei,
-                                          sBankCD,
-                                          False,
-                                          "") Then
-                Return False
+            If sWhere <> "" Then
+                sSql = sSql & " WHERE" & vbCrLf
+                sSql = sSql & sWhere
             End If
-            Return True
+            sSql = sSql & " ORDER BY BANK_CD, SITEN_CD" & vbCrLf
+            Return sSql
         End Function
+#End Region
 
-    #End Region
-
-    #Region "f_Doitu_Seisansya_Data_Select 同一生産者グループデータ取得"
+#Region "f_Doitu_Seisansya_Data_Select 同一生産者グループデータ取得"
         '------------------------------------------------------------------
         'プロシージャ名  :f_Doitu_Seisansya_Data_Select
         '説明            :同一生産者グループデータ取得

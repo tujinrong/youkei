@@ -10,7 +10,7 @@
 Namespace JBD.GJS.Service.GJ8020
 
     ''' <summary>
-    ''' 契約者農場情報
+    ''' 処理対象期・年度マスタメンテナンス情報
     ''' </summary>
     Public Class DetailVM
 

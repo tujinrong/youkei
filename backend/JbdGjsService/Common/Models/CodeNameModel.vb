@@ -54,4 +54,23 @@ Namespace JBD.GJS.Service
             Me.children = If(children.ToList(), New List(Of T)())
         End Sub
     End Class
+    Public Class CmCodeStrNameModel
+        Public Property CODE As String   'コード
+        Public Property NAME As String   '名称
+
+        ''' <summary>
+        ''' Cacheに使用
+        ''' </summary>
+        Public Sub New()
+        End Sub
+
+        Public Sub New(value As String, label As String)
+            Me.CODE = If(value, String.Empty)
+            Me.NAME = If(label, String.Empty)
+        End Sub
+
+        Public Overrides Function ToString() As String
+            Return $"{CODE}{DaConst.SELECTOR_DELIMITER}{NAME}"
+        End Function
+    End Class
 End Namespace

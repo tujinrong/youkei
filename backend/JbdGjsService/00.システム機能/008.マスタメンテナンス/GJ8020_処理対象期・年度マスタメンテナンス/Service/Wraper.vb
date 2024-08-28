@@ -10,7 +10,7 @@
 Namespace JBD.GJS.Service.GJ8020
 
     ''' <summary>
-    ''' 契約者農場マスタ一覧
+    ''' 処理対象期・年度マスタメンテナンス
     ''' </summary>
     Public Class Wraper
         Inherits Common.Wraper
