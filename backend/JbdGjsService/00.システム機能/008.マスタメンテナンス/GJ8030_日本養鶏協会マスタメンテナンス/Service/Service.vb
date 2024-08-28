@@ -19,7 +19,7 @@ Namespace JBD.GJS.Service.GJ8030
         Inherits CmServiceBase
 
         <DisplayName("初期化処理_詳細画面処理")>
-        Public Shared Function InitFuriDetailDetail(req As InitFuriDetailRequest) As InitFuriDetailResponse
+        Public Shared Function InitDetail(req As InitDetailRequest) As InitDetailResponse
             Return Nolock(req,
                 Function(db)
 
@@ -40,7 +40,7 @@ Namespace JBD.GJS.Service.GJ8030
                     '-------------------------------------------------------------
                     'データクエリ
                     Dim sql1 = f_Bank_Data_Select()
-                    Dim sql2 = f_BankShop_Data_Select(req.FURI_BANK_CD)
+                    Dim sql2 = f_BankShop_Data_Select(req.BANK_CD)
 
                     'データSelect 
                     Dim ds1 = f_Select_ODP(db, sql1)
@@ -54,7 +54,7 @@ Namespace JBD.GJS.Service.GJ8030
                     '-------------------------------------------------------------
                     '5.データ加工処理
                     '-------------------------------------------------------------
-                    Dim res = Wraper.GetInitFuriDetailResponse(dt1, dt2, dt3)
+                    Dim res = Wraper.GetInitDetailResponse(dt1, dt2, dt3)
 
                     '-------------------------------------------------------------
                     '6.正常返し
@@ -65,52 +65,7 @@ Namespace JBD.GJS.Service.GJ8030
 
         End Function
 
-        <DisplayName("初期化処理_詳細画面処理")>
-        Public Shared Function InitKofuDetailDetail(req As InitKofuDetailRequest) As InitKofuDetailResponse
-            Return Nolock(req,
-                Function(db)
 
-                    '-------------------------------------------------------------
-                    '1.初期化
-                    '-------------------------------------------------------------
-
-                    '-------------------------------------------------------------
-                    '2.データ取得
-                    '-------------------------------------------------------------
-
-                    '-------------------------------------------------------------
-                    '3.チェック処理
-                    '-------------------------------------------------------------
-
-                    '-------------------------------------------------------------
-                    '4.ビジネスロジック処理
-                    '-------------------------------------------------------------
-                    'データクエリ
-                    Dim sql1 = f_Bank_Data_Select()
-                    Dim sql2 = f_BankShop_Data_Select(req.KOFU_BANK_CD)
-
-                    'データSelect 
-                    Dim ds1 = f_Select_ODP(db, sql1)
-                    Dim dt1 = ds1.Tables(0)
-
-                    Dim ds2 = f_Select_ODP(db, sql2)
-                    Dim dt2 = ds2.Tables(0)
-
-                    Dim dt3 = f_CodeMaster_Data_Select(4, 0)
-
-                    '-------------------------------------------------------------
-                    '5.データ加工処理
-                    '-------------------------------------------------------------
-                    Dim res = Wraper.GetInitKofuDetailResponse(dt1, dt2, dt3)
-
-                    '-------------------------------------------------------------
-                    '6.正常返し
-                    '-------------------------------------------------------------
-                    Return res
-
-                End Function)
-
-        End Function
 
         <DisplayName("検索処理_詳細画面処理")>
         Public Shared Function SearchDetail(req As DaRequestBase) As SearchDetailResponse

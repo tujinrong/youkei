@@ -12,28 +12,17 @@ Namespace JBD.GJS.Service.GJ8030
     ''' <summary>
     ''' 初期化処理_詳細画面処理
     ''' </summary>
-    Public Class InitFuriDetailRequest
+    Public Class InitDetailRequest
         Inherits DaRequestBase
 
         ''' <summary>
-        ''' 振込　金融機関
+        ''' 金融機関コード
         ''' </summary>
-        Public Property FURI_BANK_CD As String = String.Empty
+        Public Property BANK_CD As String = String.Empty
 
     End Class
 
-    ''' <summary>
-    ''' 初期化処理_詳細画面処理
-    ''' </summary>
-    Public Class InitKofuDetailRequest
-        Inherits DaRequestBase
 
-        ''' <summary>
-        ''' 支払　金融機関
-        ''' </summary>
-        Public Property KOFU_BANK_CD As String = String.Empty
-
-    End Class
 
     ''' <summary>
     ''' 保存処理_詳細画面処理

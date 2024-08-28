@@ -12,23 +12,23 @@ Namespace JBD.GJS.Service.GJ8030
     ''' <summary>
     ''' 初期化処理_詳細画面処理(成功)
     ''' </summary>
-    Public Class InitFuriDetailResponse
+    Public Class InitDetailResponse
         Inherits DaResponseBase
 
         ''' <summary>
-        ''' 振込　金融機関情報プルダウンリスト
+        ''' 金融機関情報プルダウンリスト
         ''' </summary>
-        Public Property FURI_BANK_LIST As List(Of CmCodeNameModel) = New List(Of CmCodeNameModel)
+        Public Property BANK_LIST As List(Of CmStrCodeNameModel) = New List(Of CmStrCodeNameModel)
 
         ''' <summary>
-        ''' 振込　本支店情報プルダウンリスト
+        ''' 本支店情報プルダウンリスト
         ''' </summary>
-        Public Property FURI_SITEN_LIST As List(Of CmStrCodeNameModel) = New List(Of CmStrCodeNameModel)
+        Public Property SITEN_LIST As List(Of CmStrCodeNameModel) = New List(Of CmStrCodeNameModel)
 
         ''' <summary>
-        ''' 振込　口座種別情報プルダウンリスト
+        ''' 口座種別情報プルダウンリスト
         ''' </summary>
-        Public Property FURI_KOZA_SYUBETU_LIST As List(Of CmCodeNameModel) = New List(Of CmCodeNameModel)
+        Public Property KOZA_SYUBETU_LIST As List(Of CmCodeNameModel) = New List(Of CmCodeNameModel)
 
         Public Sub New()
 
@@ -40,36 +40,7 @@ Namespace JBD.GJS.Service.GJ8030
 
     End Class
 
-    ''' <summary>
-    ''' 初期化処理_詳細画面処理(成功)
-    ''' </summary>
-    Public Class InitKofuDetailResponse
-        Inherits DaResponseBase
 
-        ''' <summary>
-        ''' 支払　金融機関情報プルダウンリスト
-        ''' </summary>
-        Public Property KOFU_BANK_LIST As List(Of CmCodeNameModel) = New List(Of CmCodeNameModel)
-
-        ''' <summary>
-        ''' 支払　本支店情報プルダウンリスト
-        ''' </summary>
-        Public Property KOFU_SITEN_LIST As List(Of CmStrCodeNameModel) = New List(Of CmStrCodeNameModel)
-
-        ''' <summary>
-        ''' 支払　口座種別情報プルダウンリスト
-        ''' </summary>
-        Public Property KOFU_KOZA_SYUBETU_LIST As List(Of CmCodeNameModel) = New List(Of CmCodeNameModel)
-
-        Public Sub New()
-
-        End Sub
-
-        Public Sub New(msg As String)
-            MyBase.New(msg)
-        End Sub
-
-    End Class
 
     ''' <summary>
     ''' 検索処理_詳細画面処理(成功)

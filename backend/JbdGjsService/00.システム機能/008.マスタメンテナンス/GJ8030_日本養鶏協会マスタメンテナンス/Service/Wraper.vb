@@ -18,64 +18,36 @@ Namespace JBD.GJS.Service.GJ8030
         ''' <summary>
         ''' 初期化処理_一覧画面
         ''' </summary>
-        Public Shared Function GetInitFuriDetailResponse(dt1 As DataTable, dt2 As DataTable, dt3 As DataTable) As InitFuriDetailResponse
-            Dim res = New InitFuriDetailResponse()
+        Public Shared Function GetInitDetailResponse(dt1 As DataTable, dt2 As DataTable, dt3 As DataTable) As InitDetailResponse
+            Dim res = New InitDetailResponse()
 
-            res.FURI_BANK_LIST = New List(Of CmCodeNameModel)
+            res.BANK_LIST = New List(Of CmStrCodeNameModel)
             ' dt をループし、List にデータを追加します。
             For Each row As DataRow In dt1.Rows
-                Dim item As New CmCodeNameModel
-                item.CODE = CInt(CStr(row("BANK_CD")))
+                Dim item As New CmStrCodeNameModel
+
+                item.CODE = CStr(row("BANK_CD"))
                 item.NAME = CStr(row("BANK_NAME"))
-                res.FURI_BANK_LIST.Add(item)
+                res.BANK_LIST.Add(item)
             Next
-            res.FURI_SITEN_LIST = New List(Of CmStrCodeNameModel)
+            res.SITEN_LIST = New List(Of CmStrCodeNameModel)
             For Each row As DataRow In dt2.Rows
                 Dim item As New CmStrCodeNameModel
                 item.CODE = CStr(row("SITEN_CD"))
                 item.NAME = CStr(row("SITEN_NAME"))
-                res.FURI_SITEN_LIST.Add(item)
+                res.SITEN_LIST.Add(item)
             Next
-            res.FURI_KOZA_SYUBETU_LIST = New List(Of CmCodeNameModel)
+            res.KOZA_SYUBETU_LIST = New List(Of CmCodeNameModel)
             For Each row As DataRow In dt3.Rows
                 Dim item As New CmCodeNameModel
                 item.CODE = CInt(CStr(row("MEISYO_CD")))
                 item.NAME = CStr(row("MEISYO"))
-                res.FURI_KOZA_SYUBETU_LIST.Add(item)
+                res.KOZA_SYUBETU_LIST.Add(item)
             Next
             Return res
         End Function
 
-        ''' <summary>
-        ''' 初期化処理_一覧画面
-        ''' </summary>
-        Public Shared Function GetInitKofuDetailResponse(dt1 As DataTable, dt2 As DataTable, dt3 As DataTable) As InitKofuDetailResponse
-            Dim res = New InitKofuDetailResponse()
 
-            res.KOFU_BANK_LIST = New List(Of CmCodeNameModel)
-            ' dt をループし、List にデータを追加します。
-            For Each row As DataRow In dt1.Rows
-                Dim item As New CmCodeNameModel
-                item.CODE = CInt(CStr(row("BANK_CD")))
-                item.NAME = CStr(row("BANK_NAME"))
-                res.KOFU_BANK_LIST.Add(item)
-            Next
-            res.KOFU_SITEN_LIST = New List(Of CmStrCodeNameModel)
-            For Each row As DataRow In dt2.Rows
-                Dim item As New CmStrCodeNameModel
-                item.CODE = CStr(row("SITEN_CD"))
-                item.NAME = CStr(row("SITEN_NAME"))
-                res.KOFU_SITEN_LIST.Add(item)
-            Next
-            res.KOFU_KOZA_SYUBETU_LIST = New List(Of CmCodeNameModel)
-            For Each row As DataRow In dt3.Rows
-                Dim item As New CmCodeNameModel
-                item.CODE = CInt(CStr(row("MEISYO_CD")))
-                item.NAME = CStr(row("MEISYO"))
-                res.KOFU_KOZA_SYUBETU_LIST.Add(item)
-            Next
-            Return res
-        End Function
 
         ''' <summary>
         ''' 検索処理_詳細画面処理
