@@ -11,13 +11,20 @@
     <h1>(GJ1012)互助基金契約者マスタメンテナンス(契約情報入力)</h1>
     <div class="self_adaption_table form">
       <b>第{{ formData.KI ?? 8 }}期</b>
-      <h2 class="text-lg font-bold">1.契約農場別明細情報(表示)</h2>
-      <a-row>
-        <a-col span="10">
-          <read-only thWidth="100" th="契約者" :td="formData.KEIYAKUSYA_NAME" />
-        </a-col>
-      </a-row>
-      <div class="my-2 header_operation flex justify-between w-full">
+      <h2>1.契約農場別明細情報(表示)</h2>
+      <div class="max-w-200">
+        <a-row>
+          <a-col span="24">
+            <read-only
+              thWidth="100"
+              th="契約者"
+              :td="formData.KEIYAKUSYA_NAME"
+            />
+          </a-col>
+          <a-col span="10"></a-col>
+        </a-row>
+      </div>
+      <div class="my-2 flex justify-between max-w-200">
         <a-space :size="20">
           <a-button type="primary" :disabled="isEdit" @click="addData"
             >新規</a-button
@@ -25,8 +32,8 @@
           <a-button type="primary" :disabled="isEdit" @click="changeData"
             >変更</a-button
           >
-          <a-button type="primary" @click="goList">一覧</a-button>
         </a-space>
+        <a-button type="primary" @click="goList">一覧</a-button>
       </div>
     </div>
     <a-pagination

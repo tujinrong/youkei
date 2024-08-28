@@ -1,5 +1,6 @@
 <template>
   <a-card :bordered="false" class="mb-2 h-full">
+    <h1>(GJ8101)消費税率マスタメンテナンス</h1>
     <div class="self_adaption_table form max-w-160 flex-1">
       <a-row>
         <a-col span="24">
@@ -26,7 +27,14 @@
       ></a-row>
     </div>
     <div class="my-2 max-w-160 flex justify-between">
-      <a-button class="warning-btn" @click="save">保存</a-button>
+      <div>
+        <a-space :size="20">
+          <a-button class="warning-btn" @click="save">登録</a-button>
+          <a-button type="primary" danger @click="delete"
+            >削除</a-button
+          ></a-space
+        >
+      </div>
       <a-button type="primary" @click="goList">一覧へ</a-button>
     </div>
   </a-card>
