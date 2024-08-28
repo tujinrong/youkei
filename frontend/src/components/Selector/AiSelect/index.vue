@@ -12,6 +12,7 @@
     class="w-full"
     show-search
     allow-clear
+    :disabled="disabled"
     :filter-option="filterOption"
     :get-popup-container="(triggerNode) => triggerNode.parentNode"
     :title="curVal"
@@ -42,12 +43,14 @@ interface Props {
   options: CodeNameModel[]
   /**切値: 'value' or 'value : label'*/
   splitVal?: boolean
+  disabled?: boolean
   /**'number'が設定されている場合、最終的に数値の値を出力します*/
   type: 'string' | 'number'
 }
 const props = withDefaults(defineProps<Props>(), {
   options: () => [],
   splitVal: false,
+  disabled: false,
   type: 'string',
 })
 const emit = defineEmits(['update:value', 'change'])

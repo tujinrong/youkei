@@ -140,8 +140,9 @@
           <a-radio-group v-model:value="searchParams.SEARCH_METHOD">
             <a-radio :value="EnumAndOr.AndCode">すべてを含む(AND)</a-radio>
             <a-radio :value="EnumAndOr.OrCode">いずれかを含む(OR)</a-radio>
-          </a-radio-group></a-space
-        >
+          </a-radio-group>
+          <a-checkbox>未継続・未契約者を除く</a-checkbox>
+        </a-space>
       </div>
       <div class="flex">
         <a-space>

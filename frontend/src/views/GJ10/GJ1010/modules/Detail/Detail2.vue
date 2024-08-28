@@ -160,7 +160,7 @@
   </a-card>
 </template>
 <script lang="ts" setup>
-import { onMounted, reactive, ref, toRef } from 'vue'
+import { onMounted, reactive, ref, watch, toRef } from 'vue'
 import { NoJoRowVM } from '../../type'
 import { changeTableSort } from '@/utils/util'
 import useSearch from '@/hooks/useSearch'
@@ -275,7 +275,10 @@ onMounted(() => {})
 //--------------------------------------------------------------------------
 //監視定義
 //--------------------------------------------------------------------------
-
+watch(
+  () => formData,
+  () => editJudge.setEdited()
+)
 //--------------------------------------------------------------------------
 //メソッド
 //--------------------------------------------------------------------------

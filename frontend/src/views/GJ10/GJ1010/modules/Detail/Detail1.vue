@@ -7,11 +7,7 @@
  * 変更履歴　:
  * ----------------------------------------------------------------->
 <template>
-  <a-card
-    v-show="detailKbn === DetailStatus.Detail1"
-    :bordered="false"
-    ref="cardRef"
-  >
+  <a-card v-show="detailKbn === DetailStatus.Detail1" :bordered="false">
     <h1>(GJ1012)互助基金契約者マスタメンテナンス(契約情報入力)</h1>
     <div class="self_adaption_table form">
       <b>第{{ formData.KI ?? 8 }}期</b>
@@ -23,7 +19,12 @@
       </a-row>
       <div class="my-2 header_operation flex justify-between w-full">
         <a-space :size="20">
-          <a-button type="primary" @click="saveData">新規</a-button>
+          <a-button type="primary" :disabled="isEdit" @click="addData"
+            >新規</a-button
+          >
+          <a-button type="primary" :disabled="isEdit" @click="changeData"
+            >変更</a-button
+          >
           <a-button type="primary" @click="goList">一覧</a-button>
         </a-space>
       </div>
@@ -39,6 +40,7 @@
       class="m-b-1 text-end"
     />
     <vxe-table
+      ref="tableRef"
       class="mt-2"
       :column-config="{ resizable: true }"
       :row-config="{ isCurrent: true, isHover: true }"
@@ -48,35 +50,32 @@
       @cell-dblclick="({ row }) => goForward(PageStatus.Edit, row)"
       @sort-change="(e) => changeTableSort(e, toRef(pageParams, 'ORDER_BY'))"
     >
-      <vxe-column field="MEISAI_NO" title="明細番号" width="100" sortable>
+      <vxe-column field="MEISAI_NO" title="明細番号" width="100">
         <template #default="{ row }">
           <a @click="goForward(PageStatus.Edit, row)">{{ row.MEISAI_NO }}</a>
         </template>
       </vxe-column>
-      <vxe-column field="NOJO_NAME" title="農場名" width="200" sortable>
+      <vxe-column field="NOJO_NAME" title="農場名" width="200">
         <template #default="{ row }">
           <a @click="goForward(PageStatus.Edit, row)">{{ row.NOJO_NAME }}</a>
         </template>
       </vxe-column>
-      <vxe-column field="NOJO_ADDR" title="農場住所" min-width="200" sortable>
+      <vxe-column field="NOJO_ADDR" title="農場住所" min-width="200">
       </vxe-column>
       <vxe-column
         field="TORISYURUI"
         title="鳥の種類"
         min-width="120"
-        sortable
       ></vxe-column>
       <vxe-column
         field="KEIYAKUHASU"
         title="契約羽数"
         min-width="120"
-        sortable
       ></vxe-column>
       <vxe-column
         field="BIKO"
         title="備考"
         min-width="200"
-        sortable
         :resizable="false"
       ></vxe-column>
     </vxe-table>
@@ -157,6 +156,15 @@
       </tr>
     </table>
     <h2>2.契約農場別登録明細情報(入力)</h2>
+    <a-space :size="20" class="mb-2">
+      <a-button type="primary" :disabled="!isEdit">前期データコピー</a-button
+      ><a-button type="primary" :disabled="!isEdit" @click="saveData"
+        >保存</a-button
+      >
+      <a-button type="primary" :disabled="!isEdit" @click="reset"
+        >クリア</a-button
+      ></a-space
+    >
     <div class="self_adaption_table form max-w-300">
       <a-row>
         <a-col span="24">
@@ -182,9 +190,14 @@
                 v-model:value="formData.NOJO_CD"
                 :options="NOJO_CD_CD_NAME_LIST"
                 split-val
+                :disabled="!isEdit"
               ></ai-select>
             </a-form-item>
-            <a-button class="ml-2" type="primary" @click="addNoJo"
+            <a-button
+              class="ml-2"
+              type="primary"
+              :disabled="!isEdit"
+              @click="addNoJo"
               >農場登録</a-button
             >
           </td>
@@ -220,6 +233,7 @@
                 :options="KEI_SYURUI_CD_NAME_LIST"
                 class="w-full"
                 split-val
+                :disabled="!isEdit"
               ></ai-select>
             </a-form-item>
           </td>
@@ -230,25 +244,25 @@
             <a-form-item v-bind="validateInfos.KEIYAKU_HASU">
               <a-input-number
                 v-model:value="formData.KEIYAKU_HASU"
+                :disabled="!isEdit"
               ></a-input-number>
             </a-form-item>
           </td>
         </a-col>
       </a-row>
       <a-row>
-        <a-col span="6">
+        <a-col span="12">
           <th class="required">契約年月日</th>
           <td>
             <a-form-item v-bind="validateInfos.KEIYAKU_YMD_FM">
-              <DateJp v-model:value="formData.KEIYAKU_YMD_FM" />
-            </a-form-item>
+              <DateJp
+                v-model:value="formData.KEIYAKU_YMD_FM"
+                :disabled="!isEdit"
+              /> </a-form-item
+            ><span>～</span>
+            <DateJp v-model:value="formData.KEIYAKU_YMD_TO" disabled />
           </td>
         </a-col>
-        <a-col span="4">
-          <td>
-            <span>～</span
-            ><DateJp v-model:value="formData.KEIYAKU_YMD_TO" disabled /></td
-        ></a-col>
         <a-col class="flex-1">
           <td class="flex items-center">
             <span> (契約日を入力する二とで单価を取得します)</span>
@@ -259,7 +273,10 @@
         <a-col span="24">
           <th class="required">備考</th>
           <td>
-            <a-input v-model:value="formData.BIKO"></a-input>
+            <a-input
+              v-model:value="formData.BIKO"
+              :disabled="!isEdit"
+            ></a-input>
           </td>
         </a-col>
       </a-row>
@@ -277,12 +294,13 @@ import { reactive, ref, toRef, computed } from 'vue'
 import { DetailRowVM } from '../../type'
 import Detail2 from './Detail2.vue'
 import { changeTableSort } from '@/utils/util'
-import { useElementSize } from '@vueuse/core'
 import { PageStatus } from '@/enum'
 import { Form } from 'ant-design-vue'
 import { ITEM_REQUIRE_ERROR } from '@/constants/msg'
 import { useRoute, useRouter } from 'vue-router'
 import { DetailStatus } from '../../constant'
+import { VxeTableInstance } from 'vxe-table'
+
 //--------------------------------------------------------------------------
 //データ定義
 //--------------------------------------------------------------------------
@@ -317,6 +335,7 @@ const tableData = ref<DetailRowVM[]>([
     BIKO: '',
   },
 ])
+const isEdit = ref(false)
 const editJudge = new Judgement('GJ1010')
 const { pageParams, totalCount } = useSearch({
   service: undefined,
@@ -325,8 +344,7 @@ const { pageParams, totalCount } = useSearch({
 const NOJO_CD_CD_NAME_LIST = ref<CodeNameModel[]>([])
 const KEI_SYURUI_CD_NAME_LIST = ref<CodeNameModel[]>([])
 
-const cardRef = ref()
-const { height } = useElementSize(cardRef)
+const tableRef = ref<VxeTableInstance>()
 const devicePixelRatio = ref(window.devicePixelRatio)
 const rules = reactive({
   MEISAI_NO: [
@@ -354,7 +372,19 @@ window.addEventListener('resize', function () {
 //--------------------------------------------------------------------------
 //メソッド
 //--------------------------------------------------------------------------
-const saveData = () => {}
+const addData = () => {
+  isEdit.value = true
+}
+const changeData = () => {
+  const a = tableRef.value?.getCurrentRecord()
+  isEdit.value = true
+}
+const saveData = () => {
+  isEdit.value = false
+}
+const reset = () => {
+  isEdit.value = false
+}
 function goForward(status: PageStatus, row?: any) {}
 
 const goList = () => {

@@ -41,7 +41,7 @@
             <th>経営安定対策事業生産者番号</th>
             <td>
               <a-form-item v-bind="validateInfos.KEIYAKUSYA_CD">
-                <a-input :disabled="!isNew"> </a-input
+                <a-input> </a-input
               ></a-form-item>
             </td>
           </a-col>
@@ -64,8 +64,7 @@
             <th>日鶏協番号</th>
             <td>
               <a-form-item v-bind="validateInfos.KEIKYO_CD">
-                <a-input v-model:value="formData.KEIKYO_CD" :disabled="!isNew">
-                </a-input
+                <a-input v-model:value="formData.KEIKYO_CD"> </a-input
               ></a-form-item>
             </td>
           </a-col>
@@ -94,7 +93,7 @@
         </a-row>
         <a-row>
           <a-col span="12">
-            <th>契約状況</th>
+            <th class="required">契約状況</th>
             <td>
               <a-form-item v-bind="validateInfos.KEIYAKU_JYOKYO">
                 <ai-select
@@ -119,26 +118,18 @@
       <a-form class="mb-2">
         <a-row>
           <a-col span="8">
-            <th>申込者名(フリガナ)</th>
+            <th class="required">申込者名(フリガナ)</th>
             <td>
               <a-form-item v-bind="validateInfos.MOSIKOMUSYA_NM">
-                <a-input
-                  v-model:value="formData.MOSIKOMUSYA_NM"
-                  :disabled="!isNew"
-                >
-                </a-input
+                <a-input v-model:value="formData.MOSIKOMUSYA_NM"> </a-input
               ></a-form-item>
             </td>
           </a-col>
           <a-col span="8">
-            <th>申込者名(個人・団体)</th>
+            <th class="required">申込者名(個人・団体)</th>
             <td>
               <a-form-item v-bind="validateInfos.MOSIKOMUSYA_TANTAI">
-                <a-input
-                  v-model:value="formData.MOSIKOMUSYA_TANTAI"
-                  :disabled="!isNew"
-                >
-                </a-input
+                <a-input v-model:value="formData.MOSIKOMUSYA_TANTAI"> </a-input
               ></a-form-item>
             </td>
           </a-col>
@@ -146,11 +137,7 @@
             <th>代表者名(団体)</th>
             <td>
               <a-form-item v-bind="validateInfos.DAIHYOUSYA_NM">
-                <a-input
-                  v-model:value="formData.DAIHYOUSYA_NM"
-                  :disabled="!isNew"
-                >
-                </a-input
+                <a-input v-model:value="formData.DAIHYOUSYA_NM"> </a-input
               ></a-form-item>
             </td>
           </a-col>
@@ -163,7 +150,6 @@
                 <PostCode v-model:value="formData.ADDR_POST">
                   <a-input
                     v-model:value="formData.ADDR_1"
-                    disabled
                     class="!w-40"
                   ></a-input
                 ></PostCode>
@@ -252,8 +238,8 @@
                 v-model:value="formData.hasnyuryoku"
                 class="ml-2 pt-1"
               >
-                <a-radio value="1">有</a-radio>
-                <a-radio value="2">無</a-radio>
+                <a-radio :value="true">有</a-radio>
+                <a-radio :value="false">無</a-radio>
               </a-radio-group>
               <span class="pt-1">(有の時、下記の項目は必須入力)</span>
             </td>
@@ -266,18 +252,20 @@
                   v-model:value="formData.KINNYUKIKAN"
                   :option="KINNYUKIKAN_LIST"
                   split-val
+                  :disabled="!formData.hasnyuryoku"
                 ></ai-select
               ></a-form-item>
             </td>
           </a-col>
           <a-col span="12">
-            <th class="required">本支店</th>
+            <th :class="formData.hasnyuryoku ? 'required' : ''">本支店</th>
             <td>
               <a-form-item v-bind="validateInfos.HONSITEN">
                 <ai-select
                   v-model:value="formData.HONSITEN"
                   :option="HONSITEN_LIST"
                   split-val
+                  :disabled="!formData.hasnyuryoku"
                 ></ai-select
               ></a-form-item>
             </td>
@@ -285,24 +273,26 @@
         </a-row>
         <a-row>
           <a-col :span="12">
-            <th class="required">口座種別</th>
+            <th :class="formData.hasnyuryoku ? 'required' : ''">口座種別</th>
             <td>
               <a-form-item v-bind="validateInfos.KOUZAISYUBETU">
                 <ai-select
                   v-model:value="formData.KOUZAISYUBETU"
                   :option="KOUZAISYUBETU_LIST"
                   split-val
+                  :disabled="!formData.hasnyuryoku"
                 ></ai-select
               ></a-form-item>
             </td>
           </a-col>
           <a-col :span="12">
-            <th class="required">口座番号</th>
+            <th :class="formData.hasnyuryoku ? 'required' : ''">口座番号</th>
             <td>
               <a-form-item v-bind="validateInfos.KOUZAIBANGO">
                 <a-input
                   v-model:value="formData.KOUZAIBANGO"
                   :maxlength="15"
+                  :disabled="!formData.hasnyuryoku"
                 ></a-input>
               </a-form-item>
             </td>
@@ -310,7 +300,7 @@
         </a-row>
         <a-row>
           <a-col>
-            <th class="required">口座名義人</th>
+            <th :class="formData.hasnyuryoku ? 'required' : ''">口座名義人</th>
           </a-col>
           <a-col :span="11">
             <td>
@@ -318,6 +308,7 @@
                 <a-input
                   v-model:value="formData.KOUZAIMEIININ_1"
                   :maxlength="15"
+                  :disabled="!formData.hasnyuryoku"
                 ></a-input>
               </a-form-item>
             </td>
@@ -327,6 +318,7 @@
               <a-input
                 v-model:value="formData.KOUZAIMEIININ_2"
                 :maxlength="15"
+                :disabled="!formData.hasnyuryoku"
               ></a-input>
             </td>
           </a-col>
