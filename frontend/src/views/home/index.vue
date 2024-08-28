@@ -9,12 +9,17 @@
 <template>
   <div>
     <a-card :bordered="false" class="mb-2 h-full">
+      <img
+        src="/chicken.png"
+        alt="Image"
+        style="position: fixed; bottom: 20px; right: 50px; width: 30%"
+      />
       <div class="flex">
         <h1>{{ formattedDate }}現在</h1>
         <a-button type="primary" class="ml-2 mt-1" @click="Init">更新</a-button>
       </div>
 
-      <a-descriptions :column="1" class="mt-2">
+      <a-descriptions :column="1" class="mt-2 relative">
         <a-descriptions-item
           label="契約数"
           :content-style="{ fontSize: '24px' }"
@@ -36,17 +41,6 @@
           >{{ homeData.TUMI }} 円</a-descriptions-item
         >
       </a-descriptions>
-      <img
-        src="/logo.png"
-        alt="Image"
-        style="
-          position: absolute;
-          bottom: 20px;
-          right: 50px;
-          width: 30%;
-          height: 50%;
-        "
-      />
     </a-card>
   </div>
 </template>
