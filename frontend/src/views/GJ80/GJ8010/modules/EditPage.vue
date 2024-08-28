@@ -1,16 +1,15 @@
 <template>
   <a-card :bordered="false" class="mb-2 h-full">
-    <h1>コードマスタメンテナンス</h1>
+    <h1>(GJ8011)コードマスタメンテナンス</h1>
     <div class="self_adaption_table form max-w-160">
       <a-form>
         <a-row>
           <a-col span="24">
-            <th class="bg-readonly">種類区分</th>
-            <td>
-              <a-form-item>
-                <a-input v-model:value="formData.SYURUI_KBN" disabled></a-input>
-              </a-form-item>
-            </td>
+            <read-only
+              th="種類区分"
+              th-width="130"
+              :td="formData.SYURUI_KBN"
+            ></read-only>
           </a-col>
         </a-row>
         <div class="my-2 header_operation flex justify-between w-full">
