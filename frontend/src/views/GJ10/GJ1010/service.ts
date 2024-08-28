@@ -7,5 +7,12 @@
  * 変更履歴　:
  * -----------------------------------------------------------------*/
 import { api } from '@/service/request/common-service'
+import { InitRequest, InitResponse } from './type'
 
-const servicename = 'xxxx'
+const servicename = 'GJ1010'
+
+/** 初期化処理(一覧画面) */
+export const Init = (params: InitRequest): Promise<InitResponse> => {
+  const methodname = 'Init'
+  return api(servicename, methodname, params, undefined, { loading: true })
+}

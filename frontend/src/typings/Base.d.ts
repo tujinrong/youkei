@@ -72,6 +72,16 @@ interface CmCodeNameModel {
   disabled?: boolean
 }
 
+interface CmCodeFmToModel {
+  VALUE_FM: number | undefined
+  VALUE_TO: number | undefined
+}
+
+interface CmDateFmToModel {
+  VALUE_FM: Date | undefined
+  VALUE_TO: Date | undefined
+}
+
 /** ドロップダウンリスト */
 interface DaSelectorDisabledModel extends CmCodeNameModel {
   /** 無効属性 */

@@ -277,7 +277,7 @@ import { useElementSize } from '@vueuse/core'
 import { changeTableSort } from '@/utils/util'
 import { useRoute, useRouter } from 'vue-router'
 import { useTabStore } from '@/store/modules/tab'
-import { ListRowVM } from '../type'
+import { SearchRowVM } from '../type'
 import { VxeTableInstance } from 'vxe-table'
 import { convertToHalfNumber } from '@/utils/util'
 //--------------------------------------------------------------------------
@@ -319,7 +319,7 @@ const KEIYAKU_KBN_CD_NAME_LIST = ref<CmCodeNameModel[]>([
   { CODE: 3, NAME: '鶏以外' },
 ])
 const KEN_CD_NAME_LIST = ref<CmCodeNameModel[]>([])
-const tableData = ref<ListRowVM[]>([])
+const tableData = ref<SearchRowVM[]>([])
 const tableDefault = {
   KEIYAKUSYA_CD: 1003,
   KEIYAKUSYA_NAME: '亜伊伊伊伊伊伊伊亜伊',
