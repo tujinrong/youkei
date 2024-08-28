@@ -3,7 +3,7 @@
     class="h-full min-h-500px flex-col-stretch gap-12px overflow-hidden lt-sm:overflow-auto"
   >
     <a-card ref="headRef" :bordered="false">
-      <h1>使用者一覧</h1>
+      <h1>(GJ8040)使用者一覧</h1>
       <div class="mt-1 flex">
         <a-space>
           <a-button type="primary" @click="forwardNew">新規</a-button>
@@ -127,6 +127,4 @@ onBeforeRouteUpdate((to, from) => {
   }
 })
 </script>
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>

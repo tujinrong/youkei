@@ -1,6 +1,6 @@
 <template>
   <a-card :bordered="false" class="mb-2 h-full">
-    <h1>使用者マスタメンテナンス</h1>
+    <h1>(GJ8041)使用者マスタメンテナンス</h1>
     <div class="self_adaption_table form max-w-160">
       <div class="my-2 header_operation flex justify-between w-full">
         <a-space :size="20">
@@ -56,18 +56,20 @@
         </a-row>
         <a-row>
           <a-col span="24">
-            <th>パスワード有効期限</th>
-            <td>
-              <DateJp v-model:value="formData.PASS_KIGEN_DATE" disabled />
-            </td>
+            <read-only
+              th="パスワード有効期限"
+              th-width="150"
+              :td="getDateJpText(formData.PASS_KIGEN_DATE)"
+            ></read-only>
           </a-col>
         </a-row>
         <a-row>
           <a-col span="24">
-            <th>パスワード変更日</th>
-            <td>
-              <DateJp v-model:value="formData.PASS_UP_DATE" disabled />
-            </td>
+            <read-only
+              th="パスワード変更日"
+              th-width="150"
+              :td="getDateJpText(formData.PASS_UP_DATE)"
+            ></read-only>
           </a-col>
         </a-row>
         <a-row>
@@ -88,7 +90,7 @@
           <a-col span="24">
             <th>使用停止日</th>
             <td>
-              <DateJp v-model:value="formData.TEISI_DATE" disabled />
+              <DateJp v-model:value="formData.TEISI_DATE" :disabled="isNew" />
             </td>
           </a-col>
         </a-row>
@@ -96,7 +98,10 @@
           <a-col span="24">
             <th>使用停止理由</th>
             <td>
-              <a-input v-model:value="formData.TEISI_RIYU" disabled />
+              <a-input
+                v-model:value="formData.TEISI_RIYU"
+                :disabled="!formData.TEISI_DATE"
+              />
             </td>
           </a-col>
         </a-row>
@@ -119,6 +124,7 @@ import { nextTick, onMounted, reactive, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { Delete, InitDetail, Save } from '../service'
 import { Judgement } from '@/utils/judge-edited'
+import { getDateJpText } from '@/utils/util'
 //---------------------------------------------------------------------------
 //属性
 //---------------------------------------------------------------------------
@@ -161,6 +167,10 @@ const rules = reactive({
     {
       required: true,
       message: ITEM_REQUIRE_ERROR.Msg.replace('{0}', 'パスワード'),
+    },
+    {
+      min: 6,
+      message: 'パスリ-ドは6桁以上指定してください。',
     },
   ],
   SIYO_KBN: [

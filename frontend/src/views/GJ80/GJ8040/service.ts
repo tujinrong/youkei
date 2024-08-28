@@ -12,16 +12,16 @@ import {
   DeleteRequest,
   InitDetailRequest,
   InitDetailResponse,
-  InitResponse,
   SaveRequest,
+  SearchResponse,
 } from './type'
 
 const servicename = 'GJ8040'
 const servicename2 = 'GJ8041'
 
 /** 初期化処理(一覧画面) */
-export const Init = (): Promise<InitResponse> => {
-  const methodname = 'Init'
+export const Search = (): Promise<SearchResponse> => {
+  const methodname = 'Search'
   return api(servicename, methodname)
 }
 

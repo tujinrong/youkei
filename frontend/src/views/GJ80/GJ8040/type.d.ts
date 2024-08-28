@@ -16,35 +16,35 @@ export interface DeleteRequest extends DaRequestBase {
   /**ユーザID */
   USER_ID: string
   /**更新時間 */
-  UP_DATE?: Date
+  UP_DATE: Date
 }
 
 /**検索処理(詳細画面) */
 export interface InitDetailRequest extends DaRequestBase {
   /**ユーザID */
-  USER_ID: string
+  USER_ID?: string
 }
 
 /**登録処理(詳細画面) */
 export interface SaveRequest extends DaRequestBase {
-  /**コード情報 */
-  CODE_VM: DetailVM
+  /**使用者情報 */
+  USER: DetailVM
 }
 
 //-------------------------------------------------------------------
 //レスポンス
 //-------------------------------------------------------------------
 
-/**初期化処理(一覧画面) */
-export interface InitResponse extends DaResponseBase {
+/**検索処理(一覧画面) */
+export interface SearchResponse extends DaResponseBase {
   /**ユーザー情報リスト */
   KEKKA_LIST: SearchRowVM[]
 }
 
 /**検索処理(詳細画面) */
 export interface InitDetailResponse extends DaResponseBase {
-  /**コード情報 */
-  CODE_VM: DetailVM
+  /**使用者情報 */
+  USER: DetailVM
   /**使用区分 */
   SIYO_KBN_LIST: CmCodeNameModel[]
 }
