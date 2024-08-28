@@ -9,6 +9,7 @@
 
 Imports GrapeCity.ActiveReports.Aspnetcore.Viewer
 Imports GrapeCity.ActiveReports.Web.Viewer
+Imports JbdGjsReport
 
 Public Class Program
 
@@ -77,12 +78,13 @@ Public Class ReportProvider
     Implements IReportProvider
     Public Function GetReport(reportId As String) As Stream Implements IReportProvider.GetReport
         Dim rar As String() = reportId.Split("|")
-        Dim svcId = rar(0)
+        Dim svc = rar(0)
         Dim param = rar(1)
 
-        Select Case svcId
+        Select Case svc
             Case "GJ1030"
-                Dim ms = FrmGJ1030Service.f_Report_Output(param)
+                Dim w As New rptGJ1030
+                Dim ms = w.report(param)
                 Return ms
         End Select
         Return New MemoryStream

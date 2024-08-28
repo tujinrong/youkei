@@ -693,9 +693,9 @@ ACoDateCheckEdit_Exit3:
             Debug.WriteLine(strSQL)
             Try
                 Dim daDataAdapter As OracleDataAdapter
-                'If db.db.Connection.State = Data.ConnectionState.Closed Then
-                '    db.db.Connection.Open()
-                'End If
+                If Cnn.db.Connection.State = Data.ConnectionState.Closed Then
+                    Cnn.db.Connection.Open()
+                End If
                 daDataAdapter = New OracleDataAdapter(strSQL, Cnn.db.Connection)
                 daDataAdapter.Fill(dstDataSet)
                 dstDatasetSend = dstDataSet

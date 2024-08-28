@@ -108,24 +108,24 @@ Namespace JBD.GJS.Service.GJ1030
         '' </summary>
         '' <returns></returns>
         '' <remarks></remarks>
-        Public Function f_Report_Output(ByVal param As String) As MemoryStream
+        Public Function f_Report_Output(ByVal param As String) As String
             Dim pr = System.Text.Json.JsonSerializer.Deserialize(Of PreviewRequest)(param)
             '検索結果出力用ＳＱＬ作成
             Dim sql = f_make_SQL(pr)
 
-            'データSelect 
-            Dim rn As String = "家畜防疫互助基金契約者一覧表(連絡用)"
-            Using db = New DaDbContext()
-                Dim ds = f_Select_ODP(db, sql, rn)
-                'データ結果判定
-                Dim dt = ds.Tables(0)
-                If dt.Rows.Count > 0 Then
-                    Dim w As New rptGJ1030
-                    Dim ms = w.report(ds)
-                    Return ms
-                End If
-            End Using    
-            Return New MemoryStream
+            ''データSelect 
+            'Dim rn As String = "家畜防疫互助基金契約者一覧表(連絡用)"
+            'Using db = New DaDbContext()
+            '    Dim ds = f_Select_ODP(db, sql, rn)
+            '    'データ結果判定
+            '    Dim dt = ds.Tables(0)
+            '    If dt.Rows.Count > 0 Then
+            '        Dim w As New rptGJ1030
+            '        Dim ms = w.report(ds)
+            '        Return ms
+            '    End If
+            'End Using    
+            Return sql
 
         End Function
 #End Region

@@ -8,9 +8,12 @@
 ' *******************************************************************
 
 Imports GrapeCity.ActiveReports.Document.Section
+Imports JbdGjsService
+Imports JbdGjsService.JBD.GJS.Service
+Imports JbdGjsService.JBD.GJS.Service.GJ1030
 
 Interface InterfaceRptGJ1030
-    Function report(wkDSRep As DataSet) As MemoryStream
+    Function report(param As String) As MemoryStream
 End Interface
 
 Public Class rptGJ1030
@@ -57,7 +60,23 @@ Public Class rptGJ1030
 
     End Sub
 
-    Function report(wkDSRep As DataSet) As MemoryStream Implements InterfaceRptGJ1030.report
+    Function report(param As String) As MemoryStream Implements InterfaceRptGJ1030.report
+
+        Dim pr = System.Text.Json.JsonSerializer.Deserialize(Of JBD.GJS.Service.GJ1030.PreviewRequest)(param)
+        '検索結果出力用ＳＱＬ作成
+        Dim sql = f_make_SQL(pr)
+
+        'データSelect 
+        Dim wkDSRep As New DataSet()
+        Using db = New JbdGjsService.JBD.GJS.Service.DaDbContext()
+            wkDSRep = FrmService.f_Select_ODP(db, sql, con_ReportName)
+            'データ結果判定
+            Dim dt = wkDSRep.Tables(0)
+            If dt.Rows.Count = 0 Then
+                Return New MemoryStream
+            End If
+        End Using
+
         ' Insert code here that implements this method.
         Using wkAR As New rptGJ1030
 

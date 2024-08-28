@@ -48,6 +48,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\JbdGjsReport\JbdGjsReport.vbproj" />
     <ProjectReference Include="..\JbdGjsService\JbdGjsService.vbproj" />
   </ItemGroup>
 

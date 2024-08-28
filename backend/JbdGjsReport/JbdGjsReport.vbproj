@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\JbdGjsCommon\JbdGjsCommon.vbproj" />
+    <ProjectReference Include="..\JbdGjsService\JbdGjsService.vbproj" />
   </ItemGroup>
 
   <ItemGroup>
