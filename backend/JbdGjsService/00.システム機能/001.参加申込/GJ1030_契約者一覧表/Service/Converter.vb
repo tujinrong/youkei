@@ -9,9 +9,6 @@
 
 Namespace JBD.GJS.Service.GJ1030
 
-    ''' <summary>
-    ''' 初期化処理_一覧画面
-    ''' </summary>
     Public Class Converter
         Inherits CmConerterBase
 

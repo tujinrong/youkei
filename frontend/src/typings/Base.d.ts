@@ -63,7 +63,7 @@ interface CmSearchResponseBase extends DaResponseBase {
 }
 
 /** ドロップダウンリスト */
-interface CodeNameModel {
+interface CmCodeNameModel {
   /** 名称 */
   CODE: string | number
   /** コード */
@@ -71,18 +71,20 @@ interface CodeNameModel {
   /** 無効属性 */
   disabled?: boolean
 }
+
 /** ドロップダウンリスト */
-interface DaSelectorDisabledModel extends CodeNameModel {
+interface DaSelectorDisabledModel extends CmCodeNameModel {
   /** 無効属性 */
   disabled: boolean
 }
 /** ドロップダウンリスト(連動用) */
-interface DaSelectorKeyModel extends CodeNameModel {
+interface DaSelectorKeyModel extends CmCodeNameModel {
   /** キー項目(連動フィルター用) */
   key: string
 }
 /** ドロップダウンリスト(ツリー) */
-interface DaSelectorTreeModel<T extends CodeNameModel> extends CodeNameModel {
+interface DaSelectorTreeModel<T extends CmCodeNameModel>
+  extends CmCodeNameModel {
   /** 子ドロップダウンリスト(連動用) */
   children: T[]
 }

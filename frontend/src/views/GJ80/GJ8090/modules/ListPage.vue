@@ -184,7 +184,7 @@ const keyList = reactive({
   KEIYAKUSYA_CD: undefined,
   KEIYAKUSYA_NAME: '',
 })
-const KEIYAKUSYA_CD_NAME_LIST = ref<CodeNameModel[]>([])
+const KEIYAKUSYA_CD_NAME_LIST = ref<CmCodeNameModel[]>([])
 const tableData = ref<SearchRowVM[]>([])
 
 //表の高さ

@@ -341,8 +341,8 @@ const { pageParams, totalCount } = useSearch({
   service: undefined,
   source: tableData,
 })
-const NOJO_CD_CD_NAME_LIST = ref<CodeNameModel[]>([])
-const KEI_SYURUI_CD_NAME_LIST = ref<CodeNameModel[]>([])
+const NOJO_CD_CD_NAME_LIST = ref<CmCodeNameModel[]>([])
+const KEI_SYURUI_CD_NAME_LIST = ref<CmCodeNameModel[]>([])
 
 const tableRef = ref<VxeTableInstance>()
 const devicePixelRatio = ref(window.devicePixelRatio)

@@ -20,10 +20,10 @@ Namespace JBD.GJS.Service.GJ8090
         ''' </summary>
         Public Shared Function GetInitResponse(dt As DataTable) As InitResponse
             Dim res = New InitResponse()
-            res.KEIYAKUSYA_CD_NAME_LIST = New List(Of CodeNameModel)
+            res.KEIYAKUSYA_CD_NAME_LIST = New List(Of CmCodeNameModel)
             ' dt をループし、List にデータを追加します。
             For Each row As DataRow In dt.Rows
-                Dim item As New CodeNameModel
+                Dim item As New CmCodeNameModel
                 item.CODE = Cint(CStr(row("KEIYAKUSYA_CD")))
                 item.NAME = CStr(row("KEIYAKUSYA_NAME"))
                 res.KEIYAKUSYA_CD_NAME_LIST.Add(item)

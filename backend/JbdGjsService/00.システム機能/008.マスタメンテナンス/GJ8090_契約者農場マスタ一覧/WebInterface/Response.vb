@@ -23,7 +23,7 @@ Namespace JBD.GJS.Service.GJ8090
         ''' <summary>
         ''' 契約者情報プルダウンリスト
         ''' </summary>
-        Public Property KEIYAKUSYA_CD_NAME_LIST As List(Of CodeNameModel) = New List(Of CodeNameModel)
+        Public Property KEIYAKUSYA_CD_NAME_LIST As List(Of CmCodeNameModel) = New List(Of CmCodeNameModel)
 
         Public Sub New()
 

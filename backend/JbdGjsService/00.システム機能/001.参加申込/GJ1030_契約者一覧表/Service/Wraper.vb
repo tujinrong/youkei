@@ -10,47 +10,11 @@
 Namespace JBD.GJS.Service.GJ1030
 
     ''' <summary>
-    ''' 契約者農場マスタ一覧
+    ''' 契約者一覧表
     ''' </summary>
     Public Class Wraper
         Inherits Common.Wraper
 
-        ''' <summary>
-        ''' 初期化処理_一覧画面
-        ''' </summary>
-        Public Shared Function GetInitResponse(dt As DataTable) As InitResponse
-            Dim res = New InitResponse()
-            res.KEIYAKUSYA_CD_NAME_LIST = New List(Of CodeNameModel)
-            ' dt をループし、List にデータを追加します。
-            For Each row As DataRow In dt.Rows
-                Dim item As New CodeNameModel
-                item.CODE = Cint(CStr(row("KEIYAKUSYA_CD")))
-                item.NAME = CStr(row("KEIYAKUSYA_NAME"))
-                res.KEIYAKUSYA_CD_NAME_LIST.Add(item)
-            Next
-            Return res
-        End Function
 
-        ''' <summary>
-        ''' 検索処理_一覧画面処理
-        ''' </summary>
-        Public Shared Function SearchResponse(dt As DataTable) As SearchResponse
-            Dim res = New SearchResponse()
-            'データ結果判定
-            If dt.Rows.Count > 0 Then
-                res.TOTAL_ROW_COUNT = Cint(CStr(dt.Rows(0)("RCNT")))
-                res.TOTAL_PAGE_COUNT = Cint(CStr(dt.Rows(0)("PCNT")))
-                res.KEKKA_LIST = New List(Of KeiyakuNojo)
-                ' dt をループし、List にデータを追加します。
-                For Each row As DataRow In dt.Rows
-                    Dim item As New KeiyakuNojo
-                    item.NOJO_CD = Cint(CStr(row("NOJO_CD")))
-                    item.NOJO_NAME = CStr(row("NOJO_NAME"))
-                    item.ADDR = CStr(row("ADDR"))
-                    res.KEKKA_LIST.Add(item)
-                Next
-            End If
-            Return res
-        End Function
     End Class
 End Namespace

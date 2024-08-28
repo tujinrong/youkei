@@ -299,12 +299,12 @@ const route = useRoute()
 const tabStore = useTabStore()
 const cardRef = ref()
 const { height } = useElementSize(cardRef)
-const KEIYAKU_KBN_CD_NAME_LIST = ref<CodeNameModel[]>([
+const KEIYAKU_KBN_CD_NAME_LIST = ref<CmCodeNameModel[]>([
   { CODE: 1, NAME: '家族' },
   { CODE: 2, NAME: '企業' },
   { CODE: 3, NAME: '鶏以外' },
 ])
-const KEN_CD_NAME_LIST = ref<CodeNameModel[]>([])
+const KEN_CD_NAME_LIST = ref<CmCodeNameModel[]>([])
 const tableData = ref<ListRowVM[]>([])
 const tableDefault = {
   KEIYAKUSYA_CD: 1003,

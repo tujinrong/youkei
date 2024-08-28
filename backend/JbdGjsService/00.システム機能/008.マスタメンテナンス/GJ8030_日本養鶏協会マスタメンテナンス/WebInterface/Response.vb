@@ -18,17 +18,17 @@ Namespace JBD.GJS.Service.GJ8030
         ''' <summary>
         ''' 振込　金融機関情報プルダウンリスト
         ''' </summary>
-        Public Property FURI_BANK_LIST As List(Of CodeNameModel) = New List(Of CodeNameModel)
+        Public Property FURI_BANK_LIST As List(Of CmCodeNameModel) = New List(Of CmCodeNameModel)
 
         ''' <summary>
         ''' 振込　本支店情報プルダウンリスト
         ''' </summary>
-        Public Property FURI_SITEN_LIST As List(Of CmCodeStrNameModel) = New List(Of CmCodeStrNameModel)
+        Public Property FURI_SITEN_LIST As List(Of CmStrCodeNameModel) = New List(Of CmStrCodeNameModel)
 
         ''' <summary>
         ''' 振込　口座種別情報プルダウンリスト
         ''' </summary>
-        Public Property FURI_KOZA_SYUBETU_LIST As List(Of CodeNameModel) = New List(Of CodeNameModel)
+        Public Property FURI_KOZA_SYUBETU_LIST As List(Of CmCodeNameModel) = New List(Of CmCodeNameModel)
 
         Public Sub New()
 
@@ -49,17 +49,17 @@ Namespace JBD.GJS.Service.GJ8030
         ''' <summary>
         ''' 支払　金融機関情報プルダウンリスト
         ''' </summary>
-        Public Property KOFU_BANK_LIST As List(Of CodeNameModel) = New List(Of CodeNameModel)
+        Public Property KOFU_BANK_LIST As List(Of CmCodeNameModel) = New List(Of CmCodeNameModel)
 
         ''' <summary>
         ''' 支払　本支店情報プルダウンリスト
         ''' </summary>
-        Public Property KOFU_SITEN_LIST As List(Of CmCodeStrNameModel) = New List(Of CmCodeStrNameModel)
+        Public Property KOFU_SITEN_LIST As List(Of CmStrCodeNameModel) = New List(Of CmStrCodeNameModel)
 
         ''' <summary>
         ''' 支払　口座種別情報プルダウンリスト
         ''' </summary>
-        Public Property KOFU_KOZA_SYUBETU_LIST As List(Of CodeNameModel) = New List(Of CodeNameModel)
+        Public Property KOFU_KOZA_SYUBETU_LIST As List(Of CmCodeNameModel) = New List(Of CmCodeNameModel)
 
         Public Sub New()
 

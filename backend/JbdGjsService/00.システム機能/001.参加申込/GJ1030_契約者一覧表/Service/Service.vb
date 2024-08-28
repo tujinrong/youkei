@@ -89,9 +89,9 @@ Namespace JBD.GJS.Service.GJ1030
                     'データ結果判定
                     Dim dt = ds.Tables(0)
                     If dt.Rows.Count > 0 Then
-                        Return New CmPreviewResponseBase(EnumServiceResult.OK,"")
+                        Return New CmPreviewResponseBase(EnumServiceResult.OK, "")
                     Else
-                        Return New CmPreviewResponseBase(EnumServiceResult.ServiceAlert2,"該当データが存在しませんでした。")
+                        Return New CmPreviewResponseBase(EnumServiceResult.ServiceAlert2, "該当データが存在しませんでした。")
                     End If
 
                     '-------------------------------------------------------------

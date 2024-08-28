@@ -18,7 +18,7 @@ Namespace JBD.GJS.Service.GJ8091
         ''' <summary>
         ''' 都道府県情報プルダウンリスト
         ''' </summary>
-        Public Property KEN_CD_NAME_LIST As List(Of CodeNameModel) = New List(Of CodeNameModel)
+        Public Property KEN_CD_NAME_LIST As List(Of CmCodeNameModel) = New List(Of CmCodeNameModel)
 
         ''' <summary>
         ''' 契約者農場情報

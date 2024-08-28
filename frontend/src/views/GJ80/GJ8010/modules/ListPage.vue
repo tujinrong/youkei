@@ -102,7 +102,7 @@ const createDefaultParams = (): SearchRequest => {
     SYURUI_KBN: undefined,
   } as SearchRequest
 }
-const SYURUI_KBN_LIST = ref<CodeNameModel[]>([
+const SYURUI_KBN_LIST = ref<CmCodeNameModel[]>([
   { CODE: '1', NAME: '契約者区分' },
 ])
 const searchParams = reactive(createDefaultParams())

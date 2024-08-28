@@ -10,28 +10,6 @@
 Namespace JBD.GJS.Service.GJ1030
 
     ''' <summary>
-    ''' 契約者農場情報
-    ''' </summary>
-    Public Class KeiyakuNojo
-
-        ''' <summary>
-        ''' 農場コード
-        ''' </summary>
-        Public Property NOJO_CD As Integer = Nothing
-
-        ''' <summary>
-        ''' 農場名
-        ''' </summary>
-        Public Property NOJO_NAME As String = String.Empty
-
-        ''' <summary>
-        ''' 住所
-        ''' </summary>
-        Public Property ADDR As String = String.Empty
-
-    End Class
-
-    ''' <summary>
     ''' 契約状況
     ''' </summary>
     Public Class KeiyakuJyokyo

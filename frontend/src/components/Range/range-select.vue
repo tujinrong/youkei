@@ -36,7 +36,7 @@ const props = defineProps<{
     VALUE_FM: number | undefined
     VALUE_TO: number | undefined
   }
-  options: CodeNameModel[]
+  options: CmCodeNameModel[]
   disabled?: boolean
 }>()
 const emit = defineEmits(['update:value'])

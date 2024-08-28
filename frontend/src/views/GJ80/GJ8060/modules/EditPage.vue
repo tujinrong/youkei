@@ -55,7 +55,7 @@
         </a-row>
         <a-row>
           <a-col span="24">
-            <th class="required">事務委託先名称 正式 </th>
+            <th class="required">事務委託先名称 正式</th>
             <td>
               <a-form-item v-bind="validateInfos.ITAKU_NAME">
                 <a-input
@@ -68,7 +68,7 @@
         </a-row>
         <a-row>
           <a-col span="24">
-            <th class="required">事務委託先名称 略称 </th>
+            <th class="required">事務委託先名称 略称</th>
             <td>
               <a-form-item v-bind="validateInfos.ITAKU_RYAKU">
                 <a-input
@@ -180,7 +180,10 @@
           <a-col span="24">
             <th class="required">金融機関入力情報有無</th>
             <td>
-              <a-radio-group v-model:value="formData.BANK_INJI_KBN"  class="ml-2 pt-1">
+              <a-radio-group
+                v-model:value="formData.BANK_INJI_KBN"
+                class="ml-2 pt-1"
+              >
                 <a-radio value="1">有</a-radio>
                 <a-radio value="2">無</a-radio>
               </a-radio-group>
@@ -316,10 +319,10 @@ const route = useRoute()
 const isNew = props.status === PageStatus.New
 const editJudge = new Judgement('GJ8060')
 
-const KEN_CD_NAME_LIST = ref<CodeNameModel[]>([])
+const KEN_CD_NAME_LIST = ref<CmCodeNameModel[]>([])
 let upddttm
 const formData = reactive({
-  KI: undefined as number| undefined,
+  KI: undefined as number | undefined,
   ITAKU_CD: undefined as number | undefined,
   KEN_CD: undefined as number | undefined,
   ITAKU_NAME: '',

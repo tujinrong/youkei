@@ -46,7 +46,7 @@ export interface InitDetailResponse extends DaResponseBase {
   /**コード情報 */
   CODE_VM: DetailVM
   /**使用区分 */
-  SIYO_KBN_LIST: CodeNameModel[]
+  SIYO_KBN_LIST: CmCodeNameModel[]
 }
 
 //-------------------------------------------------------------------

@@ -20,11 +20,11 @@ Namespace JBD.GJS.Service.GJ8091
         ''' </summary>
         Public Shared Function GetInitDetailResponse(dt As DataTable) As InitDetailResponse
             Dim res = New InitDetailResponse()
-            res.KEN_CD_NAME_LIST = New List(Of CodeNameModel)
+            res.KEN_CD_NAME_LIST = New List(Of CmCodeNameModel)
             ' dt をループし、List にデータを追加します。
             For Each row As DataRow In dt.Rows
-                Dim item As New CodeNameModel
-                item.CODE = Cint(CStr(row("MEISYO_CD")))
+                Dim item As New CmCodeNameModel
+                item.CODE = CInt(CStr(row("MEISYO_CD")))
                 item.NAME = CStr(row("MEISYO"))
                 res.KEN_CD_NAME_LIST.Add(item)
             Next
@@ -39,9 +39,9 @@ Namespace JBD.GJS.Service.GJ8091
             Dim item As New InitDetailResponse()
 
             '都道府県情報処理
-            item.KEN_CD_NAME_LIST = New List(Of CodeNameModel)
+            item.KEN_CD_NAME_LIST = New List(Of CmCodeNameModel)
             For Each row As DataRow In dt.Rows
-                Dim it As New CodeNameModel
+                Dim it As New CmCodeNameModel
                 it.CODE = Cint(CStr(row("MEISYO_CD")))
                 it.NAME = CStr(row("MEISYO"))
                 item.KEN_CD_NAME_LIST.Add(it)

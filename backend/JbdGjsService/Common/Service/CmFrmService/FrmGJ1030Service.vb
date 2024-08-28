@@ -49,10 +49,10 @@ Namespace JBD.GJS.Service.GJ1030
             Dim cdt = f_CodeMaster_Data_Select(1, 0)
             'データ結果判定
             If cdt.Rows.Count > 0 Then
-                res.KEIYAKU_KBN_CD_NAME_LIST = New List(Of CodeNameModel)
+                res.KEIYAKU_KBN_CD_NAME_LIST = New List(Of CmCodeNameModel)
                 ' dt をループし、List にデータを追加します。
                 For Each row As DataRow In cdt.Rows
-                    Dim item As New CodeNameModel
+                    Dim item As New CmCodeNameModel
                     item.CODE = Cint(row("MEISYO_CD").ToString())
                     item.NAME = row("MEISYO").ToString()
                     res.KEIYAKU_KBN_CD_NAME_LIST.Add(item)
@@ -68,10 +68,10 @@ Namespace JBD.GJS.Service.GJ1030
         Dim jdt = f_JimuItaku_Data_Select(sWhere)
         'データ結果判定
         If jdt.Rows.Count > 0 Then
-            res.ITAKU_CD_NAME_LIST = New List(Of CodeNameModel)
+            res.ITAKU_CD_NAME_LIST = New List(Of CmCodeNameModel)
             ' dt をループし、List にデータを追加します。
             For Each row As DataRow In jdt.Rows
-                Dim item As New CodeNameModel
+                Dim item As New CmCodeNameModel
                 item.CODE = Cint(row("ITAKU_CD").ToString())
                 item.NAME = row("ITAKU_NAME").ToString()
                 res.ITAKU_CD_NAME_LIST.Add(item)
@@ -85,10 +85,10 @@ Namespace JBD.GJS.Service.GJ1030
         Dim kdt = f_Keiyaku_Data_Select(ki, True, String.Empty)
         'データ結果判定
         If kdt.Rows.Count > 0 Then
-            res.KEIYAKUSYA_CD_NAME_LIST = New List(Of CodeNameModel)
+            res.KEIYAKUSYA_CD_NAME_LIST = New List(Of CmCodeNameModel)
             ' dt をループし、List にデータを追加します。
             For Each row As DataRow In kdt.Rows
-                Dim item As New CodeNameModel
+                Dim item As New CmCodeNameModel
                 item.CODE = Cint(row("KEIYAKUSYA_CD").ToString())
                 item.NAME = row("KEIYAKUSYA_NAME").ToString()
                 res.KEIYAKUSYA_CD_NAME_LIST.Add(item)

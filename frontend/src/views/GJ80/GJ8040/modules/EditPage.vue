@@ -143,7 +143,7 @@ const formData = reactive({
   TEISI_DATE: new Date(),
   TEISI_RIYU: '',
 })
-const SIYO_KBN_LIST = ref<CodeNameModel[]>([])
+const SIYO_KBN_LIST = ref<CmCodeNameModel[]>([])
 const rules = reactive({
   USER_ID: [
     {

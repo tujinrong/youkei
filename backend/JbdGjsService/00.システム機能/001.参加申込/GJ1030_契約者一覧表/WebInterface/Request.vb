@@ -41,17 +41,17 @@ Namespace JBD.GJS.Service.GJ1030
         ''' <summary>
         ''' 契約区分コード
         ''' </summary>
-        Public Property KEIYAKU_KBN_CD As FmToModel
+        Public Property KEIYAKU_KBN_CD As CmFmToModal
 
         ''' <summary>
         ''' 事務委託先番号コード
         ''' </summary>
-        Public Property ITAKU_CD As FmToModel
+        Public Property ITAKU_CD As CmFmToModal
 
         ''' <summary>
         ''' 契約者番号コード
         ''' </summary>
-        Public Property KEIYAKUSYA_CD As FmToModel
+        Public Property KEIYAKUSYA_CD As CmFmToModal
 
         ''' <summary>
         ''' 契約状況

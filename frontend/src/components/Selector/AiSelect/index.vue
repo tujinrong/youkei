@@ -40,7 +40,7 @@ import { computed } from 'vue'
 interface Props {
   /**'value' and 'value : label' both OK*/
   value: any
-  options: CodeNameModel[]
+  options: CmCodeNameModel[]
   /**切値: 'value' or 'value : label'*/
   splitVal?: boolean
   disabled?: boolean

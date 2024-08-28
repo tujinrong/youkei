@@ -8,13 +8,9 @@
 ' *******************************************************************
 
 Namespace JBD.GJS.Service
-    Public Class FmToModel
-        Public Property VALUE_FM As Integer? = Nothing   
+    Public Class CmFmToModal
+        Public Property VALUE_FM As Integer? = Nothing
         Public Property VALUE_TO As Integer? = Nothing
-
-        ''' <summary>
-        ''' Cacheに使用
-        ''' </summary>
         Public Sub New()
         End Sub
     End Class

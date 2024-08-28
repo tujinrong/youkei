@@ -247,7 +247,7 @@ export function table2Opts(list: any[], field: string) {
 }
 
 /**ドロップダウンリスト検索 */
-export function filterOption(input: string, option: CodeNameModel) {
+export function filterOption(input: string, option: CmCodeNameModel) {
   return (
     option.NAME.toLowerCase().includes(input.toLowerCase()) ||
     option.CODE.toLowerCase().includes(input.toLowerCase())
@@ -257,7 +257,7 @@ export function filterOption(input: string, option: CodeNameModel) {
 /**コードで名称を取得  (ドロップダウンリスト)*/
 export function getLabelByValue(
   value = '',
-  options: (CodeNameModel & { key?: string })[] = [],
+  options: (CmCodeNameModel & { key?: string })[] = [],
   /** キー項目(連動フィルター用) */
   key?: string
 ) {
@@ -274,7 +274,7 @@ export function getLabelByValue(
 /**コードで名称を取得  (複数選択ドロップダウンリスト)*/
 export function getMultipleLabel(
   list: string[] = [],
-  options: (CodeNameModel | DaSelectorKeyModel)[] = []
+  options: (CmCodeNameModel | DaSelectorKeyModel)[] = []
 ) {
   if (list.length > 0) {
     const arr = list.map((el) => getLabelByValue(el, options))

@@ -73,7 +73,7 @@ export interface InitResponse extends DaResponseBase {
   /**対象期 */
   KI: number
   /**契約者情報プルダウンリスト */
-  KEIYAKUSYA_CD_NAME_LIST: CodeNameModel[]
+  KEIYAKUSYA_CD_NAME_LIST: CmCodeNameModel[]
 }
 
 /**検索処理(一覧画面) */
@@ -91,7 +91,7 @@ export interface InitDetailResponse extends DaResponseBase {
   /**契約者名 */
   KEIYAKUSYA_NAME: string
   /**都道府県情報プルダウンリスト */
-  KEN_CD_NAME_LIST: CodeNameModel[]
+  KEN_CD_NAME_LIST: CmCodeNameModel[]
   /**契約者農場情報 */
   KEIYAKUSYA_NOJO: DetailVM
 }

@@ -407,14 +407,14 @@ const createDefaultParams = reactive({
   HAGYO_DATE: new Date() as Date,
   BIKO: '',
 })
-const KEN_CD_NAME_LIST = ref<CodeNameModel[]>([])
-const KEIYAKU_KBN_CD_NAME_LIST = ref<CodeNameModel[]>([])
-const KEIYAKU_JYOKYO_LIST = ref<CodeNameModel[]>([])
-const KOUZAISYUBETU_LIST = ref<CodeNameModel[]>([])
-const HONSITEN_LIST = ref<CodeNameModel[]>([])
+const KEN_CD_NAME_LIST = ref<CmCodeNameModel[]>([])
+const KEIYAKU_KBN_CD_NAME_LIST = ref<CmCodeNameModel[]>([])
+const KEIYAKU_JYOKYO_LIST = ref<CmCodeNameModel[]>([])
+const KOUZAISYUBETU_LIST = ref<CmCodeNameModel[]>([])
+const HONSITEN_LIST = ref<CmCodeNameModel[]>([])
 
-const KINNYUKIKAN_LIST = ref<CodeNameModel[]>([])
-const JIMUITAKUSENN_LIST = ref<CodeNameModel[]>([])
+const KINNYUKIKAN_LIST = ref<CmCodeNameModel[]>([])
+const JIMUITAKUSENN_LIST = ref<CmCodeNameModel[]>([])
 
 const formData = reactive(createDefaultParams)
 const rules = reactive({

@@ -175,7 +175,7 @@ const route = useRoute()
 const isNew = props.status === PageStatus.New
 const editJudge = new Judgement('GJ8090')
 
-const KEN_CD_NAME_LIST = ref<CodeNameModel[]>([])
+const KEN_CD_NAME_LIST = ref<CmCodeNameModel[]>([])
 let upddttm
 const formData = reactive({
   KI: undefined as number | undefined,

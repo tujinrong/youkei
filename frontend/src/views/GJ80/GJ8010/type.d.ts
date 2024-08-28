@@ -51,7 +51,7 @@ export interface SaveRequest extends DaRequestBase {
 /**初期化処理(一覧画面) */
 export interface InitResponse extends DaResponseBase {
   /**種類区分プルダウンリスト */
-  SYURUI_KBN_LIST: CodeNameModel[]
+  SYURUI_KBN_LIST: CmCodeNameModel[]
 }
 
 /**検索処理(一覧画面) */

@@ -146,11 +146,11 @@ const KEIYAKU_JYOKYO_LABELS = {
   HAIGYO: '廃業者',
 }
 
-const KEIYAKU_KBN_CD_NAME_LIST = ref<CodeNameModel[]>([])
+const KEIYAKU_KBN_CD_NAME_LIST = ref<CmCodeNameModel[]>([])
 
-const ITAKU_CD_NAME_LIST = ref<CodeNameModel[]>([])
+const ITAKU_CD_NAME_LIST = ref<CmCodeNameModel[]>([])
 
-const KEIYAKUSYA_CD_NAME_LIST = ref<CodeNameModel[]>([])
+const KEIYAKUSYA_CD_NAME_LIST = ref<CmCodeNameModel[]>([])
 
 const layout = {
   md: 24,

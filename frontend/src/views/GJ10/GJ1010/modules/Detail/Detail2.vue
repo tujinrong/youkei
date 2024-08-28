@@ -194,7 +194,7 @@ const formData = reactive({
   KEIYAKU_YMD_TO: undefined as Date | undefined,
   BIKO: '',
 })
-const KEN_CD_NAME_LIST = ref<CodeNameModel[]>([])
+const KEN_CD_NAME_LIST = ref<CmCodeNameModel[]>([])
 const tableData = ref<NoJoRowVM[]>([])
 const { pageParams } = useSearch({
   service: undefined,

@@ -208,9 +208,9 @@ const searchParams = reactive(createDefaultParams())
 //   KEIYAKUSYA_CD: undefined,
 //   KEIYAKUSYA_NAME: '',
 // })
-const KEIYAKUSYA_CD_NAME_LIST = ref<CodeNameModel[]>([])
+const KEIYAKUSYA_CD_NAME_LIST = ref<CmCodeNameModel[]>([])
 const tableData = ref<SearchRowVM[]>([])
-const KEN_CD_NAME_LIST = ref<CodeNameModel[]>([])
+const KEN_CD_NAME_LIST = ref<CmCodeNameModel[]>([])
 //表の高さ
 const headRef = ref(null)
 const layout = {
