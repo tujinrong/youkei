@@ -3,7 +3,7 @@
     class="h-full min-h-500px flex-col-stretch gap-12px overflow-hidden lt-sm:overflow-auto"
   >
     <a-card ref="headRef" :bordered="false">
-      <h1>金融機関一覧</h1>
+      <h1>(GJ8050)金融機関一覧</h1>
       <div class="self_adaption_table form mt-1">
         <a-row>
           <a-col v-bind="layout">
@@ -541,8 +541,8 @@ async function forwardEdit2(BANK_CD, SITEN_CD) {
 </script>
 
 <style lang="scss" scoped>
-:deep(th) {
-  min-width: 100px;
+th {
+  min-width: 140px;
 }
 
 :deep(.ant-form-item) {

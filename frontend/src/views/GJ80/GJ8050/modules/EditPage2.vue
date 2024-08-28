@@ -1,6 +1,6 @@
 <template>
   <a-card :bordered="false" class="mb-2 h-full">
-    <h1>支店マスタメンテナンス</h1>
+    <h1>(GJ8052)支店マスタメンテナンス</h1>
     <div class="self_adaption_table form max-w-160">
       <div class="my-2 header_operation flex justify-between w-full">
         <a-space :size="20">
