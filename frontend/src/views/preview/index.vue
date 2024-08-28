@@ -14,7 +14,7 @@ import dayjs from 'dayjs'
 //データ定義
 //--------------------------------------------------------------------------
 const host = window.location.href.includes('localhost')
-  ? '192.168.1.65'
+  ? 'localhost'
   : '61.213.76.155'
 const URL = computed(() => {
   return `http://${host}:5109/api/reporting`
