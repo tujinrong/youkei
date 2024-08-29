@@ -72,12 +72,12 @@ Namespace JBD.GJS.Service.GJ0000
         ''' <summary>
         ''' 新規
         ''' </summary>
-        Public Property SHINKI As String = "0"
+        Public Property KEIYAKUSU_SHINKI As String = "0"
 
         ''' <summary>
         ''' 継続
         ''' </summary>
-        Public Property KEI As String = "0"
+        Public Property KEIYAKUSU_KEIZOKU As String = "0"
 
         ''' <summary>
         ''' 羽数
@@ -87,7 +87,7 @@ Namespace JBD.GJS.Service.GJ0000
         ''' <summary>
         ''' 積立金額
         ''' </summary>
-        Public Property TUMI As String = "なし"
+        Public Property TUMITATE_KIN As String = "なし"
 
 
         Public Sub New()

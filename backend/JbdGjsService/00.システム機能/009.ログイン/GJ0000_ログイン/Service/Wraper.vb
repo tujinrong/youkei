@@ -50,10 +50,10 @@ Namespace JBD.GJS.Service.GJ0000
         Public Shared Function GetHomeResponse(dt As DataTable) As HomeInfoResponse
             Dim res = New HomeInfoResponse()
             If dt.Rows.Count > 0 Then
-                res.SHINKI = CLng(WordHenkan("N", "Z", dt.Rows(0)("CNT_SHINKI"))).ToString("##,###,##0")
-                res.KEI = CLng(WordHenkan("N", "Z", dt.Rows(0)("CNT_KEI"))).ToString("##,###,##0")
+                res.KEIYAKUSU_SHINKI = CLng(WordHenkan("N", "Z", dt.Rows(0)("CNT_SHINKI"))).ToString("##,###,##0")
+                res.KEIYAKUSU_KEIZOKU = CLng(WordHenkan("N", "Z", dt.Rows(0)("CNT_KEI"))).ToString("##,###,##0")
                 res.HASU = CLng(WordHenkan("N", "Z", dt.Rows(0)("HASU"))).ToString("##,###,##0").PadLeft(14)
-                res.TUMI = CLng(WordHenkan("N", "Z", dt.Rows(0)("TUMI"))).ToString("##,###,##0").PadLeft(14)
+                res.TUMITATE_KIN = CLng(WordHenkan("N", "Z", dt.Rows(0)("TUMI"))).ToString("##,###,##0").PadLeft(14)
             End If
             Return res
         End Function
