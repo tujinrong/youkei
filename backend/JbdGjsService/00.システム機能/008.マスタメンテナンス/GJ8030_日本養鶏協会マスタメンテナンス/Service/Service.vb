@@ -7,6 +7,7 @@
 ' 変更履歴　:
 ' *******************************************************************
 
+Imports JbdGjsService.JBD.GJS.Service.GJ8020
 Imports JbdGjsService.JBD.GJS.Service.GJ8091
 
 Namespace JBD.GJS.Service.GJ8030
@@ -43,10 +44,10 @@ Namespace JBD.GJS.Service.GJ8030
                     Dim sql2 = f_BankShop_Data_Select(req.BANK_CD)
 
                     'データSelect 
-                    Dim ds1 = f_Select_ODP(db, sql1)
+                    Dim ds1 = FrmService.f_Select_ODP(db, sql1)
                     Dim dt1 = ds1.Tables(0)
 
-                    Dim ds2 = f_Select_ODP(db, sql2)
+                    Dim ds2 = FrmService.f_Select_ODP(db, sql2)
                     Dim dt2 = ds2.Tables(0)
 
                     Dim dt3 = f_CodeMaster_Data_Select(4, 0)
@@ -89,10 +90,10 @@ Namespace JBD.GJS.Service.GJ8030
                     '-------------------------------------------------------------
                     'データクエリ
                     Dim sReq = New DaRequestBase
-                    Dim sql = f_SetForm_Data(sReq)
+                    Dim sql = FrmGJ8030Service.f_SetForm_Data(sReq)
 
                     'データSelect 
-                    Dim ds = f_Select_ODP(db, sql)
+                    Dim ds = FrmService.f_Select_ODP(db, sql)
                     Dim dt = ds.Tables(0)
 
                     '-------------------------------------------------------------
@@ -134,10 +135,10 @@ Namespace JBD.GJS.Service.GJ8030
                     '-------------------------------------------------------------
                     '検索結果出力用ＳＱＬ作成
                     Dim sReq = New DaRequestBase
-                    Dim sql = f_SetForm_Data(sReq)
+                    Dim sql = FrmGJ8030Service.f_SetForm_Data(sReq)
 
                     'データSelect 
-                    Dim ds = f_Select_ODP(db, sql)
+                    Dim ds = FrmService.f_Select_ODP(db, sql)
                     Dim dt = ds.Tables(0)
 
                     'データの独占性
@@ -157,7 +158,7 @@ Namespace JBD.GJS.Service.GJ8030
                     End Select
 
                     '保存処理
-                    Dim res = f_Data_Update(db, req)
+                    Dim res = FrmGJ8030Service.f_Data_Update(db, req)
 
                     '-------------------------------------------------------------
                     '5.データ加工処理

@@ -9,7 +9,7 @@
 
 Namespace JBD.GJS.Service.GJ8091
 
-    Public Module FrmGJ8091Service
+    Public Class FrmGJ8091Service
 
 #Region "f_SetForm_Data データ取得SQL"
         '------------------------------------------------------------------
@@ -18,7 +18,7 @@ Namespace JBD.GJS.Service.GJ8091
         '引数            :1.req SearchDetailRequest  データセット
         '戻り値          :String(SQL)
         '------------------------------------------------------------------
-        Public Function f_SetForm_Data(req As InitDetailRequest) As String
+        Public Shared Function f_SetForm_Data(req As InitDetailRequest) As String
             Dim ret As Boolean = False
             Dim wkDS As New DataSet
             Dim wSql As String = String.Empty
@@ -38,7 +38,7 @@ Namespace JBD.GJS.Service.GJ8091
     '引数            :なし
     '戻り値          :Boolean(正常True/エラーFalse)
     '------------------------------------------------------------------
-    Public Function f_Data_Deleate(db As DaDbContext, wNojoCd As DeleteRequest) As DaResponseBase
+    Public Shared Function f_Data_Deleate(db As DaDbContext, wNojoCd As DeleteRequest) As DaResponseBase
 
         Dim wkCmd As New OracleCommand
         Dim wkSql As String = String.Empty
@@ -89,7 +89,7 @@ Namespace JBD.GJS.Service.GJ8091
     '引数            :なし
     '戻り値          :Boolean(正常True/エラーFalse)
     '------------------------------------------------------------------
-    Public Function f_Data_Update(db As DaDbContext, wNojoCd As SaveRequest) As DaResponseBase
+    Public Shared Function f_Data_Update(db As DaDbContext, wNojoCd As SaveRequest) As DaResponseBase
         Dim Cmd As New OracleCommand
         Dim ret As Boolean = False
 
@@ -181,6 +181,6 @@ Namespace JBD.GJS.Service.GJ8091
 
 #End Region
 
-    End Module
+    End Class
 
 End Namespace

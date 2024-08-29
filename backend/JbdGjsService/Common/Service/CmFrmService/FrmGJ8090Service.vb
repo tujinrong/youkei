@@ -9,7 +9,7 @@
 
 Namespace JBD.GJS.Service.GJ8090
 
-    Public Module FrmGJ8090Service
+    Public Class FrmGJ8090Service
 
 #Region "f_Search_SQLMake ＳＱＬ作成処理"
         '------------------------------------------------------------------
@@ -18,7 +18,7 @@ Namespace JBD.GJS.Service.GJ8090
         '引数            :なし
         '戻り値          :Boolean(正常True/エラーFalse)
         '------------------------------------------------------------------
-        Public Function f_Search_SQLMake(wKbn As SearchRequest) As String
+        Public Shared Function f_Search_SQLMake(wKbn As SearchRequest) As String
             Dim wkANDorOR As String = String.Empty
             Dim wkWhere As String = String.Empty
             Dim wSql As String = String.Empty
@@ -99,7 +99,7 @@ Namespace JBD.GJS.Service.GJ8090
         '引数            :なし
         '戻り値          :Sql String
         '------------------------------------------------------------------
-        Public Function f_Search_SQLMakePage(psize As Integer, pnum As Integer, sql As String) As String
+        Public Shared Function f_Search_SQLMakePage(psize As Integer, pnum As Integer, sql As String) As String
             '==SQL作成====================
             Dim wSql = ""
             wSql &= "SELECT * "
@@ -118,6 +118,6 @@ Namespace JBD.GJS.Service.GJ8090
         End Function
 #End Region
 
-    End Module
+    End Class
 
 End Namespace

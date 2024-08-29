@@ -38,10 +38,10 @@ Namespace JBD.GJS.Service.GJ8020
                     '-------------------------------------------------------------
                     'データクエリ
                     Dim sReq = New DaRequestBase
-                    Dim sql = f_SetForm_Data(sReq)
+                    Dim sql = FrmGJ8020Service.f_SetForm_Data(sReq)
 
                     'データSelect 
-                    Dim ds = f_Select_ODP(db, sql)
+                    Dim ds = FrmService.f_Select_ODP(db, sql)
                     Dim dt = ds.Tables(0)
 
                     '-------------------------------------------------------------
@@ -83,10 +83,10 @@ Namespace JBD.GJS.Service.GJ8020
                     '-------------------------------------------------------------
                     '検索結果出力用ＳＱＬ作成
                     Dim sReq = New DaRequestBase
-                    Dim sql = f_SetForm_Data(sReq)
+                    Dim sql = FrmGJ8020Service.f_SetForm_Data(sReq)
 
                     'データSelect 
-                    Dim ds = f_Select_ODP(db, sql)
+                    Dim ds = FrmService.f_Select_ODP(db, sql)
                     Dim dt = ds.Tables(0)
 
                     'データの独占性
@@ -106,7 +106,7 @@ Namespace JBD.GJS.Service.GJ8020
                     End Select
 
                     '保存処理
-                    Dim res = f_Data_Update(db, req)
+                    Dim res = FrmGJ8020Service.f_Data_Update(db, req)
 
                     '-------------------------------------------------------------
                     '5.データ加工処理

@@ -9,7 +9,7 @@
 
 Namespace JBD.GJS.Service.GJ0000
 
-    Public Module FrmGJ0000Service
+    Public Class FrmGJ0000Service
 
 #Region "f_Search_SQLMake 検索結果出力用ＳＱＬ作成"
         '------------------------------------------------------------------
@@ -19,7 +19,7 @@ Namespace JBD.GJS.Service.GJ0000
         '戻り値          :String(SQL文)
         '更新日          :
         '------------------------------------------------------------------
-        Public Function f_Search_SQLMake(userId As String) As String
+        Public Shared Function f_Search_SQLMake(userId As String) As String
             '検索
             Dim sql = " SELECT " & vbCrLf
             sql += "     U.USER_ID USER_ID, " & vbCrLf
@@ -45,7 +45,7 @@ Namespace JBD.GJS.Service.GJ0000
         '戻り値          :String(SQL文)
         '更新日          :
         '------------------------------------------------------------------
-        Public Function f_Search_SQLHome() As String
+        Public Shared Function f_Search_SQLHome() As String
             '検索
             Dim sSql =  "SELECT  "
             sSql = sSql & "      SUM(MEI.HASU) AS HASU,  "
@@ -72,7 +72,7 @@ Namespace JBD.GJS.Service.GJ0000
         '戻り値          :String(SQL文)
         '更新日          :
         '------------------------------------------------------------------
-        Public Function f_User_Check(dt As DataTable, pw As String, uid As String) As String
+        Public Shared Function f_User_Check(dt As DataTable, pw As String, uid As String) As String
             Dim ret As String = String.Empty
             With dt
                 'パスワードチェック
@@ -107,7 +107,7 @@ Namespace JBD.GJS.Service.GJ0000
         '           :③ vardata     i,  Variant      変換前の項目
         '戻り値     :               o,  Variant      変換後の項目
         '------------------------------------------------------------------
-        Public Function WordHenkan(ByVal strFrom As String,
+        Public Shared Function WordHenkan(ByVal strFrom As String,
             ByVal strTo As String,
             ByVal vardata As Object) As Object
             On Error GoTo Error_WordHenkan
@@ -196,7 +196,7 @@ Error_WordHenkan:
         'ﾊﾟﾗﾒｰﾀ     :① data       i,  String  
         '           :② salt       i,  String  
         '------------------------------------------------------------------
-        Function ComputeSHA256Hash(data As String, salt As String) As String
+        Shared Function ComputeSHA256Hash(data As String, salt As String) As String
             Dim inputBytes As Byte() = Encoding.UTF8.GetBytes(data & salt)
             Using sha256 As SHA256 = SHA256.Create()
                 Dim hashBytes As Byte() = sha256.ComputeHash(inputBytes)
@@ -205,6 +205,6 @@ Error_WordHenkan:
         End Function
 #End Region
 
-    End Module
+    End Class
 
 End Namespace

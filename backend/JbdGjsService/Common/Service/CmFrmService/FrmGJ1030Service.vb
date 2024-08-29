@@ -9,7 +9,7 @@
 
 Namespace JBD.GJS.Service.GJ1030
 
-    Public Module FrmGJ1030Service
+    Public Class FrmGJ1030Service
 
 #Region "***変数定義***"
 
@@ -36,7 +36,7 @@ Namespace JBD.GJS.Service.GJ1030
     '引数            :区分
     '戻り値          :InitResponse
     '------------------------------------------------------------------
-    Public Function f_ComboBox_Set(ByVal wKbn As String, ki As Integer) As InitResponse
+    Public Shared Function f_ComboBox_Set(ByVal wKbn As String, ki As Integer) As InitResponse
         Dim sSql As String = String.Empty
         Dim sWhere As String = String.Empty
         Dim ret As Boolean = False
@@ -108,25 +108,11 @@ Namespace JBD.GJS.Service.GJ1030
         '' </summary>
         '' <returns></returns>
         '' <remarks></remarks>
-        Public Function f_Report_Output(ByVal param As String) As String
+        Public Shared Function f_Report_Output(ByVal param As String) As String
             Dim pr = System.Text.Json.JsonSerializer.Deserialize(Of PreviewRequest)(param)
             '検索結果出力用ＳＱＬ作成
-            Dim sql = f_make_SQL(pr)
-
-            ''データSelect 
-            'Dim rn As String = "家畜防疫互助基金契約者一覧表(連絡用)"
-            'Using db = New DaDbContext()
-            '    Dim ds = f_Select_ODP(db, sql, rn)
-            '    'データ結果判定
-            '    Dim dt = ds.Tables(0)
-            '    If dt.Rows.Count > 0 Then
-            '        Dim w As New rptGJ1030
-            '        Dim ms = w.report(ds)
-            '        Return ms
-            '    End If
-            'End Using    
+            Dim sql = FrmGJ1030Service.f_make_SQL(pr)
             Return sql
-
         End Function
 #End Region
 #Region "f_make_SQL 帳票データ出力用ＳＱＬ作成"
@@ -144,7 +130,7 @@ Namespace JBD.GJS.Service.GJ1030
         '' </param>
         '' <returns></returns>
         '' <remarks></remarks>
-        Public Function f_make_SQL(ByVal req As PreviewRequest) As String
+        Public Shared Function f_make_SQL(ByVal req As PreviewRequest) As String
             Dim ret As Boolean = False
             Dim sSQL As String = vbNullString
             Dim sSQL2 As String = vbNullString
@@ -357,6 +343,6 @@ Namespace JBD.GJS.Service.GJ1030
 
 #End Region
 
-    End Module
+    End Class
 
 End Namespace

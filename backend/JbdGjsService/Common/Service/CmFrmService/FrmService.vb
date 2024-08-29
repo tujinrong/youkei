@@ -9,8 +9,8 @@
 
 Namespace JBD.GJS.Service
 
-    Public Module FrmService
-        Public strGjs As String = "gjs"
+    Public Class FrmService
+        Public Const strGjs As String = "gjs"
 
 #Region "f_Select_ODP データSelect"
         '------------------------------------------------------------------
@@ -20,7 +20,7 @@ Namespace JBD.GJS.Service
         '*                2.sql    SQL
         '戻り値          :データセット
         '------------------------------------------------------------------
-        Public Function f_Select_ODP(db As DaDbContext, sql As String) As DataSet
+        Public Shared Function f_Select_ODP(db As DaDbContext, sql As String) As DataSet
             Dim dt As DataSet = New DataSet()
             Dim daDataAdapter As OracleDataAdapter
             daDataAdapter = New OracleDataAdapter(sql, db.Session.Connection)
@@ -29,7 +29,7 @@ Namespace JBD.GJS.Service
             Return dt
         End Function
 
-        Public Function f_Select_ODP(db As DaDbContext, sql As String, rn As String) As DataSet
+        Public Shared Function f_Select_ODP(db As DaDbContext, sql As String, rn As String) As DataSet
             Dim dt As DataSet = New DataSet()
             dt.Tables.Add(rn)
             Dim daDataAdapter As OracleDataAdapter
@@ -47,7 +47,7 @@ Namespace JBD.GJS.Service
         'ﾊﾟﾗﾒｰﾀ     :① token       i,  String  
         '           :② uid         o,  String  
         '------------------------------------------------------------------
-        Public Function CheckToken(token As String, dir As String) As String
+        Public Shared Function CheckToken(token As String, dir As String) As String
             'トークンの取得
             Dim ret = CmTokenService.GetTokenUDGjs(token, strGjs, strGjs)
             Dim uids = ret.Split("|")
@@ -77,7 +77,7 @@ Namespace JBD.GJS.Service
             End If
         End Function
 
-        Public Function CheckToken(token As String) As String
+        Public Shared Function CheckToken(token As String) As String
             'トークンの取得
             Dim ret = CmTokenService.GetTokenUDGjs(token, strGjs, strGjs)
             Dim uids = ret.Split("|")
@@ -114,7 +114,7 @@ Namespace JBD.GJS.Service
         '引数            :なし
         '戻り値          :Sql String
         '------------------------------------------------------------------
-        Public Function f_Search_SQLMakePage(psize As Integer, pnum As Integer, sql1 As String, sql2 As String) As String
+        Public Shared Function f_Search_SQLMakePage(psize As Integer, pnum As Integer, sql1 As String, sql2 As String) As String
             '==SQL作成====================
             Dim wSql = ""
             wSql &= "SELECT * "
@@ -131,6 +131,6 @@ Namespace JBD.GJS.Service
         End Function
 #End Region
 
-    End Module
+    End Class
 
 End Namespace

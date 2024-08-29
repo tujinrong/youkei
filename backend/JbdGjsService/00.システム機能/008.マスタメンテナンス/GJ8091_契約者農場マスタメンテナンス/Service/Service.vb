@@ -7,6 +7,8 @@
 ' 変更履歴　:
 ' *******************************************************************
 
+Imports JbdGjsService.JBD.GJS.Service.GJ8020
+
 Namespace JBD.GJS.Service.GJ8091
 
     ''' <summary>
@@ -38,17 +40,17 @@ Namespace JBD.GJS.Service.GJ8091
                     '-------------------------------------------------------------
                     '都道府県情報処理
                     Dim sql = f_Ken_Data_Select()
-                    Dim ds = f_Select_ODP(db, sql)
+                    Dim ds = FrmService.f_Select_ODP(db, sql)
                     ds.Tables(0).TableName = "t1"
 
                     '契約者農場情報処理
                     Select Case req.EDIT_KBN
                         Case EnumEditKbn.Edit       '変更入力
                             '検索結果出力用ＳＱＬ作成
-                            sql = f_SetForm_Data(req)
+                            sql = FrmGJ8091Service.f_SetForm_Data(req)
 
                             'データSelect 
-                            Dim dt = f_Select_ODP(db, sql).Tables(0)
+                            Dim dt = FrmService.f_Select_ODP(db, sql).Tables(0)
 
                             'データ結果判定
                             If dt.Rows.Count ＝ 0 Then
@@ -58,9 +60,9 @@ Namespace JBD.GJS.Service.GJ8091
                             ds.Tables.Add(cdt)
                     End Select
 
-                    '-------------------------------------------------------------
-                    '5.データ加工処理
-                    '-------------------------------------------------------------
+'-------------------------------------------------------------
+'5.データ加工処理
+'-------------------------------------------------------------
                     Dim res = Wraper.InitDetailResponse(ds,req.EDIT_KBN)
 
                     '-------------------------------------------------------------
@@ -93,7 +95,7 @@ Namespace JBD.GJS.Service.GJ8091
                     '4.ビジネスロジック処理
                     '-------------------------------------------------------------
                     '削除結果出力用ＳＱＬ作成
-                    Dim res = f_Data_Deleate(db, req)
+                    Dim res = FrmGJ8091Service.f_Data_Deleate(db, req)
 
                     '-------------------------------------------------------------
                     '5.データ加工処理
@@ -133,10 +135,10 @@ Namespace JBD.GJS.Service.GJ8091
                     sReq.KI = req.KEIYAKUSYA_NOJO.KI
                     sReq.KEIYAKUSYA_CD = req.KEIYAKUSYA_NOJO.KEIYAKUSYA_CD
                     sReq.NOJO_CD = req.KEIYAKUSYA_NOJO.NOJO_CD
-                    Dim sql = f_SetForm_Data(sReq)
+                    Dim sql = FrmGJ8091Service.f_SetForm_Data(sReq)
 
                     'データSelect 
-                    Dim dt = f_Select_ODP(db, sql).Tables(0)
+                    Dim dt = FrmService.f_Select_ODP(db, sql).Tables(0)
 
                     'データの独占性
                     Select Case req.EDIT_KBN
@@ -155,7 +157,7 @@ Namespace JBD.GJS.Service.GJ8091
                     End Select
 
                     '保存処理
-                    Dim res = f_Data_Update(db, req)
+                    Dim res = FrmGJ8091Service.f_Data_Update(db, req)
 
                     '-------------------------------------------------------------
                     '5.データ加工処理

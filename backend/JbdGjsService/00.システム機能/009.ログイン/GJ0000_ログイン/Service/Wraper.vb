@@ -24,7 +24,7 @@ Namespace JBD.GJS.Service.GJ0000
             Dim loginTime = DateTime.Now.ToString("yyyyMMddHHmmss")
             Dim tokenId = CStr(dt.Rows(0)("USER_ID")) & "|" & loginTime
             'トークンの取得
-            res.TOKEN = CmTokenService.GetTokenGjs(tokenId, strGjs, strGjs)
+            res.TOKEN = CmTokenService.GetTokenGjs(tokenId, FrmService.strGjs, FrmService.strGjs)
             Return res
         End Function
 

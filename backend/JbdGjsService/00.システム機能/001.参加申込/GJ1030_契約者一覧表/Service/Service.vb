@@ -7,6 +7,8 @@
 ' 変更履歴　:
 ' *******************************************************************
 
+Imports JbdGjsService.JBD.GJS.Service.GJ8091
+
 Namespace JBD.GJS.Service.GJ1030
 
     ''' <summary>
@@ -44,7 +46,7 @@ Namespace JBD.GJS.Service.GJ1030
                     End If
 
                     'データクエリ
-                    Dim ret = f_ComboBox_Set(wKbn, req.KI)
+                    Dim ret = FrmGJ1030Service.f_ComboBox_Set(wKbn, req.KI)
 
                     '-------------------------------------------------------------
                     '5.データ加工処理
@@ -80,11 +82,11 @@ Namespace JBD.GJS.Service.GJ1030
                     '4.ビジネスロジック処理
                     '-------------------------------------------------------------
                     '検索結果出力用ＳＱＬ作成
-                    Dim sql = f_make_SQL(req)
+                    Dim sql = FrmGJ1030Service.f_make_SQL(req)
 
                     'データSelect 
                     Dim rn As String = "家畜防疫互助基金契約者一覧表(連絡用)"
-                    Dim ds = f_Select_ODP(db, sql, rn)
+                    Dim ds = FrmService.f_Select_ODP(db, sql, rn)
 
                     'データ結果判定
                     Dim dt = ds.Tables(0)

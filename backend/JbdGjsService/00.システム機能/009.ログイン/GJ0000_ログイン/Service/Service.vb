@@ -37,15 +37,15 @@ Namespace JBD.GJS.Service.GJ0000
                     '4.ビジネスロジック処理
                     '-------------------------------------------------------------
                     '検索結果出力用ＳＱＬ作成 
-                    Dim sql = f_Search_SQLMake(req.USER_ID)
+                    Dim sql = FrmGJ0000Service.f_Search_SQLMake(req.USER_ID)
 
                     'データSelect 
-                    Dim ds = f_Select_ODP(db, sql)
+                    Dim ds = FrmService.f_Select_ODP(db, sql)
                     Dim dt = ds.Tables(0)
 
                     'データ結果判定
                     If dt.Rows.Count > 0 Then
-                        Dim ret = f_User_Check(dt, req.PASS, req.USER_ID)
+                        Dim ret = FrmGJ0000Service.f_User_Check(dt, req.PASS, req.USER_ID)
                         If Not String.IsNullOrEmpty(ret) Then
                             Return New LoginResponse(ret)
                         End If
@@ -89,10 +89,10 @@ Namespace JBD.GJS.Service.GJ0000
                     '4.ビジネスロジック処理
                     '-------------------------------------------------------------
                     '検索結果出力用ＳＱＬ作成
-                    Dim sql = f_Search_SQLMake(pLOGINUSERID)
+                    Dim sql = FrmGJ0000Service.f_Search_SQLMake(pLOGINUSERID)
 
                     'データSelect 
-                    Dim ds = f_Select_ODP(db, sql)
+                    Dim ds = FrmService.f_Select_ODP(db, sql)
 
                     '-------------------------------------------------------------
                     '5.データ加工処理
@@ -130,10 +130,10 @@ Namespace JBD.GJS.Service.GJ0000
                     '4.ビジネスロジック処理
                     '-------------------------------------------------------------
                     '検索結果出力用ＳＱＬ作成
-                    Dim sql = f_Search_SQLHome()
+                    Dim sql = FrmGJ0000Service.f_Search_SQLHome()
 
                     'データSelect 
-                    Dim ds = f_Select_ODP(db, sql)
+                    Dim ds = FrmService.f_Select_ODP(db, sql)
 
                     '-------------------------------------------------------------
                     '5.データ加工処理
