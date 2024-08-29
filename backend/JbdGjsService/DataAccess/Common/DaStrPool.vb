@@ -7,7 +7,7 @@
 ' 変更履歴　:
 ' *******************************************************************
 Namespace JBD.GJS.Service
-    Public Module DaStrPool
+    Public Class DaStrPool
 #Region "char const"
 
         Public Const C_SPACE As Char = " "c
@@ -83,5 +83,5 @@ Namespace JBD.GJS.Service
         Public Const ASTERISK As String = "*"
 
 #End Region
-    End Module
+    End Class
 End Namespace

@@ -20,28 +20,28 @@ Namespace JBD.GJS.Service
         ''' <summary>
         ''' 検索入力欄(カナ)
         ''' </summary>
-        Public Shared Function ToKanaLikeStr(value As String) As String
-            If String.IsNullOrEmpty(value) Then
-                Return Nothing
-            End If
+        'Public Shared Function ToKanaLikeStr(value As String) As String
+        '    If String.IsNullOrEmpty(value) Then
+        '        Return Nothing
+        '    End If
 
-            Return $"%{DaConvertUtil.ToKana(value)}%"
-        End Function
+        '    Return $"%{DaConvertUtil.ToKana(value)}%"
+        'End Function
         ''' <summary>
         ''' 検索入力欄(氏名カナ)
         ''' </summary>
-        Public Shared Function ToKnameLikeStr(kname As String) As String
-            If Not String.IsNullOrEmpty(kname) Then
-                'カタカナへ変換
-                kname = DaConvertUtil.ToKana(kname)
-                '清音化
-                kname = DaConvertUtil.ToSeion(kname)
-                '%変換
-                kname = kname.Replace("％", "%")
-                Return $"{kname}%"
-            Else
-                Return Nothing
-            End If
-        End Function
+        'Public Shared Function ToKnameLikeStr(kname As String) As String
+        '    If Not String.IsNullOrEmpty(kname) Then
+        '        'カタカナへ変換
+        '        kname = DaConvertUtil.ToKana(kname)
+        '        '清音化
+        '        kname = DaConvertUtil.ToSeion(kname)
+        '        '%変換
+        '        kname = kname.Replace("％", "%")
+        '        Return $"{kname}%"
+        '    Else
+        '        Return Nothing
+        '    End If
+        'End Function
     End Class
 End Namespace

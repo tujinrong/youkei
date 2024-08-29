@@ -8,7 +8,7 @@
 ' *******************************************************************
 
 Namespace JBD.GJS.Service
-    Public Module CmLogicUtil
+    Public Class CmLogicUtil
         '予約状態
         Public Const YOYAKUSTATUS1 As String = "空"
         Public Const YOYAKUSTATUS2 As String = "満"
@@ -711,7 +711,7 @@ Namespace JBD.GJS.Service
         ''' <summary>
         ''' 名称取得
         ''' </summary>
-        Private Function GetCdNm(model As DaSelectorModel, cd As String) As String
+        Private Shared Function GetCdNm(model As DaSelectorModel, cd As String) As String
             If model Is Nothing Then Return $"{cd}{DaConst.SELECTOR_DELIMITER}"
             Return $"{cd}{DaConst.SELECTOR_DELIMITER}{model.label}"
         End Function
@@ -841,7 +841,7 @@ Namespace JBD.GJS.Service
         ''' <summary>
         ''' コード一覧取得
         ''' </summary>
-        Private Function GetCommonCdList(db As DaDbContext, kbn As Enumマスタ区分, nmkbn As Enum名称区分, keyList As List(Of String), ParamArray keys As String()) As List(Of DaSelectorModel)
+        Private Shared Function GetCommonCdList(db As DaDbContext, kbn As Enumマスタ区分, nmkbn As Enum名称区分, keyList As List(Of String), ParamArray keys As String()) As List(Of DaSelectorModel)
             Select Case kbn
                 'Case Gjs.Enumマスタ区分.名称マスタ, Gjs.Enumマスタ区分.汎用マスタ, Gjs.Enumマスタ区分.所属グループマスタ, Gjs.Enumマスタ区分.会場情報マスタ
                 '    Return New Exception("Enumマスタ区分 error")
@@ -898,7 +898,7 @@ Namespace JBD.GJS.Service
         ''' <summary>
         ''' 一覧選択リストを取得（参照ダイアログ項目用）
         ''' </summary>
-        Public Function GetCdList(db As DaDbContext, kinoid As String, patternno As String, kbn As Enum参照ダイアログ項目区分, Optional hasStopFlg As Boolean = False) As List(Of DaSelectorModel)
+        Public Shared Function GetCdList(db As DaDbContext, kinoid As String, patternno As String, kbn As Enum参照ダイアログ項目区分, Optional hasStopFlg As Boolean = False) As List(Of DaSelectorModel)
             '参照ダイアログ項目区分
             If kbn = Enum参照ダイアログ項目区分.医療機関 OrElse kbn = Enum参照ダイアログ項目区分.事業従事者 OrElse kbn = Enum参照ダイアログ項目区分.検診実施機関 Then
                 '実施事業(表示範囲)
@@ -935,5 +935,5 @@ Namespace JBD.GJS.Service
             Return maxCd
         End Function
 
-    End Module
+    End Class
 End Namespace

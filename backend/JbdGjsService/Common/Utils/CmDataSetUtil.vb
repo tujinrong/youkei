@@ -74,7 +74,7 @@ Namespace JBD.GJS.Service
         '}
 
     End Class
-    Friend Module DaExtension
+    Friend Class DaExtension
 
         <Extension()>
         Public Function ToStr(Me dr As DataRow, name As String) As String
@@ -202,5 +202,5 @@ Namespace JBD.GJS.Service
             End If
         End Function
 
-    End Module
+    End Class
 End Namespace
