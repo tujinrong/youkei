@@ -15,7 +15,7 @@
         style="position: fixed; bottom: 20px; right: 50px; width: 30%"
       />
       <div class="flex">
-        <h1>{{ formattedDate }}現在</h1>
+        <h1>{{ currentTime }}</h1>
         <a-button type="primary" class="ml-2 mt-1" @click="Init">更新</a-button>
       </div>
 
@@ -45,15 +45,33 @@
   </div>
 </template>
 <script setup lang="ts">
-import { computed, onMounted, reactive } from 'vue'
+import { onMounted, reactive, ref, onUnmounted } from 'vue'
 import { Init } from './service'
-const formattedDate = computed(() => {
-  const currentDate = new Date()
-  return currentDate.toLocaleDateString('ja-JP', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
+//--------------------------------------------------------------------------
+//データ定義
+//--------------------------------------------------------------------------
+const currentTime = ref('')
+
+onMounted(() => {
+  const updateCurrentTime = () => {
+    const currentDate = new Date()
+    const datePart = currentDate.toLocaleDateString('ja-JP', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+    })
+    const timePart = currentDate.toLocaleTimeString('ja-JP', {
+      hour: 'numeric',
+      minute: 'numeric',
+      second: 'numeric',
+    })
+    currentTime.value = `${datePart}${timePart}`
+  }
+  const intervalId = setInterval(updateCurrentTime, 1000)
+  onUnmounted(() => {
+    clearInterval(intervalId)
   })
+  updateCurrentTime()
 })
 
 const homeData = reactive({
