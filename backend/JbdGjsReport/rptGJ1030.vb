@@ -64,7 +64,7 @@ Public Class rptGJ1030
 
         Dim pr = System.Text.Json.JsonSerializer.Deserialize(Of JBD.GJS.Service.GJ1030.PreviewRequest)(param)
         '検索結果出力用ＳＱＬ作成
-        Dim sql = f_make_SQL(pr)
+        Dim sql = FrmGJ1030Service.f_make_SQL(pr)
 
         'データSelect 
         Dim wkDSRep As New DataSet()

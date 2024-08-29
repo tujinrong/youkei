@@ -31,7 +31,7 @@ Namespace JBD.GJS.WebService
             Dim r = SetSession(Of DaRequestBase)(bizReq, True)
 
             'チェックトークン
-            Dim rst = CheckToken(r.token,Program.ReportsDirectory.ToString())
+            Dim rst = FrmService.CheckToken(r.token,Program.ReportsDirectory.ToString())
             Dim rar As String() = rst.Split("|")
             Dim uid = rar(0)
             Dim err = rar(1)
