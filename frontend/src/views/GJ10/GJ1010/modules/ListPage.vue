@@ -29,23 +29,10 @@
           <a-col v-bind="layout">
             <th>都道府県</th>
             <td>
-              <!-- <range-select
-                v-model:value="formData.KEIYAKU_KBN_CD"
-                :options="KEIYAKU_KBN_CD_NAME_LIST"
+              <range-select
+                v-model:value="searchParams.KEN_CD"
+                :options="KEN_CD_NAME_LIST"
               />
-              <range-select> -->
-              <ai-select
-                v-model:value="searchParams.KEN_CD1"
-                :options="KEN_CD_NAME_LIST"
-                class="w-full"
-                type="number"
-              ></ai-select
-              >～<ai-select
-                v-model:value="searchParams.KEN_CD2"
-                :options="KEN_CD_NAME_LIST"
-                class="w-full"
-                type="number"
-              ></ai-select>
             </td> </a-col
         ></a-row>
         <a-row>
@@ -118,7 +105,7 @@
             <th>電話番号</th>
             <td>
               <a-input
-                v-model:value="searchParams.ADDR_TEL"
+                v-model:value="searchParams.ADDR_TEL1"
                 class="w-full"
                 :maxlength="14"
                 @input="handleTel"
@@ -128,18 +115,10 @@
           <a-col v-bind="layout">
             <th>事務委託先</th>
             <td>
-              <ai-select
-                v-model:value="searchParams.JIMUITAKU_CD1"
-                :options="KEN_CD_NAME_LIST"
-                class="w-full"
-                type="number"
-              ></ai-select
-              >～<ai-select
-                v-model:value="searchParams.JIMUITAKU_CD2"
-                :options="KEN_CD_NAME_LIST"
-                class="w-full"
-                type="number"
-              ></ai-select>
+              <range-select
+                v-model:value="searchParams.JIMUITAKU_CD"
+                :options="ITAKU_LIST"
+              />
             </td>
           </a-col>
         </a-row>
@@ -277,7 +256,7 @@ import { useElementSize } from '@vueuse/core'
 import { changeTableSort } from '@/utils/util'
 import { useRoute, useRouter } from 'vue-router'
 import { useTabStore } from '@/store/modules/tab'
-import { SearchRowVM } from '../type'
+import { SearchRequest, SearchRowVM } from '../type'
 import { VxeTableInstance } from 'vxe-table'
 import { convertToHalfNumber } from '@/utils/util'
 //--------------------------------------------------------------------------
@@ -286,19 +265,24 @@ import { convertToHalfNumber } from '@/utils/util'
 const createDefaultParams = () => {
   return {
     KI: 8,
-    KEN_CD1: '',
-    KEN_CD2: '',
-    KEIYAKUSYA_CD: '',
-    KEIYAKU_KBN: '',
-    KEIYAKU_JYOKYO: '',
+    KEN_CD: {
+      VALUE_FM: undefined,
+      VALUE_TO: undefined,
+    },
+    KEIYAKUSYA_CD: undefined,
+    KEIYAKU_KBN: undefined,
+    KEIYAKU_JYOKYO: undefined,
     KEIYAKUSYA_NAME: '',
     KEIYAKUSYA_KANA: '',
     ADDR: '',
-    ADDR_TEL: '',
-    JIMUITAKU_CD1: '',
-    JIMUITAKU_CD2: '',
+    ADDR_TEL1: '',
+    JIMUITAKU_CD: {
+      VALUE_FM: undefined,
+      VALUE_TO: undefined,
+    },
+    NOZOKU_FLG: true,
     SEARCH_METHOD: EnumAndOr.AndCode,
-  }
+  } as SearchRequest
 }
 const searchParams = reactive(createDefaultParams())
 const layout = {
@@ -319,17 +303,19 @@ const KEIYAKU_KBN_CD_NAME_LIST = ref<CmCodeNameModel[]>([
   { CODE: 3, NAME: '鶏以外' },
 ])
 const KEN_CD_NAME_LIST = ref<CmCodeNameModel[]>([])
+const ITAKU_LIST = ref<CmCodeNameModel[]>([])
 const tableData = ref<SearchRowVM[]>([])
 const tableDefault = {
   KEIYAKUSYA_CD: 1003,
   KEIYAKUSYA_NAME: '亜伊伊伊伊伊伊伊亜伊',
   KEIYAKUSYA_KANA: 'ｲｲｱｱｱｲｱｲｱｲｱｱｱｲｱｱｲｱｱｱｲｱｱｱ',
-  KEIYAKU_KBN: '企業',
-  KEIYAKU_JYOKYO: '継続',
-  ADDR_TEL: '1111-21-1121',
-  KEN_CD: '1北海道',
-  JIMUITAKU_CD1: '（宇）宇亜宇伊亜宇伊',
+  KEIYAKU_KBN_NAME: '企業',
+  KEIYAKU_JYOKYO_NAME: '継続',
+  ADDR_TEL1: '1111-21-1121',
+  KEN_CD_NAME: '1北海道',
+  JIMUITAKU_NAME: '（宇）宇亜宇伊亜宇伊',
 }
+
 const { pageParams, totalCount, searchData, clear } = useSearch({
   service: undefined,
   source: tableData,
@@ -347,12 +333,15 @@ const isDataSelected = computed(() => {
 //--------------------------------------------------------------------------
 const handleTel = () => {
   nextTick(
-    () => (searchParams.ADDR_TEL = convertToHalfNumber(searchParams.ADDR_TEL))
+    () => (searchParams.ADDR_TEL1 = convertToHalfNumber(searchParams.ADDR_TEL1))
   )
 }
 //検索処理
 function search() {
   tableData.value.push(tableDefault)
+  if (xTableRef.value && tableData.value.length > 0) {
+    xTableRef.value.setCurrentRow(tableData.value[0])
+  }
 }
 
 function goForward(status: PageStatus, row?: any) {

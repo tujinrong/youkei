@@ -32,6 +32,7 @@
                 <a-input
                   v-model:value="formData.KEIYAKUSYA_CD"
                   :disabled="!isNew"
+                  :maxlength="5"
                 >
                 </a-input
               ></a-form-item>
@@ -40,8 +41,15 @@
           <a-col span="12">
             <th>経営安定対策事業生産者番号</th>
             <td>
-              <a-form-item v-bind="validateInfos.KEIYAKUSYA_CD">
-                <a-input> </a-input
+              <a-form-item v-bind="validateInfos.SEISANSYA_CD">
+                <a-input
+                  v-model:value="formData.SEISANSYA_CD"
+                  :maxlength="5"
+                  @input="
+                    changeType('number', $event.target.value, 'SEISANSYA_CD')
+                  "
+                >
+                </a-input
               ></a-form-item>
             </td>
           </a-col>
@@ -63,8 +71,15 @@
           <a-col span="12">
             <th>日鶏協番号</th>
             <td>
-              <a-form-item v-bind="validateInfos.KEIKYO_CD">
-                <a-input v-model:value="formData.KEIKYO_CD"> </a-input
+              <a-form-item v-bind="validateInfos.NIKKEIKYO_CD">
+                <a-input
+                  v-model:value="formData.NIKKEIKYO_CD"
+                  :maxlength="10"
+                  @input="
+                    changeType('number', $event.target.value, 'SEISANSYA_CD')
+                  "
+                >
+                </a-input
               ></a-form-item>
             </td>
           </a-col>
@@ -86,7 +101,9 @@
             <th>契約日</th>
             <td>
               <a-form-item v-bind="validateInfos.KEIYAKU_DATE">
-                <DateJp v-model:value="formData.KEIYAKU_DATE"
+                <DateJp
+                  v-model:value="formData.KEIYAKU_DATE"
+                  :disabled="formData.NYU_HEN_DATE"
               /></a-form-item>
             </td>
           </a-col>
@@ -107,8 +124,8 @@
           <a-col span="12" class="flex">
             <th>入金日、返還日(入金完了時)</th>
             <td>
-              <a-form-item v-bind="validateInfos.KANRYO_DATE">
-                <DateJp v-model:value="formData.KANRYO_DATE"></DateJp>
+              <a-form-item v-bind="validateInfos.NYU_HEN_DATE">
+                <DateJp v-model:value="formData.NYU_HEN_DATE" disabled></DateJp>
               </a-form-item>
             </td>
           </a-col>
@@ -120,24 +137,45 @@
           <a-col span="8">
             <th class="required">申込者名(フリガナ)</th>
             <td>
-              <a-form-item v-bind="validateInfos.MOSIKOMUSYA_NM">
-                <a-input v-model:value="formData.MOSIKOMUSYA_NM"> </a-input
+              <a-form-item v-bind="validateInfos.KEIYAKUSYA_KANA">
+                <a-input
+                  v-model:value="formData.KEIYAKUSYA_KANA"
+                  :maxlength="50"
+                  @input="
+                    changeType('half', $event.target.value, 'KEIYAKUSYA_KANA')
+                  "
+                >
+                </a-input
               ></a-form-item>
             </td>
           </a-col>
           <a-col span="8">
             <th class="required">申込者名(個人・団体)</th>
             <td>
-              <a-form-item v-bind="validateInfos.MOSIKOMUSYA_TANTAI">
-                <a-input v-model:value="formData.MOSIKOMUSYA_TANTAI"> </a-input
+              <a-form-item v-bind="validateInfos.KEIYAKUSYA_NAME">
+                <a-input
+                  v-model:value="formData.KEIYAKUSYA_NAME"
+                  :maxlength="25"
+                  @input="
+                    changeType('full', $event.target.value, 'KEIYAKUSYA_NAME')
+                  "
+                >
+                </a-input
               ></a-form-item>
             </td>
           </a-col>
           <a-col span="8">
             <th>代表者名(団体)</th>
             <td>
-              <a-form-item v-bind="validateInfos.DAIHYOUSYA_NM">
-                <a-input v-model:value="formData.DAIHYOUSYA_NM"> </a-input
+              <a-form-item v-bind="validateInfos.DAIHYO_NAME">
+                <a-input
+                  v-model:value="formData.DAIHYO_NAME"
+                  :maxlength="25"
+                  @input="
+                    changeType('full', $event.target.value, 'DAIHYO_NAME')
+                  "
+                >
+                </a-input
               ></a-form-item>
             </td>
           </a-col>
@@ -161,12 +199,14 @@
                     <a-input
                       v-model:value="formData.ADDR_2"
                       :maxlength="15"
+                      @input="changeType('full', $event.target.value, 'ADDR_2')"
                     ></a-input> </a-form-item></a-col
               ></a-row>
               <a-form-item v-bind="validateInfos.ADDR_3">
                 <a-input
                   v-model:value="formData.ADDR_3"
                   :maxlength="15"
+                  @input="changeType('full', $event.target.value, 'ADDR_3')"
                   @change="validate('ADDR_4')"
                 ></a-input>
               </a-form-item>
@@ -174,6 +214,7 @@
                 <a-input
                   v-model:value="formData.ADDR_4"
                   :maxlength="20"
+                  @input="changeType('full', $event.target.value, 'ADDR_4')"
                 ></a-input>
               </a-form-item>
             </td>
@@ -186,10 +227,11 @@
           <a-col :span="7">
             <th class="required">電話</th>
             <td>
-              <a-form-item v-bind="validateInfos.DENWA_1">
+              <a-form-item v-bind="validateInfos.ADDR_TEL1">
                 <a-input
-                  v-model:value="formData.DENWA_1"
+                  v-model:value="formData.ADDR_TEL1"
                   :maxlength="15"
+                  @input="changeType('tel', $event.target.value, 'ADDR_TEL1')"
                 ></a-input>
               </a-form-item>
             </td>
@@ -198,22 +240,31 @@
             <th>電話2</th>
             <td>
               <a-input
-                v-model:value="formData.DENWA_1"
+                v-model:value="formData.ADDR_TEL2"
                 :maxlength="15"
+                @input="changeType('tel', $event.target.value, 'ADDR_TEL2')"
               ></a-input>
             </td>
           </a-col>
           <a-col class="flex-1">
             <th>FAX</th>
             <td>
-              <a-input v-model:value="formData.FAX" :maxlength="15"></a-input>
+              <a-input
+                v-model:value="formData.ADDR_FAX"
+                :maxlength="15"
+                @input="changeType('tel', $event.target.value, 'ADDR_FAX')"
+              ></a-input>
             </td>
           </a-col>
           <a-col span="24">
             <th style="border-top: none">　</th>
             <th>メールアドレス</th>
             <td>
-              <a-input v-model:value="formData.EMAIL" :maxlength="15"></a-input>
+              <a-input
+                v-model:value="formData.ADDR_E_MAIL"
+                :maxlength="50"
+                @input="changeType('half', $event.target.value, 'ADDR_E_MAIL')"
+              ></a-input>
             </td>
           </a-col>
         </a-row>
@@ -221,9 +272,9 @@
           <a-col span="24">
             <th class="required">事務委託先</th>
             <td>
-              <a-form-item v-bind="validateInfos.JIMUITAKUSENN">
+              <a-form-item v-bind="validateInfos.JIMUITAKU_CD">
                 <ai-select
-                  v-model:value="formData.JIMUITAKUSENN"
+                  v-model:value="formData.JIMUITAKU_CD"
                   :option="JIMUITAKUSENN_LIST"
                   split-val
                 ></ai-select
@@ -238,10 +289,7 @@
           <a-col span="24">
             <th>金融機関入力情報有無</th>
             <td>
-              <a-radio-group
-                v-model:value="formData.hasnyuryoku"
-                class="ml-2 pt-1"
-              >
+              <a-radio-group v-model:value="hasnyuryoku" class="ml-2 pt-1">
                 <a-radio :value="true">有</a-radio>
                 <a-radio :value="false">無</a-radio>
               </a-radio-group>
@@ -249,27 +297,27 @@
             </td>
           </a-col>
           <a-col span="12">
-            <th :class="formData.hasnyuryoku ? 'required' : ''">金融機関</th>
+            <th :class="hasnyuryoku ? 'required' : ''">金融機関</th>
             <td>
-              <a-form-item v-bind="validateInfos.KINNYUKIKAN">
+              <a-form-item v-bind="validateInfos.FURI_BANK_CD">
                 <ai-select
-                  v-model:value="formData.KINNYUKIKAN"
-                  :option="KINNYUKIKAN_LIST"
+                  v-model:value="formData.FURI_BANK_CD"
+                  :option="FURI_BANK_LIST"
                   split-val
-                  :disabled="!formData.hasnyuryoku"
+                  :disabled="!hasnyuryoku"
                 ></ai-select
               ></a-form-item>
             </td>
           </a-col>
           <a-col span="12">
-            <th :class="formData.hasnyuryoku ? 'required' : ''">本支店</th>
+            <th :class="hasnyuryoku ? 'required' : ''">本支店</th>
             <td>
-              <a-form-item v-bind="validateInfos.HONSITEN">
+              <a-form-item v-bind="validateInfos.FURI_BANK_SITEN_CD">
                 <ai-select
-                  v-model:value="formData.HONSITEN"
-                  :option="HONSITEN_LIST"
+                  v-model:value="formData.FURI_BANK_SITEN_CD"
+                  :option="FURI_BANK_SITEN_LIST"
                   split-val
-                  :disabled="!formData.hasnyuryoku"
+                  :disabled="!hasnyuryoku"
                 ></ai-select
               ></a-form-item>
             </td>
@@ -277,26 +325,29 @@
         </a-row>
         <a-row>
           <a-col :span="12">
-            <th :class="formData.hasnyuryoku ? 'required' : ''">口座種別</th>
+            <th :class="hasnyuryoku ? 'required' : ''">口座種別</th>
             <td>
-              <a-form-item v-bind="validateInfos.KOUZAISYUBETU">
+              <a-form-item v-bind="validateInfos.FURI_KOZA_SYUBETU">
                 <ai-select
-                  v-model:value="formData.KOUZAISYUBETU"
+                  v-model:value="formData.FURI_KOZA_SYUBETU"
                   :option="KOUZAISYUBETU_LIST"
                   split-val
-                  :disabled="!formData.hasnyuryoku"
+                  :disabled="!hasnyuryoku"
                 ></ai-select
               ></a-form-item>
             </td>
           </a-col>
           <a-col :span="12">
-            <th :class="formData.hasnyuryoku ? 'required' : ''">口座番号</th>
+            <th :class="hasnyuryoku ? 'required' : ''">口座番号</th>
             <td>
-              <a-form-item v-bind="validateInfos.KOUZAIBANGO">
+              <a-form-item v-bind="validateInfos.FURI_KOZA_NO">
                 <a-input
-                  v-model:value="formData.KOUZAIBANGO"
-                  :maxlength="15"
-                  :disabled="!formData.hasnyuryoku"
+                  v-model:value="formData.FURI_KOZA_NO"
+                  :maxlength="7"
+                  :disabled="!hasnyuryoku"
+                  @input="
+                    changeType('number', $event.target.value, 'FURI_KOZA_NO')
+                  "
                 ></a-input>
               </a-form-item>
             </td>
@@ -304,15 +355,22 @@
         </a-row>
         <a-row>
           <a-col>
-            <th :class="formData.hasnyuryoku ? 'required' : ''">口座名義人</th>
+            <th :class="hasnyuryoku ? 'required' : ''">口座名義人</th>
           </a-col>
           <a-col :span="11">
             <td>
-              <a-form-item v-bind="validateInfos.KOUZAIMEIININ_1">
+              <a-form-item v-bind="validateInfos.FURI_KOZA_MEIGI_KANA">
                 <a-input
-                  v-model:value="formData.KOUZAIMEIININ_1"
-                  :maxlength="15"
-                  :disabled="!formData.hasnyuryoku"
+                  v-model:value="formData.FURI_KOZA_MEIGI_KANA"
+                  :maxlength="80"
+                  :disabled="!hasnyuryoku"
+                  @input="
+                    changeType(
+                      'half',
+                      $event.target.value,
+                      'FURI_KOZA_MEIGI_KANA'
+                    )
+                  "
                 ></a-input>
               </a-form-item>
             </td>
@@ -320,9 +378,12 @@
           <a-col class="flex-1">
             <td>
               <a-input
-                v-model:value="formData.KOUZAIMEIININ_2"
-                :maxlength="15"
-                :disabled="!formData.hasnyuryoku"
+                v-model:value="formData.FURI_KOZA_MEIGI"
+                :maxlength="40"
+                :disabled="!hasnyuryoku"
+                @input="
+                  changeType('full', $event.target.value, 'FURI_KOZA_MEIGI')
+                "
               ></a-input>
             </td>
           </a-col>
@@ -334,18 +395,18 @@
                 <th class="required">入力確認有無</th>
                 <td>
                   <a-radio-group
-                    v-model:value="formData.NYURYOKUKAKUNIN"
+                    v-model:value="formData.NYURYOKU_JYOKYO"
                     class="ml-2 h-full pt-1"
                   >
-                    <a-radio :value="true">有</a-radio>
-                    <a-radio :value="false">無</a-radio>
+                    <a-radio :value="1">有</a-radio>
+                    <a-radio :value="2">無</a-radio>
                   </a-radio-group>
                 </td>
               </a-col>
               <a-col class="w-full">
                 <th>廃業日</th>
                 <td>
-                  <DateJp v-model:value="formData.HAGYO_DATE" />
+                  <DateJp v-model:value="formData.HAIGYO_DATE" />
                 </td>
               </a-col>
             </a-row>
@@ -353,7 +414,11 @@
           <a-col :span="12"
             ><th>備考</th>
             <td>
-              <a-textarea v-model:value="formData.BIKO" /></td
+              <a-textarea
+                v-model:value="formData.BIKO"
+                :maxlength="40"
+                @input="changeType('full', $event.target.value, 'BIKO')"
+              /></td
           ></a-col>
         </a-row>
       </a-form>
@@ -364,7 +429,7 @@
 import { PageStatus } from '@/enum'
 import { useRoute, useRouter } from 'vue-router'
 import { Form, message } from 'ant-design-vue'
-import { reactive, nextTick, onMounted, ref } from 'vue'
+import { reactive, nextTick, onMounted, ref, computed } from 'vue'
 import DateJp from '@/components/Selector/DateJp/index.vue'
 import { Judgement } from '@/utils/judge-edited'
 import { showDeleteModal, showInfoModal } from '@/utils/modal'
@@ -373,6 +438,13 @@ import {
   DELETE_OK_INFO,
   ITEM_REQUIRE_ERROR,
 } from '@/constants/msg'
+import { DetailVM } from '../../type'
+import {
+  convertALLToHalfWidth,
+  convertToFullWidth,
+  convertToTel,
+  convertToHalfNumber,
+} from '@/utils/util'
 //--------------------------------------------------------------------------
 //データ定義
 //--------------------------------------------------------------------------
@@ -383,48 +455,53 @@ const router = useRouter()
 const route = useRoute()
 const isNew = props.status === PageStatus.New
 const editJudge = new Judgement()
-const createDefaultParams = reactive({
-  KI: undefined as number | undefined,
-  KEIYAKUSYA_CD: undefined as number | undefined,
-  KEN_CD: undefined as number | undefined,
-  KEIKYO_CD: undefined as number | undefined,
-  KEIYAKU_KBN: undefined as number | undefined,
-  KEIYAKU_DATE: new Date() as Date,
-  KEIYAKU_JYOKYO: undefined as number | undefined,
-  KANRYO_DATE: new Date() as Date,
-  MOSIKOMUSYA_NM: '',
-  MOSIKOMUSYA_TANTAI: '',
-  DAIHYOUSYA_NM: '',
-  DENWA_1: '',
-  ADDR_POST: '',
-  ADDR_1: '',
-  ADDR_2: '',
-  ADDR_3: '',
-  ADDR_4: '',
-  FAX: '',
-  EMAIL: '',
-  JIMUITAKUSENN: undefined as number | undefined,
-  hasnyuryoku: false,
-  KINNYUKIKAN: '',
-  HONSITEN: '',
-  KOUZAISYUBETU: '',
-  KOUZAIBANGO: '',
-  KOUZAIMEIININ_1: '',
-  KOUZAIMEIININ_2: '',
-  NYURYOKUKAKUNIN: false,
-  HAGYO_DATE: new Date() as Date,
-  BIKO: '',
-})
+const createDefaultParams = () => {
+  return {
+    KI: undefined as number | undefined, //期
+    KEIYAKUSYA_CD: undefined as number | undefined, //契約者番号
+    SEISANSYA_CD: undefined as number | undefined, //経営安定対策事業生産者番号
+    KEN_CD: undefined as number | undefined, //都道府県
+    NIKKEIKYO_CD: undefined as number | undefined, //日鶏協番号
+    KEIYAKU_KBN: undefined as number | undefined, //契約区分
+    KEIYAKU_DATE: new Date() as Date | undefined, //契約日
+    KEIYAKU_JYOKYO: undefined as number | undefined, //契約状況
+    NYU_HEN_DATE: undefined as Date | undefined, //入金日、返還日
+    KEIYAKUSYA_KANA: '', //申込者名(ﾌﾘｶﾞﾅ)
+    KEIYAKUSYA_NAME: '', //申込者名(個人・団体
+    DAIHYO_NAME: '', //代表者名(団体)
+    ADDR_POST: '', //住所（郵便番号）
+    ADDR_1: '', //
+    ADDR_2: '', //
+    ADDR_3: '', //
+    ADDR_4: '', //
+    ADDR_TEL1: '', //連絡先（電話）
+    ADDR_TEL2: '', //連絡先（電話2)
+    ADDR_FAX: '', //連絡先（FAX）
+    ADDR_E_MAIL: '', //メールアドレス
+    JIMUITAKU_CD: undefined as number | undefined, //事務委託先番号
+    FURI_BANK_CD: '', //金融機関コード
+    FURI_BANK_SITEN_CD: '', //本支店コード
+    FURI_KOZA_SYUBETU: undefined as number | undefined, //口座種別コード
+    FURI_KOZA_NO: '', //口座番号
+    FURI_KOZA_MEIGI_KANA: '', //口座名義人（カナ）
+    FURI_KOZA_MEIGI: '', //口座名義人（漢字）
+    NYURYOKU_JYOKYO: 2 as number | undefined, //入力確認有無(入力状況)
+    BIKO: '', //備考
+    HAIGYO_DATE: new Date() as Date | undefined, //廃業日
+    UP_DATE: new Date() as Date | undefined, //データ更新日
+  } as DetailVM
+}
+const formData = reactive(createDefaultParams())
+const hasnyuryoku = ref(false)
 const KEN_CD_NAME_LIST = ref<CmCodeNameModel[]>([])
 const KEIYAKU_KBN_CD_NAME_LIST = ref<CmCodeNameModel[]>([])
 const KEIYAKU_JYOKYO_LIST = ref<CmCodeNameModel[]>([])
 const KOUZAISYUBETU_LIST = ref<CmCodeNameModel[]>([])
-const HONSITEN_LIST = ref<CmCodeNameModel[]>([])
+const FURI_BANK_SITEN_LIST = ref<CmCodeNameModel[]>([])
 
-const KINNYUKIKAN_LIST = ref<CmCodeNameModel[]>([])
+const FURI_BANK_LIST = ref<CmCodeNameModel[]>([])
 const JIMUITAKUSENN_LIST = ref<CmCodeNameModel[]>([])
 
-const formData = reactive(createDefaultParams)
 const rules = reactive({
   KEIYAKUSYA_CD: [
     {
@@ -478,11 +555,32 @@ const { validate, clearValidate, validateInfos, resetFields } = Form.useForm(
 //--------------------------------------------------------------------------
 onMounted(() => {
   nextTick(() => editJudge.reset())
+  if (!isNew && formData.FURI_BANK_CD) hasnyuryoku.value = true
 })
+//--------------------------------------------------------------------------
+//計算定義
+//--------------------------------------------------------------------------
 
 //--------------------------------------------------------------------------
 //メソッド
 //--------------------------------------------------------------------------
+const changeType = (type: string, input: any, name: string) => {
+  nextTick(() => {
+    if (type === 'half') {
+      formData[name] = convertALLToHalfWidth(input)
+    }
+    if (type === 'full') {
+      formData[name] = convertToFullWidth(input)
+    }
+    if (type === 'tel') {
+      formData[name] = convertToTel(input)
+    }
+    if (type === 'number') {
+      formData[name] = convertToHalfNumber(input)
+    }
+  })
+}
+
 //画面遷移
 const goList = () => {
   editJudge.judgeIsEdited(() => {

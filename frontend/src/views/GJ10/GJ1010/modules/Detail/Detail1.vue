@@ -406,7 +406,7 @@ const addNoJo = () => {
 </script>
 <style lang="scss" scoped>
 th {
-  min-width: 110px;
+  min-width: 110px; //絶対変えられない
 }
 
 tr th {
