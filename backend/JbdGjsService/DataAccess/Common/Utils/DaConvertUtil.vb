@@ -8,11 +8,11 @@
 ' *******************************************************************
 
 Namespace JBD.GJS.Service
-    Public Module DaConvertUtil
+    Public Class DaConvertUtil
         ''' <summary>
         ''' objectを文字列に変換
         ''' </summary>
-        Public Function [CStr](obj As Object) As String
+        Public Shared Function [CStr](obj As Object) As String
             If obj Is Nothing OrElse obj Is Convert.DBNull Then Return String.Empty
             If TypeOf obj Is String Then Return obj.ToString()
             Return String.Empty
@@ -21,7 +21,7 @@ Namespace JBD.GJS.Service
         ''' <summary>
         ''' objectをnull許容型文字列に変換
         ''' </summary>
-        Public Function CNStr(obj As Object) As String
+        Public Shared Function CNStr(obj As Object) As String
             If obj Is Nothing OrElse TypeOf obj Is DBNull Then Return Nothing
             If TypeOf obj Is String Then
                 If String.IsNullOrEmpty([CStr](obj)) Then Return Nothing
@@ -33,7 +33,7 @@ Namespace JBD.GJS.Service
         ''' <summary>
         ''' objectを数字に変換、nullの場合、０にする
         ''' </summary>
-        Public Function [CInt](obj As Object) As Integer
+        Public Shared Function [CInt](obj As Object) As Integer
             If obj Is Nothing OrElse TypeOf obj Is DBNull Then Return 0
             If TypeOf obj Is Integer Then Return Cint(obj)
             Dim i As Integer = Nothing
@@ -112,7 +112,7 @@ Namespace JBD.GJS.Service
         ''' <summary>
         ''' objectをDecimalに変換。NULL及び変換できない場合、nullにする
         ''' </summary>
-        Public Function CNDec(obj As Object) As Decimal
+        Public Shared Function CNDec(obj As Object) As Decimal
             If obj Is Nothing OrElse TypeOf obj Is DBNull Then Return Nothing
             If TypeOf obj Is Decimal Then Return CDec(obj)
             Dim i As Decimal = Nothing
@@ -121,7 +121,7 @@ Namespace JBD.GJS.Service
         ''' <summary>
         ''' objectをLongに変換。NULL及び変換できない場合、０にする
         ''' </summary>
-        Public Function [CLng](obj As Object) As Long
+        Public Shared Function [CLng](obj As Object) As Long
             If obj Is Nothing OrElse TypeOf obj Is DBNull Then Return 0L
             If TypeOf obj Is Long Then Return CType(obj, Long)
             Dim i As Long = Nothing
@@ -201,7 +201,7 @@ Namespace JBD.GJS.Service
         ''' <summary>
         ''' object対象を論理値に変換。NULL及び変換できない場合、falseにする
         ''' </summary>
-        Public Function [CBool](obj As Object) As Boolean
+        Public Shared Function [CBool](obj As Object) As Boolean
             If obj Is Nothing OrElse TypeOf obj Is DBNull Then Return False
             If TypeOf obj Is Boolean Then Return CType(obj, Boolean)
             If Equals(obj.ToString(), "1") Then Return True
@@ -238,7 +238,7 @@ Namespace JBD.GJS.Service
         ''' <summary>
         ''' Enum型から文字に変換
         ''' </summary>
-        Public Function EnumToStr(obj As [Enum]) As String
+        Public Shared Function EnumToStr(obj As [Enum]) As String
             If obj Is Nothing Then Return String.Empty
             Dim i = Convert.ToInt64(obj)
             If i = -1 Then Return String.Empty
@@ -283,7 +283,7 @@ Namespace JBD.GJS.Service
         Public Function CommaStrToList(str As String) As List(Of String)
             Dim list = New List(Of String)()
             If Not String.IsNullOrEmpty(str) Then
-                list = str.Split(COMMA).ToList()
+                list = str.Split(DaStrPool.COMMA).ToList()
             End If
             Return list
         End Function
@@ -295,7 +295,7 @@ Namespace JBD.GJS.Service
             Dim cd As String = Nothing
             If sortFlg Then cdList.Sort()
             If cdList.Count > 0 Then
-                cd = String.Join(COMMA, cdList)
+                cd = String.Join(DaStrPool.COMMA, cdList)
             End If
 
             Return cd
@@ -307,7 +307,7 @@ Namespace JBD.GJS.Service
         Public Function ListToCommaStr2(nmList As List(Of String)) As String
             Dim nm As String = Nothing
             If nmList.Count > 0 Then
-                nm = String.Join(C_COMMA2, nmList)
+                nm = String.Join(DaStrPool.C_COMMA2, nmList)
             End If
 
             Return nm
@@ -348,15 +348,15 @@ Namespace JBD.GJS.Service
             Return str
         End Function
 
-        Public Function ToNKana(str As String) As String
-            If String.IsNullOrEmpty(str) Then Return Nothing
-            Return DaConvertUtil.ToKana(str)
-        End Function
+        'Public Function ToNKana(str As String) As String
+        '    If String.IsNullOrEmpty(str) Then Return Nothing
+        '    Return DaConvertUtil.ToKana(str)
+        'End Function
 
-        Public Function ToNSeionKana(str As String) As String
-            If String.IsNullOrEmpty(str) Then Return Nothing
-            Return DaConvertUtil.ToSeion(DaConvertUtil.ToKana(str))
-        End Function
+        'Public Function ToNSeionKana(str As String) As String
+        '    If String.IsNullOrEmpty(str) Then Return Nothing
+        '    Return DaConvertUtil.ToSeion(DaConvertUtil.ToKana(str))
+        'End Function
 
         ''' <summary>
         ''' カナ変換(ひらがな=>カタカナ)
@@ -398,7 +398,7 @@ Namespace JBD.GJS.Service
         ''' 清音化
         ''' </summary>
         Public Function ToSeion(str As String) As String
-            str = str.Replace(SPACE, "").Replace(SPACE_FULL, "").Replace("ﾞ", "").Replace("ﾟ", "").Replace("ヴァ", "バ").Replace("ヴィ", "ビ").Replace("ヴ", "ブ").Replace("ハ", "ワ").Replace("ガ", "カ").Replace("ギ", "キ").Replace("グ", "ク").Replace("ゲ", "ケ").Replace("ゴ", "コ").Replace("ザ", "サ").Replace("ジ", "シ").Replace("ズ", "ス").Replace("ゼ", "セ").Replace("ゾ", "ソ").Replace("ダ", "タ").Replace("ヂ", "シ").Replace("ヅ", "ス").Replace("デ", "テ").Replace("ド", "ト").Replace("バ", "ワ").Replace("パ", "ワ").Replace("ビ", "ヒ").Replace("ピ", "ヒ").Replace("ブ", "フ").Replace("プ", "フ").Replace("ベ", "ヘ").Replace("ペ", "ヘ").Replace("ボ", "ホ").Replace("ポ", "ホ").Replace("ヲ", "オ").Replace("ヷ", "ワ").Replace("ヸ", "ヰ").Replace("ヹ", "ヱ").Replace("ヺ", "オ").Replace("ヾ", "ヽ").Replace("オウ", "オオ").Replace("コウ", "コオ").Replace("ソウ", "ソオ").Replace("トウ", "トオ").Replace("ノウ", "ノオ").Replace("ホウ", "ホオ").Replace("モウ", "モオ").Replace("ヨウ", "ヨオ").Replace("ロウ", "ロオ").Replace("ァ", "ア").Replace("ィ", "イ").Replace("ゥ", "ウ").Replace("ェ", "エ").Replace("ォ", "オ").Replace("ッ", "ツ").Replace("ャ", "ヤ").Replace("ュ", "ユ").Replace("ョ", "ヨ").Replace("ヮ", "ワ").Replace("ヵ", "カ").Replace("ヶ", "ケ")
+            str = str.Replace(DaStrPool.SPACE, "").Replace(DaStrPool.SPACE_FULL, "").Replace("ﾞ", "").Replace("ﾟ", "").Replace("ヴァ", "バ").Replace("ヴィ", "ビ").Replace("ヴ", "ブ").Replace("ハ", "ワ").Replace("ガ", "カ").Replace("ギ", "キ").Replace("グ", "ク").Replace("ゲ", "ケ").Replace("ゴ", "コ").Replace("ザ", "サ").Replace("ジ", "シ").Replace("ズ", "ス").Replace("ゼ", "セ").Replace("ゾ", "ソ").Replace("ダ", "タ").Replace("ヂ", "シ").Replace("ヅ", "ス").Replace("デ", "テ").Replace("ド", "ト").Replace("バ", "ワ").Replace("パ", "ワ").Replace("ビ", "ヒ").Replace("ピ", "ヒ").Replace("ブ", "フ").Replace("プ", "フ").Replace("ベ", "ヘ").Replace("ペ", "ヘ").Replace("ボ", "ホ").Replace("ポ", "ホ").Replace("ヲ", "オ").Replace("ヷ", "ワ").Replace("ヸ", "ヰ").Replace("ヹ", "ヱ").Replace("ヺ", "オ").Replace("ヾ", "ヽ").Replace("オウ", "オオ").Replace("コウ", "コオ").Replace("ソウ", "ソオ").Replace("トウ", "トオ").Replace("ノウ", "ノオ").Replace("ホウ", "ホオ").Replace("モウ", "モオ").Replace("ヨウ", "ヨオ").Replace("ロウ", "ロオ").Replace("ァ", "ア").Replace("ィ", "イ").Replace("ゥ", "ウ").Replace("ェ", "エ").Replace("ォ", "オ").Replace("ッ", "ツ").Replace("ャ", "ヤ").Replace("ュ", "ユ").Replace("ョ", "ヨ").Replace("ヮ", "ワ").Replace("ヵ", "カ").Replace("ヶ", "ケ")
             Return str
         End Function
 
@@ -502,6 +502,6 @@ Namespace JBD.GJS.Service
     {"ﾝ", "ン"},
     {"ｰ", "ー"}
 }
-    End Module
+    End Class
 #End Region
 End Namespace

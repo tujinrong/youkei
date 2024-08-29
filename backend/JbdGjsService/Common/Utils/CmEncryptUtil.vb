@@ -8,12 +8,12 @@
 ' *******************************************************************
 
 Namespace JBD.GJS.Service
-    Public Module CmEncryptUtil
-        Private ReadOnly AesKey As String
-        Private ReadOnly AesIv As String
-        Private ReadOnly RsaPublicKeyPem As String
-        Private ReadOnly RsaPrivateKeyPem As String
-        Private ReadOnly ValidKeyLengths As Integer() = {16, 24, 32}
+    Public Class CmEncryptUtil
+        Private Shared AesKey As String
+        Private Shared AesIv As String
+        Private Shared RsaPublicKeyPem As String
+        Private Shared RsaPrivateKeyPem As String
+        Private Shared ValidKeyLengths As Integer() = {16, 24, 32}
         Private Const ValidIvLength As Integer = 16
         Private Const RsaStrength As Integer = 2048
 
@@ -36,9 +36,9 @@ Namespace JBD.GJS.Service
         ''' </summary>
         ''' <paramname="value">画面リクエストデータ</param>
         ''' <returns></returns>
-        Public Function RsaDecryptAndAesEncrypt(value As String) As String
+        Public Shared Function RsaDecryptAndAesEncrypt(value As String) As String
             '画面データをRSA復号化して、AES暗号化
-            Return AesEncrypt(RsaDecrypt(value))
+            Return CmEncryptUtil.AesEncrypt(RsaDecrypt(value))
         End Function
 
         ''' <summary>
@@ -77,7 +77,7 @@ Namespace JBD.GJS.Service
         ''' <summary>
         ''' RSA暗号化
         ''' </summary>
-        Public Function RsaEncrypt(value As String, Optional publicKeyPem As String = Nothing) As String
+        Public Shared Function RsaEncrypt(value As String, Optional publicKeyPem As String = Nothing) As String
             Dim rsa = New RSACryptoServiceProvider()
 
             publicKeyPem = If(publicKeyPem, RsaPublicKeyPem)
@@ -92,7 +92,7 @@ Namespace JBD.GJS.Service
         ''' <summary>
         ''' RSA復号化
         ''' </summary>
-        Public Function RsaDecrypt(value As String, Optional privateKeyPem As String = Nothing) As String
+        Public Shared Function RsaDecrypt(value As String, Optional privateKeyPem As String = Nothing) As String
             Dim rsa = New RSACryptoServiceProvider()
             privateKeyPem = If(privateKeyPem, RsaPrivateKeyPem)
             Dim privateKeyBase64 As String = privateKeyPem.Replace("-----BEGIN RSA PRIVATE KEY-----", "").Replace("-----END RSA PRIVATE KEY-----", "").Replace(vbLf, "")
@@ -106,10 +106,10 @@ Namespace JBD.GJS.Service
         ''' <summary>
         ''' AES暗号化
         ''' </summary>
-        Public Function AesEncrypt(value As String, Optional key As String = Nothing, Optional iv As String = Nothing) As String
+        Public Shared Function AesEncrypt(value As String, Optional key As String = Nothing, Optional iv As String = Nothing) As String
             If String.IsNullOrEmpty(value) Then Return String.Empty
-            key = CheckAndGetKey(key)
-            iv = CheckAndGetIv(iv)
+            key = CmEncryptUtil.CheckAndGetKey(key)
+            iv = CmEncryptUtil.CheckAndGetIv(iv)
 
             Dim aes = Cryptography.Aes.Create()
             aes.Key = Encoding.UTF8.GetBytes(key)
@@ -150,7 +150,7 @@ Namespace JBD.GJS.Service
         ''' <summary>
         ''' Aesキー取得
         ''' </summary>
-        Private Function CheckAndGetKey(key As String) As String
+        Private Shared Function CheckAndGetKey(key As String) As String
             If Equals(key, Nothing) Then Return AesKey
 
             If Not ValidKeyLengths.Contains(key.Length) Then
@@ -163,7 +163,7 @@ Namespace JBD.GJS.Service
         ''' <summary>
         ''' AesIv取得
         ''' </summary>
-        Private Function CheckAndGetIv(iv As String) As String
+        Private Shared Function CheckAndGetIv(iv As String) As String
             If Equals(iv, Nothing) Then Return AesIv
 
             If iv.Length <> ValidIvLength Then
@@ -176,7 +176,7 @@ Namespace JBD.GJS.Service
         ''' <summary>
         ''' トークンIDの暗号化処理
         ''' </summary>
-        Public Function TokenEncrypt(tokenID As String, userid As String, regsisyo As String) As String
+        Public Shared Function TokenEncrypt(tokenID As String, userid As String, regsisyo As String) As String
             If String.IsNullOrEmpty(tokenID) Then
                 Return String.Empty
             End If
@@ -199,7 +199,7 @@ Namespace JBD.GJS.Service
         ''' <summary>
         ''' 解読処理
         ''' </summary>
-        Public Function TokenDecrypt(hex As String, userid As String, regsisyo As String) As String
+        Public Shared Function TokenDecrypt(hex As String, userid As String, regsisyo As String) As String
             Try
                 If String.IsNullOrEmpty(hex) Then
                     Return String.Empty
@@ -225,7 +225,7 @@ Namespace JBD.GJS.Service
         ''' <summary>
         ''' MD5変換
         ''' </summary>
-        Private Function FuncMD5(str As String) As String
+        Private Shared Function FuncMD5(str As String) As String
             Using md5Hash = MD5.Create()
                 Dim data = md5Hash.ComputeHash(Encoding.UTF8.GetBytes(str))
 
@@ -260,5 +260,5 @@ Namespace JBD.GJS.Service
         '    pemWriter.WriteObject(keyPair.Private);
         '    privateKeyPem = privateKeyWriter.ToString().Trim();
         '}
-    End Module
+    End Class
 End Namespace

@@ -47,28 +47,28 @@ Namespace JBD.GJS.Service
         ''' トークンに変換
         ''' </summary>
         Public Shared Function GetToken(tokenID As Long, userid As String, regsisyo As String) As String
-            Return TokenEncrypt(tokenID.ToString(), userid, regsisyo)
+            Return CmEncryptUtil.TokenEncrypt(tokenID.ToString(), userid, regsisyo)
         End Function
 
         ''' <summary>
         ''' トークンに変換
         ''' </summary>
         Public Shared Function GetTokenGjs(tokenID As String, userid As String, regsisyo As String) As String
-            Return TokenEncrypt(tokenID, userid, regsisyo)
+            Return CmEncryptUtil.TokenEncrypt(tokenID, userid, regsisyo)
         End Function
 
         ''' <summary>
         ''' トークンIDに変換
         ''' </summary>
         Public Shared Function GetTokenUD(token As String, userid As String, regsisyo As String) As Long
-            Return DaConvertUtil.CLng(TokenDecrypt(token, userid, regsisyo))
+            Return DaConvertUtil.CLng(CmEncryptUtil.TokenDecrypt(token, userid, regsisyo))
         End Function
 
         ''' <summary>
         ''' トークンIDに変換
         ''' </summary>
         Public Shared Function GetTokenUDGjs(token As String, userid As String, regsisyo As String) As String
-            Return TokenDecrypt(token, userid, regsisyo)
+            Return CmEncryptUtil.TokenDecrypt(token, userid, regsisyo)
         End Function
 
         ''' <summary>
@@ -125,7 +125,7 @@ Namespace JBD.GJS.Service
                 dto.kanrisyaflg = userDto.kanrisyaflg                                                                  '管理者フラグ
                 dto.pnoeditflg = userDto.pnoeditflg                                                                    '個人番号操作権限付与フラグ
                 dto.alertviewflg = userDto.alertviewflg                                                                '警告参照フラグ
-                dto.sisyocd = String.Join(COMMA, GetSisyoList(db, Enumロール区分.ユーザー, userid))                    '更新可能支所一覧
+                dto.sisyocd = String.Join(DaStrPool.COMMA, GetSisyoList(db, Enumロール区分.ユーザー, userid))                    '更新可能支所一覧
                 '権限設定が所属権限の場合
                 dto.gamenauth = System.Text.Json.JsonSerializer.Serialize(GetGamenAuthList(db, Enumロール区分.ユーザー, userid))     '画面権限(共通バーを含む)
             Else

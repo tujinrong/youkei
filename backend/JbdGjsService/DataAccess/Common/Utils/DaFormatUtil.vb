@@ -7,7 +7,7 @@
 ' 変更履歴　:
 ' *******************************************************************
 Namespace JBD.GJS.Service
-    Public Module DaFormatUtil
+    Public Class DaFormatUtil
 #Region "西暦"
         ''' <summary>
         ''' 日付編集
@@ -51,19 +51,19 @@ Namespace JBD.GJS.Service
         ''' </summary>
         Public Function FormatTime(value As String) As String
             If String.IsNullOrEmpty(value) Then Return String.Empty
-            Return value.Insert(2, COLON)
+            Return value.Insert(2, DaStrPool.COLON)
         End Function
         ''' <summary>
         ''' 時間範囲表示(HH:mm～HH:mm)
         ''' </summary>
         Public Function FormatTimeRange(tmf As String, tmt As String) As String
-            Return $"{FormatTime(tmf)}{C_TILDE_FULL}{FormatTime(tmt)}"
+            Return $"{FormatTime(tmf)}{DaStrPool.C_TILDE_FULL}{FormatTime(tmt)}"
         End Function
         ''' <summary>
         ''' 日付範囲表示(和暦～和暦)
         ''' </summary>
         Public Function FormatWaKjYMDRange(ymdf As String, ymdt As String) As String
-            Return $"{DaFormatUtil.FormatWaKjYMD(ymdf)}{C_TILDE_FULL}{DaFormatUtil.FormatWaKjYMD(ymdt)}"
+            Return $"{DaFormatUtil.FormatWaKjYMD(ymdf)}{DaStrPool.C_TILDE_FULL}{DaFormatUtil.FormatWaKjYMD(ymdt)}"
         End Function
         ''' <summary>
         ''' 時間表示
@@ -157,7 +157,7 @@ Namespace JBD.GJS.Service
         ''' <summary>
         ''' 和暦日付
         ''' </summary>
-        Public Function FormatWaKjYMD(value As String) As String
+        Public Shared Function FormatWaKjYMD(value As String) As String
             If String.IsNullOrEmpty(value) Then Return String.Empty
             Dim dt As Date = Nothing
 
@@ -211,5 +211,5 @@ Namespace JBD.GJS.Service
 
             Return String.Empty
         End Function
-    End Module
+    End Class
 End Namespace
