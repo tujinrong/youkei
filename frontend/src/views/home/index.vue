@@ -15,8 +15,10 @@
         style="position: fixed; bottom: 20px; right: 50px; width: 30%"
       />
       <div class="flex">
-        <h1>{{ currentTime }}</h1>
-        <a-button type="primary" class="ml-2 mt-1" @click="Init">更新</a-button>
+        <h1>データ更新時間：{{ updTime }}</h1>
+        <a-button type="primary" class="ml-2 mt-1" @click="update"
+          >更新</a-button
+        >
       </div>
 
       <a-descriptions :column="1" class="mt-2 relative">
@@ -45,46 +47,43 @@
   </div>
 </template>
 <script setup lang="ts">
-import { onMounted, reactive, ref, onUnmounted } from 'vue'
+import { onMounted, reactive, ref } from 'vue'
 import { Init } from './service'
 //--------------------------------------------------------------------------
 //データ定義
 //--------------------------------------------------------------------------
-const currentTime = ref('')
-
-onMounted(() => {
-  const updateCurrentTime = () => {
-    const currentDate = new Date()
-    const datePart = currentDate.toLocaleDateString('ja-JP', {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric',
-    })
-    const timePart = currentDate.toLocaleTimeString('ja-JP', {
-      hour: 'numeric',
-      minute: 'numeric',
-      second: 'numeric',
-    })
-    currentTime.value = `${datePart}${timePart}`
-  }
-  const intervalId = setInterval(updateCurrentTime, 1000)
-  onUnmounted(() => {
-    clearInterval(intervalId)
-  })
-  updateCurrentTime()
-})
-
+const updTime = ref('')
 const homeData = reactive({
   KEIYAKUSU_SHINKI: undefined as number | undefined,
   KEIYAKUSU_KEIZOKU: undefined as number | undefined,
   HASU: undefined as number | undefined,
   TUMITATE_KIN: undefined as number | undefined,
 })
-
+//---------------------------------------------------------------------------
+//フック関数
+//--------------------------------------------------------------------------
 onMounted(() => {
+  update()
+})
+//--------------------------------------------------------------------------
+//メソッド
+//--------------------------------------------------------------------------
+const update = () => {
+  const currentDate = new Date()
+  const datePart = currentDate.toLocaleDateString('ja-JP', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  })
+  const timePart = currentDate.toLocaleTimeString('ja-JP', {
+    hour: 'numeric',
+    minute: 'numeric',
+    second: 'numeric',
+  })
+  updTime.value = `${datePart}${timePart}`
   Init().then((res) => {
     Object.assign(homeData, res)
   })
-})
+}
 </script>
 <style lang="scss" scoped></style>
