@@ -8,8 +8,8 @@
  * -----------------------------------------------------------------*/
 
 export interface InitResponse {
-  SHINKI?: string
-  KEI?: string
+  KEIYAKUSU_SHINKI?: string
+  KEIYAKUSU_KEIZOKU?: string
   HASU?: string
-  TUMI?: string
+  TUMITATE_KIN?: string
 }
