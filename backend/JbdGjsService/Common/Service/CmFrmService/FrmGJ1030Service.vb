@@ -152,14 +152,16 @@ Namespace JBD.GJS.Service.GJ1030
                 Dim dateTAISYOBI_Ymd = Format(req.TAISYOBI_YMD, "yyyy/MM/dd")
 
                 sSQL = " SELECT " & vbCrLf
-                sSQL += "   TO_CHAR(SYSDATE, 'EEYY""年""MM""月""DD""日""', 'NLS_CALENDAR=''JAPANESE IMPERIAL''') AS SAKUSEIBI" & vbCrLf
+                'sSQL += "   TO_CHAR(SYSDATE, 'EEYY""年""MM""月""DD""日""', 'NLS_CALENDAR=''JAPANESE IMPERIAL''') AS SAKUSEIBI" & vbCrLf
+                sSQL += "   '令和' || TO_CHAR(TO_NUMBER(TO_CHAR(SYSDATE, 'YYYY')) - 2018) || '年' ||  TO_CHAR(SYSDATE, 'MM""月""DD""日""')  AS SAKUSEIBI " & vbCrLf
                 '-- 対象期間
                 '#25 ADD START
-                sSQL += " ,'対象期：第" & SyoriKI & "期（' || TO_CHAR(TO_DATE('" & sKaishiNen & "'), '""""EEYY""年度～""', 'NLS_CALENDAR=''JAPANESE IMPERIAL''') || TO_CHAR(TO_DATE('" & sSyuryoNen & "'), '""""EEYY""年度）""', 'NLS_CALENDAR=''JAPANESE IMPERIAL''') AS TAISYO_KI " & vbCrLf
+                'sSQL += " ,'対象期：第" & SyoriKI & "期（' || TO_CHAR(TO_DATE('" & sKaishiNen & "'), '""""EEYY""年度～""', 'NLS_CALENDAR=''JAPANESE IMPERIAL''') || TO_CHAR(TO_DATE('" & sSyuryoNen & "'), '""""EEYY""年度）""', 'NLS_CALENDAR=''JAPANESE IMPERIAL''') AS TAISYO_KI " & vbCrLf
+                sSQL += " ,'対象期：第" & SyoriKI & "期（' || '令和' || TO_CHAR(TO_NUMBER(TO_CHAR(TO_DATE('" & sKaishiNen & "'), 'YYYY')) - 2018) || '年度～'|| '令和' || TO_CHAR(TO_NUMBER(TO_CHAR(TO_DATE('" & sSyuryoNen & "'), 'YYYY')) - 2018) || '年度）' AS TAISYO_KI " & vbCrLf
                 '#25 ADD END
                 '-- 対象日
-                sSQL += " ,'対象日：' || TO_CHAR(TO_DATE('" & dateTAISYOBI_Ymd & "'), 'EEYY""年""MM""月""DD""日現在""', 'NLS_CALENDAR=''JAPANESE IMPERIAL''') AS TAISYOBI " & vbCrLf
-
+                'sSQL += " ,'対象日：' || TO_CHAR(TO_DATE('" & dateTAISYOBI_Ymd & "'), 'EEYY""年""MM""月""DD""日現在""', 'NLS_CALENDAR=''JAPANESE IMPERIAL''') AS TAISYOBI " & vbCrLf
+                sSQL += " ,'対象日：' || '令和' || TO_CHAR(TO_NUMBER(TO_CHAR(TO_DATE('" & dateTAISYOBI_Ymd & "'), 'YYYY')) - 2018) || '年' || TO_CHAR(TO_DATE('" & dateTAISYOBI_Ymd & "'), 'MM""月""DD""日現在""') AS TAISYOBI " & vbCrLf
                 '-- 期
                 sSQL += " ,KEI.KI AS KI " & vbCrLf
                 '-- 契約番号
@@ -193,10 +195,12 @@ Namespace JBD.GJS.Service.GJ1030
                 sSQL += " ,CD10.RYAKUSYO AS KEIYAKU_HENKO_KBN_NM  " & vbCrLf
                 '-- 契約日
                 sSQL += " ,KEI.KEIYAKU_DATE AS KEIYAKU_DATE " & vbCrLf
-                sSQL += " ,TO_CHAR(KEI.KEIYAKU_DATE, 'EEYY""年""MM""月""DD""日""', 'NLS_CALENDAR=''JAPANESE IMPERIAL''') AS KEIYAKU_DATE_W " & vbCrLf
+                'sSQL += " ,TO_CHAR(KEI.KEIYAKU_DATE, 'EEYY""年""MM""月""DD""日""', 'NLS_CALENDAR=''JAPANESE IMPERIAL''') AS KEIYAKU_DATE_W " & vbCrLf
+                sSQL += " , CASE WHEN KEI.KEIYAKU_DATE IS NULL THEN '' ELSE '令和' || TO_CHAR(TO_NUMBER(TO_CHAR(KEI.KEIYAKU_DATE, 'YYYY')) - 2018) || '年' || TO_CHAR(KEI.KEIYAKU_DATE, 'MM""月""DD""日""') END AS KEIYAKU_DATE_W " & vbCrLf
                 '-- 中止日
                 sSQL += " ,KEI.HAIGYO_DATE AS HAIGYO_DATE " & vbCrLf
-                sSQL += " ,TO_CHAR(KEI.HAIGYO_DATE, 'EEYY""年""MM""月""DD""日""', 'NLS_CALENDAR=''JAPANESE IMPERIAL''') AS HAIGYO_DATE_W " & vbCrLf
+                'sSQL += " ,TO_CHAR(KEI.HAIGYO_DATE, 'EEYY""年""MM""月""DD""日""', 'NLS_CALENDAR=''JAPANESE IMPERIAL''') AS HAIGYO_DATE_W " & vbCrLf
+                sSQL += " , CASE WHEN KEI.HAIGYO_DATE IS NULL THEN '' ELSE '令和' || TO_CHAR(TO_NUMBER(TO_CHAR(KEI.HAIGYO_DATE, 'YYYY')) - 2018) || '年' || TO_CHAR(KEI.HAIGYO_DATE, 'MM""月""DD""日""') END AS HAIGYO_DATE_W " & vbCrLf
                 '-- 郵便番号
                 sSQL += " ,DECODE(KEI.ADDR_POST, NULL, '', ('〒' || SUBSTR(KEI.ADDR_POST,1,3) || '-' || SUBSTR(KEI.ADDR_POST,4,4))) AS ADDR_POST " & vbCrLf
                 '-- 住所1-4

@@ -82,7 +82,7 @@ Public Class ReportProvider
         Dim param = rar(1)
 
         Select Case svc
-            Case "GJ1030"
+            Case "GJ1030"  ' "家畜防疫互助基金契約者一覧表(連絡用)"
                 Dim w As New rptGJ1030
                 Dim ms = w.report(param)
                 Return ms

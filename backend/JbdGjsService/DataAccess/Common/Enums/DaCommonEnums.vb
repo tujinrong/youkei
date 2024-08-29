@@ -73,4 +73,34 @@ Namespace JBD.GJS.Service
         xlsx
         zip
     End Enum
+
+Public Enum EnumReport
+    GJ1030
+    G11040
+    GJ1050
+    GJ2030
+    GJ2040
+    GJ2050
+    GJ2051
+    GJ2060
+    GJ2061
+    GJ2070
+    GJ2080
+    GJ2100
+    GJ2110
+    GJ2120
+    GJ3011
+    GJ3021
+    GJ3031
+    G14020
+    GJ4040
+    GJ4050
+    GJ4060
+    GJ4070
+    GJ5010
+    GJ6020
+    GJ6021
+    GJ8050
+    GJ8052
+End Enum
 End Namespace
