@@ -7,8 +7,6 @@
 ' 変更履歴　:
 ' *******************************************************************
 
-Imports GrapeCity.ActiveReports.Document
-
 Namespace JBD.GJS.Service
     Public Class CmPreviewResponseBase
         Inherits DaResponseBase

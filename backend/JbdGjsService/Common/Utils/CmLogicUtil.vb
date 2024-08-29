@@ -88,12 +88,12 @@ Namespace JBD.GJS.Service
         End Function
 
  
-        Public Function GetSex(db As DaDbContext, sex As String) As String
-            If String.IsNullOrEmpty(sex) Then
-                Return String.Empty
-            End If
-            Return DaNameService.GetName(db, EnumNmKbn.性別_システム共有, sex)
-        End Function
+        'Public Function GetSex(db As DaDbContext, sex As String) As String
+        '    If String.IsNullOrEmpty(sex) Then
+        '        Return String.Empty
+        '    End If
+        '    Return DaNameService.GetName(db, EnumNmKbn.性別_システム共有, sex)
+        'End Function
 
 
         ''' <summary>
@@ -278,9 +278,9 @@ Namespace JBD.GJS.Service
         ''' <summary>
         ''' 検索パラメータ取得(ドロップダウンリストのコード)
         ''' </summary>
-        Public Function GetSearchPara(para As String) As String
-            Return If(String.IsNullOrEmpty(para), Nothing, GetCd(para))
-        End Function
+        'Public Function GetSearchPara(para As String) As String
+        '    Return If(String.IsNullOrEmpty(para), Nothing, GetCd(para))
+        'End Function
 
 
         ''' <summary>
