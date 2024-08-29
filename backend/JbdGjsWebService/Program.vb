@@ -60,9 +60,23 @@ Public Class Program
         Dim app = builder.Build()
         VbBussinessConfig.Configure(app.Services)
 
+        'app.UseCors(Sub(cors)
+        '                cors.SetIsOriginAllowed(Function(origin) Equals(New Uri(origin).Host, "61.213.76.155")).AllowAnyMethod().AllowAnyHeader().AllowCredentials().WithExposedHeaders("Content-Disposition")
+        '            End Sub)
         app.UseCors(Sub(cors)
-                        cors.SetIsOriginAllowed(Function(origin) Equals(New Uri(origin).Host, "61.213.76.155")).AllowAnyMethod().AllowAnyHeader().AllowCredentials().WithExposedHeaders("Content-Disposition")
-                    End Sub)
+                      ' 允许的 IP 地址列表
+                      Dim allowedIPs As String() = {"61.213.76.155", "localhost"}
+
+                      ' 修改 SetIsOriginAllowed 方法来支持多个 IP 地址
+                      cors.SetIsOriginAllowed(Function(origin)
+                                                  Dim host As String = New Uri(origin).Host
+                                                  Return allowedIPs.Contains(host)
+                                              End Function).
+                    AllowAnyMethod().
+                    AllowAnyHeader().
+                    AllowCredentials().
+                    WithExposedHeaders("Content-Disposition")
+                                End Sub)
         'app.UseCors()
         app.UseReportViewer(Sub(settings)
                                 settings.UseReportProvider(New ReportProvider)
