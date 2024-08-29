@@ -61,8 +61,9 @@ Public Class Program
         VbBussinessConfig.Configure(app.Services)
 
         app.UseCors(Sub(cors)
-                        cors.SetIsOriginAllowed(Function(origin) Equals(New Uri(origin).Host, "localhost")).AllowAnyMethod().AllowAnyHeader().AllowCredentials().WithExposedHeaders("Content-Disposition")
+                        cors.SetIsOriginAllowed(Function(origin) Equals(New Uri(origin).Host, "61.213.76.155")).AllowAnyMethod().AllowAnyHeader().AllowCredentials().WithExposedHeaders("Content-Disposition")
                     End Sub)
+        'app.UseCors()
         app.UseReportViewer(Sub(settings)
                                 settings.UseReportProvider(New ReportProvider)
                             End Sub)
