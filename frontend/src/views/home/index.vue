@@ -14,17 +14,15 @@
         alt="Image"
         style="position: fixed; bottom: 20px; right: 50px; width: 30%"
       />
-      <div class="flex">
+      <div class="flex max-w-150 justify-between">
         <h1>データ更新時間：{{ updTime }}</h1>
-        <a-button type="primary" class="ml-2 mt-1" @click="update"
-          >更新</a-button
-        >
+        <a-button type="primary" class="mt-1" @click="update">更新</a-button>
       </div>
 
-      <a-descriptions :column="1" class="mt-2 relative">
+      <a-descriptions :column="1" class="mt-2 max-w-150" bordered>
         <a-descriptions-item
           label="契約数"
-          :content-style="{ fontSize: '24px' }"
+          :content-style="{ fontSize: '24px', textAlign: 'end' }"
           :label-style="{ fontSize: '24px' }"
           >(新規{{ homeData.KEIYAKUSU_SHINKI }}　継続{{
             homeData.KEIYAKUSU_KEIZOKU
@@ -32,13 +30,13 @@
         >
         <a-descriptions-item
           label="羽数"
-          :content-style="{ fontSize: '24px' }"
+          :content-style="{ fontSize: '24px', textAlign: 'end' }"
           :label-style="{ fontSize: '24px' }"
           >{{ homeData.HASU }} 羽</a-descriptions-item
         >
         <a-descriptions-item
           label="績立金額"
-          :content-style="{ fontSize: '24px' }"
+          :content-style="{ fontSize: '24px', textAlign: 'end' }"
           :label-style="{ fontSize: '24px' }"
           >{{ homeData.TUMITATE_KIN }} 円</a-descriptions-item
         >

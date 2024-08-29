@@ -16,9 +16,7 @@
   >
     {{ th }}
   </th>
-  <td v-if="!hideTd" class="ellipsis">
-    {{ td }}
-  </td>
+  <td v-if="!hideTd" class="ellipsis">{{ td }}　{{ after }}</td>
 </template>
 
 <script setup lang="ts">
@@ -28,8 +26,9 @@
 const props = defineProps<{
   thWidth?: string
   th?: string
-  td: string
+  td?: string | number
   hideTd?: boolean
+  after?: string
 }>()
 </script>
 
