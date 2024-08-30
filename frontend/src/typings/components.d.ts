@@ -82,6 +82,7 @@ declare module 'vue' {
     MenuToggler: typeof import('./../components/common/menu-toggler.vue')['default']
     PinToggler: typeof import('./../components/common/pin-toggler.vue')['default']
     PostCode: typeof import('./../components/Selector/PostCode/index.vue')['default']
+    RangeDate: typeof import('./../components/Range/range-date.vue')['default']
     RangeSelect: typeof import('./../components/Range/range-select.vue')['default']
     ReadOnly: typeof import('./../components/Row/read-only.vue')['default']
     ReloadButton: typeof import('./../components/common/reload-button.vue')['default']
