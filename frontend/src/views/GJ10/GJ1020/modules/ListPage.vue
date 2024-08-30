@@ -1,5 +1,5 @@
 <!------------------------------------------------------------------
- * 業務名称　: 互助防疫システム
+ * 業務名称　: 互助事業システム
  * 機能概要　: 互助基金契約者情報変更
  * 　　　　　  画面レイアウト・処理
  * 作成日　　: 2024.08.29
@@ -270,12 +270,12 @@ const createDefaultform = () => {
 const formData = reactive(createDefaultform())
 const LIST = ref<CmCodeNameModel[]>([])
 const KEIYAKUSYA_CD_NAME_LIST = ref<CmCodeNameModel[]>([])
-const tableData = ref<SearchRequest[]>([])
+const tableData = ref([])
 
 const layout = {
   md: 12,
   lg: 12,
-  xl: 8,
+  xl: 12,
   xxl: 6,
 }
 const rules = reactive({
