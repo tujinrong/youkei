@@ -113,7 +113,9 @@
         <vxe-column
           field="NOJO_CD"
           title="農場コード"
-          min-width="100"
+          width="150"
+          align="right"
+          header-align="left"
           sortable
           :params="{ order: 1 }"
           :resizable="true"
@@ -137,7 +139,7 @@
         <vxe-column
           field="ADDR"
           title="農場住所"
-          min-width="400"
+          min-width="500"
           sortable
           :params="{ order: 3 }"
           :resizable="false"
