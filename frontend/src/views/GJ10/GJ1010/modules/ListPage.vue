@@ -355,6 +355,6 @@ function goForward(status: PageStatus, row?: any) {
 </script>
 <style lang="scss" scoped>
 :deep(th) {
-  min-width: 140px;
+  min-width: 150px;
 }
 </style>

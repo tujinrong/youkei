@@ -50,6 +50,7 @@
       ref="tableRef"
       class="mt-2"
       :column-config="{ resizable: true }"
+      :height="144"
       :row-config="{ isCurrent: true, isHover: true }"
       :data="tableData"
       :sort-config="{ trigger: 'cell', orders: ['desc', 'asc'] }"
