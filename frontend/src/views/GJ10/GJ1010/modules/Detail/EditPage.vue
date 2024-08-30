@@ -142,7 +142,11 @@
                   v-model:value="formData.KEIYAKUSYA_KANA"
                   :maxlength="50"
                   @input="
-                    changeType('half', $event.target.value, 'KEIYAKUSYA_KANA')
+                    changeType(
+                      'furikana',
+                      $event.target.value,
+                      'KEIYAKUSYA_KANA'
+                    )
                   "
                 >
                 </a-input
@@ -444,6 +448,8 @@ import {
   convertToFullWidth,
   convertToTel,
   convertToHalfNumber,
+  convertToKaNa,
+  convertToFuRiGaNa,
 } from '@/utils/util'
 //--------------------------------------------------------------------------
 //データ定義
@@ -565,19 +571,16 @@ onMounted(() => {
 //メソッド
 //--------------------------------------------------------------------------
 const changeType = (type: string, input: any, name: string) => {
+  const typeMap = {
+    half: convertALLToHalfWidth,
+    full: convertToFullWidth,
+    tel: convertToTel,
+    number: convertToHalfNumber,
+    kana: convertToKaNa,
+    furikana: convertToFuRiGaNa,
+  }
   nextTick(() => {
-    if (type === 'half') {
-      formData[name] = convertALLToHalfWidth(input)
-    }
-    if (type === 'full') {
-      formData[name] = convertToFullWidth(input)
-    }
-    if (type === 'tel') {
-      formData[name] = convertToTel(input)
-    }
-    if (type === 'number') {
-      formData[name] = convertToHalfNumber(input)
-    }
+    if (typeMap[type]) formData[name] = typeMap[type](input)
   })
 }
 

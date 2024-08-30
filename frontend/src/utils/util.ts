@@ -250,7 +250,7 @@ export function table2Opts(list: any[], field: string) {
 export function filterOption(input: string, option: CmCodeNameModel) {
   return (
     option.NAME.toLowerCase().includes(input.toLowerCase()) ||
-    option.CODE.toLowerCase().includes(input.toLowerCase())
+    String(option.CODE).toLowerCase().includes(input.toLowerCase())
   )
 }
 
@@ -318,10 +318,20 @@ export function convertToTel(input: string) {
     .replace(/[^0-9-]/g, '')
 }
 
-/**カナに変換*/
+/**平仮名に変換*/
 export function convertToKaNa(input: string): string {
   return input.replace(/[^\u3040-\u309F\u30A0-\u30FF\uFF00-\uFFEF\s]/g, '')
 }
+
+/**フリガナに変換*/
+export function convertToFuRiGaNa(input: string): string {
+  return input
+    .replace(/[ぁ-ん]/g, (char) =>
+      String.fromCharCode(char.charCodeAt(0) + 0x60)
+    )
+    .replace(/[^\u30A0-\u30FF\s]/g, '')
+}
+
 /**金融数字*/
 export const mathNumber = {
   formatter: (value) => value.replace(/\B(?=(\d{3})+(?!\d))/g, ','),
