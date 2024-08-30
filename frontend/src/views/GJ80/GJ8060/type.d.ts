@@ -22,7 +22,7 @@ export interface InitRequest extends DaRequestBase {
 /**検索処理(一覧画面) */
 export interface SearchRequest extends CmSearchRequestBase {
   /**期 */
-  KI: number
+  KI: number | undefined
   /**都道府県コード */
   KEN_CD?: number
   /**農場番号 */

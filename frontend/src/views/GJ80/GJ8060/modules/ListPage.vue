@@ -253,10 +253,12 @@ const { validate, clearValidate, validateInfos } = Form.useForm(
 //--------------------------------------------------------------------------
 onMounted(() => {
   getInitData(searchParams.KI, true)
+  searchParams.KI = undefined
+  nextTick(() => clearValidate())
 })
 
 //初期化処理
-const getInitData = (KI: number, initflg: boolean) => {
+const getInitData = (KI: number | undefined, initflg: boolean) => {
   // if (!KI && KI !== 0) {
   //   return
   // }

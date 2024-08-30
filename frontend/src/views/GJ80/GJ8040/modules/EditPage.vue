@@ -188,7 +188,7 @@ const { validate, clearValidate, validateInfos, resetFields } = Form.useForm(
 //フック関数
 //--------------------------------------------------------------------------
 onMounted(async () => {
-  formData.USER_ID = String(route.query.USER_ID)
+  if (!isNew) formData.USER_ID = String(route.query.USER_ID) ?? ''
 
   // InitDetail({
   //   USER_ID: formData.USER_ID,

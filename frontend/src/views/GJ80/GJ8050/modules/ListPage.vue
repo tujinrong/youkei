@@ -1,6 +1,6 @@
 <template>
   <div
-    class="h-full min-h-500px flex-col-stretch gap-12px overflow-hidden lt-sm:overflow-auto"
+    class="h-full min-h-500px flex-col-stretch gap-12px overflow-hidden lt-sm:overflow-auto flex"
   >
     <a-card ref="headRef" :bordered="false">
       <h1>(GJ8050)金融機関一覧</h1>
@@ -61,8 +61,7 @@
         :show-total="(total) => `抽出件数： ${total} 件`"
         show-less-items
         show-size-changer
-        class="m-b-1 text-end"
-      />
+        class="m-b-1 text-end" />
       <vxe-table
         class="mt-2"
         ref="xTableRef"
@@ -106,11 +105,9 @@
           sortable
           :params="{ order: 3 }"
           :resizable="false"
-        ></vxe-column>
-      </vxe-table>
-    </a-card>
-
-    <a-card ref="headRef" :bordered="false">
+        ></vxe-column> </vxe-table
+    ></a-card>
+    <a-card>
       <div class="self_adaption_table form mt-1">
         <a-row>
           <a-col v-bind="layout">
@@ -169,7 +166,7 @@
       </div>
       <div v-if="!isSelectBank" class="search-disabled-mask bg-disabled"></div
     ></a-card>
-    <a-card :bordered="false" ref="cardRef">
+    <a-card class="flex-1">
       <a-pagination
         v-model:current="pageParams2.PAGE_NUM"
         v-model:page-size="pageParams2.PAGE_SIZE"
@@ -184,7 +181,7 @@
         class="mt-2"
         ref="xTableRef2"
         :column-config="{ resizable: true }"
-        :height="height - 356"
+        :height="height - 500"
         :row-config="{ isCurrent: true, isHover: true }"
         :data="tableData2"
         :sort-config="{ trigger: 'cell', orders: ['desc', 'asc'] }"

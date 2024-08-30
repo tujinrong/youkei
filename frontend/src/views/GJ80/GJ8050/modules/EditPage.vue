@@ -1,51 +1,57 @@
 <template>
-  <a-card :bordered="false" class="mb-2 h-full">
-    <h1>(GJ8051)金融機関マスタメンテナンス</h1>
-    <div class="self_adaption_table form max-w-160">
-      <div class="my-2 header_operation flex justify-between w-full">
-        <a-space :size="20">
-          <a-button class="warning-btn" @click="saveData">登録</a-button>
-          <a-button type="primary" danger :disabled="isNew" @click="deleteData"
-            >削除</a-button
+  <div>
+    <a-card :bordered="false" class="mb-2 h-full">
+      <h1>(GJ8051)金融機関マスタメンテナンス</h1>
+      <div class="self_adaption_table form max-w-160">
+        <div class="my-2 header_operation flex justify-between w-full">
+          <a-space :size="20">
+            <a-button class="warning-btn" @click="saveData">登録</a-button>
+            <a-button
+              type="primary"
+              danger
+              :disabled="isNew"
+              @click="deleteData"
+              >削除</a-button
+            >
+          </a-space>
+          <a-button type="primary" class="text-end" @click="goList"
+            >一覧へ</a-button
           >
-        </a-space>
-        <a-button type="primary" class="text-end" @click="goList"
-          >一覧へ</a-button
-        >
+        </div>
+        <a-form>
+          <a-row>
+            <a-col span="24">
+              <th class="required">金融機関コード</th>
+              <td>
+                <a-form-item v-bind="validateInfos.BANK_CD">
+                  <a-input
+                    v-model:value="formData.BANK_CD"
+                    :disabled="!isNew"
+                  ></a-input>
+                </a-form-item>
+              </td>
+            </a-col>
+            <a-col span="24">
+              <th class="required">金融機関名（ｶﾅ）</th>
+              <td>
+                <a-form-item v-bind="validateInfos.BANK_KANA">
+                  <a-input v-model:value="formData.BANK_KANA"></a-input>
+                </a-form-item>
+              </td>
+            </a-col>
+            <a-col span="24">
+              <th class="required">金融機関名（漢字）</th>
+              <td>
+                <a-form-item v-bind="validateInfos.BANK_NAME">
+                  <a-input v-model:value="formData.BANK_NAME"></a-input>
+                </a-form-item>
+              </td>
+            </a-col>
+          </a-row>
+        </a-form>
       </div>
-      <a-form>
-        <a-row>
-          <a-col span="24">
-            <th class="required">金融機関コード</th>
-            <td>
-              <a-form-item v-bind="validateInfos.BANK_CD">
-                <a-input
-                  v-model:value="formData.BANK_CD"
-                  :disabled="!isNew"
-                ></a-input>
-              </a-form-item>
-            </td>
-          </a-col>
-          <a-col span="24">
-            <th class="required">金融機関名（ｶﾅ）</th>
-            <td>
-              <a-form-item v-bind="validateInfos.BANK_KANA">
-                <a-input v-model:value="formData.BANK_KANA"></a-input>
-              </a-form-item>
-            </td>
-          </a-col>
-          <a-col span="24">
-            <th class="required">金融機関名（漢字）</th>
-            <td>
-              <a-form-item v-bind="validateInfos.BANK_NAME">
-                <a-input v-model:value="formData.BANK_NAME"></a-input>
-              </a-form-item>
-            </td>
-          </a-col>
-        </a-row>
-      </a-form>
-    </div>
-  </a-card>
+    </a-card>
+  </div>
 </template>
 <script setup lang="ts">
 import {
