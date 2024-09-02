@@ -113,7 +113,7 @@
         <vxe-column
           field="NOJO_CD"
           title="農場コード"
-          width="150"
+          width="100"
           align="right"
           header-align="left"
           sortable
