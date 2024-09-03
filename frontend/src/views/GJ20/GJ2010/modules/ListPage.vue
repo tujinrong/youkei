@@ -22,7 +22,7 @@
         @sort-change="(e) => changeTableSort(e, toRef(pageParams, 'ORDER_BY'))"
       >
         <vxe-column
-          field="START_DATE"
+          field="TAISYO_DATE_FROM"
           title="年月日(自)"
           min-width="80"
           sortable
@@ -30,11 +30,11 @@
           :resizable="true"
         >
           <template #default="{ row }">
-            <a @click="forwardEdit(row.START_DATE)">{{ row.START_DATE }}</a>
+            <a @click="forwardEdit(row.TAISYO_DATE_FROM)">{{ row.TAISYO_DATE_FROM }}</a>
           </template>
         </vxe-column>
         <vxe-column
-          field="END_DATE"
+          field="TAISYO_DATE_TO"
           title="年月日(至)"
           min-width="160"
           sortable
@@ -42,7 +42,7 @@
           :resizable="true"
         >
           <template #default="{ row }">
-            <a @click="forwardEdit(row.END_DATE)">{{ row.END_DATE }}</a>
+            <a @click="forwardEdit(row.TAISYO_DATE_TO)">{{ row.TAISYO_DATE_TO }}</a>
           </template>
         </vxe-column>
       </vxe-table>
@@ -64,55 +64,37 @@ const cardRef = ref()
 const { height } = useElementSize(cardRef)
 const tableData = ref<DetailVM[]>([
   {
-    START_DATE: '平成24/04/01',
-    END_DATE: '平成27/03/31',
-    KI: 0,
-    JIGYO_NENDO: 0,
-    JIGYO_SYURYO_NENDO: 0,
-    ZENKI_TUMITATE_DATE: '',
-    ZENKI_KOFU_DATE: '',
-    HENKAN_KEISAN_DATE: 0,
-    HENKAN_NINZU: '',
-    HENKAN_GOKEI: '',
-    HENKAN_RITU: '',
-    TAISYO_NENDO: 0,
-    NOFU_KIGEN: '',
-    HASSEI_KAISU: 0,
-    BIKO: 0,
+    TAISYO_DATE_FROM: '平成24/04/01',
+    TAISYO_DATE_TO: '平成27/03/31',
+    KEIYAKU_KBN: 0,
+    TORI_KBN: 0,
+    TUMITATE_TANKA: 0,
+    KEIEISIEN_TANKA: 0,
+    SYOKYAKU_TANKA: 0,
+    TESURYO_RITU: 0,
+    KOFU_RITU: 0,
   },
   {
-    START_DATE: '平成27/04/01',
-    END_DATE: '平成30/03/31',
-    KI: 0,
-    JIGYO_NENDO: 0,
-    JIGYO_SYURYO_NENDO: 0,
-    ZENKI_TUMITATE_DATE: '',
-    ZENKI_KOFU_DATE: '',
-    HENKAN_KEISAN_DATE: 0,
-    HENKAN_NINZU: '',
-    HENKAN_GOKEI: '',
-    HENKAN_RITU: '',
-    TAISYO_NENDO: 0,
-    NOFU_KIGEN: '',
-    HASSEI_KAISU: 0,
-    BIKO: 0,
+    TAISYO_DATE_FROM: '平成27/04/01',
+    TAISYO_DATE_TO: '平成30/03/31',
+    KEIYAKU_KBN: 0,
+    TORI_KBN: 0,
+    TUMITATE_TANKA: 0,
+    KEIEISIEN_TANKA: 0,
+    SYOKYAKU_TANKA: 0,
+    TESURYO_RITU: 0,
+    KOFU_RITU: 0,
   },
   {
-    START_DATE: '平成33/04/01',
-    END_DATE: '平成36/03/31',
-    KI: 0,
-    JIGYO_NENDO: 0,
-    JIGYO_SYURYO_NENDO: 0,
-    ZENKI_TUMITATE_DATE: '',
-    ZENKI_KOFU_DATE: '',
-    HENKAN_KEISAN_DATE: 0,
-    HENKAN_NINZU: '',
-    HENKAN_GOKEI: '',
-    HENKAN_RITU: '',
-    TAISYO_NENDO: 0,
-    NOFU_KIGEN: '',
-    HASSEI_KAISU: 0,
-    BIKO: 0,
+    TAISYO_DATE_FROM: '平成33/04/01',
+    TAISYO_DATE_TO: '平成36/03/31',
+    KEIYAKU_KBN: 0,
+    TORI_KBN: 0,
+    TUMITATE_TANKA: 0,
+    KEIEISIEN_TANKA: 0,
+    SYOKYAKU_TANKA: 0,
+    TESURYO_RITU: 0,
+    KOFU_RITU: 0,
   },
 ])
 
