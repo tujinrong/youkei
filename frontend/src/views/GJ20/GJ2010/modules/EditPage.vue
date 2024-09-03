@@ -4,28 +4,29 @@
     <div class="mb-2 header_operation flex justify-between w-full">
       <a-space :size="20">
         <a-button class="warning-btn" @click="saveData">登録</a-button>
-        <a-button type="primary" danger :disabled="isNew" @click="deleteData">削除</a-button>
+        <a-button type="primary" danger :disabled="isNew" @click="deleteData"
+          >削除</a-button
+        >
       </a-space>
-      <a-button type="primary" class="text-end" @click="goList">一覧へ</a-button>
+      <a-button type="primary" class="text-end" @click="goList"
+        >一覧へ</a-button
+      >
     </div>
     <div class="self_adaption_table form max-w-240">
       <a-row :gutter="[0, 16]">
         <a-col span="24">
           <th>年 月 日</th>
           <td class="flex items-center">
-            <YearJp
+            <DateJp
               v-model:value="formData.START_DATE"
               style="width: 50%"
             /><span>～</span>
-            <YearJp
-              v-model:value="formData.END_DATE"
-              style="width: 50%"
-            />
+            <DateJp v-model:value="formData.END_DATE" style="width: 50%" />
           </td>
         </a-col>
       </a-row>
       <a-row class="mt-4 mb-4">
-        <div style="width: 100%;text-align: end">(单位：円)</div>
+        <div style="width: 100%; text-align: end">(单位：円)</div>
         <a-row>
           <a-col span="4">
             <th>契約区分</th>
@@ -53,25 +54,35 @@
                 <th>採卵鶏(成鶏)</th>
                 <td>
                   <a-form-item>
-                    <a-input
+                    <a-input-number
                       v-model:value="formData.HENKAN_NINZU"
-                      :maxlength="40"
+                      class="w-full"
+                      :maxLength="5"
+                      :precision="1"
+                      :max="999.9"
+                      :min="0"
                     />
                   </a-form-item>
                 </td>
                 <td>
                   <a-form-item>
-                    <a-input
-                      v-model:value="formData.HENKAN_NINZU"
-                      :maxlength="40"
+                    <a-input-number
+                      v-model:value="formData.HENKAN_GOKEI"
+                      v-bind="{ ...mathNumber }"
+                      class="w-full"
+                      :maxlength="6"
+                      :min="0"
                     />
                   </a-form-item>
                 </td>
                 <td>
                   <a-form-item>
-                    <a-input
-                      v-model:value="formData.HENKAN_NINZU"
-                      :maxlength="40"
+                    <a-input-number
+                      v-model:value="formData.HENKAN_RITU"
+                      v-bind="{ ...mathNumber }"
+                      class="w-full"
+                      :maxlength="5"
+                      :min="0"
                     />
                   </a-form-item>
                 </td>
@@ -511,6 +522,7 @@
               v-model:value="formData.ZENKI_TUMITATE_DATE"
               :max="99"
               :min="1"
+              class="w-full"
             >
               <template #addonAfter>%</template>
             </a-input-number>
@@ -519,8 +531,9 @@
           <td class="flex items-center">
             <a-input-number
               v-model:value="formData.ZENKI_KOFU_DATE"
-              :max="99"
+              :max="100"
               :min="1"
+              class="w-full"
             >
               <template #addonAfter>%</template>
             </a-input-number>
@@ -532,11 +545,12 @@
 </template>
 <script setup lang="ts">
 import { Judgement } from '@/utils/judge-edited'
-import {Form} from 'ant-design-vue'
-import {reactive, watch} from 'vue'
-import {PageStatus} from '@/enum'
+import { Form } from 'ant-design-vue'
+import { reactive, watch } from 'vue'
+import { PageStatus } from '@/enum'
 import { DetailVM } from '../type'
-import {useRoute, useRouter} from "vue-router";
+import { useRoute, useRouter } from 'vue-router'
+import { mathNumber } from '@/utils/util'
 
 //--------------------------------------------------------------------------
 //データ定義
@@ -605,7 +619,6 @@ const saveData = () => {}
 
 // 削除
 const deleteData = () => {}
-
 </script>
 <style lang="scss" scoped>
 th {
