@@ -8,6 +8,7 @@
  * -----------------------------------------------------------------*/
 
 import { EnumAndOr, EnumEditKbn } from '@/enum'
+import { FmToModel } from '@/views/GJ10/GJ1030/type'
 
 //-------------------------------------------------------------------
 //リクエスト
@@ -24,7 +25,7 @@ export interface SearchRequest extends CmSearchRequestBase {
   /**期 */
   KI: number | undefined
   /**都道府県コード */
-  KEN_CD?: number
+  KEN_CD: FmToModel
   /**農場番号 */
   ITAKU_NAME?: number
   /**農場名 */

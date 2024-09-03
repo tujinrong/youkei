@@ -25,12 +25,10 @@
             <th>都道府県</th>
             <td>
               <a-form-item v-bind="validateInfos.KEN_CD">
-                <ai-select
+                <range-select
                   v-model:value="searchParams.KEN_CD"
                   :options="KEN_CD_NAME_LIST"
-                  class="w-full"
-                  type="number"
-                ></ai-select>
+                ></range-select>
               </a-form-item>
             </td>
           </a-col>
@@ -191,15 +189,18 @@ const router = useRouter()
 const route = useRoute()
 const tabStore = useTabStore()
 const xTableRef = ref<VxeTableInstance>()
-const createDefaultParams = (): SearchRequest => {
+const createDefaultParams = () => {
   return {
     KI: -1,
-    KEN_CD: undefined,
+    KEN_CD: {
+      VALUE_FM: undefined,
+      VALUE_TO: undefined,
+    },
     ITAKU_NAME: undefined,
     ITAKU_CD: undefined,
     MATOMESAKI: undefined,
     SEARCH_METHOD: EnumAndOr.AndCode,
-  } as SearchRequest
+  }
 }
 const searchParams = reactive(createDefaultParams())
 
