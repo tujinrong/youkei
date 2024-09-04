@@ -46,7 +46,7 @@
         <vxe-column
           field="MEISYO_CD"
           title="名称コード"
-          min-width="80"
+          width="120"
           sortable
           :params="{ order: 1 }"
           :resizable="true"
@@ -58,7 +58,7 @@
         <vxe-column
           field="MEISYO"
           title="名称"
-          min-width="400"
+          min-width="300"
           sortable
           :params="{ order: 2 }"
           :resizable="true"
@@ -70,7 +70,7 @@
         <vxe-column
           field="RYAKUSYO"
           title="略称"
-          min-width="100"
+          width="200"
           sortable
           :params="{ order: 3 }"
           :resizable="false"
