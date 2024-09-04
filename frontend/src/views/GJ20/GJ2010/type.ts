@@ -23,19 +23,13 @@ export interface SaveRequest extends DaRequestBase {
 
 /** 情報 */
 export interface DetailVM {
-  START_DATE: string
-  END_DATE: string
-  KI: number | undefined
-  JIGYO_NENDO: number | undefined
-  JIGYO_SYURYO_NENDO: number | undefined
-  ZENKI_TUMITATE_DATE: string
-  ZENKI_KOFU_DATE: string
-  HENKAN_KEISAN_DATE: number | undefined
-  HENKAN_NINZU: string
-  HENKAN_GOKEI: string
-  HENKAN_RITU: string
-  TAISYO_NENDO: number | undefined
-  NOFU_KIGEN: string
-  HASSEI_KAISU: number | undefined
-  BIKO: number | undefined
+  TAISYO_DATE_FROM: string
+  TAISYO_DATE_TO: string
+  KEIYAKU_KBN: number | undefined
+  TORI_KBN: number | undefined
+  TUMITATE_TANKA: number | undefined
+  KEIEISIEN_TANKA: number | undefined
+  SYOKYAKU_TANKA: number | undefined
+  TESURYO_RITU: number | undefined
+  KOFU_RITU: number | undefined
 }

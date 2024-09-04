@@ -14,14 +14,16 @@
     </div>
     <div class="self_adaption_table form max-w-240">
       <a-row :gutter="[0, 16]">
-        <a-col span="24">
-          <th>年 月 日</th>
+        <a-col span="4">
+          <th class="required">年 月 日</th>
+        </a-col>
+        <a-col span="20">
           <td class="flex items-center">
             <DateJp
-              v-model:value="formData.START_DATE"
+              v-model:value="formData.TAISYO_DATE_FROM"
               style="width: 50%"
             /><span>～</span>
-            <DateJp v-model:value="formData.END_DATE" style="width: 50%" />
+            <DateJp v-model:value="formData.TAISYO_DATE_TO" style="width: 50%" />
           </td>
         </a-col>
       </a-row>
@@ -35,13 +37,13 @@
             <th>鳥の種類</th>
           </a-col>
           <a-col span="5">
-            <th>契約者積立金</th>
+            <th>契約者積立金(単価)</th>
           </a-col>
           <a-col span="5">
-            <th>経営支援互助金</th>
+            <th>経営支援互助金(単価)</th>
           </a-col>
           <a-col span="5">
-            <th>焼却·埋却等互助金</th>
+            <th>焼却·埋却等互助金(単価)</th>
           </a-col>
         </a-row>
         <a-row>
@@ -50,147 +52,222 @@
           </a-col>
           <a-col span="20">
             <a-row class="flex-1">
-              <a-col :md="24" :lg="24" :xl="24" :xxl="24">
+              <a-col span="6">
                 <th>採卵鶏(成鶏)</th>
+              </a-col>
+              <a-col span="6">
                 <td>
                   <a-form-item>
                     <a-input-number
-                      v-model:value="formData.HENKAN_NINZU"
+                      v-model:value="formData.TUMITATE_TANKA"
                       class="w-full"
-                      :maxLength="5"
                       :precision="1"
-                      :max="999.9"
-                      :min="0"
-                    />
-                  </a-form-item>
-                </td>
-                <td>
-                  <a-form-item>
-                    <a-input-number
-                      v-model:value="formData.HENKAN_GOKEI"
-                      v-bind="{ ...mathNumber }"
-                      class="w-full"
-                      :maxlength="6"
-                      :min="0"
-                    />
-                  </a-form-item>
-                </td>
-                <td>
-                  <a-form-item>
-                    <a-input-number
-                      v-model:value="formData.HENKAN_RITU"
-                      v-bind="{ ...mathNumber }"
-                      class="w-full"
-                      :maxlength="5"
+                      :max="99.9"
                       :min="0"
                     />
                   </a-form-item>
                 </td>
               </a-col>
-              <a-col :md="24" :lg="24" :xl="24" :xxl="24">
+              <a-col span="6">
+                <td>
+                  <a-form-item>
+                    <a-input-number
+                      v-model:value="formData.KEIEISIEN_TANKA"
+                      v-bind="{ ...mathNumber }"
+                      class="w-full"
+                      :precision="0"
+                      :maxlength="4"
+                      :min="0"
+                    />
+                  </a-form-item>
+                </td>
+              </a-col>
+              <a-col span="6">
+                <td>
+                  <a-form-item>
+                    <a-input-number
+                      v-model:value="formData.SYOKYAKU_TANKA"
+                      v-bind="{ ...mathNumber }"
+                      class="w-full"
+                      :precision="0"
+                      :maxlength="4"
+                      :min="0"
+                    />
+                  </a-form-item>
+                </td>
+              </a-col>
+              <a-col span="6">
                 <th>採卵鶏(育成鶏)</th>
+              </a-col>
+              <a-col span="6">
                 <td>
                   <a-form-item>
-                    <a-input
-                      v-model:value="formData.HENKAN_NINZU"
-                      :maxlength="40"
-                    />
-                  </a-form-item>
-                </td>
-                <td>
-                  <a-form-item>
-                    <a-input
-                      v-model:value="formData.HENKAN_NINZU"
-                      :maxlength="40"
-                    />
-                  </a-form-item>
-                </td>
-                <td>
-                  <a-form-item>
-                    <a-input
-                      v-model:value="formData.HENKAN_NINZU"
-                      :maxlength="40"
+                    <a-input-number
+                      v-model:value="formData.TUMITATE_TANKA"
+                      class="w-full"
+                      :precision="1"
+                      :max="99.9"
+                      :min="0"
                     />
                   </a-form-item>
                 </td>
               </a-col>
-              <a-col :md="24" :lg="24" :xl="24" :xxl="24">
+              <a-col span="6">
+                <td>
+                  <a-form-item>
+                    <a-input-number
+                      v-model:value="formData.KEIEISIEN_TANKA"
+                      v-bind="{ ...mathNumber }"
+                      class="w-full"
+                      :precision="0"
+                      :maxlength="4"
+                      :min="0"
+                    />
+                  </a-form-item>
+                </td>
+              </a-col>
+              <a-col span="6">
+                <td>
+                  <a-form-item>
+                    <a-input-number
+                      v-model:value="formData.SYOKYAKU_TANKA"
+                      v-bind="{ ...mathNumber }"
+                      class="w-full"
+                      :precision="0"
+                      :maxlength="4"
+                      :min="0"
+                    />
+                  </a-form-item>
+                </td>
+              </a-col>
+              <a-col span="6">
                 <th>肉用鶏</th>
+              </a-col>
+              <a-col span="6">
                 <td>
                   <a-form-item>
-                    <a-input
-                      v-model:value="formData.HENKAN_NINZU"
-                      :maxlength="40"
-                    />
-                  </a-form-item>
-                </td>
-                <td>
-                  <a-form-item>
-                    <a-input
-                      v-model:value="formData.HENKAN_NINZU"
-                      :maxlength="40"
-                    />
-                  </a-form-item>
-                </td>
-                <td>
-                  <a-form-item>
-                    <a-input
-                      v-model:value="formData.HENKAN_NINZU"
-                      :maxlength="40"
+                    <a-input-number
+                      v-model:value="formData.TUMITATE_TANKA"
+                      class="w-full"
+                      :precision="1"
+                      :max="99.9"
+                      :min="0"
                     />
                   </a-form-item>
                 </td>
               </a-col>
-              <a-col :md="24" :lg="24" :xl="24" :xxl="24">
+              <a-col span="6">
+                <td>
+                  <a-form-item>
+                    <a-input-number
+                      v-model:value="formData.KEIEISIEN_TANKA"
+                      v-bind="{ ...mathNumber }"
+                      class="w-full"
+                      :precision="0"
+                      :maxlength="4"
+                      :min="0"
+                    />
+                  </a-form-item>
+                </td>
+              </a-col>
+              <a-col span="6">
+                <td>
+                  <a-form-item>
+                    <a-input-number
+                      v-model:value="formData.SYOKYAKU_TANKA"
+                      v-bind="{ ...mathNumber }"
+                      class="w-full"
+                      :precision="0"
+                      :maxlength="4"
+                      :min="0"
+                    />
+                  </a-form-item>
+                </td>
+              </a-col>
+              <a-col span="6">
                 <th>種鶏(成鷄)</th>
+              </a-col>
+              <a-col span="6">
                 <td>
                   <a-form-item>
-                    <a-input
-                      v-model:value="formData.HENKAN_NINZU"
-                      :maxlength="40"
-                    />
-                  </a-form-item>
-                </td>
-                <td>
-                  <a-form-item>
-                    <a-input
-                      v-model:value="formData.HENKAN_NINZU"
-                      :maxlength="40"
-                    />
-                  </a-form-item>
-                </td>
-                <td>
-                  <a-form-item>
-                    <a-input
-                      v-model:value="formData.HENKAN_NINZU"
-                      :maxlength="40"
+                    <a-input-number
+                      v-model:value="formData.TUMITATE_TANKA"
+                      class="w-full"
+                      :precision="1"
+                      :max="99.9"
+                      :min="0"
                     />
                   </a-form-item>
                 </td>
               </a-col>
-              <a-col :md="24" :lg="24" :xl="24" :xxl="24">
+              <a-col span="6">
+                <td>
+                  <a-form-item>
+                    <a-input-number
+                      v-model:value="formData.KEIEISIEN_TANKA"
+                      v-bind="{ ...mathNumber }"
+                      class="w-full"
+                      :precision="0"
+                      :maxlength="4"
+                      :min="0"
+                    />
+                  </a-form-item>
+                </td>
+              </a-col>
+              <a-col span="6">
+                <td>
+                  <a-form-item>
+                    <a-input-number
+                      v-model:value="formData.SYOKYAKU_TANKA"
+                      v-bind="{ ...mathNumber }"
+                      class="w-full"
+                      :precision="0"
+                      :maxlength="4"
+                      :min="0"
+                    />
+                  </a-form-item>
+                </td>
+              </a-col>
+              <a-col span="6">
                 <th>種鶏(育成鷄)</th>
+              </a-col>
+              <a-col span="6">
                 <td>
                   <a-form-item>
-                    <a-input
-                      v-model:value="formData.HENKAN_NINZU"
-                      :maxlength="40"
+                    <a-input-number
+                      v-model:value="formData.TUMITATE_TANKA"
+                      class="w-full"
+                      :precision="1"
+                      :max="99.9"
+                      :min="0"
                     />
                   </a-form-item>
                 </td>
+              </a-col>
+              <a-col span="6">
                 <td>
                   <a-form-item>
-                    <a-input
-                      v-model:value="formData.HENKAN_NINZU"
-                      :maxlength="40"
+                    <a-input-number
+                      v-model:value="formData.KEIEISIEN_TANKA"
+                      v-bind="{ ...mathNumber }"
+                      class="w-full"
+                      :precision="0"
+                      :maxlength="4"
+                      :min="0"
                     />
                   </a-form-item>
                 </td>
+              </a-col>
+              <a-col span="6">
                 <td>
                   <a-form-item>
-                    <a-input
-                      v-model:value="formData.HENKAN_NINZU"
-                      :maxlength="40"
+                    <a-input-number
+                      v-model:value="formData.SYOKYAKU_TANKA"
+                      v-bind="{ ...mathNumber }"
+                      class="w-full"
+                      :precision="0"
+                      :maxlength="4"
+                      :min="0"
                     />
                   </a-form-item>
                 </td>
@@ -204,137 +281,222 @@
           </a-col>
           <a-col span="20">
             <a-row class="flex-1">
-              <a-col :md="24" :lg="24" :xl="24" :xxl="24">
+              <a-col span="6">
                 <th>採卵鶏(成鶏)</th>
+              </a-col>
+              <a-col span="6">
                 <td>
                   <a-form-item>
-                    <a-input
-                      v-model:value="formData.HENKAN_NINZU"
-                      :maxlength="40"
-                    />
-                  </a-form-item>
-                </td>
-                <td>
-                  <a-form-item>
-                    <a-input
-                      v-model:value="formData.HENKAN_NINZU"
-                      :maxlength="40"
-                    />
-                  </a-form-item>
-                </td>
-                <td>
-                  <a-form-item>
-                    <a-input
-                      v-model:value="formData.HENKAN_NINZU"
-                      :maxlength="40"
+                    <a-input-number
+                      v-model:value="formData.TUMITATE_TANKA"
+                      class="w-full"
+                      :precision="1"
+                      :max="99.9"
+                      :min="0"
                     />
                   </a-form-item>
                 </td>
               </a-col>
-              <a-col :md="24" :lg="24" :xl="24" :xxl="24">
+              <a-col span="6">
+                <td>
+                  <a-form-item>
+                    <a-input-number
+                      v-model:value="formData.KEIEISIEN_TANKA"
+                      v-bind="{ ...mathNumber }"
+                      class="w-full"
+                      :precision="0"
+                      :maxlength="4"
+                      :min="0"
+                    />
+                  </a-form-item>
+                </td>
+              </a-col>
+              <a-col span="6">
+                <td>
+                  <a-form-item>
+                    <a-input-number
+                      v-model:value="formData.SYOKYAKU_TANKA"
+                      v-bind="{ ...mathNumber }"
+                      class="w-full"
+                      :precision="0"
+                      :maxlength="4"
+                      :min="0"
+                    />
+                  </a-form-item>
+                </td>
+              </a-col>
+              <a-col span="6">
                 <th>採卵鶏(育成鶏)</th>
+              </a-col>
+              <a-col span="6">
                 <td>
                   <a-form-item>
-                    <a-input
-                      v-model:value="formData.HENKAN_NINZU"
-                      :maxlength="40"
-                    />
-                  </a-form-item>
-                </td>
-                <td>
-                  <a-form-item>
-                    <a-input
-                      v-model:value="formData.HENKAN_NINZU"
-                      :maxlength="40"
-                    />
-                  </a-form-item>
-                </td>
-                <td>
-                  <a-form-item>
-                    <a-input
-                      v-model:value="formData.HENKAN_NINZU"
-                      :maxlength="40"
+                    <a-input-number
+                      v-model:value="formData.TUMITATE_TANKA"
+                      class="w-full"
+                      :precision="1"
+                      :max="99.9"
+                      :min="0"
                     />
                   </a-form-item>
                 </td>
               </a-col>
-              <a-col :md="24" :lg="24" :xl="24" :xxl="24">
+              <a-col span="6">
+                <td>
+                  <a-form-item>
+                    <a-input-number
+                      v-model:value="formData.KEIEISIEN_TANKA"
+                      v-bind="{ ...mathNumber }"
+                      class="w-full"
+                      :precision="0"
+                      :maxlength="4"
+                      :min="0"
+                    />
+                  </a-form-item>
+                </td>
+              </a-col>
+              <a-col span="6">
+                <td>
+                  <a-form-item>
+                    <a-input-number
+                      v-model:value="formData.SYOKYAKU_TANKA"
+                      v-bind="{ ...mathNumber }"
+                      class="w-full"
+                      :precision="0"
+                      :maxlength="4"
+                      :min="0"
+                    />
+                  </a-form-item>
+                </td>
+              </a-col>
+              <a-col span="6">
                 <th>肉用鶏</th>
+              </a-col>
+              <a-col span="6">
                 <td>
                   <a-form-item>
-                    <a-input
-                      v-model:value="formData.HENKAN_NINZU"
-                      :maxlength="40"
-                    />
-                  </a-form-item>
-                </td>
-                <td>
-                  <a-form-item>
-                    <a-input
-                      v-model:value="formData.HENKAN_NINZU"
-                      :maxlength="40"
-                    />
-                  </a-form-item>
-                </td>
-                <td>
-                  <a-form-item>
-                    <a-input
-                      v-model:value="formData.HENKAN_NINZU"
-                      :maxlength="40"
+                    <a-input-number
+                      v-model:value="formData.TUMITATE_TANKA"
+                      class="w-full"
+                      :precision="1"
+                      :max="99.9"
+                      :min="0"
                     />
                   </a-form-item>
                 </td>
               </a-col>
-              <a-col :md="24" :lg="24" :xl="24" :xxl="24">
+              <a-col span="6">
+                <td>
+                  <a-form-item>
+                    <a-input-number
+                      v-model:value="formData.KEIEISIEN_TANKA"
+                      v-bind="{ ...mathNumber }"
+                      class="w-full"
+                      :precision="0"
+                      :maxlength="4"
+                      :min="0"
+                    />
+                  </a-form-item>
+                </td>
+              </a-col>
+              <a-col span="6">
+                <td>
+                  <a-form-item>
+                    <a-input-number
+                      v-model:value="formData.SYOKYAKU_TANKA"
+                      v-bind="{ ...mathNumber }"
+                      class="w-full"
+                      :precision="0"
+                      :maxlength="4"
+                      :min="0"
+                    />
+                  </a-form-item>
+                </td>
+              </a-col>
+              <a-col span="6">
                 <th>種鶏(成鷄)</th>
+              </a-col>
+              <a-col span="6">
                 <td>
                   <a-form-item>
-                    <a-input
-                      v-model:value="formData.HENKAN_NINZU"
-                      :maxlength="40"
-                    />
-                  </a-form-item>
-                </td>
-                <td>
-                  <a-form-item>
-                    <a-input
-                      v-model:value="formData.HENKAN_NINZU"
-                      :maxlength="40"
-                    />
-                  </a-form-item>
-                </td>
-                <td>
-                  <a-form-item>
-                    <a-input
-                      v-model:value="formData.HENKAN_NINZU"
-                      :maxlength="40"
+                    <a-input-number
+                      v-model:value="formData.TUMITATE_TANKA"
+                      class="w-full"
+                      :precision="1"
+                      :max="99.9"
+                      :min="0"
                     />
                   </a-form-item>
                 </td>
               </a-col>
-              <a-col :md="24" :lg="24" :xl="24" :xxl="24">
+              <a-col span="6">
+                <td>
+                  <a-form-item>
+                    <a-input-number
+                      v-model:value="formData.KEIEISIEN_TANKA"
+                      v-bind="{ ...mathNumber }"
+                      class="w-full"
+                      :precision="0"
+                      :maxlength="4"
+                      :min="0"
+                    />
+                  </a-form-item>
+                </td>
+              </a-col>
+              <a-col span="6">
+                <td>
+                  <a-form-item>
+                    <a-input-number
+                      v-model:value="formData.SYOKYAKU_TANKA"
+                      v-bind="{ ...mathNumber }"
+                      class="w-full"
+                      :precision="0"
+                      :maxlength="4"
+                      :min="0"
+                    />
+                  </a-form-item>
+                </td>
+              </a-col>
+              <a-col span="6">
                 <th>種鶏(育成鷄)</th>
+              </a-col>
+              <a-col span="6">
                 <td>
                   <a-form-item>
-                    <a-input
-                      v-model:value="formData.HENKAN_NINZU"
-                      :maxlength="40"
+                    <a-input-number
+                      v-model:value="formData.TUMITATE_TANKA"
+                      class="w-full"
+                      :precision="1"
+                      :max="99.9"
+                      :min="0"
                     />
                   </a-form-item>
                 </td>
+              </a-col>
+              <a-col span="6">
                 <td>
                   <a-form-item>
-                    <a-input
-                      v-model:value="formData.HENKAN_NINZU"
-                      :maxlength="40"
+                    <a-input-number
+                      v-model:value="formData.KEIEISIEN_TANKA"
+                      v-bind="{ ...mathNumber }"
+                      class="w-full"
+                      :precision="0"
+                      :maxlength="4"
+                      :min="0"
                     />
                   </a-form-item>
                 </td>
+              </a-col>
+              <a-col span="6">
                 <td>
                   <a-form-item>
-                    <a-input
-                      v-model:value="formData.HENKAN_NINZU"
-                      :maxlength="40"
+                    <a-input-number
+                      v-model:value="formData.SYOKYAKU_TANKA"
+                      v-bind="{ ...mathNumber }"
+                      class="w-full"
+                      :precision="0"
+                      :maxlength="4"
+                      :min="0"
                     />
                   </a-form-item>
                 </td>
@@ -348,164 +510,266 @@
           </a-col>
           <a-col span="20">
             <a-row class="flex-1">
-              <a-col :md="24" :lg="24" :xl="24" :xxl="24">
+              <a-col span="6">
                 <th>うずら</th>
+              </a-col>
+              <a-col span="6">
                 <td>
                   <a-form-item>
-                    <a-input
-                      v-model:value="formData.HENKAN_NINZU"
-                      :maxlength="40"
-                    />
-                  </a-form-item>
-                </td>
-                <td>
-                  <a-form-item>
-                    <a-input
-                      v-model:value="formData.HENKAN_NINZU"
-                      :maxlength="40"
-                    />
-                  </a-form-item>
-                </td>
-                <td>
-                  <a-form-item>
-                    <a-input
-                      v-model:value="formData.HENKAN_NINZU"
-                      :maxlength="40"
+                    <a-input-number
+                      v-model:value="formData.TUMITATE_TANKA"
+                      class="w-full"
+                      :precision="1"
+                      :max="99.9"
+                      :min="0"
                     />
                   </a-form-item>
                 </td>
               </a-col>
-              <a-col :md="24" :lg="24" :xl="24" :xxl="24">
+              <a-col span="6">
+                <td>
+                  <a-form-item>
+                    <a-input-number
+                      v-model:value="formData.KEIEISIEN_TANKA"
+                      v-bind="{ ...mathNumber }"
+                      class="w-full"
+                      :precision="0"
+                      :maxlength="4"
+                      :min="0"
+                    />
+                  </a-form-item>
+                </td>
+              </a-col>
+              <a-col span="6">
+                <td>
+                  <a-form-item>
+                    <a-input-number
+                      v-model:value="formData.SYOKYAKU_TANKA"
+                      v-bind="{ ...mathNumber }"
+                      class="w-full"
+                      :precision="0"
+                      :maxlength="4"
+                      :min="0"
+                    />
+                  </a-form-item>
+                </td>
+              </a-col>
+              <a-col span="6">
                 <th>あひる</th>
+              </a-col>
+              <a-col span="6">
                 <td>
                   <a-form-item>
-                    <a-input
-                      v-model:value="formData.HENKAN_NINZU"
-                      :maxlength="40"
-                    />
-                  </a-form-item>
-                </td>
-                <td>
-                  <a-form-item>
-                    <a-input
-                      v-model:value="formData.HENKAN_NINZU"
-                      :maxlength="40"
-                    />
-                  </a-form-item>
-                </td>
-                <td>
-                  <a-form-item>
-                    <a-input
-                      v-model:value="formData.HENKAN_NINZU"
-                      :maxlength="40"
+                    <a-input-number
+                      v-model:value="formData.TUMITATE_TANKA"
+                      class="w-full"
+                      :precision="1"
+                      :max="99.9"
+                      :min="0"
                     />
                   </a-form-item>
                 </td>
               </a-col>
-              <a-col :md="24" :lg="24" :xl="24" :xxl="24">
+              <a-col span="6">
+                <td>
+                  <a-form-item>
+                    <a-input-number
+                      v-model:value="formData.KEIEISIEN_TANKA"
+                      v-bind="{ ...mathNumber }"
+                      class="w-full"
+                      :precision="0"
+                      :maxlength="4"
+                      :min="0"
+                    />
+                  </a-form-item>
+                </td>
+              </a-col>
+              <a-col span="6">
+                <td>
+                  <a-form-item>
+                    <a-input-number
+                      v-model:value="formData.SYOKYAKU_TANKA"
+                      v-bind="{ ...mathNumber }"
+                      class="w-full"
+                      :precision="0"
+                      :maxlength="4"
+                      :min="0"
+                    />
+                  </a-form-item>
+                </td>
+              </a-col>
+              <a-col span="6">
                 <th>きじ</th>
+              </a-col>
+              <a-col span="6">
                 <td>
                   <a-form-item>
-                    <a-input
-                      v-model:value="formData.HENKAN_NINZU"
-                      :maxlength="40"
-                    />
-                  </a-form-item>
-                </td>
-                <td>
-                  <a-form-item>
-                    <a-input
-                      v-model:value="formData.HENKAN_NINZU"
-                      :maxlength="40"
-                    />
-                  </a-form-item>
-                </td>
-                <td>
-                  <a-form-item>
-                    <a-input
-                      v-model:value="formData.HENKAN_NINZU"
-                      :maxlength="40"
+                    <a-input-number
+                      v-model:value="formData.TUMITATE_TANKA"
+                      class="w-full"
+                      :precision="1"
+                      :max="99.9"
+                      :min="0"
                     />
                   </a-form-item>
                 </td>
               </a-col>
-              <a-col :md="24" :lg="24" :xl="24" :xxl="24">
+              <a-col span="6">
+                <td>
+                  <a-form-item>
+                    <a-input-number
+                      v-model:value="formData.KEIEISIEN_TANKA"
+                      v-bind="{ ...mathNumber }"
+                      class="w-full"
+                      :precision="0"
+                      :maxlength="4"
+                      :min="0"
+                    />
+                  </a-form-item>
+                </td>
+              </a-col>
+              <a-col span="6">
+                <td>
+                  <a-form-item>
+                    <a-input-number
+                      v-model:value="formData.SYOKYAKU_TANKA"
+                      v-bind="{ ...mathNumber }"
+                      class="w-full"
+                      :precision="0"
+                      :maxlength="4"
+                      :min="0"
+                    />
+                  </a-form-item>
+                </td>
+              </a-col>
+              <a-col span="6">
                 <th>ほろほろ鳥</th>
+              </a-col>
+              <a-col span="6">
                 <td>
                   <a-form-item>
-                    <a-input
-                      v-model:value="formData.HENKAN_NINZU"
-                      :maxlength="40"
-                    />
-                  </a-form-item>
-                </td>
-                <td>
-                  <a-form-item>
-                    <a-input
-                      v-model:value="formData.HENKAN_NINZU"
-                      :maxlength="40"
-                    />
-                  </a-form-item>
-                </td>
-                <td>
-                  <a-form-item>
-                    <a-input
-                      v-model:value="formData.HENKAN_NINZU"
-                      :maxlength="40"
+                    <a-input-number
+                      v-model:value="formData.TUMITATE_TANKA"
+                      class="w-full"
+                      :precision="1"
+                      :max="99.9"
+                      :min="0"
                     />
                   </a-form-item>
                 </td>
               </a-col>
-              <a-col :md="24" :lg="24" :xl="24" :xxl="24">
+              <a-col span="6">
+                <td>
+                  <a-form-item>
+                    <a-input-number
+                      v-model:value="formData.KEIEISIEN_TANKA"
+                      v-bind="{ ...mathNumber }"
+                      class="w-full"
+                      :precision="0"
+                      :maxlength="4"
+                      :min="0"
+                    />
+                  </a-form-item>
+                </td>
+              </a-col>
+              <a-col span="6">
+                <td>
+                  <a-form-item>
+                    <a-input-number
+                      v-model:value="formData.SYOKYAKU_TANKA"
+                      v-bind="{ ...mathNumber }"
+                      class="w-full"
+                      :precision="0"
+                      :maxlength="4"
+                      :min="0"
+                    />
+                  </a-form-item>
+                </td>
+              </a-col>
+              <a-col span="6">
                 <th>七面鳥</th>
+              </a-col>
+              <a-col span="6">
                 <td>
                   <a-form-item>
-                    <a-input
-                      v-model:value="formData.HENKAN_NINZU"
-                      :maxlength="40"
-                    />
-                  </a-form-item>
-                </td>
-                <td>
-                  <a-form-item>
-                    <a-input
-                      v-model:value="formData.HENKAN_NINZU"
-                      :maxlength="40"
-                    />
-                  </a-form-item>
-                </td>
-                <td>
-                  <a-form-item>
-                    <a-input
-                      v-model:value="formData.HENKAN_NINZU"
-                      :maxlength="40"
+                    <a-input-number
+                      v-model:value="formData.TUMITATE_TANKA"
+                      class="w-full"
+                      :precision="1"
+                      :max="99.9"
+                      :min="0"
                     />
                   </a-form-item>
                 </td>
               </a-col>
-              <a-col :md="24" :lg="24" :xl="24" :xxl="24">
+              <a-col span="6">
+                <td>
+                  <a-form-item>
+                    <a-input-number
+                      v-model:value="formData.KEIEISIEN_TANKA"
+                      v-bind="{ ...mathNumber }"
+                      class="w-full"
+                      :precision="0"
+                      :maxlength="4"
+                      :min="0"
+                    />
+                  </a-form-item>
+                </td>
+              </a-col>
+              <a-col span="6">
+                <td>
+                  <a-form-item>
+                    <a-input-number
+                      v-model:value="formData.SYOKYAKU_TANKA"
+                      v-bind="{ ...mathNumber }"
+                      class="w-full"
+                      :precision="0"
+                      :maxlength="4"
+                      :min="0"
+                    />
+                  </a-form-item>
+                </td>
+              </a-col>
+              <a-col span="6">
                 <th>だちよう</th>
+              </a-col>
+              <a-col span="6">
                 <td>
                   <a-form-item>
-                    <a-input
-                      v-model:value="formData.HENKAN_NINZU"
-                      :maxlength="40"
+                    <a-input-number
+                      v-model:value="formData.TUMITATE_TANKA"
+                      class="w-full"
+                      :precision="1"
+                      :max="99.9"
+                      :min="0"
                     />
                   </a-form-item>
                 </td>
+              </a-col>
+              <a-col span="6">
                 <td>
                   <a-form-item>
-                    <a-input
-                      v-model:value="formData.HENKAN_NINZU"
-                      :maxlength="40"
+                    <a-input-number
+                      v-model:value="formData.KEIEISIEN_TANKA"
+                      v-bind="{ ...mathNumber }"
+                      class="w-full"
+                      :precision="0"
+                      :maxlength="4"
+                      :min="0"
                     />
                   </a-form-item>
                 </td>
+              </a-col>
+              <a-col span="6">
                 <td>
                   <a-form-item>
-                    <a-input
-                      v-model:value="formData.HENKAN_NINZU"
-                      :maxlength="40"
+                    <a-input-number
+                      v-model:value="formData.SYOKYAKU_TANKA"
+                      v-bind="{ ...mathNumber }"
+                      class="w-full"
+                      :precision="0"
+                      :maxlength="4"
+                      :min="0"
                     />
                   </a-form-item>
                 </td>
@@ -515,11 +779,13 @@
         </a-row>
       </a-row>
       <a-row>
-        <a-col span="24">
-          <th>手数料率</th>
+        <a-col span="4">
+          <th class="required">手数料率</th>
+        </a-col>
+        <a-col span="8">
           <td class="flex items-center">
             <a-input-number
-              v-model:value="formData.ZENKI_TUMITATE_DATE"
+              v-model:value="formData.TESURYO_RITU"
               :max="99"
               :min="1"
               class="w-full"
@@ -527,10 +793,14 @@
               <template #addonAfter>%</template>
             </a-input-number>
           </td>
-          <th>互助金交付率</th>
+        </a-col>
+        <a-col span="5">
+          <th class="required">互助金交付率</th>
+        </a-col>
+        <a-col span="7">
           <td class="flex items-center">
             <a-input-number
-              v-model:value="formData.ZENKI_KOFU_DATE"
+              v-model:value="formData.KOFU_RITU"
               :max="100"
               :min="1"
               class="w-full"
@@ -562,21 +832,15 @@ const router = useRouter()
 const route = useRoute()
 const isNew = props.status === PageStatus.New
 const formData = reactive<DetailVM>({
-  KI: undefined as number | undefined,
-  JIGYO_NENDO: undefined as number | undefined,
-  JIGYO_SYURYO_NENDO: undefined as number | undefined,
-  ZENKI_TUMITATE_DATE: '',
-  ZENKI_KOFU_DATE: '',
-  HENKAN_KEISAN_DATE: undefined as number | undefined,
-  HENKAN_NINZU: '',
-  HENKAN_GOKEI: '',
-  HENKAN_RITU: '',
-  TAISYO_NENDO: undefined as number | undefined,
-  NOFU_KIGEN: '',
-  HASSEI_KAISU: undefined as number | undefined,
-  BIKO: undefined as number | undefined,
-  START_DATE: '',
-  END_DATE: '',
+  TAISYO_DATE_FROM: '',
+  TAISYO_DATE_TO: '',
+  KEIYAKU_KBN: undefined as number | undefined,
+  TORI_KBN: undefined as number | undefined,
+  TUMITATE_TANKA: undefined as number | undefined,
+  KEIEISIEN_TANKA: undefined as number | undefined,
+  SYOKYAKU_TANKA: undefined as number | undefined,
+  TESURYO_RITU: undefined,
+  KOFU_RITU: undefined,
 })
 
 const editJudge = new Judgement()
@@ -590,16 +854,6 @@ watch(
   () => {
     editJudge.setEdited()
   }
-)
-
-watch(
-  () => formData.JIGYO_NENDO,
-  (newValue) => {
-    if (newValue) {
-      formData.JIGYO_SYURYO_NENDO = newValue + 2
-    }
-  },
-  { immediate: true }
 )
 
 //--------------------------------------------------------------------------
