@@ -36,6 +36,7 @@
                   v-model:value="formData.MEISYO_CD"
                   :min="0"
                   :maxlength="2"
+                  :max="99"
                   :disabled="!isNew"
                 ></a-input-number>
               </a-form-item>
