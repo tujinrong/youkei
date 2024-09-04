@@ -32,11 +32,11 @@ export interface SaveRequest extends DaRequestBase {
 /**初期化処理(詳細画面) */
 export interface InitDetailResponse extends DaResponseBase {
   /**金融機関情報プルダウンリスト */
-  BANK_LIST: CmCodeNameModel
+  BANK_LIST: CmCodeNameModel[]
   /**本支店情報プルダウンリスト */
-  SITEN_LIST: CmCodeNameModel
+  SITEN_LIST: CmCodeNameModel[]
   /**口座種別情報プルダウンリスト */
-  KOZA_SYUBETU_LIST: CmCodeNameModel
+  KOZA_SYUBETU_LIST: CmCodeNameModel[]
 }
 
 /**検索処理(詳細画面) */

@@ -151,6 +151,7 @@
                   <a-form-item>
                     <ai-select
                       v-model:value="formData.FURI_BANK_CD"
+                      :options="option1.BANK_LIST"
                     ></ai-select>
                   </a-form-item>
                 </td>
@@ -161,6 +162,7 @@
                   <a-form-item>
                     <ai-select
                       v-model:value="formData.FURI_BANK_SITEN_CD"
+                      :options="option1.SITEN_LIST"
                     ></ai-select>
                   </a-form-item>
                 </td>
@@ -171,6 +173,7 @@
                   <a-form-item>
                     <ai-select
                       v-model:value="formData.FURI_KOZA_SYUBETU"
+                      :options="option1.KOZA_SYUBETU_LIST"
                     ></ai-select>
                   </a-form-item>
                 </td>
@@ -228,7 +231,10 @@
                 <th>金融機関</th>
                 <td>
                   <a-form-item>
-                    <ai-select v-model:value="formData.KOFU_BANK_CD">
+                    <ai-select
+                      v-model:value="formData.KOFU_BANK_CD"
+                      :options="option2.BANK_LIST"
+                    >
                     </ai-select>
                   </a-form-item>
                 </td>
@@ -237,7 +243,10 @@
                 <th>本支店</th>
                 <td>
                   <a-form-item>
-                    <ai-select v-model:value="formData.KOFU_BANK_SITEN_CD">
+                    <ai-select
+                      v-model:value="formData.KOFU_BANK_SITEN_CD"
+                      :options="option2.SITEN_LIST"
+                    >
                     </ai-select>
                   </a-form-item>
                 </td>
@@ -246,7 +255,10 @@
                 <th>口座種別</th>
                 <td>
                   <a-form-item>
-                    <ai-select v-model:value="formData.KOFU_KOZA_SYUBETU">
+                    <ai-select
+                      v-model:value="formData.KOFU_KOZA_SYUBETU"
+                      :options="option2.KOZA_SYUBETU_LIST"
+                    >
                     </ai-select>
                   </a-form-item>
                 </td>
@@ -299,40 +311,54 @@ import { Form } from 'ant-design-vue'
 import { onMounted, reactive, watch } from 'vue'
 import { Enum編集区分 } from '@/enum'
 import { InitDetail, SearchDetail } from './service'
+import { DetailVM } from './type'
 
-const formData = reactive({
-  KYOKAI_NAME: undefined,
-  JIGYO_NAME: undefined,
-  YAKUMEI: undefined,
-  KAICHO_NAME: undefined,
-  YOBI1: undefined,
-  POST: undefined,
-  ADDR1: undefined,
-  ADDR2: undefined,
-  HAKKO_NO_KANJI: undefined,
-  TEL1: undefined,
-  FAX1: undefined,
-  E_MAIL1: undefined,
-  TEL2: undefined,
-  FAX2: undefined,
-  E_MAIL2: undefined,
-  HP_URL: undefined,
-  FURI_BANK_CD: undefined,
-  FURI_BANK_SITEN_CD: undefined,
-  FURI_KOZA_SYUBETU: undefined,
-  FURI_KOZA_NO: undefined,
-  FURI_SYUBETU: undefined,
-  FURI_KOZA_MEIGI_KANA: undefined,
-  FURI_KOZA_MEIGI: undefined,
-  KOFU_BANK_CD: undefined,
-  KOFU_BANK_SITEN_CD: undefined,
-  KOFU_KOZA_SYUBETU: undefined,
-  KOFU_KOZA_NO: undefined,
-  KOFU_SYUBETU: undefined,
-  KOFU_CD_KBN: undefined,
-  KOFU_KAISYA_CD: undefined,
+const formData = reactive<DetailVM>({
+  KYOKAI_NAME: '',
+  JIGYO_NAME: '',
+  YAKUMEI: '',
+  KAICHO_NAME: '',
+  YOBI1: '',
+  POST: '',
+  ADDR1: '',
+  ADDR2: '',
+  HAKKO_NO_KANJI: '',
+  TEL1: '',
+  FAX1: '',
+  E_MAIL1: '',
+  TEL2: '',
+  FAX2: '',
+  E_MAIL2: '',
+  HP_URL: '',
+  FURI_BANK_CD: '',
+  FURI_BANK_SITEN_CD: '',
+  FURI_KOZA_SYUBETU: 0,
+  FURI_KOZA_NO: '',
+  FURI_SYUBETU: 0,
+  FURI_KOZA_MEIGI_KANA: '',
+  FURI_KOZA_MEIGI: '',
+  KOFU_BANK_CD: '',
+  KOFU_BANK_SITEN_CD: '',
+  KOFU_KOZA_SYUBETU: 0,
+  KOFU_KOZA_NO: '',
+  KOFU_SYUBETU: 0,
+  KOFU_CD_KBN: 0,
+  KOFU_KAISYA_CD: 0,
 })
 
+/**振込口座プルダウンリスト */
+const option1 = reactive({
+  BANK_LIST: [],
+  SITEN_LIST: [],
+  KOZA_SYUBETU_LIST: [],
+})
+
+/**支払口座プルダウンリスト  */
+const option2 = reactive({
+  BANK_LIST: [],
+  SITEN_LIST: [],
+  KOZA_SYUBETU_LIST: [],
+})
 const editJudge = new Judgement('GJ8030')
 const rules = {}
 const { validate, clearValidate, validateInfos, resetFields } = Form.useForm(
@@ -340,6 +366,9 @@ const { validate, clearValidate, validateInfos, resetFields } = Form.useForm(
   rules
 )
 onMounted(async () => {
+  const res1 = await InitDetail({ BANK_CD: '' })
+  Object.assign(option1, res1)
+  Object.assign(option2, res1)
   const res = await SearchDetail({})
   Object.assign(formData, res.KYOKAI)
 })
@@ -347,6 +376,22 @@ watch(
   () => formData,
   () => {
     editJudge.setEdited()
+  }
+)
+
+watch(
+  () => formData.FURI_BANK_CD,
+  async (newValue) => {
+    const res = await InitDetail({ BANK_CD: newValue })
+    Object.assign(option1, res)
+  }
+)
+
+watch(
+  () => formData.KOFU_BANK_CD,
+  async (newValue) => {
+    const res = await InitDetail({ BANK_CD: newValue })
+    Object.assign(option2, res)
   }
 )
 
