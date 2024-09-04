@@ -123,15 +123,15 @@
           </a-col>
         </a-row>
       </div>
-      <div class="my-2 flex">
+      <div class="my-2 flex justify-between max-w-250">
         <a-space
           ><span>検索方法</span>
           <a-radio-group v-model:value="searchParams.SEARCH_METHOD">
             <a-radio :value="EnumAndOr.AndCode">すべてを含む(AND)</a-radio>
             <a-radio :value="EnumAndOr.OrCode">いずれかを含む(OR)</a-radio>
           </a-radio-group>
-          <a-checkbox>未継続・未契約者を除く</a-checkbox>
         </a-space>
+        <a-checkbox class="ml-a">未継続・未契約者を除く</a-checkbox>
       </div>
       <div class="flex">
         <a-space>

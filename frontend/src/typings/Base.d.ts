@@ -129,6 +129,32 @@ interface MenuModel {
   personalnoflg: boolean
 }
 
+//契約羽数
+interface CmKeiGokeiModel {
+  /**採卵鶏(成鶏) */
+  SAIRANKEI_SEIKEI: number | undefined
+  /**採卵鶏(育成鶏) */
+  SAIRANKEI_IKUSEIKEI: number | undefined
+  /**肉用鶏 */
+  NIKUYOUKEI: number | undefined
+  /**種鶏(成鶏) */
+  SYUKEI_SEIKEI: number | undefined
+  /**種鶏(育成鶏) */
+  SYUKEI_IKUSEIKEI: number | undefined
+  /**うずら */
+  UZURA: number | undefined
+  /**あひる */
+  AHIRU: number | undefined
+  /**きじ */
+  KIJI: number | undefined
+  /**ほろほろ鳥 */
+  HOROHOROTORI: number | undefined
+  /**七面鳥 */
+  SICHIMENCHOU: number | undefined
+  /**だちょう */
+  DACHOU: number | undefined
+}
+
 interface ProgramModel {
   /**機能ID */
   kinoid: string

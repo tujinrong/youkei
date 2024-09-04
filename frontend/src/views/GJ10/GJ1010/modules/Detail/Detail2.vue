@@ -168,7 +168,7 @@ import { Form } from 'ant-design-vue'
 import { ITEM_REQUIRE_ERROR } from '@/constants/msg'
 import { useRoute, useRouter } from 'vue-router'
 import { Judgement } from '@/utils/judge-edited'
-import { DetailStatus } from '../../constant'
+import { FarmManage } from '../../constant'
 //--------------------------------------------------------------------------
 //データ定義
 //--------------------------------------------------------------------------
@@ -282,12 +282,12 @@ watch(
 //--------------------------------------------------------------------------
 //メソッド
 //--------------------------------------------------------------------------
-const detailKbn = defineModel<DetailStatus>('detailKbn')
+const detailKbn = defineModel<FarmManage>('detailKbn')
 
 const goList = () => {
   editJudge.judgeIsEdited(() => {
     resetFields()
-    detailKbn.value = DetailStatus.Detail1
+    detailKbn.value = FarmManage.Detail
   })
 }
 const saveData = () => {}

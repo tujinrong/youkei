@@ -7,7 +7,7 @@
  * 変更履歴　:
  * ----------------------------------------------------------------->
 <template>
-  <a-card v-show="detailKbn === DetailStatus.Detail1" :bordered="false">
+  <a-card v-show="detailKbn === FarmManage.Detail" :bordered="false">
     <h1>(GJ1012)互助基金契約者マスタメンテナンス(契約情報入力)</h1>
     <div class="self_adaption_table form">
       <b>第{{ formData.KI ?? 8 }}期</b>
@@ -291,7 +291,7 @@
     </div>
   </a-card>
   <Detail2
-    v-if="detailKbn === DetailStatus.Detail2"
+    v-if="detailKbn === FarmManage.FarmInfo"
     v-model:detailKbn="detailKbn"
   />
 </template>
@@ -306,7 +306,7 @@ import { PageStatus } from '@/enum'
 import { Form } from 'ant-design-vue'
 import { ITEM_REQUIRE_ERROR } from '@/constants/msg'
 import { useRoute, useRouter } from 'vue-router'
-import { DetailStatus } from '../../constant'
+import { FarmManage } from '../../constant'
 import { VxeTableInstance } from 'vxe-table'
 
 //--------------------------------------------------------------------------
@@ -315,7 +315,7 @@ import { VxeTableInstance } from 'vxe-table'
 const router = useRouter()
 const route = useRoute()
 
-const detailKbn = ref(DetailStatus.Detail1)
+const detailKbn = ref(FarmManage.Detail)
 const formData = reactive({
   KI: undefined as number | undefined,
   KEIYAKUSYA_NAME: '',
@@ -402,7 +402,7 @@ const goList = () => {
   })
 }
 const addNoJo = () => {
-  detailKbn.value = DetailStatus.Detail2
+  detailKbn.value = FarmManage.FarmInfo
 }
 </script>
 <style lang="scss" scoped>

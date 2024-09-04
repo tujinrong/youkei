@@ -41,6 +41,7 @@ declare module 'vue' {
     AppProvider: typeof import('./../components/common/app-provider.vue')['default']
     ARadio: typeof import('ant-design-vue/es')['Radio']
     ARadioGroup: typeof import('ant-design-vue/es')['RadioGroup']
+    ARangePicker: typeof import('ant-design-vue/es')['RangePicker']
     ARow: typeof import('ant-design-vue/es')['Row']
     ASegmented: typeof import('ant-design-vue/es')['Segmented']
     ASelect: typeof import('ant-design-vue/es')['Select']
@@ -80,6 +81,7 @@ declare module 'vue' {
     LangSwitch: typeof import('./../components/common/lang-switch.vue')['default']
     LookForward: typeof import('./../components/custom/look-forward.vue')['default']
     MenuToggler: typeof import('./../components/common/menu-toggler.vue')['default']
+    MonthJp: typeof import('./../components/Selector/MonthJp/index.vue')['default']
     PinToggler: typeof import('./../components/common/pin-toggler.vue')['default']
     PostCode: typeof import('./../components/Selector/PostCode/index.vue')['default']
     RangeDate: typeof import('./../components/Range/range-date.vue')['default']
@@ -94,6 +96,6 @@ declare module 'vue' {
     TableTD: typeof import('./../components/TableTD/index.vue')['default']
     ThemeSchemaSwitch: typeof import('./../components/common/theme-schema-switch.vue')['default']
     WaveBg: typeof import('./../components/custom/wave-bg.vue')['default']
-    YearJp: typeof import('./../components/YearJp/index.vue')['default']
+    YearJp: typeof import('./../components/Selector/YearJp/index.vue')['default']
   }
 }

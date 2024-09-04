@@ -12,6 +12,7 @@ import { EnumAndOr } from '@/enum'
 //-------------------------------------------------------------------
 //リクエスト
 //-------------------------------------------------------------------
+//1010
 export interface InitRequest extends DaRequestBase {
   /**期 */
   KI: number
@@ -42,7 +43,7 @@ export interface SearchRequest extends CmSearchRequestBase {
   /**検索方法 */
   SEARCH_METHOD: EnumAndOr
 }
-
+//1011
 export interface InitDetailRequest extends DaRequestBase {
   /**期 */
   KI: number
@@ -54,7 +55,7 @@ export interface SearchDetailRequest extends DaRequestBase {
   /**期 */
   KI: number
   /**契約者番号 */
-  KEIYAKUSYA_CD?: number | undefined
+  KEIYAKUSYA_CD: number | undefined
 }
 
 export interface SaveRequest extends DaRequestBase {
@@ -66,13 +67,95 @@ export interface DeleteRequest extends DaRequestBase {
   /**期 */
   KI: number
   /**契約者番号 */
-  KEIYAKUSYA_CD?: number | undefined
+  KEIYAKUSYA_CD: number | undefined
   /**データ更新日 */
   UP_DATE: Date
 }
+//1012
+export interface SearchDetailRequest_1012 extends DaRequestBase {
+  /**期 */
+  KI: number
+  /**契約者番号 */
+  KEIYAKUSYA_CD: number | undefined
+}
+
+export interface InitDetailRequest_1012 extends DaRequestBase {
+  /**期 */
+  KI: number
+  /**契約者番号 */
+  KEIYAKUSYA_CD: number
+  /**農場コード */
+  NOJO_CD: number | undefined
+  /**自動採番 */
+  SEQNO: number
+  /**鳥の種類 */
+  TORI_KBN: number | undefined
+}
+export interface CopyRequest extends DaRequestBase {
+  /**期 */
+  KI: number
+  /**契約者番号 */
+  KEIYAKUSYA_CD: number
+  /**契約年月日 */
+  KEIYAKU_DATE_FROM: Date
+}
+
+export interface SaveRequest_1012 extends DaRequestBase {
+  /**契約農場別登録明細情報 */
+  KEIYAKUSYA_NOJO: DetailVM_1012
+}
+
+export interface DeleteRequest_1012 extends DaRequestBase {
+  /**データ更新日 */
+  UP_DATE: Date
+  /**自動採番 */
+  SEQNO: number
+}
+export interface InitNojoRequest extends DaRequestBase {
+  /**期 */
+  KI: number
+  /**契約者番号 */
+  KEIYAKUSYA_CD: number
+  /**農場コード */
+  NOJO_CD: number
+}
+//1013
+export interface InitDetailRequest_1013 extends DaRequestBase {
+  /**期 */
+  KI: number
+  /**契約者番号 */
+  KEIYAKUSYA_CD: number
+}
+
+export interface SaveRequest_1013 extends DaRequestBase {
+  /**期 */
+  KI: number
+  /**契約者番号 */
+  KEIYAKUSYA_CD: number
+  /**農場コード */
+  NOJO_CD: number
+  /**農場名称 */
+  NOJO_NAME: string
+  /**都道府県コード */
+  KEN_CD: number
+  /**郵便番号 */
+  ADDR_POST: string
+  /**住所1 */
+  ADDR_1: string
+  /**住所2 */
+  ADDR_2: string
+  /**住所3 */
+  ADDR_3: string
+  /**住所4 */
+  ADDR_4: string
+  /**明細番号 */
+  MEISAI_NO: number
+}
+
 //-------------------------------------------------------------------
 //レスポンス
 //-------------------------------------------------------------------
+//1010
 export interface InitResponse extends DaResponseBase {
   /**期 */
   KI: number
@@ -93,6 +176,7 @@ export interface SearchResponse extends CmSearchResponseBase {
   KEKKA_LIST: SearchRowVM[]
 }
 
+//1011
 export interface InitDetailResponse extends DaResponseBase {
   /**都道府県情報プルダウンリスト */
   KEN_LIST: CmCodeNameModel[]
@@ -108,20 +192,54 @@ export interface InitDetailResponse extends DaResponseBase {
   SITEN_LIST: CmCodeNameModel[]
   /**口座種別情報プルダウンリスト */
   KOZA_SYUBETU_LIST: CmCodeNameModel[]
+  /**入力確認有無情報プルダウンリスト */
+  NYURYOKU_JYOKYO_LIST: CmCodeNameModel[]
 }
 
 export interface SearchDetailResponse extends DaResponseBase {
-  /**期 */
-  KI: number
   /**契約者情報 */
   KEIYAKUSYA: DetailVM
+}
+//1012
+export interface SearchDetailResponse_1012 extends DaRequestBase {
+  /**契約羽数合計 */
+  HASU_GOKEI: CmKeiGokeiModel
+  /**契約農場別明細情報(表示)リスト */
+  KEKKA_LIST: SearchRowVM_1012[]
+}
+
+export interface InitDetailResponse_1012 extends DaResponseBase {
+  /**農場情報プルダウンリスト */
+  NOJO_LIST: CmCodeNameModel[]
+  /**鶏の種類情報プルダウンリスト */
+  TORI_KBN_LIST: CmCodeNameModel[]
+  /**契約農場別登録明細情報(入力) */
+  KEIYAKUSYA_NOJO: DetailVM_1012
+}
+
+export interface InitNojoResponse extends DaResponseBase {
+  /**農場住所情報 */
+  NOJO_ADDR: NojoAddrVM
+}
+//1013
+export interface InitDetailResponse_1013 extends DaResponseBase {
+  /**都道府県情報プルダウンリスト */
+  KEN_LIST: CmCodeNameModel[]
+  /**期 */
+  KI: number
+  /**契約者番号 */
+  KEIYAKUSYA_CD: number
+  /**契約者番名 */
+  KEIYAKUSYA_NAME: string
+  /**農場情報リスト */
+  KEKKA_LIST: NoJoRowVM
 }
 
 //-------------------------------------------------------------------
 //ビューモデル
 //-------------------------------------------------------------------
 
-//ListSearchRow
+//1010
 export interface SearchRowVM {
   /**契約者番号 */
   KEIYAKUSYA_CD: number
@@ -141,7 +259,7 @@ export interface SearchRowVM {
   JIMUITAKU_NAME: string
 }
 
-//EditPageVM
+//1011
 export interface DetailVM {
   /**期 */
   KI: number | undefined
@@ -209,7 +327,8 @@ export interface DetailVM {
   UP_DATE: Date | undefined
 }
 
-//Detail1TableRowVM
+//1012
+//1012table
 export interface DetailRowVM {
   /**明細番号 */
   MEISAI_NO: number
@@ -232,4 +351,62 @@ export interface NoJoRowVM {
   NOJO_NAME: string
   /**住所 */
   ADDR: string
+}
+
+export interface SearchRowVM_1012 {
+  /**自動採番 */
+  SEQNO: number
+  /**明細番号 */
+  MEISAI_NO: number
+  /**農場コード */
+  NOJO_CD: number
+  /**農場名 */
+  NOJO_NAME: string
+  /**農場住所 */
+  NOJO_ADDR: string
+  /**鳥の種類コード */
+  TORI_KBN: number
+  /**鳥の種類名 */
+  TORI_KBN_NAME: string
+  /**契約羽数 */
+  KEIYAKU_HASU: number
+  /**備考 */
+  BIKO: string
+}
+
+export interface DetailVM_1012 {
+  /**自動採番 */
+  SEQNO: number | undefined
+  /**期 */
+  KI: number | undefined
+  /**契約者番号 */
+  KEIYAKUSYA_CD: number | undefined
+  /**農場コード */
+  NOJO_CD: number | undefined
+  /**鳥の種類 */
+  TORI_KBN: number | undefined
+  /**契約羽数 */
+  KEIYAKU_HASU: number | undefined
+  /**契約年月日 */
+  KEIYAKU_DATE: CmDateFmToModel
+  /**備考 */
+  BIKO: string
+  /**データ更新日 */
+  UP_DATE: Date | undefined
+}
+export interface NojoAddrVM {
+  /**明細番号 */
+  MEISAI_NO: number
+  /**農場コード */
+  NOJO_CD: number
+  /**郵便番号 */
+  ADDR_POST: string
+  /**住所1 */
+  ADDR_1: string
+  /**住所2 */
+  ADDR_2: string
+  /**住所3 */
+  ADDR_3: string
+  /**住所4 */
+  ADDR_4: string
 }
