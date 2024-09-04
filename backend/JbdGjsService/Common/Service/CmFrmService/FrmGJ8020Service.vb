@@ -7,6 +7,8 @@
 ' 変更履歴　:
 ' *******************************************************************
 
+Imports OracleInternal.Json
+
 Namespace JBD.GJS.Service.GJ8020
 
     Public Class FrmGJ8020Service
@@ -19,15 +21,44 @@ Namespace JBD.GJS.Service.GJ8020
         '戻り値          :String(SQL)
         '------------------------------------------------------------------
         Public Shared Function f_SetForm_Data(req As DaRequestBase) As String
-            Dim ret As Boolean = False
-            Dim wkDS As New DataSet
-            Dim wSql As String = String.Empty
+            Dim wkSQL As String = String.Empty
             'SQL
-            wSql = "SELECT * FROM TM_SYORI_KI"
-            Return wSql
-        End Function
-#End Region
+            wkSQL += "SELECT"
+            wkSQL += "  KI,"                 '--期
+            wkSQL += "  JIGYO_NENDO,"        '--事業対象開始年度
+            wkSQL += "  JIGYO_SYURYO_NENDO," '--事業対象終了年度
 
+            '2015/03/21  追加開始
+            'wkSQL += "  ZENKI_TUMITATE_DATE,"   '--前期積立金取込日   '2015/01/19　追加
+            'wkSQL += "  ZENKI_KOFU_DATE,"       '--前期交付金取込日   '2015/01/19　追加
+            'wkSQL += "  HENKAN_KEISAN_DATE,"    '--返還金計算日       '2015/01/19　追加
+            '--前期積立金取込日
+            wkSQL &= "  TO_CHAR(ZENKI_TUMITATE_DATE, 'EEYY""/""MM""/""DD', 'NLS_CALENDAR=''JAPANESE IMPERIAL''') AS ZENKI_TUMITATE_DATE,"
+            '--前期交付金取込日
+            wkSQL &= "  TO_CHAR(ZENKI_KOFU_DATE,     'EEYY""/""MM""/""DD', 'NLS_CALENDAR=''JAPANESE IMPERIAL''') AS ZENKI_KOFU_DATE,"
+            '--返還金計算日
+            wkSQL &= "  TO_CHAR(HENKAN_KEISAN_DATE,  'EEYY""/""MM""/""DD', 'NLS_CALENDAR=''JAPANESE IMPERIAL''') AS HENKAN_KEISAN_DATE,"
+            '2015/03/21  追加終了
+
+            wkSQL += "  HENKAN_NINZU,"      '--積立金返還人数
+            wkSQL += "  HENKAN_GOKEI,"      '--積立金返還額合計
+            wkSQL += "  HENKAN_RITU,"       '--前期積立金返還率
+
+            wkSQL += "  TAISYO_NENDO,"       '--対象年度
+            wkSQL += "  NOFU_KIGEN,"         '--当初対象積立金納付期限
+            wkSQL += "  HASSEI_KAISU,"       '--現在の発生回数
+            wkSQL += "  BIKO,"               '--備考
+            wkSQL += "  REG_DATE,"           '--データ登録日
+            wkSQL += "  REG_ID,"             '--データ登録ＩＤ
+            wkSQL += "  UP_DATE,"            '--データ更新日
+            wkSQL += "  UP_ID,"              '--データ更新ＩＤ
+            wkSQL += "  COM_NAME "           '--コンピュータ名"
+            wkSQL += "FROM"
+            wkSQL += "  TM_SYORI_KI"
+            Return wkSQL
+        End Function
+
+#End Region
 #Region "f_Data_Insert 処理対象期・年度マスタメンテナンス更新処理"
         '------------------------------------------------------------------
         'プロシージャ名  :f_Data_Insert

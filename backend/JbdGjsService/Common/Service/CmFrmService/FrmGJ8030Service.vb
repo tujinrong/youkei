@@ -7,6 +7,8 @@
 ' 変更履歴　:
 ' *******************************************************************
 
+Imports OracleInternal.Json
+
 Namespace JBD.GJS.Service.GJ8030
 
     Public Class FrmGJ8030Service
@@ -23,7 +25,12 @@ Namespace JBD.GJS.Service.GJ8030
             Dim wkDS As New DataSet
             Dim wSql As String = String.Empty
             'SQL
-            wSql = "SELECT * FROM TM_KYOKAI"
+            wSql = " SELECT " & vbCrLf
+            wSql += "  * " & vbCrLf
+            wSql += " FROM" & vbCrLf
+            wSql += "  TM_KYOKAI" & vbCrLf
+            wSql += " WHERE" & vbCrLf
+            wSql += "  KYOKAI_KBN = 1" & vbCrLf
             Return wSql
         End Function
 #End Region
