@@ -59,38 +59,85 @@ Namespace JBD.GJS.Service.GJ8030
                 Dim row As DataRow = dt.Rows(0)
                 Dim item = New SearchDetailResponse()
                 item.KYOKAI.KYOKAI_KBN = CInt(CStr(row("KYOKAI_KBN")))
-                item.KYOKAI.KYOKAI_NAME = CStr(row("KYOKAI_NAME"))
-                item.KYOKAI.JIGYO_NAME = CStr(row("JIGYO_NAME"))
-                item.KYOKAI.YAKUMEI = CStr(row("YAKUMEI"))
-                item.KYOKAI.KAICHO_NAME = CStr(row("KAICHO_NAME"))
-                item.KYOKAI.YOBI1 = CStr(row("YOBI1"))
-                item.KYOKAI.POST = CStr(row("POST"))
-                item.KYOKAI.ADDR1 = CStr(row("ADDR1"))
-                item.KYOKAI.ADDR2 = CStr(row("ADDR2"))
-                item.KYOKAI.HAKKO_NO_KANJI = CStr(row("HAKKO_NO_KANJI"))
-                item.KYOKAI.TEL1 = CStr(row("TEL1"))
-                item.KYOKAI.FAX1 = CStr(row("FAX1"))
-                item.KYOKAI.E_MAIL1 = CStr(row("E_MAIL1"))
-                item.KYOKAI.TEL2 = CStr(row("TEL2"))
-                item.KYOKAI.FAX2 = CStr(row("FAX2"))
-                item.KYOKAI.E_MAIL2 = CStr(row("E_MAIL2"))
-                item.KYOKAI.HP_URL = CStr(row("HP_URL"))
-                item.KYOKAI.TOUROKU_NO = CStr(row("TOUROKU_NO"))
-                item.KYOKAI.FURI_BANK_CD = CStr(row("FURI_BANK_CD"))
-                item.KYOKAI.FURI_BANK_SITEN_CD = CStr(row("FURI_BANK_SITEN_CD"))
-                item.KYOKAI.FURI_KOZA_SYUBETU = CInt(CStr(row("FURI_KOZA_SYUBETU")))
-                item.KYOKAI.FURI_KOZA_NO = CStr(row("FURI_KOZA_NO"))
-                item.KYOKAI.FURI_SYUBETU = CInt(CStr(row("FURI_SYUBETU")))
-                item.KYOKAI.FURI_KOZA_MEIGI_KANA = CStr(row("FURI_KOZA_MEIGI_KANA"))
-                item.KYOKAI.FURI_KOZA_MEIGI = CStr(row("FURI_KOZA_MEIGI"))
-                item.KYOKAI.KOFU_BANK_CD = CStr(row("KOFU_BANK_CD"))
-                item.KYOKAI.KOFU_BANK_SITEN_CD = CStr(row("KOFU_BANK_SITEN_CD"))
-                item.KYOKAI.KOFU_KOZA_SYUBETU = CInt(CStr(row("KOFU_KOZA_SYUBETU")))
-                item.KYOKAI.KOFU_KOZA_NO = CStr(row("KOFU_KOZA_NO"))
-                item.KYOKAI.KOFU_SYUBETU = CInt(CStr(row("KOFU_SYUBETU")))
-                item.KYOKAI.KOFU_CD_KBN = CInt(CStr(row("KOFU_CD_KBN")))
-                item.KYOKAI.KOFU_KAISYA_CD = CInt(CStr(row("KOFU_KAISYA_CD")))
-                item.KYOKAI.KOFU_KAISYA_NAME = CStr(row("KOFU_KAISYA_NAME"))
+                '協会名称 ”社団法人　日本養鶏協会”
+                item.KYOKAI.KYOKAI_NAME = CStr(WordHenkan("N", "S", row("KYOKAI_NAME")))
+                '役職名 ”会長”
+                item.KYOKAI.YAKUMEI = CStr(WordHenkan("N", "S", row("YAKUMEI")))
+                '会長名 
+                item.KYOKAI.KAICHO_NAME = CStr(WordHenkan("N", "S", row("KAICHO_NAME")))
+
+                '事業名
+                item.KYOKAI.JIGYO_NAME = CStr(WordHenkan("N", "S", row("JIGYO_NAME")))
+                '予備１
+                item.KYOKAI.YOBI1 = CStr(WordHenkan("N", "S", row("YOBI1")))
+
+                '郵便番号
+                item.KYOKAI.POST = CStr(WordHenkan("N", "S", row("POST")))
+                '住所１
+                item.KYOKAI.ADDR1 = CStr(WordHenkan("N", "S", row("ADDR1")))
+                '住所２
+                item.KYOKAI.ADDR2 = CStr(WordHenkan("N", "S", row("ADDR2")))
+
+                '電話番号１ 連絡先１
+                item.KYOKAI.TEL1 = CStr(WordHenkan("N", "S", row("TEL1")))
+                'ＦＡＸ１
+                item.KYOKAI.FAX1 = CStr(WordHenkan("N", "S", row("FAX1")))
+                'Ｅ－ｍａｉｌ１
+                item.KYOKAI.E_MAIL1 = CStr(WordHenkan("N", "S", row("E_MAIL1")))
+
+                '電話番号２ 連絡先２
+                item.KYOKAI.TEL2 = CStr(WordHenkan("N", "S", row("TEL2")))
+                'ＦＡＸ２
+                item.KYOKAI.FAX2 = CStr(WordHenkan("N", "S", row("FAX2")))
+                'Ｅ－ｍａｉｌ２
+                item.KYOKAI.E_MAIL2 = CStr(WordHenkan("N", "S", row("E_MAIL2")))
+                'ホームページURL
+                item.KYOKAI.HP_URL = CStr(WordHenkan("N", "S", row("HP_URL")))
+
+                '登録番号  2023/08/04 JBD454 R5年度インボイス対応 ADD
+                item.KYOKAI.TOUROKU_NO = CStr(WordHenkan("N", "S", row("TOUROKU_NO")))
+
+                '発行番号・漢字
+                item.KYOKAI.HAKKO_NO_KANJI = CStr(WordHenkan("N", "S", row("HAKKO_NO_KANJI")))
+
+                '--------------------
+                '振込口座情報
+                '--------------------
+                '交付金支払口座（金融機関） 交付金の支払い金融機関情報
+                item.KYOKAI.FURI_BANK_CD = CStr(WordHenkan("N", "S", row("FURI_BANK_CD")))
+                '支払先支店コード
+                item.KYOKAI.FURI_BANK_SITEN_CD = CStr(WordHenkan("N", "S", row("FURI_BANK_SITEN_CD")))
+                '口座種別
+                item.KYOKAI.FURI_KOZA_SYUBETU = CInt(WordHenkan("N", "S", row("FURI_KOZA_SYUBETU")))
+                '口座番号
+                item.KYOKAI.FURI_KOZA_NO = CStr(WordHenkan("N", "S", row("FURI_KOZA_NO")))
+                '種別コード
+                item.KYOKAI.FURI_SYUBETU = CInt(WordHenkan("N", "S", row("FURI_SYUBETU")))
+                '口座名義人
+                item.KYOKAI.FURI_KOZA_MEIGI = CStr(WordHenkan("N", "S", row("FURI_KOZA_MEIGI")))
+                '口座名義人（カナ）
+                item.KYOKAI.FURI_KOZA_MEIGI_KANA = CStr(WordHenkan("N", "S", row("FURI_KOZA_MEIGI_KANA")))
+
+                '--------------------
+                '支払口座情報
+                '--------------------
+                '交付金支払口座（金融機関） 交付金の支払い金融機関情報
+                item.KYOKAI.KOFU_BANK_CD = CStr(WordHenkan("N", "S", row("KOFU_BANK_CD")))
+                '支払先支店コード
+                item.KYOKAI.KOFU_BANK_SITEN_CD = CStr(WordHenkan("N", "S", row("KOFU_BANK_SITEN_CD")))
+                '口座種別
+                item.KYOKAI.KOFU_KOZA_SYUBETU = CInt(WordHenkan("N", "S", row("KOFU_KOZA_SYUBETU")))
+                '口座番号
+                item.KYOKAI.KOFU_KOZA_NO = CStr(WordHenkan("N", "S", row("KOFU_KOZA_NO")))
+                '種別コード
+                item.KYOKAI.KOFU_SYUBETU = CInt(WordHenkan("N", "S", row("KOFU_SYUBETU")))
+                'コード区分
+                item.KYOKAI.KOFU_CD_KBN = CInt(WordHenkan("N", "S", row("KOFU_CD_KBN")))
+                ''依頼人コード
+                item.KYOKAI.KOFU_KAISYA_CD = CInt(WordHenkan("N", "S", row("KOFU_KAISYA_CD")))
+                '振込依頼人名
+                item.KYOKAI.KOFU_KAISYA_NAME = CStr(WordHenkan("N", "S", row("KOFU_KAISYA_NAME")))
+
                 item.KYOKAI.UP_DATE = CDate(row("UP_DATE"))
                 Return item
             Else
