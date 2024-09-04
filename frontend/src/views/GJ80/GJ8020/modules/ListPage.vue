@@ -159,8 +159,8 @@
 <script setup lang="ts">
 import { Judgement } from '@/utils/judge-edited'
 import { Form } from 'ant-design-vue'
-import { reactive, watch } from 'vue'
-import { Save } from '../service'
+import { onMounted, reactive, watch } from 'vue'
+import { InitDetail, Save } from '../service'
 import { EnumEditKbn } from '@/enum'
 import { DetailVM } from '../type'
 
@@ -186,6 +186,12 @@ const { validate, clearValidate, validateInfos, resetFields } = Form.useForm(
   formData,
   rules
 )
+
+onMounted(async () => {
+  const res = await InitDetail({})
+  Object.assign(formData, res.SYORI_KI)
+})
+
 watch(
   () => formData,
   () => {

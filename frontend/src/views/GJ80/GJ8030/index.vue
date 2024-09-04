@@ -296,8 +296,9 @@
 <script setup lang="ts">
 import { Judgement } from '@/utils/judge-edited'
 import { Form } from 'ant-design-vue'
-import { reactive, watch } from 'vue'
+import { onMounted, reactive, watch } from 'vue'
 import { Enum編集区分 } from '@/enum'
+import { InitDetail, SearchDetail } from './service'
 
 const formData = reactive({
   KYOKAI_NAME: undefined,
@@ -338,6 +339,10 @@ const { validate, clearValidate, validateInfos, resetFields } = Form.useForm(
   formData,
   rules
 )
+onMounted(async () => {
+  const res = await SearchDetail({})
+  Object.assign(formData, res.KYOKAI)
+})
 watch(
   () => formData,
   () => {

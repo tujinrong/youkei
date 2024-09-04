@@ -8,15 +8,28 @@
  * -----------------------------------------------------------------*/
 import { api } from '@/service/request/common-service'
 
-import { InitDetailResponse, SaveRequest } from './type'
+import {
+  InitDetailRequest,
+  InitDetailResponse,
+  SaveRequest,
+  SearchDetailResponse,
+} from './type'
 
-const servicename = 'GJ8020'
+const servicename = 'GJ8030'
 
 /** 初期化処理(詳細画面) */
 export const InitDetail = (
-  params: DaRequestBase
+  params: InitDetailRequest
 ): Promise<InitDetailResponse> => {
   const methodname = 'InitDetail'
+  return api(servicename, methodname, params)
+}
+
+/** 検索処理(詳細画面) */
+export const SearchDetail = (
+  params: DaRequestBase
+): Promise<SearchDetailResponse> => {
+  const methodname = 'SearchDetail'
   return api(servicename, methodname, params)
 }
 

@@ -15,13 +15,19 @@ import { EnumEditKbn } from '@/enum'
 
 /**登録処理(詳細画面) */
 export interface SaveRequest extends DaRequestBase {
-  /** */
+  /**契約者農場情報 */
   KEKKA: DetailVM
 }
 
 //-------------------------------------------------------------------
 //レスポンス
 //-------------------------------------------------------------------
+
+/**登録処理(詳細画面) */
+export interface InitDetailResponse extends DaResponseBase {
+  /**契約者農場情報 */
+  SYORI_KI: DetailVM
+}
 
 //-------------------------------------------------------------------
 //ビューモデル
