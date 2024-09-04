@@ -64,12 +64,19 @@ interface CmSearchResponseBase extends DaResponseBase {
 
 /** ドロップダウンリスト */
 interface CmCodeNameModel {
-  /** 名称 */
-  CODE: string | number
   /** コード */
+  CODE: string | number
+  /** 名称 */
   NAME: string
   /** 無効属性 */
   disabled?: boolean
+}
+
+interface CmStrCodeNameModel {
+  /** コード */
+  CODE: string
+  /** 名称 */
+  NAME: string
 }
 
 interface CmCodeFmToModel {
