@@ -41,9 +41,9 @@ Namespace JBD.GJS.Service.GJ8020
                 '返還金計算日
                 item.SYORI_KI.HENKAN_KEISAN_DATE = CDate(WordHenkan("N", "S", row("HENKAN_KEISAN_DATE")))
                 '積立金返還人数
-                item.SYORI_KI.HENKAN_NINZU = CInt(CStr(row("HENKAN_NINZU")))
+                item.SYORI_KI.HENKAN_NINZU = DaConvertUtil.CInt(row("HENKAN_NINZU"))
                 '積立金返還額合計
-                item.SYORI_KI.HENKAN_GOKEI = CInt(CStr(row("HENKAN_GOKEI")))
+                item.SYORI_KI.HENKAN_GOKEI = DaConvertUtil.CInt(row("HENKAN_GOKEI"))
                 '前期積立金返還率
                 item.SYORI_KI.HENKAN_RITU = DaConvertUtil.CNDec(row("HENKAN_RITU"))
                 '対象年度

@@ -7,6 +7,8 @@
 ' 変更履歴　:
 ' *******************************************************************
 
+Imports System.Runtime.InteropServices
+
 Namespace JBD.GJS.Service.GJ8030
 
     ''' <summary>
@@ -134,7 +136,7 @@ Namespace JBD.GJS.Service.GJ8030
                 'コード区分
                 item.KYOKAI.KOFU_CD_KBN = CInt(WordHenkan("N", "S", row("KOFU_CD_KBN")))
                 ''依頼人コード
-                item.KYOKAI.KOFU_KAISYA_CD = CInt(WordHenkan("N", "S", row("KOFU_KAISYA_CD")))
+                item.KYOKAI.KOFU_KAISYA_CD = DaConvertUtil.CLng(WordHenkan("N", "S", row("KOFU_KAISYA_CD")))
                 '振込依頼人名
                 item.KYOKAI.KOFU_KAISYA_NAME = CStr(WordHenkan("N", "S", row("KOFU_KAISYA_NAME")))
 

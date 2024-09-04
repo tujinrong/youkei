@@ -172,7 +172,7 @@ Namespace JBD.GJS.Service.GJ8030
         ''' <summary>
         ''' 支払　依頼人コード
         ''' </summary>
-        Public Property KOFU_KAISYA_CD As Integer? = Nothing
+        Public Property KOFU_KAISYA_CD As Long? = Nothing
 
         ''' <summary>
         ''' 支払　振込依頼人名（ﾌﾘｶﾞﾅ）
