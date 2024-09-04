@@ -187,7 +187,6 @@ import { VxeTableInstance } from 'vxe-table'
 //--------------------------------------------------------------------------
 const router = useRouter()
 const route = useRoute()
-const tabStore = useTabStore()
 const xTableRef = ref<VxeTableInstance>()
 const createDefaultParams = () => {
   return {
@@ -204,13 +203,16 @@ const createDefaultParams = () => {
 }
 const searchParams = reactive(createDefaultParams())
 
-// const keyList = reactive({
-//   KI: undefined,
-//   KEIYAKUSYA_CD: undefined,
-//   KEIYAKUSYA_NAME: '',
-// })
 const KEIYAKUSYA_CD_NAME_LIST = ref<CmCodeNameModel[]>([])
 const tableData = ref<SearchRowVM[]>([])
+const mockData: SearchRowVM = {
+  ADDR: '東京都千代田区丸の内1-1-1',
+  ITAKU_CD: 67890,
+  ITAKU_NAME: '株式会社大手',
+  ADDR_TEL: '03-1234-5678',
+  ADDR_POST: '100-0005',
+}
+
 const KEN_CD_NAME_LIST = ref<CmCodeNameModel[]>([])
 //表の高さ
 const headRef = ref(null)
@@ -241,20 +243,12 @@ const { validate, clearValidate, validateInfos } = Form.useForm(
 //--------------------------------------------------------------------------
 //計算定義
 //--------------------------------------------------------------------------
-// const KEIYAKUSYA_NAME = computed(() => {
-//   return (
-//     keyList.KEIYAKUSYA_NAME ||
-//     KEIYAKUSYA_CD_NAME_LIST.value.find(
-//       (el) => Number(el.CODE) === searchParams.KEIYAKUSYA_CD
-//     )?.NAME
-//   )
-// })
+
 //---------------------------------------------------------------------------
 //フック関数
 //--------------------------------------------------------------------------
 onMounted(() => {
   getInitData(searchParams.KI, true)
-  searchParams.KI = undefined
   nextTick(() => clearValidate())
 })
 
@@ -312,44 +306,21 @@ const { pageParams, totalCount, searchData, clear } = useSearch({
 
 //クリア
 async function reset() {
-  searchParams.KI = -1
-  searchParams.KEN_CD = undefined
-  searchParams.ITAKU_NAME = undefined
-  searchParams.ITAKU_CD = undefined
-  searchParams.SEARCH_METHOD = EnumAndOr.AndCode
-  getInitData(-1, true)
   xTableRef.value?.clearSort()
   clear()
 }
 
 const searchAll = async () => {
-  const res = await searchData()
-  // keyList.KI = res.KI
-  // keyList.KEIYAKUSYA_CD = res.KEIYAKUSYA_CD
-  // keyList.KEIYAKUSYA_NAME =
-  KEIYAKUSYA_CD_NAME_LIST.value.find((el) => el.CODE === res.KEIYAKUSYA_CD)
-    ?.NAME || ''
+  // const res = await searchData()
+  tableData.value.push(mockData)
 }
 //--------------------------------------------------------------------------
 //監視定義
 //--------------------------------------------------------------------------
-// watch(
-//   () => searchParams.NOJO_NAME,
-//   (newVal) => {
-//     if (newVal) {
-//       searchParams.NOJO_NAME = convertToFullWidth(newVal)
-//     }
-//   }
-// )
 </script>
 
 <style lang="scss" scoped>
 :deep(th) {
   min-width: 100px;
-}
-
-:deep(.ant-form-item) {
-  margin-bottom: 0;
-  width: 100%;
 }
 </style>
