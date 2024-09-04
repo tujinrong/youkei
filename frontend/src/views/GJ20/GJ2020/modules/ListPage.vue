@@ -12,7 +12,7 @@
   >
     <a-card ref="headRef" :bordered="false">
       <h1>(GJ2020)契約者積立金計算処理</h1>
-      <div class="self_adaption_table form max-w-200 mt-1">
+      <div class="self_adaption_table form max-w-250 mt-1">
         <a-row>
           <a-col span="24">
             <th class="required">処理区分</th>
@@ -43,29 +43,13 @@
             <th>請求·返還回数</th>
             <td>
               <a-form-item v-bind="validateInfos.SEIKYU_KAISU">
-                <a-input-number
-                  v-model:value="formData.SEIKYU_KAISU"
-                  :min="1"
-                  :max="99"
-                  :maxlength="2"
-                ></a-input-number>
-                <span class="!align-middle">(表示&入力)</span>
+                <div class="flex items-center">
+                  <a-input v-model:value="formData.SEIKYU_KAISU" disabled style="width: 50%;" />
+                  <span>(入力&表示)</span>
+                </div>
               </a-form-item>
             </td>
-          </a-col>
-          <a-col span="24">
-            <th>手数料率</th>
-            <td class="flex">
-              <a-form-item v-bind="validateInfos.TESURYO_KAISU">
-                <a-input-number
-                  v-model:value="formData.TESURYO_KAISU"
-                  :min="1"
-                  :max="99"
-                  :maxlength="2"
-                ></a-input-number>
-                <span class="!align-middle">％</span>
-              </a-form-item>
-            </td>
+            <read-only thWidth="100" th="手数料率" :td="formData.TESURYO_KAISU" after="%" />
           </a-col>
           <a-col span="24">
             <th class="required">徵収·返還区分</th>
@@ -109,17 +93,8 @@
             <th>契約者番号</th>
             <td class="flex">
               <a-form-item v-bind="validateInfos.KEIYAKUSYA_CD">
-                <a-input-number
-                  v-model:value="formData.KEIYAKUSYA_CD"
-                  :min="1"
-                  :max="99"
-                  :maxlength="2"
-                  style="width: 100%"
-                ></a-input-number>
-              </a-form-item>
-              <a-form-item v-bind="validateInfos.KEIYAKUSYA_CD">
                 <ai-select
-                  v-model:value="searchParams.KEIYAKU_KBN"
+                  v-model:value="formData.KEIYAKUSYA_CD"
                   :options="KEIYAKU_KBN_CD_NAME_LIST"
                   class="w-full"
                   type="number"
