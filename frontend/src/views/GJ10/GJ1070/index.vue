@@ -10,7 +10,7 @@
   <div>
     <a-card :bordered="false" class="h-full min-h-500px">
       <div>
-        <h1>(GJ1070)事業加入状況表(農場別リスト)作成</h1>
+        <h1>(GJ1070)事業加入状況表（農場別リスト）作成</h1>
         <div class="self_adaption_table form" ref="headRef">
           <a-row>
             <a-col v-bind="layout">

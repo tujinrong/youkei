@@ -2,7 +2,7 @@
   <div>
     <a-card :bordered="false" class="h-full min-h-500px">
       <div>
-        <h1>(GJ1030)契約者一覧表(連絡用)</h1>
+        <h1>(GJ1030)契約者一覧表（連絡用）</h1>
         <div class="self_adaption_table form" ref="headRef">
           <a-row>
             <a-col v-bind="layout">
