@@ -24,7 +24,7 @@ Namespace JBD.GJS.Service.GJ8020
         Inherits DaRequestBase
 
         ''' <summary>
-        ''' 契約者農場情報
+        ''' 処理対象期・年度情報
         ''' </summary>
         Public Property SYORI_KI As DetailVM = New DetailVM
 
