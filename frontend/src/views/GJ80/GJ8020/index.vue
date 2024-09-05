@@ -212,7 +212,7 @@ watch(
 const save = async () => {
   await validate()
   try {
-    await Save({ KEKKA: formData })
+    await Save({ SYORI_KI: formData })
   } catch (error) {}
 }
 
