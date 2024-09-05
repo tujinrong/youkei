@@ -81,60 +81,35 @@ Namespace JBD.GJS.Service.GJ8020
                     Cmd.CommandText = "PKG_GJ8020.GJ8020_SYORI_KI_INS"
             End Select
 
-            '引き渡し
-            '期 
+            '--期
             Cmd.Parameters.Add("IN_KI", wNojoCd.SYORI_KI.KI)
-            '事業対象開始年度
-            Cmd.Parameters.Add("IN_JIGYO_NENDO", wNojoCd.SYORI_KI.JIGYO_NENDO
-                            )
-            '事業対象終了年度 
-            Cmd.Parameters.Add("IN_JIGYO_SYURYO_NENDO", wNojoCd.SYORI_KI.JIGYO_SYURYO_NENDO
-                            )
-            '前期積立金取込日
-            Cmd.Parameters.Add("IN_ZENKI_TUMITATE_DATE", wNojoCd.SYORI_KI.ZENKI_TUMITATE_DATE
-                            )
-            '前期交付金取込日
-            Cmd.Parameters.Add("IN_ZENKI_KOFU_DATE", wNojoCd.SYORI_KI.ZENKI_KOFU_DATE
-                            )
-            '返還金計算日
-            Cmd.Parameters.Add("IN_HENKAN_KEISAN_DATE", wNojoCd.SYORI_KI.HENKAN_KEISAN_DATE
-                            )
-            '積立金返還人数
-            Cmd.Parameters.Add("IN_HENKAN_NINZU", wNojoCd.SYORI_KI.HENKAN_NINZU
-                            )
-            '積立金返還額合計
-            Cmd.Parameters.Add("IN_HENKAN_GOKEI", wNojoCd.SYORI_KI.HENKAN_GOKEI
-                            )
-            '前期積立金返還率
-            Cmd.Parameters.Add("IN_HENKAN_RITU", wNojoCd.SYORI_KI.HENKAN_RITU
-                            )
-            '対象年度
-            Cmd.Parameters.Add("IN_TAISYO_NENDO", wNojoCd.SYORI_KI.TAISYO_NENDO
-                            )
-            '当初対象積立金納付期限
-            Cmd.Parameters.Add("IN_NOFU_KIGEN", wNojoCd.SYORI_KI.NOFU_KIGEN
-                            )
-            '現在の認定回数
-            Cmd.Parameters.Add("IN_HASSEI_KAISU", wNojoCd.SYORI_KI.HASSEI_KAISU
-                            )
-            '備考
-            Cmd.Parameters.Add("IN_BIKO", wNojoCd.SYORI_KI.BIKO
-                            )
+            '--事業対象開始年度
+            Cmd.Parameters.Add("IN_JIGYO_NENDO", wNojoCd.SYORI_KI.JIGYO_NENDO)
+            '--事業対象終了年度
+            Cmd.Parameters.Add("IN_JIGYO_SYURYO_NENDO", wNojoCd.SYORI_KI.JIGYO_SYURYO_NENDO)
 
-            Select Case wNojoCd.EDIT_KBN
-                Case EnumEditKbn.Add       '新規入力
-                    'データ登録日
-                    Cmd.Parameters.Add("IN_REG_DATE", Now)
-                    'データ登録ＩＤ
-                    Cmd.Parameters.Add("IN_REG_ID", pLOGINUSERID)
-            End Select
+            '--対象年度
+            Cmd.Parameters.Add("IN_TAISYO_NENDO", wNojoCd.SYORI_KI.TAISYO_NENDO)
+            '--当初対象積立金納付期限
+            If wNojoCd.SYORI_KI.NOFU_KIGEN Is Nothing Then
+                Cmd.Parameters.Add("IN_NOFU_KIGEN", DBNull.Value)
+            Else
+                Cmd.Parameters.Add("IN_NOFU_KIGEN", f_DateTrim(CDate(wNojoCd.SYORI_KI.NOFU_KIGEN)))
+            End If
+            '--現在の発生回数
+            If wNojoCd.SYORI_KI.HASSEI_KAISU Is Nothing Then
+                Cmd.Parameters.Add("IN_HASSEI_KAISU", DBNull.Value)
+            Else
+                Cmd.Parameters.Add("IN_HASSEI_KAISU", wNojoCd.SYORI_KI.HASSEI_KAISU)
+            End If
+            '--備考
+            Cmd.Parameters.Add("IN_BIKO", wNojoCd.SYORI_KI.BIKO)
 
-            'データ更新日
-            Cmd.Parameters.Add("IN_UP_DATE", Now)
-            'データ更新ＩＤ
-            Cmd.Parameters.Add("IN_UP_ID", pLOGINUSERID)
-            'コンピュータ名
-            Cmd.Parameters.Add("IN_COM_NAME", pPCNAME)
+            Cmd.Parameters.Add("IN_SYORI_NENDO_REG_DATE", Now)
+            Cmd.Parameters.Add("IN_SYORI_NENDO_REG_ID", pLOGINUSERID)
+            Cmd.Parameters.Add("IN_SYORI_NENDO_UP_DATE", Now)
+            Cmd.Parameters.Add("IN_SYORI_NENDO_UP_ID", pLOGINUSERID)
+            Cmd.Parameters.Add("IN_SYORI_NENDO_COM_NAME", pPCNAME)
 
             '戻り
             Dim p_MSGCD As OracleParameter = Cmd.Parameters.Add("OU_MSGCD", OracleDbType.Varchar2, 255, DBNull.Value, ParameterDirection.Output)
