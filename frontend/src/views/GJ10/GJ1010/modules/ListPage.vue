@@ -202,7 +202,7 @@
         <vxe-column
           field="KEIYAKUSYA_KANA"
           title="フリガナ"
-          min-width="200"
+          min-width="250"
           sortable
         >
           <template #default="{ row }">
@@ -226,7 +226,7 @@
         <vxe-column
           field="ADDR_TEL"
           title="電話番号"
-          min-width="200"
+          min-width="150"
           sortable
         ></vxe-column>
         <vxe-column

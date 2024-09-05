@@ -26,7 +26,7 @@
         <vxe-column
           field="USER_ID"
           title="ユーザーID"
-          min-width="80"
+          width="120"
           sortable
           :params="{ order: 1 }"
           :resizable="true"
@@ -38,7 +38,7 @@
         <vxe-column
           field="USER_NAME"
           title="ユーザ名"
-          min-width="160"
+          min-width="150"
           sortable
           :params="{ order: 2 }"
           :resizable="true"
@@ -50,7 +50,7 @@
         <vxe-column
           field="SIYO_KBN"
           title="使用区分"
-          min-width="100"
+          width="120"
           sortable
           :params="{ order: 3 }"
           :resizable="true"
@@ -58,7 +58,7 @@
         <vxe-column
           field="TEISI_DATE"
           title="使用停止日"
-          min-width="160"
+          min-width="150"
           sortable
           :params="{ order: 4 }"
           :resizable="true"
@@ -66,7 +66,7 @@
         <vxe-column
           field="TEISI_RIYU"
           title="使用停止理由"
-          min-width="300"
+          min-width="400"
           :resizable="false"
         ></vxe-column>
       </vxe-table>

@@ -130,7 +130,7 @@
         <vxe-column
           field="ITAKU_NAME"
           title="事務委託先名"
-          min-width="160"
+          min-width="400"
           sortable
           :params="{ order: 2 }"
           :resizable="true"
@@ -142,7 +142,7 @@
         <vxe-column
           field="ADDR_TEL"
           title="電話番号"
-          min-width="400"
+          min-width="160"
           sortable
           :params="{ order: 3 }"
           :resizable="false"
@@ -150,7 +150,7 @@
         <vxe-column
           field="ADDR_POST"
           title="郵便番号"
-          min-width="400"
+          min-width="200"
           sortable
           :params="{ order: 4 }"
           :resizable="false"
@@ -158,7 +158,7 @@
         <vxe-column
           field="ADDR"
           title="住所"
-          min-width="400"
+          min-width="600"
           sortable
           :params="{ order: 5 }"
           :resizable="false"
