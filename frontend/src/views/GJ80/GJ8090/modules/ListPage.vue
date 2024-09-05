@@ -11,7 +11,7 @@
     class="h-full min-h-500px flex-col-stretch gap-12px overflow-hidden lt-sm:overflow-auto"
   >
     <a-card ref="headRef" :bordered="false">
-      <h1>(GJ8090)契約者農場一覧</h1>
+      <h1>（GJ8090）契約者農場一覧</h1>
       <div class="self_adaption_table form mt-1">
         <a-row>
           <a-col v-bind="layout">

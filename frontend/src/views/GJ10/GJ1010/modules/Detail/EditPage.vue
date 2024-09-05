@@ -8,7 +8,7 @@
  * ----------------------------------------------------------------->
 <template>
   <a-card :bordered="false" class="mb2 h-full">
-    <h1>(GJ1011)互助基金契約者マスタメンテナンス（基本情報入力）</h1>
+    <h1>（GJ1011）互助基金契約者マスタメンテナンス（基本情報入力）</h1>
     <div class="self_adaption_table form">
       <b>第8期</b>
       <div class="mb-2 header_operation flex justify-between w-full">

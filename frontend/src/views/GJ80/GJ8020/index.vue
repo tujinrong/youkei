@@ -1,6 +1,6 @@
 <template>
   <a-card :bordered="false" class="mb-4 h-full">
-    <h1>(GJ8020)処理対象期・年度マスタメンテナンス</h1>
+    <h1>（GJ8020）処理対象期・年度マスタメンテナンス</h1>
     <div class="my-4 flex justify-between">
       <a-space :size="20">
         <a-button class="warning-btn" @click="save">保存</a-button>

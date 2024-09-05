@@ -1,6 +1,6 @@
 <template>
   <a-card :bordered="false" class="mb-2 h-full">
-    <h1>(GJ8011)コードマスタメンテナンス</h1>
+    <h1>（GJ8011）コードマスタメンテナンス</h1>
     <div class="self_adaption_table form max-w-160">
       <a-form>
         <a-row>
