@@ -152,6 +152,8 @@
                     <ai-select
                       v-model:value="formData.FURI_BANK_CD"
                       :options="option1.BANK_LIST"
+                      split-val
+                      @change="onChangeFuriBank"
                     ></ai-select>
                   </a-form-item>
                 </td>
@@ -238,6 +240,8 @@
                     <ai-select
                       v-model:value="formData.KOFU_BANK_CD"
                       :options="option2.BANK_LIST"
+                      split-val
+                      @change="onChangeKofuBank"
                     >
                     </ai-select>
                   </a-form-item>
@@ -325,7 +329,6 @@
 import { Judgement } from '@/utils/judge-edited'
 import { Form, message } from 'ant-design-vue'
 import { onMounted, reactive, watch } from 'vue'
-import { Enum編集区分 } from '@/enum'
 import { InitDetail, Save, SearchDetail } from './service'
 import { DetailVM } from './type'
 import { showConfirmModal, showSaveModal } from '@/utils/modal'
@@ -412,7 +415,19 @@ watch(
     Object.assign(option2, res)
   }
 )
+const onChangeFuriBank = () => {
+  //クリア
+  formData.FURI_BANK_SITEN_CD = ''
+  formData.FURI_KOZA_SYUBETU = undefined
+}
 
+const onChangeKofuBank = () => {
+  //クリア
+  formData.KOFU_BANK_SITEN_CD = ''
+  formData.KOFU_KOZA_SYUBETU = undefined
+}
+
+/** 登録処理 */
 const save = async () => {
   await validate()
   try {
@@ -428,10 +443,14 @@ const save = async () => {
   } catch (error) {}
 }
 
+/** キャンセル処理 */
 const cancel = () => {
   showConfirmModal({
     content: CLOSE_CONFIRM.Msg,
-    onOk: async () => {},
+    onOk: async () => {
+      const res = await SearchDetail({})
+      Object.assign(formData, res.KYOKAI)
+    },
   })
 }
 </script>

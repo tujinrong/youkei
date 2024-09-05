@@ -30,11 +30,11 @@ export const SearchDetail = (
   params: DaRequestBase
 ): Promise<SearchDetailResponse> => {
   const methodname = 'SearchDetail'
-  return api(servicename, methodname, params)
+  return api(servicename, methodname, params, undefined, { loading: true })
 }
 
 /** 登録処理(詳細画面) */
 export const Save = (params: SaveRequest): Promise<DaResponseBase> => {
   const methodname = 'Save'
-  return api(servicename, methodname, params)
+  return api(servicename, methodname, params, undefined, { loading: true })
 }
