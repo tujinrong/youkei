@@ -1,7 +1,7 @@
 <template>
   <a-card :bordered="false" class="mb-2 h-full">
     <div class="self_adaption_table form max-w-400">
-      <h1>(GJ8061)事務委託先メンテナンス</h1>
+      <h1>(GJ8061)事務委託先マスタメンテナンス</h1>
       <b>第{{ formData.KI }}期</b>
       <a-form>
         <div class="my-2 header_operation flex justify-between w-full">
