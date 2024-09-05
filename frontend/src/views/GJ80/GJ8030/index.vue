@@ -182,9 +182,11 @@
                 <th>口座番号</th>
                 <td>
                   <a-form-item>
-                    <ai-select
+                    <a-input-number
                       v-model:value="formData.FURI_KOZA_NO"
-                    ></ai-select>
+                      string-mode
+                      style="width: 100%"
+                    ></a-input-number>
                   </a-form-item>
                 </td>
               </a-col>
@@ -192,9 +194,11 @@
                 <th>種別コード</th>
                 <td>
                   <a-form-item>
-                    <ai-select
+                    <a-input-number
                       v-model:value="formData.FURI_SYUBETU"
-                    ></ai-select>
+                      string-mode
+                      style="width: 100%"
+                    ></a-input-number>
                   </a-form-item>
                 </td>
               </a-col>
@@ -267,8 +271,12 @@
                 <th>口座番号</th>
                 <td>
                   <a-form-item>
-                    <ai-select v-model:value="formData.KOFU_KOZA_NO">
-                    </ai-select>
+                    <a-input-number
+                      v-model:value="formData.KOFU_KOZA_NO"
+                      string-mode
+                      style="width: 100%"
+                    >
+                    </a-input-number>
                   </a-form-item>
                 </td>
               </a-col>
@@ -276,8 +284,12 @@
                 <th>種別コード</th>
                 <td>
                   <a-form-item>
-                    <ai-select v-model:value="formData.KOFU_SYUBETU">
-                    </ai-select>
+                    <a-input-number
+                      v-model:value="formData.KOFU_SYUBETU"
+                      string-mode
+                      style="width: 100%"
+                    >
+                    </a-input-number>
                   </a-form-item>
                 </td>
               </a-col>
@@ -285,7 +297,11 @@
                 <th>コード区分</th>
                 <td>
                   <a-form-item>
-                    <ai-select v-model:value="formData.KOFU_CD_KBN"></ai-select>
+                    <a-input-number
+                      v-model:value="formData.KOFU_CD_KBN"
+                      string-mode
+                      style="width: 100%"
+                    ></a-input-number>
                   </a-form-item>
                 </td>
               </a-col>
@@ -307,11 +323,13 @@
 </template>
 <script setup lang="ts">
 import { Judgement } from '@/utils/judge-edited'
-import { Form } from 'ant-design-vue'
+import { Form, message } from 'ant-design-vue'
 import { onMounted, reactive, watch } from 'vue'
 import { Enum編集区分 } from '@/enum'
-import { InitDetail, SearchDetail } from './service'
+import { InitDetail, Save, SearchDetail } from './service'
 import { DetailVM } from './type'
+import { showConfirmModal, showSaveModal } from '@/utils/modal'
+import { CLOSE_CONFIRM, SAVE_CONFIRM, SAVE_OK_INFO } from '@/constants/msg'
 
 const formData = reactive<DetailVM>({
   KYOKAI_NAME: '',
@@ -397,9 +415,25 @@ watch(
 
 const save = async () => {
   await validate()
+  try {
+    showSaveModal({
+      content: SAVE_CONFIRM.Msg,
+      onOk: async () => {
+        try {
+          await Save({ KYOKAI: formData })
+          message.success(SAVE_OK_INFO.Msg)
+        } catch (error) {}
+      },
+    })
+  } catch (error) {}
 }
 
-const cancel = () => {}
+const cancel = () => {
+  showConfirmModal({
+    content: CLOSE_CONFIRM.Msg,
+    onOk: async () => {},
+  })
+}
 </script>
 <style lang="scss" scoped>
 th {
