@@ -1,6 +1,6 @@
 <template>
   <a-card :bordered="false" class="mb-2 h-full">
-    <h1>(GJ8100)消費税率一覧</h1>
+    <h1>（GJ8100）消費税率一覧</h1>
     <div class="my-2 flex justify-between">
       <a-space :size="20">
         <a-button type="primary" @click="add">新規登録</a-button>

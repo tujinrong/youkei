@@ -10,7 +10,7 @@
   <div>
     <a-card :bordered="false" class="h-full min-h-500px">
       <div>
-        <h1>(GJ1050)事務委託先別·契約者別生産者積立金等一覧表作成</h1>
+        <h1>（GJ1050）事務委託先別·契約者別生産者積立金等一覧表作成</h1>
         <div class="self_adaption_table form" ref="headRef">
           <a-row>
             <a-col v-bind="layout">

@@ -8,7 +8,7 @@
  * ----------------------------------------------------------------->
 <template>
   <a-card v-show="detailKbn === FarmManage.Detail" :bordered="false">
-    <h1>(GJ1012)互助基金契約者マスタメンテナンス（契約情報入力）</h1>
+    <h1>（GJ1012）互助基金契約者マスタメンテナンス（契約情報入力）</h1>
     <div class="self_adaption_table form">
       <b>第{{ formData.KI ?? 8 }}期</b>
       <h2>1.契約農場別明細情報(表示)</h2>

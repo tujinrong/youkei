@@ -1,7 +1,7 @@
 <template>
   <div>
     <a-card :bordered="false" class="mb-4 h-full">
-      <h1>(GJ8030)日本養鶏協会マスタメンテナンス</h1>
+      <h1>（GJ8030）日本養鶏協会マスタメンテナンス</h1>
       <div class="my-4 flex justify-between">
         <a-space :size="20">
           <a-button class="warning-btn" @click="save">保存</a-button>
