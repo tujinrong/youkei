@@ -10,7 +10,10 @@
             <th>金融機関コード</th>
             <td>
               <a-form-item>
-                <a-input v-model:value="searchParams.BANK_CD"></a-input>
+                <a-input
+                  v-model:value="searchParams.BANK_CD"
+                  :maxlength="4"
+                ></a-input>
               </a-form-item>
             </td>
           </a-col>
@@ -116,7 +119,7 @@
               <a-form-item>
                 <a-input
                   v-model:value="searchParams2.SITEN_CD"
-                  :maxlength="20"
+                  :maxlength="3"
                 ></a-input>
               </a-form-item>
             </td>

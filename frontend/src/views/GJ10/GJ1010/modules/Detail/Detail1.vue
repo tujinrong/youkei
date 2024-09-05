@@ -32,8 +32,11 @@
           <a-button type="primary" :disabled="isEdit" @click="changeData"
             >変更</a-button
           >
+          <a-button type="primary" danger :disabled="isEdit" @click="deleteData"
+            >削除</a-button
+          >
         </a-space>
-        <a-button type="primary" @click="goList">一覧</a-button>
+        <a-button type="primary" @click="goList">一覧へ</a-button>
       </div>
     </div>
     <a-pagination
@@ -385,6 +388,9 @@ const addData = () => {
 }
 const changeData = () => {
   const a = tableRef.value?.getCurrentRecord()
+  isEdit.value = true
+}
+const deleteData = () => {
   isEdit.value = true
 }
 const saveData = () => {

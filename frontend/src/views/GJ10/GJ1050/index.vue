@@ -73,7 +73,7 @@
                     <a-checkbox
                       v-for="(label, key) in NYURYOKU_JYOKYO_LABELS"
                       :key="key"
-                      v-model:checked="formData.KEIYAKU_JYOKYO[key]"
+                      v-model:checked="formData.NYURYOKU_JYOKYO[key]"
                     >
                       {{ label }}
                     </a-checkbox></a-space
@@ -151,6 +151,10 @@ const createDefaultParams = () => {
       KEIZOKU: true,
       CHUSHI: true,
       HAIGYO: true,
+    },
+    NYURYOKU_JYOKYO: {
+      ing: true,
+      ed: true,
     },
     ITAKU_CD: {
       VALUE_FM: undefined as number | undefined,

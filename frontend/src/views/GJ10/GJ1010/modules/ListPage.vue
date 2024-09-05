@@ -33,9 +33,8 @@
                 v-model:value="searchParams.KEN_CD"
                 :options="KEN_CD_NAME_LIST"
               />
-            </td> </a-col
-        ></a-row>
-        <a-row>
+            </td>
+          </a-col>
           <a-col v-bind="layout">
             <th>契約者番号</th>
             <td>
@@ -55,9 +54,8 @@
                 class="w-full"
                 type="number"
               ></ai-select>
-            </td> </a-col
-        ></a-row>
-        <a-row>
+            </td>
+          </a-col>
           <a-col v-bind="layout">
             <th>契約状況</th>
             <td>
@@ -77,9 +75,8 @@
                 class="w-full"
                 :maxlength="50"
               ></a-input>
-            </td> </a-col
-        ></a-row>
-        <a-row>
+            </td>
+          </a-col>
           <a-col v-bind="layout">
             <th>契約者名(フリガナ)</th>
             <td>
@@ -90,17 +87,7 @@
               ></a-input>
             </td>
           </a-col>
-          <a-col v-bind="layout">
-            <th>住所</th>
-            <td>
-              <a-input
-                v-model:value="searchParams.ADDR"
-                class="w-full"
-                :maxlength="80"
-              ></a-input>
-            </td> </a-col
-        ></a-row>
-        <a-row>
+
           <a-col v-bind="layout">
             <th>電話番号</th>
             <td>
@@ -112,13 +99,23 @@
               ></a-input>
             </td>
           </a-col>
-          <a-col v-bind="layout">
+          <a-col :md="24" :lg="24" :xl="24" :xxl="8">
             <th>事務委託先</th>
             <td>
               <range-select
                 v-model:value="searchParams.JIMUITAKU_CD"
                 :options="ITAKU_LIST"
               />
+            </td>
+          </a-col>
+          <a-col span="24">
+            <th>住所</th>
+            <td>
+              <a-input
+                v-model:value="searchParams.ADDR"
+                class="w-full"
+                :maxlength="80"
+              ></a-input>
             </td>
           </a-col>
         </a-row>
@@ -130,8 +127,8 @@
             <a-radio :value="EnumAndOr.AndCode">すべてを含む(AND)</a-radio>
             <a-radio :value="EnumAndOr.OrCode">いずれかを含む(OR)</a-radio>
           </a-radio-group>
+          <a-checkbox>未継続・未契約者を除く</a-checkbox>
         </a-space>
-        <a-checkbox class="ml-a">未継続・未契約者を除く</a-checkbox>
       </div>
       <div class="flex">
         <a-space>
@@ -152,7 +149,7 @@
         </AButton>
       </div>
     </a-card>
-    <a-card :bordered="false" class="sm:flex-1-hidden" ref="cardRef">
+    <a-card :bordered="false" class="min-h-100 sm:flex-1-hidden" ref="cardRef">
       <a-pagination
         v-model:current="pageParams.PAGE_NUM"
         v-model:page-size="pageParams.PAGE_SIZE"
@@ -286,9 +283,9 @@ const createDefaultParams = () => {
 }
 const searchParams = reactive(createDefaultParams())
 const layout = {
-  md: 12,
+  md: 24,
   lg: 12,
-  xl: 8,
+  xl: 12,
   xxl: 8,
 }
 const router = useRouter()

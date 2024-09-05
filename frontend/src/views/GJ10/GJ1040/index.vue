@@ -30,7 +30,7 @@
               </td>
             </a-col>
             <a-col span="24">
-              <th>
+              <th :class="formData.a ? 'required' : ''">
                 <a-radio-group v-model:value="formData.a">
                   <a-radio :value="true">登録日範囲</a-radio>
                 </a-radio-group>
@@ -44,7 +44,10 @@
               </td>
             </a-col>
             <a-col span="24">
-              <th :style="{ borderTop: 'none' }">
+              <th
+                :style="{ borderTop: 'none' }"
+                :class="formData.a ? '' : 'required'"
+              >
                 <a-radio-group v-model:value="formData.a">
                   <a-radio :value="false">更新日範囲</a-radio>
                 </a-radio-group>
@@ -352,6 +355,6 @@ const rangeCheck = (from: number, to: number, itemName: string) => {
 
 <style lang="scss" scoped>
 th {
-  min-width: 120px;
+  min-width: 140px;
 }
 </style>
