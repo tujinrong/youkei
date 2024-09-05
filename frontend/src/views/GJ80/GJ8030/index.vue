@@ -165,6 +165,7 @@
                     <ai-select
                       v-model:value="formData.FURI_BANK_SITEN_CD"
                       :options="option1.SITEN_LIST"
+                      split-val
                     ></ai-select>
                   </a-form-item>
                 </td>
@@ -176,6 +177,7 @@
                     <ai-select
                       v-model:value="formData.FURI_KOZA_SYUBETU"
                       :options="option1.KOZA_SYUBETU_LIST"
+                      type="number"
                     ></ai-select>
                   </a-form-item>
                 </td>
@@ -254,6 +256,7 @@
                     <ai-select
                       v-model:value="formData.KOFU_BANK_SITEN_CD"
                       :options="option2.SITEN_LIST"
+                      split-val
                     >
                     </ai-select>
                   </a-form-item>
@@ -266,6 +269,7 @@
                     <ai-select
                       v-model:value="formData.KOFU_KOZA_SYUBETU"
                       :options="option2.KOZA_SYUBETU_LIST"
+                      type="number"
                     >
                     </ai-select>
                   </a-form-item>
@@ -313,7 +317,10 @@
                 <th>依頼人</th>
                 <td>
                   <a-form-item>
-                    <ai-select v-model:value="formData.KOFU_KAISYA_CD">
+                    <ai-select
+                      v-model:value="formData.KOFU_KAISYA_CD"
+                      split-val
+                    >
                     </ai-select>
                   </a-form-item>
                 </td>
