@@ -141,21 +141,15 @@ Namespace JBD.GJS.Service.GJ8030
                     Dim ds = FrmService.f_Select_ODP(db, sql)
                     Dim dt = ds.Tables(0)
 
-                    'データの独占性
-                    Select Case req.EDIT_KBN
-                        Case EnumEditKbn.Edit       '変更入力
-                            If dt.Rows.Count = 0 Then
-                                Return New DaResponseBase("変更したデータはありません。")
-                            Else
-                                If CDate(dt.Rows(0)("UP_DATE")) > req.KYOKAI.UP_DATE Then
-                                    Return New DaResponseBase("データを更新できません。他のユーザーによって変更された可能性があります。")
-                                End If
-                            End If
-                        Case EnumEditKbn.Add       '新規入力
-                            If dt.Rows.Count > 0 Then
-                                Return New DaResponseBase("データは既に登録されています。")
-                            End If
-                    End Select
+                    ''データの独占性
+                    If dt.Rows.Count = 0 Then
+                        req.EDIT_KBN = EnumEditKbn.Add
+                    Else
+                        If CDate(dt.Rows(0)("UP_DATE")) > req.KYOKAI.UP_DATE Then
+                            Return New DaResponseBase("データを更新できません。他のユーザーによって変更された可能性があります。")
+                        End If
+                        req.EDIT_KBN = EnumEditKbn.Edit
+                    End If
 
                     '保存処理
                     Dim res = FrmGJ8030Service.f_Data_Update(db, req)

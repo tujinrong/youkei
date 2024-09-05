@@ -28,8 +28,5 @@ Namespace JBD.GJS.Service.GJ8020
         ''' </summary>
         Public Property SYORI_KI As DetailVM = New DetailVM
 
-
-
-
     End Class
 End Namespace
