@@ -317,11 +317,12 @@
                 <th>依頼人</th>
                 <td>
                   <a-form-item>
-                    <ai-select
+                    <a-input-number
                       v-model:value="formData.KOFU_KAISYA_CD"
-                      split-val
+                      string-mode
+                      style="width: 100%"
                     >
-                    </ai-select>
+                    </a-input-number>
                   </a-form-item>
                 </td>
               </a-col>
