@@ -158,11 +158,12 @@
 </template>
 <script setup lang="ts">
 import { Judgement } from '@/utils/judge-edited'
-import { Form } from 'ant-design-vue'
+import { Form, message } from 'ant-design-vue'
 import { onMounted, reactive, watch } from 'vue'
 import { InitDetail, Save } from './service'
-import { EnumEditKbn } from '@/enum'
 import { DetailVM } from './type'
+import { CLOSE_CONFIRM, SAVE_CONFIRM, SAVE_OK_INFO } from '@/constants/msg'
+import { showConfirmModal, showSaveModal } from '@/utils/modal'
 
 const formData = reactive<DetailVM>({
   KI: undefined as number | undefined,
@@ -188,8 +189,7 @@ const { validate, clearValidate, validateInfos, resetFields } = Form.useForm(
 )
 
 onMounted(async () => {
-  const res = await InitDetail({})
-  Object.assign(formData, res.SYORI_KI)
+  init()
 })
 
 watch(
@@ -209,14 +209,37 @@ watch(
   { immediate: true }
 )
 
+/** 初期化処理 */
+const init = async () => {
+  const res = await InitDetail({})
+  Object.assign(formData, res.SYORI_KI)
+}
+
+/** 登録処理 */
 const save = async () => {
   await validate()
   try {
-    await Save({ SYORI_KI: formData })
+    showSaveModal({
+      content: SAVE_CONFIRM.Msg,
+      onOk: async () => {
+        try {
+          await Save({ SYORI_KI: formData })
+          message.success(SAVE_OK_INFO.Msg)
+        } catch (error) {}
+      },
+    })
   } catch (error) {}
 }
 
-const cancel = () => {}
+/** キャンセル処理 */
+const cancel = () => {
+  showConfirmModal({
+    content: CLOSE_CONFIRM.Msg,
+    onOk: async () => {
+      init()
+    },
+  })
+}
 </script>
 <style lang="scss" scoped>
 th {
