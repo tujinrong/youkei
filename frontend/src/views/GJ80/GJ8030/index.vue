@@ -145,7 +145,7 @@
           <a-col span="24">
             <th class="required">振込口座情報</th>
             <a-row class="flex-1">
-              <a-col :md="24" :lg="24" :xl="12" :xxl="24">
+              <a-col :md="24" :lg="24" :xl="12" :xxl="12">
                 <th>金融機関</th>
                 <td>
                   <a-form-item>
@@ -170,7 +170,7 @@
                   </a-form-item>
                 </td>
               </a-col>
-              <a-col :md="24" :lg="12" :xl="12" :xxl="12">
+              <a-col :md="24" :lg="12" :xl="12" :xxl="6">
                 <th>口座種別</th>
                 <td>
                   <a-form-item>
@@ -182,7 +182,7 @@
                   </a-form-item>
                 </td>
               </a-col>
-              <a-col :md="24" :lg="12" :xl="12" :xxl="12">
+              <a-col :md="24" :lg="12" :xl="12" :xxl="6">
                 <th>口座番号</th>
                 <td>
                   <a-form-item>
@@ -194,7 +194,7 @@
                   </a-form-item>
                 </td>
               </a-col>
-              <a-col :md="24" :lg="12" :xl="12" :xxl="12">
+              <a-col :md="24" :lg="12" :xl="12" :xxl="6">
                 <th>種別コード</th>
                 <td>
                   <a-form-item>
@@ -233,10 +233,10 @@
         </a-row>
         <a-row class="mt-4">
           <a-col span="24">
-            <th>支払口座情報</th>
+            <th>支払口座情報<br />（全銀手順で使用）</th>
             <a-row class="flex-1">
               <a-col :md="24" :lg="12" :xl="12" :xxl="12">
-                <th>金融機関</th>
+                <th>金融機関/th></th>
                 <td>
                   <a-form-item>
                     <ai-select
@@ -313,8 +313,8 @@
                   </a-form-item>
                 </td>
               </a-col>
-              <a-col :md="24" :lg="24" :xl="16" :xxl="24">
-                <th>依頼人</th>
+              <a-col :md="24" :lg="24" :xl="20" :xxl="6">
+                <th>依頼人コード</th>
                 <td>
                   <a-form-item>
                     <a-input-number
@@ -323,6 +323,18 @@
                       style="width: 100%"
                     >
                     </a-input-number>
+                  </a-form-item>
+                </td>
+              </a-col>
+              <a-col :md="24" :lg="24" :xl="20" :xxl="18">
+                <th>振込依頼人名（ﾌﾘｶﾞﾅ）</th>
+                <td>
+                  <a-form-item>
+                    <a-input
+                      v-model:value="formData.KOFU_KAISYA_NAME"
+                      style="width: 100%"
+                    >
+                    </a-input>
                   </a-form-item>
                 </td>
               </a-col>
@@ -373,6 +385,7 @@ const formData = reactive<DetailVM>({
   KOFU_SYUBETU: 0,
   KOFU_CD_KBN: 0,
   KOFU_KAISYA_CD: 0,
+  KOFU_KAISYA_NAME: '',
 })
 
 /**振込口座プルダウンリスト */
