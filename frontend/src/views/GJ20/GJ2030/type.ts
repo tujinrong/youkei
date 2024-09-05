@@ -22,13 +22,13 @@ export interface PreviewRequest extends DaRequestBase {
   /**対象期 */
   KI: number
   /**請求回数 */
-  SEIKYU_KAISU: string
-  /**対象日(現在) */
-  SEIKYU_DATE: string
-  /**契約者区分コード */
+  SEIKYU_KAISU: FmToModel
+  /**請求・返還日 */
+  SEIKYU_DATE: CmDateFmToModel
+  /**契約区分コード */
   KEIYAKU_KBN: FmToModel
   /**請求・返還区分 */
-  CYOSYU_HENKAN_KBN_LABELS: {
+  SEIKYU_HENKAN_KBN: {
     CYOSYU_HENKAN_KBN1: boolean
     CYOSYU_HENKAN_KBN2: boolean
     CYOSYU_HENKAN_KBN3: boolean
@@ -68,4 +68,9 @@ export interface InitResponse extends DaResponseBase {
 export interface FmToModel {
   VALUE_FM: number | undefined
   VALUE_TO: number | undefined
+}
+
+export interface CmDateFmToModel {
+  VALUE_FM: Date | undefined
+  VALUE_TO: Date | undefined
 }

@@ -5,7 +5,7 @@
         <h1>(GJ2040)家畜防疫互助基金積立金等請求書兼返還金通知書</h1>
         <div class="self_adaption_table form" ref="headRef">
           <a-row>
-            <a-col v-bind="layout">
+            <a-col span="24">
               <th>出力区分</th>
               <td>
                 <a-form-item v-bind="validateInfos.SYUTURYOKU_KBN">
@@ -209,7 +209,7 @@ const URL = computed(() => {
 //フック関数
 //--------------------------------------------------------------------------
 onMounted(() => {
-  handleKI(true)
+  // handleKI(true)
 })
 
 //--------------------------------------------------------------------------

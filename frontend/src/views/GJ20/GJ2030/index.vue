@@ -26,7 +26,7 @@
               <th class="required">請求回数</th>
               <td class="flex">
                 <a-form-item v-bind="validateInfos.SEIKYU_KAISU">
-                  <range-select
+                  <range-number
                     v-model:value="formData.SEIKYU_KAISU"
                     :options="KEIYAKU_KBN_CD_NAME_LIST"
                   /></a-form-item>
@@ -142,7 +142,10 @@ const createDefaultParams = () => {
       VALUE_FM: undefined as number | undefined,
       VALUE_TO: undefined as number | undefined,
     },
-    SEIKYU_DATE: new Date().toISOString().split('T')[0],
+    SEIKYU_DATE: {
+      VALUE_FM: undefined as Date | undefined,
+      VALUE_TO: undefined as Date | undefined,
+    },
     KEIYAKU_KBN: {
       VALUE_FM: undefined as number | undefined,
       VALUE_TO: undefined as number | undefined,
@@ -208,7 +211,7 @@ const URL = computed(() => {
 //フック関数
 //--------------------------------------------------------------------------
 onMounted(() => {
-  handleKI(true)
+  // handleKI(true)
 })
 
 //--------------------------------------------------------------------------
