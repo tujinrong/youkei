@@ -6,9 +6,9 @@ import { onMounted, computed } from 'vue'
 import '@grapecity/ar-viewer-ja/dist/jsViewer.min.js'
 import '@grapecity/ar-viewer-ja/dist/jsViewer.min.css'
 import '@grapecity/ar-viewer-ja'
-import { createViewer } from '@grapecity/ar-viewer-ja'
-import { sessionStg } from '@/utils/storage'
+import { ExportTypes, createViewer } from '@grapecity/ar-viewer-ja'
 import dayjs from 'dayjs'
+import { reportSettings } from './constant'
 
 //--------------------------------------------------------------------------
 //データ定義
@@ -33,42 +33,28 @@ channel.onmessage = (event) => {
     count++
     try {
       let params = [{ name: '1', values: ['2'] }]
-      let viewer = createViewer({
-        element: '#viewerContainer',
-        reportService: { url: URL.value },
-        // reportService: { url: 'http://:192.168.1.245/api/reporting ' },
-        reportParameters: params,
-        defaultExportSettings: {
-          pdf: {
-            FileName: {
-              value:
-                'GJ1030家庭防疫互助基金契約者一覧表(連絡用)_' +
-                dayjs(new Date()).format('YYYYMMDDHHmmss'),
-              visible: true,
-            },
-          },
-          xls: {
-            FileName: {
-              value:
-                'GJ1030家庭防疫互助基金契約者一覧表(連絡用)_' +
-                dayjs(new Date()).format('YYYYMMDDHHmmss'),
-              visible: true,
-            },
-          },
-          xlsx: {
-            FileName: {
-              value:
-                'GJ1030家庭防疫互助基金契約者一覧表(連絡用)_' +
-                dayjs(new Date()).format('YYYYMMDDHHmmss'),
-              visible: true,
-            },
-          },
-        },
-        availableExports: ['Pdf', 'Xls', 'Xlsx'],
-      })
-      // let token = sessionStg.get('token')
-      let name = 'GJ1030|' + event.data.params
-      viewer.openReport(name, params)
+      let reportSetting = reportSettings.find((e) => e.name === event.data.name)
+      if (reportSetting) {
+        let fileName =
+          reportSetting.fileName + dayjs(new Date()).format('YYYYMMDDHHmmss')
+        let defaultExportSettings = {}
+        reportSetting.availableExports.forEach((format) => {
+          defaultExportSettings[format.toLowerCase()] = {
+            FileName: { value: fileName, visible: true },
+          }
+        })
+        let viewer = createViewer({
+          element: '#viewerContainer',
+          reportService: { url: URL.value },
+          reportParameters: params,
+          defaultExportSettings: defaultExportSettings,
+          availableExports: reportSetting.availableExports as ExportTypes[],
+        })
+        let name = event.data.name + '|' + event.data.params
+        viewer.openReport(name, params)
+      } else {
+        console.error('No report setting found for', event.data.name)
+      }
     } catch (error) {}
   }
 }
