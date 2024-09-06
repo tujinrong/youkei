@@ -88,7 +88,7 @@
         <vxe-column
           field="KEIYAKU_DATE_FROM"
           title="移動開始日"
-          width="10%"
+          min-width="150px"
           sortable
           :params="{ order: 1 }"
           :resizable="true"
@@ -102,7 +102,7 @@
         <vxe-column
           field="TORI_KBN"
           title="鳥の種類"
-          width="8%"
+          min-width="120px"
           sortable
           :params="{ order: 2 }"
           :resizable="true"
@@ -111,7 +111,7 @@
         <vxe-column
           field="IDO_HASU"
           title="移動羽数"
-          width="8%"
+          min-width="120px"
           sortable
           :params="{ order: 3 }"
           :resizable="true"
@@ -120,13 +120,14 @@
           field="NOJO_NAME_MOTO"
           title="農場名(移動元)"
           sortable
+          width="333px"
           :params="{ order: 4 }"
           :resizable="true"
         ></vxe-column>
         <vxe-column
           field="KEIYAKU_HASU_MOTO_ATO"
           title="契約羽数(移動元)"
-          width="12%"
+          min-width="150px"
           sortable
           :params="{ order: 5 }"
           :resizable="true"
@@ -134,7 +135,7 @@
         <vxe-column
           field="NOJO_NAME_SAKI"
           title="農場名(移動先)"
-          width="20%"
+          width="333px"
           sortable
           :params="{ order: 6 }"
           :resizable="true"
@@ -143,7 +144,7 @@
         <vxe-column
           field="KEIYAKU_HASU_SAKI_ATO"
           title="契約羽数(移動先)"
-          width="13%"
+          min-width="150px"
           sortable
           :params="{ order: 7 }"
           :resizable="true"
@@ -152,7 +153,7 @@
         <vxe-column
           field="SYORI_KBN_NAME"
           title="処理区分"
-          width="8%"
+          min-width="120px"
           sortable
           :params="{ order: 8 }"
           :resizable="false"

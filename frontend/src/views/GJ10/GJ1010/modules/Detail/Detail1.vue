@@ -166,7 +166,10 @@
     <h2>2.契約農場別登録明細情報(入力)</h2>
     <a-space :size="20" class="mb-2">
       <a-button type="primary" :disabled="!isEdit">前期データコピー</a-button
-      ><a-button class="warning-btn" :disabled="!isEdit" @click="saveData"
+      ><a-button
+        :class="{ 'warning-btn': isEdit }"
+        :disabled="!isEdit"
+        @click="saveData"
         >登録</a-button
       ><a-button type="primary" danger :disabled="!isEdit" @click="deleteData"
         >削除</a-button
