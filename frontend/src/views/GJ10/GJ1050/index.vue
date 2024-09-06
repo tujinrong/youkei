@@ -32,23 +32,24 @@
             <a-col v-bind="layout">
               <th class="required">出力区分</th>
               <td class="flex">
-                <a-radio-group v-model:value="formData.a" class="mt-1">
-                  <a-radio :value="true">契約者別</a-radio>
-                  <a-radio :value="false">事務委託先別· 契約者別</a-radio>
+                <a-radio-group
+                  v-model:value="formData.SYUTURYOKU_KBN"
+                  class="mt-1"
+                >
+                  <a-radio :value="1">契約者別</a-radio>
+                  <a-radio :value="2">事務委託先別· 契約者別</a-radio>
                 </a-radio-group>
               </td>
             </a-col>
             <a-col v-bind="layout">
               <th>契約区分</th>
               <td class="flex">
-                <a-form-item v-bind="validateInfos.KEIYAKU_KBN_CD">
-                  <range-select
-                    v-model:value="formData.KEIYAKU_KBN_CD"
-                    :options="LIST"
-                /></a-form-item>
+                <range-select
+                  v-model:value="formData.KEIYAKU_KBN"
+                  :options="LIST"
+                />
               </td>
             </a-col>
-
             <a-col v-bind="layout">
               <th class="required">契約状況</th>
               <td>
@@ -130,42 +131,45 @@
 </template>
 <script lang="ts" setup>
 import { reactive, ref, watch, computed, onMounted, onUnmounted } from 'vue'
-import DateJp from '@/components/Selector/DateJp/index.vue'
 import { ITEM_REQUIRE_ERROR } from '@/constants/msg'
 import { Form } from 'ant-design-vue'
+import { PreviewRequest } from './type'
 
 //--------------------------------------------------------------------------
 //データ定義
 //--------------------------------------------------------------------------
-const createDefaultParams = () => {
+const createDefaultParams = (): PreviewRequest => {
   return {
-    a: true,
     KI: -1,
-    TAISYOBI_YMD: new Date().toISOString().split('T')[0],
-    KEIYAKU_KBN_CD: {
-      VALUE_FM: undefined as number | undefined,
-      VALUE_TO: undefined as number | undefined,
+    SYUTURYOKU_KBN: 1,
+    KEIYAKU_KBN: {
+      VALUE_FM: undefined,
+      VALUE_TO: undefined,
     },
     KEIYAKU_JYOKYO: {
       SHINKI: true,
       KEIZOKU: true,
       CHUSHI: true,
-      HAIGYO: true,
     },
     NYURYOKU_JYOKYO: {
-      ing: true,
-      ed: true,
+      NYURYOKU_TYU: true,
+      NYURYOKU_KAKUTEI: true,
+    },
+    KEN_CD: {
+      VALUE_FM: undefined,
+      VALUE_TO: undefined,
     },
     ITAKU_CD: {
-      VALUE_FM: undefined as number | undefined,
-      VALUE_TO: undefined as number | undefined,
+      VALUE_FM: undefined,
+      VALUE_TO: undefined,
     },
     KEIYAKUSYA_CD: {
-      VALUE_FM: undefined as number | undefined,
-      VALUE_TO: undefined as number | undefined,
+      VALUE_FM: undefined,
+      VALUE_TO: undefined,
     },
   }
 }
+
 const formData = reactive(createDefaultParams())
 const LIST = ref<CmCodeNameModel[]>([])
 const KEIYAKU_JYOKYO_LABELS = {
@@ -174,9 +178,10 @@ const KEIYAKU_JYOKYO_LABELS = {
   CHUSHI: '中止者',
 }
 const NYURYOKU_JYOKYO_LABELS = {
-  ing: '入力中',
-  ed: '入力確認',
+  NYURYOKU_TYU: '入力中',
+  NYURYOKU_KAKUTEI: '入力確定',
 }
+
 const layout = {
   md: 24,
   lg: 24,

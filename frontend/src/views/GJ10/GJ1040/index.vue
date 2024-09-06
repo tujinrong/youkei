@@ -30,42 +30,42 @@
               </td>
             </a-col>
             <a-col span="24">
-              <th :class="formData.a ? 'required' : ''">
-                <a-radio-group v-model:value="formData.a">
+              <th :class="CHOOSE_REG_DATE ? 'required' : ''">
+                <a-radio-group v-model:value="CHOOSE_REG_DATE">
                   <a-radio :value="true">登録日範囲</a-radio>
                 </a-radio-group>
               </th>
               <td>
-                <a-form-item v-bind="validateInfos.KEIYAKU_KBN_CD">
+                <a-form-item v-bind="validateInfos.REG_DATE">
                   <range-date
-                    v-model:value="formData.date"
-                    :disabled="!formData.a"
+                    v-model:value="formData.REG_DATE"
+                    :disabled="!CHOOSE_REG_DATE"
                 /></a-form-item>
               </td>
             </a-col>
             <a-col span="24">
               <th
                 :style="{ borderTop: 'none' }"
-                :class="formData.a ? '' : 'required'"
+                :class="CHOOSE_REG_DATE ? '' : 'required'"
               >
-                <a-radio-group v-model:value="formData.a">
+                <a-radio-group v-model:value="CHOOSE_REG_DATE">
                   <a-radio :value="false">更新日範囲</a-radio>
                 </a-radio-group>
               </th>
               <td>
-                <a-form-item v-bind="validateInfos.KEIYAKU_KBN_CD">
+                <a-form-item v-bind="validateInfos.UP_DATE">
                   <range-date
-                    v-model:value="formData.date"
-                    :disabled="formData.a"
+                    v-model:value="formData.UP_DATE"
+                    :disabled="CHOOSE_REG_DATE"
                 /></a-form-item>
               </td>
             </a-col>
             <a-col span="24">
               <th>契約区分</th>
               <td class="flex">
-                <a-form-item v-bind="validateInfos.KEIYAKU_KBN_CD">
+                <a-form-item v-bind="validateInfos.KEIYAKU_KBN">
                   <range-select
-                    v-model:value="formData.KEIYAKU_KBN_CD"
+                    v-model:value="formData.KEIYAKU_KBN"
                     :options="LIST"
                 /></a-form-item>
               </td>
@@ -105,13 +105,13 @@
             <a-col span="24">
               <th class="required">契約日</th>
               <td>
-                <a-form-item v-bind="validateInfos.NYURYOKU_KBN">
+                <a-form-item v-bind="validateInfos.KEIYAKUBI">
                   <a-space class="flex-wrap">
                     <a-checkbox
-                      v-for="(label, key) in NYURYOKU_KBN_LABELS"
+                      v-for="(label, key) in KEIYAKUBI_LABELS"
                       :key="key"
-                      v-model:checked="formData.NYURYOKU_KBN[key]"
-                      @change="handle"
+                      v-model:checked="formData.KEIYAKUBI[key]"
+                      @change="handleKeiyakubi"
                     >
                       {{ label }}
                     </a-checkbox></a-space
@@ -123,16 +123,16 @@
               ><th :style="{ borderTop: 'none' }"></th>
               <td>
                 <range-date
-                  v-model:value="formData.date"
-                  :disabled="!formData.NYURYOKU_KBN.ing"
+                  v-model:value="formData.KEIYAKUBI_YMD"
+                  :disabled="!formData.KEIYAKUBI.NYURYOKU_NOMI"
                 /></td
             ></a-col>
             <a-col span="24">
               <th>入力者</th>
               <td class="flex">
-                <a-form-item v-bind="validateInfos.ITAKU_CD">
+                <a-form-item v-bind="validateInfos.NYURYOKUSYA_CD">
                   <range-select
-                    v-model:value="formData.ITAKU_CD"
+                    v-model:value="formData.NYURYOKUSYA_CD"
                     :options="LIST"
                 /></a-form-item>
               </td>
@@ -163,7 +163,7 @@
               <div class="mb-2 header_operation flex justify-between w-full">
                 <a-space :size="20">
                   <a-button type="primary">プレビュー</a-button>
-                  <a-button type="primary">クリア</a-button>
+                  <a-button type="primary" @click="clear">クリア</a-button>
                 </a-space>
                 <close-page />
               </div>
@@ -185,42 +185,63 @@ import { onMounted, reactive, ref } from 'vue'
 //--------------------------------------------------------------------------
 const createDefaultParams = () => {
   return {
-    a: true,
-    date: {
-      VALUE_FM: undefined as Date | undefined,
-      VALUE_TO: undefined as Date | undefined,
+    KI: -1, // 対象期
+    // 登録日範囲
+    REG_DATE: {
+      VALUE_FM: undefined as Date | undefined, // 開始日
+      VALUE_TO: undefined as Date | undefined, // 終了日
     },
-    KI: -1,
-
-    TAISYOBI_YMD: new Date().toISOString().split('T')[0],
-    KEIYAKU_KBN_CD: {
-      VALUE_FM: undefined as number | undefined,
-      VALUE_TO: undefined as number | undefined,
+    // 更新日範囲
+    UP_DATE: {
+      VALUE_FM: undefined as Date | undefined, // 開始日
+      VALUE_TO: undefined as Date | undefined, // 終了日
     },
+    // 契約区分
+    KEIYAKU_KBN: {
+      VALUE_FM: undefined as number | undefined, // 開始番号
+      VALUE_TO: undefined as number | undefined, // 終了番号
+    },
+    // 契約状況
     KEIYAKU_JYOKYO: {
-      SHINKI: true,
-      KEIZOKU: true,
-      CHUSHI: true,
+      SHINKI: true, // 新規契約者
+      KEIZOKU: true, // 継続契約者
+      CHUSHI: true, // 中止契約者
     },
+    // 入力状況
     NYURYOKU_JYOKYO: {
-      ing: true,
-      ed: true,
+      NYURYOKU_TYU: true, // 入力中
+      NYURYOKU_KAKUTEI: true, // 入力確定
     },
-    NYURYOKU_KBN: {
-      ing: true,
-      ed: true,
+    // 契約日
+    KEIYAKUBI: {
+      NYURYOKU_NOMI: true, // 入力のみ
+      MIRYOKU_NOMI: true, // 未入力のみ
     },
+    // 契約日（日付範囲）
+    KEIYAKUBI_YMD: {
+      VALUE_FM: undefined as Date | undefined, // 開始日
+      VALUE_TO: undefined as Date | undefined, // 終了日
+    },
+    // 入力者
+    NYURYOKUSYA_CD: {
+      VALUE_FM: undefined as number | undefined, // 開始番号
+      VALUE_TO: undefined as number | undefined, // 終了番号
+    },
+    // 事務委託先
     ITAKU_CD: {
-      VALUE_FM: undefined as number | undefined,
-      VALUE_TO: undefined as number | undefined,
+      VALUE_FM: undefined as number | undefined, // 開始番号
+      VALUE_TO: undefined as number | undefined, // 終了番号
     },
+    // 契約者番号
     KEIYAKUSYA_CD: {
-      VALUE_FM: undefined as number | undefined,
-      VALUE_TO: undefined as number | undefined,
+      VALUE_FM: undefined as number | undefined, // 開始番号
+      VALUE_TO: undefined as number | undefined, // 終了番号
     },
   }
 }
+
 const formData = reactive(createDefaultParams())
+const CHOOSE_REG_DATE = ref(true)
 const KEIYAKU_JYOKYO_LABELS = {
   SHINKI: '新規契約者',
   KEIZOKU: '継続契約者',
@@ -231,12 +252,12 @@ const clearFromToValue = {
   VALUE_TO: undefined,
 }
 const NYURYOKU_JYOKYO_LABELS = {
-  ing: '入力中',
-  ed: '入力確認',
+  NYURYOKU_TYU: '入力中',
+  NYURYOKU_KAKUTEI: '入力確認',
 }
-const NYURYOKU_KBN_LABELS = {
-  ing: '入力のみ',
-  ed: '未入力のみ',
+const KEIYAKUBI_LABELS = {
+  NYURYOKU_NOMI: '入力のみ',
+  MIRYOKU_NOMI: '未入力のみ',
 }
 const LIST = ref<CmCodeNameModel[]>([])
 const rules = reactive({
@@ -329,12 +350,14 @@ onMounted(() => {})
 //--------------------------------------------------------------------------
 //メソッド
 //--------------------------------------------------------------------------
-const handle = () => {
-  if (!formData.NYURYOKU_KBN.ing) {
-    Object.assign(formData.date, clearFromToValue)
+const handleKeiyakubi = () => {
+  if (!formData.KEIYAKUBI.NYURYOKU_NOMI) {
+    Object.assign(formData.KEIYAKUBI_YMD, clearFromToValue)
   }
 }
-
+const clear = () => {
+  Object.assign(formData, createDefaultParams())
+}
 const rangeCheck = (from: number, to: number, itemName: string) => {
   let result = { flag: true, content: '' }
   if (from && !to) {

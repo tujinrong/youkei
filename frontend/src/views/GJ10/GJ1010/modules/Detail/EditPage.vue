@@ -433,14 +433,16 @@
 import { PageStatus } from '@/enum'
 import { useRoute, useRouter } from 'vue-router'
 import { Form, message } from 'ant-design-vue'
-import { reactive, nextTick, onMounted, ref, computed } from 'vue'
+import { reactive, nextTick, onMounted, ref, watch } from 'vue'
 import DateJp from '@/components/Selector/DateJp/index.vue'
 import { Judgement } from '@/utils/judge-edited'
-import { showDeleteModal, showInfoModal } from '@/utils/modal'
+import { showDeleteModal, showInfoModal, showSaveModal } from '@/utils/modal'
 import {
   DELETE_CONFIRM,
   DELETE_OK_INFO,
   ITEM_REQUIRE_ERROR,
+  SAVE_CONFIRM,
+  SAVE_OK_INFO,
 } from '@/constants/msg'
 import { DetailVM } from '../../type'
 import {
@@ -451,6 +453,7 @@ import {
   convertToKaNa,
   convertToFuRiGaNa,
 } from '@/utils/util'
+import { Save } from '../../service'
 //--------------------------------------------------------------------------
 //データ定義
 //--------------------------------------------------------------------------
@@ -568,6 +571,17 @@ onMounted(() => {
 //--------------------------------------------------------------------------
 
 //--------------------------------------------------------------------------
+//監視定義
+//--------------------------------------------------------------------------
+
+watch(
+  () => formData,
+  () => {
+    editJudge.setEdited()
+  },
+  { deep: true }
+)
+//--------------------------------------------------------------------------
 //メソッド
 //--------------------------------------------------------------------------
 const changeType = (type: string, input: any, name: string) => {
@@ -597,6 +611,17 @@ const saveData = () => {
   if (!editJudge.isPageEdited()) {
     showInfoModal({
       content: '変更したデータはありません。',
+    })
+  } else {
+    showSaveModal({
+      content: SAVE_CONFIRM.Msg,
+      onOk: async () => {
+        try {
+          await Save({ KEIYAKUSYA: formData })
+          router.push({ name: route.name, query: { refresh: '1' } })
+          message.success(SAVE_OK_INFO.Msg)
+        } catch (error) {}
+      },
     })
   }
 }

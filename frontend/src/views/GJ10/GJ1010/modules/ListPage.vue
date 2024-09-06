@@ -177,6 +177,7 @@
           title="契約者番号"
           width="100"
           sortable
+          :params="{ order: 1 }"
         >
           <template #default="{ row }">
             <a @click="goForward(PageStatus.Edit, row)">{{
@@ -189,6 +190,7 @@
           title="契約者名"
           width="200"
           sortable
+          :params="{ order: 2 }"
         >
           <template #default="{ row }">
             <a @click="goForward(PageStatus.Edit, row)">{{
@@ -201,6 +203,7 @@
           title="フリガナ"
           min-width="250"
           sortable
+          :params="{ order: 3 }"
         >
           <template #default="{ row }">
             <a @click="goForward(PageStatus.Edit, row)">{{
@@ -213,30 +216,35 @@
           title="契約区分"
           min-width="120"
           sortable
+          :params="{ order: 4 }"
         ></vxe-column>
         <vxe-column
           field="KEIYAKU_JYOKYO"
           title="契約状況"
           min-width="120"
           sortable
+          :params="{ order: 5 }"
         ></vxe-column>
         <vxe-column
           field="ADDR_TEL"
           title="電話番号"
           min-width="150"
           sortable
+          :params="{ order: 6 }"
         ></vxe-column>
         <vxe-column
           field="KEN_CD"
           title="都道府県"
           min-width="150"
           sortable
+          :params="{ order: 7 }"
         ></vxe-column>
         <vxe-column
           field="JIMUITAKU_CD1"
           title="事務委託先"
           min-width="200"
           sortable
+          :params="{ order: 8 }"
           :resizable="false"
         ></vxe-column>
       </vxe-table>
@@ -256,6 +264,7 @@ import { useTabStore } from '@/store/modules/tab'
 import { SearchRequest, SearchRowVM } from '../type'
 import { VxeTableInstance } from 'vxe-table'
 import { convertToHalfNumber } from '@/utils/util'
+import { Search } from '../service'
 //--------------------------------------------------------------------------
 //データ定義
 //--------------------------------------------------------------------------
@@ -314,7 +323,7 @@ const tableDefault = {
 }
 
 const { pageParams, totalCount, searchData, clear } = useSearch({
-  service: undefined,
+  service: Search,
   source: tableData,
   params: toRef(() => searchParams),
 })
@@ -335,6 +344,7 @@ const handleTel = () => {
 }
 //検索処理
 function search() {
+  // searchData()
   tableData.value.push(tableDefault)
   if (xTableRef.value && tableData.value.length > 0) {
     xTableRef.value.setCurrentRow(tableData.value[0])

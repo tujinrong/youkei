@@ -20,7 +20,7 @@ export interface SearchRequest extends CmSearchRequestBase {
   /**期 */
   KI: number
   /**契約者番号 */
-  KEIYAKUSYA_CD: number
+  KEIYAKUSYA_CD: number | undefined
 }
 /**初期化処理_詳細画面 */
 export interface InitDetailRequest extends DaRequestBase {
@@ -173,7 +173,7 @@ export interface DetailVM {
 
 export interface NojoAddrVM {
   /** 農場コード */
-  NOJO_CD: number
+  NOJO_CD: number | undefined
   /** 農場名 */
   NOJO_NAME: string
   /** 農場住所（郵便番号） */
