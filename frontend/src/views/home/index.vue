@@ -12,32 +12,54 @@
       <img
         src="/chicken.png"
         alt="Image"
-        style="position: fixed; bottom: 20px; right: 50px; width: 30%"
+        style="
+          position: fixed;
+          bottom: 20px;
+          right: 50px;
+          width: 20%;
+          opacity: 0.5;
+        "
       />
-      <div class="flex max-w-150 justify-between">
-        <h1>データ更新時間：{{ updTime }}</h1>
-        <a-button type="primary" class="mt-1" @click="update">更新</a-button>
+      <h1>(GJ0020)契約情報</h1>
+      <div class="flex mt-2 max-w-150 justify-between">
+        <h2>{{ updTime }}現在</h2>
+        <a-button type="primary" class="mt-1" @click="update">再表示</a-button>
       </div>
 
-      <a-descriptions :column="1" class="mt-2 max-w-150" bordered>
+      <a-descriptions
+        :column="1"
+        class="mt-2 max-w-150"
+        bordered
+        size="small"
+        :style="{ borderWidth: '2px', borderColor: '#d9d9d9' }"
+      >
         <a-descriptions-item
           label="契約数"
-          :content-style="{ fontSize: '24px', textAlign: 'end' }"
-          :label-style="{ fontSize: '24px' }"
+          :content-style="{ fontSize: '15px', textAlign: 'end' }"
+          :label-style="{ fontSize: '15px' }"
           >(新規{{ homeData.KEIYAKUSU_SHINKI }}　継続{{
             homeData.KEIYAKUSU_KEIZOKU
           }})</a-descriptions-item
         >
         <a-descriptions-item
           label="羽数"
-          :content-style="{ fontSize: '24px', textAlign: 'end' }"
-          :label-style="{ fontSize: '24px' }"
+          :content-style="{
+            fontSize: '15px',
+            textAlign: 'end',
+            borderTop: '2px solid #d9d9d9',
+            borderBottom: '2px solid #d9d9d9',
+          }"
+          :label-style="{
+            fontSize: '15px',
+            borderTop: '2px solid #d9d9d9',
+            borderBottom: '2px solid #d9d9d9',
+          }"
           >{{ homeData.HASU }} 羽</a-descriptions-item
         >
         <a-descriptions-item
-          label="績立金額"
-          :content-style="{ fontSize: '24px', textAlign: 'end' }"
-          :label-style="{ fontSize: '24px' }"
+          label="積立金額"
+          :content-style="{ fontSize: '15px', textAlign: 'end' }"
+          :label-style="{ fontSize: '15px' }"
           >{{ homeData.TUMITATE_KIN }} 円</a-descriptions-item
         >
       </a-descriptions>
