@@ -8,7 +8,7 @@
 ' *******************************************************************
 
 Namespace JBD.GJS.Service
-    Public Class CmFmToModal
+    Public Class CmCodeFmToModel
         Public Property VALUE_FM As Integer? = Nothing
         Public Property VALUE_TO As Integer? = Nothing
         Public Sub New()
