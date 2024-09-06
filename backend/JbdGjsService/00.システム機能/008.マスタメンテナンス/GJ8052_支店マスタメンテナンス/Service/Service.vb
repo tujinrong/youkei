@@ -1,25 +1,25 @@
 ﻿' *******************************************************************
 ' 業務名称　: 互助事業システム
-' 機能概要　: 金融機関マスタメンテナンス
+' 機能概要　: 支店マスタメンテナンス
 '            サービス処理
 ' 作成日　　: 2024.07.21
 ' 作成者　　: 宋 峰
 ' 変更履歴　:
 ' *******************************************************************
 
-Imports JbdGjsService.JBD.GJS.Service.GJ8051
+Imports JbdGjsService.JBD.GJS.Service.GJ8052
 
-Namespace JBD.GJS.Service.GJ8051
+Namespace JBD.GJS.Service.GJ8052
 
     ''' <summary>
-    ''' 初期化処理_金融機関詳細画面
+    ''' 初期化処理_詳細画面
     ''' </summary>
-    <DisplayName("初期化処理_金融機関詳細画面")>
+    <DisplayName("初期化処理_支店詳細画面")>
     Public Class Service
         Inherits CmServiceBase
 
-        <DisplayName("初期化処理_金融機関詳細画面")>
-        Public Shared Function InitBankDetail(req As InitBankDetailRequest) As InitBankDetailResponse
+        <DisplayName("初期化処理_支店詳細画面")>
+        Public Shared Function InitSitenDetail(req As InitSitenDetailRequest) As InitSitenDetailResponse
             Return Nolock(req,
                 Function(db)
 
@@ -46,14 +46,14 @@ Namespace JBD.GJS.Service.GJ8051
                     Select Case req.EDIT_KBN
                         Case EnumEditKbn.Edit       '変更入力
                             '検索結果出力用ＳＱＬ作成
-                            sql = FrmGJ8051Service.f_SetForm_Data(req.BANK_CD)
+                            sql = FrmGJ8052Service.f_SetForm_Data(req.BANK_CD, req.SITEN_CD)
 
                             'データSelect 
                             Dim dt = FrmService.f_Select_ODP(db, sql).Tables(0)
 
                             'データ結果判定
                             If dt.Rows.Count = 0 Then
-                                Return New InitBankDetailResponse("該当データが存在しませんでした。")
+                                Return New InitSitenDetailResponse("該当データが存在しませんでした。")
                             End If
                             Dim cdt As DataTable = dt.Copy()
                             ds.Tables.Add(cdt)
@@ -73,8 +73,8 @@ Namespace JBD.GJS.Service.GJ8051
 
         End Function
 
-        <DisplayName("保存処理_金融機関詳細画面処理")>
-        Public Shared Function SaveBank(req As SaveBankRequest) As DaResponseBase
+        <DisplayName("保存処理_支店詳細画面処理")>
+        Public Shared Function SaveSiten(req As SaveSitenRequest) As DaResponseBase
             Return Transction(req,
                 Function(db)
 
@@ -94,7 +94,7 @@ Namespace JBD.GJS.Service.GJ8051
                     '4.ビジネスロジック処理
                     '-------------------------------------------------------------
                     '検索結果出力用ＳＱＬ作成
-                    Dim sql = FrmGJ8051Service.f_SetForm_Data(req.BANK.BANK_CD)
+                    Dim sql = FrmGJ8052Service.f_SetForm_Data(req.SITEN.BANK_CD, req.SITEN.SITEN_CD)
 
                     'データSelect 
                     Dim dt = FrmService.f_Select_ODP(db, sql).Tables(0)
@@ -105,7 +105,7 @@ Namespace JBD.GJS.Service.GJ8051
                             If dt.Rows.Count = 0 Then
                                 Return New DaResponseBase("データが存在しないため、データを変更できません。")
                             Else
-                                If CDate(dt.Rows(0)("UP_DATE")) > req.BANK.UP_DATE Then
+                                If CDate(dt.Rows(0)("UP_DATE")) > req.SITEN.UP_DATE Then
                                     Return New DaResponseBase("データを更新できません。他のユーザーによって変更された可能性があります。")
                                 End If
                             End If
@@ -116,7 +116,7 @@ Namespace JBD.GJS.Service.GJ8051
                     End Select
 
                     '保存処理
-                    Dim res = FrmGJ8051Service.f_Data_Update(db, req)
+                    Dim res = FrmGJ8052Service.f_Data_Update(db, req)
 
                     '-------------------------------------------------------------
                     '5.データ加工処理
@@ -131,8 +131,8 @@ Namespace JBD.GJS.Service.GJ8051
 
         End Function
 
-        <DisplayName("削除処理_金融機関詳細画面処理")>
-        Public Shared Function DeleteBank(req As DeleteBankRequest) As DaResponseBase
+        <DisplayName("削除処理_支店詳細画面処理")>
+        Public Shared Function DeleteBank(req As DeleteSitenRequest) As DaResponseBase
             Return Transction(req,
                 Function(db)
 
@@ -152,7 +152,7 @@ Namespace JBD.GJS.Service.GJ8051
                     '4.ビジネスロジック処理
                     '-------------------------------------------------------------
                     '削除結果出力用ＳＱＬ作成
-                    Dim res = FrmGJ8051Service.f_Data_Deleate(db, req)
+                    Dim res = FrmGJ8052Service.f_Data_Deleate(db, req)
 
                     '-------------------------------------------------------------
                     '5.データ加工処理

@@ -1,6 +1,6 @@
 ﻿' *******************************************************************
 ' 業務名称　: 互助事業システム
-' 機能概要　: サービスGJ8051関数
+' 機能概要　: サービスGJ8052関数
 '
 ' 作成日　　: 2024.07.12
 ' 作成者　　: 
@@ -9,9 +9,9 @@
 
 Imports OracleInternal.Json
 
-Namespace JBD.GJS.Service.GJ8051
+Namespace JBD.GJS.Service.GJ8052
 
-    Public Class FrmGJ8051Service
+    Public Class FrmGJ8052Service
 
 #Region "f_SetForm_Data データ取得SQL"
         '------------------------------------------------------------------
@@ -20,15 +20,17 @@ Namespace JBD.GJS.Service.GJ8051
         '引数            :1.req SearchDetailRequest  データセット
         '戻り値          :String(SQL)
         '------------------------------------------------------------------
-        Public Shared Function f_SetForm_Data(BANK_CD As String) As String
+        Public Shared Function f_SetForm_Data(BANK_CD As String, SITEN_CD As String) As String
             Dim wSql As String = String.Empty
             'SQL
             wSql = " SELECT " & vbCrLf
             wSql += "  * " & vbCrLf
             wSql += " FROM" & vbCrLf
-            wSql += "  TM_BANK" & vbCrLf
+            wSql += "  TM_SITEN" & vbCrLf
             wSql += " WHERE" & vbCrLf
-            wSql += "  BANK_CD = " & BANK_CD
+            wSql += "  BANK_CD = " & BANK_CD & vbCrLf
+            wSql += " AND" & vbCrLf
+            wSql += "  SITEN_CD = " & SITEN_CD & vbCrLf
             Return wSql
         End Function
 #End Region
@@ -40,7 +42,7 @@ Namespace JBD.GJS.Service.GJ8051
         '引数            :なし
         '戻り値          :Boolean(正常True/エラーFalse)
         '------------------------------------------------------------------
-        Public Shared Function f_Data_Update(db As DaDbContext, wNojoCd As SaveBankRequest) As DaResponseBase
+        Public Shared Function f_Data_Update(db As DaDbContext, wNojoCd As SaveSitenRequest) As DaResponseBase
             Dim Cmd As New OracleCommand
             Dim ret As Boolean = False
 
@@ -50,32 +52,26 @@ Namespace JBD.GJS.Service.GJ8051
 
             Select Case wNojoCd.EDIT_KBN
                 Case EnumEditKbn.Edit       '変更入力
-                    Cmd.CommandText = "PKG_GJ8051.GJ8051_BANK_UPD"
+                    Cmd.CommandText = "PKG_GJ8052.GJ8052_SITEN_UPD"
                 Case EnumEditKbn.Add       '新規入力
-                    Cmd.CommandText = "PKG_GJ8051.GJ8051_BANK_INS"
-                    wNojoCd.BANK.BANK_CD = Format(CInt(wNojoCd.BANK.BANK_CD), "0000")
+                    Cmd.CommandText = "PKG_GJ8052.GJ8052_SITEN_INS"
+                    wNojoCd.SITEN.SITEN_CD = Format(CInt(wNojoCd.SITEN.SITEN_CD), "0000")
             End Select
 
             '引き渡し
             '金融機関コード
-            Cmd.Parameters.Add("IN_BANK_BANK_CD", wNojoCd.BANK.BANK_CD)
-            '金融機関号(カナ)
-            Cmd.Parameters.Add("IN_BANK_BANK_KANA", wNojoCd.BANK.BANK_KANA
+            Cmd.Parameters.Add("IN_SITEN_BANK_CD", wNojoCd.SITEN.BANK_CD)
+            '支店コード
+            Cmd.Parameters.Add("IN_SITEN_SITEN_CD", wNojoCd.SITEN.BANK_CD)
+            '支店(カナ)
+            Cmd.Parameters.Add("IN_SITEN_SITEN_KANA", wNojoCd.SITEN.SITEN_KANA
                             )
-            '金融機関号(漢字)
-            Cmd.Parameters.Add("IN_BANK_BANK_NAME", wNojoCd.BANK.BANK_NAME
+            '支店(漢字)
+            Cmd.Parameters.Add("IN_SITEN_SITEN_NAME", wNojoCd.SITEN.SITEN_NAME
                             )
             'データ区分
             Cmd.Parameters.Add("IN_BANK_DATAKBN", 0
                             )
-
-            Select Case wNojoCd.EDIT_KBN
-                Case EnumEditKbn.Add       '新規入力
-                    'データ登録日
-                    Cmd.Parameters.Add("IN_REG_DATE", Now)
-                    'データ登録ＩＤ
-                    Cmd.Parameters.Add("IN_REG_ID", pLOGINUSERID)
-            End Select
 
             'データ登録日
             Cmd.Parameters.Add("IN_ITAKU_REG_DATE", Now)
@@ -116,7 +112,7 @@ Namespace JBD.GJS.Service.GJ8051
         '引数            :なし
         '戻り値          :Boolean(正常True/エラーFalse)
         '------------------------------------------------------------------
-        Public Shared Function f_Data_Deleate(db As DaDbContext, wNojoCd As DeleteBankRequest) As DaResponseBase
+        Public Shared Function f_Data_Deleate(db As DaDbContext, wNojoCd As DeleteSitenRequest) As DaResponseBase
 
             Dim wkCmd As New OracleCommand
             Dim wkSql As String = String.Empty
@@ -125,10 +121,11 @@ Namespace JBD.GJS.Service.GJ8051
             'ストアドプロシージャの呼び出し
             wkCmd.Connection = db.Session.Connection
             wkCmd.CommandType = CommandType.StoredProcedure
-            wkCmd.CommandText = "PKG_GJ8051.GJ8051_BANK_DEL"
+            wkCmd.CommandText = "PKG_GJ8052.GJ8052_SITEN_DEL"
 
             '引き渡し
-            wkCmd.Parameters.Add("IN_BANK_BANK_CD", wNojoCd.BANK_CD)
+            wkCmd.Parameters.Add("IN_SITEN_BANK_CD", wNojoCd.BANK_CD)
+            wkCmd.Parameters.Add("IN_SITEN_SITEN_CD", wNojoCd.SITEN_CD)
 
             '戻り
             Dim p_MSGCD As OracleParameter = wkCmd.Parameters.Add("OU_MSGCD", OracleDbType.Varchar2, 255, DBNull.Value, ParameterDirection.Output)
