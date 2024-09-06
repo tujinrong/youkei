@@ -12,73 +12,70 @@
       <a-row :gutter="[0, 16]">
         <a-col span="24">
           <th class="required">事業対象期·年度</th>
-          <td class="flex items-center">
-            <a-input-number
-              v-model:value="formData.KI"
-              style="width: 33.3%"
-              :max="99"
-              :min="1"
+          <td class="">
+            <a-form-item v-bind="validateInfos.KI">
+              <a-input-number
+                name="KI"
+                v-model:value="formData.KI"
+                style="width: 60%; margin-right: 16px"
+                :max="99"
+                :min="1"
+              >
+                <template #addonAfter>期</template>
+              </a-input-number></a-form-item
             >
-              <template #addonAfter>期</template>
-            </a-input-number>
-            <YearJp
-              v-model:value="formData.JIGYO_NENDO"
-              style="width: 33.3%"
-            /><span>～</span>
-            <YearJp
-              v-model:value="formData.JIGYO_SYURYO_NENDO"
-              style="width: 33.3%"
-              disabled
-            />
+            <div class="w-full">
+              <YearJp
+                v-model:value="formData.JIGYO_NENDO"
+                style="width: 40%"
+              /><span>～</span>
+              <YearJp
+                v-model:value="formData.JIGYO_SYURYO_NENDO"
+                style="width: 40%"
+                disabled
+              />
+            </div>
           </td>
         </a-col>
         <a-col span="24">
           <th>1.前期積立金取込日</th>
           <td>
-            <a-form-item>
-              <DateJp
-                v-model:value="formData.ZENKI_TUMITATE_DATE"
-                style="width: 33.3%"
-              />
-            </a-form-item>
+            <DateJp
+              v-model:value="formData.ZENKI_TUMITATE_DATE"
+              style="width: 33.3%"
+            />
           </td>
         </a-col>
         <a-col span="24">
           <th>2.前期交付金取込日</th>
           <td>
-            <a-form-item>
-              <DateJp
-                v-model:value="formData.ZENKI_KOFU_DATE"
-                style="width: 33.3%"
-              />
-            </a-form-item>
+            <DateJp
+              v-model:value="formData.ZENKI_KOFU_DATE"
+              style="width: 33.3%"
+            />
           </td>
         </a-col>
         <a-col span="24">
           <th>3.返還金計算日</th>
           <td>
-            <a-form-item>
-              <DateJp
-                v-model:value="formData.HENKAN_KEISAN_DATE"
-                style="width: 33.3%"
-              />
-            </a-form-item>
+            <DateJp
+              v-model:value="formData.HENKAN_KEISAN_DATE"
+              style="width: 33.3%"
+            />
           </td>
         </a-col>
         <a-col span="24">
           <th>積立金返還人数</th>
           <td>
-            <a-form-item>
-              <a-input-number
-                v-model:value="formData.HENKAN_NINZU"
-                style="width: 33.3%"
-                :max="9999"
-                :min="0"
-                disabled
-              >
-                <template #addonAfter> (人) </template></a-input-number
-              >
-            </a-form-item>
+            <a-input-number
+              v-model:value="formData.HENKAN_NINZU"
+              style="width: 33.3%"
+              :max="9999"
+              :min="0"
+              disabled
+            >
+              <template #addonAfter> (人) </template></a-input-number
+            >
           </td>
         </a-col>
         <a-col span="24">
@@ -112,7 +109,7 @@
         <a-col span="24">
           <th class="required">対象年度(現在処理中)</th>
           <td>
-            <a-form-item>
+            <a-form-item v-bind="validateInfos.TAISYO_NENDO">
               <YearJp
                 v-model:value="formData.TAISYO_NENDO"
                 style="width: 33.3%"
@@ -124,13 +121,8 @@
         <a-col span="24">
           <th>当初対象積立金納付期限</th>
           <td>
-            <a-form-item>
-              <DateJp
-                v-model:value="formData.NOFU_KIGEN"
-                style="width: 33.3%"
-              />
-              (左記期限までに入金済みの時は、契約日は4月1 日となる。)
-            </a-form-item>
+            <DateJp v-model:value="formData.NOFU_KIGEN" style="width: 33.3%" />
+            (左記期限までに入金済みの時は、契約日は4月1 日となる。)
           </td>
         </a-col>
         <a-col span="24">
@@ -162,7 +154,12 @@ import { Form, message } from 'ant-design-vue'
 import { onMounted, reactive, watch } from 'vue'
 import { InitDetail, Save } from './service'
 import { DetailVM } from './type'
-import { CLOSE_CONFIRM, SAVE_CONFIRM, SAVE_OK_INFO } from '@/constants/msg'
+import {
+  CLOSE_CONFIRM,
+  ITEM_REQUIRE_ERROR,
+  SAVE_CONFIRM,
+  SAVE_OK_INFO,
+} from '@/constants/msg'
 import { showConfirmModal, showSaveModal } from '@/utils/modal'
 
 const formData = reactive<DetailVM>({
@@ -182,7 +179,22 @@ const formData = reactive<DetailVM>({
 })
 
 const editJudge = new Judgement('GJ8020')
-const rules = {}
+
+/** ルール */
+const rules = reactive({
+  KI: [
+    {
+      required: true,
+      message: ITEM_REQUIRE_ERROR.Msg.replace('{0}', '事業対象期'),
+    },
+  ],
+  TAISYO_NENDO: [
+    {
+      required: true,
+      message: ITEM_REQUIRE_ERROR.Msg.replace('{0}', '対象年度'),
+    },
+  ],
+})
 const { validate, clearValidate, validateInfos, resetFields } = Form.useForm(
   formData,
   rules
@@ -218,17 +230,15 @@ const init = async () => {
 /** 登録処理 */
 const save = async () => {
   await validate()
-  try {
-    showSaveModal({
-      content: SAVE_CONFIRM.Msg,
-      onOk: async () => {
-        try {
-          await Save({ SYORI_KI: formData })
-          message.success(SAVE_OK_INFO.Msg)
-        } catch (error) {}
-      },
-    })
-  } catch (error) {}
+  showSaveModal({
+    content: SAVE_CONFIRM.Msg,
+    onOk: async () => {
+      try {
+        await Save({ SYORI_KI: formData })
+        message.success(SAVE_OK_INFO.Msg)
+      } catch (error) {}
+    },
+  })
 }
 
 /** キャンセル処理 */
