@@ -38,16 +38,14 @@
       ></vxe-column>
     </vxe-table>
   </a-card>
+  <EditModal v-model:visible="visible" ref="editModalRef" />
 </template>
 <script setup lang="ts">
-import { PageStatus } from '@/enum'
 import { ref } from 'vue'
-import { useRoute, useRouter } from 'vue-router'
 import { VxeTableInstance } from 'vxe-pc-ui'
-
-const route = useRoute()
-const router = useRouter()
-
+import EditModal from './EditPage.vue'
+const visible = ref(false)
+const editModalRef = ref()
 const xTableRef = ref<VxeTableInstance>()
 const tableData = ref([
   { TAX_DATE_FROM: '1', TAX_DATE_TO: '1', TAX_RITU: '1' },
@@ -56,29 +54,15 @@ const tableData = ref([
 ])
 
 const add = () => {
-  router.push({
-    name: route.name,
-    query: {
-      status: PageStatus.New,
-    },
-  })
+  visible.value = true
 }
 const edit = () => {
   const currentRow = xTableRef.value?.getCurrentRecord()
   if (currentRow) {
-    router.push({
-      name: route.name,
-      query: {
-        status: PageStatus.Edit,
-        TAX_DATE_FROM: currentRow.TAX_DATE_FROM,
-        TAX_DATE_TO: currentRow.TAX_DATE_TO,
-        TAX_RITU: currentRow.TAX_RITU,
-      },
-    })
+    editModalRef.value.setEditModal(currentRow)
+    visible.value = true
   } else {
-    console.log('请选择一行')
   }
-  console.log('edit')
 }
 </script>
 <style lang="scss" scoped></style>

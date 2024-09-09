@@ -1,6 +1,6 @@
 <template>
-  <a-card :bordered="false" class="mb-2 h-full">
-    <h1>（GJ8101）消費税率マスタメンテナンス</h1>
+  <a-modal :visible="visible" :bordered="false" class="mb-2 h-full">
+    <template #title> <h1>（GJ8101）消費税率マスタメンテナンス</h1></template>
     <div class="self_adaption_table form max-w-160 flex-1">
       <a-row>
         <a-col span="24">
@@ -23,29 +23,28 @@
             <a-form-item>
               <a-input v-model:value="formData.TAX_RITU" :maxlength="30" />
             </a-form-item>
-          </td> </a-col
-      ></a-row>
+          </td>
+        </a-col>
+      </a-row>
     </div>
-    <div class="my-2 max-w-160 flex justify-between">
-      <div>
-        <a-space :size="20">
-          <a-button class="warning-btn" @click="save">登録</a-button>
-          <a-button type="primary" danger @click="delete"
-            >削除</a-button
-          ></a-space
-        >
-      </div>
-      <a-button type="primary" @click="goList">一覧へ</a-button>
-    </div>
-  </a-card>
+    <template #footer>
+      <a-button style="float: left" class="warning-btn" @click="save">
+        登録
+      </a-button>
+      <a-button style="float: left" type="primary" danger @click="delete">
+        削除
+      </a-button>
+      <a-button key="back" type="primary" @click="closeModal">閉じる</a-button>
+    </template>
+  </a-modal>
 </template>
 <script setup lang="ts">
 import { Judgement } from '@/utils/judge-edited'
-import { nextTick, onMounted, reactive } from 'vue'
-import { useRoute, useRouter } from 'vue-router'
-
-const route = useRoute()
-const router = useRouter()
+import { nextTick, onMounted, reactive, watch } from 'vue'
+interface Props {
+  visible: boolean
+}
+const model = defineModel('visible')
 const editJudge = new Judgement()
 const formData = reactive({
   TAX_DATE_FROM: undefined,
@@ -54,17 +53,44 @@ const formData = reactive({
 })
 
 onMounted(() => {
-  Object.assign(formData, route.query)
   nextTick(() => editJudge.reset())
 })
+watch(
+  () => model.value,
+  (newValue) => {
+    if (newValue) {
+      nextTick(() => editJudge.reset())
+    }
+  }
+)
+
+watch(
+  () => formData,
+  () => {
+    editJudge.setEdited()
+  },
+  { deep: true }
+)
 
 const save = () => {}
 
-const goList = () => {
+const closeModal = () => {
   editJudge.judgeIsEdited(() => {
-    router.push({ name: route.name })
+    Object.assign(formData, {
+      TAX_DATE_FROM: undefined,
+      TAX_DATE_TO: undefined,
+      TAX_RITU: undefined,
+    })
+    model.value = false
   })
 }
+
+const setEditModal = (data) => {
+  Object.assign(formData, data)
+}
+defineExpose({
+  setEditModal,
+})
 </script>
 <style lang="scss" scoped>
 th {

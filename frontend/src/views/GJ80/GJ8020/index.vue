@@ -9,7 +9,7 @@
       <close-page />
     </div>
     <div class="self_adaption_table form max-w-240">
-      <a-row :gutter="[0, 16]">
+      <a-row>
         <a-col span="24">
           <th class="required">事業対象期·年度</th>
           <td class="">
