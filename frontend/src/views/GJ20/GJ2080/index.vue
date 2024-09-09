@@ -121,9 +121,8 @@
             <a-col :span="24">
               <div class="mb-2 header_operation flex justify-between w-full">
                 <a-space :size="20">
-                  <a-button type="primary" @click="onPreview"
-                  >プレビュー</a-button
-                  >
+                  <a-button type="primary" @click="onPreview">プレビュー</a-button>
+                  <a-button type="primary">EXCEL出力</a-button>
                   <a-button type="primary" @click="clear">クリア</a-button>
                 </a-space>
                 <close-page />
