@@ -1,10 +1,12 @@
 <template>
-  <div class="h-full min-h-500px flex-col-stretch gap-12px overflow-hidden lt-sm:overflow-auto">
+  <div
+    class="h-full min-h-500px flex-col-stretch gap-12px overflow-hidden lt-sm:overflow-auto"
+  >
     <a-card ref="headRef" :bordered="false">
       <h1>(GJ2010)契約者積立金・互助金単価マスタ一覧</h1>
       <div class="mt-1 flex">
         <a-space>
-          <a-button type="primary" @click="forwardEdit">新規</a-button>
+          <a-button type="primary" @click="forwardEdit">新規登録</a-button>
         </a-space>
         <close-page />
       </div>
@@ -30,7 +32,9 @@
           :resizable="true"
         >
           <template #default="{ row }">
-            <a @click="forwardEdit(row.TAISYO_DATE_FROM)">{{ row.TAISYO_DATE_FROM }}</a>
+            <a @click="forwardEdit(row.TAISYO_DATE_FROM)">{{
+              row.TAISYO_DATE_FROM
+            }}</a>
           </template>
         </vxe-column>
         <vxe-column
@@ -42,7 +46,9 @@
           :resizable="true"
         >
           <template #default="{ row }">
-            <a @click="forwardEdit(row.TAISYO_DATE_TO)">{{ row.TAISYO_DATE_TO }}</a>
+            <a @click="forwardEdit(row.TAISYO_DATE_TO)">{{
+              row.TAISYO_DATE_TO
+            }}</a>
           </template>
         </vxe-column>
       </vxe-table>
@@ -53,7 +59,7 @@
 import { useElementSize } from '@vueuse/core'
 import { reactive, ref, toRef } from 'vue'
 import { onBeforeRouteUpdate, useRoute, useRouter } from 'vue-router'
-import {DetailVM} from '../type'
+import { DetailVM } from '../type'
 import { PageStatus } from '@/enum'
 import { changeTableSort } from '@/utils/util'
 

@@ -7,9 +7,7 @@
  * 変更履歴　:
  * ----------------------------------------------------------------->
 <template>
-  <div
-    class="h-full min-h-500px flex-col-stretch gap-12px overflow-hidden lt-sm:overflow-auto"
-  >
+  <div class="h-full min-h-500px flex-col-stretch gap-12px lt-sm:overflow-auto">
     <a-card :bordered="false">
       <h1>（GJ1020）互助基金契約者情報変更（移動）</h1>
       <div class="self_adaption_table form mt-1">
@@ -53,15 +51,15 @@
             type="primary"
             :disabled="!isSearched || isEditing"
             @click="add"
-            >新規</a-button
+            >新規登録</a-button
           >
           <a-button type="primary" @click="reset">条件クリア</a-button>
         </a-space>
         <close-page />
       </div> </a-card
-    ><a-card>
+    ><a-card
+      ><h2>1.契約農場別明細 移動情報(表示)</h2>
       <div class="flex justify-between">
-        <h2>1.契約農場別明細 移動情報(表示)</h2>
         <a-pagination
           v-model:current="pageParams.PAGE_NUM"
           v-model:page-size="pageParams.PAGE_SIZE"
