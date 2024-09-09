@@ -48,7 +48,7 @@
       <div class="flex">
         <a-space>
           <a-button type="primary" @click="searchAll">検索</a-button>
-          <a-button type="primary" @click="forwardNew">新規</a-button>
+          <a-button type="primary" @click="forwardNew">新規登録</a-button>
           <a-button type="primary" @click="reset">クリア</a-button>
           <a-button type="primary">プレビュー</a-button>
         </a-space>
@@ -161,7 +161,7 @@
       <div class="flex">
         <a-space>
           <a-button type="primary" @click="searchAll2">検索</a-button>
-          <a-button type="primary" @click="forwardNew2">新規</a-button>
+          <a-button type="primary" @click="forwardNew2">新規登録</a-button>
           <a-button type="primary" @click="reset2">クリア</a-button>
           <a-button type="primary">プレビュー</a-button>
         </a-space>

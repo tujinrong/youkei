@@ -63,6 +63,47 @@
   }
 }
 
+//編集画面
+.edit_table {
+  .ant-col {
+    display: flex;
+    th {
+      margin: 0 0 -1px -1px;
+      padding: 2px 4px;
+      line-height: 32px;
+      border: none !important;
+      font-weight: normal;
+      height: 34px;
+      text-align: start;
+    }
+    td {
+      margin: 0 0 -1px 0;
+      border: none !important;
+      color: rgba(0, 0, 0, 0.85);
+      padding: 2px 2px;
+      height: fit-content;
+      flex: 1;
+      overflow-wrap: break-word;
+      display: flex;
+    }
+  }
+  .ant-col td {
+    width: 0; // セレクタ幅制限
+  }
+  &.form {
+    .required::after {
+      content: '＊';
+      color: #ff0000;
+    }
+  }
+  // <a-col :md="0"
+  @media (max-width: 1600px) {
+    .ant-col-md-0 {
+      display: none;
+    }
+  }
+}
+
 //DB登録ボタン
 //<a-button type="warn"/>
 .ant-btn-warn {
@@ -111,6 +152,8 @@ h1 {
 h2 {
   font-size: 16px;
   font-weight: bold;
+  padding-left: 0.25rem; /* 4px */
+  padding-right: 0.25rem;
 }
 //レイヤーマスク
 .search-disabled-mask {

@@ -27,7 +27,7 @@
       <div class="my-2 flex justify-between">
         <a-space :size="20">
           <a-button type="primary" :disabled="isEdit" @click="addData"
-            >新規</a-button
+            >新規登録</a-button
           >
         </a-space>
         <a-button type="primary" @click="goList">一覧へ</a-button>

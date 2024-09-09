@@ -28,7 +28,7 @@
         </a-row>
         <div class="my-2 header_operation flex justify-between w-full">
           <a-space :size="20">
-            <a-button class="warning-btn" @click="saveData">登録</a-button>
+            <a-button class="warning-btn" @click="saveData">保存</a-button>
             <a-button
               type="primary"
               danger

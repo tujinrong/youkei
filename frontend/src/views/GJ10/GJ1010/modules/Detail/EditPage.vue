@@ -7,24 +7,19 @@
  * 変更履歴　:
  * ----------------------------------------------------------------->
 <template>
-  <a-card :bordered="false" class="mb2 h-full">
-    <h1>（GJ1011）互助基金契約者マスタメンテナンス（基本情報入力）</h1>
-    <div class="self_adaption_table form">
+  <a-modal
+    :visible="modalVisible"
+    centered
+    title="（GJ1011）互助基金契約者マスタメンテナンス（基本情報入力）"
+    width="1000px"
+    :mask-closable="false"
+    destroy-on-close
+    @cancel="goList"
+  >
+    <div class="edit_table form">
       <b>第8期</b>
-      <div class="mb-2 header_operation flex justify-between w-full">
-        <a-space :size="20">
-          <a-button class="warning-btn" @click="saveData">登録</a-button>
-          <a-button type="primary" danger :disabled="isNew" @click="deleteData"
-            >削除</a-button
-          >
-        </a-space>
-        <a-button type="primary" class="text-end" @click="goList"
-          >一覧へ</a-button
-        >
-      </div>
-      <h2>申請者基本情報1</h2>
-      <a-form class="mb-1">
-        <a-row>
+      <a-form class="border-t-1">
+        <a-row class="mt-2">
           <a-col span="12">
             <th class="required">契約者番号</th>
             <td>
@@ -121,7 +116,7 @@
               ></a-form-item>
             </td>
           </a-col>
-          <a-col span="12" class="flex">
+          <a-col span="12" class="flex mb-2">
             <th>入金日、返還日(入金完了時)</th>
             <td>
               <a-form-item v-bind="validateInfos.NYU_HEN_DATE">
@@ -131,10 +126,9 @@
           </a-col>
         </a-row>
       </a-form>
-      <h2>申請者基本情報2</h2>
-      <a-form class="mb-1">
-        <a-row>
-          <a-col span="8">
+      <a-form class="border-t-1">
+        <a-row class="mt-2">
+          <a-col span="24">
             <th class="required">申込者名(フリガナ)</th>
             <td>
               <a-form-item v-bind="validateInfos.KEIYAKUSYA_KANA">
@@ -153,7 +147,7 @@
               ></a-form-item>
             </td>
           </a-col>
-          <a-col span="8">
+          <a-col span="24">
             <th class="required">申込者名(個人・団体)</th>
             <td>
               <a-form-item v-bind="validateInfos.KEIYAKUSYA_NAME">
@@ -168,7 +162,7 @@
               ></a-form-item>
             </td>
           </a-col>
-          <a-col span="8">
+          <a-col span="24">
             <th>代表者名(団体)</th>
             <td>
               <a-form-item v-bind="validateInfos.DAIHYO_NAME">
@@ -187,7 +181,7 @@
         <a-row>
           <a-col span="24">
             <th class="required">住所</th>
-            <td class="flex-col">
+            <td class="flex-col" style="height: fit-content">
               <a-row>
                 <a-col
                   ><a-form-item v-bind="validateInfos.ADDR_POST">
@@ -228,8 +222,8 @@
           <a-col>
             <th class="required">連絡先</th>
           </a-col>
-          <a-col :span="7">
-            <th class="required">電話</th>
+          <a-col :span="6">
+            <th class="required" style="width: fit-content">電話</th>
             <td>
               <a-form-item v-bind="validateInfos.ADDR_TEL1">
                 <a-input
@@ -240,8 +234,8 @@
               </a-form-item>
             </td>
           </a-col>
-          <a-col :span="7">
-            <th>電話2</th>
+          <a-col :span="6">
+            <th style="width: fit-content">電話2</th>
             <td>
               <a-input
                 v-model:value="formData.ADDR_TEL2"
@@ -251,7 +245,7 @@
             </td>
           </a-col>
           <a-col class="flex-1">
-            <th>FAX</th>
+            <th style="width: fit-content">FAX</th>
             <td>
               <a-input
                 v-model:value="formData.ADDR_FAX"
@@ -261,8 +255,8 @@
             </td>
           </a-col>
           <a-col span="24">
-            <th style="border-top: none">　</th>
-            <th>メールアドレス</th>
+            <th></th>
+            <th style="width: fit-content">メールアドレス</th>
             <td>
               <a-input
                 v-model:value="formData.ADDR_E_MAIL"
@@ -273,7 +267,7 @@
           </a-col>
         </a-row>
         <a-row>
-          <a-col span="24">
+          <a-col span="24" class="mb-2">
             <th class="required">事務委託先</th>
             <td>
               <a-form-item v-bind="validateInfos.JIMUITAKU_CD">
@@ -287,9 +281,8 @@
           </a-col>
         </a-row>
       </a-form>
-      <h2>申請者基本情報3</h2>
-      <a-form>
-        <a-row>
+      <a-form class="border-t-1">
+        <a-row class="mt-2">
           <a-col span="24">
             <th>金融機関入力情報有無</th>
             <td>
@@ -300,7 +293,7 @@
               <span class="pt-1">(有の時、下記の項目は必須入力)</span>
             </td>
           </a-col>
-          <a-col span="12">
+          <a-col span="13">
             <th :class="hasnyuryoku ? 'required' : ''">金融機関</th>
             <td>
               <a-form-item v-bind="validateInfos.FURI_BANK_CD">
@@ -313,7 +306,7 @@
               ></a-form-item>
             </td>
           </a-col>
-          <a-col span="12">
+          <a-col span="13">
             <th :class="hasnyuryoku ? 'required' : ''">本支店</th>
             <td>
               <a-form-item v-bind="validateInfos.FURI_BANK_SITEN_CD">
@@ -328,7 +321,7 @@
           </a-col>
         </a-row>
         <a-row>
-          <a-col :span="12">
+          <a-col :span="13">
             <th :class="hasnyuryoku ? 'required' : ''">口座種別</th>
             <td>
               <a-form-item v-bind="validateInfos.FURI_KOZA_SYUBETU">
@@ -341,8 +334,13 @@
               ></a-form-item>
             </td>
           </a-col>
-          <a-col :span="12">
-            <th :class="hasnyuryoku ? 'required' : ''">口座番号</th>
+          <a-col :span="11">
+            <th
+              :class="hasnyuryoku ? 'required' : ''"
+              style="width: fit-content"
+            >
+              口座番号
+            </th>
             <td>
               <a-form-item v-bind="validateInfos.FURI_KOZA_NO">
                 <a-input
@@ -358,10 +356,8 @@
           </a-col>
         </a-row>
         <a-row>
-          <a-col>
+          <a-col :span="24">
             <th :class="hasnyuryoku ? 'required' : ''">口座名義人</th>
-          </a-col>
-          <a-col :span="11">
             <td>
               <a-form-item v-bind="validateInfos.FURI_KOZA_MEIGI_KANA">
                 <a-input
@@ -379,7 +375,9 @@
               </a-form-item>
             </td>
           </a-col>
-          <a-col class="flex-1">
+
+          <a-col :span="24">
+            <th class="border-t-0"></th>
             <td>
               <a-input
                 v-model:value="formData.FURI_KOZA_MEIGI"
@@ -393,7 +391,7 @@
           </a-col>
         </a-row>
         <a-row>
-          <a-col :span="12">
+          <a-col :span="13">
             <a-row class="flex-rol w-full"
               ><a-col class="w-full">
                 <th class="required">入力確認有無</th>
@@ -415,25 +413,37 @@
               </a-col>
             </a-row>
           </a-col>
-          <a-col :span="12"
-            ><th>備考</th>
+          <a-col :span="11"
+            ><th style="width: fit-content">備考</th>
             <td>
               <a-textarea
                 v-model:value="formData.BIKO"
                 :maxlength="40"
+                :auto-size="{ minRows: 2, maxRows: 2 }"
                 @input="changeType('full', $event.target.value, 'BIKO')"
               /></td
           ></a-col>
         </a-row>
       </a-form>
     </div>
-  </a-card>
+    <template #footer>
+      <div class="pt-2 flex justify-between border-t-1">
+        <a-space :size="20">
+          <a-button class="warning-btn" @click="saveData">登録</a-button>
+          <a-button type="primary" danger :disabled="isNew" @click="deleteData"
+            >削除</a-button
+          >
+        </a-space>
+        <a-button type="primary" @click="closeModal">閉じる</a-button>
+      </div>
+    </template>
+  </a-modal>
 </template>
 <script setup lang="ts">
-import { PageStatus } from '@/enum'
+import { EnumEditKbn, PageStatus } from '@/enum'
 import { useRoute, useRouter } from 'vue-router'
 import { Form, message } from 'ant-design-vue'
-import { reactive, nextTick, onMounted, ref, watch } from 'vue'
+import { reactive, nextTick, onMounted, ref, watch, computed } from 'vue'
 import DateJp from '@/components/Selector/DateJp/index.vue'
 import { Judgement } from '@/utils/judge-edited'
 import { showDeleteModal, showInfoModal, showSaveModal } from '@/utils/modal'
@@ -458,11 +468,11 @@ import { Save } from '../../service'
 //データ定義
 //--------------------------------------------------------------------------
 const props = defineProps<{
-  status: PageStatus
+  editkbn: EnumEditKbn
+  visible: boolean
 }>()
-const router = useRouter()
-const route = useRoute()
-const isNew = props.status === PageStatus.New
+const emit = defineEmits(['update:visible'])
+
 const editJudge = new Judgement()
 const createDefaultParams = () => {
   return {
@@ -562,18 +572,31 @@ const { validate, clearValidate, validateInfos, resetFields } = Form.useForm(
 //---------------------------------------------------------------------------
 //フック関数
 //--------------------------------------------------------------------------
-onMounted(() => {
-  nextTick(() => editJudge.reset())
-  if (!isNew && formData.FURI_BANK_CD) hasnyuryoku.value = true
-})
+
 //--------------------------------------------------------------------------
 //計算定義
 //--------------------------------------------------------------------------
-
+const modalVisible = computed({
+  get() {
+    return props.visible
+  },
+  set(visible) {
+    emit('update:visible', visible)
+  },
+})
+const isNew = computed(() => (props.editkbn === EnumEditKbn.Add ? true : false))
 //--------------------------------------------------------------------------
 //監視定義
 //--------------------------------------------------------------------------
-
+watch(
+  () => props.visible,
+  (newValue) => {
+    if (newValue) {
+      if (!isNew && formData.FURI_BANK_CD) hasnyuryoku.value = true
+      nextTick(() => editJudge.reset())
+    }
+  }
+)
 watch(
   () => formData,
   () => {
@@ -600,10 +623,15 @@ const changeType = (type: string, input: any, name: string) => {
 
 //画面遷移
 const goList = () => {
+  closeModal()
+}
+
+const closeModal = () => {
   editJudge.judgeIsEdited(() => {
+    Object.assign(formData, createDefaultParams())
+    hasnyuryoku.value = false
     clearValidate()
-    resetFields()
-    router.push({ name: route.name })
+    emit('update:visible', false)
   })
 }
 
@@ -618,7 +646,7 @@ const saveData = () => {
       onOk: async () => {
         try {
           await Save({ KEIYAKUSYA: formData })
-          router.push({ name: route.name, query: { refresh: '1' } })
+          closeModal()
           message.success(SAVE_OK_INFO.Msg)
         } catch (error) {}
       },
@@ -638,7 +666,7 @@ const deleteData = () => {
         //   UP_DATE: upddttm,
         //   EDIT_KBN: EnumEditKbn.Edit,
         // })
-        router.push({ name: route.name, query: { refresh: '1' } })
+        closeModal()
         message.success(DELETE_OK_INFO.Msg)
       } catch (error) {}
     },
@@ -647,6 +675,6 @@ const deleteData = () => {
 </script>
 <style lang="scss" scoped>
 th {
-  min-width: 120px;
+  width: 200px;
 }
 </style>

@@ -25,7 +25,7 @@
             type="primary"
             :disabled="!searchParams.SYURUI_KBN"
             @click="forwardNew"
-            >新規</a-button
+            >新規登録</a-button
           >
         </a-space>
         <close-page />

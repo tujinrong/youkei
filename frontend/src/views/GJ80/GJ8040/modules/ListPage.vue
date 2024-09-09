@@ -6,7 +6,7 @@
       <h1>（GJ8040）使用者一覧</h1>
       <div class="mt-1 flex">
         <a-space>
-          <a-button type="primary" @click="forwardNew">新規</a-button>
+          <a-button type="primary" @click="forwardNew">新規登録</a-button>
         </a-space>
         <close-page />
       </div>

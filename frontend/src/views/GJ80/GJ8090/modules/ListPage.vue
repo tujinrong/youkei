@@ -81,7 +81,7 @@
       <div class="flex">
         <a-space>
           <a-button type="primary" @click="searchAll">検索</a-button>
-          <a-button type="primary" @click="forwardNew">新規</a-button>
+          <a-button type="primary" @click="forwardNew">新規登録</a-button>
           <a-button type="primary" @click="reset">クリア</a-button>
         </a-space>
         <close-page />

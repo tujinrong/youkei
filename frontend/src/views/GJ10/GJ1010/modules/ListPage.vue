@@ -134,7 +134,7 @@
         <a-space>
           <a-button type="primary" @click="search">検索</a-button>
           <a-button type="primary" @click="goForward(PageStatus.New)"
-            >新規</a-button
+            >新規登録</a-button
           >
           <a-button
             type="primary"
@@ -250,9 +250,10 @@
       </vxe-table>
     </a-card>
   </div>
+  <EditPage v-model:visible="editVisible" :editkbn="editkbn" />
 </template>
 <script setup lang="ts">
-import { EnumAndOr, PageStatus } from '@/enum'
+import { EnumAndOr, EnumEditKbn, PageStatus } from '@/enum'
 import { computed, reactive, ref, toRef, nextTick } from 'vue'
 import { showInfoModal } from '@/utils/modal'
 import { ITEM_REQUIRE_ERROR } from '@/constants/msg'
@@ -265,6 +266,7 @@ import { SearchRequest, SearchRowVM } from '../type'
 import { VxeTableInstance } from 'vxe-table'
 import { convertToHalfNumber } from '@/utils/util'
 import { Search } from '../service'
+import EditPage from './Detail/EditPage.vue'
 //--------------------------------------------------------------------------
 //データ定義
 //--------------------------------------------------------------------------
@@ -321,7 +323,8 @@ const tableDefault = {
   KEN_CD_NAME: '1北海道',
   JIMUITAKU_NAME: '（宇）宇亜宇伊亜宇伊',
 }
-
+const editVisible = ref(false)
+const editkbn = ref<EnumEditKbn>(EnumEditKbn.Add)
 const { pageParams, totalCount, searchData, clear } = useSearch({
   service: Search,
   source: tableData,
@@ -352,6 +355,12 @@ function search() {
 }
 
 function goForward(status: PageStatus, row?: any) {
+  if (status === PageStatus.Edit || status === PageStatus.New) {
+    editVisible.value = true
+    editkbn.value =
+      status === PageStatus.Edit ? EnumEditKbn.Edit : EnumEditKbn.Add
+    return
+  }
   router.push({
     name: route.name,
     query: {

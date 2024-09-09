@@ -3,13 +3,8 @@
     <div v-show="status === PageStatus.List" class="h-full">
       <ListPage />
     </div>
-    <div
-      v-if="status === PageStatus.New || status === PageStatus.Edit"
-      class="h-full"
-    >
-      <EditPage :status="status" />
-    </div>
-    <div v-else-if="status === PageStatus.Detail" class="h-full">
+
+    <div v-if="status === PageStatus.Detail" class="h-full">
       <Detail />
     </div>
   </div>
@@ -19,7 +14,6 @@ import { onMounted, ref, watch } from 'vue'
 import { useRoute } from 'vue-router'
 import { PageStatus } from '@/enum'
 import ListPage from './modules/ListPage.vue'
-import EditPage from './modules/Detail/EditPage.vue'
 import Detail from './modules/Detail/Detail1.vue'
 //--------------------------------------------------------------------------
 //データ定義
