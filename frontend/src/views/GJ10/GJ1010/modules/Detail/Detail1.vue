@@ -12,7 +12,7 @@
     <div class="self_adaption_table form">
       <b>第{{ formData.KI ?? 8 }}期</b>
       <h2>1.契約農場別明細情報(表示)</h2>
-      <div class="max-w-200">
+      <div class="max-w-100">
         <a-row>
           <a-col span="24">
             <read-only
@@ -24,7 +24,7 @@
           <a-col span="10"></a-col>
         </a-row>
       </div>
-      <div class="my-2 flex justify-between max-w-200">
+      <div class="my-2 flex justify-between">
         <a-space :size="20">
           <a-button type="primary" :disabled="isEdit" @click="addData"
             >新規</a-button
