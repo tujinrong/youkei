@@ -3,7 +3,7 @@
     <h1>(GJ2021)契約者積立金・互助金単価マスタメンテナンス</h1>
     <div class="mb-2 header_operation flex justify-between w-full">
       <a-space :size="20">
-        <a-button class="warning-btn" @click="saveData">登録</a-button>
+        <a-button class="warning-btn" @click="saveData">保存</a-button>
         <a-button type="primary" danger :disabled="isNew" @click="deleteData"
           >削除</a-button
         >
@@ -23,7 +23,10 @@
               v-model:value="formData.TAISYO_DATE_FROM"
               style="width: 50%"
             /><span>～</span>
-            <DateJp v-model:value="formData.TAISYO_DATE_TO" style="width: 50%" />
+            <DateJp
+              v-model:value="formData.TAISYO_DATE_TO"
+              style="width: 50%"
+            />
           </td>
         </a-col>
       </a-row>

@@ -65,7 +65,7 @@
       <a-row class="mb-2"
         ><a-col span="13"
           ><a-space :size="20">
-            <a-button class="warning-btn" @click="saveData">登録</a-button>
+            <a-button class="warning-btn" @click="saveData">保存</a-button>
             <a-button type="primary" @click="goList">戻る</a-button>
           </a-space>
         </a-col></a-row

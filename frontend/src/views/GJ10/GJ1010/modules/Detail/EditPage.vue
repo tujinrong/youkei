@@ -429,7 +429,7 @@
     <template #footer>
       <div class="pt-2 flex justify-between border-t-1">
         <a-space :size="20">
-          <a-button class="warning-btn" @click="saveData">登録</a-button>
+          <a-button class="warning-btn" @click="saveData">保存</a-button>
           <a-button type="primary" danger :disabled="isNew" @click="deleteData"
             >削除</a-button
           >
