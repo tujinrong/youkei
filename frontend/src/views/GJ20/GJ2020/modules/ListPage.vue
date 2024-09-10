@@ -27,7 +27,7 @@
               </a-form-item>
             </td>
           </a-col>
-          <a-col span="24">
+          <a-col v-bind="layout">
             <th class="required">対象期</th>
             <td>
               <a-form-item v-bind="validateInfos.KI">
@@ -42,25 +42,20 @@
                 <!--                <span class="!align-middle">期</span>-->
               </a-form-item>
             </td>
-            <th>請求·返還回数</th>
-            <td>
-              <a-form-item v-bind="validateInfos.SEIKYU_KAISU">
-                <div class="flex items-center">
-                  <a-input
-                    v-model:value="formData.SEIKYU_KAISU"
-                    disabled
-                    style="width: 50%"
-                  />
-                  <span>(入力&表示)</span>
-                </div>
-              </a-form-item>
-            </td>
-            <read-only
-              thWidth="100"
-              th="手数料率"
-              :td="formData.TESURYO_KAISU"
-              after="%"
-            />
+          </a-col>
+          <a-col v-bind="layout">
+              <th>請求·返還回数</th>
+              <td>
+                <a-form-item v-bind="validateInfos.SEIKYU_KAISU">
+                  <div class="flex items-center">
+                    <a-input v-model:value="formData.SEIKYU_KAISU" disabled style="width: 50%;" />
+                    <span>(入力&表示)</span>
+                  </div>
+                </a-form-item>
+              </td>
+          </a-col>
+          <a-col v-bind="layout">
+              <read-only thWidth="80" th="手数料率" :td="formData.TESURYO_KAISU" after="%" />
           </a-col>
           <a-col span="24">
             <th class="required">徵収·返還区分</th>
@@ -319,6 +314,13 @@ const { pageParams, totalCount, searchData, clear } = useSearch({
   source: tableData,
   params: toRef(() => searchParams),
 })
+
+const layout = {
+  md: 24,
+  lg: 8,
+  xl: 8,
+  xxl: 8,
+}
 
 //--------------------------------------------------------------------------
 //メソッド
