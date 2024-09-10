@@ -37,10 +37,12 @@
           label="契約数"
           :content-style="{ fontSize: '15px', textAlign: 'end' }"
           :label-style="{ fontSize: '15px' }"
-          >(新規{{ homeData.KEIYAKUSU_SHINKI }}　継続{{
-            homeData.KEIYAKUSU_KEIZOKU
-          }})</a-descriptions-item
-        >
+          ><CountTo
+            :endValue="homeData.KEIYAKUSU_SHINKI"
+            prefix="新規" /><CountTo
+            :endValue="homeData.KEIYAKUSU_KEIZOKU"
+            prefix="　継続"
+        /></a-descriptions-item>
         <a-descriptions-item
           label="羽数"
           :content-style="{
@@ -54,14 +56,14 @@
             borderTop: '2px solid #d9d9d9',
             borderBottom: '2px solid #d9d9d9',
           }"
-          >{{ homeData.HASU }} 羽</a-descriptions-item
-        >
+          ><CountTo :endValue="homeData.HASU" suffix=" 羽" />
+        </a-descriptions-item>
         <a-descriptions-item
           label="積立金額"
           :content-style="{ fontSize: '15px', textAlign: 'end' }"
           :label-style="{ fontSize: '15px' }"
-          >{{ homeData.TUMITATE_KIN }} 円</a-descriptions-item
-        >
+          ><CountTo :endValue="homeData.TUMITATE_KIN" suffix=" 円" />
+        </a-descriptions-item>
       </a-descriptions>
     </a-card>
   </div>
