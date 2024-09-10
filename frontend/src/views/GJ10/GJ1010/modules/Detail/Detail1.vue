@@ -252,20 +252,23 @@
           </a-col>
         </a-row>
         <a-row>
-          <a-col span="12">
+          <a-col span="24">
             <th class="required">契約年月日</th>
-            <td class="!border-r-0">
-              <a-form-item v-bind="validateInfos.KEIYAKU_YMD_FM">
-                <DateJp v-model:value="formData.KEIYAKU_YMD_FM" /> </a-form-item
-              ><span>～</span>
-              <DateJp v-model:value="formData.KEIYAKU_YMD_TO" disabled />
+            <td>
+              <a-form-item v-bind="validateInfos.KEIYAKU_YMD_FM" class="!w-40">
+                <DateJp v-model:value="formData.KEIYAKU_YMD_FM" class="!w-40"
+              /></a-form-item>
+              <span>～</span>
+              <a-form-item class="!w-40">
+                <DateJp
+                  v-model:value="formData.KEIYAKU_YMD_TO"
+                  disabled
+                  class="!w-40" /></a-form-item
+              ><span class="flex items-center"
+                >(契約日を入力する二とで单価を取得します)</span
+              >
             </td>
           </a-col>
-          <a-col class="flex-1">
-            <td class="flex items-center">
-              <span> (契約日を入力する二とで单価を取得します)</span>
-            </td></a-col
-          >
         </a-row>
         <a-row>
           <a-col span="24">
