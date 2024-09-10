@@ -71,9 +71,9 @@
         class="mt-2"
         ref="xTableRef"
         :column-config="{ resizable: true }"
-        :height="height - 356"
+        :height="height - 65"
         :row-config="{ isCurrent: true, isHover: true }"
-        :data="tableData"
+        :data="bankTableData"
         :sort-config="{ trigger: 'cell', orders: ['desc', 'asc'] }"
         :empty-render="{ name: 'NotData' }"
         @cell-dblclick="({ row }) => forwardEdit(row.BANK_CD)"
@@ -189,7 +189,7 @@
         :column-config="{ resizable: true }"
         :height="height - 500"
         :row-config="{ isCurrent: true, isHover: true }"
-        :data="tableData2"
+        :data="sitanTableData"
         :sort-config="{ trigger: 'cell', orders: ['desc', 'asc'] }"
         :empty-render="{ name: 'NotData' }"
         @cell-dblclick="({ row }) => forwardEdit2(row.BANK_CD, row.SITEN_CD)"
@@ -261,9 +261,8 @@ import { changeTableSort } from '@/utils/util'
 import { useTabStore } from '@/store/modules/tab'
 import { useElementSize } from '@vueuse/core'
 import { VxeTableInstance } from 'vxe-pc-ui'
-import { Row } from 'ant-design-vue'
-import { rowProps } from 'ant-design-vue/es/grid/Row'
-import { SearchBankRowVM } from '../type'
+import { SearchBankRowVM } from '../service/8050/type'
+import { SearchBank, SearchSiten } from '../service/8050/service'
 
 //--------------------------------------------------------------------------
 //データ定義
@@ -290,9 +289,7 @@ const keyList = reactive({
 })
 // const KEIYAKUSYA_CD_NAME_LIST = ref<CodeNameModel[]>([])
 
-// const tableData = []
-
-const tableData = ref<SearchBankRowVM[]>([])
+const bankTableData = ref<SearchBankRowVM[]>([])
 
 const createDefaultParams2 = () => {
   return {
@@ -306,50 +303,7 @@ const createDefaultParams2 = () => {
 
 const searchParams2 = reactive(createDefaultParams2())
 
-const tableData2 = [
-  {
-    BANK_CD: '0001',
-    SITEN_CD: '001',
-
-    SITEN_KANA: 'トウキョウ',
-    SITEN_NAME: '東京営業部',
-  },
-  {
-    BANK_CD: '0001',
-    SITEN_CD: '004',
-    SITEN_KANA: 'マルノウチチュウオウ',
-    SITEN_NAME: '丸の内中央',
-  },
-  {
-    BANK_CD: '0001',
-    SITEN_CD: '005',
-
-    SITEN_KANA: 'マルノウチ',
-    SITEN_NAME: '丸の内',
-  },
-  {
-    BANK_CD: '0001',
-    SITEN_CD: '009',
-
-    SITEN_KANA: 'カンダエキマエ',
-    SITEN_NAME: '神田駅前',
-  },
-  {
-    BANK_CD: '0001',
-    SITEN_CD: '013',
-
-    SITEN_KANA: 'チョウソンカイカン',
-    SITEN_NAME: '町村会館',
-  },
-  {
-    BANK_CD: '0001',
-    SITEN_CD: '015',
-
-    SITEN_KANA: 'ツキヂ',
-    SITEN_NAME: '築地',
-  },
-]
-
+const sitanTableData = ref<SearchBankRowVM[]>([])
 //表の高さ
 const headRef = ref(null)
 const layout = {
@@ -395,54 +349,25 @@ onBeforeRouteUpdate((to, from) => {
 
 //検索処理
 const { pageParams, totalCount, searchData, clear } = useSearch({
-  service: undefined,
-  source: tableData,
+  service: SearchBank,
+  source: bankTableData,
   params: toRef(() => searchParams),
   // validate,
 })
-
-const exampleData = [
-  {
-    BANK_CD: '0001',
-    BANK_KANA: 'ミジホ',
-    BANK_NAME: 'みずほ',
-  },
-  {
-    BANK_CD: '0005',
-    BANK_KANA: 'ミツビシUFJ',
-    BANK_NAME: '三菱UFJ',
-  },
-  {
-    BANK_CD: '0009',
-    BANK_KANA: 'ミツイスミトモ',
-    BANK_NAME: '三井住友',
-  },
-  {
-    BANK_CD: '0010',
-    BANK_KANA: 'リンナ',
-    BANK_NAME: 'りんな',
-  },
-  {
-    BANK_CD: '0017',
-    BANK_KANA: 'サイタマリンナ',
-    BANK_NAME: '埼玉りんな',
-  },
-  {
-    BANK_CD: '0033',
-    BANK_KANA: 'ペイペイ',
-    BANK_NAME: 'PayPay',
-  },
-]
-
+//検索処理2
+const {
+  pageParams: pageParams2,
+  totalCount: totalCount2,
+  searchData: searchData2,
+  clear: clear2,
+} = useSearch({
+  service: SearchSiten,
+  source: sitanTableData,
+  params: toRef(() => searchParams2),
+  // validate,
+})
 const searchAll = async () => {
-  tableData.value = exampleData
-
-  // const res = await searchData()
-  // keyList.KI = res.KI
-  // keyList.KEIYAKUSYA_CD = res.KEIYAKUSYA_CD
-  // keyList.KEIYAKUSYA_NAME =
-  //   KEIYAKUSYA_CD_NAME_LIST.value.find((el) => el.CODE === res.KEIYAKUSYA_CD)
-  //     ?.NAME || ''
+  await searchData()
 }
 
 // クリア
@@ -452,7 +377,7 @@ async function reset() {
   searchParams.BANK_NAME = undefined
   searchParams.SEARCH_METHOD = EnumAndOr.AndCode
   xTableRef.value?.clearSort()
-  tableData.value = []
+  bankTableData.value = []
 
   clear()
 }
@@ -479,19 +404,6 @@ async function forwardEdit(BANK_CD) {
     },
   })
 }
-
-//検索処理2
-const {
-  pageParams: pageParams2,
-  totalCount: totalCount2,
-  searchData: searchData2,
-  clear: clear2,
-} = useSearch({
-  service: undefined,
-  source: tableData2,
-  params: toRef(() => searchParams2),
-  // validate,
-})
 
 const searchAll2 = async () => {
   const res = await searchData2()
@@ -563,3 +475,4 @@ th {
   opacity: 0.5;
 }
 </style>
+../service/8050/service../service/8050/type
