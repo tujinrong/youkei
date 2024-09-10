@@ -4,7 +4,12 @@
     <div class="my-2 flex justify-between">
       <a-space :size="20">
         <a-button type="primary" @click="add">新規登録</a-button>
-        <a-button type="primary" @click="edit">変更（表示）</a-button>
+        <a-button
+          type="primary"
+          :disabled="!xTableRef?.getCurrentRecord()"
+          @click="edit"
+          >変更（表示）</a-button
+        >
       </a-space>
       <close-page />
     </div>

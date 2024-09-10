@@ -1,7 +1,15 @@
 <template>
-  <a-modal :visible="visible" :bordered="false" class="mb-2 h-full">
-    <template #title> <h1>（GJ8101）消費税率マスタメンテナンス</h1></template>
-    <div class="self_adaption_table form max-w-160 flex-1">
+  <a-modal
+    :visible="visible"
+    :body-style="{ height: '800px' }"
+    width="1000px"
+    title="（GJ8101）消費税率マスタメンテナンス"
+    centered
+    destroy-on-close
+    :mask-closable="false"
+    @cancel="closeModal"
+  >
+    <div class="edit_table form max-w-160 flex-1">
       <a-row>
         <a-col span="24">
           <th class="required">適用開始日</th>
@@ -41,9 +49,9 @@
 <script setup lang="ts">
 import { Judgement } from '@/utils/judge-edited'
 import { nextTick, onMounted, reactive, watch } from 'vue'
-interface Props {
-  visible: boolean
-}
+// interface Props {
+//   visible: boolean
+// }
 const model = defineModel('visible')
 const editJudge = new Judgement()
 const formData = reactive({
