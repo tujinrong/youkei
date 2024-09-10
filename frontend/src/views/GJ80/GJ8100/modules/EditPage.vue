@@ -9,7 +9,7 @@
     :mask-closable="false"
     @cancel="closeModal"
   >
-    <div class="edit_table form max-w-160 flex-1">
+    <div class="edit_table form max-w-160 flex-1 p-10">
       <a-row>
         <a-col span="24">
           <th class="required">適用開始日</th>
