@@ -29,7 +29,7 @@
                   <range-number
                     v-model:value="formData.SEIKYU_KAISU"
                     :options="KEIYAKU_KBN_CD_NAME_LIST"
-                  /></a-form-item>
+                /></a-form-item>
               </td>
             </a-col>
             <a-col v-bind="layout">
@@ -61,7 +61,7 @@
                   <range-select
                     v-model:value="formData.KEIYAKU_KBN"
                     :options="KEIYAKU_KBN_CD_NAME_LIST"
-                  /></a-form-item>
+                /></a-form-item>
               </td>
             </a-col>
             <a-col v-bind="layout">
@@ -103,7 +103,7 @@
                   <range-select
                     v-model:value="formData.JIMUITAKU_CD"
                     :options="ITAKU_CD_NAME_LIST"
-                  /></a-form-item>
+                /></a-form-item>
               </td>
             </a-col>
             <a-col v-bind="layout">
@@ -113,7 +113,7 @@
                   <range-select
                     v-model:value="formData.KEIYAKUSYA_CD"
                     :options="KEIYAKUSYA_CD_NAME_LIST"
-                  /></a-form-item>
+                /></a-form-item>
               </td>
             </a-col>
           </a-row>
@@ -121,9 +121,11 @@
             <a-col :span="24">
               <div class="mb-2 header_operation flex justify-between w-full">
                 <a-space :size="20">
-                  <a-button type="primary" @click="onPreview">プレビュー</a-button>
+                  <a-button type="primary" @click="onPreview"
+                    >プレビュー</a-button
+                  >
                   <a-button type="primary">EXCEL出力</a-button>
-                  <a-button type="primary" @click="clear">クリア</a-button>
+                  <a-button type="primary" @click="clear">条件クリア</a-button>
                 </a-space>
                 <close-page />
               </div>
@@ -271,7 +273,11 @@ const rules = reactive({
           VALUE_TO
         }
       ) => {
-        const result = rangeCheck(value.VALUE_FM, value.VALUE_TO, '請求・返還日')
+        const result = rangeCheck(
+          value.VALUE_FM,
+          value.VALUE_TO,
+          '請求・返還日'
+        )
         if (!result.flag) return Promise.reject(result.content)
         return Promise.resolve()
       },
@@ -290,7 +296,11 @@ const rules = reactive({
           VALUE_TO
         }
       ) => {
-        const result = rangeCheck(value.VALUE_FM, value.VALUE_TO, '入金・振込日')
+        const result = rangeCheck(
+          value.VALUE_FM,
+          value.VALUE_TO,
+          '入金・振込日'
+        )
         if (!result.flag) return Promise.reject(result.content)
         return Promise.resolve()
       },

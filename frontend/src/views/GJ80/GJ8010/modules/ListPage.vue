@@ -20,7 +20,7 @@
         </a-row>
       </div>
       <div class="mt-2 flex">
-        <a-space>
+        <a-space :size="20">
           <a-button
             type="primary"
             :disabled="!searchParams.SYURUI_KBN"

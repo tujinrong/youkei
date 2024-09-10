@@ -83,11 +83,15 @@
         >
       </div>
       <div class="flex">
-        <a-space>
+        <a-space :size="20">
           <a-button type="primary" @click="searchAll">検索</a-button>
-          <a-button type="primary" @click="forwardNew">新規登録</a-button>
-          <a-button type="primary" @click="reset">クリア</a-button>
-          <a-button type="primary" @click="reset">CSV出力</a-button>
+          <a-button type="primary" @click="reset">条件クリア</a-button>
+          <a-button class="ml-20" type="primary" @click="forwardNew"
+            >新規登録</a-button
+          >
+          <a-button class="ml-20" type="primary" @click="reset"
+            >CSV出力</a-button
+          >
         </a-space>
         <close-page />
       </div>

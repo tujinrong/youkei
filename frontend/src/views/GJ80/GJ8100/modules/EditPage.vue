@@ -36,13 +36,13 @@
       </a-row>
     </div>
     <template #footer>
-      <a-button style="float: left" class="warning-btn" @click="save">
-        登録
-      </a-button>
-      <a-button style="float: left" type="primary" danger @click="delete">
-        削除
-      </a-button>
-      <a-button key="back" type="primary" @click="closeModal">閉じる</a-button>
+      <div class="pt-2 flex justify-between border-t-1">
+        <a-space :size="20">
+          <a-button class="warning-btn" @click="save"> 登録 </a-button>
+          <a-button type="primary" danger @click="delete"> 削除 </a-button>
+        </a-space>
+        <a-button type="primary" @click="closeModal">閉じる</a-button>
+      </div>
     </template>
   </a-modal>
 </template>

@@ -163,7 +163,7 @@
               <div class="mb-2 header_operation flex justify-between w-full">
                 <a-space :size="20">
                   <a-button type="primary">プレビュー</a-button>
-                  <a-button type="primary" @click="clear">クリア</a-button>
+                  <a-button type="primary" @click="clear">条件クリア</a-button>
                 </a-space>
                 <close-page />
               </div>

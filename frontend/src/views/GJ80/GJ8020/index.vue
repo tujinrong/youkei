@@ -5,7 +5,7 @@
       <div class="my-4 flex justify-between">
         <a-space :size="20">
           <a-button class="warning-btn" @click="save">保存</a-button>
-          <a-button type="primary" danger @click="cancel">キャンセル</a-button>
+          <a-button type="primary" @click="cancel">キャンセル</a-button>
         </a-space>
         <close-page />
       </div>
@@ -121,12 +121,14 @@
 
           <a-col span="24">
             <th>当初対象積立金納付期限</th>
-            <td>
+            <td class="items-center">
               <DateJp
                 v-model:value="formData.NOFU_KIGEN"
                 style="width: 33.3%"
               />
-              (左記期限までに入金済みの時は、契約日は4月1 日となる。)
+              <span>
+                (左記期限までに入金済みの時は、契約日は4月1日となる。)</span
+              >
             </td>
           </a-col>
           <a-col span="24">

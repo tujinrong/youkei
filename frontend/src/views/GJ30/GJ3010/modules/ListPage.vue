@@ -44,7 +44,7 @@
         ></a-row>
       </div>
       <div class="flex mt-2">
-        <a-space>
+        <a-space :size="20">
           <a-button type="primary" :disabled="isSearched" @click="search"
             >検索</a-button
           >

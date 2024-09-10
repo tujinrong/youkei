@@ -5,7 +5,7 @@
       <div class="my-4 flex justify-between">
         <a-space :size="20">
           <a-button class="warning-btn" @click="save">保存</a-button>
-          <a-button type="primary" danger @click="cancel">キャンセル</a-button>
+          <a-button type="primary" @click="cancel">キャンセル</a-button>
         </a-space>
         <close-page />
       </div>

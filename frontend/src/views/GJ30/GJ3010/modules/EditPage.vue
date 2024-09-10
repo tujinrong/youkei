@@ -68,7 +68,7 @@
               <a-button type="primary" :disabled="searchParams.syuturyoku !== 5"
                 >請求書取消</a-button
               >
-              <a-button type="primary">クリア</a-button>
+              <a-button type="primary">条件クリア</a-button>
             </a-space>
             <a-button class="ml-a" type="primary" @click="goList"
               >一覧</a-button

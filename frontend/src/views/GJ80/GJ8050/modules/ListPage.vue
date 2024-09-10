@@ -46,10 +46,12 @@
         >
       </div>
       <div class="flex">
-        <a-space>
+        <a-space :size="20">
           <a-button type="primary" @click="searchAll">検索</a-button>
-          <a-button type="primary" @click="forwardNew">新規登録</a-button>
-          <a-button type="primary" @click="reset">クリア</a-button>
+          <a-button type="primary" @click="reset">条件クリア</a-button>
+          <a-button class="ml-20" type="primary" @click="forwardNew"
+            >新規登録</a-button
+          >
           <a-button type="primary">プレビュー</a-button>
         </a-space>
         <close-page />
@@ -159,13 +161,14 @@
         >
       </div>
       <div class="flex">
-        <a-space>
+        <a-space :size="20">
           <a-button type="primary" @click="searchAll2">検索</a-button>
-          <a-button type="primary" @click="forwardNew2">新規登録</a-button>
-          <a-button type="primary" @click="reset2">クリア</a-button>
+          <a-button type="primary" @click="reset2">条件クリア</a-button>
+          <a-button class="ml-20" type="primary" @click="forwardNew2"
+            >新規登録</a-button
+          >
           <a-button type="primary">プレビュー</a-button>
         </a-space>
-        <close-page />
       </div>
       <div v-if="!isSelectBank" class="search-disabled-mask bg-disabled"></div
     ></a-card>

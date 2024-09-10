@@ -9,11 +9,16 @@
               <th>出力区分</th>
               <td>
                 <a-form-item v-bind="validateInfos.SYUTURYOKU_KBN">
-                  <a-radio-group v-model:value="formData.SYUTURYOKU_KBN" class="mt-1">
-                    <a-radio :value=1>仮発行</a-radio>
-                    <a-radio :value=2>初回発行</a-radio>
-                    <a-radio :value=3>再発行(初回と同内容)</a-radio>
-                    <a-radio :value=4>修正発行(納付期限、発行日、発信番号変更可能)</a-radio>
+                  <a-radio-group
+                    v-model:value="formData.SYUTURYOKU_KBN"
+                    class="mt-1"
+                  >
+                    <a-radio :value="1">仮発行</a-radio>
+                    <a-radio :value="2">初回発行</a-radio>
+                    <a-radio :value="3">再発行(初回と同内容)</a-radio>
+                    <a-radio :value="4"
+                      >修正発行(納付期限、発行日、発信番号変更可能)</a-radio
+                    >
                   </a-radio-group>
                 </a-form-item>
               </td>
@@ -69,7 +74,10 @@
                   <DateJp
                     v-model:value="formData.NOFUKIGEN_DATE"
                     class="w-full"
-                    :disabled="formData.SYUTURYOKU_KBN === 1 || formData.SYUTURYOKU_KBN === 3"
+                    :disabled="
+                      formData.SYUTURYOKU_KBN === 1 ||
+                      formData.SYUTURYOKU_KBN === 3
+                    "
                   />
                 </a-form-item>
               </td>
@@ -81,7 +89,10 @@
                   <DateJp
                     v-model:value="formData.SEIKYU_HAKKO_DATE"
                     class="w-full"
-                    :disabled="formData.SYUTURYOKU_KBN === 1 || formData.SYUTURYOKU_KBN === 3"
+                    :disabled="
+                      formData.SYUTURYOKU_KBN === 1 ||
+                      formData.SYUTURYOKU_KBN === 3
+                    "
                   />
                 </a-form-item>
               </td>
@@ -91,16 +102,26 @@
               <td>
                 <a-form-item v-bind="validateInfos.KI">
                   <span class="!align-middle">日鶏</span>
-                  <a-input v-model:value="formData.KI"
-                           :disabled="formData.SYUTURYOKU_KBN === 1 || formData.SYUTURYOKU_KBN === 3"
-                           style="width: 50%" />
+                  <a-input
+                    v-model:value="formData.KI"
+                    :disabled="
+                      formData.SYUTURYOKU_KBN === 1 ||
+                      formData.SYUTURYOKU_KBN === 3
+                    "
+                    style="width: 50%"
+                  />
                   <span class="!align-middle">発</span>
                 </a-form-item>
                 <a-form-item v-bind="validateInfos.KI">
                   <span class="!align-middle">第</span>
-                  <a-input v-model:value="formData.KI"
-                           :disabled="formData.SYUTURYOKU_KBN === 1 || formData.SYUTURYOKU_KBN === 3"
-                           style="width: 50%"/>
+                  <a-input
+                    v-model:value="formData.KI"
+                    :disabled="
+                      formData.SYUTURYOKU_KBN === 1 ||
+                      formData.SYUTURYOKU_KBN === 3
+                    "
+                    style="width: 50%"
+                  />
                   <span class="!align-middle">号</span>
                 </a-form-item>
               </td>
@@ -112,7 +133,7 @@
                   <range-select
                     v-model:value="formData.JIMUITAKU_CD"
                     :options="ITAKU_CD_NAME_LIST"
-                  /></a-form-item>
+                /></a-form-item>
               </td>
             </a-col>
             <a-col v-bind="layout">
@@ -122,7 +143,7 @@
                   <range-select
                     v-model:value="formData.KEIYAKUSYA_CD"
                     :options="KEIYAKUSYA_CD_NAME_LIST"
-                  /></a-form-item>
+                /></a-form-item>
               </td>
             </a-col>
           </a-row>
@@ -130,8 +151,10 @@
             <a-col :span="24">
               <div class="mb-2 header_operation flex justify-between w-full">
                 <a-space :size="20">
-                  <a-button type="primary" @click="onPreview">プレビュー</a-button>
-                  <a-button type="primary" @click="clear">クリア</a-button>
+                  <a-button type="primary" @click="onPreview"
+                    >プレビュー</a-button
+                  >
+                  <a-button type="primary" @click="clear">条件クリア</a-button>
                 </a-space>
                 <close-page />
               </div>
@@ -149,7 +172,7 @@ import { ITEM_REQUIRE_ERROR } from '@/constants/msg'
 import { Form } from 'ant-design-vue'
 import { Init, Preview } from './service'
 import { PreviewRequest } from './type'
-import DateJp from "@/components/Selector/DateJp/index.vue";
+import DateJp from '@/components/Selector/DateJp/index.vue'
 
 //--------------------------------------------------------------------------
 //データ定義
@@ -169,7 +192,7 @@ const createDefaultParams = () => {
     KEIYAKUSYA_CD: {
       VALUE_FM: undefined as number | undefined,
       VALUE_TO: undefined as number | undefined,
-    }
+    },
   }
 }
 const formData = reactive(createDefaultParams() as PreviewRequest)

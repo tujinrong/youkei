@@ -131,7 +131,7 @@
         </a-space>
       </div>
       <div class="flex">
-        <a-space>
+        <a-space :size="20">
           <a-button type="primary" @click="search">検索</a-button>
           <a-button type="primary" @click="goForward(PageStatus.New)"
             >新規登録</a-button
@@ -142,7 +142,7 @@
             @click="goForward(PageStatus.Detail)"
             >契約情報登録</a-button
           >
-          <a-button type="primary" @click="clear">クリア</a-button>
+          <a-button type="primary" @click="clear">条件クリア</a-button>
         </a-space>
         <AButton type="primary" class="ml-a" @click="tabStore.removeActiveTab">
           閉じる

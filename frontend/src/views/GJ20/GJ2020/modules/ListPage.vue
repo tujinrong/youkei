@@ -20,7 +20,9 @@
               <a-form-item v-bind="validateInfos.SYORI_KBN">
                 <a-radio-group v-model:value="formData.SYORI_KBN" class="mt-1">
                   <a-radio :value="0">請求·返還処理</a-radio>
-                  <a-radio :value="1">請求·返還取消処理(取消対象に入金済が存在する場合は、取消不可)</a-radio>
+                  <a-radio :value="1"
+                    >請求·返還取消処理(取消対象に入金済が存在する場合は、取消不可)</a-radio
+                  >
                 </a-radio-group>
               </a-form-item>
             </td>
@@ -29,7 +31,7 @@
             <th class="required">対象期</th>
             <td>
               <a-form-item v-bind="validateInfos.KI">
-<!--                <span class="!align-middle">第</span>-->
+                <!--                <span class="!align-middle">第</span>-->
                 <a-input-number
                   v-model:value="formData.KI"
                   :min="1"
@@ -37,19 +39,28 @@
                   :maxlength="2"
                   style="width: 100%"
                 ></a-input-number>
-<!--                <span class="!align-middle">期</span>-->
+                <!--                <span class="!align-middle">期</span>-->
               </a-form-item>
             </td>
             <th>請求·返還回数</th>
             <td>
               <a-form-item v-bind="validateInfos.SEIKYU_KAISU">
                 <div class="flex items-center">
-                  <a-input v-model:value="formData.SEIKYU_KAISU" disabled style="width: 50%;" />
+                  <a-input
+                    v-model:value="formData.SEIKYU_KAISU"
+                    disabled
+                    style="width: 50%"
+                  />
                   <span>(入力&表示)</span>
                 </div>
               </a-form-item>
             </td>
-            <read-only thWidth="100" th="手数料率" :td="formData.TESURYO_KAISU" after="%" />
+            <read-only
+              thWidth="100"
+              th="手数料率"
+              :td="formData.TESURYO_KAISU"
+              after="%"
+            />
           </a-col>
           <a-col span="24">
             <th class="required">徵収·返還区分</th>
@@ -105,10 +116,10 @@
         </a-row>
       </div>
       <div class="my-2 flex">
-        <a-space>
+        <a-space :size="20">
           <a-button type="primary" @click="search">検索</a-button>
           <a-button type="primary" @click="save">実行</a-button>
-          <a-button type="primary" @click="clear">クリア</a-button>
+          <a-button type="primary" @click="clear">条件クリア</a-button>
         </a-space>
         <AButton type="primary" class="ml-a" @click="tabStore.removeActiveTab">
           閉じる
@@ -137,26 +148,10 @@
         :empty-render="{ name: 'NotData' }"
         @sort-change="(e) => changeTableSort(e, toRef(pageParams, 'ORDER_BY'))"
       >
-        <vxe-column
-          field="KI"
-          title="対象期"
-          width="80"
-          sortable
-        >
+        <vxe-column field="KI" title="対象期" width="80" sortable> </vxe-column>
+        <vxe-column field="SEIKYU_KAISU" title="回数" width="80" sortable>
         </vxe-column>
-        <vxe-column
-          field="SEIKYU_KAISU"
-          title="回数"
-          width="80"
-          sortable
-        >
-        </vxe-column>
-        <vxe-column
-          field="SYORI_DATE"
-          title="処理日"
-          min-width="100"
-          sortable
-        >
+        <vxe-column field="SYORI_DATE" title="処理日" min-width="100" sortable>
         </vxe-column>
         <vxe-column
           field="KEIYAKU_HENKO_KBN"
@@ -220,8 +215,8 @@ import { useRoute, useRouter } from 'vue-router'
 import { useTabStore } from '@/store/modules/tab'
 import { SearchRequest, DetailVM } from '../type'
 import { VxeTableInstance } from 'vxe-table'
-import DateJp from "@/components/Selector/DateJp/index.vue";
-import {Form} from "ant-design-vue";
+import DateJp from '@/components/Selector/DateJp/index.vue'
+import { Form } from 'ant-design-vue'
 //--------------------------------------------------------------------------
 //データ定義
 //--------------------------------------------------------------------------
@@ -316,7 +311,7 @@ const tableDefault = {
   SEIKYU_TAISYO_SYASU: 1,
   TUMITATE_KINGAKU: 730,
   CYOSYU_KINGAKU: 730,
-  HENKAN_KINGAKU: 0
+  HENKAN_KINGAKU: 0,
 }
 
 const { pageParams, totalCount, searchData, clear } = useSearch({
@@ -342,7 +337,6 @@ function save() {
     xTableRef.value.setCurrentRow(tableData.value[0])
   }
 }
-
 </script>
 <style lang="scss" scoped>
 :deep(th) {
