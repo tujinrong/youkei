@@ -14,8 +14,8 @@ Namespace JBD.GJS.Service
         ''' </summary>
         Public Shared Function [CStr](obj As Object) As String
             If obj Is Nothing OrElse obj Is Convert.DBNull Then Return String.Empty
-            If TypeOf obj Is String Then Return obj.ToString()
-            Return String.Empty
+            'If TypeOf obj Is String Then Return obj.ToString()
+            Return obj.ToString()
         End Function
 
         ''' <summary>
@@ -27,7 +27,7 @@ Namespace JBD.GJS.Service
                 If String.IsNullOrEmpty([CStr](obj)) Then Return Nothing
                 Return obj.ToString()
             End If
-            Return String.Empty
+            Return obj.ToString()
         End Function
 
         ''' <summary>
