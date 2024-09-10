@@ -7,8 +7,6 @@
 ' 変更履歴　:
 ' *******************************************************************
 
-Imports System.Runtime.InteropServices
-
 Namespace JBD.GJS.Service.GJ8030
 
     ''' <summary>
