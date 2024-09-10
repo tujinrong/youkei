@@ -75,6 +75,11 @@ import { Form, message } from 'ant-design-vue'
 import { nextTick, onMounted, reactive, ref, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { Judgement } from '@/utils/judge-edited'
+import {
+  DeleteSiten,
+  InitSitenDetail,
+  SaveSiten,
+} from '../service/8052/service'
 //---------------------------------------------------------------------------
 //属性
 //---------------------------------------------------------------------------
@@ -134,30 +139,25 @@ const { validate, clearValidate, validateInfos, resetFields } = Form.useForm(
 //--------------------------------------------------------------------------
 onMounted(async () => {
   formData.BANK_CD = String(route.query.BANK_CD)
-  console.log(formData.BANK_CD)
-
   if (!isNew) {
     formData.SITEN_CD = String(route.query.SITEN_CD)
+    InitSitenDetail({
+      BANK_CD: formData.BANK_CD ?? '',
+      SITEN_CD: formData.SITEN_CD ?? '',
+      EDIT_KBN: EnumEditKbn.Edit,
+    })
+      .then((res) => {
+        Object.assign(formData, res.SITEN)
+        upddttm = res.SITEN.UP_DATE
+        nextTick(() => {
+          editJudge.reset()
+          clearValidate()
+        })
+      })
+      .catch((error) => {
+        router.push({ name: route.name, query: { refresh: '1' } })
+      })
   }
-  nextTick(() => editJudge.reset())
-  // InitDetail({
-  //   KI: formData.KI,
-  //   KEIYAKUSYA_CD: formData.KEIYAKUSYA_CD,
-  //   NOJO_CD: formData.NOJO_CD,
-  //   EDIT_KBN: isNew ? EnumEditKbn.Add : EnumEditKbn.Edit,
-  // })
-  //   .then((res) => {
-  //     KEN_CD_NAME_LIST.value = res.KEN_CD_NAME_LIST
-  //     if (!isNew) {
-  //       Object.assign(formData, res.KEIYAKUSYA_NOJO)
-  //       formData.ADDR_1 = res.KEIYAKUSYA_NOJO.ADDR_1
-  //       upddttm = res.KEIYAKUSYA_NOJO.UP_DATE
-  //     }
-  //     nextTick(() => editJudge.reset())
-  //   })
-  //   .catch((error) => {
-  //     router.push({ name: route.name, query: { refresh: '1' } })
-  //   })
 })
 
 //--------------------------------------------------------------------------
@@ -191,13 +191,10 @@ const saveData = async () => {
     content: SAVE_CONFIRM.Msg,
     onOk: async () => {
       try {
-        // await Save({
-        //   KEIYAKUSYA_NOJO: {
-        //     ...formData,
-        //     UP_DATE: isNew ? undefined : upddttm,
-        //   },
-        //   EDIT_KBN: isNew ? EnumEditKbn.Add : EnumEditKbn.Edit,
-        // })
+        await SaveSiten({
+          SITEN: { ...formData, UP_DATE: upddttm },
+          EDIT_KBN: isNew ? EnumEditKbn.Add : EnumEditKbn.Edit,
+        })
         router.push({ name: route.name, query: { refresh: '1' } })
         message.success(SAVE_OK_INFO.Msg)
       } catch (error) {}
@@ -212,13 +209,11 @@ const deleteData = () => {
     content: DELETE_CONFIRM.Msg,
     onOk: async () => {
       try {
-        // await Delete({
-        //   KI: formData.KI,
-        //   KEIYAKUSYA_CD: formData.KEIYAKUSYA_CD,
-        //   NOJO_CD: formData.NOJO_CD,
-        //   UP_DATE: upddttm,
-        //   EDIT_KBN: EnumEditKbn.Edit,
-        // })
+        await DeleteSiten({
+          BANK_CD: formData.BANK_CD,
+          SITEN_CD: formData.SITEN_CD,
+          UP_DATE: upddttm,
+        })
         router.push({ name: route.name, query: { refresh: '1' } })
         message.success(DELETE_OK_INFO.Msg)
       } catch (error) {}

@@ -27,6 +27,7 @@
                   <a-input
                     v-model:value="formData.BANK_CD"
                     :disabled="!isNew"
+                    :maxlength="4"
                   ></a-input>
                 </a-form-item>
               </td>
@@ -67,6 +68,7 @@ import { Form, message } from 'ant-design-vue'
 import { nextTick, onMounted, reactive, ref, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { Judgement } from '@/utils/judge-edited'
+import { DeleteBank, InitBankDetail, SaveBank } from '../service/8051/service'
 //---------------------------------------------------------------------------
 //属性
 //---------------------------------------------------------------------------
@@ -94,6 +96,10 @@ const rules = reactive({
       required: true,
       message: ITEM_REQUIRE_ERROR.Msg.replace('{0}', '金融機関コード'),
     },
+    {
+      min: 4,
+      message: '桁数が正しくない、桁数は4です。',
+    },
   ],
   BANK_KANA: [
     {
@@ -120,26 +126,22 @@ const { validate, clearValidate, validateInfos, resetFields } = Form.useForm(
 onMounted(async () => {
   if (!isNew) {
     formData.BANK_CD = String(route.query.BANK_CD)
+    InitBankDetail({
+      BANK_CD: formData.BANK_CD ?? '',
+      EDIT_KBN: EnumEditKbn.Edit,
+    })
+      .then((res) => {
+        Object.assign(formData, res.BANK)
+        upddttm = res.BANK.UP_DATE
+        nextTick(() => {
+          editJudge.reset()
+          clearValidate()
+        })
+      })
+      .catch((error) => {
+        router.push({ name: route.name, query: { refresh: '1' } })
+      })
   }
-  nextTick(() => editJudge.reset())
-  // InitDetail({
-  //   KI: formData.KI,
-  //   KEIYAKUSYA_CD: formData.KEIYAKUSYA_CD,
-  //   NOJO_CD: formData.NOJO_CD,
-  //   EDIT_KBN: isNew ? EnumEditKbn.Add : EnumEditKbn.Edit,
-  // })
-  //   .then((res) => {
-  //     KEN_CD_NAME_LIST.value = res.KEN_CD_NAME_LIST
-  //     if (!isNew) {
-  //       Object.assign(formData, res.KEIYAKUSYA_NOJO)
-  //       formData.ADDR_1 = res.KEIYAKUSYA_NOJO.ADDR_1
-  //       upddttm = res.KEIYAKUSYA_NOJO.UP_DATE
-  //     }
-  //     nextTick(() => editJudge.reset())
-  //   })
-  //   .catch((error) => {
-  //     router.push({ name: route.name, query: { refresh: '1' } })
-  //   })
 })
 
 //--------------------------------------------------------------------------
@@ -173,13 +175,10 @@ const saveData = async () => {
     content: SAVE_CONFIRM.Msg,
     onOk: async () => {
       try {
-        // await Save({
-        //   KEIYAKUSYA_NOJO: {
-        //     ...formData,
-        //     UP_DATE: isNew ? undefined : upddttm,
-        //   },
-        //   EDIT_KBN: isNew ? EnumEditKbn.Add : EnumEditKbn.Edit,
-        // })
+        await SaveBank({
+          BANK: { ...formData, UP_DATE: upddttm },
+          EDIT_KBN: isNew ? EnumEditKbn.Add : EnumEditKbn.Edit,
+        })
         router.push({ name: route.name, query: { refresh: '1' } })
         message.success(SAVE_OK_INFO.Msg)
       } catch (error) {}
@@ -194,14 +193,11 @@ const deleteData = () => {
     content: DELETE_CONFIRM.Msg,
     onOk: async () => {
       try {
-        // await Delete({
-        //   KI: formData.KI,
-        //   KEIYAKUSYA_CD: formData.KEIYAKUSYA_CD,
-        //   NOJO_CD: formData.NOJO_CD,
-        //   UP_DATE: upddttm,
-        //   EDIT_KBN: EnumEditKbn.Edit,
-        // })
-        router.push({ name: route.name, query: { refresh: '1' } })
+        await DeleteBank({
+          BANK_CD: formData.BANK_CD,
+          UP_DATE: upddttm,
+        })
+        router.push({ name: route.name, query: { refresh: 'delete' } })
         message.success(DELETE_OK_INFO.Msg)
       } catch (error) {}
     },

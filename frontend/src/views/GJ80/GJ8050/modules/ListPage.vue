@@ -52,7 +52,7 @@
           <a-button class="ml-20" type="primary" @click="forwardNew"
             >新規登録</a-button
           >
-          <a-button type="primary">プレビュー</a-button>
+          <a-button type="primary" @click="preview1">プレビュー</a-button>
         </a-space>
         <close-page />
       </div>
@@ -99,9 +99,6 @@
           :params="{ order: 2 }"
           :resizable="true"
         >
-          <template #default="{ row }">
-            <a @click="forwardEdit(row.BANK_CD)">{{ row.BANK_KANA }}</a>
-          </template>
         </vxe-column>
         <vxe-column
           field="BANK_NAME"
@@ -167,7 +164,7 @@
           <a-button class="ml-20" type="primary" @click="forwardNew2"
             >新規登録</a-button
           >
-          <a-button type="primary">プレビュー</a-button>
+          <a-button type="primary" @click="preview2">プレビュー</a-button>
         </a-space>
       </div>
       <div v-if="!isSelectBank" class="search-disabled-mask bg-disabled"></div
@@ -176,7 +173,7 @@
       <a-pagination
         v-model:current="pageParams2.PAGE_NUM"
         v-model:page-size="pageParams2.PAGE_SIZE"
-        :total="totalCount"
+        :total="totalCount2"
         :page-size-options="['10', '25', '50', '100']"
         :show-total="(total) => `抽出件数： ${total} 件`"
         show-less-items
@@ -203,11 +200,6 @@
           :params="{ order: 1 }"
           :resizable="true"
         >
-          <template #default="{ row }">
-            <a @click="forwardEdit2(row.BANK_CD, row.SITEN_CD)">{{
-              row.SITEN_CD
-            }}</a>
-          </template>
         </vxe-column>
         <vxe-column
           field="SITEN_CD"
@@ -231,11 +223,6 @@
           :params="{ order: 3 }"
           :resizable="false"
         >
-          <template #default="{ row }">
-            <a @click="forwardEdit2(row.BANK_CD, row.SITEN_CD)">{{
-              row.SITEN_KANA
-            }}</a>
-          </template>
         </vxe-column>
         <vxe-column
           field="SITEN_NAME"
@@ -261,8 +248,13 @@ import { changeTableSort } from '@/utils/util'
 import { useTabStore } from '@/store/modules/tab'
 import { useElementSize } from '@vueuse/core'
 import { VxeTableInstance } from 'vxe-pc-ui'
-import { SearchBankRowVM } from '../service/8050/type'
-import { SearchBank, SearchSiten } from '../service/8050/service'
+import { SearchBankRowVM, SearchSitenRowVM } from '../service/8050/type'
+import {
+  PreviewBank,
+  PreviewSiten,
+  SearchBank,
+  SearchSiten,
+} from '../service/8050/service'
 
 //--------------------------------------------------------------------------
 //データ定義
@@ -276,34 +268,29 @@ const xTableRef2 = ref<VxeTableInstance>()
 
 const createDefaultParams = () => {
   return {
-    BANK_CD: undefined,
-    BANK_KANA: undefined,
-    BANK_NAME: undefined,
+    BANK_CD: '',
+    BANK_KANA: '',
+    BANK_NAME: '',
     SEARCH_METHOD: EnumAndOr.AndCode,
   }
 }
 const searchParams = reactive(createDefaultParams())
 
-const keyList = reactive({
-  BANK_CD: undefined,
-})
-// const KEIYAKUSYA_CD_NAME_LIST = ref<CodeNameModel[]>([])
-
 const bankTableData = ref<SearchBankRowVM[]>([])
 
 const createDefaultParams2 = () => {
   return {
-    BANK_CD: undefined,
-    SITEN_CD: undefined,
-    SITEN_KANA: undefined,
-    SITEN_NAME: undefined,
+    BANK_CD: '',
+    SITEN_CD: '',
+    SITEN_KANA: '',
+    SITEN_NAME: '',
     SEARCH_METHOD: EnumAndOr.AndCode,
   }
 }
 
 const searchParams2 = reactive(createDefaultParams2())
 
-const sitanTableData = ref<SearchBankRowVM[]>([])
+const sitanTableData = ref<SearchSitenRowVM[]>([])
 //表の高さ
 const headRef = ref(null)
 const layout = {
@@ -315,6 +302,7 @@ const layout = {
 const cardRef = ref()
 const { height } = useElementSize(cardRef)
 const currentRow = ref<SearchBankRowVM | null>(null)
+const currentRow2 = ref<SearchSitenRowVM | null>(null)
 const isSelectBank = computed(() => currentRow.value !== null)
 //--------------------------------------------------------------------------
 //計算定義
@@ -323,24 +311,29 @@ const isSelectBank = computed(() => currentRow.value !== null)
 //---------------------------------------------------------------------------
 //フック関数
 //--------------------------------------------------------------------------
-// onMounted(() => {
-//   getInitData(searchParams.KI, true)
-// })
+
 watch(
   () => xTableRef.value?.getCurrentRecord(),
   (val) => {
     currentRow.value = val
+    searchParams2.BANK_CD = currentRow.value?.BANK_CD ?? ''
+  }
+)
+
+watch(
+  () => xTableRef2.value?.getCurrentRecord(),
+  (val) => {
+    currentRow2.value = val
   }
 )
 
 //初期化処理
 
 onBeforeRouteUpdate((to, from) => {
-  if (to.query.refresh) {
-    pageParams.PAGE_NUM = 1
-    pageParams2.PAGE_NUM = 1
-    searchAll()
-    searchAll2()
+  if (to.query.refresh == 'delete') {
+    searchAll().then((res) => {})
+    // reset()
+    // reset2()
   }
 })
 //--------------------------------------------------------------------------
@@ -366,22 +359,33 @@ const {
   params: toRef(() => searchParams2),
   // validate,
 })
-const searchAll = async () => {
+const searchAll = async (deleteflg?) => {
   await searchData()
+  if (xTableRef.value && bankTableData.value.length > 0) {
+    xTableRef.value.setCurrentRow(bankTableData.value[0])
+  }
 }
-
+const searchAll2 = async () => {
+  await searchData2()
+  if (xTableRef2.value && sitanTableData.value.length > 0) {
+    xTableRef2.value.setCurrentRow(sitanTableData.value[0])
+  }
+}
 // クリア
 async function reset() {
-  searchParams.BANK_CD = undefined
-  searchParams.BANK_KANA = undefined
-  searchParams.BANK_NAME = undefined
-  searchParams.SEARCH_METHOD = EnumAndOr.AndCode
+  Object.assign(searchParams, createDefaultParams())
   xTableRef.value?.clearSort()
   bankTableData.value = []
-
   clear()
 }
+// クリア2
+async function reset2() {
+  Object.assign(searchParams2, createDefaultParams2())
+  xTableRef2.value?.clearSort()
+  clear2()
+}
 
+//銀行
 async function forwardNew() {
   // await validate()
   router.push({
@@ -392,7 +396,6 @@ async function forwardNew() {
     },
   })
 }
-
 async function forwardEdit(BANK_CD) {
   // await validate()
   router.push({
@@ -404,37 +407,22 @@ async function forwardEdit(BANK_CD) {
     },
   })
 }
-
-const searchAll2 = async () => {
-  const res = await searchData2()
-
-  // keyList.KI = res.KI
-  // keyList.KEIYAKUSYA_CD = res.KEIYAKUSYA_CD
-  // keyList.KEIYAKUSYA_NAME =
-  //   KEIYAKUSYA_CD_NAME_LIST.value.find((el) => el.CODE === res.KEIYAKUSYA_CD)
-  //     ?.NAME || ''
+function preview1() {
+  PreviewBank({ ...searchParams })
 }
 
-// クリア2
-async function reset2() {
-  searchParams2.BANK_CD = undefined
-  searchParams2.SITEN_CD = undefined
-  searchParams2.SITEN_KANA = undefined
-  searchParams2.SITEN_NAME = undefined
-  searchParams2.SEARCH_METHOD = EnumAndOr.AndCode
-  xTableRef2.value?.clearSort()
-  clear2()
-}
-
+//支店
 async function forwardNew2() {
-  keyList.BANK_CD = '001'
   // await validate()
   router.push({
     name: route.name,
     query: {
       status: PageStatus.New,
       editPage: 2,
-      BANK_CD: keyList.BANK_CD,
+      BANK_CD:
+        sitanTableData.value.length > 0
+          ? currentRow2.value?.BANK_CD
+          : currentRow.value?.BANK_CD,
     },
   })
 }
@@ -449,6 +437,10 @@ async function forwardEdit2(BANK_CD, SITEN_CD) {
       SITEN_CD: SITEN_CD,
     },
   })
+}
+
+function preview2() {
+  PreviewSiten({ ...searchParams2 })
 }
 //--------------------------------------------------------------------------
 //監視定義

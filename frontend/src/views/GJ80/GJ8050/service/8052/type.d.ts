@@ -41,7 +41,7 @@ export interface DeleteSitenRequest extends DaRequestBase {
 /**初期化処理(詳細画面) */
 export interface InitSitenDetailResponse extends DaResponseBase {
   /**金融機関情報 */
-  Siten: SitenDetailVM
+  SITEN: SitenDetailVM
 }
 //-------------------------------------------------------------------
 //ビューモデル
