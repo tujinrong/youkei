@@ -82,6 +82,12 @@
         <a-space>
           <a-button type="primary" @click="searchAll">検索</a-button>
           <a-button type="primary" @click="forwardNew">新規登録</a-button>
+          <a-button
+            type="primary"
+            :disabled="!isDataSelected"
+            @click="forwardEdit(xTableRef?.getCurrentRecord().NOJO_CD)"
+            >変更(表示)</a-button
+          >
           <a-button type="primary" @click="reset">クリア</a-button>
         </a-space>
         <close-page />
@@ -218,7 +224,9 @@ const { validate, clearValidate, validateInfos } = Form.useForm(
 //--------------------------------------------------------------------------
 //計算定義
 //--------------------------------------------------------------------------
-
+const isDataSelected = computed(() => {
+  return tableData.value.length > 0 && xTableRef.value?.getCurrentRecord()
+})
 //---------------------------------------------------------------------------
 //フック関数
 //--------------------------------------------------------------------------
@@ -302,6 +310,9 @@ const searchAll = async () => {
   keyList.KEIYAKUSYA_NAME =
     KEIYAKUSYA_CD_NAME_LIST.value.find((el) => el.CODE === res.KEIYAKUSYA_CD)
       ?.NAME || ''
+  if (xTableRef.value && tableData.value.length > 0) {
+    xTableRef.value.setCurrentRow(tableData.value[0])
+  }
 }
 //--------------------------------------------------------------------------
 //監視定義
