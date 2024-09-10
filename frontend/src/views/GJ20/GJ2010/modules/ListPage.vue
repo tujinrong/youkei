@@ -6,7 +6,7 @@
       <h1>(GJ2010)契約者積立金・互助金単価マスタ一覧</h1>
       <div class="mt-1 flex">
         <a-space :size="20">
-          <a-button type="primary" @click="forwardEdit">新規登録</a-button>
+          <a-button type="primary" @click="forwardEdit(PageStatus.New)">新規登録</a-button>
         </a-space>
         <close-page />
       </div>
@@ -20,7 +20,7 @@
         :data="tableData"
         :sort-config="{ trigger: 'cell', orders: ['desc', 'asc'] }"
         :empty-render="{ name: 'NotData' }"
-        @cell-dblclick="({ row }) => forwardEdit(row.USER_ID)"
+        @cell-dblclick="({ row }) => forwardEdit(PageStatus.Edit,row)"
         @sort-change="(e) => changeTableSort(e, toRef(pageParams, 'ORDER_BY'))"
       >
         <vxe-column
@@ -32,7 +32,7 @@
           :resizable="true"
         >
           <template #default="{ row }">
-            <a @click="forwardEdit(row.TAISYO_DATE_FROM)">{{
+            <a @click="forwardEdit(PageStatus.Edit,row)">{{
               row.TAISYO_DATE_FROM
             }}</a>
           </template>
@@ -46,7 +46,7 @@
           :resizable="true"
         >
           <template #default="{ row }">
-            <a @click="forwardEdit(row.TAISYO_DATE_TO)">{{
+            <a @click="forwardEdit(PageStatus.Edit,row)">{{
               row.TAISYO_DATE_TO
             }}</a>
           </template>
@@ -54,14 +54,16 @@
       </vxe-table>
     </a-card>
   </div>
+  <EditPage v-model:visible="editVisible" :editkbn="editkbn"/>
 </template>
 <script setup lang="ts">
 import { useElementSize } from '@vueuse/core'
 import { reactive, ref, toRef } from 'vue'
 import { onBeforeRouteUpdate, useRoute, useRouter } from 'vue-router'
 import { DetailVM } from '../type'
-import { PageStatus } from '@/enum'
+import { EnumEditKbn, PageStatus } from '@/enum'
 import { changeTableSort } from '@/utils/util'
+import EditPage from './EditPage.vue'
 
 //--------------------------------------------------------------------------
 //データ定義
@@ -109,18 +111,19 @@ const route = useRoute()
 const pageParams = reactive({
   ORDER_BY: 0,
 })
+const editVisible = ref(false)
+const editkbn = ref<EnumEditKbn>(EnumEditKbn.Add)
 
 //--------------------------------------------------------------------------
 //メソッド
 //--------------------------------------------------------------------------
-function forwardEdit(USER_ID) {
-  router.push({
-    name: route.name,
-    query: {
-      status: PageStatus.Edit,
-      USER_ID: USER_ID,
-    },
-  })
+function forwardEdit(status: PageStatus, row?: any) {
+  if (status === PageStatus.Edit || status === PageStatus.New) {
+    editVisible.value = true
+    editkbn.value =
+      status === PageStatus.Edit ? EnumEditKbn.Edit : EnumEditKbn.Add
+    return
+  }
 }
 onBeforeRouteUpdate((to, from) => {
   if (to.query.refresh) {
