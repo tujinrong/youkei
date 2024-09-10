@@ -28,11 +28,11 @@ Namespace JBD.GJS.Service.GJ8051
                     If dt.Rows.Count > 0 Then
                         Dim row As DataRow = dt.Rows(0)
                         '金融機関コード
-                        item.BANK.BANK_CD = CStr(WordHenkan("N", "S", row("BANK_CD")))
+                        item.BANK.BANK_CD = DaConvertUtil.CStr(WordHenkan("N", "S", row("BANK_CD")))
                         '金融機関名（ｶﾅ）
-                        item.BANK.BANK_KANA = CStr(WordHenkan("N", "S", row("BANK_KANA")))
+                        item.BANK.BANK_KANA = DaConvertUtil.CStr(WordHenkan("N", "S", row("BANK_KANA")))
                         '金融機関名（漢字）
-                        item.BANK.BANK_NAME = CStr(WordHenkan("N", "S", row("BANK_NAME")))
+                        item.BANK.BANK_NAME = DaConvertUtil.CStr(WordHenkan("N", "S", row("BANK_NAME")))
                     End If
             End Select
 

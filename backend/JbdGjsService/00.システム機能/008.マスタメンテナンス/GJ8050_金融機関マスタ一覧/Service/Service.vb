@@ -10,9 +10,9 @@
 Namespace JBD.GJS.Service.GJ8050
 
     ''' <summary>
-    ''' 初期化処理_一覧画面
+    ''' 金融機関マスタ一覧
     ''' </summary>
-    <DisplayName("初期化処理_一覧画面")>
+    <DisplayName("金融機関マスタ一覧")>
     Public Class Service
         Inherits CmServiceBase
 

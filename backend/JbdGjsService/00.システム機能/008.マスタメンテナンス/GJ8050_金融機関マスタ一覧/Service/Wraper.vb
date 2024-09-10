@@ -22,15 +22,15 @@ Namespace JBD.GJS.Service.GJ8050
             Dim res = New SearchBankResponse()
             'データ結果判定
             If dt.Rows.Count > 0 Then
-                res.TOTAL_ROW_COUNT = CInt(CStr(dt.Rows(0)("RCNT")))
-                res.TOTAL_PAGE_COUNT = CInt(CStr(dt.Rows(0)("PCNT")))
+                res.TOTAL_ROW_COUNT = DaConvertUtil.CInt(DaConvertUtil.CStr(dt.Rows(0)("RCNT")))
+                res.TOTAL_PAGE_COUNT = DaConvertUtil.CInt(DaConvertUtil.CStr(dt.Rows(0)("PCNT")))
                 res.KEKKA_LIST = New List(Of SearchBankRowVM)
                 ' dt をループし、List にデータを追加します。
                 For Each row As DataRow In dt.Rows
                     Dim item As New SearchBankRowVM
-                    item.BANK_CD = CStr(row("BANK_CD"))
-                    item.BANK_KANA = CStr(row("BANK_KANA"))
-                    item.BANK_NAME = CStr(row("BANK_NAME"))
+                    item.BANK_CD = DaConvertUtil.CStr(row("BANK_CD"))
+                    item.BANK_KANA = DaConvertUtil.CStr(row("BANK_KANA"))
+                    item.BANK_NAME = DaConvertUtil.CStr(row("BANK_NAME"))
                     res.KEKKA_LIST.Add(item)
                 Next
             End If
@@ -44,16 +44,16 @@ Namespace JBD.GJS.Service.GJ8050
             Dim res = New SearchSitenResponse()
             'データ結果判定
             If dt.Rows.Count > 0 Then
-                res.TOTAL_ROW_COUNT = CInt(CStr(dt.Rows(0)("RCNT")))
-                res.TOTAL_PAGE_COUNT = CInt(CStr(dt.Rows(0)("PCNT")))
+                res.TOTAL_ROW_COUNT = DaConvertUtil.CInt(DaConvertUtil.CStr(dt.Rows(0)("RCNT")))
+                res.TOTAL_PAGE_COUNT = DaConvertUtil.CInt(DaConvertUtil.CStr(dt.Rows(0)("PCNT")))
                 res.KEKKA_LIST = New List(Of SearchSitenRowVM)
                 ' dt をループし、List にデータを追加します。
                 For Each row As DataRow In dt.Rows
                     Dim item As New SearchSitenRowVM
-                    item.BANK_CD = CStr(row("BANK_CD"))
-                    item.SITEN_CD = CStr(row("SITEN_CD"))
-                    item.SITEN_KANA = CStr(row("SITEN_KANA"))
-                    item.SITEN_NAME = CStr(row("SITEN_NAME"))
+                    item.BANK_CD = DaConvertUtil.CStr(row("BANK_CD"))
+                    item.SITEN_CD = DaConvertUtil.CStr(row("SITEN_CD"))
+                    item.SITEN_KANA = DaConvertUtil.CStr(row("SITEN_KANA"))
+                    item.SITEN_NAME = DaConvertUtil.CStr(row("SITEN_NAME"))
                     res.KEKKA_LIST.Add(item)
                 Next
             End If

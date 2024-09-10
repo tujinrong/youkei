@@ -28,13 +28,13 @@ Namespace JBD.GJS.Service.GJ8052
                     If dt.Rows.Count > 0 Then
                         Dim row As DataRow = dt.Rows(0)
                         '金融機関コード
-                        item.SITEN.BANK_CD = CStr(WordHenkan("N", "S", row("BANK_CD")))
+                        item.SITEN.BANK_CD = DaConvertUtil.CStr(WordHenkan("N", "S", row("BANK_CD")))
                         '支店コード
-                        item.SITEN.SITEN_CD = CStr(WordHenkan("N", "S", row("SITEN_CD")))
+                        item.SITEN.SITEN_CD = DaConvertUtil.CStr(WordHenkan("N", "S", row("SITEN_CD")))
                         '支店名（ｶﾅ）
-                        item.SITEN.SITEN_KANA = CStr(WordHenkan("N", "S", row("SITEN_KANA")))
+                        item.SITEN.SITEN_KANA = DaConvertUtil.CStr(WordHenkan("N", "S", row("SITEN_KANA")))
                         '支店名（漢字）
-                        item.SITEN.SITEN_NAME = CStr(WordHenkan("N", "S", row("SITEN_NAME")))
+                        item.SITEN.SITEN_NAME = DaConvertUtil.CStr(WordHenkan("N", "S", row("SITEN_NAME")))
                     End If
             End Select
 

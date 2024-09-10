@@ -24,8 +24,8 @@ Namespace JBD.GJS.Service.GJ8090
             ' dt をループし、List にデータを追加します。
             For Each row As DataRow In dt.Rows
                 Dim item As New CmCodeNameModel
-                item.CODE = Cint(CStr(row("KEIYAKUSYA_CD")))
-                item.NAME = CStr(row("KEIYAKUSYA_NAME"))
+                item.CODE = DaConvertUtil.Cint(DaConvertUtil.CStr(row("KEIYAKUSYA_CD")))
+                item.NAME = DaConvertUtil.CStr(row("KEIYAKUSYA_NAME"))
                 res.KEIYAKUSYA_CD_NAME_LIST.Add(item)
             Next
             Return res
@@ -38,15 +38,15 @@ Namespace JBD.GJS.Service.GJ8090
             Dim res = New SearchResponse()
             'データ結果判定
             If dt.Rows.Count > 0 Then
-                res.TOTAL_ROW_COUNT = Cint(CStr(dt.Rows(0)("RCNT")))
-                res.TOTAL_PAGE_COUNT = Cint(CStr(dt.Rows(0)("PCNT")))
+                res.TOTAL_ROW_COUNT = DaConvertUtil.Cint(DaConvertUtil.CStr(dt.Rows(0)("RCNT")))
+                res.TOTAL_PAGE_COUNT = DaConvertUtil.Cint(DaConvertUtil.CStr(dt.Rows(0)("PCNT")))
                 res.KEKKA_LIST = New List(Of KeiyakuNojo)
                 ' dt をループし、List にデータを追加します。
                 For Each row As DataRow In dt.Rows
                     Dim item As New KeiyakuNojo
-                    item.NOJO_CD = Cint(CStr(row("NOJO_CD")))
-                    item.NOJO_NAME = CStr(row("NOJO_NAME"))
-                    item.ADDR = CStr(row("ADDR"))
+                    item.NOJO_CD = Cint(DaConvertUtil.CStr(row("NOJO_CD")))
+                    item.NOJO_NAME = DaConvertUtil.CStr(row("NOJO_NAME"))
+                    item.ADDR = DaConvertUtil.CStr(row("ADDR"))
                     res.KEKKA_LIST.Add(item)
                 Next
             End If
