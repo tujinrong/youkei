@@ -113,8 +113,8 @@
       <div class="my-2 flex">
         <a-space :size="20">
           <a-button type="primary" @click="search">検索</a-button>
-          <a-button type="primary" @click="save">実行</a-button>
-          <a-button type="primary" @click="clear">条件クリア</a-button>
+          <a-button type="primary" @click="clear">キャンセル</a-button>
+          <a-button class="ml-20" type="primary" @click="save">実行</a-button>
         </a-space>
         <AButton type="primary" class="ml-a" @click="tabStore.removeActiveTab">
           閉じる

@@ -147,13 +147,10 @@
               </td>
             </a-col>
             <a-col v-bind="layout">
-              <a-form-item v-bind="validateInfos.HENKAN_KINGAKU_UMU">
-                <a-space class="flex-wrap">
-                  <a-checkbox v-model:checked="formData.HENKAN_KINGAKU_UMU">
-                    返還金額を表示しない
-                  </a-checkbox>
-                </a-space>
-              </a-form-item>
+              <th>返還金額を表示しない</th>
+              <td>
+                <a-checkbox v-model:checked="formData.HENKAN_KINGAKU_UMU"/>
+              </td>
             </a-col>
           </a-row>
           <a-row class="m-t-1">
@@ -163,7 +160,7 @@
                   <a-button type="primary" @click="onPreview"
                     >プレビュー</a-button
                   >
-                  <a-button type="primary" @click="clear">条件クリア</a-button>
+                  <a-button type="primary" @click="clear">キャンセル</a-button>
                 </a-space>
                 <close-page />
               </div>
@@ -358,7 +355,7 @@ onUnmounted(() => {
 
 <style scoped lang="scss">
 th {
-  width: 130px;
+  width: 150px;
 }
 
 :deep(.ant-card-body) {
