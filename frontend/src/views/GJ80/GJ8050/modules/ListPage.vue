@@ -80,6 +80,7 @@
         @sort-change="(e) => changeTableSort(e, toRef(pageParams, 'ORDER_BY'))"
       >
         <vxe-column
+          header-align="center"
           field="BANK_CD"
           title="金融機関"
           min-width="100"
@@ -92,6 +93,7 @@
           </template>
         </vxe-column>
         <vxe-column
+          header-align="center"
           field="BANK_KANA"
           title="金融機関名（ｶﾅ）"
           min-width="160"
@@ -101,6 +103,7 @@
         >
         </vxe-column>
         <vxe-column
+          header-align="center"
           field="BANK_NAME"
           title="金融機関名（漢字）"
           min-width="400"
@@ -193,6 +196,7 @@
         @sort-change="(e) => changeTableSort(e, toRef(pageParams2, 'ORDER_BY'))"
       >
         <vxe-column
+          header-align="center"
           field="BANK_CD"
           title="金融機関"
           min-width="100"
@@ -202,6 +206,7 @@
         >
         </vxe-column>
         <vxe-column
+          header-align="center"
           field="SITEN_CD"
           title="支店コード"
           min-width="160"
@@ -216,6 +221,7 @@
           </template>
         </vxe-column>
         <vxe-column
+          header-align="center"
           field="SITEN_KANA"
           title="支店名（ｶﾅ）"
           min-width="400"
@@ -225,6 +231,7 @@
         >
         </vxe-column>
         <vxe-column
+          header-align="center"
           field="SITEN_NAME"
           title="支店名（漢字）"
           min-width="400"
@@ -255,6 +262,7 @@ import {
   SearchBank,
   SearchSiten,
 } from '../service/8050/service'
+import { showInfoModal } from '@/utils/modal'
 
 //--------------------------------------------------------------------------
 //データ定義
@@ -330,10 +338,14 @@ watch(
 //初期化処理
 
 onBeforeRouteUpdate((to, from) => {
-  if (to.query.refresh == 'delete') {
-    searchAll().then((res) => {})
-    // reset()
-    // reset2()
+  if (to.query.refresh == 'delete1') {
+    searchAll(true)
+  }
+  if (to.query.refresh == 'delete2') {
+    searchAll2(true)
+  }
+  if (to.query.refresh == '1') {
+    searchAll()
   }
 })
 //--------------------------------------------------------------------------
@@ -361,12 +373,24 @@ const {
 })
 const searchAll = async (deleteflg?) => {
   await searchData()
+  if (bankTableData.value.length <= 0 && !deleteflg) {
+    showInfoModal({
+      type: 'warning',
+      content: '11xxx',
+    })
+  }
   if (xTableRef.value && bankTableData.value.length > 0) {
     xTableRef.value.setCurrentRow(bankTableData.value[0])
   }
 }
-const searchAll2 = async () => {
+const searchAll2 = async (deleteflg?) => {
   await searchData2()
+  if (sitanTableData.value.length <= 0 && !deleteflg) {
+    showInfoModal({
+      type: 'warning',
+      content: '11xxx',
+    })
+  }
   if (xTableRef2.value && sitanTableData.value.length > 0) {
     xTableRef2.value.setCurrentRow(sitanTableData.value[0])
   }

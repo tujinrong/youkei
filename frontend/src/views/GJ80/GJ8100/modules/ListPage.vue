@@ -22,6 +22,7 @@
       :empty-render="{ name: 'NotData' }"
     >
       <vxe-column
+        header-align="center"
         field="TAX_DATE_FROM"
         title="適用開始日"
         min-width="80"
@@ -29,6 +30,7 @@
       >
       </vxe-column>
       <vxe-column
+        header-align="center"
         field="TAX_DATE_TO"
         title="適用終了日"
         min-width="160"
@@ -36,6 +38,7 @@
       >
       </vxe-column>
       <vxe-column
+        header-align="center"
         field="TAX_RITU"
         title="消費税率（%）"
         min-width="100"

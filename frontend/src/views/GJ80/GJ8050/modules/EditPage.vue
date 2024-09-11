@@ -176,7 +176,7 @@ const saveData = async () => {
     onOk: async () => {
       try {
         await SaveBank({
-          BANK: { ...formData, UP_DATE: upddttm },
+          BANK: { ...formData,UP_DATE: upddttm },
           EDIT_KBN: isNew ? EnumEditKbn.Add : EnumEditKbn.Edit,
         })
         router.push({ name: route.name, query: { refresh: '1' } })
@@ -197,7 +197,7 @@ const deleteData = () => {
           BANK_CD: formData.BANK_CD,
           UP_DATE: upddttm,
         })
-        router.push({ name: route.name, query: { refresh: 'delete' } })
+        router.push({ name: route.name, query: { refresh: 'delete1' } })
         message.success(DELETE_OK_INFO.Msg)
       } catch (error) {}
     },

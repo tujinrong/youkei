@@ -55,29 +55,47 @@
       @cell-dblclick="({ row }) => changeData()"
       @sort-change="(e) => changeTableSort(e, toRef(pageParams, 'ORDER_BY'))"
     >
-      <vxe-column field="MEISAI_NO" title="明細番号" width="100">
+      <vxe-column
+        header-align="center"
+        field="MEISAI_NO"
+        title="明細番号"
+        width="100"
+      >
         <template #default="{ row }">
           <a @click="changeData()">{{ row.MEISAI_NO }}</a>
         </template>
       </vxe-column>
-      <vxe-column field="NOJO_NAME" title="農場名" width="200">
+      <vxe-column
+        header-align="center"
+        field="NOJO_NAME"
+        title="農場名"
+        width="200"
+      >
         <template #default="{ row }">
           <a @click="changeData()">{{ row.NOJO_NAME }}</a>
         </template>
       </vxe-column>
-      <vxe-column field="NOJO_ADDR" title="農場住所" min-width="200">
+      <vxe-column
+        header-align="center"
+        field="NOJO_ADDR"
+        title="農場住所"
+        min-width="200"
+      >
       </vxe-column>
       <vxe-column
+        header-align="center"
         field="TORISYURUI"
         title="鳥の種類"
         min-width="120"
       ></vxe-column>
       <vxe-column
+        header-align="center"
         field="KEIYAKUHASU"
         title="契約羽数"
         min-width="120"
       ></vxe-column>
       <vxe-column
+        header-align="center"
         field="BIKO"
         title="備考"
         min-width="200"

@@ -84,6 +84,7 @@
         @sort-change="(e) => changeTableSort(e, toRef(pageParams, 'ORDER_BY'))"
       >
         <vxe-column
+          header-align="center"
           field="KEIYAKU_DATE_FROM"
           title="増羽年月日"
           min-width="160"
@@ -92,6 +93,7 @@
         >
         </vxe-column>
         <vxe-column
+          header-align="center"
           field="NOJO_NAME"
           title="農場名"
           min-width="100"
@@ -102,6 +104,7 @@
           </template>
         </vxe-column>
         <vxe-column
+          header-align="center"
           field="TORI_KBN_NAME"
           title="鳥の種類"
           min-width="100"
@@ -110,6 +113,7 @@
         >
         </vxe-column>
         <vxe-column
+          header-align="center"
           field="ZO_HASU"
           title="増羽数"
           min-width="100"
@@ -118,6 +122,7 @@
         >
         </vxe-column>
         <vxe-column
+          header-align="center"
           field="KEIYAKU_HASU_MAE"
           title="契約羽数(増羽前)"
           min-width="100"
@@ -126,6 +131,7 @@
         >
         </vxe-column>
         <vxe-column
+          header-align="center"
           field="KEIYAKU_HASU"
           title="契約羽数(増羽後)"
           min-width="100"
@@ -134,6 +140,7 @@
         >
         </vxe-column>
         <vxe-column
+          header-align="center"
           field="SYORI_KBN"
           title="処理区分"
           min-width="50"
@@ -142,6 +149,7 @@
         >
         </vxe-column>
         <vxe-column
+          header-align="center"
           field="SEIKYU_KAISU"
           title="請求回数"
           min-width="100"

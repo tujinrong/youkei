@@ -120,6 +120,7 @@
         @sort-change="(e) => changeTableSort(e, toRef(pageParams, 'ORDER_BY'))"
       >
         <vxe-column
+          header-align="center"
           field="ITAKU_CD"
           title="事務委託先"
           min-width="100"
@@ -132,6 +133,7 @@
           </template>
         </vxe-column>
         <vxe-column
+          header-align="center"
           field="ITAKU_NAME"
           title="事務委託先名"
           min-width="400"
@@ -144,6 +146,7 @@
           </template>
         </vxe-column>
         <vxe-column
+          header-align="center"
           field="ADDR_TEL"
           title="電話番号"
           min-width="160"
@@ -152,6 +155,7 @@
           :resizable="false"
         ></vxe-column>
         <vxe-column
+          header-align="center"
           field="ADDR_POST"
           title="郵便番号"
           min-width="200"
@@ -160,6 +164,7 @@
           :resizable="false"
         ></vxe-column>
         <vxe-column
+          header-align="center"
           field="ADDR"
           title="住所"
           min-width="600"

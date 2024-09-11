@@ -117,11 +117,11 @@
         @sort-change="(e) => changeTableSort(e, toRef(pageParams, 'ORDER_BY'))"
       >
         <vxe-column
+          header-align="center"
           field="NOJO_CD"
           title="農場コード"
           width="100"
           align="right"
-          header-align="left"
           sortable
           :params="{ order: 1 }"
           :resizable="true"
@@ -131,6 +131,7 @@
           </template>
         </vxe-column>
         <vxe-column
+          header-align="center"
           field="NOJO_NAME"
           title="農場名"
           min-width="160"
@@ -143,6 +144,7 @@
           </template>
         </vxe-column>
         <vxe-column
+          header-align="center"
           field="ADDR"
           title="農場住所"
           min-width="500"

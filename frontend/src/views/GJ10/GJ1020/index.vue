@@ -84,6 +84,7 @@
         @sort-change="(e) => changeTableSort(e, toRef(pageParams, 'ORDER_BY'))"
       >
         <vxe-column
+          header-align="center"
           field="KEIYAKU_DATE_FROM"
           title="移動開始日"
           min-width="150px"
@@ -98,6 +99,7 @@
           </template>
         </vxe-column>
         <vxe-column
+          header-align="center"
           field="TORI_KBN"
           title="鳥の種類"
           min-width="120px"
@@ -107,6 +109,7 @@
         >
         </vxe-column>
         <vxe-column
+          header-align="center"
           field="IDO_HASU"
           title="移動羽数"
           min-width="120px"
@@ -115,6 +118,7 @@
           :resizable="true"
         ></vxe-column>
         <vxe-column
+          header-align="center"
           field="NOJO_NAME_MOTO"
           title="農場名(移動元)"
           sortable
@@ -123,6 +127,7 @@
           :resizable="true"
         ></vxe-column>
         <vxe-column
+          header-align="center"
           field="KEIYAKU_HASU_MOTO_ATO"
           title="契約羽数(移動元)"
           min-width="150px"
@@ -131,6 +136,7 @@
           :resizable="true"
         ></vxe-column>
         <vxe-column
+          header-align="center"
           field="NOJO_NAME_SAKI"
           title="農場名(移動先)"
           width="333px"
@@ -140,6 +146,7 @@
         >
         </vxe-column>
         <vxe-column
+          header-align="center"
           field="KEIYAKU_HASU_SAKI_ATO"
           title="契約羽数(移動先)"
           min-width="150px"
@@ -149,6 +156,7 @@
         >
         </vxe-column>
         <vxe-column
+          header-align="center"
           field="SYORI_KBN_NAME"
           title="処理区分"
           min-width="120px"

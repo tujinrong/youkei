@@ -108,7 +108,7 @@
               />
             </td>
           </a-col>
-          <a-col span="24">
+          <a-col span="16">
             <th>住所</th>
             <td>
               <a-input
@@ -116,6 +116,12 @@
                 class="w-full"
                 :maxlength="80"
               ></a-input>
+            </td>
+          </a-col>
+          <a-col span="8">
+            <th>未継続・未契約者を除く</th>
+            <td>
+              <a-checkbox></a-checkbox>
             </td>
           </a-col>
         </a-row>
@@ -127,7 +133,6 @@
             <a-radio :value="EnumAndOr.AndCode">すべてを含む(AND)</a-radio>
             <a-radio :value="EnumAndOr.OrCode">いずれかを含む(OR)</a-radio>
           </a-radio-group>
-          <a-checkbox>未継続・未契約者を除く</a-checkbox>
         </a-space>
       </div>
       <div class="flex">
@@ -177,6 +182,7 @@
         @sort-change="(e) => changeTableSort(e, toRef(pageParams, 'ORDER_BY'))"
       >
         <vxe-column
+          header-align="center"
           field="KEIYAKUSYA_CD"
           title="契約者番号"
           width="100"
@@ -190,6 +196,7 @@
           </template>
         </vxe-column>
         <vxe-column
+          header-align="center"
           field="KEIYAKUSYA_NAME"
           title="契約者名"
           width="200"
@@ -203,6 +210,7 @@
           </template>
         </vxe-column>
         <vxe-column
+          header-align="center"
           field="KEIYAKUSYA_KANA"
           title="フリガナ"
           min-width="250"
@@ -216,6 +224,7 @@
           </template>
         </vxe-column>
         <vxe-column
+          header-align="center"
           field="KEIYAKU_KBN"
           title="契約区分"
           min-width="120"
@@ -223,6 +232,7 @@
           :params="{ order: 4 }"
         ></vxe-column>
         <vxe-column
+          header-align="center"
           field="KEIYAKU_JYOKYO"
           title="契約状況"
           min-width="120"
@@ -230,6 +240,7 @@
           :params="{ order: 5 }"
         ></vxe-column>
         <vxe-column
+          header-align="center"
           field="ADDR_TEL"
           title="電話番号"
           min-width="150"
@@ -237,6 +248,7 @@
           :params="{ order: 6 }"
         ></vxe-column>
         <vxe-column
+          header-align="center"
           field="KEN_CD"
           title="都道府県"
           min-width="150"
@@ -244,6 +256,7 @@
           :params="{ order: 7 }"
         ></vxe-column>
         <vxe-column
+          header-align="center"
           field="JIMUITAKU_CD1"
           title="事務委託先"
           min-width="200"
@@ -375,6 +388,6 @@ function goForward(status: PageStatus, row?: any) {
 </script>
 <style lang="scss" scoped>
 :deep(th) {
-  min-width: 150px;
+  min-width: 165px;
 }
 </style>
