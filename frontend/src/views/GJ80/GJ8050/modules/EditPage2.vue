@@ -34,6 +34,7 @@
                 <a-form-item v-bind="validateInfos.SITEN_CD">
                   <a-input
                     v-model:value="formData.SITEN_CD"
+                    :maxlength="3"
                     :disabled="!isNew"
                   ></a-input>
                 </a-form-item>
@@ -113,6 +114,10 @@ const rules = reactive({
     {
       required: true,
       message: ITEM_REQUIRE_ERROR.Msg.replace('{0}', '支店コード'),
+    },
+    {
+      min: 3,
+      message: '桁数が正しくない、桁数は4です。',
     },
   ],
   SITEN_KANA: [
@@ -214,7 +219,7 @@ const deleteData = () => {
           SITEN_CD: formData.SITEN_CD,
           UP_DATE: upddttm,
         })
-        router.push({ name: route.name, query: { refresh: '1' } })
+        router.push({ name: route.name, query: { refresh: 'delete2' } })
         message.success(DELETE_OK_INFO.Msg)
       } catch (error) {}
     },

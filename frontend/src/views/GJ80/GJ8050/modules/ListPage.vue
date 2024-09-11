@@ -47,7 +47,7 @@
       </div>
       <div class="flex">
         <a-space :size="20">
-          <a-button type="primary" @click="searchAll">検索</a-button>
+          <a-button type="primary" @click="searchAll()">検索</a-button>
           <a-button type="primary" @click="reset">条件クリア</a-button>
           <a-button class="ml-20" type="primary" @click="forwardNew"
             >新規登録</a-button
@@ -162,7 +162,7 @@
       </div>
       <div class="flex">
         <a-space :size="20">
-          <a-button type="primary" @click="searchAll2">検索</a-button>
+          <a-button type="primary" @click="searchAll2()">検索</a-button>
           <a-button type="primary" @click="reset2">条件クリア</a-button>
           <a-button class="ml-20" type="primary" @click="forwardNew2"
             >新規登録</a-button
@@ -346,6 +346,7 @@ onBeforeRouteUpdate((to, from) => {
   }
   if (to.query.refresh == '1') {
     searchAll()
+    searchAll2()
   }
 })
 //--------------------------------------------------------------------------
@@ -371,24 +372,24 @@ const {
   params: toRef(() => searchParams2),
   // validate,
 })
-const searchAll = async (deleteflg?) => {
+const searchAll = async (deleteflg: boolean = false) => {
   await searchData()
   if (bankTableData.value.length <= 0 && !deleteflg) {
     showInfoModal({
       type: 'warning',
-      content: '11xxx',
+      content: '指定された条件に一致するデータは存在しません。',
     })
   }
   if (xTableRef.value && bankTableData.value.length > 0) {
     xTableRef.value.setCurrentRow(bankTableData.value[0])
   }
 }
-const searchAll2 = async (deleteflg?) => {
+const searchAll2 = async (deleteflg: boolean = false) => {
   await searchData2()
   if (sitanTableData.value.length <= 0 && !deleteflg) {
     showInfoModal({
       type: 'warning',
-      content: '11xxx',
+      content: '指定された条件に一致するデータは存在しません。',
     })
   }
   if (xTableRef2.value && sitanTableData.value.length > 0) {
