@@ -7,9 +7,6 @@
 ' 変更履歴　:
 ' *******************************************************************
 
-Imports JbdGjsService.JBD.GJS.Service.GJ1030
-Imports OracleInternal.Json
-
 Namespace JBD.GJS.Service.GJ8050
 
     Public Class FrmGJ8050Service
@@ -150,7 +147,7 @@ Namespace JBD.GJS.Service.GJ8050
                 Else
                     pJoken += wkANDorOR & vbCrLf
                 End If
-                pJoken += "(BNK.BANK_CD  = '" & wKbn.BANK_CD & "')" & vbCrLf
+                pJoken += "(BANK_CD  = '" & wKbn.BANK_CD & "')" & vbCrLf
             End If
 
             '支店・支所

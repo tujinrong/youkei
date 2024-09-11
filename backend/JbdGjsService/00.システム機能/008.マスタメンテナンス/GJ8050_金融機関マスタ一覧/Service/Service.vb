@@ -50,7 +50,7 @@ Namespace JBD.GJS.Service.GJ8050
                     '-------------------------------------------------------------
                     Dim dt = ds.Tables(0)
                     If dt.Rows.Count = 0 Then
-                        Return New SearchBankResponse(EnumServiceResult.ServiceAlert2, "指定された条件に一致するデータは存在しません。")
+                        Return New SearchBankResponse(EnumServiceResult.OK, "指定された条件に一致するデータは存在しません。")
                     End If
                     Dim res = Wraper.SearchBankResponse(dt)
 
@@ -97,7 +97,7 @@ Namespace JBD.GJS.Service.GJ8050
                     '-------------------------------------------------------------
                     Dim dt = ds.Tables(0)
                     If dt.Rows.Count = 0 Then
-                        Return New SearchSitenResponse(EnumServiceResult.ServiceAlert2, "指定された条件に一致するデータは存在しません。")
+                        Return New SearchSitenResponse(EnumServiceResult.OK, "指定された条件に一致するデータは存在しません。")
                     End If
                     Dim res = Wraper.SearchSitenResponse(dt)
 

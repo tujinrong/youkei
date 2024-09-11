@@ -35,6 +35,7 @@ Namespace JBD.GJS.Service.GJ8052
                         item.SITEN.SITEN_KANA = DaConvertUtil.CStr(WordHenkan("N", "S", row("SITEN_KANA")))
                         '支店名（漢字）
                         item.SITEN.SITEN_NAME = DaConvertUtil.CStr(WordHenkan("N", "S", row("SITEN_NAME")))
+                        item.SITEN.UP_DATE = DaConvertUtil.CNDate( row("UP_DATE"))
                     End If
             End Select
 

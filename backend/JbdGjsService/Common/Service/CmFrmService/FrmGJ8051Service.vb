@@ -68,14 +68,14 @@ Namespace JBD.GJS.Service.GJ8051
             'データ区分
             Cmd.Parameters.Add("IN_BANK_DATAKBN", 0
                             )
-
-            Select Case wNojoCd.EDIT_KBN
-                Case EnumEditKbn.Add       '新規入力
-                    'データ登録日
-                    Cmd.Parameters.Add("IN_REG_DATE", Now)
-                    'データ登録ＩＤ
-                    Cmd.Parameters.Add("IN_REG_ID", pLOGINUSERID)
-            End Select
+            'bug 1 modify sf
+            'Select Case wNojoCd.EDIT_KBN
+            '    Case EnumEditKbn.Add       '新規入力
+            '        'データ登録日
+            '        Cmd.Parameters.Add("IN_REG_DATE", Now)
+            '        'データ登録ＩＤ
+            '        Cmd.Parameters.Add("IN_REG_ID", pLOGINUSERID)
+            'End Select
 
             'データ登録日
             Cmd.Parameters.Add("IN_ITAKU_REG_DATE", Now)

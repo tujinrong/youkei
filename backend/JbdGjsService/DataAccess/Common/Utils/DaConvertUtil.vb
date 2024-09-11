@@ -38,10 +38,6 @@ Namespace JBD.GJS.Service
             If TypeOf obj Is Integer Then Return Cint(obj)
             Dim i As Integer = Nothing
             Return If((Integer.TryParse(obj.ToString(), i)), i, 0)
-
-            ''' <summary>
-            ''' objectをnull許容型整数に変換
-            ''' </summary>
         End Function
 
         ''' Cannot convert MethodDeclarationSyntax, System.ArgumentOutOfRangeException: 種類 'System.ArgumentOutOfRangeException' の例外がスローされました。

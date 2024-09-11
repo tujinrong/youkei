@@ -33,6 +33,7 @@ Namespace JBD.GJS.Service.GJ8051
                         item.BANK.BANK_KANA = DaConvertUtil.CStr(WordHenkan("N", "S", row("BANK_KANA")))
                         '金融機関名（漢字）
                         item.BANK.BANK_NAME = DaConvertUtil.CStr(WordHenkan("N", "S", row("BANK_NAME")))
+                        item.BANK.UP_DATE = DaConvertUtil.CNDate( row("UP_DATE"))
                     End If
             End Select
 
