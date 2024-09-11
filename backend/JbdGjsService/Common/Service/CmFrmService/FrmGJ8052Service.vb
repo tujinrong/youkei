@@ -7,8 +7,6 @@
 ' 変更履歴　:
 ' *******************************************************************
 
-Imports OracleInternal.Json
-
 Namespace JBD.GJS.Service.GJ8052
 
     Public Class FrmGJ8052Service
@@ -55,14 +53,14 @@ Namespace JBD.GJS.Service.GJ8052
                     Cmd.CommandText = "PKG_GJ8052.GJ8052_SITEN_UPD"
                 Case EnumEditKbn.Add       '新規入力
                     Cmd.CommandText = "PKG_GJ8052.GJ8052_SITEN_INS"
-                    wNojoCd.SITEN.SITEN_CD = Format(CInt(wNojoCd.SITEN.SITEN_CD), "0000")
+                    wNojoCd.SITEN.SITEN_CD = Format(CInt(wNojoCd.SITEN.SITEN_CD), "000")
             End Select
 
             '引き渡し
             '金融機関コード
             Cmd.Parameters.Add("IN_SITEN_BANK_CD", wNojoCd.SITEN.BANK_CD)
             '支店コード
-            Cmd.Parameters.Add("IN_SITEN_SITEN_CD", wNojoCd.SITEN.BANK_CD)
+            Cmd.Parameters.Add("IN_SITEN_SITEN_CD", wNojoCd.SITEN.SITEN_CD)
             '支店(カナ)
             Cmd.Parameters.Add("IN_SITEN_SITEN_KANA", wNojoCd.SITEN.SITEN_KANA
                             )
