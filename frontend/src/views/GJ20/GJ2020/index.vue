@@ -143,54 +143,69 @@
         :empty-render="{ name: 'NotData' }"
         @sort-change="(e) => changeTableSort(e, toRef(pageParams, 'ORDER_BY'))"
       >
-        <vxe-column field="KI" title="対象期" width="80" sortable> </vxe-column>
-        <vxe-column field="SEIKYU_KAISU" title="回数" width="80" sortable>
+        <vxe-column header-align="center" align="center" field="KI" title="対象期" width="80" sortable> </vxe-column>
+        <vxe-column header-align="center" align="center" field="SEIKYU_KAISU" title="回数" width="80" sortable>
         </vxe-column>
-        <vxe-column field="SYORI_DATE" title="処理日" min-width="100" sortable>
+        <vxe-column header-align="center" align="center" field="SYORI_DATE" title="処理日" min-width="100" sortable>
         </vxe-column>
         <vxe-column
+          header-align="center"
           field="KEIYAKU_HENKO_KBN"
           title="計算区分"
           min-width="100"
           sortable
         ></vxe-column>
         <vxe-column
+          header-align="center"
+          align="center"
           field="SEIKYU_DATE"
           title="請求·返還日"
           min-width="100"
           sortable
         ></vxe-column>
         <vxe-column
+          header-align="center"
+          align="center"
           field="KIGEN_DATE"
           title="納付期限"
           min-width="100"
           sortable
         ></vxe-column>
         <vxe-column
+          header-align="center"
+          align="center"
           field="FURIKOMI_YOTEI_DATE"
           title="振込予定日"
           min-width="100"
           sortable
         ></vxe-column>
         <vxe-column
+          header-align="center"
+          align="right"
           field="SEIKYU_TAISYO_SYASU"
           title="対象者数"
           width="90"
           sortable
         ></vxe-column>
         <vxe-column
+          header-align="center"
+          align="right"
           field="TUMITATE_KINGAKU"
           title="積立金等総額"
           min-width="120"
           sortable
         ></vxe-column>
         <vxe-column
+          header-align="center"
+          align="right"
           field="CYOSYU_KINGAKU"
           title="徵収金額"
           min-width="100"
           sortable
         ></vxe-column>
         <vxe-column
+          header-align="center"
+          align="right"
           field="HENKAN_KINGAKU"
           title="返還金額"
           min-width="100"
