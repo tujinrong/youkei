@@ -85,10 +85,12 @@
       >
         <vxe-column
           header-align="center"
+          align="center"
           field="KEIYAKU_DATE_FROM"
           title="増羽年月日"
           min-width="160"
           sortable
+          formatter="jpDate"
           :params="{ order: 1 }"
         >
         </vxe-column>
@@ -114,6 +116,7 @@
         </vxe-column>
         <vxe-column
           header-align="center"
+          align="right"
           field="ZO_HASU"
           title="増羽数"
           min-width="100"
@@ -123,6 +126,7 @@
         </vxe-column>
         <vxe-column
           header-align="center"
+          align="right"
           field="KEIYAKU_HASU_MAE"
           title="契約羽数(増羽前)"
           min-width="100"
@@ -132,6 +136,7 @@
         </vxe-column>
         <vxe-column
           header-align="center"
+          align="right"
           field="KEIYAKU_HASU"
           title="契約羽数(増羽後)"
           min-width="100"
@@ -141,6 +146,7 @@
         </vxe-column>
         <vxe-column
           header-align="center"
+          align="center"
           field="SYORI_KBN"
           title="処理区分"
           min-width="50"
@@ -150,6 +156,7 @@
         </vxe-column>
         <vxe-column
           header-align="center"
+          align="right"
           field="SEIKYU_KAISU"
           title="請求回数"
           min-width="100"
