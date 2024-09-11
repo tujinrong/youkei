@@ -2,7 +2,7 @@
   <div>
     <a-card :bordered="false" class="h-full min-h-500px">
       <div>
-        <h1>(GJ2070)家畜防疫互助金積立金等請求通知書（新規加入者）</h1>
+        <h1>（GJ2070）家畜防疫互助金積立金等請求通知書（新規加入者）</h1>
         <div class="self_adaption_table form" ref="headRef">
           <a-row>
             <a-col span="24">

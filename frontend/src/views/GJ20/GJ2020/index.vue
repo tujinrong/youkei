@@ -11,7 +11,7 @@
     class="h-full min-h-500px flex-col-stretch gap-12px overflow-hidden lt-sm:overflow-auto"
   >
     <a-card ref="headRef" :bordered="false">
-      <h1>(GJ2020)契約者積立金計算処理</h1>
+      <h1>（GJ2020）契約者積立金計算処理</h1>
       <div class="self_adaption_table form max-w-250 mt-1">
         <a-row>
           <a-col span="24">
@@ -252,7 +252,7 @@ const formData = reactive(createDefaultParams())
 const LABELS = {
   SHINKI: '請求(新規)',
   KEIZOKU: '請求兼返還(徵収)',
-  CHUSHI: '請求兼返還（返還）',
+  CHUSHI: '請求兼返還(返還)',
   HAIGYO: '全額返還',
 }
 const rules = reactive({

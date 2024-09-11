@@ -2,7 +2,7 @@
   <div>
     <a-card :bordered="false" class="h-full min-h-500px">
       <div>
-        <h1>(GJ2080)生産者積立金等請求・返還一覧表(処理確定・未処理)</h1>
+        <h1>（GJ2080）生産者積立金等請求・返還一覧表（処理確定・未処理）</h1>
         <div class="self_adaption_table form" ref="headRef">
           <a-row>
             <a-col v-bind="layout">

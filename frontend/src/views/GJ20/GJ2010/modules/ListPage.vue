@@ -3,7 +3,7 @@
     class="h-full min-h-500px flex-col-stretch gap-12px overflow-hidden lt-sm:overflow-auto"
   >
     <a-card ref="headRef" :bordered="false">
-      <h1>(GJ2010)契約者積立金・互助金単価マスタ一覧</h1>
+      <h1>（GJ2010）契約者積立金・互助金単価マスタ一覧</h1>
       <div class="mt-1 flex">
         <a-space :size="20">
           <a-button type="primary" @click="forwardEdit(PageStatus.New)">新規登録</a-button>
