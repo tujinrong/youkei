@@ -11,7 +11,7 @@
     class="h-full flex-col-stretch gap-12px overflow-hidden lt-sm:overflow-auto flex"
   >
     <a-card>
-      <h1>（GJ3020）互助基金契約者情報变更（契約区分变更）</h1>
+      <h1>（GJ3020）互助基金契約者情報変更（契約区分変更）</h1>
       <div class="self_adaption_table form mt-1">
         <a-row>
           <a-col span="8">

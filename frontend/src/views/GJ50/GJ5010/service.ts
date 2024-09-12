@@ -7,28 +7,16 @@
  * 変更履歴　:
  * -----------------------------------------------------------------*/
 import { api } from '@/service/request/common-service'
-import { CancelRequest, InitRequest, InitResponse, PreviewRequest } from './type'
+import { InitRequest, InitResponse, PreviewRequest } from './type';
 
-const servicename = 'GJ3031'
-
-/** 初期化処理_請求書発行画面 */
+const servicename = 'xxxx'
+/** 初期化処理_プレビュー画面 Init */
 export const Init = (params: InitRequest): Promise<InitResponse> => {
   const methodName = 'Init';
   return api(servicename, methodName, params, undefined, { loading: true });
 };
-
-
-/** プレビュー処理_通知書発行画面 */
-/** プレビュー処理_請求書発行画面 Preview */
+/** プレビュー */
 export const Preview = (params: PreviewRequest): Promise<DaResponseBase> => {
   const methodName = 'Preview';
   return api(servicename, methodName, params, undefined, { loading: true });
 };
-
-
-/** 取消処理_請求書発行画面 Cancel */
-export const Cancel = (params: CancelRequest): Promise<DaResponseBase> => {
-  const methodName = 'Cancel';
-  return api(servicename, methodName, params, undefined, { loading: true });
-};
-

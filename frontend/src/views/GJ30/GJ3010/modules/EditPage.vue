@@ -1,6 +1,6 @@
 <template>
   <a-card class="h-full">
-    <h1>（GJ3011）互助基金契約者情報变更(增羽) 請求書発行</h1>
+    <h1>（GJ3011）互助基金契約者情報変更(增羽) 請求書発行</h1>
     <div class="self_adaption_table form mt-1 max-w-300">
       <b>第{{ searchParams.KI }}期</b>
 
@@ -40,6 +40,7 @@
           <a-form-item v-bind="validateInfos.NOFUKIGEN_DATE">
             <DateJp
               v-model:value="searchParams.NOFUKIGEN_DATE"
+              :disabled="!hakou"
               class="max-w-50"
             ></DateJp
           ></a-form-item></td></a-col
@@ -49,6 +50,7 @@
           <a-form-item v-bind="validateInfos.SEIKYU_HAKKO_DATE">
             <DateJp
               v-model:value="searchParams.SEIKYU_HAKKO_DATE"
+              :disabled="!hakou"
               class="max-w-50"
             ></DateJp
           ></a-form-item></td
@@ -61,6 +63,7 @@
               >日鶏
               <a-input
                 v-model:value="searchParams.SEIKYU_HAKKO_NO_NEN"
+                :disabled="!hakou"
                 class="max-w-20"
                 :maxlength="2"
               ></a-input
@@ -69,6 +72,7 @@
             <a-form-item v-bind="validateInfos.SEIKYU_HAKKO_NO_RENBAN"
               >第<a-input
                 v-model:value="searchParams.SEIKYU_HAKKO_NO_RENBAN"
+                :disabled="!hakou"
                 class="max-w-30"
                 :maxlength="4"
               ></a-input
@@ -87,7 +91,7 @@
                 :disabled="searchParams.SYUTURYOKU_KBN !== 5"
                 >請求書取消</a-button
               >
-              <a-button type="primary">条件クリア</a-button>
+              <a-button type="primary">キャンセル</a-button>
             </a-space>
             <a-button class="ml-a" type="primary" @click="goList"
               >一覧へ</a-button
@@ -102,7 +106,7 @@
 import { ITEM_REQUIRE_ERROR } from '@/constants/msg'
 import { PageStatus } from '@/enum'
 import { Form } from 'ant-design-vue'
-import { onMounted, reactive, ref } from 'vue'
+import { computed, onMounted, reactive, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 
 //--------------------------------------------------------------------------
@@ -112,7 +116,7 @@ const createDefaultParams = () => {
   return {
     KI: -1, // 期
     KEIYAKUSYA_CD: 0, // 契約者番号
-    SYUTURYOKU_KBN: 0, // 出力区分
+    SYUTURYOKU_KBN: 1, // 出力区分
     NOFUKIGEN_DATE: undefined, // 納付期限
     SEIKYU_HAKKO_DATE: undefined, // 発行日
     SEIKYU_HAKKO_NO_NEN: undefined, // 発信番号（発信年）
@@ -158,7 +162,9 @@ const rules = reactive({
 //--------------------------------------------------------------------------
 //計算定義
 //--------------------------------------------------------------------------
-
+const hakou = computed(() => {
+  return searchParams.SYUTURYOKU_KBN === 2 || searchParams.SYUTURYOKU_KBN === 4
+})
 //---------------------------------------------------------------------------
 //フック関数
 //--------------------------------------------------------------------------
