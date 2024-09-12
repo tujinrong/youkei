@@ -27,7 +27,8 @@
             </td>
           </a-col>
         </a-row>
-        <a-row class="mt-2"><div style="width: 100%; text-align: end">(单位：円)</div>
+        <a-row class="mt-2"
+          ><div style="width: 100%; text-align: end">(单位：円)</div>
           <a-row>
             <a-col span="4">
               <th>契約区分</th>
@@ -815,8 +816,8 @@
       <div class="pt-2 flex justify-between border-t-1">
         <a-space :size="20">
           <a-button class="warning-btn" @click="saveData">保存</a-button>
-          <a-button type="primary" danger :disabled="isNew" @click="deleteData"
-          >削除</a-button
+          <a-button class="danger-btn" :disabled="isNew" @click="deleteData"
+            >削除</a-button
           >
         </a-space>
         <a-button type="primary" @click="closeModal">閉じる</a-button>
@@ -832,7 +833,7 @@ import { EnumEditKbn, PageStatus } from '@/enum'
 import { DetailVM } from '../type'
 import { useRoute, useRouter } from 'vue-router'
 import { mathNumber } from '@/utils/util'
-import DateJp from "@/components/Selector/DateJp/index.vue";
+import DateJp from '@/components/Selector/DateJp/index.vue'
 
 //--------------------------------------------------------------------------
 //データ定義

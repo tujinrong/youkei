@@ -105,7 +105,7 @@
               <a-button type="primary">キャンセル</a-button>
             </a-space>
             <a-button class="ml-a" type="primary" @click="goList"
-              >一覧</a-button
+              >一覧へ</a-button
             >
           </div>
         </a-col>

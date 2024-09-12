@@ -17,13 +17,15 @@
           <a-col v-bind="layout">
             <th class="required">期</th>
             <td>
-              <a-input-number
-                v-model:value="searchParams.KI"
-                :min="1"
-                :max="99"
-                :maxlength="2"
-                class="w-full"
-              ></a-input-number>
+              <a-form-item v-bind="validateInfos.KI">
+                <a-input-number
+                  v-model:value="searchParams.KI"
+                  :min="1"
+                  :max="99"
+                  :maxlength="2"
+                  class="w-full"
+                ></a-input-number
+              ></a-form-item>
             </td>
           </a-col>
           <a-col v-bind="layout">
@@ -277,6 +279,7 @@ import { ITEM_REQUIRE_ERROR } from '@/constants/msg'
 import useSearch from '@/hooks/useSearch'
 import { useElementSize } from '@vueuse/core'
 import { changeTableSort } from '@/utils/util'
+import { Form } from 'ant-design-vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useTabStore } from '@/store/modules/tab'
 import { SearchRequest, SearchRowVM } from '../type'
@@ -350,6 +353,15 @@ const { pageParams, totalCount, searchData, clear } = useSearch({
 const isDataSelected = computed(() => {
   return tableData.value.length > 0 && xTableRef.value?.getCurrentRecord()
 })
+
+const rules = reactive({
+  KI: [
+    {
+      required: true,
+      message: ITEM_REQUIRE_ERROR.Msg.replace('{0}', '期'),
+    },
+  ],
+})
 //--------------------------------------------------------------------------
 //監視定義
 //--------------------------------------------------------------------------
@@ -357,6 +369,11 @@ const isDataSelected = computed(() => {
 //--------------------------------------------------------------------------
 //メソッド
 //--------------------------------------------------------------------------
+
+const { validate, clearValidate, validateInfos, resetFields } = Form.useForm(
+  searchParams,
+  rules
+)
 const handleTel = () => {
   nextTick(
     () => (searchParams.ADDR_TEL1 = convertToHalfNumber(searchParams.ADDR_TEL1))

@@ -5,7 +5,7 @@
       <div class="my-2 header_operation flex justify-between w-full">
         <a-space :size="20">
           <a-button class="warning-btn" @click="saveData">保存</a-button>
-          <a-button type="primary" danger :disabled="isNew" @click="deleteData"
+          <a-button class="danger-btn" :disabled="isNew" @click="deleteData"
             >削除</a-button
           >
         </a-space>

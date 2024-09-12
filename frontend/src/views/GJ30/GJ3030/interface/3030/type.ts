@@ -15,13 +15,13 @@ export interface InitRequest extends DaRequestBase {
   /** 期 */
   KI: number;
 }
-/** 検索処理_詳細画面 Search Request */
-export interface SearchRequest {
-  /** 対象期 */
+export interface SearchRequest extends CmSearchRequestBase {
+  /** 期 */
   KI: number;
   /** 契約者番号(譲渡先) */
   KEIYAKUSYA_CD: number;
 }
+
 
 // 初期化処理_詳細画面InitDetail Request
 export interface InitDetailRequest extends DaRequestBase {
@@ -58,7 +58,7 @@ export interface DeleteRequest extends DaRequestBase {
 //-------------------------------------------------------------------
 //レスポンス
 //-------------------------------------------------------------------
-// 初期化処理_詳細画面Init Response
+// 初期化処理_詳細画面
 export interface InitResponse extends DaResponseBase {
   /** 期 */
   KI: number;
@@ -66,15 +66,15 @@ export interface InitResponse extends DaResponseBase {
   KEIYAKUSYA_LIST: CmCodeNameModel[];
 }
 
-/** 検索処理_詳細画面 Search Response */
-export interface SearchResponse {
-  /** 一覧情報 */
+export interface SearchResponse extends CmSearchResponseBase {
+  /** 期 */
   KI: number;
   /** 契約者番号(譲渡先) */
   KEIYAKUSYA_CD: number;
-  /** 契約農場別明細　譲渡情報(表示)リスト */
+  /** 契約農場別明細 譲渡情報(表示)リスト */
   KEKKA_LIST: SearchRowVM[];
 }
+
 // 初期化処理_詳細画面InitDetail Response
 export interface InitDetailResponse extends DaResponseBase {
   /** 契約農場別明細 譲渡元情報(選択) */

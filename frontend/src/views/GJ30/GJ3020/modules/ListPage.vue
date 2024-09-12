@@ -53,10 +53,7 @@
             :disabled="!isSearched || isEditing"
             @click="add"
             >新規登録</a-button
-          ><a-button
-            type="primary"
-            danger
-            :disabled="!isDataSelected || isEditing"
+          ><a-button class="danger-btn" :disabled="!isDataSelected || isEditing"
             >削除</a-button
           >
         </a-space>
@@ -142,11 +139,8 @@
       </vxe-table> </a-card
     ><a-card class="flex-1">
       <h2>2.契豹区分情報(入力)</h2>
-      <a-space :size="20" 　class="mb-2">
-        <a-button
-          :class="{ 'warning-btn': isEditing }"
-          :disabled="!isEditing"
-          @click="save"
+      <a-space :size="20" class="mb-2">
+        <a-button class="warning-btn" :disabled="!isEditing" @click="save"
           >保存</a-button
         >
         <a-button type="primary" :disabled="!isEditing" @click="cancel"

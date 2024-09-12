@@ -12,6 +12,7 @@
     centered
     title="（GJ1011）互助基金契約者マスタメンテナンス（基本情報入力）"
     width="1000px"
+    :body-style="{ height: '800px', overflowY: 'scroll' }"
     :mask-closable="false"
     destroy-on-close
     @cancel="goList"
@@ -56,7 +57,7 @@
               <a-form-item v-bind="validateInfos.KEN_CD">
                 <ai-select
                   v-model:value="formData.KEN_CD"
-                  :options="KEN_CD_NAME_LIST"
+                  :options="KEN_LIST"
                   split-val
                   class="w-full"
                 ></ai-select>
@@ -86,7 +87,7 @@
               <a-form-item v-bind="validateInfos.KEIYAKU_KBN">
                 <ai-select
                   v-model:value="formData.KEIYAKU_KBN"
-                  :options="KEIYAKU_KBN_CD_NAME_LIST"
+                  :options="KEIYAKU_KBN_LIST"
                   split-val
                 ></ai-select
               ></a-form-item>
@@ -273,7 +274,7 @@
               <a-form-item v-bind="validateInfos.JIMUITAKU_CD">
                 <ai-select
                   v-model:value="formData.JIMUITAKU_CD"
-                  :option="JIMUITAKUSENN_LIST"
+                  :option="ITAKU_LIST"
                   split-val
                 ></ai-select
               ></a-form-item>
@@ -299,7 +300,7 @@
               <a-form-item v-bind="validateInfos.FURI_BANK_CD">
                 <ai-select
                   v-model:value="formData.FURI_BANK_CD"
-                  :option="FURI_BANK_LIST"
+                  :option="BANK_LIST"
                   split-val
                   :disabled="!hasnyuryoku"
                 ></ai-select
@@ -312,7 +313,7 @@
               <a-form-item v-bind="validateInfos.FURI_BANK_SITEN_CD">
                 <ai-select
                   v-model:value="formData.FURI_BANK_SITEN_CD"
-                  :option="FURI_BANK_SITEN_LIST"
+                  :option="SITEN_LIST"
                   split-val
                   :disabled="!hasnyuryoku"
                 ></ai-select
@@ -327,7 +328,7 @@
               <a-form-item v-bind="validateInfos.FURI_KOZA_SYUBETU">
                 <ai-select
                   v-model:value="formData.FURI_KOZA_SYUBETU"
-                  :option="KOUZAISYUBETU_LIST"
+                  :option="KOZA_SYUBETU_LIST"
                   split-val
                   :disabled="!hasnyuryoku"
                 ></ai-select
@@ -430,7 +431,7 @@
       <div class="pt-2 flex justify-between border-t-1">
         <a-space :size="20">
           <a-button class="warning-btn" @click="saveData">保存</a-button>
-          <a-button type="primary" danger :disabled="isNew" @click="deleteData"
+          <a-button class="danger-btn" :disabled="isNew" @click="deleteData"
             >削除</a-button
           >
         </a-space>
@@ -463,7 +464,7 @@ import {
   convertToKaNa,
   convertToFuRiGaNa,
 } from '@/utils/util'
-import { Save } from '../../service'
+import { InitDetail, Save, SearchDetail } from '../../service'
 //--------------------------------------------------------------------------
 //データ定義
 //--------------------------------------------------------------------------
@@ -511,24 +512,64 @@ const createDefaultParams = () => {
   } as DetailVM
 }
 const formData = reactive(createDefaultParams())
-const hasnyuryoku = ref(false)
-const KEN_CD_NAME_LIST = ref<CmCodeNameModel[]>([])
-const KEIYAKU_KBN_CD_NAME_LIST = ref<CmCodeNameModel[]>([])
-const KEIYAKU_JYOKYO_LIST = ref<CmCodeNameModel[]>([])
-const KOUZAISYUBETU_LIST = ref<CmCodeNameModel[]>([])
-const FURI_BANK_SITEN_LIST = ref<CmCodeNameModel[]>([])
+const hasnyuryoku = ref(true)
 
-const FURI_BANK_LIST = ref<CmCodeNameModel[]>([])
-const JIMUITAKUSENN_LIST = ref<CmCodeNameModel[]>([])
+const KEN_LIST = ref<CmCodeNameModel[]>([]) // 都道府県情報プルダウンリスト
+const KEIYAKU_KBN_LIST = ref<CmCodeNameModel[]>([]) // 契約区分情報プルダウンリスト
+const KEIYAKU_JYOKYO_LIST = ref<CmCodeNameModel[]>([]) // 契約状況情報プルダウンリスト
+const ITAKU_LIST = ref<CmCodeNameModel[]>([]) // 事務委託先情報プルダウンリスト
+const BANK_LIST = ref<CmCodeNameModel[]>([]) // 金融機関情報プルダウンリスト
+const SITEN_LIST = ref<CmCodeNameModel[]>([]) // 本支店情報プルダウンリスト
+const KOZA_SYUBETU_LIST = ref<CmCodeNameModel[]>([]) // 口座種別情報プルダウンリスト
+const NYURYOKU_JYOKYO_LIST = ref<CmCodeNameModel[]>([]) // 入力確認有無情報プルダウンリスト
 
 const rules = reactive({
   KEIYAKUSYA_CD: [
     {
       required: true,
-      message: ITEM_REQUIRE_ERROR.Msg.replace(
-        '{0}',
-        '経営安定対策事業生産者番号'
-      ),
+      message: ITEM_REQUIRE_ERROR.Msg.replace('{0}', '契約者番号'),
+    },
+  ],
+  KEN_CD: [
+    {
+      required: true,
+      message: ITEM_REQUIRE_ERROR.Msg.replace('{0}', '都道府県'),
+    },
+  ],
+  KEIYAKU_JYOKYO: [
+    {
+      required: true,
+      message: ITEM_REQUIRE_ERROR.Msg.replace('{0}', '契約状況'),
+    },
+  ],
+  KEIYAKU_KBN: [
+    {
+      required: true,
+      message: ITEM_REQUIRE_ERROR.Msg.replace('{0}', '契約区分'),
+    },
+  ],
+  KEIYAKUSYA_KANA: [
+    {
+      required: true,
+      message: ITEM_REQUIRE_ERROR.Msg.replace('{0}', '申込者名(フリガナ)'),
+    },
+  ],
+  KEIYAKUSYA_NAME: [
+    {
+      required: true,
+      message: ITEM_REQUIRE_ERROR.Msg.replace('{0}', '申込者名(個人・団体)'),
+    },
+  ],
+  ADDR_TEL1: [
+    {
+      required: true,
+      message: ITEM_REQUIRE_ERROR.Msg.replace('{0}', '電話番号'),
+    },
+  ],
+  JIMUITAKU_CD: [
+    {
+      required: true,
+      message: ITEM_REQUIRE_ERROR.Msg.replace('{0}', '事務委託先'),
     },
   ],
   ADDR_POST: [
@@ -592,6 +633,8 @@ watch(
   () => props.visible,
   (newValue) => {
     if (newValue) {
+      // InitDetail()
+      // SearchDetail()
       if (!isNew && formData.FURI_BANK_CD) hasnyuryoku.value = true
       nextTick(() => editJudge.reset())
     }
@@ -635,7 +678,8 @@ const closeModal = () => {
   })
 }
 
-const saveData = () => {
+const saveData = async () => {
+  await validate()
   if (!editJudge.isPageEdited()) {
     showInfoModal({
       content: '変更したデータはありません。',

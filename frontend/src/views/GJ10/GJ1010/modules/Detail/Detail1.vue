@@ -189,7 +189,7 @@
         :disabled="!isEdit"
         @click="saveData"
         >登録</a-button
-      ><a-button type="primary" danger :disabled="!isEdit" @click="deleteData"
+      ><a-button class="danger-btn" :disabled="!isEdit" @click="deleteData"
         >削除</a-button
       >
       <a-button type="primary" :disabled="!isEdit" @click="reset"
@@ -442,6 +442,7 @@ th {
 tr th {
   text-align: center;
   border: 1px solid rgb(190, 190, 190);
+  background-color: #ffffe1;
   font-weight: 100;
   width: 0.8rem !important;
 }

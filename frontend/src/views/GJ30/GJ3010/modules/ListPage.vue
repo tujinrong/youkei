@@ -15,7 +15,7 @@
       <h1>（GJ3010）互助基金契約者情報変更(增羽)</h1>
       <div class="self_adaption_table form mt-1">
         <a-row>
-          <a-col v-bind="layout">
+          <a-col span="8">
             <th class="required">期</th>
             <td>
               <a-form-item v-bind="validateInfos.KI">
@@ -30,7 +30,7 @@
               </a-form-item>
             </td>
           </a-col>
-          <a-col v-bind="layout">
+          <a-col span="8">
             <th class="required">契約者</th>
             <td>
               <a-form-item v-bind="validateInfos.KEIYAKUSYA_CD">
@@ -47,14 +47,15 @@
         <a-space :size="20">
           <a-button type="primary" :disabled="isSearched" @click="search"
             >検索</a-button
-          >
+          ><a-button type="primary" @click="reset">条件クリア</a-button>
           <a-button
             type="primary"
             :disabled="!isSearched || isEditing"
             @click="add"
             >新規登録</a-button
+          ><a-button class="danger-btn" :disabled="!isDataSelected || isEditing"
+            >削除</a-button
           >
-          <a-button type="primary" @click="reset">条件クリア</a-button>
         </a-space>
         <close-page /></div
     ></a-card>
@@ -173,7 +174,7 @@
           :class="{ 'warning-btn': isEditing }"
           :disabled="!isEditing"
           @click="save"
-          >登録</a-button
+          >保存</a-button
         ><a-button type="primary" :disabled="!isDataSelected || isEditing"
           >削除</a-button
         >
@@ -316,12 +317,7 @@ const searchParams = reactive(createDefaultParams())
 const isSearched = ref(false)
 const isEditing = ref(false)
 const detailKbn = ref(FarmManage.Detail)
-const layout = {
-  md: 12,
-  lg: 12,
-  xl: 12,
-  xxl: 6,
-}
+
 const createDefaultform = () => {
   return {
     NOJO_CD: undefined,
