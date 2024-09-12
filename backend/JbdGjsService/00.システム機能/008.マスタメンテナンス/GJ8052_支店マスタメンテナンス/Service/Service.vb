@@ -132,7 +132,7 @@ Namespace JBD.GJS.Service.GJ8052
         End Function
 
         <DisplayName("削除処理_支店詳細画面処理")>
-        Public Shared Function DeleteBank(req As DeleteSitenRequest) As DaResponseBase
+        Public Shared Function DeleteSiten(req As DeleteSitenRequest) As DaResponseBase
             Return Transction(req,
                 Function(db)
 
