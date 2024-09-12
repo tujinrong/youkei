@@ -76,6 +76,7 @@ export const Delete = (params: DeleteRequest): Promise<DaResponseBase> => {
   return api(servicename1, methodname, params, undefined, { loading: true })
 }
 
+//3011
 /** 初期化処理_請求書発行画面Init */
 export const Init_3011 = (
   params: InitRequest_3011

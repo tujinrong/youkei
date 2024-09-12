@@ -100,18 +100,19 @@
         </vxe-column>
         <vxe-column
           header-align="center"
-          field="NOJO_NAME"
+          field="KEIYAKU_KBN_MAE"
           title="契約区分(変更前)"
           min-width="100"
           sortable
           :params="{ order: 2 }"
-          ><template #default="{ row }">
-            <a @click="edit()">{{ row.NOJO_NAME }}</a>
+        >
+          <template #default="{ row }">
+            <a @click="edit()">{{ row.KEIYAKU_KBN_MAE }}</a>
           </template>
         </vxe-column>
         <vxe-column
           header-align="center"
-          field="TORI_KBN_NAME"
+          field="KEIYAKU_KBN_ATO"
           title="契約区分(変更後)"
           min-width="100"
           sortable
@@ -120,8 +121,7 @@
         </vxe-column>
         <vxe-column
           header-align="center"
-          align="right"
-          field="ZO_HASU"
+          field="SYORI_KBN"
           title="処理状況"
           min-width="100"
           sortable
@@ -131,7 +131,7 @@
         <vxe-column
           header-align="center"
           align="right"
-          field="KEIYAKU_HASU_MAE"
+          field="SEIKYU_KAISU"
           title="請求回数"
           min-width="100"
           sortable
@@ -163,23 +163,31 @@
         <div class="self_adaption_table form max-w-300">
           <a-row>
             <a-col span="24">
-              <th class="required">増羽年月日</th>
+              <th class="required">変更年月日</th>
               <td>
-                <a-form-item v-bind="validateInfos.a">
-                  <DateJp v-model:value="formData.c"></DateJp>
+                <a-form-item v-bind="validateInfos1.KEIYAKU_DATE_FROM">
+                  <DateJp v-model:value="formData.KEIYAKU_DATE_FROM"></DateJp>
                 </a-form-item>
               </td>
             </a-col>
             <a-col span="24">
-              <read-only thWidth="220" th="契豹区分(変更前)" :td="formData.a" />
-              <read-only thWidth="220" th="契約区分(変更後)" :td="formData.a" />
+              <read-only
+                thWidth="220"
+                th="契豹区分(変更前)"
+                :td="formData.KEIYAKU_KBN_MAE"
+              />
+              <read-only
+                thWidth="220"
+                th="契約区分(変更後)"
+                :td="formData.KEIYAKU_KBN_ATO"
+              />
             </a-col>
 
             <a-col span="24">
               <th class="required">入力確認有無</th>
               <td>
                 <a-radio-group
-                  v-model:value="formData.b"
+                  v-model:value="formData.SYORI_KBN"
                   class="ml-2 h-full pt-1"
                 >
                   <a-radio :value="1">入力中</a-radio>
@@ -206,8 +214,8 @@ import { changeTableSort, mathNumber } from '@/utils/util'
 import { useRoute, useRouter } from 'vue-router'
 import { PageStatus } from '@/enum'
 import { VxeTableInstance } from 'vxe-table'
-import { SearchRowVM } from '../type'
 import { nextTick } from 'process'
+import { SearchRowVM } from '../interface/3020/type'
 //--------------------------------------------------------------------------
 //データ定義
 //--------------------------------------------------------------------------
@@ -223,11 +231,14 @@ const isEditing = ref(false)
 
 const createDefaultform = () => {
   return {
-    a: '',
-    b: '',
-    c: '',
+    KEIYAKU_DATE_FROM: new Date(),
+    KEIYAKU_KBN_MAE: '',
+    KEIYAKU_KBN_ATO: '',
+    SYORI_KBN: '',
+    UP_DATE: undefined,
   }
 }
+
 const formData = reactive(createDefaultform())
 const LIST = ref<CmCodeNameModel[]>([])
 const tableData = ref<SearchRowVM[]>([])
@@ -241,27 +252,43 @@ const rules = reactive({
       message: ITEM_REQUIRE_ERROR.Msg.replace('{0}', '契約者'),
     },
   ],
+  KEIYAKU_DATE_FROM: [
+    {
+      required: true,
+      message: ITEM_REQUIRE_ERROR.Msg.replace('{0}', '変更年月日'),
+    },
+  ],
+})
+const rules1 = reactive({
+  KEIYAKU_DATE_FROM: [
+    {
+      required: true,
+      message: ITEM_REQUIRE_ERROR.Msg.replace('{0}', '変更年月日'),
+    },
+  ],
 })
 const { validate, clearValidate, validateInfos } = Form.useForm(
   searchParams,
   rules
 )
+const {
+  validate: validate1,
+  clearValidate: clearValidate1,
+  validateInfos: validateInfos1,
+} = Form.useForm(formData, rules1)
+
 const xTableRef = ref<VxeTableInstance>()
 const tableDefault = {
-  KI: 2024, // 期
-  KEIYAKUSYA_CD: 123456, // 契約者番号
-  KEIYAKU_DATE_TO: new Date('2024-12-31'), // 契約年月日To (Date类型)
-  NOJO_CD: 101, // 農場コード
-  KEIYAKU_KBN: 1, // 契約区分
-  TORI_KBN: 2, // 鳥の種類コード
-  KEIYAKU_DATE_FROM: new Date('2024-01-01'), // 増羽年月日 (Date类型)
-  NOJO_NAME: '亜伊伊伊伊（伊）', // 農場名 (String类型)
-  TORI_KBN_NAME: '肉用', // 鳥の種類名 (String类型)
-  ZO_HASU: 1573, // 増羽数 (Number类型)
-  KEIYAKU_HASU_MAE: 1500, // 契約羽数(増羽前) (Number类型，可选)
-  KEIYAKU_HASU: 1600, // 契約羽数(増羽後) (Number类型)
-  SYORI_KBN: '入力確定', // 処理区分 (String类型)
-  SEIKYU_KAISU: 216, // 請求回数 (Number类型，可选)
+  /** 変更年月日 */
+  KEIYAKU_DATE_FROM: new Date('2024-08-15'),
+  /** 契約区分(変更前) */
+  KEIYAKU_KBN_MAE: '月額契約',
+  /** 契約区分(変更後) */
+  KEIYAKU_KBN_ATO: '年間契約',
+  /** 処理状況 */
+  SYORI_KBN: '処理済み',
+  /** 請求回数 */
+  SEIKYU_KAISU: 3,
 }
 
 const router = useRouter()
@@ -323,7 +350,8 @@ const edit = () => {
   isEditing.value = true
 }
 //登録
-const save = () => {
+const save = async () => {
+  await validate1()
   isEditing.value = false
 }
 //キャンセル

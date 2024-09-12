@@ -195,7 +195,7 @@
               <td>
                 <a-form-item v-bind="validateInfos.NOJO_CD">
                   <ai-select
-                    v-model:value="formData.a"
+                    v-model:value="formData.NOJO_CD"
                     :options="LIST"
                     split-val
                   ></ai-select>
@@ -211,21 +211,21 @@
             </a-col>
             <a-col span="24">
               <read-only thWidth="120" th="農場住所" td="" :hideTd="true" />
-              <read-only th="　〒　" :td="formData.a" />
-              <read-only thWidth="100" th="住所1" :td="formData.a" />
-              <read-only thWidth="100" th="住所2" :td="formData.a" />
+              <read-only th="　〒　" :td="nojoData.ADDR_POST" />
+              <read-only thWidth="100" th="住所1" :td="nojoData.ADDR_1" />
+              <read-only thWidth="100" th="住所2" :td="nojoData.ADDR_2" />
             </a-col>
             <a-col span="24">
-              <read-only thWidth="120" th="" :hideTd="true" :td="formData.a" />
-              <read-only thWidth="100" th="住所3" :td="formData.a" />
-              <read-only thWidth="100" th="住所4" :td="formData.a" />
+              <read-only thWidth="120" th="" :hideTd="true" />
+              <read-only thWidth="100" th="住所3" :td="nojoData.ADDR_3" />
+              <read-only thWidth="100" th="住所4" :td="nojoData.ADDR_4" />
             </a-col>
             <a-col span="12">
               <th class="required">鳥の種類</th>
               <td>
-                <a-form-item v-bind="validateInfos.a">
+                <a-form-item v-bind="validateInfos.TORI_KBN">
                   <ai-select
-                    v-model:value="formData.a"
+                    v-model:value="formData.TORI_KBN"
                     :options="LIST"
                     class="w-full"
                     split-val
@@ -235,8 +235,9 @@
             ><a-col span="12">
               <th class="required">増羽数</th>
               <td>
-                <a-form-item v-bind="validateInfos.a">
+                <a-form-item v-bind="validateInfos.ZOGEN_HASU">
                   <a-input-number
+                    v-model:value="formData.ZOGEN_HASU"
                     class="w-full"
                     v-bind="{ ...mathNumber }"
                   ></a-input-number>
@@ -244,14 +245,22 @@
               </td>
             </a-col>
             <a-col span="24">
-              <read-only thWidth="220" th="契豹羽数(増羽前)" :td="formData.a" />
-              <read-only thWidth="220" th="契約羽数(増羽後)" :td="formData.a" />
+              <read-only
+                thWidth="130"
+                th="契豹羽数(増羽前)"
+                :td="KEIYAKU_HASU"
+              />
+              <read-only
+                thWidth="130"
+                th="契約羽数(増羽後)"
+                :td="Number(formData.ZOGEN_HASU) + Number(KEIYAKU_HASU)"
+              />
             </a-col>
             <a-col span="12">
               <th class="required">増羽年月日</th>
               <td>
-                <a-form-item v-bind="validateInfos.a">
-                  <DateJp v-model:value="formData.c"></DateJp>
+                <a-form-item v-bind="validateInfos.KEIYAKU_DATE_FROM">
+                  <DateJp v-model:value="formData.KEIYAKU_DATE_FROM"></DateJp>
                 </a-form-item>
               </td>
             </a-col>
@@ -259,7 +268,7 @@
               <th class="required">検索方法</th>
               <td>
                 <a-radio-group
-                  v-model:value="formData.b"
+                  v-model:value="formData.SYORI_KBN"
                   class="ml-2 h-full pt-1"
                 >
                   <a-radio :value="1">入力中</a-radio>
@@ -315,12 +324,27 @@ const layout = {
 }
 const createDefaultform = () => {
   return {
-    a: '',
-    b: '',
-    c: '',
+    NOJO_CD: undefined,
+    TORI_KBN: undefined,
+    ZOGEN_HASU: undefined,
+    KEIYAKU_DATE_FROM: new Date(),
+    SYORI_KBN: 1,
   }
 }
+
 const formData = reactive(createDefaultform())
+const createDefaultnojo = () => {
+  return {
+    NOJO_CD: undefined,
+    ADDR_POST: '',
+    ADDR_1: '',
+    ADDR_2: '',
+    ADDR_3: '',
+    ADDR_4: '',
+  }
+}
+const nojoData = reactive(createDefaultnojo())
+const KEIYAKU_HASU = ref(undefined) //契約羽数(増羽前)
 const LIST = ref<CmCodeNameModel[]>([])
 const tableData = ref<SearchRowVM[]>([])
 const rules = reactive({

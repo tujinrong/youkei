@@ -30,7 +30,7 @@ export interface InitDetailRequest extends DaRequestBase {
   KI: number
   /** 契約者番号 */
   KEIYAKUSYA_CD: number
-  /** 変更年月日（可选） */
+  /** 変更年月日 */
   KEIYAKU_DATE_FROM?: Date
 }
 /** 保存処理_詳細画面リクエスト */

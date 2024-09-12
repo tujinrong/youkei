@@ -9,7 +9,7 @@
           ><th class="bg-readonly">契約者</th>
           <td>
             <ai-select
-              v-model:value="searchParams.a"
+              v-model:value="searchParams.KEIYAKUSYA_CD"
               :options="LIST"
               split-val
               disabled
@@ -24,7 +24,7 @@
           ></th>
           <td>
             <ai-select
-              v-model:value="searchParams.a"
+              v-model:value="searchParams.KEIYAKUSYA_CD"
               :options="LIST"
               split-val
               disabled
@@ -34,7 +34,10 @@
         ><a-col :span="24"
           ><th>出力区分</th>
           <td>
-            <a-radio-group v-model:value="searchParams.syuturyoku" class="mt-1">
+            <a-radio-group
+              v-model:value="searchParams.SYUTURYOKU_KBN"
+              class="mt-1"
+            >
               <a-radio :value="1">仮発行</a-radio>
               <a-radio :value="2">初回発行</a-radio>
               <a-radio :value="3">再発行(初回と同内容)</a-radio>
@@ -49,32 +52,43 @@
       <a-col :span="24"
         ><th class="required">納付期限</th>
         <td>
-          <DateJp
-            v-model:value="searchParams.a"
-            class="max-w-50"
-          ></DateJp></td></a-col
+          <a-form-item v-bind="validateInfos.NOFUKIGEN_DATE">
+            <DateJp
+              v-model:value="searchParams.NOFUKIGEN_DATE"
+              class="max-w-50"
+            ></DateJp
+          ></a-form-item></td></a-col
       ><a-col :span="24"
         ><th class="required">発行日</th>
         <td>
-          <DateJp v-model:value="searchParams.a" class="max-w-50"></DateJp></td
+          <a-form-item v-bind="validateInfos.SEIKYU_HAKKO_DATE">
+            <DateJp
+              v-model:value="searchParams.SEIKYU_HAKKO_DATE"
+              class="max-w-50"
+            ></DateJp
+          ></a-form-item></td
       ></a-col>
       <a-row
         ><a-col :span="24"
           ><th class="required">発信番号</th>
           <td>
-            <span class="min-w-10 mt-1">日鶏</span>
-            <a-input
-              v-model:value="searchParams.a"
-              class="max-w-20"
-              :maxlength="2"
-            ></a-input
-            ><span class="min-w-10 mt-1">発 第</span
-            ><a-input
-              v-model:value="searchParams.a"
-              class="max-w-30"
-              :maxlength="4"
-            ></a-input
-            ><span class="min-w-10 mt-1">号</span>
+            <a-form-item v-bind="validateInfos.SEIKYU_HAKKO_NO_NEN"
+              >日鶏
+              <a-input
+                v-model:value="searchParams.SEIKYU_HAKKO_NO_NEN"
+                class="max-w-20"
+                :maxlength="2"
+              ></a-input
+              >発</a-form-item
+            >
+            <a-form-item v-bind="validateInfos.SEIKYU_HAKKO_NO_RENBAN"
+              >第<a-input
+                v-model:value="searchParams.SEIKYU_HAKKO_NO_RENBAN"
+                class="max-w-30"
+                :maxlength="4"
+              ></a-input
+              >号</a-form-item
+            >
           </td></a-col
         ></a-row
       >
@@ -83,7 +97,9 @@
           <div class="mb-2 header_operation flex justify-between w-full">
             <a-space :size="20">
               <a-button type="primary">プレビュー</a-button>
-              <a-button type="primary" :disabled="searchParams.syuturyoku !== 5"
+              <a-button
+                type="primary"
+                :disabled="searchParams.SYUTURYOKU_KBN !== 5"
                 >通知書取消</a-button
               >
               <a-button type="primary">キャンセル</a-button>
@@ -98,7 +114,9 @@
   </a-card>
 </template>
 <script lang="ts" setup>
+import { ITEM_REQUIRE_ERROR } from '@/constants/msg'
 import { PageStatus } from '@/enum'
+import { Form } from 'ant-design-vue'
 import { onMounted, reactive, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 
@@ -107,14 +125,19 @@ import { useRoute, useRouter } from 'vue-router'
 //--------------------------------------------------------------------------
 const createDefaultParams = () => {
   return {
-    KI: -1,
-    KEIYAKUSYA_CD: undefined,
-    syuturyoku: 1,
-    a: undefined,
+    KI: undefined, // 期
+    KEIYAKUSYA_CD: undefined, // 契約者番号
+    SEIKYU_KAISU: undefined, // 請求返還回数
+    TUMITATE_KBN: undefined, // 積立金区分
+    SYUTURYOKU_KBN: undefined, // 出力区分
+    NOFUKIGEN_DATE: undefined, // 納付期限
+    SEIKYU_HAKKO_DATE: undefined, // 発行日
+    SEIKYU_HAKKO_NO_NEN: undefined, // 発信番号（発信年）
+    SEIKYU_HAKKO_NO_RENBAN: undefined, // 発信番号（発信連番）
   }
 }
+
 const searchParams = reactive(createDefaultParams())
-const KEIYAKUSYA = ref('')
 const router = useRouter()
 const route = useRoute()
 const props = defineProps<{
@@ -122,6 +145,32 @@ const props = defineProps<{
 }>()
 const LIST = ref<CmCodeNameModel[]>([])
 const isNew = props.status === PageStatus.New
+const rules = reactive({
+  NOFUKIGEN_DATE: [
+    {
+      required: true,
+      message: ITEM_REQUIRE_ERROR.Msg.replace('{0}', '納付期限'),
+    },
+  ],
+  SEIKYU_HAKKO_DATE: [
+    {
+      required: true,
+      message: ITEM_REQUIRE_ERROR.Msg.replace('{0}', '発行日'),
+    },
+  ],
+  SEIKYU_HAKKO_NO_NEN: [
+    {
+      required: true,
+      message: ITEM_REQUIRE_ERROR.Msg.replace('{0}', '発信番号'),
+    },
+  ],
+  SEIKYU_HAKKO_NO_RENBAN: [
+    {
+      required: true,
+      message: ITEM_REQUIRE_ERROR.Msg.replace('{0}', '発信番号'),
+    },
+  ],
+})
 //--------------------------------------------------------------------------
 //計算定義
 //--------------------------------------------------------------------------
@@ -138,6 +187,10 @@ onMounted(() => {})
 //--------------------------------------------------------------------------
 //メソッド
 //--------------------------------------------------------------------------
+const { validate, clearValidate, validateInfos } = Form.useForm(
+  searchParams,
+  rules
+)
 //画面遷移
 const goList = () => {
   router.push({ name: route.name })
