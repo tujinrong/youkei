@@ -307,8 +307,13 @@
               ></a-form-item>
             </td>
           </a-col>
-          <a-col span="13">
-            <th :class="hasnyuryoku ? 'required' : ''">本支店</th>
+          <a-col span="11">
+            <th
+              :class="hasnyuryoku ? 'required' : ''"
+              style="width: fit-content"
+            >
+              本支店
+            </th>
             <td>
               <a-form-item v-bind="validateInfos.FURI_BANK_SITEN_CD">
                 <ai-select
@@ -392,7 +397,7 @@
           </a-col>
         </a-row>
         <a-row>
-          <a-col :span="13">
+          <a-col :span="10">
             <a-row class="flex-rol w-full"
               ><a-col class="w-full">
                 <th class="required">入力確認有無</th>
@@ -414,13 +419,14 @@
               </a-col>
             </a-row>
           </a-col>
-          <a-col :span="11"
+          <a-col :span="14"
             ><th style="width: fit-content">備考</th>
             <td>
               <a-textarea
+                class="font-size-3"
                 v-model:value="formData.BIKO"
-                :maxlength="40"
-                :auto-size="{ minRows: 2, maxRows: 2 }"
+                :maxlength="200"
+                :auto-size="{ minRows: 5, maxRows: 5 }"
                 @input="changeType('full', $event.target.value, 'BIKO')"
               /></td
           ></a-col>
