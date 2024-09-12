@@ -108,6 +108,7 @@
         </vxe-column>
         <vxe-column
           header-align="center"
+          align="center"
           field="TORI_KBN_NAME"
           title="鳥の種類"
           min-width="100"

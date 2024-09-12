@@ -55,6 +55,7 @@
           <a-form-item v-bind="validateInfos.NOFUKIGEN_DATE">
             <DateJp
               v-model:value="searchParams.NOFUKIGEN_DATE"
+              :disabled="!hakou"
               class="max-w-50"
             ></DateJp
           ></a-form-item></td></a-col
@@ -64,6 +65,7 @@
           <a-form-item v-bind="validateInfos.SEIKYU_HAKKO_DATE">
             <DateJp
               v-model:value="searchParams.SEIKYU_HAKKO_DATE"
+              :disabled="!hakou"
               class="max-w-50"
             ></DateJp
           ></a-form-item></td
@@ -76,6 +78,7 @@
               >日鶏
               <a-input
                 v-model:value="searchParams.SEIKYU_HAKKO_NO_NEN"
+                :disabled="!hakou"
                 class="max-w-20"
                 :maxlength="2"
               ></a-input
@@ -84,6 +87,7 @@
             <a-form-item v-bind="validateInfos.SEIKYU_HAKKO_NO_RENBAN"
               >第<a-input
                 v-model:value="searchParams.SEIKYU_HAKKO_NO_RENBAN"
+                :disabled="!hakou"
                 class="max-w-30"
                 :maxlength="4"
               ></a-input
@@ -117,7 +121,7 @@
 import { ITEM_REQUIRE_ERROR } from '@/constants/msg'
 import { PageStatus } from '@/enum'
 import { Form } from 'ant-design-vue'
-import { onMounted, reactive, ref } from 'vue'
+import { computed, onMounted, reactive, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 
 //--------------------------------------------------------------------------
@@ -129,7 +133,7 @@ const createDefaultParams = () => {
     KEIYAKUSYA_CD: undefined, // 契約者番号
     SEIKYU_KAISU: undefined, // 請求返還回数
     TUMITATE_KBN: undefined, // 積立金区分
-    SYUTURYOKU_KBN: undefined, // 出力区分
+    SYUTURYOKU_KBN: 1, // 出力区分
     NOFUKIGEN_DATE: undefined, // 納付期限
     SEIKYU_HAKKO_DATE: undefined, // 発行日
     SEIKYU_HAKKO_NO_NEN: undefined, // 発信番号（発信年）
@@ -174,7 +178,9 @@ const rules = reactive({
 //--------------------------------------------------------------------------
 //計算定義
 //--------------------------------------------------------------------------
-
+const hakou = computed(() => {
+  return searchParams.SYUTURYOKU_KBN === 2 || searchParams.SYUTURYOKU_KBN === 4
+})
 //---------------------------------------------------------------------------
 //フック関数
 //--------------------------------------------------------------------------

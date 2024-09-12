@@ -97,6 +97,7 @@
         </vxe-column>
         <vxe-column
           header-align="center"
+          align="center"
           field="KEIYAKU_KBN_MAE"
           title="契約区分(変更前)"
           min-width="100"
@@ -109,6 +110,7 @@
         </vxe-column>
         <vxe-column
           header-align="center"
+          align="center"
           field="KEIYAKU_KBN_ATO"
           title="契約区分(変更後)"
           min-width="100"
@@ -228,7 +230,7 @@ const createDefaultform = () => {
     KEIYAKU_DATE_FROM: new Date(),
     KEIYAKU_KBN_MAE: '',
     KEIYAKU_KBN_ATO: '',
-    SYORI_KBN: '',
+    SYORI_KBN: 1,
     UP_DATE: undefined,
   }
 }
