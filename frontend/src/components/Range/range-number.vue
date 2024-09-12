@@ -13,12 +13,14 @@
       :disabled="disabled"
       @change="change1"
     />
-    <span>～</span>
+    <span v-if="unit" class="ml-1">{{ unit }}</span>
+    <span class="ml-1 mr-1">～</span>
     <a-input-number
       :value="value.VALUE_TO"
       :disabled="disabled"
       @change="change2"
     />
+    <span v-if="unit" class="ml-1">{{ unit }}</span>
   </div>
 </template>
 
@@ -33,6 +35,7 @@ const props = defineProps<{
     VALUE_TO: number | undefined
   }
   disabled?: boolean
+  unit?: ''
 }>()
 const emit = defineEmits(['update:value'])
 
