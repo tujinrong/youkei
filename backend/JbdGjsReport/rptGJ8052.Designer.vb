@@ -533,7 +533,7 @@ Partial Public Class rptGJ8052
         Me.Label8.Left = 9.200001!
         Me.Label8.Name = "Label8"
         Me.Label8.Style = "font-family: ＭＳ Ｐゴシック; font-size: 9pt; text-align: right; vertical-align: middle"
-        Me.Label8.Text = "(S7052)"
+        Me.Label8.Text = "(S8050)"
         Me.Label8.Top = 0.0!
         Me.Label8.Width = 1.559055!
         '
