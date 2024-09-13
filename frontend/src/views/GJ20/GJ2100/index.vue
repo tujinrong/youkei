@@ -22,7 +22,7 @@
                 </a-form-item>
               </td>
             </a-col>
-            <a-col span="24">
+            <a-col v-bind="layout">
               <th>契約区分</th>
               <td class="flex">
                 <a-form-item v-bind="validateInfos.KEIYAKU_KBN">
@@ -36,7 +36,10 @@
               <th class="required">集計区分</th>
               <td class="flex">
                 <a-form-item v-bind="validateInfos.SYUKEI_KBN">
-                  <a-radio-group v-model:value="formData.SYUKEI_KBN" class="mt-1">
+                  <a-radio-group
+                    v-model:value="formData.SYUKEI_KBN"
+                    class="mt-1"
+                  >
                     <a-radio :value="1">都道府県別</a-radio>
                     <a-radio :value="2">事務委託先別</a-radio>
                   </a-radio-group>
@@ -63,10 +66,10 @@
               <th>都道府県</th>
               <td>
                 <a-form-item v-bind="validateInfos.KEN_CD">
-                <range-select
-                  v-model:value="formData.KEN_CD"
-                  :options="KEN_CD_NAME_LIST"
-                  :disabled="formData.SYUKEI_KBN !== 1"
+                  <range-select
+                    v-model:value="formData.KEN_CD"
+                    :options="KEN_CD_NAME_LIST"
+                    :disabled="formData.SYUKEI_KBN !== 1"
                 /></a-form-item>
               </td>
             </a-col>
