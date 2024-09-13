@@ -8,6 +8,7 @@
  * ----------------------------------------------------------------->
 <template>
   <th
+    v-if="!hideTh"
     class="bg-readonly"
     :style="{
       width: thWidth ? thWidth + 'px' : undefined,
@@ -27,6 +28,7 @@ const props = defineProps<{
   thWidth?: string
   th?: string
   td?: string | number
+  hideTh?: boolean
   hideTd?: boolean
   after?: string
 }>()

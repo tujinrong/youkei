@@ -7,7 +7,7 @@
       v-if="status === PageStatus.New || status === PageStatus.Edit"
       class="h-full"
     >
-      <EditPage :status="status" />
+<!--      <EditPage :status="status" />-->
     </div>
   </div>
 </template>
@@ -16,7 +16,7 @@ import { onMounted, ref, watch } from 'vue'
 import { useRoute } from 'vue-router'
 import { PageStatus } from '@/enum'
 import ListPage from './modules/ListPage.vue'
-import EditPage from './modules/EditPage.vue'
+// import EditPage from './modules/EditPage.vue'
 
 //--------------------------------------------------------------------------
 //データ定義
