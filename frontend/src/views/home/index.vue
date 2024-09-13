@@ -20,7 +20,7 @@
           opacity: 0.5;
         "
       />
-      <h1>(GJ0020)契約情報</h1>
+      <h1>（GJ0020）契約情報</h1>
       <div class="flex mt-2 max-w-150 justify-between">
         <h2>{{ updTime }}現在</h2>
         <a-button type="primary" class="mt-1" @click="update">再表示</a-button>
