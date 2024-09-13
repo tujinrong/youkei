@@ -247,7 +247,16 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, reactive, toRef, watch, onMounted, computed, nextTick } from 'vue'
+import {
+  ref,
+  reactive,
+  toRef,
+  watch,
+  onMounted,
+  computed,
+  nextTick,
+  onUnmounted,
+} from 'vue'
 import { useRouter, useRoute, onBeforeRouteUpdate } from 'vue-router'
 import { EnumAndOr, EnumEditKbn, PageStatus } from '@/enum'
 import useSearch from '@/hooks/useSearch'
@@ -301,6 +310,7 @@ const searchParams2 = reactive(createDefaultParams2())
 const sitanTableData = ref<SearchSitenRowVM[]>([])
 //表の高さ
 const headRef = ref(null)
+const previewName = ref('')
 const layout = {
   md: 24,
   lg: 12,
@@ -311,29 +321,20 @@ const cardRef = ref()
 const { height } = useElementSize(cardRef)
 const currentRow = ref<SearchBankRowVM | null>(null)
 const currentRow2 = ref<SearchSitenRowVM | null>(null)
-const isSelectBank = computed(() => currentRow.value !== null)
+const host = window.location.href.includes('localhost')
+  ? 'localhost:9527'
+  : '61.213.76.155:65534'
+const URL = computed(() => {
+  return `http://${host}/preview`
+})
 //--------------------------------------------------------------------------
 //計算定義
 //--------------------------------------------------------------------------
+const isSelectBank = computed(() => currentRow.value !== null)
 
 //---------------------------------------------------------------------------
 //フック関数
 //--------------------------------------------------------------------------
-
-watch(
-  () => xTableRef.value?.getCurrentRecord(),
-  (val) => {
-    currentRow.value = val
-    searchParams2.BANK_CD = currentRow.value?.BANK_CD ?? ''
-  }
-)
-
-watch(
-  () => xTableRef2.value?.getCurrentRecord(),
-  (val) => {
-    currentRow2.value = val
-  }
-)
 
 //初期化処理
 
@@ -349,6 +350,43 @@ onBeforeRouteUpdate((to, from) => {
     searchAll2()
   }
 })
+
+//--------------------------------------------------------------------------
+//監視定義
+//--------------------------------------------------------------------------
+const channel = new BroadcastChannel('channel_preview')
+channel.onmessage = (event) => {
+  if (event.data.isMounted) {
+    channel.postMessage({
+      params:
+        previewName.value === 'S80501'
+          ? JSON.stringify(searchParams)
+          : JSON.stringify(searchParams2),
+      name: previewName.value,
+    })
+  }
+}
+onUnmounted(() => {
+  previewName.value = ''
+  channel.close()
+})
+
+watch(
+  () => xTableRef.value?.getCurrentRecord(),
+  (val) => {
+    currentRow.value = val
+    if (sitanTableData.value.length <= 0)
+      searchParams2.BANK_CD = currentRow.value?.BANK_CD ?? ''
+  }
+)
+
+watch(
+  () => xTableRef2.value?.getCurrentRecord(),
+  (val) => {
+    currentRow2.value = val
+    searchParams2.BANK_CD = currentRow2.value?.BANK_CD ?? ''
+  }
+)
 //--------------------------------------------------------------------------
 //メソッド
 //--------------------------------------------------------------------------
@@ -412,7 +450,6 @@ async function reset2() {
 
 //銀行
 async function forwardNew() {
-  // await validate()
   router.push({
     name: route.name,
     query: {
@@ -422,7 +459,6 @@ async function forwardNew() {
   })
 }
 async function forwardEdit(BANK_CD) {
-  // await validate()
   router.push({
     name: route.name,
     query: {
@@ -432,13 +468,19 @@ async function forwardEdit(BANK_CD) {
     },
   })
 }
-function preview1() {
-  PreviewBank({ ...searchParams })
+async function preview1() {
+  try {
+    previewName.value = 'S80501'
+    await PreviewBank({ ...searchParams })
+    const openNew = () => {
+      window.open(URL.value, '_blank')
+    }
+    openNew()
+  } catch (error) {}
 }
 
 //支店
 async function forwardNew2() {
-  // await validate()
   router.push({
     name: route.name,
     query: {
@@ -464,12 +506,16 @@ async function forwardEdit2(BANK_CD, SITEN_CD) {
   })
 }
 
-function preview2() {
-  PreviewSiten({ ...searchParams2 })
+async function preview2() {
+  try {
+    previewName.value = 'S80502'
+    await PreviewSiten({ ...searchParams2 })
+    const openNew = () => {
+      window.open(URL.value, '_blank')
+    }
+    openNew()
+  } catch (error) {}
 }
-//--------------------------------------------------------------------------
-//監視定義
-//--------------------------------------------------------------------------
 </script>
 
 <style lang="scss" scoped>
