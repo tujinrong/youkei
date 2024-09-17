@@ -1,18 +1,15 @@
 <template>
-  <a-card :bordered="false" class="mb-2 h-full">
-    <h1>（GJ8041）使用者マスタメンテナンス</h1>
-    <div class="self_adaption_table form max-w-160">
-      <div class="my-2 header_operation flex justify-between w-full">
-        <a-space :size="20">
-          <a-button class="warning-btn" @click="saveData">保存</a-button>
-          <a-button class="danger-btn" :disabled="isNew" @click="deleteData"
-            >削除</a-button
-          >
-        </a-space>
-        <a-button type="primary" class="text-end" @click="goList"
-          >一覧へ</a-button
-        >
-      </div>
+  <a-modal
+    :visible="modalVisible"
+    centered
+    title="（GJ8041）使用者マスタメンテナンス"
+    width="1000px"
+    :body-style="{ height: '800px' }"
+    :mask-closable="false"
+    destroy-on-close
+    @cancel="goList"
+  >
+    <div class="edit_table form">
       <a-form>
         <a-row>
           <a-col span="24">
@@ -54,22 +51,22 @@
             </td>
           </a-col>
         </a-row>
-        <a-row>
+        <a-row class="mt-1">
           <a-col span="24">
-            <read-only
+            <read-only-pop
               th="パスワード有効期限"
               th-width="150"
               :td="getDateJpText(formData.PASS_KIGEN_DATE)"
-            ></read-only>
+            ></read-only-pop>
           </a-col>
         </a-row>
         <a-row>
           <a-col span="24">
-            <read-only
+            <read-only-pop
               th="パスワード変更日"
               th-width="150"
               :td="getDateJpText(formData.PASS_UP_DATE)"
-            ></read-only>
+            ></read-only-pop>
           </a-col>
         </a-row>
         <a-row>
@@ -107,7 +104,18 @@
         </a-row>
       </a-form>
     </div>
-  </a-card>
+    <template #footer>
+      <div class="pt-2 flex justify-between border-t-1">
+        <a-space :size="20">
+          <a-button class="warning-btn" @click="saveData"> 保存 </a-button>
+          <a-button class="danger-btn" :disabled="isNew" @click="deleteData">
+            削除
+          </a-button>
+        </a-space>
+        <a-button type="primary" @click="goList">閉じる</a-button>
+      </div>
+    </template></a-modal
+  >
 </template>
 <script setup lang="ts">
 import {
@@ -120,23 +128,25 @@ import {
 import { EnumEditKbn, PageStatus } from '@/enum'
 import { showDeleteModal, showSaveModal } from '@/utils/modal'
 import { Form, message } from 'ant-design-vue'
-import { nextTick, onMounted, reactive, ref } from 'vue'
+import { computed, nextTick, onMounted, reactive, ref, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { Delete, InitDetail, Save } from '../service'
 import { Judgement } from '@/utils/judge-edited'
 import { getDateJpText } from '@/utils/util'
+import { SearchRowVM } from '../type'
 //---------------------------------------------------------------------------
 //属性
 //---------------------------------------------------------------------------
 const props = defineProps<{
-  status: PageStatus
+  editkbn: EnumEditKbn
+  visible: boolean
+  userData?: SearchRowVM
 }>()
+const emit = defineEmits(['update:visible'])
 //--------------------------------------------------------------------------
 //データ定義
 //--------------------------------------------------------------------------
-const router = useRouter()
-const route = useRoute()
-const isNew = props.status === PageStatus.New
+
 const editJudge = new Judgement('GJ8040')
 let upddttm
 const formData = reactive({
@@ -145,10 +155,11 @@ const formData = reactive({
   PASS: '',
   PASS_KIGEN_DATE: new Date(),
   PASS_UP_DATE: new Date(),
-  SIYO_KBN: 0,
+  SIYO_KBN: undefined,
   TEISI_DATE: new Date(),
   TEISI_RIYU: '',
 })
+
 const SIYO_KBN_LIST = ref<CmCodeNameModel[]>([])
 const rules = reactive({
   USER_ID: [
@@ -184,36 +195,68 @@ const { validate, clearValidate, validateInfos, resetFields } = Form.useForm(
   formData,
   rules
 )
+//--------------------------------------------------------------------------
+//計算定義
+//--------------------------------------------------------------------------
+const modalVisible = computed({
+  get() {
+    return props.visible
+  },
+  set(visible) {
+    emit('update:visible', visible)
+  },
+})
+const isNew = computed(() => (props.editkbn === EnumEditKbn.Add ? true : false))
 //---------------------------------------------------------------------------
 //フック関数
 //--------------------------------------------------------------------------
-onMounted(async () => {
-  if (!isNew) formData.USER_ID = String(route.query.USER_ID) ?? ''
 
-  // InitDetail({
-  //   USER_ID: formData.USER_ID,
-  //   EDIT_KBN: isNew ? EnumEditKbn.Add : EnumEditKbn.Edit,
-  // })
-  //   .then((res) => {
-  //     SIYO_KBN_LIST.value = res.SIYO_KBN_LIST
-  //     if (!isNew) {
-  //       Object.assign(formData, res.CODE_VM)
-  //       upddttm = res.CODE_VM.UP_DATE
-  //     }
-  //     nextTick(() => editJudge.reset())
-  //   })
-  //   .catch((error) => {
-  //     router.push({ name: route.name, query: { refresh: '1' } })
-  //   })
-})
+//--------------------------------------------------------------------------
+//監視定義
+//--------------------------------------------------------------------------
+watch(
+  () => props.visible,
+  (newValue) => {
+    if (newValue) {
+      if (!isNew.value) {
+        if (props.userData) {
+          Object.assign(formData, props.userData)
+        }
+      }
+      // InitDetail({
+      //   USER_ID: formData.USER_ID,
+      //   EDIT_KBN: isNew.value ? EnumEditKbn.Add : EnumEditKbn.Edit,
+      // })
+      //   .then((res) => {
+      //     SIYO_KBN_LIST.value = res.SIYO_KBN_LIST
+      //     if (!isNew.value) {
+      //       Object.assign(formData, res.CODE_VM)
+      //       upddttm = res.CODE_VM.UP_DATE
+      //     }
+      //     nextTick(() => editJudge.reset())
+      //   })
+      //   .catch((error) => {
+      //     router.push({ name: route.name, query: { refresh: '1' } })
+      //   })
+      nextTick(() => editJudge.reset())
+    }
+  }
+)
+watch(formData, () => editJudge.setEdited())
 //--------------------------------------------------------------------------
 //メソッド
 //--------------------------------------------------------------------------
 //画面遷移
-const goList = () => {
+const closeModal = () => {
   editJudge.judgeIsEdited(() => {
     resetFields()
-    router.push({ name: route.name, query: { refresh: '1' } })
+    clearValidate()
+    modalVisible.value = false
+  })
+}
+const goList = () => {
+  editJudge.judgeIsEdited(() => {
+    closeModal()
   })
 }
 
@@ -227,9 +270,9 @@ const saveData = async () => {
   //       await Save({
   //         CODE_VM: {
   //           ...formData,
-  //           UP_DATE: isNew ? undefined : upddttm,
+  //           UP_DATE: isNew.value ? undefined : upddttm,
   //         },
-  //         EDIT_KBN: isNew ? EnumEditKbn.Add : EnumEditKbn.Edit,
+  //         EDIT_KBN: isNew.value ? EnumEditKbn.Add : EnumEditKbn.Edit,
   //       })
   //       router.push({ name: route.name, query: { refresh: '1' } })
   //       message.success(SAVE_OK_INFO.Msg)

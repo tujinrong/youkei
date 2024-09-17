@@ -1,28 +1,25 @@
 <template>
-  <a-card :bordered="false" class="mb-2 h-full">
-    <h1>（GJ8011）コードマスタメンテナンス</h1>
-    <div class="self_adaption_table form max-w-160">
+  <a-modal
+    :visible="modalVisible"
+    centered
+    title="（GJ8011）コードマスタメンテナンス"
+    width="1000px"
+    :body-style="{ height: '800px' }"
+    :mask-closable="false"
+    destroy-on-close
+    @cancel="goList"
+  >
+    <div class="edit_table form">
       <a-form>
         <a-row>
           <a-col span="24">
-            <read-only
+            <read-only-pop
               th="種類区分"
               th-width="130"
               :td="formData.SYURUI_KBN"
-            ></read-only>
+            ></read-only-pop>
           </a-col>
         </a-row>
-        <div class="my-2 header_operation flex justify-between w-full">
-          <a-space :size="20">
-            <a-button class="warning-btn" @click="saveData">保存</a-button>
-            <a-button class="danger-btn" :disabled="isNew" @click="deleteData"
-              >削除</a-button
-            >
-          </a-space>
-          <a-button type="primary" class="text-end" @click="goList"
-            >一覧へ</a-button
-          >
-        </div>
         <a-row>
           <a-col span="24">
             <th class="required">名称コード</th>
@@ -67,12 +64,23 @@
         </a-row>
       </a-form>
     </div>
-  </a-card>
+    <template #footer>
+      <div class="pt-2 flex justify-between border-t-1">
+        <a-space :size="20">
+          <a-button class="warning-btn" @click="saveData"> 保存 </a-button>
+          <a-button class="danger-btn" :disabled="isNew" @click="deleteData">
+            削除
+          </a-button>
+        </a-space>
+        <a-button type="primary" @click="goList">閉じる</a-button>
+      </div>
+    </template>
+  </a-modal>
 </template>
 <script setup lang="ts">
 import { EnumEditKbn, PageStatus } from '@/enum'
 import { Judgement } from '@/utils/judge-edited'
-import { reactive, watch } from 'vue'
+import { computed, nextTick, reactive, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { DetailVM } from '../type'
 import { convertToFullWidth } from '@/utils/util'
@@ -88,12 +96,12 @@ import { showDeleteModal, showSaveModal } from '@/utils/modal'
 import { Delete, Save } from '../service'
 
 const props = defineProps<{
-  status: PageStatus
+  editkbn: EnumEditKbn
+  visible: boolean
 }>()
-const router = useRouter()
-const route = useRoute()
-const isNew = props.status === PageStatus.New
-const editJudge = new Judgement('GJ8010')
+const emit = defineEmits(['update:visible'])
+
+const editJudge = new Judgement('')
 let upddttm
 const formData = reactive({
   SYURUI_KBN: '',
@@ -127,11 +135,29 @@ const { validate, clearValidate, validateInfos, resetFields } = Form.useForm(
   formData,
   rules
 )
-
+//--------------------------------------------------------------------------
+//計算定義
+//--------------------------------------------------------------------------
+const modalVisible = computed({
+  get() {
+    return props.visible
+  },
+  set(visible) {
+    emit('update:visible', visible)
+  },
+})
+const isNew = computed(() => (props.editkbn === EnumEditKbn.Add ? true : false))
 //--------------------------------------------------------------------------
 //監視定義
 //--------------------------------------------------------------------------
-
+watch(
+  () => props.visible,
+  (newValue) => {
+    if (newValue) {
+      nextTick(() => editJudge.reset())
+    }
+  }
+)
 watch(formData, () => editJudge.setEdited())
 
 watch(
@@ -151,11 +177,17 @@ watch(
 //--------------------------------------------------------------------------
 //メソッド
 //--------------------------------------------------------------------------
+const closeModal = () => {
+  editJudge.judgeIsEdited(() => {
+    resetFields()
+    clearValidate()
+    modalVisible.value = false
+  })
+}
 //画面遷移
 const goList = () => {
   editJudge.judgeIsEdited(() => {
-    resetFields()
-    router.push({ name: route.name })
+    closeModal()
   })
 }
 
@@ -169,11 +201,11 @@ const saveData = async () => {
         await Save({
           CODE_VM: {
             ...formData,
-            UP_DATE: isNew ? undefined : upddttm,
+            UP_DATE: isNew.value ? undefined : upddttm,
           },
-          EDIT_KBN: isNew ? EnumEditKbn.Add : EnumEditKbn.Edit,
+          EDIT_KBN: isNew.value ? EnumEditKbn.Add : EnumEditKbn.Edit,
         })
-        router.push({ name: route.name as string, query: { refresh: '1' } })
+        closeModal()
         message.success(SAVE_OK_INFO.Msg)
       } catch (error) {}
     },
@@ -192,7 +224,7 @@ const deleteData = () => {
           MEISYO_CD: formData.MEISYO_CD,
           UP_DATE: upddttm,
         })
-        router.push({ name: route.name as string, query: { refresh: '1' } })
+        closeModal()
         message.success(DELETE_OK_INFO.Msg)
       } catch (error) {}
     },

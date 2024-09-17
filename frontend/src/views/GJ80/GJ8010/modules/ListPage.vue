@@ -24,7 +24,7 @@
           <a-button
             type="primary"
             :disabled="!searchParams.SYURUI_KBN"
-            @click="forwardNew"
+            @click="goForward(PageStatus.New)"
             >新規登録</a-button
           >
         </a-space>
@@ -40,7 +40,7 @@
         :data="tableData"
         :sort-config="{ trigger: 'cell', orders: ['desc', 'asc'] }"
         :empty-render="{ name: 'NotData' }"
-        @cell-dblclick="({ row }) => forwardEdit(row.MEISYO_CD)"
+        @cell-dblclick="({ row }) => goForward(PageStatus.Edit, row)"
         @sort-change="(e) => changeTableSort(e, toRef(pageParams, 'ORDER_BY'))"
       >
         <vxe-column
@@ -53,7 +53,7 @@
           :resizable="true"
         >
           <template #default="{ row }">
-            <a @click="forwardEdit(row.MEISYO_CD)">{{ row.MEISYO_CD }}</a>
+            <a @click="goForward(PageStatus.Edit, row)">{{ row.MEISYO_CD }}</a>
           </template>
         </vxe-column>
         <vxe-column
@@ -66,7 +66,7 @@
           :resizable="true"
         >
           <template #default="{ row }">
-            <a @click="forwardEdit(row.MEISYO_CD)">{{ row.MEISYO }}</a>
+            <a @click="goForward(PageStatus.Edit, row)">{{ row.MEISYO }}</a>
           </template>
         </vxe-column>
         <vxe-column
@@ -81,25 +81,22 @@
       </vxe-table>
     </a-card>
   </div>
+  <EditPage v-model:visible="editVisible" :editkbn="editkbn" />
 </template>
 <script setup lang="ts">
 import { ref, reactive, toRef, watch, onMounted, computed } from 'vue'
-import { useRouter, useRoute, onBeforeRouteUpdate } from 'vue-router'
-import { PageStatus } from '@/enum'
+import { EnumEditKbn, PageStatus } from '@/enum'
 import useSearch from '@/hooks/useSearch'
-import { ITEM_REQUIRE_ERROR } from '@/constants/msg'
 import { changeTableSort, convertToFullWidth } from '@/utils/util'
-import { useTabStore } from '@/store/modules/tab'
 import { useElementSize } from '@vueuse/core'
 import { SearchRequest, SearchRowVM } from '../type'
 import { Init, Search } from '../service'
-import { Form } from 'ant-design-vue'
+import EditPage from './EditPage.vue'
 
 //--------------------------------------------------------------------------
 //データ定義
 //--------------------------------------------------------------------------
-const router = useRouter()
-const route = useRoute()
+
 const createDefaultParams = (): SearchRequest => {
   return {
     SYURUI_KBN: undefined,
@@ -112,6 +109,18 @@ const searchParams = reactive(createDefaultParams())
 const cardRef = ref()
 const { height } = useElementSize(cardRef)
 const tableData = ref<SearchRowVM[]>([])
+const editVisible = ref(false)
+const editkbn = ref<EnumEditKbn>(EnumEditKbn.Add)
+
+//--------------------------------------------------------------------------
+//監視定義
+//--------------------------------------------------------------------------
+watch(
+  () => editVisible.value,
+  (newValue) => {
+    // if (!newValue) searchData()
+  }
+)
 //--------------------------------------------------------------------------
 //メソッド
 //--------------------------------------------------------------------------
@@ -126,12 +135,6 @@ const getInitData = () => {
     SYURUI_KBN_LIST.value = res.SYURUI_KBN_LIST
   })
 }
-
-onBeforeRouteUpdate((to, from) => {
-  if (to.query.refresh) {
-    searchData()
-  }
-})
 
 const changeKbn = () => {
   // searchData()
@@ -150,24 +153,12 @@ const { pageParams, searchData } = useSearch({
   params: toRef(() => searchParams),
 })
 
-function forwardNew() {
-  router.push({
-    name: route.name,
-    query: {
-      status: PageStatus.New,
-      SYURUI_KBN: searchParams.SYURUI_KBN,
-    },
-  })
-}
-function forwardEdit(MEISYO_CD) {
-  router.push({
-    name: route.name,
-    query: {
-      status: PageStatus.Edit,
-      SYURUI_KBN: searchParams.SYURUI_KBN,
-      MEISYO_CD: MEISYO_CD,
-    },
-  })
+function goForward(status: PageStatus, row?: any) {
+  if (status === PageStatus.Edit || status === PageStatus.New) {
+    editVisible.value = true
+    editkbn.value =
+      status === PageStatus.Edit ? EnumEditKbn.Edit : EnumEditKbn.Add
+  }
 }
 </script>
 <style lang="scss" scoped></style>

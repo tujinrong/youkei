@@ -6,7 +6,9 @@
       <h1>（GJ8040）使用者一覧</h1>
       <div class="mt-1 flex">
         <a-space :size="20">
-          <a-button type="primary" @click="forwardNew">新規登録</a-button>
+          <a-button type="primary" @click="goForward(PageStatus.New)"
+            >新規登録</a-button
+          >
         </a-space>
         <close-page />
       </div>
@@ -20,7 +22,7 @@
         :data="tableData"
         :sort-config="{ trigger: 'cell', orders: ['desc', 'asc'] }"
         :empty-render="{ name: 'NotData' }"
-        @cell-dblclick="({ row }) => forwardEdit(row.USER_ID)"
+        @cell-dblclick="({ row }) => goForward(PageStatus.Edit, row)"
         @sort-change="(e) => changeTableSort(e, toRef(pageParams, 'ORDER_BY'))"
       >
         <vxe-column
@@ -33,7 +35,7 @@
           :resizable="true"
         >
           <template #default="{ row }">
-            <a @click="forwardEdit(row.USER_ID)">{{ row.USER_ID }}</a>
+            <a @click="goForward(PageStatus.Edit, row)">{{ row.USER_ID }}</a>
           </template>
         </vxe-column>
         <vxe-column
@@ -46,7 +48,7 @@
           :resizable="true"
         >
           <template #default="{ row }">
-            <a @click="forwardEdit(row.USER_ID)">{{ row.USER_NAME }}</a>
+            <a @click="goForward(PageStatus.Edit, row)">{{ row.USER_NAME }}</a>
           </template>
         </vxe-column>
         <vxe-column
@@ -77,14 +79,19 @@
       </vxe-table>
     </a-card>
   </div>
+  <EditPage
+    v-model:visible="editVisible"
+    :editkbn="editkbn"
+    :user-data="userData"
+  />
 </template>
 <script setup lang="ts">
 import { useElementSize } from '@vueuse/core'
-import { reactive, ref, toRef } from 'vue'
-import { onBeforeRouteUpdate, useRoute, useRouter } from 'vue-router'
+import { reactive, ref, toRef, watch } from 'vue'
 import { SearchRowVM } from '../type'
-import { PageStatus } from '@/enum'
+import { EnumEditKbn, PageStatus } from '@/enum'
 import { changeTableSort } from '@/utils/util'
+import EditPage from './EditPage.vue'
 
 //--------------------------------------------------------------------------
 //データ定義
@@ -100,36 +107,33 @@ const tableData = ref<SearchRowVM[]>([
     TEISI_RIYU: '',
   },
 ])
-
-const router = useRouter()
-const route = useRoute()
+const editVisible = ref(false)
+const editkbn = ref<EnumEditKbn>(EnumEditKbn.Add)
+const userData = ref<SearchRowVM>()
 const pageParams = reactive({
   ORDER_BY: 0,
 })
 //--------------------------------------------------------------------------
+//監視定義
+//--------------------------------------------------------------------------
+watch(
+  () => editVisible.value,
+  (newValue) => {
+    // if (!newValue) searchData()
+  }
+)
+//--------------------------------------------------------------------------
 //メソッド
 //--------------------------------------------------------------------------
 
-function forwardEdit(USER_ID) {
-  router.push({
-    name: route.name,
-    query: {
-      status: PageStatus.Edit,
-      USER_ID: USER_ID,
-    },
-  })
-}
-function forwardNew() {
-  router.push({
-    name: route.name,
-    query: {
-      status: PageStatus.New,
-    },
-  })
-}
-onBeforeRouteUpdate((to, from) => {
-  if (to.query.refresh) {
+function goForward(status: PageStatus, row?: any) {
+  editVisible.value = true
+  if (status === PageStatus.Edit) {
+    editkbn.value = EnumEditKbn.Edit
+    userData.value = row
+  } else {
+    editkbn.value = EnumEditKbn.Add
   }
-})
+}
 </script>
 <style lang="scss" scoped></style>
