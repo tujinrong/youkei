@@ -118,6 +118,7 @@
           <a-col span="16">
             <vxe-table
               ref="xTableRef"
+              class="vxe-table-pop"
               :column-config="{ resizable: true }"
               max-height="300px"
               :row-config="{ isCurrent: true, isHover: true }"
@@ -401,7 +402,10 @@ watch(
   (newValue) => {
     if (newValue) {
       Object.assign(formData, formDefault)
-      nextTick(() => editJudge.reset())
+      nextTick(() => {
+        setPaddingToZero()
+        editJudge.reset()
+      })
     }
   }
 )
@@ -433,6 +437,13 @@ const saveData = () => {}
 
 // 削除
 const deleteData = () => {}
+
+const setPaddingToZero = () => {
+  const table = document.querySelector('.vxe-table-pop') as HTMLElement
+  if (table) {
+    table.style.setProperty('--vxe-ui-table-column-padding-default', '0px')
+  }
+}
 </script>
 <style lang="scss" scoped>
 th {
