@@ -7,8 +7,16 @@
  * 変更履歴　:
  * ----------------------------------------------------------------->
 <template>
-  <a-card :bordered="false" class="mb-2 h-full"
-    ><h1>（GJ1013）互助基金契約者マスタメンテナンス(農場情報入力)</h1>
+  <a-modal
+    :visible="detailKbn === FarmManage.FarmInfo"
+    centered
+    title="（GJ1013）互助基金契約者マスタメンテナンス(農場情報入力)"
+    width="1000px"
+    :body-style="{ height: '800px' }"
+    :mask-closable="false"
+    destroy-on-close
+    @cancel="goList"
+  >
     <div class="self_adaption_table form">
       <b>第{{ formData.KI ?? 8 }}期</b>
       <h2>1.農場情報(表示)</h2>
@@ -65,14 +73,7 @@
     <h2>2.農場登録情報(入力)</h2>
 
     <div class="self_adaption_table form">
-      <a-row class="mb-2"
-        ><a-col span="13"
-          ><a-space :size="20">
-            <a-button class="warning-btn" @click="saveData">保存</a-button>
-            <a-button type="primary" @click="goList">戻る</a-button>
-          </a-space>
-        </a-col></a-row
-      >
+      <a-row class="mb-2"><a-col span="13"> </a-col></a-row>
       <a-row>
         <a-col span="13">
           <th class="required">農場番号</th>
@@ -160,7 +161,15 @@
         </a-col>
       </a-row>
     </div>
-  </a-card>
+    <template #footer>
+      <div class="pt-2 flex justify-between border-t-1">
+        <a-space :size="20">
+          <a-button class="warning-btn" @click="saveData">保存</a-button>
+        </a-space>
+        <a-button type="primary" @click="goList">閉じる</a-button>
+      </div>
+    </template>
+  </a-modal>
 </template>
 <script lang="ts" setup>
 import { onMounted, reactive, ref, watch, toRef } from 'vue'

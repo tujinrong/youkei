@@ -286,7 +286,7 @@ import { SearchRequest, SearchRowVM } from '../type'
 import { VxeTableInstance } from 'vxe-table'
 import { convertToHalfNumber } from '@/utils/util'
 import { Search } from '../service'
-import EditPage from './Detail/EditPage.vue'
+import EditPage from './Popup/PopUp_1011.vue'
 //--------------------------------------------------------------------------
 //データ定義
 //--------------------------------------------------------------------------

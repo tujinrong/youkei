@@ -55,7 +55,13 @@
             >新規登録</a-button
           ><a-button class="danger-btn" :disabled="!isDataSelected || isEditing"
             >削除</a-button
-          >
+          ><a-button
+            class="ml-20"
+            type="primary"
+            @click="turnExportPage"
+            :disabled="!isDataSelected || isEditing"
+            >請求書発行
+          </a-button>
         </a-space>
         <close-page /></div
     ></a-card>
@@ -182,13 +188,6 @@
         <a-button type="primary" :disabled="!isEditing" @click="cancel"
           >キャンセル</a-button
         >
-        <a-button
-          class="ml-20"
-          type="primary"
-          @click="turnExportPage"
-          :disabled="!isDataSelected || isEditing"
-          >請求書発行
-        </a-button>
       </a-space>
       <div class="parent-container">
         <div class="self_adaption_table form max-w-300">
@@ -296,7 +295,7 @@
 <script setup lang="ts">
 import { ITEM_REQUIRE_ERROR } from '@/constants/msg'
 import { Form } from 'ant-design-vue'
-import NoJoJoHo from '../../../GJ10/GJ1010/modules/Detail/Detail2.vue'
+import NoJoJoHo from '../../../GJ10/GJ1010/modules/Popup/PopUp_1013.vue'
 import { onMounted, reactive, ref, toRef, computed } from 'vue'
 import useSearch from '@/hooks/useSearch'
 import { changeTableSort, mathNumber } from '@/utils/util'

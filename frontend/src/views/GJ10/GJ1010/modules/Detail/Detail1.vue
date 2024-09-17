@@ -7,7 +7,7 @@
  * 変更履歴　:
  * ----------------------------------------------------------------->
 <template>
-  <a-card v-show="detailKbn === FarmManage.Detail" :bordered="false">
+  <a-card :bordered="false" class="h-full">
     <h1>（GJ1012）互助基金契約者マスタメンテナンス（契約情報入力）</h1>
     <div class="self_adaption_table form">
       <b>第{{ formData.KI ?? 8 }}期</b>
@@ -26,9 +26,8 @@
       </div>
       <div class="my-2 flex justify-between">
         <a-space :size="20">
-          <a-button type="primary" :disabled="isEdit" @click="addData"
-            >新規登録</a-button
-          >
+          <a-button type="primary" @click="addData">新規登録</a-button
+          ><a-button class="ml-20" type="primary">前期データコピー</a-button>
         </a-space>
         <a-button type="primary" @click="goList">一覧へ</a-button>
       </div>
@@ -181,143 +180,25 @@
         <td>{{ hasuGokei.TOTAL || 0 }}</td>
       </tr>
     </table>
-    <h2>2.契約農場別登録明細情報(入力)</h2>
-    <a-space :size="20" class="mb-2">
-      <a-button type="primary" :disabled="!isEdit">前期データコピー</a-button
-      ><a-button
-        :class="{ 'warning-btn': isEdit }"
-        :disabled="!isEdit"
-        @click="saveData"
-        >登録</a-button
-      ><a-button class="danger-btn" :disabled="!isEdit" @click="deleteData"
-        >削除</a-button
-      >
-      <a-button type="primary" :disabled="!isEdit" @click="reset"
-        >キャンセル</a-button
-      ></a-space
-    >
-    <div class="parent-container">
-      <div class="self_adaption_table form w-full">
-        <a-row>
-          <a-col span="24">
-            <read-only
-              th="明細番号"
-              thWidth="110"
-              :td="formData.MEISAI_NO"
-            ></read-only>
-          </a-col>
-        </a-row>
-        <a-row>
-          <a-col span="24">
-            <th class="required">農場</th>
-            <td>
-              <a-form-item v-bind="validateInfos.NOJO_CD">
-                <ai-select
-                  v-model:value="formData.NOJO_CD"
-                  :options="NOJO_CD_CD_NAME_LIST"
-                  split-val
-                ></ai-select>
-              </a-form-item>
-              <a-button class="ml-2" type="primary" @click="addNoJo"
-                >農場登録</a-button
-              >
-            </td>
-          </a-col>
-        </a-row>
-        <a-row>
-          <a-col span="24">
-            <read-only thWidth="110" th="住所" td="" :hideTd="true" />
-            <read-only th="　〒　" :td="formData.ADDR_POST" />
-            <read-only thWidth="100" th="住所1" :td="formData.ADDR_1" />
-            <read-only thWidth="100" th="住所2" :td="formData.ADDR_2" />
-          </a-col>
-        </a-row>
-        <a-row>
-          <a-col span="24">
-            <read-only
-              thWidth="110"
-              th=""
-              :hideTd="true"
-              :td="formData.ADDR_POST"
-            />
-            <read-only thWidth="100" th="住所3" :td="formData.ADDR_3" />
-            <read-only thWidth="100" th="住所4" :td="formData.ADDR_4" />
-          </a-col>
-        </a-row>
-        <a-row>
-          <a-col span="12">
-            <th class="required">鶏の種類</th>
-            <td>
-              <a-form-item v-bind="validateInfos.KEI_SYURUI">
-                <ai-select
-                  v-model:value="formData.KEI_SYURUI"
-                  :options="KEI_SYURUI_CD_NAME_LIST"
-                  class="w-full"
-                  split-val
-                ></ai-select>
-              </a-form-item>
-            </td>
-          </a-col>
-          <a-col span="12">
-            <th class="required">契約羽数</th>
-            <td>
-              <a-form-item v-bind="validateInfos.KEIYAKU_HASU">
-                <a-input-number
-                  v-model:value="formData.KEIYAKU_HASU"
-                ></a-input-number>
-              </a-form-item>
-            </td>
-          </a-col>
-        </a-row>
-        <a-row>
-          <a-col span="24">
-            <th class="required">契約年月日</th>
-            <td>
-              <a-form-item v-bind="validateInfos.KEIYAKU_YMD_FM" class="!w-40">
-                <DateJp v-model:value="formData.KEIYAKU_YMD_FM" class="!w-40"
-              /></a-form-item>
-              <span>～</span>
-              <a-form-item class="!w-40">
-                <DateJp
-                  v-model:value="formData.KEIYAKU_YMD_TO"
-                  disabled
-                  class="!w-40" /></a-form-item
-              ><span class="flex items-center"
-                >(契約日を入力する二とで单価を取得します)</span
-              >
-            </td>
-          </a-col>
-        </a-row>
-        <a-row>
-          <a-col span="24">
-            <th class="required">備考</th>
-            <td>
-              <a-input v-model:value="formData.BIKO"></a-input>
-            </td>
-          </a-col>
-        </a-row>
-      </div>
-      <div v-if="!isEdit" class="search-disabled-mask bg-disabled"></div>
-    </div>
+    <PopUp1012
+      v-model:visible="popupVisible"
+      :editkbn="popupeditkbn"
+    ></PopUp1012>
   </a-card>
-  <Detail2
-    v-if="detailKbn === FarmManage.FarmInfo"
-    v-model:detailKbn="detailKbn"
-  />
 </template>
 <script setup lang="ts">
 import useSearch from '@/hooks/useSearch'
 import { Judgement } from '@/utils/judge-edited'
 import { reactive, ref, toRef, computed } from 'vue'
 import { DetailRowVM } from '../../type'
-import Detail2 from './Detail2.vue'
 import { changeTableSort } from '@/utils/util'
-import { PageStatus } from '@/enum'
+import { EnumEditKbn, PageStatus } from '@/enum'
 import { Form } from 'ant-design-vue'
 import { ITEM_REQUIRE_ERROR } from '@/constants/msg'
 import { useRoute, useRouter } from 'vue-router'
 import { FarmManage } from '../../constant'
 import { VxeTableInstance } from 'vxe-table'
+import PopUp1012 from '../Popup/PopUp_1012.vue'
 
 //--------------------------------------------------------------------------
 //データ定義
@@ -325,7 +206,6 @@ import { VxeTableInstance } from 'vxe-table'
 const router = useRouter()
 const route = useRoute()
 
-const detailKbn = ref(FarmManage.Detail)
 const formData = reactive({
   KI: undefined as number | undefined,
   KEIYAKUSYA_NAME: '',
@@ -369,7 +249,10 @@ const tableData = ref<DetailRowVM[]>([
     BIKO: '',
   },
 ])
-const isEdit = ref(false)
+
+const popupVisible = ref(false)
+const popupeditkbn = ref<EnumEditKbn>(EnumEditKbn.Add)
+
 const editJudge = new Judgement('GJ1010')
 const { pageParams, totalCount } = useSearch({
   service: undefined,
@@ -407,21 +290,16 @@ window.addEventListener('resize', function () {
 //メソッド
 //--------------------------------------------------------------------------
 const addData = () => {
-  isEdit.value = true
+  popupVisible.value = true
+  popupeditkbn.value = EnumEditKbn.Add
 }
 const changeData = () => {
-  const a = tableRef.value?.getCurrentRecord()
-  isEdit.value = true
+  popupVisible.value = true
+  popupeditkbn.value = EnumEditKbn.Edit
 }
-const deleteData = () => {
-  isEdit.value = false
-}
-const saveData = () => {
-  isEdit.value = false
-}
-const reset = () => {
-  isEdit.value = false
-}
+const deleteData = () => {}
+const saveData = () => {}
+const reset = () => {}
 function goForward(status: PageStatus, row?: any) {}
 
 const goList = () => {
@@ -429,9 +307,6 @@ const goList = () => {
     resetFields()
     router.push({ name: route.name })
   })
-}
-const addNoJo = () => {
-  detailKbn.value = FarmManage.FarmInfo
 }
 </script>
 <style lang="scss" scoped>
