@@ -13,7 +13,7 @@ Imports JbdGjsService.JBD.GJS.Service
 Imports JbdGjsService.JBD.GJS.Service.GJ1030
 
 Public Interface InterfaceRptGJ1030
-    Function report(param As String) As MemoryStream
+    Function Report(param As String) As MemoryStream
 End Interface
 
 Public Class rptGJ1030
@@ -60,7 +60,7 @@ Public Class rptGJ1030
 
     End Sub
 
-    Public Function report(param As String) As MemoryStream Implements InterfaceRptGJ1030.report
+    Public Function Report(param As String) As MemoryStream Implements InterfaceRptGJ1030.Report
 
         Dim pr = System.Text.Json.JsonSerializer.Deserialize(Of JBD.GJS.Service.GJ1030.PreviewRequest)(param)
         '検索結果出力用ＳＱＬ作成

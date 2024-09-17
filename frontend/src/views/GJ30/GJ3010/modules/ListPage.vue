@@ -28,8 +28,8 @@
                   @change="getInitData(searchParams.KI, false)"
                 ></a-input-number>
               </a-form-item>
-            </td> </a-col></a-row
-        ><a-row>
+            </td>
+          </a-col>
           <a-col span="8">
             <th class="required">契約者</th>
             <td>
@@ -183,6 +183,7 @@
           >キャンセル</a-button
         >
         <a-button
+          class="ml-20"
           type="primary"
           @click="turnExportPage"
           :disabled="!isDataSelected || isEditing"
@@ -274,7 +275,7 @@
                   class="ml-2 h-full pt-1"
                 >
                   <a-radio :value="1">入力中</a-radio>
-                  <a-radio :value="2">入力確認</a-radio>
+                  <a-radio :value="2">入力確定</a-radio>
                 </a-radio-group>
               </td>
             </a-col>
