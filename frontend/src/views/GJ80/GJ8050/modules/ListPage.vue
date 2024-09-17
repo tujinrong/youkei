@@ -49,7 +49,7 @@
         <a-space :size="20">
           <a-button type="primary" @click="searchAll()">検索</a-button>
           <a-button type="primary" @click="reset">条件クリア</a-button>
-          <a-button class="ml-20" type="primary" @click="forwardNew"
+          <a-button class="ml-20" type="primary" @click="forwardNew1"
             >新規登録</a-button
           >
           <a-button type="primary" @click="preview1">プレビュー</a-button>
@@ -76,7 +76,7 @@
         :data="bankTableData"
         :sort-config="{ trigger: 'cell', orders: ['desc', 'asc'] }"
         :empty-render="{ name: 'NotData' }"
-        @cell-dblclick="({ row }) => forwardEdit(row.BANK_CD)"
+        @cell-dblclick="({ row }) => forwardEdit1(row.BANK_CD)"
         @sort-change="(e) => changeTableSort(e, toRef(pageParams, 'ORDER_BY'))"
       >
         <vxe-column
@@ -89,7 +89,7 @@
           :resizable="true"
         >
           <template #default="{ row }">
-            <a @click="forwardEdit(row.BANK_CD)">{{ row.BANK_CD }}</a>
+            <a @click="forwardEdit1(row.BANK_CD)">{{ row.BANK_CD }}</a>
           </template>
         </vxe-column>
         <vxe-column
@@ -244,6 +244,19 @@
       <div v-if="!isSelectBank" class="search-disabled-mask bg-disabled"></div>
     </a-card>
   </div>
+  <EditPage
+    v-model:visible="editVisible1"
+    :editkbn="editkbn1"
+    :bankcd="bankcd"
+    @getTableList="searchAll"
+  />
+  <EditPage2
+    v-model:visible="editVisible2"
+    :editkbn="editkbn2"
+    :bankcd="bankcd"
+    :sitencd="sitencd"
+    @getTableList="searchAll2"
+  />
 </template>
 
 <script lang="ts" setup>
@@ -272,7 +285,8 @@ import {
   SearchSiten,
 } from '../service/8050/service'
 import { showInfoModal } from '@/utils/modal'
-
+import EditPage from './EditPage.vue'
+import EditPage2 from './EditPage2.vue'
 //--------------------------------------------------------------------------
 //データ定義
 //--------------------------------------------------------------------------
@@ -304,9 +318,13 @@ const createDefaultParams2 = () => {
     SEARCH_METHOD: EnumAndOr.AndCode,
   }
 }
-
 const searchParams2 = reactive(createDefaultParams2())
-
+const editVisible1 = ref(false)
+const editkbn1 = ref<EnumEditKbn>(EnumEditKbn.Add)
+const editVisible2 = ref(false)
+const bankcd = ref()
+const sitencd = ref()
+const editkbn2 = ref<EnumEditKbn>(EnumEditKbn.Add)
 const sitanTableData = ref<SearchSitenRowVM[]>([])
 //表の高さ
 const headRef = ref(null)
@@ -336,24 +354,142 @@ const isSelectBank = computed(() => currentRow.value !== null)
 //フック関数
 //--------------------------------------------------------------------------
 
-//初期化処理
-
-onBeforeRouteUpdate((to, from) => {
-  if (to.query.refresh == 'delete1') {
-    searchAll(true)
-  }
-  if (to.query.refresh == 'delete2') {
-    searchAll2(true)
-  }
-  if (to.query.refresh == '1') {
-    searchAll()
-    searchAll2()
-  }
-})
-
 //--------------------------------------------------------------------------
 //監視定義
 //--------------------------------------------------------------------------
+
+watch(
+  () => xTableRef.value?.getCurrentRecord(),
+  (val) => {
+    currentRow.value = val
+    searchParams2.BANK_CD = currentRow.value?.BANK_CD ?? ''
+    if (sitanTableData.value.length <= 0) {
+      bankcd.value = currentRow.value?.BANK_CD ?? ''
+    }
+  }
+)
+
+watch(
+  () => xTableRef2.value?.getCurrentRecord(),
+  (val) => {
+    currentRow2.value = val
+    // searchParams2.BANK_CD = currentRow2.value?.BANK_CD ?? ''
+    bankcd.value = currentRow2.value?.BANK_CD ?? ''
+  }
+)
+//--------------------------------------------------------------------------
+//メソッド
+//--------------------------------------------------------------------------
+
+//銀行
+
+//検索処理
+const { pageParams, totalCount, searchData, clear } = useSearch({
+  service: SearchBank,
+  source: bankTableData,
+  params: toRef(() => searchParams),
+  // validate,
+})
+
+const searchAll = async (deleteflg: boolean = false) => {
+  await searchData()
+  if (bankTableData.value.length <= 0 && !deleteflg) {
+    showInfoModal({
+      type: 'warning',
+      content: '指定された条件に一致するデータは存在しません。',
+    })
+  }
+  if (xTableRef.value && bankTableData.value.length > 0) {
+    xTableRef.value.setCurrentRow(bankTableData.value[0])
+  }
+}
+async function forwardNew1() {
+  editkbn1.value = EnumEditKbn.Add
+  editVisible1.value = true
+}
+async function forwardEdit1(BANK_CD) {
+  editkbn1.value = EnumEditKbn.Edit
+  editVisible1.value = true
+  bankcd.value = BANK_CD
+}
+// クリア
+async function reset() {
+  Object.assign(searchParams, createDefaultParams())
+  xTableRef.value?.clearSort()
+  clear()
+  reset2()
+}
+
+//支店
+
+//検索処理支店
+const {
+  pageParams: pageParams2,
+  totalCount: totalCount2,
+  searchData: searchData2,
+  clear: clear2,
+} = useSearch({
+  service: SearchSiten,
+  source: sitanTableData,
+  params: toRef(() => searchParams2),
+  // validate,
+})
+
+const searchAll2 = async (deleteflg: boolean = false) => {
+  await searchData2()
+  if (sitanTableData.value.length <= 0 && !deleteflg) {
+    showInfoModal({
+      type: 'warning',
+      content: '指定された条件に一致するデータは存在しません。',
+    })
+  }
+  if (xTableRef2.value && sitanTableData.value.length > 0) {
+    xTableRef2.value.setCurrentRow(sitanTableData.value[0])
+  }
+}
+async function forwardNew2() {
+  bankcd.value = currentRow2.value?.BANK_CD ?? bankcd.value
+  editkbn2.value = EnumEditKbn.Add
+  editVisible2.value = true
+}
+
+async function forwardEdit2(BANK_CD, SITEN_CD) {
+  editkbn2.value = EnumEditKbn.Edit
+  editVisible2.value = true
+  bankcd.value = BANK_CD
+  sitencd.value = SITEN_CD
+}
+
+// クリア支店
+async function reset2() {
+  Object.assign(searchParams2, createDefaultParams2())
+  xTableRef2.value?.clearSort()
+  clear2()
+}
+//--------------------------------------------------------------------------
+//プレビュー
+//--------------------------------------------------------------------------
+async function preview1() {
+  try {
+    previewName.value = 'S80501'
+    await PreviewBank({ ...searchParams })
+    const openNew = () => {
+      window.open(URL.value, '_blank')
+    }
+    openNew()
+  } catch (error) {}
+}
+async function preview2() {
+  try {
+    previewName.value = 'S80502'
+    await PreviewSiten({ ...searchParams2 })
+    const openNew = () => {
+      window.open(URL.value, '_blank')
+    }
+    openNew()
+  } catch (error) {}
+}
+
 const channel = new BroadcastChannel('channel_preview')
 channel.onmessage = (event) => {
   if (event.data.isMounted) {
@@ -370,152 +506,6 @@ onUnmounted(() => {
   previewName.value = ''
   channel.close()
 })
-
-watch(
-  () => xTableRef.value?.getCurrentRecord(),
-  (val) => {
-    currentRow.value = val
-    if (sitanTableData.value.length <= 0)
-      searchParams2.BANK_CD = currentRow.value?.BANK_CD ?? ''
-  }
-)
-
-watch(
-  () => xTableRef2.value?.getCurrentRecord(),
-  (val) => {
-    currentRow2.value = val
-    searchParams2.BANK_CD = currentRow2.value?.BANK_CD ?? ''
-  }
-)
-//--------------------------------------------------------------------------
-//メソッド
-//--------------------------------------------------------------------------
-
-//検索処理
-const { pageParams, totalCount, searchData, clear } = useSearch({
-  service: SearchBank,
-  source: bankTableData,
-  params: toRef(() => searchParams),
-  // validate,
-})
-//検索処理2
-const {
-  pageParams: pageParams2,
-  totalCount: totalCount2,
-  searchData: searchData2,
-  clear: clear2,
-} = useSearch({
-  service: SearchSiten,
-  source: sitanTableData,
-  params: toRef(() => searchParams2),
-  // validate,
-})
-const searchAll = async (deleteflg: boolean = false) => {
-  await searchData()
-  if (bankTableData.value.length <= 0 && !deleteflg) {
-    showInfoModal({
-      type: 'warning',
-      content: '指定された条件に一致するデータは存在しません。',
-    })
-  }
-  if (xTableRef.value && bankTableData.value.length > 0) {
-    xTableRef.value.setCurrentRow(bankTableData.value[0])
-  }
-}
-const searchAll2 = async (deleteflg: boolean = false) => {
-  await searchData2()
-  if (sitanTableData.value.length <= 0 && !deleteflg) {
-    showInfoModal({
-      type: 'warning',
-      content: '指定された条件に一致するデータは存在しません。',
-    })
-  }
-  if (xTableRef2.value && sitanTableData.value.length > 0) {
-    xTableRef2.value.setCurrentRow(sitanTableData.value[0])
-  }
-}
-// クリア
-async function reset() {
-  Object.assign(searchParams, createDefaultParams())
-  xTableRef.value?.clearSort()
-  bankTableData.value = []
-  clear()
-}
-// クリア2
-async function reset2() {
-  Object.assign(searchParams2, createDefaultParams2())
-  xTableRef2.value?.clearSort()
-  clear2()
-}
-
-//銀行
-async function forwardNew() {
-  router.push({
-    name: route.name,
-    query: {
-      status: PageStatus.New,
-      editPage: 1,
-    },
-  })
-}
-async function forwardEdit(BANK_CD) {
-  router.push({
-    name: route.name,
-    query: {
-      status: PageStatus.Edit,
-      editPage: 1,
-      BANK_CD: BANK_CD,
-    },
-  })
-}
-async function preview1() {
-  try {
-    previewName.value = 'S80501'
-    await PreviewBank({ ...searchParams })
-    const openNew = () => {
-      window.open(URL.value, '_blank')
-    }
-    openNew()
-  } catch (error) {}
-}
-
-//支店
-async function forwardNew2() {
-  router.push({
-    name: route.name,
-    query: {
-      status: PageStatus.New,
-      editPage: 2,
-      BANK_CD:
-        sitanTableData.value.length > 0
-          ? currentRow2.value?.BANK_CD
-          : currentRow.value?.BANK_CD,
-    },
-  })
-}
-
-async function forwardEdit2(BANK_CD, SITEN_CD) {
-  router.push({
-    name: route.name,
-    query: {
-      status: PageStatus.Edit,
-      editPage: 2,
-      BANK_CD: BANK_CD,
-      SITEN_CD: SITEN_CD,
-    },
-  })
-}
-
-async function preview2() {
-  try {
-    previewName.value = 'S80502'
-    await PreviewSiten({ ...searchParams2 })
-    const openNew = () => {
-      window.open(URL.value, '_blank')
-    }
-    openNew()
-  } catch (error) {}
-}
 </script>
 
 <style lang="scss" scoped>
