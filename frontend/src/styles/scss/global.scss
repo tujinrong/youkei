@@ -78,7 +78,7 @@
     }
     td {
       margin: 0 0 -1px 0;
-      border: none !important;
+      // border: none !important;
       color: rgba(0, 0, 0, 0.85);
       padding: 2px 2px;
       height: fit-content;
@@ -219,4 +219,18 @@ h2 {
 }
 .parent-container {
   position: relative;
+}
+//popup
+:where(.css-dev-only-do-not-override-8krvbs).ant-modal .ant-modal-content {
+  background-color: aliceblue
+}
+
+:where(.css-dev-only-do-not-override-8krvbs).ant-modal .ant-modal-title {
+  margin: 0;
+  color: rgba(0, 0, 0, 0.88);
+  background-color: aliceblue;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 1.5;
+  word-wrap: break-word;
 }

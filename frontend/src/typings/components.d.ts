@@ -88,6 +88,7 @@ declare module 'vue' {
     RangeNumber: typeof import('./../components/Range/range-number.vue')['default']
     RangeSelect: typeof import('./../components/Range/range-select.vue')['default']
     ReadOnly: typeof import('./../components/Row/read-only.vue')['default']
+    ReadOnlyPop: typeof import('./../components/Row/read-only-pop.vue')['default']
     ReloadButton: typeof import('./../components/common/reload-button.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']

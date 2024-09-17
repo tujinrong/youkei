@@ -32,10 +32,8 @@
             <th>請求·返還回数</th>
             <td class="flex">
               <a-form-item v-bind="validateInfos.SEIKYU_KAISU">
-                <range-number
-                  v-model:value="formData.SEIKYU_KAISU"
-                  unit="回"
-                /></a-form-item>
+                <range-number v-model:value="formData.SEIKYU_KAISU" unit="回"
+              /></a-form-item>
             </td>
           </a-col>
           <a-col v-bind="layout">
@@ -56,7 +54,7 @@
                   :option="JIMUITAKU_LIST"
                   split-val
                 ></ai-select
-                ></a-form-item>
+              ></a-form-item>
             </td>
           </a-col>
           <a-col v-bind="layout">
@@ -99,14 +97,17 @@
                 <range-number
                   v-model:value="formData.SAGUKU_SEIKYU_KIN"
                   unit="円"
-                /></a-form-item>
+              /></a-form-item>
             </td>
           </a-col>
           <a-col v-bind="layout">
             <th class="required">納付方法</th>
             <td class="flex">
               <a-form-item v-bind="validateInfos.SEIKYU_HENKAN_KBN">
-                <a-radio-group v-model:value="formData.SEIKYU_HENKAN_KBN" class="mt-1">
+                <a-radio-group
+                  v-model:value="formData.SEIKYU_HENKAN_KBN"
+                  class="mt-1"
+                >
                   <a-radio :value="1">入金</a-radio>
                   <a-radio :value="2">返還</a-radio>
                 </a-radio-group>
@@ -117,7 +118,10 @@
             <th class="required">処理状況</th>
             <td class="flex">
               <a-form-item v-bind="validateInfos.SYORI_JOKYO_KBN">
-                <a-radio-group v-model:value="formData.SYORI_JOKYO_KBN" class="mt-1">
+                <a-radio-group
+                  v-model:value="formData.SYORI_JOKYO_KBN"
+                  class="mt-1"
+                >
                   <a-radio :value="1">全て</a-radio>
                   <a-radio :value="2">未入金・未返還分</a-radio>
                   <a-radio :value="3">入金・返還済分</a-radio>
@@ -148,7 +152,7 @@
       </div>
       <div class="my-2 flex justify-between max-w-250">
         <a-space
-        ><span>検索方法</span>
+          ><span>検索方法</span>
           <a-radio-group v-model:value="formData.SEARCH_METHOD">
             <a-radio :value="EnumAndOr.AndCode">すべてを含む(AND)</a-radio>
             <a-radio :value="EnumAndOr.OrCode">いずれかを含む(OR)</a-radio>
@@ -159,7 +163,9 @@
         <a-space :size="20">
           <a-button type="primary" @click="search">検索</a-button>
           <a-button type="primary" @click="clear">条件クリア</a-button>
-          <a-button class="ml-20" type="primary" @click="openGJ2091">入金確認</a-button>
+          <a-button class="ml-20" type="primary" @click="openGJ2091"
+            >入金確認</a-button
+          >
         </a-space>
         <AButton type="primary" class="ml-a" @click="tabStore.removeActiveTab">
           閉じる
@@ -262,8 +268,8 @@
       </vxe-table>
     </a-card>
   </div>
-  <Detail1 v-model:visible="GJ2091Visible" :editkbn="GJ2091kbn"/>
-  <Detail2 v-model:visible="GJ2092Visible" :editkbn="GJ2092kbn"/>
+  <Detail1 v-model:visible="GJ2091Visible" :editkbn="GJ2091kbn" />
+  <Detail2 v-model:visible="GJ2092Visible" :editkbn="GJ2092kbn" />
 </template>
 <script setup lang="ts">
 import { reactive, ref, toRef } from 'vue'
@@ -277,9 +283,9 @@ import { SearchRequest } from '../type'
 import { VxeTableInstance } from 'vxe-table'
 import DateJp from '@/components/Selector/DateJp/index.vue'
 import { Form } from 'ant-design-vue'
-import {EnumAndOr, EnumEditKbn, PageStatus} from "@/enum";
-import Detail1 from "@/views/GJ20/GJ2090/modules/Detail/Detail1.vue";
-import Detail2 from "@/views/GJ20/GJ2090/modules/Detail/Detail2.vue";
+import { EnumAndOr, EnumEditKbn, PageStatus } from '@/enum'
+import Detail1 from '@/views/GJ20/GJ2090/modules/Detail/Detail1.vue'
+import Detail2 from '@/views/GJ20/GJ2090/modules/Detail/Detail2.vue'
 //--------------------------------------------------------------------------
 //データ定義
 //--------------------------------------------------------------------------
@@ -382,10 +388,10 @@ function search() {
   }
 }
 function openGJ2091(row?: any) {
-    GJ2091Visible.value = true
+  GJ2091Visible.value = true
 }
 function openGJ2092(row?: any) {
-    GJ2092Visible.value = true
+  GJ2092Visible.value = true
 }
 </script>
 <style lang="scss" scoped>

@@ -7,7 +7,7 @@
       v-if="status === PageStatus.New || status === PageStatus.Edit"
       class="h-full"
     >
-<!--      <EditPage :status="status" />-->
+      <!--      <EditPage :status="status" />-->
     </div>
   </div>
 </template>
