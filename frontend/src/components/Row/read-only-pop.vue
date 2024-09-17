@@ -16,7 +16,14 @@
   >
     {{ th }}
   </th>
-  <td v-if="!hideTd" class="ellipsis">{{ td }}</td>
+  <td v-if="!hideTd" class="ellipsis">
+    <template v-if="isNumber(td)">
+      {{ td?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') }}
+    </template>
+    <template v-else>
+      {{ td }}
+    </template>
+  </td>
   <span class="ellipsis1">{{ after }}</span>
 </template>
 
@@ -32,6 +39,10 @@ const props = defineProps<{
   hideTd?: boolean
   after?: string
 }>()
+
+function isNumber(value) {
+  return !isNaN(value) && typeof value === 'number'
+}
 </script>
 
 <style scoped>
