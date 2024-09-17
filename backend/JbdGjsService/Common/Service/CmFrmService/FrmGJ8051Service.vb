@@ -7,8 +7,6 @@
 ' 変更履歴　:
 ' *******************************************************************
 
-Imports OracleInternal.Json
-
 Namespace JBD.GJS.Service.GJ8051
 
     Public Class FrmGJ8051Service

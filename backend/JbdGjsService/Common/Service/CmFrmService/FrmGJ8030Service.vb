@@ -6,9 +6,6 @@
 ' 作成者　　: 唐
 ' 変更履歴　:
 ' *******************************************************************
-
-Imports OracleInternal.Json
-
 Namespace JBD.GJS.Service.GJ8030
 
     Public Class FrmGJ8030Service
