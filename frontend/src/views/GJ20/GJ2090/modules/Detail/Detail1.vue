@@ -129,15 +129,15 @@
             <read-only-pop th="対象期" thWidth="140" :td="formData.KI" />
           </a-col>
         </a-row>
-        <a-row>
-          <a-col span="8">
+        <a-row justify="space-between">
+          <a-col span="7">
             <read-only-pop
               th="請求・返還日"
               thWidth="140"
               :td="formData.SEIKYU_DATE"
             />
           </a-col>
-          <a-col span="8">
+          <a-col span="7">
             <read-only-pop
               th="請求・返還回数"
               thWidth="110"
@@ -145,13 +145,14 @@
               after="回"
             />
           </a-col>
-          <a-col span="8">
+          <a-col span="7">
             <read-only-pop
               th="請求・返還区分"
               thWidth="110"
               :td="formData.SEIKYU_HENKAN_KBN_NAME"
             />
           </a-col>
+          <a-col span="1"/>
         </a-row>
         <a-row>
           <a-col span="8">
@@ -163,8 +164,8 @@
             </td>
           </a-col>
         </a-row>
-        <a-row>
-          <a-col span="24">
+        <a-row justify="space-between">
+          <a-col span="7">
             <read-only-pop
               thWidth="140"
               th="請求・返還金額"
@@ -172,31 +173,39 @@
               v-bind="{ ...mathNumber }"
               after="円"
             />
+          </a-col>
+          <a-col span="7">
             <read-only-pop
-              thWidth="130"
+              thWidth="70"
               th="積立金額"
               :td="formData.TUMITATE_KIN"
               v-bind="{ ...mathNumber }"
               after="円"
             />
+          </a-col>
+          <a-col span="7">
             <read-only-pop
-              thWidth="130"
+              thWidth="100"
               th="手数料"
               :td="formData.TESURYO"
               v-bind="{ ...mathNumber }"
               after="円"
             />
           </a-col>
+          <a-col span="1"/>
         </a-row>
-        <a-row>
-          <a-col span="8" :offset="16">
+        <a-row justify="space-between">
+          <a-col span="7"/>
+          <a-col span="7"/>
+          <a-col span="7">
             <read-only-pop
-              thWidth="130"
+              thWidth="100"
               th="積立金等総計"
               :td="formData.SEIKYU_KIN"
               after="円"
             />
           </a-col>
+          <a-col span="1"/>
         </a-row>
         <a-row>
           <a-col span="24">
@@ -211,7 +220,7 @@
     <template #footer>
       <div class="pt-2 flex justify-between border-t-1">
         <a-space :size="20">
-          <a-button class="warning-btn" @click="saveData">入金登録</a-button>
+          <a-button class="warning-btn" :disabled="!formData.NYUKIN_DATE" @click="saveData">入金登録</a-button>
           <a-button type="primary" :disabled="!formData.NYUKIN_DATE" @click="closeModal"
             >入金取消</a-button
           >
