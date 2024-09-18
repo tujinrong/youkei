@@ -3,7 +3,7 @@
     :open="modalVisible"
     centered
     title="（GJ4011）経営支援互助金申請情報入力（契約・交付情報表示）"
-    width="1000px"
+    width="1200px"
     :body-style="{ height: '800px' }"
     :mask-closable="false"
     destroy-on-close
@@ -33,7 +33,9 @@
                     class="w-full"
                   ></a-input-number>
                 </a-form-item>
-                <a-button class="ml-2" type="primary" @click="search">検索</a-button>
+                <a-button class="ml-2" type="primary" @click="search"
+                  >検索</a-button
+                >
               </td>
             </a-col>
           </a-row>
@@ -47,7 +49,10 @@
               <th class="required">申請日</th>
               <td>
                 <a-form-item v-bind="validateInfos.SINSEI_DATE">
-                  <DateJp v-model:value="searchParams.SINSEI_DATE" :notAllowClear="true" />
+                  <DateJp
+                    v-model:value="searchParams.SINSEI_DATE"
+                    :notAllowClear="true"
+                  />
                 </a-form-item>
               </td>
             </a-col>
@@ -81,63 +86,69 @@
       >
         <vxe-column
           header-align="center"
+          align="right"
           field="MEISAI_NO"
           title="明細番号"
-          width="100"
+          width="80"
         >
         </vxe-column>
         <vxe-column
           header-align="center"
           field="NOJO_NAME"
           title="農場名"
-          width="200"
+          width="150"
         >
         </vxe-column>
         <vxe-column
           header-align="center"
           field="ADDR"
           title="農場住所"
-          min-width="200"
+          min-width="250"
         >
         </vxe-column>
         <vxe-column
           header-align="center"
+          align="center"
           field="TORI_KBN_NAME"
           title="鳥の種類"
-          min-width="120"
+          min-width="80"
         ></vxe-column>
         <vxe-column
           header-align="center"
+          align="right"
           field="KEISAN_KAISU"
           title="計算回数"
-          min-width="120"
+          min-width="80"
         ></vxe-column>
         <vxe-column
           header-align="center"
+          align="center"
           field="SYORI_JOKYO_KBN_NAME"
           title="処理状況"
-          min-width="200"
+          min-width="80"
           :resizable="false"
         ></vxe-column>
         <vxe-column
           header-align="center"
+          align="right"
           field="KOFU_HASU"
           title="互助金対象羽数"
-          min-width="200"
+          min-width="150"
           :resizable="false"
         ></vxe-column>
         <vxe-column
           header-align="center"
           field="GENGAKU_RITU"
           title="減額率(%)"
-          min-width="120"
+          min-width="100"
           :resizable="false"
         ></vxe-column>
         <vxe-column
           header-align="center"
+          align="right"
           field="KOFU_KIN"
           title="経営支援互助金額"
-          min-width="200"
+          min-width="130"
           :resizable="false"
         ></vxe-column>
       </vxe-table>
@@ -153,7 +164,7 @@
             <th>種鶏(育成鶏)</th>
           </tr>
           <tr>
-            <th style="width: 160px !important;">互助金交付対象羽数</th>
+            <th style="width: 160px !important">互助金交付対象羽数</th>
             <td>{{ hasuGokei.SAIRANKEI_SEIKEI }}</td>
             <td>{{ hasuGokei.SAIRANKEI_IKUSEIKEI }}</td>
             <td>{{ hasuGokei.NIKUYOUKEI }}</td>
@@ -161,7 +172,7 @@
             <td>{{ hasuGokei.SYUKEI_IKUSEIKEI }}</td>
           </tr>
           <tr>
-            <th style="width: 160px !important;">経営支援互助金交付額</th>
+            <th style="width: 160px !important">経営支援互助金交付額</th>
             <td>{{ hasuGokei.SAIRANKEI_SEIKEI }}</td>
             <td>{{ hasuGokei.SAIRANKEI_IKUSEIKEI }}</td>
             <td>{{ hasuGokei.NIKUYOUKEI }}</td>
@@ -242,7 +253,9 @@
           </tr>
         </table>
 
-        <a-button class="m2" :disabled="!isEdit" @click="deleteData">削除</a-button>
+        <a-button class="m2" :disabled="!isEdit" @click="deleteData"
+          >削除</a-button
+        >
       </div>
       <h2 class="my-1">2.契約農場別登録明細情報(確認用)</h2>
       <div class="parent-container">
@@ -269,20 +282,52 @@
           </a-row>
           <a-row>
             <a-col span="24">
-              <read-only-pop thWidth="110" th="鶏の種類" :td="formData.TORI_KBN" />
+              <read-only-pop
+                thWidth="110"
+                th="鶏の種類"
+                :td="formData.TORI_KBN"
+              />
             </a-col>
             <a-col span="24">
-              <read-only-pop thWidth="110" th="契約羽数" :td="formData.KEIYAKU_HASU" />
+              <read-only-pop
+                thWidth="110"
+                th="契約羽数"
+                :td="formData.KEIYAKU_HASU"
+              />
             </a-col>
             <a-col span="24">
-              <read-only-pop thWidth="150" th="互助金交付対象羽数" :td="formData.KOFU_HASU" />
-              <read-only-pop thWidth="100" th="互助金交付率" :td="formData.KOFU_RITU" />
-              <read-only-pop thWidth="150" th="家伝法違反減額率" :td="formData.GENGAKU_RITU" />
+              <read-only-pop
+                thWidth="150"
+                th="互助金交付対象羽数"
+                :td="formData.KOFU_HASU"
+              />
+              <read-only-pop
+                thWidth="100"
+                th="互助金交付率"
+                :td="formData.KOFU_RITU"
+              />
+              <read-only-pop
+                thWidth="150"
+                th="家伝法違反減額率"
+                :td="formData.GENGAKU_RITU"
+              />
             </a-col>
             <a-col span="24">
-              <read-only-pop thWidth="150" th="経営支援互助金交付額" :td="formData.KOFU_KIN" />
-              <read-only-pop thWidth="100" th="積立金交付額" :td="formData.SEI_TUMITATE_KIN" />
-              <read-only-pop thWidth="150" th="国庫交付額" :td="formData.KUNI_KOFU_KIN" />
+              <read-only-pop
+                thWidth="150"
+                th="経営支援互助金交付額"
+                :td="formData.KOFU_KIN"
+              />
+              <read-only-pop
+                thWidth="100"
+                th="積立金交付額"
+                :td="formData.SEI_TUMITATE_KIN"
+              />
+              <read-only-pop
+                thWidth="150"
+                th="国庫交付額"
+                :td="formData.KUNI_KOFU_KIN"
+              />
             </a-col>
           </a-row>
         </div>
@@ -291,27 +336,31 @@
     <template #footer>
       <div class="pt-2 flex justify-between border-t-1">
         <a-space :size="20">
-          <a-button :disabled="!isEdit" @click="openGJ4012">互助金明細入力</a-button>
-          <a-button :disabled="!isEdit" @click="closeModal">キャンセル</a-button>
+          <a-button :disabled="!isEdit" @click="openGJ4012"
+            >互助金明細入力</a-button
+          >
+          <a-button :disabled="!isEdit" @click="closeModal"
+            >キャンセル</a-button
+          >
         </a-space>
         <a-button type="primary" @click="closeModal">閉じる</a-button>
       </div>
     </template>
   </a-modal>
-  <Detail2 v-model:visible="GJ4012Visible" :editkbn="GJ4012kbn"/>
+  <Detail2 v-model:visible="GJ4012Visible" :editkbn="GJ4012kbn" />
 </template>
 <script setup lang="ts">
-import {Judgement} from '@/utils/judge-edited'
-import {Form} from 'ant-design-vue'
-import {computed, nextTick, reactive, watch, ref, toRef} from 'vue'
-import {EnumEditKbn, PageStatus} from '@/enum'
-import {GJ4011DetailVM, SearchRequest, SearchRowVM} from '../../type'
-import {useRoute, useRouter} from 'vue-router'
-import {changeTableSort, mathNumber} from '@/utils/util'
+import { Judgement } from '@/utils/judge-edited'
+import { Form } from 'ant-design-vue'
+import { computed, nextTick, reactive, watch, ref, toRef } from 'vue'
+import { EnumEditKbn, PageStatus } from '@/enum'
+import { GJ4011DetailVM, SearchRequest, SearchRowVM } from '../../type'
+import { useRoute, useRouter } from 'vue-router'
+import { changeTableSort, mathNumber } from '@/utils/util'
 import DateJp from '@/components/Selector/DateJp/index.vue'
-import Detail2 from "@/views/GJ40/GJ4010/modules/Detail/Detail2.vue";
-import useSearch from "@/hooks/useSearch";
-import {VxeTableInstance} from "vxe-table";
+import Detail2 from '@/views/GJ40/GJ4010/modules/Detail/Detail2.vue'
+import useSearch from '@/hooks/useSearch'
+import { VxeTableInstance } from 'vxe-table'
 
 //--------------------------------------------------------------------------
 //データ定義
@@ -377,7 +426,7 @@ const isEdit = ref(false)
 const editJudge = new Judgement()
 const devicePixelRatio = ref(window.devicePixelRatio)
 const rules = {}
-const {validate, clearValidate, validateInfos, resetFields} = Form.useForm(
+const { validate, clearValidate, validateInfos, resetFields } = Form.useForm(
   formData,
   rules
 )
@@ -454,12 +503,10 @@ function openGJ4012(row?: any) {
   GJ4012Visible.value = true
 }
 // 登録
-const saveData = () => {
-}
+const saveData = () => {}
 
 // 削除
-const deleteData = () => {
-}
+const deleteData = () => {}
 </script>
 <style lang="scss" scoped>
 th {
