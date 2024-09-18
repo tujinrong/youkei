@@ -14,7 +14,7 @@
       <h1>（GJ3030）互助基金契約者情報変更（譲渡）</h1>
       <div class="self_adaption_table form mt-1">
         <a-row>
-          <a-col span="8">
+          <a-col :md="12" :lg="12" :xl="8" :xxl="8">
             <th class="required">期</th>
             <td>
               <a-form-item v-bind="validateInfos.KI">
@@ -29,7 +29,7 @@
               </a-form-item>
             </td>
           </a-col>
-          <a-col span="8">
+          <a-col :md="12" :lg="12" :xl="8" :xxl="8">
             <th class="required">契約者(譲渡先)</th>
             <td>
               <a-form-item v-bind="validateInfos.KEIYAKUSYA_CD">
@@ -131,7 +131,7 @@
       <h2>2.契約農場別明細 讓渡元情報(選択)</h2>
       <div class="self_adaption_table form mt-1">
         <a-row>
-          <a-col span="8">
+          <a-col :md="12" :lg="12" :xl="8" :xxl="8">
             <th class="required">契約者</th>
             <td>
               <a-form-item v-bind="validateInfos.KEIYAKUSYA_CD">
@@ -231,17 +231,20 @@
         </a-space>
       </div>
       <div class="parent-container">
-        <div class="self_adaption_table form max-w-300">
+        <div class="self_adaption_table form">
           <a-row>
-            <a-col span="24">
+            <a-col span="16">
               <th class="required">譲渡年月日</th>
               <td>
                 <a-form-item v-bind="validateInfos.KEIYAKU_DATE_FROM">
-                  <DateJp v-model:value="formData.KEIYAKU_DATE_FROM"></DateJp>
+                  <DateJp
+                    v-model:value="formData.KEIYAKU_DATE_FROM"
+                    class="max-w-80!"
+                  ></DateJp>
                 </a-form-item>
               </td>
             </a-col>
-            <a-col span="24">
+            <a-col span="16">
               <th class="required">入力確認有無</th>
               <td>
                 <a-radio-group
@@ -257,7 +260,7 @@
         </div>
         <div
           v-if="!isEditing"
-          class="search-disabled-mask bg-disabled max-w-300"
+          class="search-disabled-mask bg-disabled w-67%!"
         ></div>
       </div>
     </a-card>
