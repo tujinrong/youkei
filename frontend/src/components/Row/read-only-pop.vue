@@ -26,7 +26,7 @@
       {{ td }}
     </template>
   </td>
-  <span class="ellipsis1">{{ after }}</span>
+  <span v-if="after" class="ellipsis1">{{ after }}</span>
 </template>
 
 <script setup lang="ts">
