@@ -24,8 +24,8 @@ Namespace JBD.GJS.Service.GJ8091
             ' dt をループし、List にデータを追加します。
             For Each row As DataRow In dt.Rows
                 Dim item As New CmCodeNameModel
-                item.CODE = CInt(CStr(row("MEISYO_CD")))
-                item.NAME = CStr(row("MEISYO"))
+                item.CODE = DaConvertUtil.CInt(DaConvertUtil.CStr(row("MEISYO_CD")))
+                item.NAME = DaConvertUtil.CStr(row("MEISYO"))
                 res.KEN_CD_NAME_LIST.Add(item)
             Next
             Return res
@@ -42,8 +42,8 @@ Namespace JBD.GJS.Service.GJ8091
             item.KEN_CD_NAME_LIST = New List(Of CmCodeNameModel)
             For Each row As DataRow In dt.Rows
                 Dim it As New CmCodeNameModel
-                it.CODE = Cint(CStr(row("MEISYO_CD")))
-                it.NAME = CStr(row("MEISYO"))
+                it.CODE = DaConvertUtil.Cint(DaConvertUtil.CStr(row("MEISYO_CD")))
+                it.NAME = DaConvertUtil.CStr(row("MEISYO"))
                 item.KEN_CD_NAME_LIST.Add(it)
             Next
 
@@ -53,14 +53,14 @@ Namespace JBD.GJS.Service.GJ8091
                     dt = ds.Tables(1)
                     If dt.Rows.Count > 0 Then
                         Dim row As DataRow = dt.Rows(0)
-                        item.KEIYAKUSYA_NOJO.KI = Cint(CStr(row("KI")))
-                        item.KEIYAKUSYA_NOJO.KEIYAKUSYA_CD = Cint(CStr(row("KEIYAKUSYA_CD")))
-                        item.KEIYAKUSYA_NOJO.NOJO_CD = Cint(CStr(row("NOJO_CD")))
-                        item.KEIYAKUSYA_NOJO.NOJO_NAME = CStr(row("NOJO_NAME"))
-                        item.KEIYAKUSYA_NOJO.KEN_CD = Cint(CStr(row("KEN_CD")))
-                        item.KEIYAKUSYA_NOJO.ADDR_POST = CStr(row("ADDR_POST"))
-                        item.KEIYAKUSYA_NOJO.ADDR_1 = CStr(row("ADDR_1"))
-                        item.KEIYAKUSYA_NOJO.ADDR_2 = CStr(row("ADDR_2"))
+                        item.KEIYAKUSYA_NOJO.KI = DaConvertUtil.Cint(DaConvertUtil.CStr(row("KI")))
+                        item.KEIYAKUSYA_NOJO.KEIYAKUSYA_CD = DaConvertUtil.Cint(DaConvertUtil.CStr(row("KEIYAKUSYA_CD")))
+                        item.KEIYAKUSYA_NOJO.NOJO_CD = DaConvertUtil.Cint(DaConvertUtil.CStr(row("NOJO_CD")))
+                        item.KEIYAKUSYA_NOJO.NOJO_NAME = DaConvertUtil.CStr(row("NOJO_NAME"))
+                        item.KEIYAKUSYA_NOJO.KEN_CD = DaConvertUtil.Cint(DaConvertUtil.CStr(row("KEN_CD")))
+                        item.KEIYAKUSYA_NOJO.ADDR_POST = DaConvertUtil.CStr(row("ADDR_POST"))
+                        item.KEIYAKUSYA_NOJO.ADDR_1 = DaConvertUtil.CStr(row("ADDR_1"))
+                        item.KEIYAKUSYA_NOJO.ADDR_2 = DaConvertUtil.CStr(row("ADDR_2"))
                         If String.IsNullOrEmpty( row("ADDR_3").ToString())
                             item.KEIYAKUSYA_NOJO.ADDR_3 = String.Empty
                         Else
@@ -69,10 +69,10 @@ Namespace JBD.GJS.Service.GJ8091
                         If String.IsNullOrEmpty( row("ADDR_4").ToString())
                             item.KEIYAKUSYA_NOJO.ADDR_4 = String.Empty
                         Else
-                            item.KEIYAKUSYA_NOJO.ADDR_4 = CStr(row("ADDR_4"))  
+                            item.KEIYAKUSYA_NOJO.ADDR_4 = DaConvertUtil.CStr(row("ADDR_4"))  
                         End If
-                        item.KEIYAKUSYA_NOJO.MEISAI_NO = Cint(CStr(row("MEISAI_NO")))
-                        item.KEIYAKUSYA_NOJO.UP_DATE = Cdate(row("UP_DATE"))
+                        item.KEIYAKUSYA_NOJO.MEISAI_NO = DaConvertUtil.Cint(DaConvertUtil.CStr(row("MEISAI_NO")))
+                        item.KEIYAKUSYA_NOJO.UP_DATE = DaConvertUtil.Cdate(row("UP_DATE"))
                     End If
             End Select
 

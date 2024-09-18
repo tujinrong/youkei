@@ -11,7 +11,7 @@
     class="h-full min-h-500px flex-col-stretch gap-12px overflow-hidden lt-sm:overflow-auto"
   >
     <a-card ref="headRef" :bordered="false">
-      <h1>(GJ8090)契約者農場一覧</h1>
+      <h1>（GJ8090）契約者農場一覧</h1>
       <div class="self_adaption_table form mt-1">
         <a-row>
           <a-col v-bind="layout">
@@ -20,7 +20,7 @@
               <a-form-item v-bind="validateInfos.KI">
                 <a-input-number
                   v-model:value="searchParams.KI"
-                  :min="0"
+                  :min="1"
                   :max="99"
                   :maxlength="2"
                   class="w-full"
@@ -79,10 +79,16 @@
         >
       </div>
       <div class="flex">
-        <a-space>
+        <a-space :size="20">
           <a-button type="primary" @click="searchAll">検索</a-button>
-          <a-button type="primary" @click="forwardNew">新規</a-button>
-          <a-button type="primary" @click="reset">クリア</a-button>
+          <a-button type="primary" @click="reset">条件クリア</a-button>
+          <a-button type="primary" @click="forwardNew">新規登録</a-button>
+          <a-button
+            type="primary"
+            :disabled="!isDataSelected"
+            @click="forwardEdit(xTableRef?.getCurrentRecord().NOJO_CD)"
+            >変更(表示)</a-button
+          >
         </a-space>
         <close-page />
       </div>
@@ -111,11 +117,11 @@
         @sort-change="(e) => changeTableSort(e, toRef(pageParams, 'ORDER_BY'))"
       >
         <vxe-column
+          header-align="center"
           field="NOJO_CD"
           title="農場コード"
           width="100"
           align="right"
-          header-align="left"
           sortable
           :params="{ order: 1 }"
           :resizable="true"
@@ -125,6 +131,7 @@
           </template>
         </vxe-column>
         <vxe-column
+          header-align="center"
           field="NOJO_NAME"
           title="農場名"
           min-width="160"
@@ -137,6 +144,7 @@
           </template>
         </vxe-column>
         <vxe-column
+          header-align="center"
           field="ADDR"
           title="農場住所"
           min-width="500"
@@ -218,7 +226,9 @@ const { validate, clearValidate, validateInfos } = Form.useForm(
 //--------------------------------------------------------------------------
 //計算定義
 //--------------------------------------------------------------------------
-
+const isDataSelected = computed(() => {
+  return tableData.value.length > 0 && xTableRef.value?.getCurrentRecord()
+})
 //---------------------------------------------------------------------------
 //フック関数
 //--------------------------------------------------------------------------
@@ -302,6 +312,9 @@ const searchAll = async () => {
   keyList.KEIYAKUSYA_NAME =
     KEIYAKUSYA_CD_NAME_LIST.value.find((el) => el.CODE === res.KEIYAKUSYA_CD)
       ?.NAME || ''
+  if (xTableRef.value && tableData.value.length > 0) {
+    xTableRef.value.setCurrentRow(tableData.value[0])
+  }
 }
 //--------------------------------------------------------------------------
 //監視定義

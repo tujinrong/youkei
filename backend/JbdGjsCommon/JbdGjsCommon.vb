@@ -28,10 +28,10 @@ Namespace JBD.GJS.Common
         Public myREPORT_PDF_OUTKBN As String
         Public myANNAI_CD As Integer = 0        '2010/11/08 ADD JBD200 案内文マスタの種類初期表示用
         Public myTAISYO_NENGETU As Date         '2012/02/21 ADD JBD200 承認法人受入履歴用
-        Public myYOHAKU_UP As Double
-        Public myYOHAKU_DOWN As Double
-        Public myYOHAKU_LEFT As Double
-        Public myYOHAKU_RIGHT As Double
+        Public myYOHAKU_UP As Double = 1.5
+        Public myYOHAKU_DOWN As Double = 1.0
+        Public myYOHAKU_LEFT As Double = 1.0
+        Public myYOHAKU_RIGHT As Double = 1.0
         Public myBACKCOLOR_STRING As String = String.Empty
         Public myBACKCOLOR As System.Drawing.Color          '2014/05/09　画面背景色
         Public myTXT_FURIKOMI_ENTRY As String

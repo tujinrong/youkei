@@ -131,6 +131,67 @@ Namespace JBD.GJS.Service
         End Function
 #End Region
 
+#Region "コードマスタメンテナンスＳＱＬ文作成"
+    ''' <summary>
+    ''' ＳＱＬ文作成
+    ''' </summary>
+    ''' <param name="iKbn">
+    ''' 0・
+    ''' 
+    ''' </param>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    Public Shared Function f_Search_SQLMakeCode(iKbn As Integer, iSelKbn As Integer?) As String
+        Dim wkSB As New StringBuilder
+        Dim wkANDorOR As String = String.Empty
+        Dim wkWhere As New StringBuilder
+
+        Select Case iKbn
+            Case 0
+                wkSB.AppendLine("select ")
+                wkSB.AppendLine("	T.MEISYO_CD,")
+                wkSB.AppendLine("	T.MEISYO,")
+                wkSB.AppendLine("	T.SYURUI_KBN,")
+                wkSB.AppendLine("	NVL(T.RYAKUSYO,'') as RYAKUSYO")
+                wkSB.AppendLine("     ,KBN.MEISYO as SYURUI_KBN_NM")
+                wkSB.AppendLine("From TM_CODE T")
+                wkSB.AppendLine("    left join TM_CODE  KBN")
+                wkSB.AppendLine("      on 1 = 1 ")
+                wkSB.AppendLine("      and KBN.SYURUI_KBN = 0 ")
+                wkSB.AppendLine("      and KBN.MEISYO_CD = T.SYURUI_KBN ")
+            Case 1
+        End Select
+
+        '==必須条件=======================
+        If IsNothing(iSelKbn) Then
+            wkWhere.AppendLine(" and  1=0 ")
+        Else
+            wkWhere.AppendLine(" and   T.SYURUI_KBN =   " & iSelKbn)
+        End If
+        '----------------------------------/
+
+        '==オプション条件====================
+        ' 以下は省略可能な条件なので指定されていた場合にのみ編集
+        ' 但し、検索方法が全てを含むなのかいずれかを含むなのかによりwkANDorORの内容がANDかORに変わる
+
+        '==必須条(ここだけOR条件を指定されてもAND条件)======================
+        'WHERE条件句を作成
+        wkSB.AppendLine(" Where 1=1 ")
+        wkSB.AppendLine(" and  1=1 " & wkWhere.ToString) 'AND条件
+
+        '-------------------------/
+        Select Case iKbn
+            Case 0, 1
+                '検索
+                wkSB.AppendLine(" ORDER BY ")
+                wkSB.AppendLine(" T.MEISYO_CD ")
+        End Select
+
+        Return wkSB.ToString
+
+    End Function
+#End Region
+
     End Class
 
 End Namespace

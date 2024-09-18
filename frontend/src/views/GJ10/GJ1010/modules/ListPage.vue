@@ -11,19 +11,21 @@
     class="h-full min-h-500px flex-col-stretch gap-12px overflow-hidden lt-sm:overflow-auto"
   >
     <a-card ref="headRef" :bordered="false">
-      <h1>(GJ1010)互助基金契約者マスタ一覧</h1>
+      <h1>（GJ1010）互助基金契約者マスタ一覧</h1>
       <div class="self_adaption_table form mt-1">
         <a-row>
           <a-col v-bind="layout">
             <th class="required">期</th>
             <td>
-              <a-input-number
-                v-model:value="searchParams.KI"
-                :min="1"
-                :max="99"
-                :maxlength="2"
-                class="w-full"
-              ></a-input-number>
+              <a-form-item v-bind="validateInfos.KI">
+                <a-input-number
+                  v-model:value="searchParams.KI"
+                  :min="1"
+                  :max="99"
+                  :maxlength="2"
+                  class="w-full"
+                ></a-input-number
+              ></a-form-item>
             </td>
           </a-col>
           <a-col v-bind="layout">
@@ -33,9 +35,8 @@
                 v-model:value="searchParams.KEN_CD"
                 :options="KEN_CD_NAME_LIST"
               />
-            </td> </a-col
-        ></a-row>
-        <a-row>
+            </td>
+          </a-col>
           <a-col v-bind="layout">
             <th>契約者番号</th>
             <td>
@@ -55,9 +56,8 @@
                 class="w-full"
                 type="number"
               ></ai-select>
-            </td> </a-col
-        ></a-row>
-        <a-row>
+            </td>
+          </a-col>
           <a-col v-bind="layout">
             <th>契約状況</th>
             <td>
@@ -77,9 +77,8 @@
                 class="w-full"
                 :maxlength="50"
               ></a-input>
-            </td> </a-col
-        ></a-row>
-        <a-row>
+            </td>
+          </a-col>
           <a-col v-bind="layout">
             <th>契約者名(フリガナ)</th>
             <td>
@@ -90,17 +89,7 @@
               ></a-input>
             </td>
           </a-col>
-          <a-col v-bind="layout">
-            <th>住所</th>
-            <td>
-              <a-input
-                v-model:value="searchParams.ADDR"
-                class="w-full"
-                :maxlength="80"
-              ></a-input>
-            </td> </a-col
-        ></a-row>
-        <a-row>
+
           <a-col v-bind="layout">
             <th>電話番号</th>
             <td>
@@ -112,7 +101,7 @@
               ></a-input>
             </td>
           </a-col>
-          <a-col v-bind="layout">
+          <a-col :md="24" :lg="24" :xl="24" :xxl="8">
             <th>事務委託先</th>
             <td>
               <range-select
@@ -121,38 +110,57 @@
               />
             </td>
           </a-col>
+          <a-col span="16">
+            <th>住所</th>
+            <td>
+              <a-input
+                v-model:value="searchParams.ADDR"
+                class="w-full"
+                :maxlength="80"
+              ></a-input>
+            </td>
+          </a-col>
+          <a-col span="8">
+            <th>未継続・未契約者を除く</th>
+            <td>
+              <a-checkbox></a-checkbox>
+            </td>
+          </a-col>
         </a-row>
       </div>
-      <div class="my-2 flex">
+      <div class="my-2 flex justify-between max-w-250">
         <a-space
           ><span>検索方法</span>
           <a-radio-group v-model:value="searchParams.SEARCH_METHOD">
             <a-radio :value="EnumAndOr.AndCode">すべてを含む(AND)</a-radio>
             <a-radio :value="EnumAndOr.OrCode">いずれかを含む(OR)</a-radio>
           </a-radio-group>
-          <a-checkbox>未継続・未契約者を除く</a-checkbox>
         </a-space>
       </div>
       <div class="flex">
-        <a-space>
+        <a-space :size="20">
           <a-button type="primary" @click="search">検索</a-button>
-          <a-button type="primary" @click="goForward(PageStatus.New)"
-            >新規</a-button
+          <a-button type="primary" @click="clear">条件クリア</a-button>
+          <a-button
+            class="ml-20"
+            type="primary"
+            @click="goForward(PageStatus.New)"
+            >新規登録</a-button
           >
           <a-button
+            class="ml-20"
             type="primary"
             :disabled="!isDataSelected"
             @click="goForward(PageStatus.Detail)"
             >契約情報登録</a-button
           >
-          <a-button type="primary" @click="clear">クリア</a-button>
         </a-space>
         <AButton type="primary" class="ml-a" @click="tabStore.removeActiveTab">
           閉じる
         </AButton>
       </div>
     </a-card>
-    <a-card :bordered="false" class="sm:flex-1-hidden" ref="cardRef">
+    <a-card :bordered="false" class="min-h-100 sm:flex-1-hidden" ref="cardRef">
       <a-pagination
         v-model:current="pageParams.PAGE_NUM"
         v-model:page-size="pageParams.PAGE_SIZE"
@@ -176,10 +184,12 @@
         @sort-change="(e) => changeTableSort(e, toRef(pageParams, 'ORDER_BY'))"
       >
         <vxe-column
+          header-align="center"
           field="KEIYAKUSYA_CD"
           title="契約者番号"
           width="100"
           sortable
+          :params="{ order: 1 }"
         >
           <template #default="{ row }">
             <a @click="goForward(PageStatus.Edit, row)">{{
@@ -188,10 +198,12 @@
           </template>
         </vxe-column>
         <vxe-column
+          header-align="center"
           field="KEIYAKUSYA_NAME"
           title="契約者名"
           width="200"
           sortable
+          :params="{ order: 2 }"
         >
           <template #default="{ row }">
             <a @click="goForward(PageStatus.Edit, row)">{{
@@ -200,10 +212,12 @@
           </template>
         </vxe-column>
         <vxe-column
+          header-align="center"
           field="KEIYAKUSYA_KANA"
           title="フリガナ"
-          min-width="200"
+          min-width="250"
           sortable
+          :params="{ order: 3 }"
         >
           <template #default="{ row }">
             <a @click="goForward(PageStatus.Edit, row)">{{
@@ -212,53 +226,67 @@
           </template>
         </vxe-column>
         <vxe-column
+          header-align="center"
           field="KEIYAKU_KBN"
           title="契約区分"
           min-width="120"
           sortable
+          :params="{ order: 4 }"
         ></vxe-column>
         <vxe-column
+          header-align="center"
           field="KEIYAKU_JYOKYO"
           title="契約状況"
           min-width="120"
           sortable
+          :params="{ order: 5 }"
         ></vxe-column>
         <vxe-column
+          header-align="center"
           field="ADDR_TEL"
           title="電話番号"
-          min-width="200"
+          min-width="150"
           sortable
+          :params="{ order: 6 }"
         ></vxe-column>
         <vxe-column
+          header-align="center"
           field="KEN_CD"
           title="都道府県"
           min-width="150"
           sortable
+          :params="{ order: 7 }"
         ></vxe-column>
         <vxe-column
+          header-align="center"
           field="JIMUITAKU_CD1"
           title="事務委託先"
           min-width="200"
           sortable
+          :params="{ order: 8 }"
           :resizable="false"
         ></vxe-column>
       </vxe-table>
     </a-card>
   </div>
+  <EditPage v-model:visible="editVisible" :editkbn="editkbn" />
 </template>
 <script setup lang="ts">
-import { EnumAndOr, PageStatus } from '@/enum'
+import { EnumAndOr, EnumEditKbn, PageStatus } from '@/enum'
 import { computed, reactive, ref, toRef, nextTick } from 'vue'
 import { showInfoModal } from '@/utils/modal'
 import { ITEM_REQUIRE_ERROR } from '@/constants/msg'
 import useSearch from '@/hooks/useSearch'
 import { useElementSize } from '@vueuse/core'
 import { changeTableSort } from '@/utils/util'
+import { Form } from 'ant-design-vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useTabStore } from '@/store/modules/tab'
 import { SearchRequest, SearchRowVM } from '../type'
 import { VxeTableInstance } from 'vxe-table'
 import { convertToHalfNumber } from '@/utils/util'
+import { Search } from '../service'
+import EditPage from './Popup/PopUp_1011.vue'
 //--------------------------------------------------------------------------
 //データ定義
 //--------------------------------------------------------------------------
@@ -286,9 +314,9 @@ const createDefaultParams = () => {
 }
 const searchParams = reactive(createDefaultParams())
 const layout = {
-  md: 12,
+  md: 24,
   lg: 12,
-  xl: 8,
+  xl: 12,
   xxl: 8,
 }
 const router = useRouter()
@@ -315,14 +343,24 @@ const tableDefault = {
   KEN_CD_NAME: '1北海道',
   JIMUITAKU_NAME: '（宇）宇亜宇伊亜宇伊',
 }
-
+const editVisible = ref(false)
+const editkbn = ref<EnumEditKbn>(EnumEditKbn.Add)
 const { pageParams, totalCount, searchData, clear } = useSearch({
-  service: undefined,
+  service: Search,
   source: tableData,
   params: toRef(() => searchParams),
 })
 const isDataSelected = computed(() => {
   return tableData.value.length > 0 && xTableRef.value?.getCurrentRecord()
+})
+
+const rules = reactive({
+  KI: [
+    {
+      required: true,
+      message: ITEM_REQUIRE_ERROR.Msg.replace('{0}', '期'),
+    },
+  ],
 })
 //--------------------------------------------------------------------------
 //監視定義
@@ -331,6 +369,11 @@ const isDataSelected = computed(() => {
 //--------------------------------------------------------------------------
 //メソッド
 //--------------------------------------------------------------------------
+
+const { validate, clearValidate, validateInfos, resetFields } = Form.useForm(
+  searchParams,
+  rules
+)
 const handleTel = () => {
   nextTick(
     () => (searchParams.ADDR_TEL1 = convertToHalfNumber(searchParams.ADDR_TEL1))
@@ -338,6 +381,7 @@ const handleTel = () => {
 }
 //検索処理
 function search() {
+  // searchData()
   tableData.value.push(tableDefault)
   if (xTableRef.value && tableData.value.length > 0) {
     xTableRef.value.setCurrentRow(tableData.value[0])
@@ -345,6 +389,12 @@ function search() {
 }
 
 function goForward(status: PageStatus, row?: any) {
+  if (status === PageStatus.Edit || status === PageStatus.New) {
+    editVisible.value = true
+    editkbn.value =
+      status === PageStatus.Edit ? EnumEditKbn.Edit : EnumEditKbn.Add
+    return
+  }
   router.push({
     name: route.name,
     query: {
@@ -355,6 +405,6 @@ function goForward(status: PageStatus, row?: any) {
 </script>
 <style lang="scss" scoped>
 :deep(th) {
-  min-width: 150px;
+  min-width: 165px;
 }
 </style>

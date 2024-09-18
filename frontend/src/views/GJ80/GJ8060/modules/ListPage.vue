@@ -3,7 +3,7 @@
     class="h-full min-h-500px flex-col-stretch gap-12px overflow-hidden lt-sm:overflow-auto"
   >
     <a-card ref="headRef" :bordered="false">
-      <h1>(GJ8060)事務委託先一覧</h1>
+      <h1>（GJ8060）事務委託先一覧</h1>
       <div class="self_adaption_table form mt-1">
         <a-row>
           <a-col v-bind="layout">
@@ -25,12 +25,10 @@
             <th>都道府県</th>
             <td>
               <a-form-item v-bind="validateInfos.KEN_CD">
-                <ai-select
+                <range-select
                   v-model:value="searchParams.KEN_CD"
                   :options="KEN_CD_NAME_LIST"
-                  class="w-full"
-                  type="number"
-                ></ai-select>
+                ></range-select>
               </a-form-item>
             </td>
           </a-col>
@@ -85,11 +83,15 @@
         >
       </div>
       <div class="flex">
-        <a-space>
+        <a-space :size="20">
           <a-button type="primary" @click="searchAll">検索</a-button>
-          <a-button type="primary" @click="forwardNew">新規</a-button>
-          <a-button type="primary" @click="reset">クリア</a-button>
-          <a-button type="primary" @click="reset">CSV出力</a-button>
+          <a-button type="primary" @click="reset">条件クリア</a-button>
+          <a-button class="ml-20" type="primary" @click="forwardNew"
+            >新規登録</a-button
+          >
+          <a-button class="ml-20" type="primary" @click="reset"
+            >CSV出力</a-button
+          >
         </a-space>
         <close-page />
       </div>
@@ -118,6 +120,7 @@
         @sort-change="(e) => changeTableSort(e, toRef(pageParams, 'ORDER_BY'))"
       >
         <vxe-column
+          header-align="center"
           field="ITAKU_CD"
           title="事務委託先"
           min-width="100"
@@ -130,9 +133,10 @@
           </template>
         </vxe-column>
         <vxe-column
+          header-align="center"
           field="ITAKU_NAME"
           title="事務委託先名"
-          min-width="160"
+          min-width="400"
           sortable
           :params="{ order: 2 }"
           :resizable="true"
@@ -142,25 +146,28 @@
           </template>
         </vxe-column>
         <vxe-column
+          header-align="center"
           field="ADDR_TEL"
           title="電話番号"
-          min-width="400"
+          min-width="160"
           sortable
           :params="{ order: 3 }"
           :resizable="false"
         ></vxe-column>
         <vxe-column
+          header-align="center"
           field="ADDR_POST"
           title="郵便番号"
-          min-width="400"
+          min-width="200"
           sortable
           :params="{ order: 4 }"
           :resizable="false"
         ></vxe-column>
         <vxe-column
+          header-align="center"
           field="ADDR"
           title="住所"
-          min-width="400"
+          min-width="600"
           sortable
           :params="{ order: 5 }"
           :resizable="false"
@@ -189,27 +196,32 @@ import { VxeTableInstance } from 'vxe-table'
 //--------------------------------------------------------------------------
 const router = useRouter()
 const route = useRoute()
-const tabStore = useTabStore()
 const xTableRef = ref<VxeTableInstance>()
-const createDefaultParams = (): SearchRequest => {
+const createDefaultParams = () => {
   return {
     KI: -1,
-    KEN_CD: undefined,
+    KEN_CD: {
+      VALUE_FM: undefined,
+      VALUE_TO: undefined,
+    },
     ITAKU_NAME: undefined,
     ITAKU_CD: undefined,
     MATOMESAKI: undefined,
     SEARCH_METHOD: EnumAndOr.AndCode,
-  } as SearchRequest
+  }
 }
 const searchParams = reactive(createDefaultParams())
 
-// const keyList = reactive({
-//   KI: undefined,
-//   KEIYAKUSYA_CD: undefined,
-//   KEIYAKUSYA_NAME: '',
-// })
 const KEIYAKUSYA_CD_NAME_LIST = ref<CmCodeNameModel[]>([])
 const tableData = ref<SearchRowVM[]>([])
+const mockData: SearchRowVM = {
+  ADDR: '東京都千代田区丸の内1-1-1',
+  ITAKU_CD: 67890,
+  ITAKU_NAME: '株式会社大手',
+  ADDR_TEL: '03-1234-5678',
+  ADDR_POST: '100-0005',
+}
+
 const KEN_CD_NAME_LIST = ref<CmCodeNameModel[]>([])
 //表の高さ
 const headRef = ref(null)
@@ -240,20 +252,12 @@ const { validate, clearValidate, validateInfos } = Form.useForm(
 //--------------------------------------------------------------------------
 //計算定義
 //--------------------------------------------------------------------------
-// const KEIYAKUSYA_NAME = computed(() => {
-//   return (
-//     keyList.KEIYAKUSYA_NAME ||
-//     KEIYAKUSYA_CD_NAME_LIST.value.find(
-//       (el) => Number(el.CODE) === searchParams.KEIYAKUSYA_CD
-//     )?.NAME
-//   )
-// })
+
 //---------------------------------------------------------------------------
 //フック関数
 //--------------------------------------------------------------------------
 onMounted(() => {
   getInitData(searchParams.KI, true)
-  searchParams.KI = undefined
   nextTick(() => clearValidate())
 })
 
@@ -311,44 +315,21 @@ const { pageParams, totalCount, searchData, clear } = useSearch({
 
 //クリア
 async function reset() {
-  searchParams.KI = -1
-  searchParams.KEN_CD = undefined
-  searchParams.ITAKU_NAME = undefined
-  searchParams.ITAKU_CD = undefined
-  searchParams.SEARCH_METHOD = EnumAndOr.AndCode
-  getInitData(-1, true)
   xTableRef.value?.clearSort()
   clear()
 }
 
 const searchAll = async () => {
-  const res = await searchData()
-  // keyList.KI = res.KI
-  // keyList.KEIYAKUSYA_CD = res.KEIYAKUSYA_CD
-  // keyList.KEIYAKUSYA_NAME =
-  KEIYAKUSYA_CD_NAME_LIST.value.find((el) => el.CODE === res.KEIYAKUSYA_CD)
-    ?.NAME || ''
+  // const res = await searchData()
+  tableData.value.push(mockData)
 }
 //--------------------------------------------------------------------------
 //監視定義
 //--------------------------------------------------------------------------
-// watch(
-//   () => searchParams.NOJO_NAME,
-//   (newVal) => {
-//     if (newVal) {
-//       searchParams.NOJO_NAME = convertToFullWidth(newVal)
-//     }
-//   }
-// )
 </script>
 
 <style lang="scss" scoped>
 :deep(th) {
   min-width: 100px;
-}
-
-:deep(.ant-form-item) {
-  margin-bottom: 0;
-  width: 100%;
 }
 </style>

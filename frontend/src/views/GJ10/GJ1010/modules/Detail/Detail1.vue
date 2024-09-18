@@ -7,12 +7,12 @@
  * 変更履歴　:
  * ----------------------------------------------------------------->
 <template>
-  <a-card v-show="detailKbn === DetailStatus.Detail1" :bordered="false">
-    <h1>(GJ1012)互助基金契約者マスタメンテナンス(契約情報入力)</h1>
+  <a-card :bordered="false" class="h-full">
+    <h1>（GJ1012）互助基金契約者マスタメンテナンス（契約情報入力）</h1>
     <div class="self_adaption_table form">
       <b>第{{ formData.KI ?? 8 }}期</b>
       <h2>1.契約農場別明細情報(表示)</h2>
-      <div class="max-w-200">
+      <div class="max-w-100">
         <a-row>
           <a-col span="24">
             <read-only
@@ -24,16 +24,12 @@
           <a-col span="10"></a-col>
         </a-row>
       </div>
-      <div class="my-2 flex justify-between max-w-200">
+      <div class="my-2 flex justify-between">
         <a-space :size="20">
-          <a-button type="primary" :disabled="isEdit" @click="addData"
-            >新規</a-button
-          >
-          <a-button type="primary" :disabled="isEdit" @click="changeData"
-            >変更</a-button
-          >
+          <a-button type="primary" @click="addData">新規登録</a-button
+          ><a-button class="ml-20" type="primary">前期データコピー</a-button>
         </a-space>
-        <a-button type="primary" @click="goList">一覧</a-button>
+        <a-button type="primary" @click="goList">一覧へ</a-button>
       </div>
     </div>
     <a-pagination
@@ -55,32 +51,53 @@
       :data="tableData"
       :sort-config="{ trigger: 'cell', orders: ['desc', 'asc'] }"
       :empty-render="{ name: 'NotData' }"
-      @cell-dblclick="({ row }) => goForward(PageStatus.Edit, row)"
+      @cell-dblclick="({ row }) => changeData()"
       @sort-change="(e) => changeTableSort(e, toRef(pageParams, 'ORDER_BY'))"
     >
-      <vxe-column field="MEISAI_NO" title="明細番号" width="100">
+      <vxe-column
+        header-align="center"
+        align="right"
+        field="MEISAI_NO"
+        title="明細番号"
+        width="100"
+      >
         <template #default="{ row }">
-          <a @click="goForward(PageStatus.Edit, row)">{{ row.MEISAI_NO }}</a>
+          <a @click="changeData()">{{ row.MEISAI_NO }}</a>
         </template>
-      </vxe-column>
-      <vxe-column field="NOJO_NAME" title="農場名" width="200">
-        <template #default="{ row }">
-          <a @click="goForward(PageStatus.Edit, row)">{{ row.NOJO_NAME }}</a>
-        </template>
-      </vxe-column>
-      <vxe-column field="NOJO_ADDR" title="農場住所" min-width="200">
       </vxe-column>
       <vxe-column
+        header-align="center"
+        field="NOJO_NAME"
+        title="農場名"
+        width="200"
+      >
+        <template #default="{ row }">
+          <a @click="changeData()">{{ row.NOJO_NAME }}</a>
+        </template>
+      </vxe-column>
+      <vxe-column
+        header-align="center"
+        field="NOJO_ADDR"
+        title="農場住所"
+        min-width="200"
+      >
+      </vxe-column>
+      <vxe-column
+        header-align="center"
+        align="center"
         field="TORISYURUI"
         title="鳥の種類"
         min-width="120"
       ></vxe-column>
       <vxe-column
+        header-align="center"
+        align="right"
         field="KEIYAKUHASU"
         title="契約羽数"
         min-width="120"
       ></vxe-column>
       <vxe-column
+        header-align="center"
         field="BIKO"
         title="備考"
         min-width="200"
@@ -98,11 +115,11 @@
       </tr>
       <tr>
         <th>契約羽数合計</th>
-        <td>600</td>
-        <td>300</td>
-        <td>0</td>
-        <td>0</td>
-        <td>0</td>
+        <td>{{ hasuGokei.SAIRANKEI_SEIKEI }}</td>
+        <td>{{ hasuGokei.SAIRANKEI_IKUSEIKEI }}</td>
+        <td>{{ hasuGokei.NIKUYOUKEI }}</td>
+        <td>{{ hasuGokei.SYUKEI_SEIKEI }}</td>
+        <td>{{ hasuGokei.SYUKEI_IKUSEIKEI }}</td>
       </tr>
       <tr>
         <th>うずら</th>
@@ -114,15 +131,18 @@
         <th>合計</th>
       </tr>
       <tr>
-        <td>0</td>
-        <td>0</td>
-        <td>0</td>
-        <td>0</td>
-        <td>0</td>
-        <td>0</td>
-        <td>900</td>
+        <td>{{ hasuGokei.UZURA }}</td>
+        <td>{{ hasuGokei.AHIRU }}</td>
+        <td>{{ hasuGokei.KIJI }}</td>
+        <td>{{ hasuGokei.HOROHOROTORI }}</td>
+        <td>{{ hasuGokei.SICHIMENCHOU }}</td>
+        <td>{{ hasuGokei.DACHOU }}</td>
+        <td>
+          {{ hasuGokei.TOTAL || 0 }}
+        </td>
       </tr>
     </table>
+
     <table v-if="devicePixelRatio > 1.5" class="my-2 table-fixed">
       <tr>
         <th>鶏の種類</th>
@@ -132,9 +152,9 @@
       </tr>
       <tr>
         <th>契約羽数合計</th>
-        <td>600</td>
-        <td>300</td>
-        <td>0</td>
+        <td>{{ hasuGokei.SAIRANKEI_SEIKEI }}</td>
+        <td>{{ hasuGokei.SAIRANKEI_IKUSEIKEI }}</td>
+        <td>{{ hasuGokei.NIKUYOUKEI }}</td>
       </tr>
       <tr>
         <th>種鶏(成鶏)</th>
@@ -143,10 +163,10 @@
         <th>あひる</th>
       </tr>
       <tr>
-        <td>0</td>
-        <td>0</td>
-        <td>0</td>
-        <td>0</td>
+        <td>{{ hasuGokei.SYUKEI_SEIKEI }}</td>
+        <td>{{ hasuGokei.SYUKEI_IKUSEIKEI }}</td>
+        <td>{{ hasuGokei.UZURA }}</td>
+        <td>{{ hasuGokei.AHIRU || 0 }}</td>
       </tr>
       <tr>
         <th>きじ</th>
@@ -156,158 +176,32 @@
         <th>合計</th>
       </tr>
       <tr>
-        <td>0</td>
-        <td>0</td>
-        <td>0</td>
-        <td>0</td>
-        <td>900</td>
+        <td>{{ hasuGokei.KIJI }}</td>
+        <td>{{ hasuGokei.HOROHOROTORI }}</td>
+        <td>{{ hasuGokei.SICHIMENCHOU }}</td>
+        <td>{{ hasuGokei.DACHOU }}</td>
+        <td>{{ hasuGokei.TOTAL || 0 }}</td>
       </tr>
     </table>
-    <h2>2.契約農場別登録明細情報(入力)</h2>
-    <a-space :size="20" class="mb-2">
-      <a-button type="primary" :disabled="!isEdit">前期データコピー</a-button
-      ><a-button type="primary" :disabled="!isEdit" @click="saveData"
-        >保存</a-button
-      >
-      <a-button type="primary" :disabled="!isEdit" @click="reset"
-        >クリア</a-button
-      ></a-space
-    >
-    <div class="self_adaption_table form max-w-300">
-      <a-row>
-        <a-col span="24">
-          <th class="required">明細番号</th>
-          <td>
-            <a-form-item v-bind="validateInfos.MEISAI_NO">
-              <a-input-number
-                v-model:value="formData.MEISAI_NO"
-                :min="0"
-                :max="999"
-                :maxlength="3"
-              ></a-input-number>
-            </a-form-item>
-          </td>
-        </a-col>
-      </a-row>
-      <a-row>
-        <a-col span="24">
-          <th class="required">農場</th>
-          <td>
-            <a-form-item v-bind="validateInfos.NOJO_CD">
-              <ai-select
-                v-model:value="formData.NOJO_CD"
-                :options="NOJO_CD_CD_NAME_LIST"
-                split-val
-                :disabled="!isEdit"
-              ></ai-select>
-            </a-form-item>
-            <a-button
-              class="ml-2"
-              type="primary"
-              :disabled="!isEdit"
-              @click="addNoJo"
-              >農場登録</a-button
-            >
-          </td>
-        </a-col>
-      </a-row>
-      <a-row>
-        <a-col span="24">
-          <read-only thWidth="110" th="住所" td="" :hideTd="true" />
-          <read-only th="　〒　" :td="formData.ADDR_POST" />
-          <read-only thWidth="100" th="住所1" :td="formData.ADDR_1" />
-          <read-only thWidth="100" th="住所2" :td="formData.ADDR_2" />
-        </a-col>
-      </a-row>
-      <a-row>
-        <a-col span="24">
-          <read-only
-            thWidth="110"
-            th=""
-            :hideTd="true"
-            :td="formData.ADDR_POST"
-          />
-          <read-only thWidth="100" th="住所3" :td="formData.ADDR_3" />
-          <read-only thWidth="100" th="住所4" :td="formData.ADDR_4" />
-        </a-col>
-      </a-row>
-      <a-row>
-        <a-col span="12">
-          <th class="required">鶏の種類</th>
-          <td>
-            <a-form-item v-bind="validateInfos.KEI_SYURUI">
-              <ai-select
-                v-model:value="formData.KEI_SYURUI"
-                :options="KEI_SYURUI_CD_NAME_LIST"
-                class="w-full"
-                split-val
-                :disabled="!isEdit"
-              ></ai-select>
-            </a-form-item>
-          </td>
-        </a-col>
-        <a-col span="12">
-          <th class="required">契約羽数</th>
-          <td>
-            <a-form-item v-bind="validateInfos.KEIYAKU_HASU">
-              <a-input-number
-                v-model:value="formData.KEIYAKU_HASU"
-                :disabled="!isEdit"
-              ></a-input-number>
-            </a-form-item>
-          </td>
-        </a-col>
-      </a-row>
-      <a-row>
-        <a-col span="12">
-          <th class="required">契約年月日</th>
-          <td>
-            <a-form-item v-bind="validateInfos.KEIYAKU_YMD_FM">
-              <DateJp
-                v-model:value="formData.KEIYAKU_YMD_FM"
-                :disabled="!isEdit"
-              /> </a-form-item
-            ><span>～</span>
-            <DateJp v-model:value="formData.KEIYAKU_YMD_TO" disabled />
-          </td>
-        </a-col>
-        <a-col class="flex-1">
-          <td class="flex items-center">
-            <span> (契約日を入力する二とで单価を取得します)</span>
-          </td></a-col
-        >
-      </a-row>
-      <a-row>
-        <a-col span="24">
-          <th class="required">備考</th>
-          <td>
-            <a-input
-              v-model:value="formData.BIKO"
-              :disabled="!isEdit"
-            ></a-input>
-          </td>
-        </a-col>
-      </a-row>
-    </div>
+    <PopUp1012
+      v-model:visible="popupVisible"
+      :editkbn="popupeditkbn"
+    ></PopUp1012>
   </a-card>
-  <Detail2
-    v-if="detailKbn === DetailStatus.Detail2"
-    v-model:detailKbn="detailKbn"
-  />
 </template>
 <script setup lang="ts">
 import useSearch from '@/hooks/useSearch'
 import { Judgement } from '@/utils/judge-edited'
 import { reactive, ref, toRef, computed } from 'vue'
 import { DetailRowVM } from '../../type'
-import Detail2 from './Detail2.vue'
 import { changeTableSort } from '@/utils/util'
-import { PageStatus } from '@/enum'
+import { EnumEditKbn, PageStatus } from '@/enum'
 import { Form } from 'ant-design-vue'
 import { ITEM_REQUIRE_ERROR } from '@/constants/msg'
 import { useRoute, useRouter } from 'vue-router'
-import { DetailStatus } from '../../constant'
+import { FarmManage } from '../../constant'
 import { VxeTableInstance } from 'vxe-table'
+import PopUp1012 from '../Popup/PopUp_1012.vue'
 
 //--------------------------------------------------------------------------
 //データ定義
@@ -315,7 +209,6 @@ import { VxeTableInstance } from 'vxe-table'
 const router = useRouter()
 const route = useRoute()
 
-const detailKbn = ref(DetailStatus.Detail1)
 const formData = reactive({
   KI: undefined as number | undefined,
   KEIYAKUSYA_NAME: '',
@@ -333,6 +226,22 @@ const formData = reactive({
   KEIYAKU_YMD_TO: undefined as Date | undefined,
   BIKO: '',
 })
+
+const hasuGokei = reactive({
+  SAIRANKEI_SEIKEI: undefined,
+  SAIRANKEI_IKUSEIKEI: undefined,
+  NIKUYOUKEI: undefined,
+  SYUKEI_SEIKEI: undefined,
+  SYUKEI_IKUSEIKEI: undefined,
+  UZURA: undefined,
+  AHIRU: undefined,
+  KIJI: undefined,
+  HOROHOROTORI: undefined,
+  SICHIMENCHOU: undefined,
+  DACHOU: undefined,
+  TOTAL: undefined,
+})
+
 const tableData = ref<DetailRowVM[]>([
   {
     MEISAI_NO: 0,
@@ -343,7 +252,10 @@ const tableData = ref<DetailRowVM[]>([
     BIKO: '',
   },
 ])
-const isEdit = ref(false)
+
+const popupVisible = ref(false)
+const popupeditkbn = ref<EnumEditKbn>(EnumEditKbn.Add)
+
 const editJudge = new Judgement('GJ1010')
 const { pageParams, totalCount } = useSearch({
   service: undefined,
@@ -381,18 +293,16 @@ window.addEventListener('resize', function () {
 //メソッド
 //--------------------------------------------------------------------------
 const addData = () => {
-  isEdit.value = true
+  popupVisible.value = true
+  popupeditkbn.value = EnumEditKbn.Add
 }
 const changeData = () => {
-  const a = tableRef.value?.getCurrentRecord()
-  isEdit.value = true
+  popupVisible.value = true
+  popupeditkbn.value = EnumEditKbn.Edit
 }
-const saveData = () => {
-  isEdit.value = false
-}
-const reset = () => {
-  isEdit.value = false
-}
+const deleteData = () => {}
+const saveData = () => {}
+const reset = () => {}
 function goForward(status: PageStatus, row?: any) {}
 
 const goList = () => {
@@ -400,9 +310,6 @@ const goList = () => {
     resetFields()
     router.push({ name: route.name })
   })
-}
-const addNoJo = () => {
-  detailKbn.value = DetailStatus.Detail2
 }
 </script>
 <style lang="scss" scoped>
@@ -413,6 +320,7 @@ th {
 tr th {
   text-align: center;
   border: 1px solid rgb(190, 190, 190);
+  background-color: #ffffe1;
   font-weight: 100;
   width: 0.8rem !important;
 }

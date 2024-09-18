@@ -36,7 +36,7 @@ Namespace JBD.GJS.Service.GJ8091
     'プロシージャ名  :f_Data_Deleate
     '説明            :契約者農場削除処理
     '引数            :なし
-    '戻り値          :Boolean(正常True/エラーFalse)
+    '戻り値          :DaResponseBase
     '------------------------------------------------------------------
     Public Shared Function f_Data_Deleate(db As DaDbContext, wNojoCd As DeleteRequest) As DaResponseBase
 

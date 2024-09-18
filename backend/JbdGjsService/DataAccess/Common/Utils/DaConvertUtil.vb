@@ -14,8 +14,8 @@ Namespace JBD.GJS.Service
         ''' </summary>
         Public Shared Function [CStr](obj As Object) As String
             If obj Is Nothing OrElse obj Is Convert.DBNull Then Return String.Empty
-            If TypeOf obj Is String Then Return obj.ToString()
-            Return String.Empty
+            'If TypeOf obj Is String Then Return obj.ToString()
+            Return obj.ToString()
         End Function
 
         ''' <summary>
@@ -27,7 +27,7 @@ Namespace JBD.GJS.Service
                 If String.IsNullOrEmpty([CStr](obj)) Then Return Nothing
                 Return obj.ToString()
             End If
-            Return String.Empty
+            Return obj.ToString()
         End Function
 
         ''' <summary>
@@ -38,10 +38,6 @@ Namespace JBD.GJS.Service
             If TypeOf obj Is Integer Then Return Cint(obj)
             Dim i As Integer = Nothing
             Return If((Integer.TryParse(obj.ToString(), i)), i, 0)
-
-            ''' <summary>
-            ''' objectをnull許容型整数に変換
-            ''' </summary>
         End Function
 
         ''' Cannot convert MethodDeclarationSyntax, System.ArgumentOutOfRangeException: 種類 'System.ArgumentOutOfRangeException' の例外がスローされました。
@@ -131,7 +127,7 @@ Namespace JBD.GJS.Service
         ''' <summary>
         ''' objectをLongに変換。NULL及び変換できない場合、nullにする
         ''' </summary>
-        Public Function CNLng(obj As Object) As Long
+        Public Shared Function CNLng(obj As Object) As Long
             If obj Is Nothing OrElse TypeOf obj Is DBNull Then Return 0L
             If TypeOf obj Is Long Then Return CLng(obj)
             Dim i As Long = Nothing
@@ -142,7 +138,7 @@ Namespace JBD.GJS.Service
         ''' <summary>
         ''' objectをfloatに変換。NULL及び変換できない場合、０にする
         ''' </summary>
-        Public Function [CSng](obj As Object) As Single
+        Public Shared Function [CSng](obj As Object) As Single
             If obj Is Nothing OrElse TypeOf obj Is DBNull Then Return 0F
             If TypeOf obj Is Single Then Return CType(obj, Single)
             Dim i As Single = Nothing
@@ -151,7 +147,7 @@ Namespace JBD.GJS.Service
         ''' <summary>
         ''' objectをfloatに変換。NULL及び変換できない場合、Nullにする
         ''' </summary>
-        Public Function CNSng(obj As Object) As Single
+        Public Shared Function CNSng(obj As Object) As Single
             If obj Is Nothing OrElse TypeOf obj Is DBNull Then Return Nothing
             If TypeOf obj Is Single Then Return CSng(obj)
             Dim i As Single = Nothing
@@ -161,7 +157,7 @@ Namespace JBD.GJS.Service
         ''' <summary>
         ''' objectを日付に変換、NULL及び変換できない場合、DateTime最小値にする
         ''' </summary>
-        Public Function [CDate](obj As Object) As Date
+        Public Shared Function [CDate](obj As Object) As Date
             If obj Is Nothing OrElse TypeOf obj Is DBNull Then Return New DateTime()
             If TypeOf obj Is Date Then Return CType(obj, Date)
             Dim i As Date = Nothing
@@ -171,7 +167,7 @@ Namespace JBD.GJS.Service
         ''' <summary>
         ''' objectを日付に変換、NULL及び変換できない場合、Nullにする
         ''' </summary>
-        Public Function CNDate(obj As Object) As Date
+        Public Shared Function CNDate(obj As Object) As Date
             If obj Is Nothing OrElse TypeOf obj Is DBNull Then Return Nothing
             If TypeOf obj Is Date Then Return CDate(obj)
             Dim i As Date = Nothing
@@ -181,7 +177,7 @@ Namespace JBD.GJS.Service
         ''' <summary>
         ''' objectをTimeSpanに変換、NULL及び変換できない場合、TimeSpan最小値にする
         ''' </summary>
-        Public Function CTimeSpan(obj As Object) As TimeSpan
+        Public Shared Function CTimeSpan(obj As Object) As TimeSpan
             If obj Is Nothing OrElse TypeOf obj Is DBNull Then Return New TimeSpan()
             If TypeOf obj Is TimeSpan Then Return CType(obj, TimeSpan)
             Dim i As TimeSpan = Nothing
@@ -213,7 +209,7 @@ Namespace JBD.GJS.Service
         ''' <summary>
         ''' object対象を論理値に変換。NULL及び変換できない場合、NULLにする
         ''' </summary>
-        Public Function CNBool(obj As Object) As Boolean
+        Public Shared Function CNBool(obj As Object) As Boolean
             If obj Is Nothing OrElse TypeOf obj Is DBNull Then Return Nothing
             If TypeOf obj Is Boolean Then Return CBool(obj)
             If Equals(obj.ToString(), "1") Then Return True
@@ -248,7 +244,7 @@ Namespace JBD.GJS.Service
         ''' <summary>
         ''' Enum型から文字に変換
         ''' </summary>
-        Public Function EnumToNStr(obj As [Enum]) As String
+        Public Shared Function EnumToNStr(obj As [Enum]) As String
             If obj Is Nothing Then Return Nothing
             Return EnumToStr(obj)
         End Function
@@ -256,7 +252,7 @@ Namespace JBD.GJS.Service
         ''' <summary>
         ''' 空白文字からnothingに変換
         ''' </summary>
-        Public Function ToNStr(str As String) As String
+        Public Shared Function ToNStr(str As String) As String
             If String.IsNullOrEmpty(str) Then Return Nothing
             Return str
         End Function
@@ -264,7 +260,7 @@ Namespace JBD.GJS.Service
         ''' <summary>
         ''' 数値から文字へ変換
         ''' </summary>
-        Public Function ToStr(i As Integer) As String
+        Public Shared Function ToStr(i As Integer) As String
             If i = 0 Then Return String.Empty
             Return i.ToString()
         End Function
@@ -272,7 +268,7 @@ Namespace JBD.GJS.Service
         ''' <summary>
         ''' 空白ないリスト取得
         ''' </summary>
-        Public Function NzStrList(str As String, list As List(Of String)) As List(Of String)
+        Public Shared Function NzStrList(str As String, list As List(Of String)) As List(Of String)
             If Not String.IsNullOrEmpty(str) Then list.Add(str)
             Return list
         End Function
@@ -280,7 +276,7 @@ Namespace JBD.GJS.Service
         ''' <summary>
         ''' コードリスト取得(「,」区切り文字列から)
         ''' </summary>
-        Public Function CommaStrToList(str As String) As List(Of String)
+        Public Shared Function CommaStrToList(str As String) As List(Of String)
             Dim list = New List(Of String)()
             If Not String.IsNullOrEmpty(str) Then
                 list = str.Split(DaStrPool.COMMA).ToList()
@@ -291,7 +287,7 @@ Namespace JBD.GJS.Service
         ''' <summary>
         ''' 「,」区切り文字列取得(コードリストから)
         ''' </summary>
-        Public Function ListToCommaStr(cdList As List(Of String), Optional sortFlg As Boolean = True) As String
+        Public Shared Function ListToCommaStr(cdList As List(Of String), Optional sortFlg As Boolean = True) As String
             Dim cd As String = Nothing
             If sortFlg Then cdList.Sort()
             If cdList.Count > 0 Then
@@ -304,7 +300,7 @@ Namespace JBD.GJS.Service
         ''' <summary>
         ''' 「、」区切り文字列取得(名称リストから)
         ''' </summary>
-        Public Function ListToCommaStr2(nmList As List(Of String)) As String
+        Public Shared Function ListToCommaStr2(nmList As List(Of String)) As String
             Dim nm As String = Nothing
             If nmList.Count > 0 Then
                 nm = String.Join(DaStrPool.C_COMMA2, nmList)
@@ -316,7 +312,7 @@ Namespace JBD.GJS.Service
         ''' <summary>
         ''' 「、」区切り文字列取得(「,」区切り文字列から)
         ''' </summary>
-        Public Function CommaStrToCommaStr2(str As String, nmList As List(Of DaSelectorModel), Optional sortFlg As Boolean = False) As String
+        Public Shared Function CommaStrToCommaStr2(str As String, nmList As List(Of DaSelectorModel), Optional sortFlg As Boolean = False) As String
             Dim cds = CommaStrToList(str)
             If sortFlg Then cds.Sort()
             Dim nms = nmList.Where(Function(e) cds.Contains(e.value)).[Select](Function(e) e.label).ToList()
@@ -326,7 +322,7 @@ Namespace JBD.GJS.Service
         ''' <summary>
         ''' 論理値から文字型に変換
         ''' </summary>
-        Public Function BoolToStr(flg As Boolean) As String
+        Public Shared Function BoolToStr(flg As Boolean) As String
             If flg Then Return "1"
             Return "0"
         End Function

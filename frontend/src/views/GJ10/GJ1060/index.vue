@@ -10,7 +10,7 @@
   <div>
     <a-card :bordered="false" class="h-full min-h-500px">
       <div>
-        <h1>(GJ1060)家畜防疫互助基金事業加入状況表作成</h1>
+        <h1>（GJ1060）家畜防疫互助基金事業加入状況表作成</h1>
         <div class="self_adaption_table form" ref="headRef">
           <a-row>
             <a-col v-bind="layout">
@@ -32,43 +32,42 @@
             <a-col v-bind="layout">
               <th class="required">出力区分</th>
               <td class="flex">
-                <a-radio-group v-model:value="formData.a" class="mt-1">
-                  <a-radio :value="true">契約者& 合計</a-radio>
-                  <a-radio :value="false">合計</a-radio>
+                <a-radio-group
+                  v-model:value="formData.SYUTURYOKU_KBN"
+                  class="mt-1"
+                >
+                  <a-radio :value="1">契約者& 合計</a-radio>
+                  <a-radio :value="2">合計</a-radio>
                 </a-radio-group>
               </td>
             </a-col>
             <a-col v-bind="layout">
-              <th>指定日</th>
+              <th class="required">指定日</th>
               <td class="flex">
-                <a-form-item v-bind="validateInfos.TAISYOBI_YMD">
-                  <DateJp v-model:value="formData.TAISYOBI_YMD"
+                <a-form-item v-bind="validateInfos.KEIYAKU_DATE_FROM">
+                  <DateJp v-model:value="formData.KEIYAKU_DATE_FROM"
                 /></a-form-item>
               </td>
             </a-col>
             <a-col v-bind="layout">
               <th>契約区分</th>
-              <td class="flex">
-                <a-form-item v-bind="validateInfos.KEIYAKU_KBN_CD">
-                  <a-space class="flex-wrap">
-                    <a-checkbox
-                      v-for="(label, key) in LABELS"
-                      :key="key"
-                      v-model:checked="formData.KEIYAKU_JYOKYO[key]"
-                    >
-                      {{ label }}
-                    </a-checkbox></a-space
-                  ></a-form-item
+              <td>
+                <a-space class="flex-wrap">
+                  <a-checkbox
+                    v-for="(label, key) in LABELS"
+                    :key="key"
+                    v-model:checked="formData.KEIYAKU_KBN[key]"
+                  >
+                    {{ label }}
+                  </a-checkbox></a-space
                 >
               </td>
             </a-col>
             <a-col v-bind="layout">
               <th>都道府県</th>
               <td class="flex">
-                <a-form-item v-bind="validateInfos.ITAKU_CD">
-                  <range-select
-                    v-model:value="formData.ITAKU_CD"
-                    :options="LIST"
+                <a-form-item v-bind="validateInfos.KEN_CD">
+                  <range-select v-model:value="formData.KEN_CD" :options="LIST"
                 /></a-form-item>
               </td>
             </a-col>
@@ -88,7 +87,7 @@
               <div class="mb-2 header_operation flex justify-between w-full">
                 <a-space :size="20">
                   <a-button type="primary">EXCEL出力</a-button>
-                  <a-button type="primary">クリア</a-button>
+                  <a-button type="primary">条件クリア</a-button>
                 </a-space>
                 <close-page />
               </div>
@@ -104,41 +103,38 @@ import { reactive, ref, watch, computed, onMounted, onUnmounted } from 'vue'
 import DateJp from '@/components/Selector/DateJp/index.vue'
 import { ITEM_REQUIRE_ERROR } from '@/constants/msg'
 import { Form } from 'ant-design-vue'
+import { ExcelExportRequest } from './type'
 
 //--------------------------------------------------------------------------
 //データ定義
 //--------------------------------------------------------------------------
-const createDefaultParams = () => {
+const createDefaultParams = (): ExcelExportRequest => {
   return {
-    a: true,
     KI: -1,
-    TAISYOBI_YMD: new Date().toISOString().split('T')[0],
-    KEIYAKU_KBN_CD: {
-      VALUE_FM: undefined as number | undefined,
-      VALUE_TO: undefined as number | undefined,
+    SYUTURYOKU_KBN: 1,
+    KEIYAKU_DATE_FROM: new Date(),
+    KEIYAKU_KBN: {
+      KAZOKU: true,
+      KIGYO: true,
+      KEIIGAI: true,
     },
-    KEIYAKU_JYOKYO: {
-      SHINKI: true,
-      KEIZOKU: true,
-      CHUSHI: true,
-      HAIGYO: true,
-    },
-    ITAKU_CD: {
-      VALUE_FM: undefined as number | undefined,
-      VALUE_TO: undefined as number | undefined,
+    KEN_CD: {
+      VALUE_FM: undefined,
+      VALUE_TO: undefined,
     },
     KEIYAKUSYA_CD: {
-      VALUE_FM: undefined as number | undefined,
-      VALUE_TO: undefined as number | undefined,
+      VALUE_FM: undefined,
+      VALUE_TO: undefined,
     },
   }
 }
+
 const formData = reactive(createDefaultParams())
 const LIST = ref<CmCodeNameModel[]>([])
 const LABELS = {
-  SHINKI: '家族',
-  KEIZOKU: '企業',
-  CHUSHI: '鶏以外',
+  KAZOKU: '家族',
+  KIGYO: '企業',
+  KEIIGAI: '鶏以外',
 }
 const layout = {
   md: 24,

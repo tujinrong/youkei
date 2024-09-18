@@ -1,30 +1,23 @@
 <template>
   <a-card :bordered="false" class="mb-2 h-full">
-    <div class="self_adaption_table form max-w-160">
-      <h1>(GJ8060)事務委託先メンテナンス</h1>
+    <div class="self_adaption_table form max-w-400">
+      <h1>（GJ8061）事務委託先マスタメンテナンス</h1>
       <b>第{{ formData.KI }}期</b>
       <a-form>
         <div class="my-2 header_operation flex justify-between w-full">
           <a-space :size="20">
-            <a-button class="warning-btn" @click="saveData">登録</a-button>
-            <a-button
-              type="primary"
-              danger
-              :disabled="isNew"
-              @click="deleteData"
+            <a-button class="warning-btn" @click="saveData">保存</a-button>
+            <a-button class="danger-btn" :disabled="isNew" @click="deleteData"
               >削除</a-button
             >
-            <!-- <a-button v-if="!isNew" :icon="h(LeftOutlined)"></a-button
-          ><span v-if="!isNew">2/5</span>
-          <a-button v-if="!isNew" :icon="h(RightOutlined)"></a-button> -->
           </a-space>
           <a-button type="primary" class="text-end" @click="goList"
             >一覧へ</a-button
           >
         </div>
-        <b>事務委託先基本登録項目</b>
+        <h2>事務委託先基本登録項目</h2>
         <a-row>
-          <a-col span="24">
+          <a-col span="12">
             <th :class="!isNew ? 'bg-readonly' : 'required'">事務委託先</th>
             <td>
               <a-form-item v-bind="validateInfos.ITAKU_CD">
@@ -38,9 +31,7 @@
               </a-form-item>
             </td>
           </a-col>
-        </a-row>
-        <a-row>
-          <a-col span="24">
+          <a-col span="12">
             <th class="required">都道府県</th>
             <td>
               <a-form-item v-bind="validateInfos.KEN_CD">
@@ -53,9 +44,7 @@
               </a-form-item>
             </td>
           </a-col>
-        </a-row>
-        <a-row>
-          <a-col span="24">
+          <a-col span="12">
             <th class="required">事務委託先名称 正式</th>
             <td>
               <a-form-item v-bind="validateInfos.ITAKU_NAME">
@@ -66,9 +55,7 @@
               </a-form-item>
             </td>
           </a-col>
-        </a-row>
-        <a-row>
-          <a-col span="24">
+          <a-col span="12">
             <th class="required">事務委託先名称 略称</th>
             <td>
               <a-form-item v-bind="validateInfos.ITAKU_RYAKU">
@@ -79,9 +66,7 @@
               </a-form-item>
             </td>
           </a-col>
-        </a-row>
-        <a-row>
-          <a-col span="24">
+          <a-col span="12">
             <th>代表者氏名</th>
             <td>
               <a-form-item v-bind="validateInfos.DAIHYO_NAME">
@@ -92,9 +77,7 @@
               </a-form-item>
             </td>
           </a-col>
-        </a-row>
-        <a-row>
-          <a-col span="24">
+          <a-col span="12">
             <th>担当者氏名</th>
             <td>
               <a-form-item v-bind="validateInfos.TANTO_NAME">
@@ -106,6 +89,7 @@
             </td>
           </a-col>
         </a-row>
+
         <a-row>
           <a-col span="24">
             <th class="required">住所</th>
@@ -116,15 +100,15 @@
                     v-model:value="formData.ADDR_1"
                     disabled
                     class="!w-40"
-                  ></a-input
-                ></PostCode>
+                  ></a-input>
+                </PostCode>
               </a-form-item>
               <a-form-item v-bind="validateInfos.ADDR_2">
                 <a-input
                   v-model:value="formData.ADDR_2"
                   :maxlength="15"
-                ></a-input>
-              </a-form-item>
+                ></a-input
+              ></a-form-item>
               <a-input
                 v-model:value="formData.ADDR_3"
                 :maxlength="15"
@@ -165,7 +149,10 @@
           </a-col>
         </a-row>
         <a-row>
-          <a-col span="24">
+          <a-col>
+            <th style="border-top: none"></th>
+          </a-col>
+          <a-col class="flex-1">
             <th>メールアドレス</th>
             <td>
               <a-form-item v-bind="validateInfos.ADDR_E_MAIL">
@@ -174,11 +161,10 @@
                   :maxlength="50"
                 ></a-input>
               </a-form-item>
-            </td>
-          </a-col>
-        </a-row>
+            </td> </a-col
+        ></a-row>
         <a-row>
-          <a-col span="24">
+          <a-col span="12">
             <th class="required">金融機関入力情報有無</th>
             <td>
               <a-radio-group
@@ -190,9 +176,7 @@
               </a-radio-group>
             </td>
           </a-col>
-        </a-row>
-        <a-row>
-          <a-col span="24">
+          <a-col span="12">
             <th>まとめ先</th>
             <td>
               <a-form-item v-bind="validateInfos.MATOMESAKI">
@@ -205,9 +189,7 @@
               </a-form-item>
             </td>
           </a-col>
-        </a-row>
-        <a-row>
-          <a-col span="24">
+          <a-col span="12">
             <th>申込書類</th>
             <td>
               <a-form-item v-bind="validateInfos.MOSIKOMISYORUI">
@@ -218,9 +200,7 @@
               </a-form-item>
             </td>
           </a-col>
-        </a-row>
-        <a-row>
-          <a-col span="24">
+          <a-col span="12">
             <th>請求書・契約書</th>
             <td>
               <a-form-item v-bind="validateInfos.SEIKYUSYO">
@@ -231,9 +211,7 @@
               </a-form-item>
             </td>
           </a-col>
-        </a-row>
-        <a-row>
-          <a-col span="24">
+          <a-col :lg="6" :md="8" :sm="8">
             <th>入金方法</th>
             <td>
               <a-form-item v-bind="validateInfos.NYUKINHOHO">
@@ -244,9 +222,7 @@
               </a-form-item>
             </td>
           </a-col>
-        </a-row>
-        <a-row>
-          <a-col span="24">
+          <a-col :lg="6" :md="8" :sm="6">
             <th>ラベル発行</th>
             <td>
               <a-form-item v-bind="validateInfos.LABELHAKKO">
@@ -259,9 +235,7 @@
               </a-form-item>
             </td>
           </a-col>
-        </a-row>
-        <a-row>
-          <a-col span="24">
+          <a-col :lg="12" :md="8" :sm="8">
             <th>除外フラグ</th>
             <td>
               <a-form-item v-bind="validateInfos.JYOGAI_FLG">
@@ -274,8 +248,6 @@
               </a-form-item>
             </td>
           </a-col>
-        </a-row>
-        <a-row>
           <a-col :span="24"
             ><th>備考</th>
             <td>
@@ -421,6 +393,7 @@ onMounted(async () => {
   if (!isNew) {
     formData.ITAKU_CD = Number(route.query.ITAKU_CD)
   }
+  nextTick(() => editJudge.reset())
 
   // InitDetail({
   //   KI: formData.KI,
@@ -479,7 +452,7 @@ watch(
 const goList = () => {
   editJudge.judgeIsEdited(() => {
     resetFields()
-    router.push({ name: route.name, query: { refresh: '1' } })
+    router.push({ name: route.name })
   })
 }
 
@@ -536,7 +509,7 @@ const deleteData = () => {
 
 <style scoped lang="scss">
 th {
-  width: 130px;
+  min-width: 120px;
 }
 
 :deep(.ant-form-item) {

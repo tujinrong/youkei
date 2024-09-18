@@ -10,7 +10,7 @@
   <div>
     <a-card :bordered="false" class="h-full min-h-500px">
       <div>
-        <h1>(GJ1070)事業加入状況表(農場別リスト)作成</h1>
+        <h1>（GJ1070）事業加入状況表（農場別リスト）作成</h1>
         <div class="self_adaption_table form" ref="headRef">
           <a-row>
             <a-col v-bind="layout">
@@ -32,9 +32,9 @@
             <a-col v-bind="layout">
               <th>契約区分</th>
               <td class="flex">
-                <a-form-item v-bind="validateInfos.KEIYAKU_KBN_CD">
+                <a-form-item v-bind="validateInfos.KEIYAKU_KBN">
                   <range-select
-                    v-model:value="formData.KEIYAKU_KBN_CD"
+                    v-model:value="formData.KEIYAKU_KBN"
                     :options="LIST"
                 /></a-form-item>
               </td>
@@ -42,9 +42,9 @@
             <a-col v-bind="layout">
               <th>鳥の種類</th>
               <td class="flex">
-                <a-form-item v-bind="validateInfos.KEIYAKU_KBN_CD">
+                <a-form-item v-bind="validateInfos.TORI_KBN">
                   <range-select
-                    v-model:value="formData.KEIYAKU_KBN_CD"
+                    v-model:value="formData.TORI_KBN"
                     :options="LIST"
                 /></a-form-item>
               </td>
@@ -52,10 +52,8 @@
             <a-col v-bind="layout">
               <th>都道府県</th>
               <td class="flex">
-                <a-form-item v-bind="validateInfos.ITAKU_CD">
-                  <range-select
-                    v-model:value="formData.ITAKU_CD"
-                    :options="LIST"
+                <a-form-item v-bind="validateInfos.KEN_CD">
+                  <range-select v-model:value="formData.KEN_CD" :options="LIST"
                 /></a-form-item>
               </td>
             </a-col>
@@ -75,7 +73,7 @@
               <div class="mb-2 header_operation flex justify-between w-full">
                 <a-space :size="20">
                   <a-button type="primary">EXCEL出力</a-button>
-                  <a-button type="primary">クリア</a-button>
+                  <a-button type="primary">条件クリア</a-button>
                 </a-space>
                 <close-page />
               </div>
@@ -88,38 +86,35 @@
 </template>
 <script lang="ts" setup>
 import { reactive, ref, watch, computed, onMounted, onUnmounted } from 'vue'
-import DateJp from '@/components/Selector/DateJp/index.vue'
 import { ITEM_REQUIRE_ERROR } from '@/constants/msg'
 import { Form } from 'ant-design-vue'
+import { ExcelExportRequest } from './type'
 
 //--------------------------------------------------------------------------
 //データ定義
 //--------------------------------------------------------------------------
-const createDefaultParams = () => {
+const createDefaultParams = (): ExcelExportRequest => {
   return {
-    a: true,
     KI: -1,
-    TAISYOBI_YMD: new Date().toISOString().split('T')[0],
-    KEIYAKU_KBN_CD: {
-      VALUE_FM: undefined as number | undefined,
-      VALUE_TO: undefined as number | undefined,
+    KEIYAKU_KBN: {
+      VALUE_FM: undefined,
+      VALUE_TO: undefined,
     },
-    KEIYAKU_JYOKYO: {
-      SHINKI: true,
-      KEIZOKU: true,
-      CHUSHI: true,
-      HAIGYO: true,
+    TORI_KBN: {
+      VALUE_FM: undefined,
+      VALUE_TO: undefined,
     },
-    ITAKU_CD: {
-      VALUE_FM: undefined as number | undefined,
-      VALUE_TO: undefined as number | undefined,
+    KEN_CD: {
+      VALUE_FM: undefined,
+      VALUE_TO: undefined,
     },
     KEIYAKUSYA_CD: {
-      VALUE_FM: undefined as number | undefined,
-      VALUE_TO: undefined as number | undefined,
+      VALUE_FM: undefined,
+      VALUE_TO: undefined,
     },
   }
 }
+
 const formData = reactive(createDefaultParams())
 const LIST = ref<CmCodeNameModel[]>([])
 const LABELS = {

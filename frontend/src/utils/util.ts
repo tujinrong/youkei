@@ -91,7 +91,7 @@ export function getUnKnownDateJpText(value: string): string {
 }
 
 /**和暦取得(日付) */
-export const getDateJpText = (value: Date): string => {
+export const getDateJpText = (value: Date | undefined): string => {
   if (value) {
     try {
       return (

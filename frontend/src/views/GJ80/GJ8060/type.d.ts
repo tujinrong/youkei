@@ -8,6 +8,7 @@
  * -----------------------------------------------------------------*/
 
 import { EnumAndOr, EnumEditKbn } from '@/enum'
+import { FmToModel } from '@/views/GJ10/GJ1030/type'
 
 //-------------------------------------------------------------------
 //リクエスト
@@ -24,7 +25,7 @@ export interface SearchRequest extends CmSearchRequestBase {
   /**期 */
   KI: number | undefined
   /**都道府県コード */
-  KEN_CD?: number
+  KEN_CD: FmToModel
   /**農場番号 */
   ITAKU_NAME?: number
   /**農場名 */
@@ -101,11 +102,15 @@ export interface InitDetailResponse extends DaResponseBase {
 //-------------------------------------------------------------------
 
 export interface SearchRowVM {
-  /**農場コード */
-  NOJO_CD: number
-  /**農場名 */
-  NOJO_NAME: string
-  /**住所 */
+  /** 事務委託先 */
+  ITAKU_CD: number
+  /** 事務委託先名 */
+  ITAKU_NAME: string
+  /** 電話番号 */
+  ADDR_TEL: string
+  /** 郵便番号 */
+  ADDR_POST: string
+  /** 住所 */
   ADDR: string
 }
 

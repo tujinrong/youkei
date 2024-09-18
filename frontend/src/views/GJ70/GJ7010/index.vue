@@ -1,53 +1,45 @@
+<!------------------------------------------------------------------
+ * 業務名称　: 互助事業システム
+ * 機能概要　: 契約者別基本情報·農場登録情報 SVデータ作成
+ * 　　　　　  画面レイアウト・処理
+ * 作成日　　: 2024.09.18
+ * 作成者　　: wx
+ * 変更履歴　:
+ * ----------------------------------------------------------------->
 <template>
-  <div>
-    <div v-show="status === PageStatus.List" class="h-full">
-      <ListPage />
-    </div>
-    <div
-      v-if="status === PageStatus.New || status === PageStatus.Edit"
-      class="h-full"
-    >
-      <EditPage :status="status" />
-    </div>
+  <div
+    class="h-full flex-col-stretch gap-12px overflow-hidden lt-sm:overflow-auto flex"
+  >
+    <a-card
+      ><h1>（GJ7010）互助基金契約者情報検索CSVデ一夕作成</h1>
+      <div class="self_adaption_table form mt-1">
+        <a-row> </a-row></div
+    ></a-card>
   </div>
 </template>
-<script setup lang="ts">
-import { onMounted, ref, watch } from 'vue'
-import { useRoute } from 'vue-router'
-import { PageStatus } from '@/enum'
-import ListPage from './modules/ListPage.vue'
-import EditPage from './modules/EditPage.vue'
+<script lang="ts" setup>
+import { onMounted } from 'vue'
 
 //--------------------------------------------------------------------------
 //データ定義
 //--------------------------------------------------------------------------
-const route = useRoute()
-const status = ref(PageStatus.List)
-
-//--------------------------------------------------------------------------
-//フック関数
-//--------------------------------------------------------------------------
-onMounted(() => {
-  if (route.query.status) {
-    status.value = +route.query.status
-  }
-})
 
 //--------------------------------------------------------------------------
 //計算定義
 //--------------------------------------------------------------------------
 
 //---------------------------------------------------------------------------
+//フック関数
+//--------------------------------------------------------------------------
+onMounted(() => {})
+
+//--------------------------------------------------------------------------
 //監視定義
 //--------------------------------------------------------------------------
-watch(
-  () => [route.name, route.query],
-  () => {
-    if (route.name === 'gj70_gj7010') {
-      status.value = route.query.status ? +route.query.status : PageStatus.List
-    }
-  },
-  { deep: true }
-)
+
+//--------------------------------------------------------------------------
+//メソッド
+//--------------------------------------------------------------------------
 </script>
+
 <style lang="scss" scoped></style>

@@ -2,7 +2,7 @@
   <div>
     <a-card :bordered="false" class="h-full min-h-500px">
       <div>
-        <h1>(GJ1030)契約者一覧表(連絡用)</h1>
+        <h1>（GJ1030）契約者一覧表（連絡用）</h1>
         <div class="self_adaption_table form" ref="headRef">
           <a-row>
             <a-col v-bind="layout">
@@ -87,7 +87,7 @@
                   <a-button type="primary" @click="onPreview"
                     >プレビュー</a-button
                   >
-                  <a-button type="primary" @click="clear">クリア</a-button>
+                  <a-button type="primary" @click="clear">条件クリア</a-button>
                 </a-space>
                 <close-page />
               </div>
@@ -308,7 +308,7 @@ async function onPreview() {
 const channel = new BroadcastChannel('channel_preview')
 channel.onmessage = (event) => {
   if (event.data.isMounted) {
-    channel.postMessage({ params: JSON.stringify(formData) })
+    channel.postMessage({ params: JSON.stringify(formData), name: 'S1030' })
   }
 }
 onUnmounted(() => {

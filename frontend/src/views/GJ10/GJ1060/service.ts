@@ -7,5 +7,19 @@
  * 変更履歴　:
  * -----------------------------------------------------------------*/
 import { api } from '@/service/request/common-service'
+import { ExcelExportRequest, InitRequest, InitResponse } from './type'
 
-const servicename = 'xxxx'
+const servicename = 'GJ1060'
+/** 初期化処理_EXCEL出力画面 */
+export const Init = (params: InitRequest): Promise<InitResponse> => {
+  const methodName = 'Init'
+  return api(servicename, methodName, params, undefined, { loading: true })
+}
+
+/** EXCEL出力処理_EXCEL出力画面 */
+export const ExcelExport = (
+  params: ExcelExportRequest
+): Promise<DaResponseBase> => {
+  const methodName = 'ExcelExport'
+  return api(servicename, methodName, params)
+}

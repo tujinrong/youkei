@@ -13,7 +13,7 @@ Namespace JBD.GJS.Service
         Public Property PAGE_NUM As Integer = 1               'ページNo.
         Public Property ORDER_BY As Integer = 0               '並び順
 
-        Public Overridable Property personalno As String     '個人番号
+        Public Overridable Property personalno As String
         Public Sub SetPersonalno()
             If Not String.IsNullOrEmpty(personalno) Then
                 '復号化
