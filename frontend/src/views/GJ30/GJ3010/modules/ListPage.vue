@@ -175,7 +175,7 @@
         </vxe-column>
       </vxe-table>
 
-      <h2>2.契豹農場別明細 增羽情報(入力)</h2>
+      <h2>2.契約農場別明細 增羽情報(入力)</h2>
       <a-space :size="20" 　class="mb-2">
         <a-button
           :class="{ 'warning-btn': isEditing }"
@@ -249,7 +249,7 @@
             <a-col span="24">
               <read-only
                 thWidth="130"
-                th="契豹羽数(増羽前)"
+                th="契約羽数(増羽前)"
                 :td="KEIYAKU_HASU"
               />
               <read-only

@@ -11,7 +11,7 @@
     class="h-full flex-col-stretch gap-12px overflow-hidden lt-sm:overflow-auto flex"
   >
     <a-card>
-      <h1>（GJ3030）互助基金契約者情報变更（譲渡）</h1>
+      <h1>（GJ3030）互助基金契約者情報変更（譲渡）</h1>
       <div class="self_adaption_table form mt-1">
         <a-row>
           <a-col span="8">
@@ -128,7 +128,7 @@
         </vxe-column>
       </vxe-table> </a-card
     ><a-card class="flex-1">
-      <h2>2.契豹農場別明細 讓渡元情報(選択)</h2>
+      <h2>2.契約農場別明細 讓渡元情報(選択)</h2>
       <div class="self_adaption_table form mt-1">
         <a-row>
           <a-col span="8">

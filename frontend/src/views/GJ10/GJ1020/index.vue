@@ -167,7 +167,7 @@
         </vxe-column>
       </vxe-table>
 
-      <h2>2.契豹農場別明細 移動情報(入力)</h2>
+      <h2>2.契約農場別明細 移動情報(入力)</h2>
       <a-space :size="20" 　class="mb-2">
         <a-button
           :class="{ 'warning-btn': isEditing }"
@@ -233,7 +233,7 @@
             <a-col span="24">
               <read-only
                 thWidth="220"
-                th="契豹羽数(移動前)"
+                th="契約羽数(移動前)"
                 :td="formData.KEIYAKU_HASU_MOTO_MAE"
               />
               <read-only
@@ -270,7 +270,7 @@
             <a-col span="24">
               <read-only
                 thWidth="220"
-                th="契豹羽数(移動前)"
+                th="契約羽数(移動前)"
                 :td="formData.KEIYAKU_HASU_SAKI_MAE"
               />
               <read-only

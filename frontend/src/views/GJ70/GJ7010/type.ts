@@ -19,33 +19,62 @@ export interface InitRequest extends DaRequestBase {
 }
 /** 検索処理_一覧画面リクエスト */
 export interface SearchRequest extends DaRequestBase {
-  /** 入金日・振込日 */
-  NYUKIN_DATE?: Date;
+  /** 契約日未入力者を除く */
+  KEIYAKU_DATE_NOZOKU_FLG?: boolean;
+  /** 入金・返還日未入力者を除く */
+  NYUHEN_DATE_NOZOKU_FLG?: boolean;
   /** 対象期 */
   KI?: number;
-  /** 請求・返還回数 */
-  SEIKYU_KAISU?: CmCodeFmToModel;
+  /** 対象年月 */
+  KEIYAKU_DATE_TO?: Date;
   /** 都道府県 */
   KEN_CD?: CmCodeFmToModel;
-  /** 事務委託先 */
-  JIMUITAKU_CD?: number;
   /** 契約者番号 */
-  KEIYAKUSYA_CD?: number;
-  /** 契約者名（カナ） */
-  KEIYAKUSYA_KANA?: string;
-  /** 契約者名（漢字） */
-  KEIYAKUSYA_NAME?: string;
-  /** 請求・返還金額（入金金額） */
-  SAGUKU_SEIKYU_KIN?: CmCodeFmToModel;
-  /** 納付方法 */
-  SEIKYU_HENKAN_KBN?: number;
-  /** 処理状況 */
-  SYORI_JOKYO_KBN?: number;
-  /** 入金・返還日 */
+  KEIYAKUSYA_CD?: CmCodeFmToModel;
+  /** 契約区分 */
+  KEIYAKU_KBN?: CmCodeFmToModel;
+  /** 契約状況 */
+  KEIYAKU_JYOKYO?: CmCodeFmToModel;
+  /** 事務委託先 */
+  JIMUITAKU_CD?: CmCodeFmToModel;
+  /** 鶏の種類 */
+  TORI_KBN?: CmCodeFmToModel;
+  /** 契約年月日 */
+  KEIYAKU_DATE?: CmDateFmToModel;
+  /** 出力項目選択 */
+  SYUTURYOKU_KOMOKU_SENTAKU?: number;
   /** 検索方法 */
   SEARCH_METHOD?: EnumAndOr;
 }
-
+/** CSV出力処理_一覧画面リクエスト */
+export interface CsvExportRequest extends DaRequestBase {
+  /** 契約日未入力者を除く */
+  KEIYAKU_DATE_NOZOKU_FLG?: boolean;
+  /** 入金・返還日未入力者を除く */
+  NYUHEN_DATE_NOZOKU_FLG?: boolean;
+  /** 対象期 */
+  KI?: number;
+  /** 対象年月 */
+  KEIYAKU_DATE_TO?: Date;
+  /** 都道府県 */
+  KEN_CD?: CmCodeFmToModel;
+  /** 契約者番号 */
+  KEIYAKUSYA_CD?: CmCodeFmToModel;
+  /** 契約区分 */
+  KEIYAKU_KBN?: CmCodeFmToModel;
+  /** 契約状況 */
+  KEIYAKU_JYOKYO?: CmCodeFmToModel;
+  /** 事務委託先 */
+  JIMUITAKU_CD?: CmCodeFmToModel;
+  /** 鶏の種類 */
+  TORI_KBN?: CmCodeFmToModel;
+  /** 契約年月日 */
+  KEIYAKU_DATE?: CmDateFmToModel;
+  /** 出力項目選択 */
+  SYUTURYOKU_KOMOKU_SENTAKU?: number;
+  /** 検索方法 */
+  SEARCH_METHOD?: EnumAndOr;
+}
 //-------------------------------------------------------------------
 //レスポンス
 //-------------------------------------------------------------------
@@ -54,45 +83,60 @@ export interface InitResponse extends DaResponseBase {
   /** 対象期 */
   KI?: number;
   /** 都道府県情報プルダウンリスト */
-  KEN_LIST?: CmCodeNameModel[];
+  KEN_LIST: CmCodeNameModel[];
+  /** 契約者情報プルダウンリスト */
+  KEIYAKUSYA_LIST: CmCodeNameModel[];
+  /** 契約区分情報プルダウンリスト */
+  KEIYAKU_KBN_LIST: CmCodeNameModel[];
+  /** 契約状況情報プルダウンリスト */
+  KEIYAKU_JYOKYO_LIST: CmCodeNameModel[];
   /** 事務委託先情報プルダウンリスト */
-  JIMUITAKU_LIST?: CmCodeNameModel[];
-}
-/** 検索処理_一覧画面レスポンス */
-export interface SearchResponse extends DaResponseBase {
-  /** 一覧情報 */
-  KEKKA_LIST?: SearchRowVM[];
+  JIMUITAKU_LIST: CmCodeNameModel[];
+  /** 鶏の種類情報プルダウンリスト */
+  TORI_KBN_LIST: CmCodeNameModel[];
 }
 
+/** 検索処理_一覧画面レスポンス */
+export interface SearchResponse extends DaResponseBase {
+  /** 対象期 */
+  KI?: number;
+  /** 農場件数 */
+  MEISAI_TOTAL_ROW_COUNT?: number;
+  /** 契約者情報リスト */
+  KEKKA_LIST?: SearchRowVM[];
+}
+/** CSV出力処理_一覧画面レスポンス */
+export interface CsvExportResponse extends DaResponseBase {
+  /** ドキュメント情報 */
+  DATA: Blob;
+}
 //-------------------------------------------------------------------
 //ビューモデル
 //-------------------------------------------------------------------
-/** 検索結果行情報 */
+/** 契約者信息 */
 export interface SearchRowVM {
-  /** 対象期 */
-  KI?: number;
-  /** 請求(返還)回数 */
-  SEIKYU_KAISU?: number;
-  /** 積立金区分 */
-  TUMITATE_KBN?: number;
   /** 契約者番号 */
   KEIYAKUSYA_CD?: number;
   /** 契約者名 */
   KEIYAKUSYA_NAME?: string;
   /** フリガナ */
   KEIYAKUSYA_KANA?: string;
-  /** 処理状況コード */
-  SYORI_JOKYO_KBN?: number;
-  /** 処理状況名 */
-  SYORI_JOKYO_NAME?: string;
-  /** 請求・返還コード */
-  SEIKYU_HENKAN_KBN?: number;
-  /** 請求・返還名 */
-  SEIKYU_HENKAN_KBN_NAME?: string;
-  /** 請求・返還日 */
-  SEIKYU_DATE?: Date;
-  /** 入金・振込日 */
-  NYUKIN_DATE?: Date;
-  /** 請求金額/返還金額 */
-  SEIKYU_KIN?: number;
+  /** 契約区分コード */
+  KEIYAKU_KBN?: number;
+  /** 契約区分名 */
+  KEIYAKU_KBN_NAME?: string;
+  /** 契約状況コード */
+  KEIYAKU_JYOKYO?: number;
+  /** 契約状況名 */
+  KEIYAKU_JYOKYO_NAME?: string;
+  /** 電話番号 */
+  ADD_TEL1?: string;
+  /** 都道府県コード */
+  KEN_CD?: number;
+  /** 都道府県コード名 */
+  KEN_CD_NAME?: string;
+  /** 事務委託先コード */
+  ITAKU_CD?: number;
+  /** 事務委託先名 */
+  ITAKU_NAME?: string;
 }

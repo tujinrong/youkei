@@ -7,7 +7,7 @@
  * 変更履歴　:
  * -----------------------------------------------------------------*/
 import { api } from '@/service/request/common-service'
-import { InitRequest, InitResponse, SearchRequest, SearchResponse } from './type';
+import { CsvExportRequest, CsvExportResponse, InitRequest, InitResponse, SearchRequest, SearchResponse } from './type';
 
 const servicename = 'GJ7010'
 export const Init = (params: InitRequest): Promise<InitResponse> => {
@@ -18,3 +18,10 @@ export const Search = (params: SearchRequest): Promise<SearchResponse> => {
   const methodName = 'Search';
   return api(servicename, methodName, params, undefined, { loading: true });
 };
+/** CSV出力処理_一覧画面サービス */
+export const CsvExport = (params: CsvExportRequest): Promise<CsvExportResponse> => {
+  const methodName = 'CsvExport';
+  return api(servicename, methodName, params, undefined, { loading: true });
+};
+
+

@@ -139,7 +139,7 @@
         </vxe-column>
       </vxe-table> </a-card
     ><a-card class="flex-1">
-      <h2>2.契豹区分情報(入力)</h2>
+      <h2>2.契約区分情報(入力)</h2>
       <a-space :size="20" class="mb-2">
         <a-button class="warning-btn" :disabled="!isEditing" @click="save"
           >保存</a-button
@@ -169,7 +169,7 @@
             <a-col span="24">
               <read-only
                 thWidth="220"
-                th="契豹区分(変更前)"
+                th="契約区分(変更前)"
                 :td="formData.KEIYAKU_KBN_MAE"
               />
               <read-only
