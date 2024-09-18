@@ -233,18 +233,15 @@
       <div class="parent-container">
         <div class="self_adaption_table form">
           <a-row>
-            <a-col span="16">
+            <a-col :md="12" :lg="12" :xl="8" :xxl="8">
               <th class="required">譲渡年月日</th>
               <td>
                 <a-form-item v-bind="validateInfos.KEIYAKU_DATE_FROM">
-                  <DateJp
-                    v-model:value="formData.KEIYAKU_DATE_FROM"
-                    class="max-w-80!"
-                  ></DateJp>
+                  <DateJp v-model:value="formData.KEIYAKU_DATE_FROM"></DateJp>
                 </a-form-item>
               </td>
             </a-col>
-            <a-col span="16">
+            <a-col :md="12" :lg="12" :xl="8" :xxl="8">
               <th class="required">入力確認有無</th>
               <td>
                 <a-radio-group
