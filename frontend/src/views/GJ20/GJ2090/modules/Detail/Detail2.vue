@@ -16,7 +16,7 @@
             <read-only-pop
               th="契約者番号"
               thWidth="110"
-              :td="formData.KEIYAKUSYA_CD"
+              :td="String(formData.KEIYAKUSYA_CD)"
             ></read-only-pop>
           </a-col>
           <a-col span="8">
@@ -46,7 +46,11 @@
         <h2 class="mt3 mb1">請求入金内容</h2>
         <a-row>
           <a-col span="24">
-            <read-only-pop th="対象期" thWidth="110" :td="formData.KI" />
+            <read-only-pop
+              th="対象期"
+              thWidth="110"
+              :td="String(formData.KI)"
+            />
           </a-col>
         </a-row>
         <a-row>
@@ -194,7 +198,7 @@
                   after="円"
                 />
               </a-col>
-              <a-col span="12">
+              <a-col span="24">
                 <read-only-pop
                   thWidth="80"
                   th="入金額計"
@@ -202,7 +206,7 @@
                   after="円"
                 />
               </a-col>
-              <a-col span="12">
+              <a-col span="24">
                 <read-only-pop
                   thWidth="80"
                   th="入金額残"
@@ -367,11 +371,11 @@ const formDefault = {
   SITEN_NAME: '本店',
   FURI_KOZA_SYUBETU: 2,
   FURI_KOZA_SYUBETU_NAME: '普通',
-  FURI_KOZA_NO: '1234567',
+  FURI_KOZA_NO: '',
   FURI_KOZA_MEIGI_KANA: 'ジョウトモト',
   JIMUITAKU_CD: 1001,
   ITAKU_NAME: '事務委託株式会社',
-  KI: 2024,
+  KI: 8,
   SEIKYU_DATE: new Date('2024-09-13'),
   SEIKYU_KAISU: 2,
   SEIKYU_HENKAN_KBN: 1,

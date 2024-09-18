@@ -17,8 +17,10 @@
     {{ th }}
   </th>
   <td v-if="!hideTd" class="ellipsis">
-    <template v-if="isNumber(td)">
-      {{ td?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') }}
+    <template v-if="isNumber(td)"
+      ><div class="w-full text-right">
+        <span> {{ td?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') }}</span>
+      </div>
     </template>
     <template v-else>
       {{ td }}
