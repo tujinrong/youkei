@@ -28,19 +28,19 @@ export interface SearchRequest extends DaRequestBase {
   /** 対象年月 */
   KEIYAKU_DATE_TO?: Date;
   /** 都道府県 */
-  KEN_CD?: CmCodeFmToModel;
+  KEN_CD: CmCodeFmToModel;
   /** 契約者番号 */
-  KEIYAKUSYA_CD?: CmCodeFmToModel;
+  KEIYAKUSYA_CD: CmCodeFmToModel;
   /** 契約区分 */
-  KEIYAKU_KBN?: CmCodeFmToModel;
+  KEIYAKU_KBN: CmCodeFmToModel;
   /** 契約状況 */
-  KEIYAKU_JYOKYO?: CmCodeFmToModel;
+  KEIYAKU_JYOKYO: CmCodeFmToModel;
   /** 事務委託先 */
-  JIMUITAKU_CD?: CmCodeFmToModel;
+  JIMUITAKU_CD: CmCodeFmToModel;
   /** 鶏の種類 */
-  TORI_KBN?: CmCodeFmToModel;
+  TORI_KBN: CmCodeFmToModel;
   /** 契約年月日 */
-  KEIYAKU_DATE?: CmDateFmToModel;
+  KEIYAKU_DATE: CmDateFmToModel;
   /** 出力項目選択 */
   SYUTURYOKU_KOMOKU_SENTAKU?: number;
   /** 検索方法 */
