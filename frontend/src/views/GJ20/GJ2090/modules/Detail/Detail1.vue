@@ -212,10 +212,10 @@
       <div class="pt-2 flex justify-between border-t-1">
         <a-space :size="20">
           <a-button class="warning-btn" @click="saveData">入金登録</a-button>
-          <a-button :disabled="!formData.NYUKIN_DATE" @click="closeModal"
+          <a-button type="primary" :disabled="!formData.NYUKIN_DATE" @click="closeModal"
             >入金取消</a-button
           >
-          <a-button :disabled="!formData.NYUKIN_DATE" @click="openGJ2092"
+          <a-button type="primary" :disabled="!formData.NYUKIN_DATE" @click="openGJ2092"
             >分割入金</a-button
           >
         </a-space>
