@@ -325,7 +325,7 @@
             ①積立金交付金額 ＋ ②国庫交付金額
           </td>
         </tr>
-        <tr>
+<!--        <tr>
           <th class="required" style="text-align: left">入力確認有無</th>
           <td colspan="3" style="text-align: left">
             <a-radio-group v-model:value="formData.SYORI_JOKYO_KBN">
@@ -341,14 +341,34 @@
               :disabled="formData.SYORI_JOKYO_KBN !== 3"
             />
           </td>
-        </tr>
+        </tr>-->
       </table>
+      <a-row>
+        <a-col span="3">
+          <th class="required">入力確認有無</th>
+        </a-col>
+        <a-col span="7">
+          <td style="align-items: center;height: 100%">
+            <a-radio-group v-model:value="formData.SYORI_JOKYO_KBN">
+              <a-radio :value="1">入力中</a-radio>
+              <a-radio :value="2">審査中</a-radio>
+              <a-radio :value="3">交付確定</a-radio>
+            </a-radio-group>
+          </td>
+        </a-col>
+        <a-col span="6">
+          <th>確定年月日</th>
+          <td>
+            <DateJp v-model:value="formData.TANKA_MST_DATE" :disabled="formData.SYORI_JOKYO_KBN !== 3"/>
+          </td>
+        </a-col>
+      </a-row>
     </div>
     <template #footer>
       <div class="pt-2 flex justify-between border-t-1">
         <a-space :size="20">
           <a-button class="warning-btn" @click="saveData">保存</a-button>
-          <a-button @click="closeModal">キャンセル</a-button>
+          <a-button type="primary" @click="closeModal">キャンセル</a-button>
         </a-space>
         <a-button type="primary" @click="closeModal">閉じる</a-button>
       </div>
