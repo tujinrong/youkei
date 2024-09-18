@@ -14,13 +14,15 @@
         <a-col span="24">
           <th class="required">適用開始日</th>
           <td>
-            <DateJp v-model:value="formData.TAX_DATE_FROM" />
+            <a-form-item v-bind="validateInfos.TAX_DATE_FROM">
+              <DateJp v-model:value="formData.TAX_DATE_FROM" />
+            </a-form-item>
           </td>
         </a-col>
         <a-col span="24">
           <th class="required">適用終了日</th>
           <td>
-            <a-form-item>
+            <a-form-item v-bind="validateInfos.TAX_DATE_TO">
               <DateJp v-model:value="formData.TAX_DATE_TO" />
             </a-form-item>
           </td>
@@ -28,7 +30,7 @@
         <a-col span="24">
           <th class="required">消費税率（%）</th>
           <td>
-            <a-form-item>
+            <a-form-item v-bind="validateInfos.TAX_RITU">
               <a-input v-model:value="formData.TAX_RITU" :maxlength="30" />
             </a-form-item>
           </td>
@@ -39,6 +41,9 @@
       <div class="pt-2 flex justify-between border-t-1">
         <a-space :size="20">
           <a-button class="warning-btn" @click="save"> 保存 </a-button>
+          <a-button class="warning-btn" @click="continueSave">
+            保存して継続登録
+          </a-button>
           <a-button class="danger-btn" @click="delete"> 削除 </a-button>
         </a-space>
         <a-button type="primary" @click="closeModal">閉じる</a-button>
@@ -47,7 +52,10 @@
   </a-modal>
 </template>
 <script setup lang="ts">
+import { ITEM_REQUIRE_ERROR, SAVE_CONFIRM, SAVE_OK_INFO } from '@/constants/msg'
 import { Judgement } from '@/utils/judge-edited'
+import { showInfoModal, showSaveModal } from '@/utils/modal'
+import { Form, message } from 'ant-design-vue'
 import { nextTick, onMounted, reactive, watch } from 'vue'
 // interface Props {
 //   visible: boolean
@@ -79,9 +87,48 @@ watch(
   },
   { deep: true }
 )
-
-const save = () => {}
-
+const rules = reactive({
+  TAX_DATE_FROM: [
+    {
+      required: true,
+      message: ITEM_REQUIRE_ERROR.Msg.replace('{0}', '適用開始日'),
+    },
+  ],
+  TAX_DATE_TO: [
+    {
+      required: true,
+      message: ITEM_REQUIRE_ERROR.Msg.replace('{0}', '適用終了日'),
+    },
+  ],
+  TAX_RITU: [
+    {
+      required: true,
+      message: ITEM_REQUIRE_ERROR.Msg.replace('{0}', '消費税率（%）'),
+    },
+  ],
+})
+const { validate, clearValidate, validateInfos, resetFields } = Form.useForm(
+  formData,
+  rules
+)
+const save = () => {
+  showSaveModal({
+    content: SAVE_CONFIRM.Msg,
+    onOk: async () => {
+      message.success(SAVE_OK_INFO.Msg)
+      closeModal()
+    },
+  })
+}
+const continueSave = () => {
+  showSaveModal({
+    content: SAVE_CONFIRM.Msg,
+    onOk: async () => {
+      message.success(SAVE_OK_INFO.Msg)
+      resetFields()
+    },
+  })
+}
 const closeModal = () => {
   editJudge.judgeIsEdited(() => {
     Object.assign(formData, {
