@@ -114,7 +114,7 @@
       <div class="pt-2 flex justify-between border-t-1">
         <a-space :size="20" class="mb-2">
           <a-button class="warning-btn" @click="saveData">保存</a-button>
-          <a-button class="warning-btn" @click="saveData">
+          <a-button class="warning-btn" @click="continueSave">
             保存して継続登録 </a-button
           ><a-button class="danger-btn" @click="deleteData">削除</a-button>
           <a-button type="primary" @click="reset">キャンセル</a-button></a-space
@@ -133,8 +133,8 @@ import { Judgement } from '@/utils/judge-edited'
 import { reactive, ref, toRef, computed } from 'vue'
 import Detail2 from '../Popup/PopUp_1013.vue'
 import { EnumEditKbn, PageStatus } from '@/enum'
-import { Form } from 'ant-design-vue'
-import { ITEM_REQUIRE_ERROR } from '@/constants/msg'
+import { Form, message } from 'ant-design-vue'
+import { ITEM_REQUIRE_ERROR, SAVE_OK_INFO } from '@/constants/msg'
 import { FarmManage } from '../../constant'
 import { VxeTableInstance } from 'vxe-table'
 
@@ -240,6 +240,10 @@ const deleteData = () => {
 }
 const saveData = () => {
   isEdit.value = false
+}
+const continueSave = () => {
+  message.success(SAVE_OK_INFO.Msg)
+  resetFields()
 }
 const reset = () => {
   isEdit.value = false
