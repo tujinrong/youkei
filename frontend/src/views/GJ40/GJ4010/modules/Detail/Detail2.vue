@@ -89,6 +89,7 @@
             <td>×</td>
             <td>
               <a-input-number
+                class="input"
                 v-model:value="formData.SAIRANKEI_IKUSEIKEI"
                 :min="1"
                 size="small"
@@ -115,6 +116,7 @@
             <td>×</td>
             <td>
               <a-input-number
+                class="input"
                 v-model:value="formData.SAIRANKEI_IKUSEIKEI"
                 :min="1"
                 size="small"
@@ -141,6 +143,7 @@
             <td>×</td>
             <td>
               <a-input-number
+                class="input"
                 v-model:value="formData.SAIRANKEI_IKUSEIKEI"
                 :min="1"
                 size="small"
@@ -165,6 +168,7 @@
           <tr>
             <td colspan="3" style="border-bottom: none">
               <a-input-number
+                class="input"
                 v-model:value="formData.SAIRANKEI_IKUSEIKEI"
                 :min="1"
                 size="small"
@@ -204,6 +208,7 @@
             <td>＋</td>
             <td>
               <a-input-number
+                class="input"
                 v-model:value="formData.SAIRANKEI_IKUSEIKEI"
                 :min="1"
                 size="small"
@@ -240,6 +245,7 @@
           <th style="width: 210px">対象羽数(導入羽数等)</th>
           <td style="width: 100px">
             <a-input-number
+              class="input"
               v-model:value="formData.SAIRANKEI_IKUSEIKEI"
               :min="1"
               size="small"
@@ -261,6 +267,7 @@
           <th>家伝法違反減額率</th>
           <td class="flex" style="border: none">
             <a-input-number
+              class="input"
               v-model:value="formData.SAIRANKEI_IKUSEIKEI"
               :min="1"
               size="small"
@@ -300,6 +307,7 @@
           <th>積立金交付金額※3</th>
           <td>
             <a-input-number
+              class="input2"
               v-model:value="formData.SAIRANKEI_IKUSEIKEI"
               :min="1"
               size="small"
@@ -485,7 +493,7 @@ th {
 }
 tr th {
   border: 1px solid rgb(190, 190, 190);
-  background-color: #ffffe1;
+  // background-color: #ffffe1;
   font-weight: 100;
   padding: 2px 5px;
 }
@@ -507,5 +515,11 @@ tr td {
   tr td {
     text-align: left;
   }
+}
+.input {
+  background-color: #c0ffc0;
+}
+.input2 {
+  background-color: #ffd700;
 }
 </style>
