@@ -134,9 +134,16 @@ import { reactive, ref, toRef, computed } from 'vue'
 import Detail2 from '../Popup/PopUp_1013.vue'
 import { EnumEditKbn, PageStatus } from '@/enum'
 import { Form, message } from 'ant-design-vue'
-import { ITEM_REQUIRE_ERROR, SAVE_OK_INFO } from '@/constants/msg'
+import {
+  DELETE_CONFIRM,
+  DELETE_OK_INFO,
+  ITEM_REQUIRE_ERROR,
+  SAVE_CONFIRM,
+  SAVE_OK_INFO,
+} from '@/constants/msg'
 import { FarmManage } from '../../constant'
 import { VxeTableInstance } from 'vxe-table'
+import { showDeleteModal, showSaveModal } from '@/utils/modal'
 
 //--------------------------------------------------------------------------
 //データ定義
@@ -205,7 +212,14 @@ const { validate, clearValidate, validateInfos, resetFields } = Form.useForm(
 //--------------------------------------------------------------------------
 //計算定義
 //--------------------------------------------------------------------------
-
+const modalVisible = computed({
+  get() {
+    return props.visible
+  },
+  set(visible) {
+    emit('update:visible', visible)
+  },
+})
 //--------------------------------------------------------------------------
 //監視定義
 //--------------------------------------------------------------------------
@@ -220,7 +234,7 @@ window.addEventListener('resize', function () {
 const closeModal = () => {
   resetFields()
   clearValidate()
-  emit('update:visible', false)
+  modalVisible.value = false
 }
 const goList = () => {
   editJudge.judgeIsEdited(() => {
@@ -236,17 +250,35 @@ const changeData = () => {
   isEdit.value = true
 }
 const deleteData = () => {
-  isEdit.value = false
+  showDeleteModal({
+    handleDB: true,
+    content: DELETE_CONFIRM.Msg,
+    onOk: async () => {
+      message.success(DELETE_OK_INFO.Msg)
+      closeModal()
+    },
+  })
 }
 const saveData = () => {
-  isEdit.value = false
+  showSaveModal({
+    content: SAVE_CONFIRM.Msg,
+    onOk: async () => {
+      message.success(SAVE_OK_INFO.Msg)
+      closeModal()
+    },
+  })
 }
 const continueSave = () => {
-  message.success(SAVE_OK_INFO.Msg)
-  resetFields()
+  showSaveModal({
+    content: SAVE_CONFIRM.Msg,
+    onOk: async () => {
+      message.success(SAVE_OK_INFO.Msg)
+      resetFields()
+    },
+  })
 }
 const reset = () => {
-  isEdit.value = false
+  resetFields()
 }
 function goForward(status: PageStatus, row?: any) {}
 
