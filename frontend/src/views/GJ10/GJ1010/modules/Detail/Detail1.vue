@@ -56,6 +56,7 @@
     >
       <vxe-column
         header-align="center"
+        align="right"
         field="MEISAI_NO"
         title="明細番号"
         width="100"
@@ -83,12 +84,14 @@
       </vxe-column>
       <vxe-column
         header-align="center"
+        align="center"
         field="TORISYURUI"
         title="鳥の種類"
         min-width="120"
       ></vxe-column>
       <vxe-column
         header-align="center"
+        align="right"
         field="KEIYAKUHASU"
         title="契約羽数"
         min-width="120"
