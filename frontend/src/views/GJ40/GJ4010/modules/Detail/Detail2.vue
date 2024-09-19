@@ -89,11 +89,10 @@
             <td>×</td>
             <td>
               <a-input-number
-                class="input"
+                class="input w-full"
                 v-model:value="formData.SAIRANKEI_IKUSEIKEI"
                 :min="1"
                 size="small"
-                style="width: 100%"
               />
             </td>
             <td>÷</td>
@@ -116,11 +115,10 @@
             <td>×</td>
             <td>
               <a-input-number
-                class="input"
+                class="input w-full"
                 v-model:value="formData.SAIRANKEI_IKUSEIKEI"
                 :min="1"
                 size="small"
-                style="width: 100%"
               />
             </td>
             <td>÷</td>
@@ -143,11 +141,10 @@
             <td>×</td>
             <td>
               <a-input-number
-                class="input"
+                class="input w-full"
                 v-model:value="formData.SAIRANKEI_IKUSEIKEI"
                 :min="1"
                 size="small"
-                style="width: 100%"
               />
             </td>
             <td>÷</td>
@@ -168,11 +165,10 @@
           <tr>
             <td colspan="3" style="border-bottom: none">
               <a-input-number
-                class="input"
+                class="input w-full"
                 v-model:value="formData.SAIRANKEI_IKUSEIKEI"
                 :min="1"
                 size="small"
-                style="width: 100%"
               />
             </td>
             <td style="border-bottom: none">÷</td>
@@ -208,11 +204,10 @@
             <td>＋</td>
             <td>
               <a-input-number
-                class="input"
+                class="input w-full"
                 v-model:value="formData.SAIRANKEI_IKUSEIKEI"
                 :min="1"
                 size="small"
-                style="width: 100%"
               />
             </td>
             <td>＝</td>
@@ -239,113 +234,160 @@
           </tr>
         </table>
       </div>
-      <table class="last-table">
-        <tr>
-          <th style="width: 150px">経営支援互助金 算定</th>
-          <th style="width: 210px">対象羽数(導入羽数等)</th>
-          <td style="width: 100px">
+      <a-row>
+        <a-col span="4">
+          <read-only-pop thWidth="150" th="経営支援互助金 算定" :hideTd="true" />
+        </a-col>
+        <a-col span="8">
+          <th style="width: 210px;">対象羽数(導入羽数等)</th>
+          <td style="align-items: center">
             <a-input-number
-              class="input"
+              class="input w-full"
               v-model:value="formData.SAIRANKEI_IKUSEIKEI"
               :min="1"
-              size="small"
-              style="width: 100%"
             />
           </td>
-          <th style="width: 30px; text-align: center">×</th>
-          <th style="width: 130px">最終決定単価</th>
-          <th style="width: 100px"></th>
-          <th style="width: 30px; text-align: center">＝</th>
-          <th style="width: 100px"></th>
-          <th style="width: 150px">※1</th>
-        </tr>
-        <tr>
-          <th style="text-align: left">家伝法違反減額</th>
-          <th style="text-align: left">経営支援互助金 算定(※1)</th>
-          <td>{{ hasuGokei.SAIRANKEI_SEIKEI }}</td>
-          <th style="text-align: center">×</th>
-          <th>家伝法違反減額率</th>
-          <td class="flex" style="border: none">
+        </a-col>
+        <a-col span="0.5">
+          <span class="symbol">×</span>
+        </a-col>
+        <a-col span="5">
+          <read-only-pop
+            thWidth="100"
+            th="最終決定単価"
+            :td="hasuGokei.SAIRANKEI_SEIKEI"
+          />
+        </a-col>
+        <a-col span="6">
+          <read-only-pop th="＝" :td="hasuGokei.SAIRANKEI_SEIKEI" after="※1&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;" />
+        </a-col>
+      </a-row>
+      <a-row>
+        <a-col span="4">
+          <read-only-pop th="家伝法違反減額" :hideTd="true" />
+        </a-col>
+        <a-col span="8">
+          <read-only-pop
+            thWidth="210"
+            th="経営支援互助金 算定(※1)"
+            :td="hasuGokei.SAIRANKEI_SEIKEI"
+          />
+        </a-col>
+        <a-col span="0.5">
+          <span class="symbol">×</span>
+        </a-col>
+        <a-col span="5">
+          <th style="width: 120px">家伝法違反減額率</th>
+          <td style="align-items: center">
             <a-input-number
-              class="input"
+              class="input mr-1"
               v-model:value="formData.SAIRANKEI_IKUSEIKEI"
               :min="1"
-              size="small"
-              style="width: 100%"
             />%
           </td>
-          <td style="text-align: center">＝</td>
-          <td>{{ hasuGokei.SYUKEI_SEIKEI }}</td>
-          <th>(円未満切り上げ)※2</th>
-        </tr>
-        <tr>
-          <th rowspan="2" style="text-align: left">①積立金交付金額</th>
-          <th rowspan="2" style="text-align: left">
-            経営支援互助金 算定(※1-※2)
-          </th>
-          <td>{{ hasuGokei.SAIRANKEI_SEIKEI }}</td>
-          <th style="text-align: center">×</th>
-          <th colspan="2" style="text-align: left" class="pl2">１/２</th>
-          <td style="text-align: center">＝</td>
-          <td>{{ hasuGokei.SYUKEI_SEIKEI }}</td>
-          <th>(円未満切り上げ)※3</th>
-        </tr>
-        <tr>
-          <td>{{ hasuGokei.SAIRANKEI_SEIKEI }}</td>
-          <th style="text-align: center">×</th>
-          <th>互助金交付率</th>
-          <td>{{ hasuGokei.SAIRANKEI_IKUSEIKEI }}%</td>
-          <td style="text-align: center">＝</td>
-          <td>{{ hasuGokei.SYUKEI_SEIKEI }}</td>
-          <th>(円未満切り上げ)①</th>
-        </tr>
-        <tr>
-          <th style="text-align: left">②国庫交付金額</th>
-          <th style="text-align: left">経営支援互助金 算定(※1-※2)</th>
-          <td>{{ hasuGokei.SAIRANKEI_SEIKEI }}</td>
-          <th style="text-align: center">—</th>
-          <th>積立金交付金額※3</th>
-          <td>
+        </a-col>
+        <a-col span="6">
+          <read-only-pop
+            th="＝"
+            :td="hasuGokei.SYUKEI_SEIKEI"
+            after="(円未満切り上げ)※2"
+          />
+        </a-col>
+      </a-row>
+      <a-row>
+        <a-col span="4">
+          <read-only-pop th="&emsp;①積立金交付金額" :hideTd="true" />
+        </a-col>
+        <a-col span="8">
+          <read-only-pop
+            thWidth="210"
+            th="経営支援互助金 算定(※1-※2)"
+            :td="hasuGokei.SAIRANKEI_SEIKEI"
+          />
+        </a-col>
+        <a-col span="0.5">
+          <span class="symbol">×</span>
+        </a-col>
+        <a-col span="5">
+          <read-only-pop thWidth="150" th="１/２" :hideTd="true" />
+        </a-col>
+        <a-col span="6">
+          <read-only-pop
+            th="＝"
+            :td="hasuGokei.SYUKEI_SEIKEI"
+            after="(円未満切り上げ)※3"
+          />
+        </a-col>
+      </a-row>
+      <a-row>
+        <a-col span="4" />
+        <a-col span="8">
+          <read-only-pop thWidth="210" th="" :td="hasuGokei.SAIRANKEI_SEIKEI" />
+        </a-col>
+        <a-col span="0.5">
+          <span class="symbol">×</span>
+        </a-col>
+        <a-col span="5">
+          <th style="width: 100px">互助金交付率</th>
+          <td style="align-items: center">
             <a-input-number
-              class="input2"
+              class="input2 mr-1 w-full"
               v-model:value="formData.SAIRANKEI_IKUSEIKEI"
               :min="1"
-              size="small"
-              style="width: 100%"
-            />
+            />%
           </td>
-          <td style="text-align: center">＝</td>
-          <td>{{ hasuGokei.SYUKEI_SEIKEI }}</td>
-          <th>②</th>
-        </tr>
-        <tr>
-          <th style="text-align: left">③経営支援互助金</th>
-          <td>{{ hasuGokei.SAIRANKEI_SEIKEI }}</td>
-          <td colspan="7" style="text-align: left">
-            ①積立金交付金額 ＋ ②国庫交付金額
-          </td>
-        </tr>
-        <!--        <tr>
-          <th class="required" style="text-align: left">入力確認有無</th>
-          <td colspan="3" style="text-align: left">
-            <a-radio-group v-model:value="formData.SYORI_JOKYO_KBN">
-              <a-radio :value="1">入力中</a-radio>
-              <a-radio :value="2">審査中</a-radio>
-              <a-radio :value="3">交付確定</a-radio>
-            </a-radio-group>
-          </td>
-          <th style="text-align: left">確定年月日</th>
-          <td colspan="4" style="text-align: left">
-            <DateJp
-              v-model:value="formData.TANKA_MST_DATE"
-              :disabled="formData.SYORI_JOKYO_KBN !== 3"
-            />
-          </td>
-        </tr>-->
-      </table>
+        </a-col>
+        <a-col span="6">
+          <read-only-pop
+            th="＝"
+            :td="hasuGokei.SYUKEI_SEIKEI"
+            after="(円未満切り上げ)①&nbsp;"
+          />
+        </a-col>
+      </a-row>
       <a-row>
-        <a-col span="3">
-          <th class="required">入力確認有無</th>
+        <a-col span="4">
+          <read-only-pop
+            th="&emsp;②国庫交付金額"
+            :hideTd="true"
+          />
+        </a-col>
+        <a-col span="8">
+          <read-only-pop
+            thWidth="210"
+            th="経営支援互助金 算定(※1-※2)"
+            :td="hasuGokei.SAIRANKEI_SEIKEI"
+          />
+        </a-col>
+        <a-col span="0.5">
+          <span class="symbol">—</span>
+        </a-col>
+        <a-col span="6">
+          <read-only-pop
+            thWidth="130"
+            th="積立金交付金額※3"
+            :td="hasuGokei.SAIRANKEI_IKUSEIKEI"
+          />
+        </a-col>
+        <a-col span="5">
+          <read-only-pop th="＝" :td="hasuGokei.SYUKEI_SEIKEI" after="②" />
+        </a-col>
+      </a-row>
+      <a-row>
+        <a-col span="4">
+          <read-only-pop th="&emsp;③経営支援互助金" :hideTd="true" />
+        </a-col>
+        <a-col span="8">
+          <read-only-pop
+            :hideTh="true"
+            :td="hasuGokei.SAIRANKEI_SEIKEI"
+            after="①積立金交付金額 ＋ ②国庫交付金額"
+          />
+        </a-col>
+      </a-row>
+      <a-row>
+        <a-col span="4">
+          <th class="required">&emsp;入力確認有無</th>
         </a-col>
         <a-col span="7">
           <td style="align-items: center; height: 100%">
@@ -381,10 +423,9 @@
 <script setup lang="ts">
 import { Judgement } from '@/utils/judge-edited'
 import { Form } from 'ant-design-vue'
-import { computed, nextTick, reactive, ref, toRef, watch } from 'vue'
-import { EnumAndOr, EnumEditKbn, PageStatus } from '@/enum'
-import { DetailVM, SearchRequest } from '../../type'
-import { changeTableSort, mathNumber } from '@/utils/util'
+import { computed, nextTick, reactive, ref, watch } from 'vue'
+import { EnumEditKbn } from '@/enum'
+import { SearchRequest } from '../../type'
 import DateJp from '@/components/Selector/DateJp/index.vue'
 import { VxeTableInstance } from 'vxe-table'
 
@@ -397,7 +438,7 @@ const props = defineProps<{
 }>()
 const emit = defineEmits(['update:visible'])
 const xTableRef = ref<VxeTableInstance>()
-const formData = reactive<DetailVM>({
+const formData = reactive({
   TUMITATE_KBN: undefined as number | undefined,
   KEIYAKUSYA_CD: undefined as number | undefined,
   KEN_CD: undefined as number | undefined,
@@ -538,6 +579,14 @@ tr td {
   tr td {
     text-align: left;
   }
+}
+.edit_table .ant-col {
+  align-items: center;
+}
+.symbol {
+  width: 15px;
+  text-align: center;
+  margin: 0 3px;
 }
 .input {
   background-color: #c0ffc0;
