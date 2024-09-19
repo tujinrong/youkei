@@ -285,7 +285,7 @@
           </th>
           <td>{{ hasuGokei.SAIRANKEI_SEIKEI }}</td>
           <th style="text-align: center">×</th>
-          <th colspan="2" style="text-align: left" class="pl2">1/2</th>
+          <th colspan="2" style="text-align: left" class="pl2">１/２</th>
           <td style="text-align: center">＝</td>
           <td>{{ hasuGokei.SYUKEI_SEIKEI }}</td>
           <th>(円未満切り上げ)※3</th>
@@ -325,7 +325,7 @@
             ①積立金交付金額 ＋ ②国庫交付金額
           </td>
         </tr>
-<!--        <tr>
+        <!--        <tr>
           <th class="required" style="text-align: left">入力確認有無</th>
           <td colspan="3" style="text-align: left">
             <a-radio-group v-model:value="formData.SYORI_JOKYO_KBN">
@@ -348,7 +348,7 @@
           <th class="required">入力確認有無</th>
         </a-col>
         <a-col span="7">
-          <td style="align-items: center;height: 100%">
+          <td style="align-items: center; height: 100%">
             <a-radio-group v-model:value="formData.SYORI_JOKYO_KBN">
               <a-radio :value="1">入力中</a-radio>
               <a-radio :value="2">審査中</a-radio>
@@ -359,7 +359,10 @@
         <a-col span="6">
           <th>確定年月日</th>
           <td>
-            <DateJp v-model:value="formData.TANKA_MST_DATE" :disabled="formData.SYORI_JOKYO_KBN !== 3"/>
+            <DateJp
+              v-model:value="formData.TANKA_MST_DATE"
+              :disabled="formData.SYORI_JOKYO_KBN !== 3"
+            />
           </td>
         </a-col>
       </a-row>

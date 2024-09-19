@@ -3,7 +3,7 @@
     :open="modalVisible"
     centered
     title="（GJ4013）焼却・埋却等互助金申請情報入力（契約交付情報表示）"
-    width="80%"
+    width="1200px"
     :body-style="{ height: '800px' }"
     :mask-closable="false"
     destroy-on-close
@@ -33,7 +33,9 @@
                     class="w-full"
                   ></a-input-number>
                 </a-form-item>
-                <a-button class="ml-2" type="primary" @click="search">検索</a-button>
+                <a-button class="ml-2" type="primary" @click="search"
+                  >検索</a-button
+                >
               </td>
             </a-col>
           </a-row>
@@ -49,17 +51,20 @@
               <th class="required">申請日</th>
               <td>
                 <a-form-item v-bind="validateInfos.SINSEI_DATE">
-                  <DateJp v-model:value="searchParams.SINSEI_DATE" :notAllowClear="true"/>
+                  <DateJp
+                    v-model:value="searchParams.SINSEI_DATE"
+                    :notAllowClear="true"
+                  />
                 </a-form-item>
               </td>
             </a-col>
-            <a-col span="14" style="justify-content: end;">
+            <a-col span="14" style="justify-content: end">
               <a-pagination
                 v-model:current="pageParams.PAGE_NUM"
                 v-model:page-size="pageParams.PAGE_SIZE"
                 :total="totalCount"
                 :page-size-options="['10', '25', '50', '100']"
-                :show-total="(total) => `件数： ${total} `"
+                :show-total="(total) => `抽出件数： ${total} 件 `"
                 show-less-items
                 show-size-changer
                 class="m-b-1 text-end"
@@ -78,13 +83,18 @@
             :sort-config="{ trigger: 'cell', orders: ['desc', 'asc'] }"
             :empty-render="{ name: 'NotData' }"
             @cell-click="({ row }) => changeData()"
-            @sort-change="(e) => changeTableSort(e, toRef(pageParams, 'ORDER_BY'))"
+            @sort-change="
+              (e) => changeTableSort(e, toRef(pageParams, 'ORDER_BY'))
+            "
           >
             <vxe-column
               header-align="center"
+              align="right"
               field="MEISAI_NO"
               title="明細番号"
-              width="100"
+              width="90"
+              sortable
+              :params="{ order: 1 }"
             >
               <template #default="{ row }">
                 <a @click="changeData()">{{ row.MEISAI_NO }}</a>
@@ -94,7 +104,9 @@
               header-align="center"
               field="NOJO_NAME"
               title="農場名"
-              width="200"
+              width="150"
+              sortable
+              :params="{ order: 2 }"
             >
               <template #default="{ row }">
                 <a @click="changeData()">{{ row.NOJO_NAME }}</a>
@@ -104,47 +116,58 @@
               header-align="center"
               field="ADDR"
               title="農場住所"
-              min-width="200"
+              sortable
+              :params="{ order: 3 }"
             >
             </vxe-column>
             <vxe-column
               header-align="center"
+              align="center"
               field="TORI_KBN_NAME"
               title="鳥の種類"
-              min-width="120"
+              width="90"
+              sortable
+              :params="{ order: 4 }"
             ></vxe-column>
             <vxe-column
               header-align="center"
               field="KEISAN_KAISU"
               title="計算回数"
-              min-width="120"
+              width="90"
+              sortable
+              :params="{ order: 5 }"
             ></vxe-column>
             <vxe-column
               header-align="center"
               field="SYORI_JOKYO_KBN_NAME"
               title="処理状況"
-              min-width="200"
-              :resizable="false"
+              width="90"
+              sortable
+              :params="{ order: 6 }"
             ></vxe-column>
             <vxe-column
               header-align="center"
               field="KOFU_HASU"
               title="互助金対象羽数"
-              min-width="200"
-              :resizable="false"
+              width="130"
+              sortable
+              :params="{ order: 7 }"
             ></vxe-column>
             <vxe-column
               header-align="center"
               field="GENGAKU_RITU"
               title="減額率(%)"
-              min-width="120"
-              :resizable="false"
+              width="100"
+              sortable
+              :params="{ order: 8 }"
             ></vxe-column>
             <vxe-column
               header-align="center"
               field="KOFU_KIN"
               title="焼却・埋却等互助金額"
-              min-width="200"
+              width="170"
+              sortable
+              :params="{ order: 9 }"
               :resizable="false"
             ></vxe-column>
           </vxe-table>
@@ -160,7 +183,7 @@
                 <th>種鶏(育成鶏)</th>
               </tr>
               <tr>
-                <th style="width: 180px !important;">互助金交付対象羽数</th>
+                <th style="width: 180px !important">互助金交付対象羽数</th>
                 <td>{{ hasuGokei.SAIRANKEI_SEIKEI }}</td>
                 <td>{{ hasuGokei.SAIRANKEI_IKUSEIKEI }}</td>
                 <td>{{ hasuGokei.NIKUYOUKEI }}</td>
@@ -249,41 +272,54 @@
               </tr>
             </table>
 
-            <a-button class="danger-btn m2" :disabled="!isEdit" @click="deleteData">削除</a-button>
+            <a-button
+              class="danger-btn m2"
+              :disabled="!isEdit"
+              @click="deleteData"
+              >削除</a-button
+            >
           </div>
         </div>
         <div v-if="tab === 2" class="edit_table form w-full">
           <a-row>
             <a-col span="24">
-              <read-only-pop thWidth="110" th="農場" :td="formData.NOJO_CD"/>
+              <read-only-pop thWidth="110" th="農場" :td="formData.NOJO_CD" />
             </a-col>
           </a-row>
           <a-row>
             <a-col span="24">
-              <read-only-pop thWidth="110" th="住所" td="" :hideTd="true"/>
-              <read-only-pop th="　〒　" :td="formData.ADDR_POST"/>
-              <read-only-pop thWidth="100" th="住所1" :td="formData.ADDR_1"/>
-              <read-only-pop thWidth="100" th="住所2" :td="formData.ADDR_2"/>
+              <read-only-pop thWidth="110" th="住所" td="" :hideTd="true" />
+              <read-only-pop th="　〒　" :td="formData.ADDR_POST" />
+              <read-only-pop thWidth="100" th="住所1" :td="formData.ADDR_1" />
+              <read-only-pop thWidth="100" th="住所2" :td="formData.ADDR_2" />
             </a-col>
           </a-row>
           <a-row>
             <a-col span="24">
-              <read-only-pop thWidth="110" th="" :hideTd="true"/>
-              <read-only-pop thWidth="100" th="住所3" :td="formData.ADDR_3"/>
-              <read-only-pop thWidth="100" th="住所4" :td="formData.ADDR_4"/>
+              <read-only-pop thWidth="110" th="" :hideTd="true" />
+              <read-only-pop thWidth="100" th="住所3" :td="formData.ADDR_3" />
+              <read-only-pop thWidth="100" th="住所4" :td="formData.ADDR_4" />
             </a-col>
           </a-row>
           <a-row>
             <a-col span="24">
-              <read-only-pop thWidth="110" th="鶏の種類" :td="formData.TORI_KBN"/>
+              <read-only-pop
+                thWidth="110"
+                th="鶏の種類"
+                :td="formData.TORI_KBN"
+              />
             </a-col>
           </a-row>
           <a-row>
             <a-col span="6">
-              <read-only-pop thWidth="150" th="契約羽数" :td="formData.KOFU_HASU"/>
+              <read-only-pop
+                thWidth="110"
+                th="契約羽数"
+                :td="formData.KOFU_HASU"
+              />
             </a-col>
             <a-col span="18">
-              <th style="width: 180px">互助金交付対象羽数</th>
+              <th style="width: 180px; text-align: end">互助金交付対象羽数</th>
               <td style="align-items: center">
                 <a-input-number
                   class="input"
@@ -296,41 +332,49 @@
           </a-row>
           <a-row>
             <a-col span="6">
-              <read-only-pop thWidth="150" th="①互助金算定額" :hideTd="true"/>
+              <read-only-pop thWidth="150" th="①互助金算定額" :hideTd="true" />
             </a-col>
-            <a-col span="7">
-              <read-only-pop thWidth="180" th="互助金交付対象羽数" :td="formData.KOFU_HASU"/>
+            <a-col span="7" class="thleft">
+              <read-only-pop
+                thWidth="180"
+                th="互助金交付対象羽数"
+                :td="formData.KOFU_HASU"
+              />
             </a-col>
             <a-col span="0.5">
               <span class="symbol">×</span>
             </a-col>
             <a-col span="5">
-              <read-only-pop thWidth="150" th="焼却・埋却等単価" :td="formData.KOFU_HASU"/>
+              <read-only-pop
+                thWidth="150"
+                th="焼却・埋却等単価"
+                :td="formData.KOFU_HASU"
+              />
             </a-col>
             <a-col span="5">
-              <read-only-pop th="＝" :td="formData.KOFU_HASU" after="①"/>
+              <read-only-pop th="＝" :td="formData.KOFU_HASU" after="①" />
             </a-col>
           </a-row>
           <a-row>
             <a-col span="6">
-              <read-only-pop th="②焼却等経費" :hideTd="true"/>
+              <read-only-pop th="②焼却等経費" :hideTd="true" />
             </a-col>
             <a-col span="7">
-              <th style="width: 180px">焼却等経費</th>
+              <th style="width: 180px; text-align: end">焼却等経費</th>
               <td style="align-items: center">
                 <a-input-number
                   class="input"
                   v-model:value="formData.SAIRANKEI_IKUSEIKEI"
                   :min="1"
                 />
-                × 0.9
+                × ０．９
               </td>
             </a-col>
             <a-col span="0.5">
               <span class="symbol">—</span>
             </a-col>
             <a-col span="5">
-<!--              <read-only-pop thWidth="150" th="国交付金(家伝法21条)" :td="formData.KOFU_HASU"/>-->
+              <!--              <read-only-pop thWidth="150" th="国交付金(家伝法21条)" :td="formData.KOFU_HASU"/>-->
               <th style="width: 150px">国交付金(家伝法21条)</th>
               <td style="align-items: center">
                 <a-input-number
@@ -341,21 +385,25 @@
               </td>
             </a-col>
             <a-col span="5">
-              <read-only-pop th="＝" :td="formData.KOFU_HASU" after="②"/>
+              <read-only-pop th="＝" :td="formData.KOFU_HASU" after="②" />
             </a-col>
           </a-row>
           <a-row>
             <a-col span="6">
-              <read-only-pop th="③焼却・埋却互助金算定額" :hideTd="true"/>
+              <read-only-pop th="③焼却・埋却互助金算定額" :hideTd="true" />
             </a-col>
             <a-col span="7" class="thleft">
-              <read-only-pop thWidth="180" th="※1(①と②の少ない方)" :td="formData.KOFU_HASU"/>
+              <read-only-pop
+                thWidth="180"
+                th="※1(①と②の少ない方)"
+                :td="formData.KOFU_HASU"
+              />
             </a-col>
             <a-col span="0.5">
               <span class="symbol">×</span>
             </a-col>
             <a-col span="5">
-<!--              <read-only-pop thWidth="150" th="家伝法違反減額率" :td="formData.KOFU_HASU" after="%"/>-->
+              <!--              <read-only-pop thWidth="150" th="家伝法違反減額率" :td="formData.KOFU_HASU" after="%"/>-->
               <th style="width: 150px">家伝法違反減額率</th>
               <td style="align-items: center">
                 <a-input-number
@@ -366,7 +414,11 @@
               </td>
             </a-col>
             <a-col span="5">
-              <read-only-pop th="＝" :td="formData.KOFU_HASU" after="(円未満切上)※2"/>
+              <read-only-pop
+                th="＝"
+                :td="formData.KOFU_HASU"
+                after="(円未満切上)※2"
+              />
             </a-col>
           </a-row>
           <a-row>
@@ -375,39 +427,47 @@
               <span class="symbol"></span>
             </a-col>
             <a-col span="5">
-              <read-only-pop th="焼却・埋却互助金 算定(※1-※2)" :hideTd="true"/>
+              <read-only-pop th="焼却・埋却互助金 算定(※1-※2)" :hideTd="true" />
             </a-col>
             <a-col span="5">
-              <read-only-pop th="＝" :td="formData.KOFU_HASU" after="③"/>
+              <read-only-pop th="＝" :td="formData.KOFU_HASU" after="③" />
             </a-col>
           </a-row>
           <a-row>
             <a-col span="6">
-              <read-only-pop th="④焼却・埋却互助金(積立金分)" :hideTd="true"/>
+              <read-only-pop th="④焼却・埋却互助金(積立金分)" :hideTd="true" />
             </a-col>
             <a-col span="7">
-              <read-only-pop thWidth="180" th="③焼却・埋却互助金算定額" :td="formData.KOFU_HASU"/>
+              <read-only-pop
+                thWidth="180"
+                th="③焼却・埋却互助金算定額"
+                :td="formData.KOFU_HASU"
+              />
             </a-col>
             <a-col span="0.5">
               <span class="symbol">×</span>
             </a-col>
             <a-col span="5">
-              <read-only-pop thWidth="150" th="1/2" :hideTd="true"/>
+              <read-only-pop thWidth="150" th="１/２" :hideTd="true" />
             </a-col>
             <a-col span="5">
-              <read-only-pop th="＝" :td="formData.KOFU_HASU" after="(円未満切上)※3"/>
+              <read-only-pop
+                th="＝"
+                :td="formData.KOFU_HASU"
+                after="(円未満切上)※3"
+              />
             </a-col>
           </a-row>
           <a-row>
-            <a-col span="6"/>
+            <a-col span="6" />
             <a-col span="7" class="thleft">
-              <read-only-pop thWidth="180" th="※3" :td="formData.KOFU_HASU"/>
+              <read-only-pop thWidth="180" th="※3" :td="formData.KOFU_HASU" />
             </a-col>
             <a-col span="0.5">
               <span class="symbol">×</span>
             </a-col>
             <a-col span="5">
-<!--              <read-only-pop thWidth="100" th="互助金交付率" :td="formData.KOFU_HASU" after="%"/>-->
+              <!--              <read-only-pop thWidth="100" th="互助金交付率" :td="formData.KOFU_HASU" after="%"/>-->
               <th style="width: 100px">互助金交付率</th>
               <td style="align-items: center">
                 <a-input-number
@@ -418,32 +478,51 @@
               </td>
             </a-col>
             <a-col span="5">
-              <read-only-pop th="＝" :td="formData.KOFU_HASU" after="(円未満切上)④"/>
+              <read-only-pop
+                th="＝"
+                :td="formData.KOFU_HASU"
+                after="(円未満切上)④"
+              />
             </a-col>
           </a-row>
           <a-row>
             <a-col span="6">
-              <read-only-pop th="⑤焼却・埋却互助金(国庫交付金分)" :hideTd="true"/>
+              <read-only-pop
+                th="⑤焼却・埋却互助金(国庫交付金分)"
+                :hideTd="true"
+              />
             </a-col>
             <a-col span="7">
-              <read-only-pop thWidth="180" th="③焼却・埋却互助金算定額" :td="formData.KOFU_HASU"/>
+              <read-only-pop
+                thWidth="180"
+                th="③焼却・埋却互助金算定額"
+                :td="formData.KOFU_HASU"
+              />
             </a-col>
             <a-col span="0.5">
               <span class="symbol">—</span>
             </a-col>
             <a-col span="7">
-              <read-only-pop thWidth="220" th="※3焼却・埋却互助金(積立金分)" :td="formData.KOFU_HASU"/>
+              <read-only-pop
+                thWidth="220"
+                th="※3焼却・埋却互助金(積立金分)"
+                :td="formData.KOFU_HASU"
+              />
             </a-col>
             <a-col span="3">
-              <read-only-pop th="＝" :td="formData.KOFU_HASU" after="⑤"/>
+              <read-only-pop th="＝" :td="formData.KOFU_HASU" after="⑤" />
             </a-col>
           </a-row>
           <a-row>
             <a-col span="6">
-              <read-only-pop th="⑥焼却・埋却互助金" :hideTd="true"/>
+              <read-only-pop th="⑥焼却・埋却互助金" :hideTd="true" />
             </a-col>
             <a-col span="4">
-              <read-only-pop :hideTh="true" :td="formData.KOFU_HASU" after="(④﹢⑤)"/>
+              <read-only-pop
+                :hideTh="true"
+                :td="formData.KOFU_HASU"
+                after="(④﹢⑤)"
+              />
             </a-col>
           </a-row>
           <a-row>
@@ -462,11 +541,14 @@
             <a-col span="6">
               <th>確定年月日</th>
               <td>
-                <DateJp v-model:value="formData.TANKA_MST_DATE" :disabled="formData.SYORI_JOKYO_KBN !== 3"/>
+                <DateJp
+                  v-model:value="formData.TANKA_MST_DATE"
+                  :disabled="formData.SYORI_JOKYO_KBN !== 3"
+                />
               </td>
             </a-col>
           </a-row>
-<!--          <table class="last-table">
+          <!--          <table class="last-table">
             <tr>
               <th style="width: 150px">互助金算定額</th>
               <th style="width: 210px">互助金交付対象羽数</th>
@@ -582,30 +664,34 @@
         </div>
       </div>
     </div>
-      <template #footer>
-        <div class="pt-2 flex justify-between border-t-1">
-          <a-space :size="20">
-            <a-button :disabled="!isEdit" class="warning-btn" @click="saveData">保存</a-button>
-            <a-button type="primary" :disabled="!isEdit" @click="closeModal">キャンセル</a-button>
-          </a-space>
-          <a-button type="primary" @click="closeModal">閉じる</a-button>
-        </div>
-      </template>
+    <template #footer>
+      <div class="pt-2 flex justify-between border-t-1">
+        <a-space :size="20">
+          <a-button :disabled="!isEdit" class="warning-btn" @click="saveData"
+            >保存</a-button
+          >
+          <a-button type="primary" :disabled="!isEdit" @click="closeModal"
+            >キャンセル</a-button
+          >
+        </a-space>
+        <a-button type="primary" @click="closeModal">閉じる</a-button>
+      </div>
+    </template>
   </a-modal>
-  <Detail2 v-model:visible="GJ4012Visible" :editkbn="GJ4012kbn"/>
+  <Detail2 v-model:visible="GJ4012Visible" :editkbn="GJ4012kbn" />
 </template>
 <script setup lang="ts">
-import {Judgement} from '@/utils/judge-edited'
-import {Form} from 'ant-design-vue'
-import {computed, nextTick, reactive, watch, ref, toRef} from 'vue'
-import {EnumEditKbn, PageStatus} from '@/enum'
-import {GJ4011DetailVM, SearchRequest, SearchRowVM} from '../../type'
-import {useRoute, useRouter} from 'vue-router'
-import {changeTableSort, mathNumber} from '@/utils/util'
+import { Judgement } from '@/utils/judge-edited'
+import { Form } from 'ant-design-vue'
+import { computed, nextTick, reactive, watch, ref, toRef } from 'vue'
+import { EnumEditKbn, PageStatus } from '@/enum'
+import { GJ4011DetailVM, SearchRequest, SearchRowVM } from '../../type'
+import { useRoute, useRouter } from 'vue-router'
+import { changeTableSort, mathNumber } from '@/utils/util'
 import DateJp from '@/components/Selector/DateJp/index.vue'
-import Detail2 from "@/views/GJ40/GJ4010/modules/Detail/Detail2.vue";
-import useSearch from "@/hooks/useSearch";
-import {VxeTableInstance} from "vxe-table";
+import Detail2 from '@/views/GJ40/GJ4010/modules/Detail/Detail2.vue'
+import useSearch from '@/hooks/useSearch'
+import { VxeTableInstance } from 'vxe-table'
 
 //--------------------------------------------------------------------------
 //データ定義
@@ -673,11 +759,11 @@ const isEdit = ref(false)
 const editJudge = new Judgement()
 const devicePixelRatio = ref(window.devicePixelRatio)
 const rules = {}
-const {validate, clearValidate, validateInfos, resetFields} = Form.useForm(
+const { validate, clearValidate, validateInfos, resetFields } = Form.useForm(
   formData,
   rules
 )
-const {pageParams, totalCount, searchData, clear} = useSearch({
+const { pageParams, totalCount, searchData, clear } = useSearch({
   service: undefined,
   source: tableData,
   params: toRef(() => formData),
@@ -724,9 +810,9 @@ window.addEventListener('resize', function () {
 //検索処理
 function search() {
   tableData.value.push(tableDefault)
-  if (xTableRef.value && tableData.value.length > 0) {
-    xTableRef.value.setCurrentRow(tableData.value[0])
-  }
+  // if (xTableRef.value && tableData.value.length > 0) {
+  //   xTableRef.value.setCurrentRow(tableData.value[0])
+  // }
 }
 
 //画面遷移
@@ -737,6 +823,7 @@ const goList = () => {
 const changeData = () => {
   const a = xTableRef.value?.getCurrentRecord()
   isEdit.value = true
+  tab.value = 2
 }
 
 const closeModal = () => {
@@ -752,12 +839,10 @@ function openGJ4012(row?: any) {
 }
 
 // 登録
-const saveData = () => {
-}
+const saveData = () => {}
 
 // 削除
-const deleteData = () => {
-}
+const deleteData = () => {}
 </script>
 <style lang="scss" scoped>
 th {
