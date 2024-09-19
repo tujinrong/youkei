@@ -217,10 +217,9 @@ h2 {
   position: relative;
 }
 //popup
-:where(.css-dev-only-do-not-override-8krvbs).ant-modal .ant-modal-content {
-  background-color: aliceblue
+:where(.css-dev-only-do-not-override-8krvbs) .ant-modal:not(.ant-modal-confirm) .ant-modal-content {
+  background-color: aliceblue;
 }
-
 :where(.css-dev-only-do-not-override-8krvbs).ant-modal .ant-modal-title {
   margin: 0;
   color: rgba(0, 0, 0, 0.88);
