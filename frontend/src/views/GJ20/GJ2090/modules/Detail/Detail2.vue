@@ -218,45 +218,48 @@
           </a-col>
         </a-row>
         <a-space :size="20" class="mb-2 mt3">
-          <a-button>新規入金</a-button>
-          <a-button>変更(表示)</a-button>
-          <a-button>削除</a-button>
+          <a-button type="primary">新規入金</a-button>
+          <a-button class="danger-btn">削除</a-button>
         </a-space>
         <a-row>
-          <a-col span="24">
+          <a-col span="8">
             <th class="required" style="width: 110px">入金・振込日</th>
             <td style="border-bottom: none">
               <a-form-item v-bind="validateInfos.NYUKIN_DATE">
                 <DateJp v-model:value="formData.NYUKIN_DATE" />
               </a-form-item>
             </td>
+          </a-col>
+          <a-col span="15" offset="1">
             <read-only-pop
               thWidth="100"
               th="積立金額"
               :td="formData.BANK_NAME"
-              after="(返還金額(預かり金) + 入金額)"
+              after="円(返還金額(預かり金) + 入金額)"
             />
           </a-col>
         </a-row>
         <a-row>
-          <a-col span="24">
-            <th style="width: 110px; border-top: none"></th>
-            <td style="border-bottom: none; border-top: none"></td>
+          <a-col span="10" offset="9">
+<!--            <th style="width: 110px; border-top: none"></th>-->
+<!--            <td style="border-bottom: none; border-top: none"></td>-->
             <read-only-pop
               thWidth="100"
               th="手数料額"
               :td="formData.FURI_KOZA_NO"
+              after="円"
             />
           </a-col>
         </a-row>
         <a-row>
-          <a-col span="24">
-            <th style="width: 110px; border-top: none"></th>
-            <td style="border-top: none"></td>
+          <a-col span="10" offset="9">
+<!--            <th style="width: 110px; border-top: none"></th>-->
+<!--            <td style="border-top: none"></td>-->
             <read-only-pop
               thWidth="100"
               th="入金額"
               :td="formData.FURI_KOZA_MEIGI_KANA"
+              after="円"
             />
           </a-col>
         </a-row>
@@ -279,7 +282,7 @@
             @click="saveData"
             >保存</a-button
           >
-          <a-button :disabled="!formData.NYUKIN_DATE" @click="closeModal"
+          <a-button type="primary" :disabled="!formData.NYUKIN_DATE" @click="closeModal"
             >キャンセル</a-button
           >
         </a-space>
@@ -353,7 +356,7 @@ const { validate, clearValidate, validateInfos, resetFields } = Form.useForm(
 )
 const formDefault = {
   TUMITATE_KBN: 1,
-  KEIYAKUSYA_CD: 987654,
+  KEIYAKUSYA_CD: 987,
   KEN_CD: 12,
   KEN_CD_NAME: '東京都',
   SYORI_JOKYO_KBN: 3,
@@ -366,13 +369,13 @@ const formDefault = {
   ADDR_TEL2: '03-9876-5432',
   ADDR_FAX: '03-1111-2222',
   FURI_BANK_CD: '0001',
-  BANK_NAME: 'みずほ銀行',
+  BANK_NAME: '',
   FURI_BANK_SITEN_CD: '001',
   SITEN_NAME: '本店',
   FURI_KOZA_SYUBETU: 2,
   FURI_KOZA_SYUBETU_NAME: '普通',
   FURI_KOZA_NO: '',
-  FURI_KOZA_MEIGI_KANA: 'ジョウトモト',
+  FURI_KOZA_MEIGI_KANA: '',
   JIMUITAKU_CD: 1001,
   ITAKU_NAME: '事務委託株式会社',
   KI: 8,

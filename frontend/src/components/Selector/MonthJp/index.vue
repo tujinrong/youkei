@@ -7,12 +7,7 @@
  * 変更履歴　:
  * ----------------------------------------------------------------->
 <template>
-  <a-date-picker
-    v-model:value="monthV"
-    :format="Formatter"
-    picker="month"
-    @change="changeM"
-  />
+  <a-date-picker v-model:value="monthV" :format="Formatter" picker="month" />
 </template>
 <script lang="ts" setup>
 import dayjs from 'dayjs'
@@ -25,12 +20,19 @@ import { computed, onMounted, ref, watch } from 'vue'
 const props = defineProps<{
   value: any
 }>()
-const monthV = ref('')
 const emit = defineEmits(['update:value'])
 
 //--------------------------------------------------------------------------
 //計算定義
 //--------------------------------------------------------------------------
+const monthV = computed({
+  get() {
+    return props.value ? dayjs(props.value) : props.value
+  },
+  set(v) {
+    emit('update:value', v ? dayjs(v).format('YYYY-MM') : v)
+  },
+})
 //---------------------------------------------------------------------------
 //フック関数
 //--------------------------------------------------------------------------
@@ -43,9 +45,7 @@ onMounted(() => {})
 //--------------------------------------------------------------------------
 //メソッド
 //--------------------------------------------------------------------------
-const changeM = () => {
-  emit('update:value', dayjs(monthV.value).format('YYYY-MM'))
-}
+
 /**和暦取得(年月) */
 const Formatter = (value: Date): string => {
   const year = dayjs(value).year()

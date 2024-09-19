@@ -12,6 +12,7 @@
     v-model:value="curVal"
     :format="formatter"
     :disabled-date="disabledDate"
+    :allowClear="!notAllowClear"
     style="width: 100%"
     @change="inputText = ''"
   />
@@ -32,6 +33,7 @@ const props = defineProps<{
   unknown?: boolean
   hanif?: string
   hanit?: string
+  notAllowClear?: boolean
 }>()
 
 //--------------------------------------------------------------------------

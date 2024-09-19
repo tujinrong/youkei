@@ -110,8 +110,6 @@
   color: #fff;
   background-color: #e6a23c;
   border-color: #e6a23c;
-  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.12);
-  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.045);
 }
 .ant-btn-warn:focus,
 .ant-btn-warn:hover {
@@ -129,8 +127,6 @@
   color: #fff;
   background-color: #e6a23c;
   border-color: #e6a23c;
-  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.12);
-  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.045);
 }
 .warning-btn:focus,
 .warning-btn:hover {
@@ -150,8 +146,6 @@
   color: #fff;
   background-color: #f5222d;
   border-color: #f5222d;
-  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.12);
-  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.045);
 }
 .ant-btn-danger:focus,
 .ant-btn-danger:hover {
@@ -169,8 +163,6 @@
   color: #fff;
   background-color: #f5222d;
   border-color: #f5222d;
-  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.12);
-  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.045);
 }
 .danger-btn:focus,
 .danger-btn:hover {
@@ -182,6 +174,10 @@
   background: #f5f5f5 !important;
   border-color: #dadada !important;
   color: #000000 !important;
+}
+
+.ant-btn-primary:disabled {
+  background: #f5f5f5 !important;
 }
 
 
@@ -221,10 +217,9 @@ h2 {
   position: relative;
 }
 //popup
-:where(.css-dev-only-do-not-override-8krvbs).ant-modal .ant-modal-content {
-  background-color: aliceblue
+:where(.css-dev-only-do-not-override-8krvbs) .ant-modal:not(.ant-modal-confirm) .ant-modal-content {
+  background-color: aliceblue;
 }
-
 :where(.css-dev-only-do-not-override-8krvbs).ant-modal .ant-modal-title {
   margin: 0;
   color: rgba(0, 0, 0, 0.88);
