@@ -175,6 +175,11 @@
       </vxe-table>
     </a-card>
   </div>
+  <EditPage
+    v-model:visible="editVisible"
+    :editkbn="editkbn"
+    @getTableList="searchAll"
+  />
 </template>
 
 <script lang="ts" setup>
@@ -190,7 +195,7 @@ import { SearchRowVM, SearchRequest } from '@/views/GJ80/GJ8060/type'
 import { Init, Search } from '../service'
 import { Form } from 'ant-design-vue'
 import { VxeTableInstance } from 'vxe-table'
-
+import EditPage from './EditPage.vue'
 //--------------------------------------------------------------------------
 //データ定義
 //--------------------------------------------------------------------------
@@ -233,7 +238,8 @@ const layout = {
 }
 const cardRef = ref()
 const { height } = useElementSize(cardRef)
-
+const editVisible = ref(false)
+const editkbn = ref<EnumEditKbn>(EnumEditKbn.Add)
 const rules = reactive({
   KI: [
     { required: true, message: ITEM_REQUIRE_ERROR.Msg.replace('{0}', '期') },
@@ -286,23 +292,12 @@ onBeforeRouteUpdate((to, from) => {
 
 async function forwardNew() {
   await validate()
-  router.push({
-    name: route.name,
-    query: {
-      status: PageStatus.New,
-      KI: searchParams.KI,
-    },
-  })
+  editkbn.value = EnumEditKbn.Add
+  editVisible.value = true
 }
 async function forwardEdit(NOJO_CD) {
-  await validate()
-  router.push({
-    name: route.name,
-    query: {
-      status: PageStatus.Edit,
-      ITAKU_CD: NOJO_CD,
-    },
-  })
+  editkbn.value = EnumEditKbn.Edit
+  editVisible.value = true
 }
 
 //検索処理

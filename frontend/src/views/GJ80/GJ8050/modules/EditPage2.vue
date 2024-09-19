@@ -9,7 +9,7 @@
     destroy-on-close
     @cancel="goList"
   >
-    <div class="self_adaption_table form max-w-160">
+    <div class="edit_table form max-w-160">
       <a-form>
         <a-row>
           <a-col span="24">
