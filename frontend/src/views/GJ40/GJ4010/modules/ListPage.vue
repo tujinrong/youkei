@@ -96,45 +96,57 @@
           <a-col v-bind="layout">
             <th>契約者名</th>
             <td>
-              <a-input
-                v-model:value="formData.KEIYAKUSYA_NAME"
-                class="w-full"
-                :maxlength="50"
-                placeholder="(部分一致)"
-              ></a-input>
+              <div class="flex items-center w-full">
+                <a-input
+                  v-model:value="formData.KEIYAKUSYA_NAME"
+                  class="w-full"
+                  :maxlength="50"
+                  style="width: 80%"
+                />
+                <span>(部分一致)</span>
+              </div>
             </td>
           </a-col>
           <a-col v-bind="layout">
             <th>契約者名(フリガナ)</th>
             <td>
-              <a-input
-                v-model:value="formData.KEIYAKUSYA_KANA"
-                class="w-full"
-                :maxlength="50"
-                placeholder="(部分一致)"
-              ></a-input>
+              <div class="flex items-center w-full">
+                <a-input
+                  v-model:value="formData.KEIYAKUSYA_KANA"
+                  class="w-full"
+                  :maxlength="50"
+                  style="width: 80%"
+                />
+                <span>(部分一致)</span>
+              </div>
             </td>
           </a-col>
           <a-col v-bind="layout">
             <th>住所</th>
             <td>
-              <a-input
-                v-model:value="formData.ADDR"
-                class="w-full"
-                :maxlength="50"
-                placeholder="(部分一致)"
-              ></a-input>
+              <div class="flex items-center w-full">
+                <a-input
+                  v-model:value="formData.ADDR"
+                  class="w-full"
+                  :maxlength="50"
+                  style="width: 80%"
+                />
+                <span>(部分一致)</span>
+              </div>
             </td>
           </a-col>
           <a-col v-bind="layout">
             <th>電話番号</th>
             <td>
-              <a-input
-                v-model:value="formData.ADDR_TEL"
-                class="w-full"
-                :maxlength="50"
-                placeholder="(全一致)"
-              ></a-input>
+              <div class="flex items-center w-full">
+                <a-input
+                  v-model:value="formData.ADDR_TEL"
+                  class="w-full"
+                  :maxlength="50"
+                  style="width: 80%"
+                />
+                <span>(全一致)</span>
+              </div>
             </td>
           </a-col>
           <a-col v-bind="layout">
@@ -354,9 +366,9 @@ const { pageParams, totalCount, searchData, clear } = useSearch({
 
 const layout = {
   md: 24,
-  lg: 12,
-  xl: 12,
-  xxl: 12,
+  lg: 24,
+  xl: 24,
+  xxl: 24,
 }
 
 const GJ4011Visible = ref(false)

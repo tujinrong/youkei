@@ -20,9 +20,7 @@
               <a-form-item v-bind="validateInfos.SYORI_KBN">
                 <a-radio-group v-model:value="formData.SYORI_KBN" class="mt-1">
                   <a-radio :value="1">計算処理</a-radio>
-                  <a-radio :value="2"
-                  >計算取消処理(取消対象に補填金支払済が存在する場合は、取消不可)</a-radio
-                  >
+                  <a-radio :value="2">計算取消処理(取消対象に補填金支払済が存在する場合は、取消不可)</a-radio>
                 </a-radio-group>
               </a-form-item>
             </td>
@@ -31,14 +29,16 @@
             <th class="required">対象期</th>
             <td>
               <a-form-item v-bind="validateInfos.KI">
-                <a-input-number
-                  v-model:value="formData.KI"
-                  :min="1"
-                  :max="99"
-                  :maxlength="2"
-                  style="width: 100%"
-                  placeholder="(表示&入力)"
-                />
+                <div class="flex items-center">
+                  <a-input-number
+                    v-model:value="formData.KI"
+                    :min="1"
+                    :max="99"
+                    :maxlength="2"
+                    style="width: 50%"
+                  />
+                  <span>(表示&入力)</span>
+                </div>
               </a-form-item>
             </td>
           </a-col>
@@ -47,7 +47,8 @@
             <td>
               <a-form-item v-bind="validateInfos.HASSEI_KAISU">
                 <div class="flex items-center">
-                  <a-input v-model:value="formData.HASSEI_KAISU" placeholder="(表示&入力)" />
+                  <a-input v-model:value="formData.HASSEI_KAISU" style="width: 50%" />
+                  <span>(表示&入力)</span>
                 </div>
               </a-form-item>
             </td>
