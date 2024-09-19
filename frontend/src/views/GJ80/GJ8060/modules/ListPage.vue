@@ -15,7 +15,7 @@
                   :min="0"
                   :max="99"
                   :maxlength="2"
-                  class="w-full"
+                  class="w-20"
                   @change="getInitData(searchParams.KI, false)"
                 ></a-input-number>
               </a-form-item>
@@ -24,12 +24,14 @@
           <a-col v-bind="layout">
             <th>都道府県</th>
             <td>
-              <a-form-item v-bind="validateInfos.KEN_CD">
-                <range-select
-                  v-model:value="searchParams.KEN_CD"
-                  :options="KEN_CD_NAME_LIST"
-                ></range-select>
-              </a-form-item>
+              <div class="w-150">
+                <a-form-item v-bind="validateInfos.KEN_CD">
+                  <range-select
+                    v-model:value="searchParams.KEN_CD"
+                    :options="KEN_CD_NAME_LIST"
+                  ></range-select>
+                </a-form-item>
+              </div>
             </td>
           </a-col>
           <a-col v-bind="layout">
@@ -39,6 +41,7 @@
                 <a-input
                   v-model:value="searchParams.ITAKU_NAME"
                   :maxlength="20"
+                  placeholder="(部分一致)"
                 ></a-input>
               </a-form-item>
             </td>
@@ -52,7 +55,7 @@
                   :min="0"
                   :max="999"
                   :maxlength="3"
-                  class="w-full"
+                  class="w-20"
                 ></a-input-number>
               </a-form-item>
             </td>
@@ -64,9 +67,9 @@
                 <a-input-number
                   v-model:value="searchParams.MATOMESAKI"
                   :min="0"
-                  :max="999"
-                  :maxlength="3"
-                  class="w-full"
+                  :max="9"
+                  :maxlength="1"
+                  class="w-20"
                 ></a-input-number>
               </a-form-item>
             </td>
@@ -232,9 +235,9 @@ const KEN_CD_NAME_LIST = ref<CmCodeNameModel[]>([])
 const headRef = ref(null)
 const layout = {
   md: 24,
-  lg: 12,
-  xl: 8,
-  xxl: 6,
+  lg: 24,
+  xl: 24,
+  xxl: 24,
 }
 const cardRef = ref()
 const { height } = useElementSize(cardRef)
