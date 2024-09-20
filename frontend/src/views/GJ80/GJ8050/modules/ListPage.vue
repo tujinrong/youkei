@@ -11,7 +11,7 @@
                 <a-input
                   v-model:value="searchParams.BANK_CD"
                   :maxlength="4"
-                  class="max-w-35"
+                  class="max-w-15"
                 ></a-input>
               </a-form-item>
             </td>
@@ -20,7 +20,11 @@
             <th>金融機関名（ｶﾅ）</th>
             <td>
               <a-form-item>
-                <a-input v-model:value="searchParams.BANK_KANA"></a-input>
+                <a-input
+                  v-model:value="searchParams.BANK_KANA"
+                  :maxlength="60"
+                  class="max-w-150"
+                ></a-input>
               </a-form-item>
             </td>
           </a-col>
@@ -30,7 +34,8 @@
               <a-form-item>
                 <a-input
                   v-model:value="searchParams.BANK_NAME"
-                  class="max-w-180"
+                  :maxlength="30"
+                  class="max-w-75"
                 ></a-input>
               </a-form-item>
             </td>
@@ -50,10 +55,12 @@
         <a-space :size="20">
           <a-button type="primary" @click="searchAll()">検索</a-button>
           <a-button type="primary" @click="reset">条件クリア</a-button>
-          <a-button class="ml-20" type="primary" @click="forwardNew1"
+          <a-button class="ml-50%" type="primary" @click="forwardNew1"
             >新規登録</a-button
           >
-          <a-button type="primary" @click="preview1">プレビュー</a-button>
+          <a-button class="ml-70%" type="primary" @click="preview1"
+            >プレビュー</a-button
+          >
         </a-space>
         <close-page />
       </div>
@@ -124,7 +131,7 @@
                 <a-input
                   v-model:value="searchParams2.SITEN_CD"
                   :maxlength="3"
-                  class="max-w-35"
+                  class="max-w-15"
                 ></a-input>
               </a-form-item>
             </td>
@@ -137,6 +144,7 @@
                 <a-input
                   v-model:value="searchParams2.SITEN_KANA"
                   :maxlength="20"
+                  class="max-w-150"
                 ></a-input>
               </a-form-item>
             </td>
@@ -148,7 +156,7 @@
                 <a-input
                   v-model:value="searchParams2.SITEN_NAME"
                   :maxlength="20"
-                  class="max-w-180"
+                  class="max-w-75"
                 ></a-input>
               </a-form-item>
             </td>
@@ -168,10 +176,12 @@
         <a-space :size="20">
           <a-button type="primary" @click="searchAll2()">検索</a-button>
           <a-button type="primary" @click="reset2">条件クリア</a-button>
-          <a-button class="ml-20" type="primary" @click="forwardNew2"
+          <a-button class="ml-50%" type="primary" @click="forwardNew2"
             >新規登録</a-button
           >
-          <a-button type="primary" @click="preview2">プレビュー</a-button>
+          <a-button class="ml-70%" type="primary" @click="preview2"
+            >プレビュー</a-button
+          >
         </a-space>
       </div>
       <div v-if="!isSelectBank" class="search-disabled-mask bg-disabled"></div

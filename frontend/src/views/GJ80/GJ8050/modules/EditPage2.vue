@@ -9,14 +9,18 @@
     destroy-on-close
     @cancel="goList"
   >
-    <div class="edit_table form max-w-160">
+    <div class="edit_table form">
       <a-form>
         <a-row>
           <a-col span="24">
             <th class="required">金融機関コード</th>
             <td>
               <a-form-item v-bind="validateInfos.BANK_CD">
-                <a-input v-model:value="formData.BANK_CD" disabled></a-input>
+                <a-input
+                  v-model:value="formData.BANK_CD"
+                  class="max-w-15"
+                  disabled
+                ></a-input>
               </a-form-item>
             </td>
           </a-col>
@@ -28,6 +32,7 @@
                   v-model:value="formData.SITEN_CD"
                   :maxlength="3"
                   :disabled="!isNew"
+                  class="max-w-15"
                 ></a-input>
               </a-form-item>
             </td>
@@ -36,7 +41,10 @@
             <th class="required">支店名（ｶﾅ）</th>
             <td>
               <a-form-item v-bind="validateInfos.SITEN_KANA">
-                <a-input v-model:value="formData.SITEN_KANA"></a-input>
+                <a-input
+                  v-model:value="formData.SITEN_KANA"
+                  class="max-w-150"
+                ></a-input>
               </a-form-item>
             </td>
           </a-col>
@@ -44,7 +52,10 @@
             <th class="required">支店名（漢字）</th>
             <td>
               <a-form-item v-bind="validateInfos.SITEN_NAME">
-                <a-input v-model:value="formData.SITEN_NAME"></a-input>
+                <a-input
+                  v-model:value="formData.SITEN_NAME"
+                  class="max-w-75"
+                ></a-input>
               </a-form-item>
             </td>
           </a-col>

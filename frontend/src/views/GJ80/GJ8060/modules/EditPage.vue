@@ -14,7 +14,7 @@
       <a-form>
         <h2>事務委託先基本登録項目</h2>
         <a-row>
-          <a-col span="13">
+          <a-col span="24">
             <th class="required">事務委託先</th>
             <td>
               <a-form-item v-bind="validateInfos.ITAKU_CD">
@@ -24,64 +24,69 @@
                   :max="999"
                   :maxlength="3"
                   :disabled="!isNew"
+                  class="w-15"
                 ></a-input-number>
               </a-form-item>
             </td> </a-col></a-row
         ><a-row>
-          <a-col span="13">
+          <a-col span="24">
             <th class="required">都道府県</th>
             <td>
               <a-form-item v-bind="validateInfos.KEN_CD">
                 <ai-select
                   v-model:value="formData.KEN_CD"
                   :options="KEN_CD_NAME_LIST"
-                  class="w-full"
+                  class="max-w-35"
                   type="number"
                 ></ai-select>
               </a-form-item>
             </td> </a-col
         ></a-row>
         <a-row
-          ><a-col span="13">
+          ><a-col span="24">
             <th class="required">事務委託先名称 正式</th>
             <td>
               <a-form-item v-bind="validateInfos.ITAKU_NAME">
                 <a-input
                   v-model:value="formData.ITAKU_NAME"
-                  :maxlength="50"
+                  :maxlength="25"
+                  class="max-w-110"
                 ></a-input>
               </a-form-item>
             </td> </a-col></a-row
         ><a-row>
-          <a-col span="13">
+          <a-col span="24">
             <th class="required" style="text-align: end">略称</th>
             <td>
               <a-form-item v-bind="validateInfos.ITAKU_RYAKU">
                 <a-input
                   v-model:value="formData.ITAKU_RYAKU"
-                  :maxlength="30"
+                  :maxlength="15"
+                  class="max-w-80"
                 ></a-input>
               </a-form-item>
             </td> </a-col></a-row
         ><a-row>
-          <a-col span="13">
+          <a-col span="24">
             <th>代表者氏名</th>
             <td>
               <a-form-item v-bind="validateInfos.DAIHYO_NAME">
                 <a-input
                   v-model:value="formData.DAIHYO_NAME"
-                  :maxlength="50"
+                  :maxlength="25"
+                  class="max-w-110"
                 ></a-input>
               </a-form-item>
             </td>
           </a-col>
-          <a-col span="13">
+          <a-col span="24">
             <th>担当者氏名</th>
             <td>
               <a-form-item v-bind="validateInfos.TANTO_NAME">
                 <a-input
                   v-model:value="formData.TANTO_NAME"
-                  :maxlength="50"
+                  :maxlength="25"
+                  class="max-w-110"
                 ></a-input>
               </a-form-item>
             </td>
@@ -89,7 +94,7 @@
         </a-row>
 
         <a-row>
-          <a-col span="13">
+          <a-col span="24">
             <th class="required">住所</th>
             <td class="flex-col">
               <a-form-item v-bind="validateInfos.ADDR_POST">
@@ -97,7 +102,7 @@
                   <a-input
                     v-model:value="formData.ADDR_1"
                     disabled
-                    class="!w-40"
+                    class="!w-30"
                   ></a-input>
                 </PostCode>
               </a-form-item>
@@ -105,17 +110,20 @@
                 <a-input
                   v-model:value="formData.ADDR_2"
                   :maxlength="15"
+                  class="max-w-90"
                 ></a-input
               ></a-form-item>
               <a-input
                 v-model:value="formData.ADDR_3"
                 :maxlength="15"
+                class="max-w-90"
                 @change="validate('ADDR_4')"
               ></a-input>
               <a-form-item v-bind="validateInfos.ADDR_4">
                 <a-input
                   v-model:value="formData.ADDR_4"
                   :maxlength="20"
+                  class="max-w-105"
                 ></a-input>
               </a-form-item>
             </td>
@@ -125,41 +133,44 @@
           <a-col>
             <th class="required">連絡先</th>
           </a-col>
-          <a-col :span="7">
+          <a-col :span="6">
             <th class="required" style="width: 50px">電話</th>
             <td>
               <a-form-item v-bind="validateInfos.ADDR_TEL">
                 <a-input
                   v-model:value="formData.ADDR_TEL"
-                  :maxlength="15"
+                  :maxlength="14"
+                  class="max-w-35"
                 ></a-input>
               </a-form-item>
             </td>
           </a-col>
-          <a-col :span="7">
+          <a-col :span="8">
             <th style="width: 70px; text-align: end">ＦＡＸ</th>
             <td>
               <a-input
                 v-model:value="formData.ADDR_FAX"
-                :maxlength="15"
+                :maxlength="14"
+                class="max-w-35"
               ></a-input>
             </td>
           </a-col>
         </a-row>
         <a-row>
-          <a-col span="16">
+          <a-col span="24">
             <th>メールアドレス</th>
             <td>
               <a-form-item v-bind="validateInfos.ADDR_E_MAIL">
                 <a-input
                   v-model:value="formData.ADDR_E_MAIL"
                   :maxlength="50"
+                  class="max-w-130"
                 ></a-input>
               </a-form-item>
             </td> </a-col
         ></a-row>
         <a-row>
-          <a-col span="13">
+          <a-col span="24">
             <th class="required" style="width: 170px">金融機関入力情報有無</th>
             <td>
               <a-radio-group
@@ -171,7 +182,7 @@
               </a-radio-group>
             </td>
           </a-col>
-          <a-col span="13">
+          <a-col span="24">
             <th>まとめ先</th>
             <td>
               <a-form-item v-bind="validateInfos.MATOMESAKI">
@@ -180,6 +191,7 @@
                   :min="0"
                   :max="9"
                   :maxlength="1"
+                  class="w-10"
                 ></a-input-number>
               </a-form-item>
             </td>
@@ -191,17 +203,19 @@
                 <a-input
                   v-model:value="formData.MOSIKOMISYORUI"
                   :maxlength="70"
+                  class="max-w-180"
                 ></a-input>
               </a-form-item>
             </td>
           </a-col>
-          <a-col span="13">
+          <a-col span="24">
             <th>請求書・契約書</th>
             <td>
               <a-form-item v-bind="validateInfos.SEIKYUSYO">
                 <a-input
                   v-model:value="formData.SEIKYUSYO"
                   :maxlength="15"
+                  class="max-w-48"
                 ></a-input>
               </a-form-item>
             </td>
@@ -213,11 +227,12 @@
                 <a-input
                   v-model:value="formData.NYUKINHOHO"
                   :maxlength="70"
+                  class="max-w-180"
                 ></a-input>
               </a-form-item>
             </td>
           </a-col>
-          <a-col span="13">
+          <a-col span="24">
             <th>ラベル発行</th>
             <td>
               <a-form-item v-bind="validateInfos.LABELHAKKO">
@@ -226,11 +241,12 @@
                   :min="0"
                   :max="9"
                   :maxlength="1"
+                  class="w-10"
                 ></a-input-number>
               </a-form-item>
             </td>
           </a-col>
-          <a-col span="13">
+          <a-col span="24">
             <th>除外フラグ</th>
             <td>
               <a-form-item v-bind="validateInfos.JYOGAI_FLG">
@@ -239,11 +255,12 @@
                   :min="0"
                   :max="99"
                   :maxlength="2"
+                  class="w-15"
                 ></a-input-number>
               </a-form-item>
             </td>
           </a-col>
-          <a-col :span="24"
+          <a-col :span="23"
             ><th>備考</th>
             <td>
               <a-textarea

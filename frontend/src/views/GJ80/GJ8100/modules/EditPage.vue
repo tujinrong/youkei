@@ -15,7 +15,7 @@
           <th class="required">適用開始日</th>
           <td>
             <a-form-item v-bind="validateInfos.TAX_DATE_FROM">
-              <DateJp v-model:value="formData.TAX_DATE_FROM" />
+              <DateJp v-model:value="formData.TAX_DATE_FROM" class="max-w-50" />
             </a-form-item>
           </td>
         </a-col>
@@ -23,7 +23,7 @@
           <th class="required">適用終了日</th>
           <td>
             <a-form-item v-bind="validateInfos.TAX_DATE_TO">
-              <DateJp v-model:value="formData.TAX_DATE_TO" />
+              <DateJp v-model:value="formData.TAX_DATE_TO" class="max-w-50" />
             </a-form-item>
           </td>
         </a-col>
@@ -31,7 +31,14 @@
           <th class="required">消費税率（%）</th>
           <td>
             <a-form-item v-bind="validateInfos.TAX_RITU">
-              <a-input v-model:value="formData.TAX_RITU" :maxlength="30" />
+              <a-input
+                v-model:value="formData.TAX_RITU"
+                :min="0"
+                :max="99"
+                :maxlength="2"
+                class="max-w-15"
+              />
+              <span> %</span>
             </a-form-item>
           </td>
         </a-col>

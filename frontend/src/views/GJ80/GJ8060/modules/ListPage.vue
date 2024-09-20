@@ -1,6 +1,6 @@
 <template>
   <div
-    class="min-h-fit min-h-500px flex-col-stretch gap-12px overflow-hidden lt-sm:overflow-auto"
+    class="h-full min-h-500px flex-col-stretch gap-12px overflow-hidden lt-sm:overflow-auto flex"
   >
     <a-card ref="headRef" :bordered="false">
       <h1>（GJ8060）事務委託先一覧</h1>
@@ -24,7 +24,7 @@
           <a-col v-bind="layout">
             <th>都道府県</th>
             <td>
-              <div class="w-150">
+              <div class="w-100">
                 <a-form-item v-bind="validateInfos.KEN_CD">
                   <range-select
                     v-model:value="searchParams.KEN_CD"
@@ -40,8 +40,8 @@
               <a-form-item>
                 <a-input
                   v-model:value="searchParams.ITAKU_NAME"
-                  :maxlength="20"
-                  style="width: 82%"
+                  :maxlength="25"
+                  class="max-w-150"
                 ></a-input>
                 <span>(部分一致)</span>
               </a-form-item>
@@ -70,7 +70,7 @@
                   :min="0"
                   :max="9"
                   :maxlength="1"
-                  class="w-20"
+                  class="w-10"
                 ></a-input-number>
               </a-form-item>
             </td>
@@ -100,7 +100,7 @@
         <close-page />
       </div>
     </a-card>
-    <a-card :bordered="false" class="sm:flex-1-hidden" ref="cardRef">
+    <a-card :bordered="false" class="flex-1" ref="cardRef">
       <a-pagination
         v-model:current="pageParams.PAGE_NUM"
         v-model:page-size="pageParams.PAGE_SIZE"

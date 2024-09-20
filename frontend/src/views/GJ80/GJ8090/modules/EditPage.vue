@@ -41,6 +41,7 @@
                   :max="999"
                   :maxlength="3"
                   :disabled="!isNew"
+                  class="w-20"
                 ></a-input-number>
               </a-form-item>
             </td>
@@ -54,6 +55,7 @@
                 <a-input
                   v-model:value="formData.NOJO_NAME"
                   :maxlength="20"
+                  class="w-105"
                 ></a-input>
               </a-form-item>
             </td>
@@ -67,7 +69,7 @@
                 <ai-select
                   v-model:value="formData.KEN_CD"
                   :options="KEN_CD_NAME_LIST"
-                  class="w-full"
+                  class="max-w-35"
                   type="number"
                 ></ai-select>
               </a-form-item>
@@ -83,7 +85,7 @@
                   <a-input
                     v-model:value="formData.ADDR_1"
                     disabled
-                    class="!w-40"
+                    class="!w-30"
                   ></a-input
                 ></PostCode>
               </a-form-item>
@@ -91,17 +93,20 @@
                 <a-input
                   v-model:value="formData.ADDR_2"
                   :maxlength="15"
+                  class="max-w-90"
                 ></a-input>
               </a-form-item>
               <a-input
                 v-model:value="formData.ADDR_3"
                 :maxlength="15"
+                class="max-w-90"
                 @change="validate('ADDR_4')"
               ></a-input>
               <a-form-item v-bind="validateInfos.ADDR_4">
                 <a-input
                   v-model:value="formData.ADDR_4"
                   :maxlength="20"
+                  class="max-w-105"
                 ></a-input>
               </a-form-item>
             </td>
@@ -117,6 +122,7 @@
                   :min="0"
                   :max="999"
                   :maxlength="3"
+                  class="w-20"
                 ></a-input-number>
               </a-form-item>
             </td>
