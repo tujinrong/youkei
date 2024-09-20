@@ -35,7 +35,7 @@
           </a-col>
         </a-row>
         <a-row>
-          <a-col span="24">
+          <a-col span="12">
             <read-only-pop
               thWidth="110"
               th="契約者名"
@@ -45,7 +45,7 @@
         </a-row>
         <h2 class="mt3 mb1">請求入金内容</h2>
         <a-row>
-          <a-col span="24">
+          <a-col span="4">
             <read-only-pop
               th="対象期"
               thWidth="110"
@@ -54,24 +54,24 @@
           </a-col>
         </a-row>
         <a-row>
-          <a-col span="12">
+          <a-col span="7">
             <read-only-pop
               th="請求日"
               thWidth="110"
               :td="getDateJpText(formData.SEIKYU_DATE)"
             />
           </a-col>
-          <a-col span="12">
+          <a-col span="5" class="thleft">
             <read-only-pop
               th="請求回数"
-              thWidth="110"
+              thWidth="90"
               :td="formData.SEIKYU_KAISU"
               after="回"
             />
           </a-col>
         </a-row>
         <a-row>
-          <a-col span="6">
+          <a-col span="7">
             <read-only-pop
               thWidth="110"
               th="請求金額"
@@ -80,21 +80,12 @@
               after="円"
             />
           </a-col>
-          <a-col span="6">
-            <read-only-pop
-              thWidth="110"
-              th="積立金額"
-              :td="formData.TUMITATE_KIN"
-              v-bind="{ ...mathNumber }"
-              after="円"
-            />
-          </a-col>
-          <a-col span="6" style="flex-flow: column">
+          <a-col span="6" style="flex-flow: column" class="thleft">
             <div class="flex">
               <read-only-pop
-                thWidth="110"
-                th="手数料"
-                :td="formData.TESURYO"
+                thWidth="90"
+                th="積立金額"
+                :td="formData.TUMITATE_KIN"
                 v-bind="{ ...mathNumber }"
                 after="円"
               />
@@ -107,6 +98,15 @@
                 after="円"
               />
             </div>
+          </a-col>
+          <a-col span="5" class="thleft">
+            <read-only-pop
+              thWidth="60"
+              th="手数料"
+              :td="formData.TESURYO"
+              v-bind="{ ...mathNumber }"
+              after="円"
+            />
           </a-col>
           <a-col span="6">
             <read-only-pop
@@ -241,8 +241,8 @@
         </a-row>
         <a-row>
           <a-col span="10" offset="9">
-<!--            <th style="width: 110px; border-top: none"></th>-->
-<!--            <td style="border-bottom: none; border-top: none"></td>-->
+            <!--            <th style="width: 110px; border-top: none"></th>-->
+            <!--            <td style="border-bottom: none; border-top: none"></td>-->
             <read-only-pop
               thWidth="100"
               th="手数料額"
@@ -253,8 +253,8 @@
         </a-row>
         <a-row>
           <a-col span="10" offset="9">
-<!--            <th style="width: 110px; border-top: none"></th>-->
-<!--            <td style="border-top: none"></td>-->
+            <!--            <th style="width: 110px; border-top: none"></th>-->
+            <!--            <td style="border-top: none"></td>-->
             <read-only-pop
               thWidth="100"
               th="入金額"
@@ -282,7 +282,10 @@
             @click="saveData"
             >保存</a-button
           >
-          <a-button type="primary" :disabled="!formData.NYUKIN_DATE" @click="closeModal"
+          <a-button
+            type="primary"
+            :disabled="!formData.NYUKIN_DATE"
+            @click="closeModal"
             >キャンセル</a-button
           >
         </a-space>
@@ -454,7 +457,12 @@ const setPaddingToZero = () => {
 </script>
 <style lang="scss" scoped>
 th {
-  width: 200px;
+  width: 150px;
   border-right: 1px solid #8a8d92 !important;
+}
+.thleft {
+  :deep(th) {
+    text-align: right;
+  }
 }
 </style>

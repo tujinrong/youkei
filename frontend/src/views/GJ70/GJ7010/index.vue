@@ -90,9 +90,9 @@
           ><a-col v-bind="layout"
             ><th>契約年月日<br />(契約者マスタ契約日)</th>
             <td>
-              <a-form-item v-bind="validateInfos.KEIYAKUSYA_CD">
-                <range-select
-                  v-model:value="searchParams.KEIYAKUSYA_CD"
+              <a-form-item v-bind="validateInfos.KEIYAKU_DATE">
+                <range-date
+                  v-model:value="searchParams.KEIYAKU_DATE"
                   :options="LIST"
               /></a-form-item></td
           ></a-col>
