@@ -32,7 +32,7 @@
                 /></a-form-item>
               </td>
             </a-col>
-            <a-col span="24">
+            <a-col v-bind="layout">
               <th>契約区分</th>
               <td class="flex">
                 <a-form-item v-bind="validateInfos.KEIYAKU_KBN">
