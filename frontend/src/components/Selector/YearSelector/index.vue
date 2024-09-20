@@ -93,7 +93,7 @@ const Formatter = (value: Date): string => {
   } else {
     if (year && value) {
       yearName = '令和'
-      yearNum = year - 2018 + 1
+      yearNum = year - 2019 + 1
     } else {
       return ''
     }
