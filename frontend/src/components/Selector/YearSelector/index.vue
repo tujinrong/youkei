@@ -15,16 +15,21 @@
   />
 </template>
 <script lang="ts" setup>
-import dayjs from 'dayjs'
+import dayjs, { Dayjs } from 'dayjs'
 import { computed, onMounted, ref, watch } from 'vue'
 
 //--------------------------------------------------------------------------
 //データ定義
 //--------------------------------------------------------------------------
 
-const props = defineProps<{
-  value: number
-}>()
+const props = withDefaults(
+  defineProps<{
+    value: number
+  }>(),
+  {
+    value: 2021,
+  }
+)
 const emit = defineEmits(['update:value'])
 const inputYear = ref()
 //--------------------------------------------------------------------------
@@ -32,10 +37,12 @@ const inputYear = ref()
 //--------------------------------------------------------------------------
 const yearV = computed({
   get() {
-    return props.value ? dayjs(props.value) : String(props.value)
+    return props.value
+      ? dayjs(new Date(props.value, 1, 1))
+      : String(props.value)
   },
   set(v) {
-    emit('update:value', v ? Number(dayjs(v).format('YYYY')) : v)
+    emit('update:value', dayjs(v).year() ?? v)
   },
 })
 //---------------------------------------------------------------------------
