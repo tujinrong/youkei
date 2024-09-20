@@ -26,11 +26,11 @@
                 </a-input-number></a-form-item
               >
               <div class="w-full">
-                <YearJp
+                <YearSelector
                   v-model:value="formData.JIGYO_NENDO"
                   style="width: 40%"
                 /><span>～</span>
-                <YearJp
+                <YearSelector
                   v-model:value="formData.JIGYO_SYURYO_NENDO"
                   style="width: 40%"
                   disabled
@@ -111,7 +111,7 @@
             <th class="required">対象年度(現在処理中)</th>
             <td>
               <a-form-item v-bind="validateInfos.TAISYO_NENDO">
-                <YearJp
+                <YearSelector
                   v-model:value="formData.TAISYO_NENDO"
                   style="width: 33.3%"
                 />
