@@ -7,7 +7,12 @@
  * 変更履歴　:
  * ----------------------------------------------------------------->
 <template>
-  <a-date-picker v-model:value="monthV" :format="Formatter" picker="month" />
+  <a-date-picker
+    ref="inputYearMonth"
+    v-model:value="monthV"
+    :format="Formatter"
+    picker="month"
+  />
 </template>
 <script lang="ts" setup>
 import dayjs from 'dayjs'
@@ -21,7 +26,7 @@ const props = defineProps<{
   value: any
 }>()
 const emit = defineEmits(['update:value'])
-
+const inputYearMonth = ref()
 //--------------------------------------------------------------------------
 //計算定義
 //--------------------------------------------------------------------------
@@ -36,7 +41,16 @@ const monthV = computed({
 //---------------------------------------------------------------------------
 //フック関数
 //--------------------------------------------------------------------------
-onMounted(() => {})
+onMounted(() => {
+  const inputDom = inputYearMonth.value.$el.querySelector('.ant-picker-input')
+  if (inputDom) {
+    inputDom.addEventListener('keydown', function (event) {
+      if (event.key === 'Backspace') {
+        event.preventDefault()
+      }
+    })
+  }
+})
 
 //--------------------------------------------------------------------------
 //監視定義
