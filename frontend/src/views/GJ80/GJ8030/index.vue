@@ -34,7 +34,7 @@
                 <a-input
                   v-model:value="formData.YAKUMEI"
                   :maxlength="30"
-                  class="max-w-151.5"
+                  class="max-w-145"
                 />
               </a-form-item>
             </td>
@@ -74,7 +74,7 @@
               <a-col span="24">
                 <td>
                   <a-form-item v-bind="validateInfos.ADDR1">
-                    <a-input v-model:value="formData.ADDR1" class="max-w-228" />
+                    <a-input v-model:value="formData.ADDR1" class="max-w-220" />
                   </a-form-item>
                 </td>
               </a-col>

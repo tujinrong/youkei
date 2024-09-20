@@ -12,7 +12,7 @@
     <div class="edit_table form">
       <a-form>
         <a-row>
-          <a-col span="24">
+          <a-col span="8">
             <read-only-pop
               th="種類区分"
               th-width="130"

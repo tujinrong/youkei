@@ -23,7 +23,7 @@
                   :min="1"
                   :max="99"
                   :maxlength="2"
-                  class="w-22"
+                  class="w-20"
                 ></a-input-number
               ></a-form-item>
             </td>

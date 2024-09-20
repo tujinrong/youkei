@@ -13,27 +13,27 @@
         <a-row>
           <a-col span="24">
             <th class="required">事業対象期·年度</th>
-            <td class="">
-              <a-form-item v-bind="validateInfos.KI">
+            <td>
+              <a-form-item v-bind="validateInfos.KI" class="w-70!">
                 <a-input-number
+                  class="w-20"
                   name="KI"
                   v-model:value="formData.KI"
-                  style="width: 20%; margin-right: 16px"
                   :max="99"
                   :min="1"
                   :maxlength="2"
                 >
-                  <template #addonAfter>期</template>
-                </a-input-number></a-form-item
+                </a-input-number
+                ><span class="!align-middle ml-2">期</span></a-form-item
               >
               <div class="w-full">
                 <YearSelector
                   v-model:value="formData.JIGYO_NENDO"
-                  style="width: 40%"
+                  class="w-50"
                 /><span>～</span>
                 <YearSelector
                   v-model:value="formData.JIGYO_SYURYO_NENDO"
-                  style="width: 40%"
+                  class="w-50"
                   disabled
                 />
               </div>
@@ -44,17 +44,14 @@
             <td>
               <DateJp
                 v-model:value="formData.ZENKI_TUMITATE_DATE"
-                style="width: 33.3%"
+                class="w-50!"
               />
             </td>
           </a-col>
           <a-col span="24">
             <th>2.前期交付金取込日</th>
             <td>
-              <DateJp
-                v-model:value="formData.ZENKI_KOFU_DATE"
-                style="width: 33.3%"
-              />
+              <DateJp v-model:value="formData.ZENKI_KOFU_DATE" class="w-50!" />
             </td>
           </a-col>
           <a-col span="24">
@@ -62,7 +59,7 @@
             <td>
               <DateJp
                 v-model:value="formData.HENKAN_KEISAN_DATE"
-                style="width: 33.3%"
+                class="w-50!"
               />
             </td>
           </a-col>
@@ -71,13 +68,13 @@
             <td>
               <a-input-number
                 v-model:value="formData.HENKAN_NINZU"
-                style="width: 10%"
+                class="w-20"
                 :max="9999"
                 :min="0"
                 disabled
               >
-                <template #addonAfter> (人) </template></a-input-number
-              >
+              </a-input-number
+              ><span class="mt-1 ml-2">(人)</span>
             </td>
           </a-col>
           <a-col span="24">
@@ -85,12 +82,13 @@
             <td class="flex items-center">
               <a-input-number
                 v-model:value="formData.HENKAN_GOKEI"
-                style="width: 33.3%"
+                class="w-50!"
                 :max="999999999999999"
                 :min="0"
                 disabled
               >
-                <template #addonAfter> (円) </template> </a-input-number
+              </a-input-number
+              ><span class="mt-1 mr-5"> (円) </span
               ><span>(左記項目は積立金返還処理で算定した结果を保存、表示)</span>
             </td> </a-col
           ><a-col span="24">
@@ -99,9 +97,8 @@
               <a-form-item>
                 <a-input-number
                   v-model:value="formData.HENKAN_RITU"
-                  style="width: 10%"
-                  :precision="2"
-                  :max="99.99"
+                  class="w-20"
+                  :max="99"
                   :min="0"
                   disabled
                 ></a-input-number>
@@ -114,7 +111,7 @@
               <a-form-item v-bind="validateInfos.TAISYO_NENDO">
                 <YearSelector
                   v-model:value="formData.TAISYO_NENDO"
-                  style="width: 33.3%"
+                  class="w-30!"
                 />
               </a-form-item>
             </td>
@@ -122,12 +119,9 @@
 
           <a-col span="24">
             <th>当初対象積立金納付期限</th>
-            <td class="items-center">
-              <DateJp
-                v-model:value="formData.NOFU_KIGEN"
-                style="width: 33.3%"
-              />
-              <span>
+            <td>
+              <DateJp v-model:value="formData.NOFU_KIGEN" class="w-50!" />
+              <span class="mt-1">
                 (左記期限までに入金済みの時は、契約日は4月1日となる。)</span
               >
             </td>
@@ -137,13 +131,13 @@
             <td>
               <a-input-number
                 v-model:value="formData.HASSEI_KAISU"
-                style="width: 10%"
+                class="w-20"
                 :max="99"
                 :min="1"
                 :maxlength="2"
               >
-                <template #addonAfter> 回 </template></a-input-number
-              >
+              </a-input-number
+              ><span class="mt-1 ml-1">回</span>
             </td>
           </a-col>
           <a-col span="24">
