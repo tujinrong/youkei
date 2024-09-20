@@ -99,7 +99,7 @@ const Formatter = (value: Date): string => {
     }
   }
   const formattedYearNum = yearNum < 10 ? `0${yearNum}` : `${yearNum}`
-  return `${yearName}${formattedYearNum}年`
+  return `${yearName}${formattedYearNum}年度`
 }
 </script>
 
