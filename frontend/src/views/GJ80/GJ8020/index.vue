@@ -9,7 +9,7 @@
         </a-space>
         <close-page />
       </div>
-      <div class="self_adaption_table form max-w-240">
+      <div class="self_adaption_table form">
         <a-row>
           <a-col span="24">
             <th class="required">事業対象期·年度</th>
@@ -18,9 +18,10 @@
                 <a-input-number
                   name="KI"
                   v-model:value="formData.KI"
-                  style="width: 60%; margin-right: 16px"
+                  style="width: 20%; margin-right: 16px"
                   :max="99"
                   :min="1"
+                  :maxlength="2"
                 >
                   <template #addonAfter>期</template>
                 </a-input-number></a-form-item
@@ -70,7 +71,7 @@
             <td>
               <a-input-number
                 v-model:value="formData.HENKAN_NINZU"
-                style="width: 33.3%"
+                style="width: 10%"
                 :max="9999"
                 :min="0"
                 disabled
@@ -85,7 +86,7 @@
               <a-input-number
                 v-model:value="formData.HENKAN_GOKEI"
                 style="width: 33.3%"
-                :max="999999999"
+                :max="999999999999999"
                 :min="0"
                 disabled
               >
@@ -98,9 +99,9 @@
               <a-form-item>
                 <a-input-number
                   v-model:value="formData.HENKAN_RITU"
-                  style="width: 33.3%"
-                  :precision="7"
-                  :max="99.9999999"
+                  style="width: 10%"
+                  :precision="2"
+                  :max="99.99"
                   :min="0"
                   disabled
                 ></a-input-number>
@@ -136,9 +137,10 @@
             <td>
               <a-input-number
                 v-model:value="formData.HASSEI_KAISU"
-                style="width: 33.3%"
+                style="width: 10%"
                 :max="99"
                 :min="1"
+                :maxlength="2"
               >
                 <template #addonAfter> 回 </template></a-input-number
               >
