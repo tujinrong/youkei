@@ -40,11 +40,11 @@ export interface DetailVM {
   /** 事業対象終了年度 */
   JIGYO_SYURYO_NENDO: number | undefined
   /** 前期積立金取込日 */
-  ZENKI_TUMITATE_DATE: string
+  ZENKI_TUMITATE_DATE: Date| undefined
   /** 前期交付金取込日 */
-  ZENKI_KOFU_DATE: string
+  ZENKI_KOFU_DATE: Date| undefined
   /** 返還金計算日 */
-  HENKAN_KEISAN_DATE: number | undefined
+  HENKAN_KEISAN_DATE: Date | undefined
   /** 積立金返還人数 */
   HENKAN_NINZU: string
   /** 積立金返還額合計 */

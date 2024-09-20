@@ -91,9 +91,10 @@ export function getUnKnownDateJpText(value: string): string {
 }
 
 /**和暦取得(日付) */
-export const getDateJpText = (value: Date | undefined): string => {
+export const getDateJpText = (value: Date | string | undefined): string => {
   if (value) {
     try {
+      const date = new Date(value); // 确保是 Date 对象
       return (
         new Intl.DateTimeFormat('ja-JP-u-ca-japanese', {
           era: 'long',
@@ -101,17 +102,19 @@ export const getDateJpText = (value: Date | undefined): string => {
           month: '2-digit',
           day: '2-digit',
         })
-          .format(value)
+          .format(date)
           .replace(/\//, '年')
           .replace(/\//, '月') + '日'
-      )
+      );
     } catch (error) {
-      return '無効日付'
+      console.error(error);
+      return '無効日付';
     }
   } else {
-    return ''
+    return '';
   }
-}
+};
+
 
 /**和暦取得(日時) */
 export const getDateHmsJpText = (value: Date): string => {

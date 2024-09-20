@@ -39,71 +39,48 @@
               </div>
             </td>
           </a-col>
-          <a-col span="24">
-            <th>1.前期積立金取込日</th>
-            <td>
-              <DateJp
-                v-model:value="formData.ZENKI_TUMITATE_DATE"
-                class="w-50!"
-              />
-            </td>
+          <a-col span="24"
+            ><read-only
+              thWidth="200"
+              th="1.前期積立金取込日"
+              :td="getDateJpText(formData.ZENKI_TUMITATE_DATE)"
+            />
           </a-col>
           <a-col span="24">
-            <th>2.前期交付金取込日</th>
-            <td>
-              <DateJp v-model:value="formData.ZENKI_KOFU_DATE" class="w-50!" />
-            </td>
+            <read-only
+              thWidth="200"
+              th="2.前期交付金取込日"
+              :td="getDateJpText(formData.ZENKI_KOFU_DATE)"
+            />
           </a-col>
           <a-col span="24">
-            <th>3.返還金計算日</th>
-            <td>
-              <DateJp
-                v-model:value="formData.HENKAN_KEISAN_DATE"
-                class="w-50!"
-              />
-            </td>
+            <read-only
+              thWidth="200"
+              th="3.返還金計算日"
+              :td="getDateJpText(formData.HENKAN_KEISAN_DATE)"
+            />
           </a-col>
           <a-col span="24">
-            <th>積立金返還人数</th>
-            <td>
-              <a-input-number
-                v-model:value="formData.HENKAN_NINZU"
-                class="w-20"
-                :max="9999"
-                :min="0"
-                disabled
-              >
-              </a-input-number
-              ><span class="mt-1 ml-2">(人)</span>
-            </td>
+            <read-only
+              thWidth="200"
+              th="積立金返還人数"
+              :td="formData.HENKAN_NINZU"
+              after="(人)"
+            />
           </a-col>
           <a-col span="24">
-            <th>積立金返還額合計</th>
-            <td class="flex items-center">
-              <a-input-number
-                v-model:value="formData.HENKAN_GOKEI"
-                class="w-50!"
-                :max="999999999999999"
-                :min="0"
-                disabled
-              >
-              </a-input-number
-              ><span class="mt-1 mr-5"> (円) </span
-              ><span>(左記項目は積立金返還処理で算定した结果を保存、表示)</span>
-            </td> </a-col
+            <read-only
+              thWidth="200"
+              th="積立金返還額合計"
+              :td="formData.HENKAN_GOKEI"
+              after="(円) (左記項目は積立金返還処理で算定した结果を保存、表示)"
+            /> </a-col
           ><a-col span="24">
-            <th>前期積立金返還率</th>
-            <td>
-              <a-form-item>
-                <a-input-number
-                  v-model:value="formData.HENKAN_RITU"
-                  class="w-20"
-                  :max="99"
-                  :min="0"
-                  disabled
-                ></a-input-number>
-              </a-form-item>
-            </td>
+            <read-only
+              thWidth="200"
+              th="前期積立金返還率"
+              :td="formData.HENKAN_RITU"
+            />
           </a-col>
           <a-col span="24">
             <th class="required">対象年度(現在処理中)</th>
@@ -164,14 +141,16 @@ import {
   SAVE_OK_INFO,
 } from '@/constants/msg'
 import { showConfirmModal, showSaveModal } from '@/utils/modal'
+import dayjs from 'dayjs'
+import { getDateJpText } from '@/utils/util'
 
 const formData = reactive<DetailVM>({
   KI: undefined as number | undefined,
   JIGYO_NENDO: undefined as number | undefined,
   JIGYO_SYURYO_NENDO: undefined as number | undefined,
-  ZENKI_TUMITATE_DATE: '',
-  ZENKI_KOFU_DATE: '',
-  HENKAN_KEISAN_DATE: undefined as number | undefined,
+  ZENKI_TUMITATE_DATE: undefined as Date | undefined,
+  ZENKI_KOFU_DATE: undefined as Date | undefined,
+  HENKAN_KEISAN_DATE: undefined as Date | undefined,
   HENKAN_NINZU: '',
   HENKAN_GOKEI: '',
   HENKAN_RITU: '',
