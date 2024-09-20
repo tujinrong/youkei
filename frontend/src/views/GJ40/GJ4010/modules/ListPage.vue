@@ -18,7 +18,7 @@
             <th class="required">互助金単価マスタ　参照日</th>
             <td class="flex">
               <a-form-item v-bind="validateInfos.TANKA_MST_DATE">
-                <DateJp v-model:value="formData.TANKA_MST_DATE" />
+                <DateJp class="w-50!" v-model:value="formData.TANKA_MST_DATE" />
               </a-form-item>
             </td>
           </a-col>
@@ -31,7 +31,7 @@
                   :min="1"
                   :max="99"
                   :maxlength="2"
-                  style="width: 100%"
+                  class="w-20"
                 ></a-input-number>
               </a-form-item>
             </td>

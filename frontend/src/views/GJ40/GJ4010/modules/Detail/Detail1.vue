@@ -52,6 +52,7 @@
                   <DateJp
                     v-model:value="searchParams.SINSEI_DATE"
                     :notAllowClear="true"
+                    class="w-50!"
                   />
                 </a-form-item>
               </td>

@@ -404,6 +404,7 @@
             <DateJp
               v-model:value="formData.TANKA_MST_DATE"
               :disabled="formData.SYORI_JOKYO_KBN !== 3"
+              class="w-50!"
             />
           </td>
         </a-col>

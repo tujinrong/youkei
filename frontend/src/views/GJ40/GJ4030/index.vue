@@ -35,7 +35,7 @@
                     :min="1"
                     :max="99"
                     :maxlength="2"
-                    style="width: 50%"
+                    class="w-20"
                   />
                   <span>(表示&入力)</span>
                 </div>
@@ -60,7 +60,7 @@
             <th class="required">振込予定日</th>
             <td class="flex">
               <a-form-item v-bind="validateInfos.FURIKOMI_YOTEI_DATE">
-                <DateJp v-model:value="formData.FURIKOMI_YOTEI_DATE" />
+                <DateJp class="w-50!" v-model:value="formData.FURIKOMI_YOTEI_DATE" />
               </a-form-item>
             </td>
           </a-col>

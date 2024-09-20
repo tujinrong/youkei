@@ -30,7 +30,7 @@
                     :min="1"
                     :max="99"
                     :maxlength="2"
-                    style="width: 120px"
+                    class="w-20"
                     @change="handleKI(false)"
                   ></a-input-number>
                   <span class="!align-middle">期</span>
@@ -42,7 +42,7 @@
                     :min="1"
                     :max="99"
                     :maxlength="2"
-                    style="width: 120px"
+                    class="w-20"
                     @change="handleKI(false)"
                   ></a-input-number>
                   <span class="!align-middle">回</span>
@@ -70,7 +70,7 @@
                 <a-form-item v-bind="validateInfos.SEIKYU_HAKKO_DATE">
                   <DateJp
                     v-model:value="formData.SEIKYU_HAKKO_DATE"
-                    class="w-full"
+                    class="w-50!"
                     :disabled="formData.SYUTURYOKU_KBN === 2"
                   />
                 </a-form-item>
@@ -82,7 +82,7 @@
                 <a-form-item v-bind="validateInfos.FURIKOMI_YOTEI_DATE">
                   <DateJp
                     v-model:value="formData.FURIKOMI_YOTEI_DATE"
-                    class="w-full"
+                    class="w-50!"
                     :disabled="formData.SYUTURYOKU_KBN === 2"
                   />
                 </a-form-item>
@@ -96,7 +96,7 @@
                   <a-input
                     v-model:value="formData.KI"
                     :disabled="formData.SYUTURYOKU_KBN === 2"
-                    style="width: 50%"
+                    class="w-20"
                   />
                   <span class="!align-middle">発</span>
                 </a-form-item>
@@ -105,7 +105,7 @@
                   <a-input
                     v-model:value="formData.KI"
                     :disabled="formData.SYUTURYOKU_KBN === 2"
-                    style="width: 50%"
+                    class="w-20"
                   />
                   <span class="!align-middle">号</span>
                 </a-form-item>
