@@ -1,6 +1,6 @@
 <template>
   <div
-    class="h-full min-h-500px flex-col-stretch gap-12px overflow-hidden lt-sm:overflow-auto"
+    class="min-h-fit min-h-500px flex-col-stretch gap-12px overflow-hidden lt-sm:overflow-auto"
   >
     <a-card ref="headRef" :bordered="false">
       <h1>（GJ8060）事務委託先一覧</h1>
@@ -41,8 +41,9 @@
                 <a-input
                   v-model:value="searchParams.ITAKU_NAME"
                   :maxlength="20"
-                  placeholder="(部分一致)"
+                  style="width: 82%"
                 ></a-input>
+                <span>(部分一致)</span>
               </a-form-item>
             </td>
           </a-col>
@@ -89,10 +90,10 @@
         <a-space :size="20">
           <a-button type="primary" @click="searchAll">検索</a-button>
           <a-button type="primary" @click="reset">条件クリア</a-button>
-          <a-button class="ml-20" type="primary" @click="forwardNew"
+          <a-button class="ml-50%" type="primary" @click="forwardNew"
             >新規登録</a-button
           >
-          <a-button class="ml-20" type="primary" @click="reset"
+          <a-button class="ml-100%" type="primary" @click="reset"
             >CSV出力</a-button
           >
         </a-space>
@@ -127,6 +128,7 @@
           field="ITAKU_CD"
           title="事務委託先"
           min-width="100"
+          align="right"
           sortable
           :params="{ order: 1 }"
           :resizable="true"
