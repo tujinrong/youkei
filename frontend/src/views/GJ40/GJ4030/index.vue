@@ -12,7 +12,7 @@
   >
     <a-card ref="headRef" :bordered="false">
       <h1>（GJ4030）互助交付金計算処理</h1>
-      <div class="self_adaption_table form max-w-250 mt-1">
+      <div class="self_adaption_table form mt-1">
         <a-row>
           <a-col span="24">
             <th class="required">処理区分</th>

@@ -44,11 +44,12 @@
             </a-col>
             <a-col v-bind="layout">
               <th>契約区分</th>
-              <td class="flex">
+              <td>
                 <a-form-item v-bind="validateInfos.KEIYAKU_KBN">
                   <range-select
                     v-model:value="formData.KEIYAKU_KBN"
                     :options="KEIYAKU_KBN_CD_NAME_LIST"
+                    class="max-w-72"
                 /></a-form-item>
               </td>
             </a-col>

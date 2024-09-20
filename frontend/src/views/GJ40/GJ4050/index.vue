@@ -23,7 +23,7 @@
             <a-col v-bind="layout">
               <th class="required">対象期・認定回数</th>
               <td>
-                <a-form-item v-bind="validateInfos.KI">
+                <a-form-item v-bind="validateInfos.KI" class="w-50!">
                   <span class="!align-middle">第</span>
                   <a-input-number
                     v-model:value="formData.KI"
@@ -32,7 +32,7 @@
                     :maxlength="2"
                     class="w-20"
                     @change="handleKI(false)"
-                  ></a-input-number>
+                  />
                   <span class="!align-middle">期</span>
                 </a-form-item>
                 <a-form-item v-bind="validateInfos.HASSEI_KAISU">
@@ -44,7 +44,7 @@
                     :maxlength="2"
                     class="w-20"
                     @change="handleKI(false)"
-                  ></a-input-number>
+                  />
                   <span class="!align-middle">回</span>
                 </a-form-item>
               </td>
@@ -91,7 +91,7 @@
             <a-col v-bind="layout">
               <th class="required">発信番号</th>
               <td>
-                <a-form-item v-bind="validateInfos.KI">
+                <a-form-item v-bind="validateInfos.KI" class="w-50!">
                   <span class="!align-middle">日鶏</span>
                   <a-input
                     v-model:value="formData.KI"
