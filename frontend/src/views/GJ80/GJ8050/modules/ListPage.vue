@@ -1,6 +1,6 @@
 <template>
   <div
-    class="h-full min-h-500px flex-col-stretch gap-12px overflow-hidden lt-sm:overflow-auto flex"
+    class="h-full min-h-500px flex-col-stretch gap-12px lt-sm:overflow-auto flex"
   >
     <a-card ref="headRef" :bordered="false">
       <h1>（GJ8050）金融機関一覧</h1>
