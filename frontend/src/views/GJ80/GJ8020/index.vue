@@ -29,11 +29,11 @@
               <div class="w-full">
                 <YearSelector
                   v-model:value="formData.JIGYO_NENDO"
-                  class="w-50"
+                  class="w-30"
                 /><span>～</span>
                 <YearSelector
                   v-model:value="formData.JIGYO_SYURYO_NENDO"
-                  class="w-50"
+                  class="w-30"
                   disabled
                 />
               </div>
