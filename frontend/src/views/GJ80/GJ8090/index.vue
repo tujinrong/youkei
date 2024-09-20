@@ -23,7 +23,7 @@
                   :min="1"
                   :max="99"
                   :maxlength="2"
-                  class="w-full"
+                  class="w-20"
                   @change="getInitData(searchParams.KI, false)"
                 ></a-input-number>
               </a-form-item>
@@ -36,7 +36,7 @@
                 <ai-select
                   v-model:value="searchParams.KEIYAKUSYA_CD"
                   :options="KEIYAKUSYA_CD_NAME_LIST"
-                  style="width: 100%"
+                  class="max-w-200"
                   split-val
                 ></ai-select>
               </a-form-item>
@@ -51,7 +51,7 @@
                   :min="0"
                   :max="999"
                   :maxlength="3"
-                  class="w-full"
+                  class="w-20"
                 ></a-input-number>
               </a-form-item>
             </td>
@@ -63,7 +63,9 @@
                 <a-input
                   v-model:value="searchParams.NOJO_NAME"
                   :maxlength="20"
+                  class="w-100"
                 ></a-input>
+                <span>(部分一致)</span>
               </a-form-item>
             </td>
           </a-col>
@@ -200,9 +202,9 @@ const tableData = ref<SearchRowVM[]>([])
 const headRef = ref(null)
 const layout = {
   md: 24,
-  lg: 12,
-  xl: 8,
-  xxl: 6,
+  lg: 24,
+  xl: 24,
+  xxl: 24,
 }
 const cardRef = ref()
 const { height } = useElementSize(cardRef)

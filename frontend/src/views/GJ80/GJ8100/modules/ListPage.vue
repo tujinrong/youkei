@@ -31,6 +31,7 @@
           field="TAX_DATE_FROM"
           title="適用開始日"
           min-width="80"
+          align="center"
           :resizable="true"
         >
         </vxe-column>
@@ -39,6 +40,7 @@
           field="TAX_DATE_TO"
           title="適用終了日"
           min-width="160"
+          align="center"
           :resizable="true"
         >
         </vxe-column>
@@ -47,6 +49,7 @@
           field="TAX_RITU"
           title="消費税率（%）"
           min-width="100"
+          align="right"
           :resizable="true"
         ></vxe-column>
       </vxe-table>
