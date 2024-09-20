@@ -13,11 +13,11 @@
                 <a-input
                   v-model:value="searchParams.BANK_CD"
                   :maxlength="4"
+                  class="max-w-35"
                 ></a-input>
               </a-form-item>
             </td>
           </a-col>
-
           <a-col v-bind="layout">
             <th>金融機関名（ｶﾅ）</th>
             <td>
@@ -30,7 +30,10 @@
             <th>金融機関名（漢字）</th>
             <td>
               <a-form-item>
-                <a-input v-model:value="searchParams.BANK_NAME"></a-input>
+                <a-input
+                  v-model:value="searchParams.BANK_NAME"
+                  class="max-w-180"
+                ></a-input>
               </a-form-item>
             </td>
           </a-col>
@@ -84,6 +87,8 @@
           field="BANK_CD"
           title="金融機関"
           min-width="100"
+          width="10%"
+          align="center"
           sortable
           :params="{ order: 1 }"
           :resizable="true"
@@ -96,7 +101,7 @@
           header-align="center"
           field="BANK_KANA"
           title="金融機関名（ｶﾅ）"
-          min-width="160"
+          min-width="400"
           sortable
           :params="{ order: 2 }"
           :resizable="true"
@@ -106,7 +111,8 @@
           header-align="center"
           field="BANK_NAME"
           title="金融機関名（漢字）"
-          min-width="400"
+          min-width="160"
+          width="28%"
           sortable
           :params="{ order: 3 }"
           :resizable="false"
@@ -122,6 +128,7 @@
                 <a-input
                   v-model:value="searchParams2.SITEN_CD"
                   :maxlength="3"
+                  class="max-w-35"
                 ></a-input>
               </a-form-item>
             </td>
@@ -145,6 +152,7 @@
                 <a-input
                   v-model:value="searchParams2.SITEN_NAME"
                   :maxlength="20"
+                  class="max-w-180"
                 ></a-input>
               </a-form-item>
             </td>
@@ -200,6 +208,8 @@
           field="BANK_CD"
           title="金融機関"
           min-width="100"
+          width="10%"
+          align="center"
           sortable
           :params="{ order: 1 }"
           :resizable="true"
@@ -210,6 +220,8 @@
           field="SITEN_CD"
           title="支店コード"
           min-width="160"
+          width="8%"
+          align="center"
           sortable
           :params="{ order: 2 }"
           :resizable="true"
@@ -235,6 +247,7 @@
           field="SITEN_NAME"
           title="支店名（漢字）"
           min-width="400"
+          width="28%"
           sortable
           :params="{ order: 4 }"
           :resizable="false"
@@ -331,9 +344,9 @@ const headRef = ref(null)
 const previewName = ref('')
 const layout = {
   md: 24,
-  lg: 12,
-  xl: 8,
-  xxl: 6,
+  lg: 24,
+  xl: 24,
+  xxl: 24,
 }
 const cardRef = ref()
 const { height } = useElementSize(cardRef)

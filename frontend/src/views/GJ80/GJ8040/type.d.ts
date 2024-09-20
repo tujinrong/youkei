@@ -59,7 +59,7 @@ export interface SearchRowVM {
   /**ユーザ名 */
   USER_NAME: string
   /**使用区分  */
-  SIYO_KBN: number
+  SIYO_KBN: number | string
   /**停止日  */
   TEISI_DATE: Date | undefined
   /**停止理由  */
