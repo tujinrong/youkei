@@ -37,6 +37,9 @@ const inputYear = ref()
 //--------------------------------------------------------------------------
 const yearV = computed({
   get() {
+    if (!props.value) {
+      return ''
+    }
     return props.value
       ? dayjs(new Date(props.value, 1, 1))
       : String(props.value)
@@ -88,8 +91,12 @@ const Formatter = (value: Date): string => {
     yearName = '平成'
     yearNum = year - 1989 + 1
   } else {
-    yearName = '令和'
-    yearNum = year - 2018 + 1
+    if (year && value) {
+      yearName = '令和'
+      yearNum = year - 2018 + 1
+    } else {
+      return ''
+    }
   }
   const formattedYearNum = yearNum < 10 ? `0${yearNum}` : `${yearNum}`
   return `${yearName}${formattedYearNum}年`
