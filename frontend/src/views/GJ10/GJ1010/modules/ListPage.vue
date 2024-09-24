@@ -28,21 +28,17 @@
               ></a-form-item>
             </td>
           </a-col>
-          <a-col span="12">
+          <a-col v-bind="layout">
             <th>都道府県</th>
             <td>
               <range-select
                 v-model:value="searchParams.KEN_CD"
                 :options="KEN_CD_NAME_LIST"
+                class="w-120!"
               />
             </td>
           </a-col>
-          <a-col span="12">
-            <th>未継続・未契約者を除く</th>
-            <td>
-              <a-checkbox></a-checkbox>
-            </td>
-          </a-col>
+
           <a-col v-bind="layout">
             <th>契約者番号</th>
             <td>
@@ -51,7 +47,7 @@
                 :min="1"
                 :max="99999"
                 :maxlength="5"
-                class="w-22"
+                class="w-20"
               ></a-input-number>
             </td>
           </a-col>
@@ -61,7 +57,7 @@
               <ai-select
                 v-model:value="searchParams.KEIYAKU_KBN"
                 :options="KEIYAKU_KBN_CD_NAME_LIST"
-                class="max-w-72"
+                class="w-50!"
                 type="number"
               ></ai-select>
             </td>
@@ -72,7 +68,7 @@
               <ai-select
                 v-model:value="searchParams.KEIYAKU_JYOKYO"
                 :options="KEIYAKU_KBN_CD_NAME_LIST"
-                class="max-w-72"
+                class="w-50!"
                 type="number"
               ></ai-select>
             </td>
@@ -82,10 +78,10 @@
             <td>
               <a-input
                 v-model:value="searchParams.KEIYAKUSYA_NAME"
-                :maxlength="50"
-                class="w-200"
+                :maxlength="25"
+                class="w-150"
               ></a-input>
-              <span>(部分一致)</span>
+              <span class="w-40!">(部分一致)</span>
             </td>
           </a-col>
           <a-col v-bind="layout">
@@ -94,20 +90,20 @@
               <a-input
                 v-model:value="searchParams.KEIYAKUSYA_KANA"
                 :maxlength="50"
-                class="w-200"
+                class="w-150"
               ></a-input>
-              <span>(部分一致)</span>
+              <span class="w-40!">(部分一致)</span>
             </td>
           </a-col>
-          <a-col span="24">
+          <a-col v-bind="layout">
             <th>住所</th>
             <td>
               <a-input
                 v-model:value="searchParams.ADDR"
-                class="w-300"
-                :maxlength="80"
+                class="w-270"
+                :maxlength="54"
               ></a-input>
-              <span>(部分一致)</span>
+              <span class="w-65!">(部分一致)</span>
             </td>
           </a-col>
           <a-col v-bind="layout">
@@ -115,7 +111,7 @@
             <td>
               <a-input
                 v-model:value="searchParams.ADDR_TEL1"
-                class="w-72"
+                class="w-33"
                 :maxlength="14"
                 @input="handleTel"
               ></a-input>
@@ -129,6 +125,14 @@
                 v-model:value="searchParams.JIMUITAKU_CD"
                 :options="ITAKU_LIST"
               />
+            </td>
+          </a-col>
+          <a-col v-bind="layout">
+            <th>未継続・未契約者を除く</th>
+            <td>
+              <a-checkbox
+                v-model:checked="searchParams.NOZOKU_FLG"
+              ></a-checkbox>
             </td>
           </a-col>
         </a-row>
@@ -153,7 +157,7 @@
             >新規登録</a-button
           >
           <a-button
-            class="ml-60%"
+            class="ml-50%"
             type="primary"
             :disabled="!isDataSelected"
             @click="goForward(PageStatus.Detail)"
@@ -236,6 +240,7 @@
           field="KEIYAKU_KBN"
           title="契約区分"
           min-width="120"
+          align="center"
           sortable
           :params="{ order: 4 }"
         ></vxe-column>
@@ -244,6 +249,7 @@
           field="KEIYAKU_JYOKYO"
           title="契約状況"
           min-width="120"
+          align="center"
           sortable
           :params="{ order: 5 }"
         ></vxe-column>

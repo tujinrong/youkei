@@ -29,6 +29,7 @@
                   v-model:value="formData.KEIYAKUSYA_CD"
                   :disabled="!isNew"
                   :maxlength="5"
+                  class="w-20"
                 >
                 </a-input
               ></a-form-item>
@@ -89,8 +90,10 @@
                   v-model:value="formData.KEIYAKU_KBN"
                   :options="KEIYAKU_KBN_LIST"
                   split-val
+                  class="w-full"
                 ></ai-select
-              ></a-form-item>
+                ><span>(家族型、企業型、鶏以外)</span></a-form-item
+              >
             </td>
           </a-col>
           <a-col span="12">
@@ -114,7 +117,8 @@
                   :option="KEIYAKU_JYOKYO_LIST"
                   split-val
                 ></ai-select
-              ></a-form-item>
+                ><span>(継続契約、新規契約、未契約者)</span></a-form-item
+              >
             </td>
           </a-col>
           <a-col span="12" class="flex mb-2">
