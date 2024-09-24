@@ -17,16 +17,16 @@
     destroy-on-close
     @cancel="goList"
   >
-    <div class="self_adaption_table form">
+    <div class="edit_table form">
       <b>第{{ formData.KI ?? 8 }}期</b>
       <h2>1.農場情報(表示)</h2>
       <a-row>
         <a-col span="8"
-          ><read-only
+          ><read-only-pop
             th="契約者"
             th-width="110"
             :td="formData.KEIYAKUSYA_NAME"
-          ></read-only>
+          ></read-only-pop>
         </a-col>
       </a-row>
     </div>
@@ -72,9 +72,7 @@
       ></vxe-column>
     </vxe-table>
     <h2>2.農場登録情報(入力)</h2>
-
-    <div class="self_adaption_table form">
-      <a-row class="mb-2"><a-col span="24"> </a-col></a-row>
+    <div class="edit_table form">
       <a-row>
         <a-col span="24">
           <th class="required">農場番号</th>

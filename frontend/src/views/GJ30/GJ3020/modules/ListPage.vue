@@ -47,20 +47,21 @@
           <a-button type="primary" :disabled="isSearched" @click="search"
             >検索</a-button
           ><a-button type="primary" @click="reset">条件クリア</a-button>
-          <a-button
-            type="primary"
-            :disabled="!isSearched || isEditing"
-            @click="add"
+          <a-button type="primary" :disabled="!isSearched" @click="add"
             >新規登録</a-button
-          ><a-button class="danger-btn" :disabled="!isDataSelected || isEditing"
-            >削除</a-button
-          >
+          ><a-button
+            class="ml-20"
+            type="primary"
+            @click="turnExportPage"
+            :disabled="!isDataSelected"
+            >通知書発行
+          </a-button>
         </a-space>
         <close-page /></div
     ></a-card>
-    <a-card>
+    <a-card class="flex-1">
       <div class="flex justify-between">
-        <h2>1.契約区分情報(表示)</h2>
+        <h2>契約区分情報(表示)</h2>
         <a-pagination
           v-model:current="pageParams.PAGE_NUM"
           v-model:page-size="pageParams.PAGE_SIZE"
@@ -137,68 +138,10 @@
           :params="{ order: 5 }"
         >
         </vxe-column>
-      </vxe-table> </a-card
-    ><a-card class="flex-1">
-      <h2>2.契約区分情報(入力)</h2>
-      <a-space :size="20" class="mb-2">
-        <a-button class="warning-btn" :disabled="!isEditing" @click="save"
-          >保存</a-button
-        >
-        <a-button type="primary" :disabled="!isEditing" @click="cancel"
-          >キャンセル</a-button
-        >
-        <a-button
-          class="ml-20"
-          type="primary"
-          @click="turnExportPage"
-          :disabled="!isDataSelected || isEditing"
-          >通知書発行
-        </a-button>
-      </a-space>
-      <div class="parent-container">
-        <div class="self_adaption_table form max-w-300">
-          <a-row>
-            <a-col span="24">
-              <th class="required">変更年月日</th>
-              <td>
-                <a-form-item v-bind="validateInfos1.KEIYAKU_DATE_FROM">
-                  <DateJp v-model:value="formData.KEIYAKU_DATE_FROM"></DateJp>
-                </a-form-item>
-              </td>
-            </a-col>
-            <a-col span="24">
-              <read-only
-                thWidth="220"
-                th="契約区分(変更前)"
-                :td="formData.KEIYAKU_KBN_MAE"
-              />
-              <read-only
-                thWidth="220"
-                th="契約区分(変更後)"
-                :td="formData.KEIYAKU_KBN_ATO"
-              />
-            </a-col>
-
-            <a-col span="24">
-              <th class="required">入力確認有無</th>
-              <td>
-                <a-radio-group
-                  v-model:value="formData.SYORI_KBN"
-                  class="ml-2 h-full pt-1"
-                >
-                  <a-radio :value="1">入力中</a-radio>
-                  <a-radio :value="2">入力確定</a-radio>
-                </a-radio-group>
-              </td>
-            </a-col>
-          </a-row>
-        </div>
-        <div
-          v-if="!isEditing"
-          class="search-disabled-mask bg-disabled max-w-300"
-        ></div>
-      </div>
+      </vxe-table>
     </a-card>
+
+    <Detail v-model:visible="detailVisible" :editkbn="editkbn"></Detail>
   </div>
 </template>
 <script setup lang="ts">
@@ -208,10 +151,11 @@ import { onMounted, reactive, ref, toRef, computed } from 'vue'
 import useSearch from '@/hooks/useSearch'
 import { changeTableSort, mathNumber } from '@/utils/util'
 import { useRoute, useRouter } from 'vue-router'
-import { PageStatus } from '@/enum'
+import { EnumEditKbn, PageStatus } from '@/enum'
 import { VxeTableInstance } from 'vxe-table'
 import { nextTick } from 'process'
 import { SearchRowVM } from '../interface/3020/type'
+import Detail from './DetailPage.vue'
 //--------------------------------------------------------------------------
 //データ定義
 //--------------------------------------------------------------------------
@@ -223,7 +167,6 @@ const createDefaultParams = () => {
 }
 const searchParams = reactive(createDefaultParams())
 const isSearched = ref(false)
-const isEditing = ref(false)
 
 const createDefaultform = () => {
   return {
@@ -236,6 +179,8 @@ const createDefaultform = () => {
 }
 
 const formData = reactive(createDefaultform())
+const detailVisible = ref(false)
+const editkbn = ref<EnumEditKbn>(EnumEditKbn.Add)
 const LIST = ref<CmCodeNameModel[]>([])
 const tableData = ref<SearchRowVM[]>([])
 const rules = reactive({
@@ -335,25 +280,23 @@ const reset = () => {
   clear()
   clearValidate()
   isSearched.value = false
-  isEditing.value = false
 }
 //新規
 const add = () => {
-  isEditing.value = true
+  detailVisible.value = true
+  editkbn.value = EnumEditKbn.Add
 }
 //編集
 const edit = () => {
-  isEditing.value = true
+  detailVisible.value = true
+  editkbn.value = EnumEditKbn.Edit
 }
 //登録
 const save = async () => {
   await validate1()
-  isEditing.value = false
 }
 //キャンセル
-const cancel = () => {
-  isEditing.value = false
-}
+const cancel = () => {}
 
 //請求書発行
 const turnExportPage = () => {
