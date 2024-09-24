@@ -2,7 +2,7 @@
   <a-modal
     :open="modalVisible"
     centered
-    title="（GJ2021）契約者積立金・互助金単価マスタメンテナンス"
+    title="（GJ2011）契約者積立金・互助金単価マスタメンテナンス"
     width="1000px"
     :mask-closable="false"
     destroy-on-close

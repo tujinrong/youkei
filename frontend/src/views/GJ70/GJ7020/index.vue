@@ -76,14 +76,21 @@
               /></a-form-item></td
           ></a-col>
           <a-col span="24"
-            ><th>契約変更</th>
+            ><th class="required">契約変更</th>
             <td>
               <a-form-item v-bind="validateInfos.KEIYAKU_HENKO_KBN">
                 <a-space class="flex-wrap" :size="40">
                   <a-checkbox
-                    v-for="(label, key) in KEIYAKU_HENKO_KBN_LABELS"
+                    v-for="(label, key, index) in KEIYAKU_HENKO_KBN_LABELS"
                     :key="key"
                     v-model:checked="searchParams.KEIYAKU_HENKO_KBN[key]"
+                    :class="
+                      devicePixelRatio > 1.25
+                        ? ''
+                        : index === 0
+                          ? 'w-60!'
+                          : 'w-35!'
+                    "
                   >
                     {{ label }}
                   </a-checkbox></a-space
@@ -92,14 +99,21 @@
             </td></a-col
           >
           <a-col span="24"
-            ><th>請求・返還区分</th>
+            ><th class="required">請求・返還区分</th>
             <td>
               <a-form-item v-bind="validateInfos.SEIKYU_HENKAN_KBN">
                 <a-space class="flex-wrap" :size="40">
                   <a-checkbox
-                    v-for="(label, key) in SEIKYU_HENKAN_KBN_LABELS"
+                    v-for="(label, key, index) in SEIKYU_HENKAN_KBN_LABELS"
                     :key="key"
                     v-model:checked="searchParams.SEIKYU_HENKAN_KBN[key]"
+                    :class="
+                      devicePixelRatio > 1.25
+                        ? ''
+                        : index === 0
+                          ? 'w-60!'
+                          : 'w-35!'
+                    "
                   >
                     {{ label }}
                   </a-checkbox></a-space
@@ -108,14 +122,21 @@
             </td></a-col
           >
           <a-col span="24"
-            ><th>入金・振込状況</th>
+            ><th class="required">入金・振込状況</th>
             <td>
               <a-form-item v-bind="validateInfos.SYORI_JOKYO_KBN">
                 <a-space class="flex-wrap" :size="40">
                   <a-checkbox
-                    v-for="(label, key) in SYORI_JOKYO_KBN_LABELS"
+                    v-for="(label, key, index) in SYORI_JOKYO_KBN_LABELS"
                     :key="key"
                     v-model:checked="searchParams.SYORI_JOKYO_KBN[key]"
+                    :class="
+                      devicePixelRatio > 1.25
+                        ? ''
+                        : index === 0
+                          ? 'w-60!'
+                          : 'w-35!'
+                    "
                   >
                     {{ label }}
                   </a-checkbox></a-space
@@ -385,12 +406,8 @@ const SYORI_JOKYO_KBN_LABELS = {
   MI_NYUKIN_FURIKOMI: '未入金・未振込',
   ICHIBU_NYUKIN: '一部入金',
 }
-const layout = {
-  md: 24,
-  lg: 24,
-  xl: 12,
-  xxl: 12,
-}
+
+const devicePixelRatio = ref(window.devicePixelRatio)
 const cardRef = ref()
 const { height } = useElementSize(cardRef)
 const rules = reactive({
@@ -428,6 +445,9 @@ watch(
     searchParams.KEIYAKU_DATE_TO = undefined
   }
 )
+window.addEventListener('resize', function () {
+  devicePixelRatio.value = window.devicePixelRatio
+})
 //--------------------------------------------------------------------------
 //メソッド
 //--------------------------------------------------------------------------

@@ -14,10 +14,10 @@
       ><h1>（GJ7010）互助基金契約者情報検索CSVデ一夕作成</h1>
       <div class="self_adaption_table form mt-1">
         <a-row
-          ><a-col v-bind="layout"
+          ><a-col span="24"
             ><th class="required">対象期</th>
             <td>
-              <a-form-item v-bind="validateInfos.KI">
+              <a-form-item v-bind="validateInfos.KI" class="w-50!">
                 <a-input-number
                   v-model:value="searchParams.KI"
                   :min="1"
@@ -25,20 +25,15 @@
                   :maxlength="2"
                 ></a-input-number>
                 <span class="align-middle">期</span></a-form-item
-              >
-            </td></a-col
-          >
-          <a-col v-bind="layout"
-            ><th class="required">对象年月</th>
-            <td>
-              <a-form-item v-bind="validateInfos.KEIYAKU_DATE_TO">
+              ><a-form-item v-bind="validateInfos.KEIYAKU_DATE_TO">
                 <MonthJp
                   v-model:value="searchParams.KEIYAKU_DATE_TO"
                   :disabled="!searchParams.KEIYAKU_DATE_NOZOKU_FLG"
                 />　末　現在　(契約情報の契約日)</a-form-item
               >
-            </td></a-col
-          ><a-col span="24"
+            </td>
+          </a-col>
+          <a-col span="24"
             ><th>都道府県</th>
             <td>
               <a-form-item v-bind="validateInfos.KEN_CD">

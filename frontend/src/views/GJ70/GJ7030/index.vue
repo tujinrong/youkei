@@ -11,13 +11,13 @@
     class="h-full flex-col-stretch gap-12px overflow lt-sm:overflow-auto flex"
   >
     <a-card
-      ><h1>（GJ7010）互助基金契約者情報検索CSVデ一夕作成</h1>
+      ><h1>（GJ7030）互助基金契約者互助金情報検索CSVデ一夕作成</h1>
       <div class="self_adaption_table form mt-1">
         <a-row
-          ><a-col v-bind="layout"
+          ><a-col span="24"
             ><th class="required">対象期</th>
             <td>
-              <a-form-item v-bind="validateInfos.KI">
+              <a-form-item v-bind="validateInfos.KI" class="w-50!">
                 <a-input-number
                   v-model:value="searchParams.KI"
                   :min="1"
@@ -25,19 +25,14 @@
                   :maxlength="2"
                 ></a-input-number>
                 <span class="align-middle">期</span></a-form-item
-              >
-            </td></a-col
-          >
-          <a-col v-bind="layout"
-            ><th class="required">对象年月</th>
-            <td>
-              <a-form-item v-bind="validateInfos.KEISAN_DATE">
+              ><a-form-item v-bind="validateInfos.KEISAN_DATE">
                 <MonthJp
                   v-model:value="searchParams.KEISAN_DATE"
                 />　末　現在</a-form-item
               >
             </td></a-col
-          ><a-col span="24"
+          >
+          <a-col span="24"
             ><th>都道府県</th>
             <td>
               <a-form-item v-bind="validateInfos.KEN_CD">
@@ -91,7 +86,7 @@
               /></a-form-item></td
           ></a-col>
           <a-col span="24"
-            ><th>交付通知書</th>
+            ><th class="required">交付通知書</th>
             <td>
               <a-space :size="40" class="align-middle!">
                 <a-checkbox
@@ -174,7 +169,7 @@
           header-align="center"
           field="HASSEI_KAISU"
           title="認定回数"
-          width="80"
+          width="90"
           align="right"
           sortable
           :params="{ order: 1 }"
@@ -215,6 +210,7 @@
           header-align="center"
           field="KEIYAKU_KBN_NAME"
           title="契約区分"
+          align="center"
           min-width="120"
           sortable
           :params="{ order: 4 }"
@@ -222,10 +218,9 @@
         ></vxe-column>
         <vxe-column
           header-align="center"
-          align="center"
           field="KEN_CD_NAME"
           title="都道府県"
-          min-width="160"
+          min-width="120"
           sortable
           :params="{ order: 5 }"
           :resizable="true"
@@ -247,12 +242,13 @@
           title="振込予定日"
           min-width="120"
           sortable
+          formatter="jpDate"
           :params="{ order: 7 }"
           :resizable="true"
         ></vxe-column>
         <vxe-column
           header-align="center"
-          align="center"
+          align="right"
           field="KOFU_KIN_KEI"
           title="互助交付金"
           min-width="120"
