@@ -67,18 +67,10 @@
                 :options="KEI_SYURUI_CD_NAME_LIST"
                 class="max-w-40"
                 split-val
-              ></ai-select
-              ><span
-                >(1:採卵鶏「成鶏」、2:採卵鶏「育成鶏」、3:肉用鶏、4:種鶏「成鶏」、5:種鶏「育成鶏」、
-              </span>
+              ></ai-select>
             </a-form-item>
           </td>
         </a-col>
-        <a-col span="23"
-          ><span
-            >6:うずら、7:あひる、8:きじ、9:ほろほろ鳥、10:七面鳥、11:だちょう)</span
-          ></a-col
-        >
         <a-col span="23">
           <th class="required">契約羽数</th>
           <td>
