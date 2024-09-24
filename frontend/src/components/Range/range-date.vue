@@ -8,9 +8,19 @@
  * ----------------------------------------------------------------->
 <template>
   <div class="flex items-center w-full">
-    <DateJp :value="value.VALUE_FM" :disabled="disabled" @change="change1" />
+    <DateJp
+      :value="value.VALUE_FM"
+      :disabled="disabled"
+      class="w-50!"
+      @change="change1"
+    />
     <span>～</span>
-    <DateJp :value="value.VALUE_TO" :disabled="disabled" @change="change2" />
+    <DateJp
+      :value="value.VALUE_TO"
+      :disabled="disabled"
+      class="w-50!"
+      @change="change2"
+    />
   </div>
 </template>
 

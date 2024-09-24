@@ -11,6 +11,7 @@
     <a-input-number
       :value="value.VALUE_FM"
       :disabled="disabled"
+      class="w-20!"
       @change="change1"
     />
     <span v-if="unit" class="ml-1">{{ unit }}</span>
@@ -18,6 +19,7 @@
     <a-input-number
       :value="value.VALUE_TO"
       :disabled="disabled"
+      class="w-20!"
       @change="change2"
     />
     <span v-if="unit" class="ml-1">{{ unit }}</span>
