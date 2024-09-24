@@ -3,7 +3,7 @@
     v-show="detailKbn === FarmManage.Detail"
     :visible="visible"
     centered
-    title="契約農場別登録明細情報(入力)"
+    title="2.契約農場別登録明細情報(入力)"
     width="1000px"
     :body-style="{ height: '800px' }"
     :mask-closable="false"
@@ -12,7 +12,7 @@
   >
     <div class="edit_table form w-full">
       <a-row>
-        <a-col span="24">
+        <a-col span="4">
           <read-only-pop
             th="明細番号"
             thWidth="110"
@@ -21,7 +21,7 @@
         </a-col>
       </a-row>
       <a-row>
-        <a-col span="24">
+        <a-col span="22">
           <th class="required">農場</th>
           <td>
             <a-form-item v-bind="validateInfos.NOJO_CD">
@@ -38,7 +38,7 @@
         </a-col>
       </a-row>
       <a-row class="mt-1">
-        <a-col span="24">
+        <a-col span="21">
           <read-only-pop thWidth="110" th="住所" td="" :hideTd="true" />
           <read-only-pop th="　〒　" :td="formData.ADDR_POST" />
           <read-only-pop th="住所1" :td="formData.ADDR_1" />
@@ -46,9 +46,9 @@
         </a-col>
       </a-row>
       <a-row>
-        <a-col span="24">
+        <a-col span="21">
           <read-only-pop
-            thWidth="110"
+            thWidth="280"
             th=""
             :hideTd="true"
             :td="formData.ADDR_POST"
@@ -58,20 +58,28 @@
         </a-col>
       </a-row>
       <a-row>
-        <a-col span="12">
+        <a-col span="23">
           <th class="required">鶏の種類</th>
           <td>
             <a-form-item v-bind="validateInfos.KEI_SYURUI">
               <ai-select
                 v-model:value="formData.KEI_SYURUI"
                 :options="KEI_SYURUI_CD_NAME_LIST"
-                class="w-full"
+                class="max-w-40"
                 split-val
-              ></ai-select>
+              ></ai-select
+              ><span
+                >(1:採卵鶏「成鶏」、2:採卵鶏「育成鶏」、3:肉用鶏、4:種鶏「成鶏」、5:種鶏「育成鶏」、
+              </span>
             </a-form-item>
           </td>
         </a-col>
-        <a-col span="12">
+        <a-col span="23"
+          ><span
+            >6:うずら、7:あひる、8:きじ、9:ほろほろ鳥、10:七面鳥、11:だちょう)</span
+          ></a-col
+        >
+        <a-col span="23">
           <th class="required">契約羽数</th>
           <td>
             <a-form-item v-bind="validateInfos.KEIYAKU_HASU">

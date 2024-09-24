@@ -44,7 +44,8 @@
         header-align="center"
         field="NOJO_CD"
         title="農場コード"
-        min-width="100"
+        width="110"
+        align="right"
         sortable
         :params="{ order: 1 }"
         :resizable="true"
@@ -54,6 +55,7 @@
         header-align="center"
         field="NOJO_NAME"
         title="農場名"
+        width="240"
         min-width="160"
         sortable
         :params="{ order: 2 }"
@@ -64,7 +66,6 @@
         header-align="center"
         field="ADDR"
         title="農場住所"
-        min-width="400"
         sortable
         :params="{ order: 3 }"
         :resizable="false"
@@ -73,9 +74,9 @@
     <h2>2.農場登録情報(入力)</h2>
 
     <div class="self_adaption_table form">
-      <a-row class="mb-2"><a-col span="13"> </a-col></a-row>
+      <a-row class="mb-2"><a-col span="24"> </a-col></a-row>
       <a-row>
-        <a-col span="13">
+        <a-col span="24">
           <th class="required">農場番号</th>
           <td>
             <a-form-item v-bind="validateInfos.NOJO_CD">
@@ -84,28 +85,31 @@
                 :min="0"
                 :max="999"
                 :maxlength="3"
+                class="w-15"
               ></a-input-number>
             </a-form-item>
           </td>
         </a-col>
-        <a-col span="13">
+        <a-col span="24">
           <th class="required">農場名</th>
           <td>
             <a-form-item v-bind="validateInfos.NOJO_NAME">
               <a-input
                 v-model:value="formData.NOJO_NAME"
                 :maxlength="20"
+                class="w-150"
               ></a-input>
             </a-form-item>
           </td>
         </a-col>
-        <a-col span="13">
+        <a-col span="24">
           <th class="required">都道府県</th>
           <td>
             <a-form-item v-bind="validateInfos.KEN_CD">
               <ai-select
                 v-model:value="formData.KEN_CD"
                 :options="KEN_CD_NAME_LIST"
+                class="max-w-50"
                 split-val
               ></ai-select>
             </a-form-item>
@@ -113,7 +117,7 @@
         </a-col>
       </a-row>
       <a-row>
-        <a-col span="13">
+        <a-col span="24">
           <th class="required">住所</th>
           <td class="flex-col">
             <a-form-item v-bind="validateInfos.ADDR_POST">
@@ -121,7 +125,7 @@
                 <a-input
                   v-model:value="formData.ADDR_1"
                   disabled
-                  class="!w-40"
+                  class="!w-33"
                 ></a-input
               ></PostCode>
             </a-form-item>
@@ -129,24 +133,27 @@
               <a-input
                 v-model:value="formData.ADDR_2"
                 :maxlength="15"
+                class="w-80"
               ></a-input>
             </a-form-item>
             <a-input
               v-model:value="formData.ADDR_3"
               :maxlength="15"
+              class="w-80"
               @change="validate('ADDR_4')"
             ></a-input>
             <a-form-item v-bind="validateInfos.ADDR_4">
               <a-input
                 v-model:value="formData.ADDR_4"
                 :maxlength="20"
+                class="w-110"
               ></a-input>
             </a-form-item>
           </td>
         </a-col>
       </a-row>
       <a-row>
-        <a-col span="13">
+        <a-col span="24">
           <th class="required">明細番号</th>
           <td>
             <a-form-item v-bind="validateInfos.MEISAI_NO">
@@ -155,6 +162,7 @@
                 :min="0"
                 :max="999"
                 :maxlength="3"
+                class="w-15"
               ></a-input-number>
             </a-form-item>
           </td>
