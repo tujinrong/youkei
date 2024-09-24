@@ -25,11 +25,10 @@
               </a-form-item>
             </td>
           </a-col>
-          <a-col span="12">
+          <a-col span="24">
             <th class="required">対象期</th>
             <td>
-              <a-form-item v-bind="validateInfos.KI">
-                <div class="flex items-center">
+              <a-form-item v-bind="validateInfos.KI" class="w-50!">
                   <a-input-number
                     v-model:value="formData.KI"
                     :min="1"
@@ -37,24 +36,31 @@
                     :maxlength="2"
                     class="w-20"
                   />
-                  <span>(表示&入力)</span>
-                </div>
+                  <span class="!align-middle">(表示&入力)</span>
               </a-form-item>
-            </td>
-          </a-col>
-          <a-col span="12">
-            <th>認定回数</th>
-            <td>
               <a-form-item v-bind="validateInfos.HASSEI_KAISU">
-                <div class="flex items-center">
-                  <a-input v-model:value="formData.HASSEI_KAISU" style="width: 50%" />
-                  <span>(表示&入力)</span>
-                </div>
+                <span class="!align-middle">認定回数</span>
+                <a-input-number
+                  v-model:value="formData.HASSEI_KAISU"
+                  :min="1"
+                  :max="99"
+                  :maxlength="2"
+                  class="w-20"
+                />
+                <span class="!align-middle">(表示&入力)</span>
               </a-form-item>
             </td>
           </a-col>
           <a-col span="24">
-            <read-only thWidth="80" th="計算回数" :td="formData.KEISAN_KAISU" after="(表示&入力)"/>
+            <th>計算回数</th>
+            <td>
+              <a-form-item v-bind="validateInfos.HASSEI_KAISU">
+                <div class="flex items-center">
+                  <a-input v-model:value="formData.HASSEI_KAISU" class="w-20" :disabled="formData.SYORI_KBN === 1" />
+                  <span>(表示&入力)</span>
+                </div>
+              </a-form-item>
+            </td>
           </a-col>
           <a-col span="24">
             <th class="required">振込予定日</th>

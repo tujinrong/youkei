@@ -20,7 +20,14 @@
               </td>
             </a-col>
             <a-col v-bind="layout">
-              <th class="required">対象期(前期)</th>
+              <read-only
+                thWidth="220"
+                th="対象期(前期)"
+                :td="formData.KI"
+                before="第"
+                after="期"
+              />
+<!--              <th class="required">対象期(前期)</th>
               <td>
                 <a-form-item v-bind="validateInfos.KI">
                   <span class="!align-middle">第</span>
@@ -34,35 +41,28 @@
                   />
                   <span class="!align-middle">期</span>
                 </a-form-item>
-              </td>
+              </td>-->
             </a-col>
             <a-col v-bind="layout">
-              <th></th>
-              <td style="padding: 0">
-                <a-row class="w-full">
-                  <a-col span="24">
-                    <read-only-pop
-                      thWidth="220"
-                      :th="'事務委託先マスタ処理件数(' + String(formData.KI + 1) +'期)'"
-                      :td="formData.JIMUITAKU_KENSU"
-                    />
-                  </a-col>
-                  <a-col span="24">
-                    <read-only-pop
-                      thWidth="220"
-                      :th="'契約者マスタ処理件数(' + String(formData.KI + 1) +'期)'"
-                      :td="formData.KEIYAKUSYA_KENSU"
-                    />
-                  </a-col>
-                  <a-col span="24">
-                    <read-only-pop
-                      thWidth="220"
-                      :th="'農場マスタ処理件数(' + String(formData.KI + 1) +'期)'"
-                      :td="formData.NOJO_KENSU"
-                    />
-                  </a-col>
-                </a-row>
-              </td>
+              <read-only
+                thWidth="220"
+                :th="'事務委託先マスタ処理件数(' + String(formData.KI + 1) +'期)'"
+                :td="formData.JIMUITAKU_KENSU"
+              />
+            </a-col>
+            <a-col v-bind="layout">
+              <read-only
+                thWidth="220"
+                :th="'契約者マスタ処理件数(' + String(formData.KI + 1) +'期)'"
+                :td="formData.KEIYAKUSYA_KENSU"
+              />
+            </a-col>
+            <a-col v-bind="layout">
+              <read-only
+                thWidth="220"
+                :th="'農場マスタ処理件数(' + String(formData.KI + 1) +'期)'"
+                :td="formData.NOJO_KENSU"
+              />
             </a-col>
           </a-row>
           <a-row class="m-t-1">

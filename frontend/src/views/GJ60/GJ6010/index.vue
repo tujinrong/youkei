@@ -9,18 +9,30 @@
               <th class="required">処理選択</th>
               <td>
                 <a-form-item v-bind="validateInfos.SYORI_SENTAKU">
-                  <a-input-number
+                  <ai-select
                     v-model:value="formData.SYORI_SENTAKU"
-                    :min="1"
-                    :max="3"
-                    class="w-20"
+                    :options="SYORI_SENTAKU_LIST"
+                    split-val
                   />
-                  <span class="!align-middle ml-2">1: 積立金納付額取込処理&nbsp;&nbsp;2: 互助金交付額取込&nbsp;&nbsp;3: 繰越額算定処理</span>
+<!--                  <a-input-number-->
+<!--                    v-model:value="formData.SYORI_SENTAKU"-->
+<!--                    :min="1"-->
+<!--                    :max="3"-->
+<!--                    class="w-20"-->
+<!--                  />-->
+<!--                  <span class="!align-middle ml-2">1: 積立金納付額取込処理&nbsp;&nbsp;2: 互助金交付額取込&nbsp;&nbsp;3: 繰越額算定処理</span>-->
                 </a-form-item>
               </td>
             </a-col>
             <a-col v-bind="layout">
-              <th class="required">対象期(前期)</th>
+              <read-only
+                thWidth="220"
+                th="対象期(前期)"
+                :td="formData.KI"
+                before="第"
+                after="期"
+              />
+<!--              <th class="required">対象期(前期)</th>
               <td>
                 <a-form-item v-bind="validateInfos.KI">
                   <span class="!align-middle">第</span>
@@ -34,7 +46,7 @@
                   />
                   <span class="!align-middle">期</span>
                 </a-form-item>
-              </td>
+              </td>-->
             </a-col>
             <a-col v-bind="layout">
               <th class="required">１:前期積立金納付額取込処理</th>
@@ -73,35 +85,27 @@
               </td>
             </a-col>
             <a-col v-bind="layout">
-              <th></th>
-              <td style="padding: 0">
-                <a-row class="w-full">
-                  <a-col span="24">
-                    <read-only-pop
-                      thWidth="160"
-                      th="前期積立金返還人数"
-                      :td="formData.ZENKI_HENKAN_NINSU"
-                      after="(人)"
-                    />
-                  </a-col>
-                  <a-col span="24">
-                    <read-only-pop
-                      thWidth="160"
-                      th="前期積立金返還金合計"
-                      :td="formData.ZENKI_HENKAN_GOKEI"
-                      after="(円)"
-                    />
-                  </a-col>
-                  <a-col span="24">
-                    <read-only-pop
-                      thWidth="160"
-                      th="前期積立金返還率"
-                      :td="formData.ZENKI_HENKAN_RITU"
-                      after="&nbsp;&nbsp;&nbsp;&nbsp;"
-                    />
-                  </a-col>
-                </a-row>
-              </td>
+              <read-only
+                thWidth="220"
+                th="前期積立金返還人数"
+                :td="formData.ZENKI_HENKAN_NINSU"
+                after="(人)"
+              />
+            </a-col>
+            <a-col v-bind="layout">
+              <read-only
+                thWidth="220"
+                th="前期積立金返還金合計"
+                :td="formData.ZENKI_HENKAN_GOKEI"
+                after="(円)"
+              />
+            </a-col>
+            <a-col v-bind="layout">
+              <read-only
+                thWidth="220"
+                th="前期積立金返還率"
+                :td="formData.ZENKI_HENKAN_RITU"
+              />
             </a-col>
           </a-row>
           <a-row class="m-t-1">
@@ -135,13 +139,18 @@ const createDefaultParams = () => {
   return {
     KI: 8,
     SYORI_SENTAKU: 1,
-    SYORI_TYPE: 1,
+    SYORI_TYPE: 2,
     ZENKI_TUMITATE_DATE: '平成06/09/02',
     ZENKI_KOFU_DATE: '平成06/09/02',
     HENKAN_KEISAN_DATE: '平成06/09/02',
   }
 }
 const formData = reactive(createDefaultParams() as PreviewRequest)
+const SYORI_SENTAKU_LIST = ref<CmCodeNameModel[]>([
+  { CODE: 1, NAME: '積立金納付額取込処理' },
+  { CODE: 2, NAME: '互助金交付額取込' },
+  { CODE: 3, NAME: '繰越額算定処理' },
+])
 
 const layout = {
   md: 24,
