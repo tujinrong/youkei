@@ -7,12 +7,6 @@
       <div class="my-2 flex justify-between">
         <a-space :size="20">
           <a-button type="primary" @click="add">新規登録</a-button>
-          <a-button
-            type="primary"
-            :disabled="!xTableRef?.getCurrentRecord()"
-            @click="edit"
-            >変更（表示）</a-button
-          >
         </a-space>
         <close-page /></div
     ></a-card>
@@ -24,6 +18,7 @@
         :column-config="{ resizable: true }"
         :row-config="{ isCurrent: true, isHover: true }"
         :data="tableData"
+        @cell-dblclick="() => edit()"
         :empty-render="{ name: 'NotData' }"
       >
         <vxe-column
@@ -33,7 +28,9 @@
           min-width="80"
           align="center"
           :resizable="true"
-        >
+          ><template #default="{ row }">
+            <a @click="edit">{{ row.TAX_DATE_FROM }}</a>
+          </template>
         </vxe-column>
         <vxe-column
           header-align="center"
