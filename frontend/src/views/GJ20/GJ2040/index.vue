@@ -33,10 +33,10 @@
                     :min="1"
                     :max="99"
                     :maxlength="2"
-                    style="width: 120px"
+                    class="w-20!"
                     @change="handleKI(false)"
                   ></a-input-number>
-                  <span class="!align-middle">期</span>
+                  <span class="!align-middle w-20!">期</span>
                 </a-form-item>
               </td>
             </a-col>
@@ -61,7 +61,7 @@
                 <a-form-item v-bind="validateInfos.SEIKYU_DATE">
                   <DateJp
                     v-model:value="formData.SEIKYU_DATE"
-                    class="w-full"
+                    class="w-50!"
                     disabled
                   />
                 </a-form-item>
@@ -73,7 +73,7 @@
                 <a-form-item v-bind="validateInfos.NOFUKIGEN_DATE">
                   <DateJp
                     v-model:value="formData.NOFUKIGEN_DATE"
-                    class="w-full"
+                    class="w-50!"
                     :disabled="
                       formData.SYUTURYOKU_KBN === 1 ||
                       formData.SYUTURYOKU_KBN === 3
@@ -88,7 +88,7 @@
                 <a-form-item v-bind="validateInfos.SEIKYU_HAKKO_DATE">
                   <DateJp
                     v-model:value="formData.SEIKYU_HAKKO_DATE"
-                    class="w-full"
+                    class="w-50!"
                     :disabled="
                       formData.SYUTURYOKU_KBN === 1 ||
                       formData.SYUTURYOKU_KBN === 3
@@ -100,7 +100,7 @@
             <a-col v-bind="layout">
               <th class="required">発信番号</th>
               <td>
-                <a-form-item v-bind="validateInfos.KI">
+                <a-form-item v-bind="validateInfos.KI" class="w-50!">
                   <span class="!align-middle">日鶏</span>
                   <a-input
                     v-model:value="formData.KI"
@@ -108,11 +108,11 @@
                       formData.SYUTURYOKU_KBN === 1 ||
                       formData.SYUTURYOKU_KBN === 3
                     "
-                    style="width: 50%"
+                    class="w-20!"
                   />
                   <span class="!align-middle">発</span>
                 </a-form-item>
-                <a-form-item v-bind="validateInfos.KI">
+                <a-form-item v-bind="validateInfos.KI" class="w-50!">
                   <span class="!align-middle">第</span>
                   <a-input
                     v-model:value="formData.KI"
@@ -120,7 +120,7 @@
                       formData.SYUTURYOKU_KBN === 1 ||
                       formData.SYUTURYOKU_KBN === 3
                     "
-                    style="width: 50%"
+                    class="w-20!"
                   />
                   <span class="!align-middle">号</span>
                 </a-form-item>
@@ -149,7 +149,7 @@
             <a-col v-bind="layout">
               <th>返還金額を表示しない</th>
               <td>
-                <a-checkbox v-model:checked="formData.HENKAN_KINGAKU_UMU"/>
+                <a-checkbox v-model:checked="formData.HENKAN_KINGAKU_UMU" />
               </td>
             </a-col>
           </a-row>
@@ -216,7 +216,7 @@ const layout = {
   md: 24,
   lg: 24,
   xl: 24,
-  xxl: 12,
+  xxl: 24,
 }
 const host = window.location.href.includes('localhost')
   ? 'localhost:9527'

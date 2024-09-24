@@ -15,10 +15,10 @@
                     :min="1"
                     :max="99"
                     :maxlength="2"
-                    style="width: 120px"
+                    class="w-20!"
                     @change="handleKI(false)"
                   ></a-input-number>
-                  <span class="!align-middle w-20!">期</span>
+                  <span class="!align-middle">期</span>
                 </a-form-item>
               </td>
             </a-col>
