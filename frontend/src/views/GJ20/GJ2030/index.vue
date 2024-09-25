@@ -15,7 +15,7 @@
                     :min="1"
                     :max="99"
                     :maxlength="2"
-                    style="width: 120px"
+                    class="w-20!"
                     @change="handleKI(false)"
                   ></a-input-number>
                   <span class="!align-middle">期</span>
@@ -46,7 +46,10 @@
             <a-col v-bind="layout">
               <th>契約区分</th>
               <td class="flex">
-                <a-form-item v-bind="validateInfos.KEIYAKU_KBN">
+                <a-form-item
+                  v-bind="validateInfos.KEIYAKU_KBN"
+                  style="width: 40%"
+                >
                   <range-select
                     v-model:value="formData.KEIYAKU_KBN"
                     :options="KEIYAKU_KBN_CD_NAME_LIST"
@@ -198,7 +201,7 @@ const layout = {
   md: 24,
   lg: 24,
   xl: 24,
-  xxl: 12,
+  xxl: 24,
 }
 const host = window.location.href.includes('localhost')
   ? 'localhost:9527'

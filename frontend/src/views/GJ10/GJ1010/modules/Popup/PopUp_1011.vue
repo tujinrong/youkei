@@ -29,6 +29,7 @@
                   v-model:value="formData.KEIYAKUSYA_CD"
                   :disabled="!isNew"
                   :maxlength="5"
+                  class="w-20"
                 >
                 </a-input
               ></a-form-item>
@@ -41,6 +42,7 @@
                 <a-input
                   v-model:value="formData.SEISANSYA_CD"
                   :maxlength="5"
+                  class="w-20"
                   @input="
                     changeType('number', $event.target.value, 'SEISANSYA_CD')
                   "
@@ -59,7 +61,7 @@
                   v-model:value="formData.KEN_CD"
                   :options="KEN_LIST"
                   split-val
-                  class="w-full"
+                  class="max-w-50"
                 ></ai-select>
               </a-form-item>
             </td>
@@ -70,7 +72,8 @@
               <a-form-item v-bind="validateInfos.NIKKEIKYO_CD">
                 <a-input
                   v-model:value="formData.NIKKEIKYO_CD"
-                  :maxlength="10"
+                  :maxlength="5"
+                  class="w-20"
                   @input="
                     changeType('number', $event.target.value, 'SEISANSYA_CD')
                   "
@@ -89,6 +92,8 @@
                   v-model:value="formData.KEIYAKU_KBN"
                   :options="KEIYAKU_KBN_LIST"
                   split-val
+                  class="max-w-60"
+                  placeholder="家族型、企業型、鶏以外"
                 ></ai-select
               ></a-form-item>
             </td>
@@ -99,6 +104,7 @@
               <a-form-item v-bind="validateInfos.KEIYAKU_DATE">
                 <DateJp
                   v-model:value="formData.KEIYAKU_DATE"
+                  class="max-w-50"
                   :disabled="formData.NYU_HEN_DATE"
               /></a-form-item>
             </td>
@@ -112,6 +118,8 @@
                 <ai-select
                   v-model:value="formData.KEIYAKU_JYOKYO"
                   :option="KEIYAKU_JYOKYO_LIST"
+                  class="max-w-60"
+                  placeholder="継続契約、新規契約、未契約者"
                   split-val
                 ></ai-select
               ></a-form-item>
@@ -121,7 +129,11 @@
             <th>入金日、返還日(入金完了時)</th>
             <td>
               <a-form-item v-bind="validateInfos.NYU_HEN_DATE">
-                <DateJp v-model:value="formData.NYU_HEN_DATE" disabled></DateJp>
+                <DateJp
+                  v-model:value="formData.NYU_HEN_DATE"
+                  class="max-w-50"
+                  disabled
+                ></DateJp>
               </a-form-item>
             </td>
           </a-col>
@@ -136,6 +148,7 @@
                 <a-input
                   v-model:value="formData.KEIYAKUSYA_KANA"
                   :maxlength="50"
+                  class="w-160"
                   @input="
                     changeType(
                       'furikana',
@@ -155,6 +168,7 @@
                 <a-input
                   v-model:value="formData.KEIYAKUSYA_NAME"
                   :maxlength="25"
+                  class="w-160"
                   @input="
                     changeType('full', $event.target.value, 'KEIYAKUSYA_NAME')
                   "
@@ -170,6 +184,7 @@
                 <a-input
                   v-model:value="formData.DAIHYO_NAME"
                   :maxlength="25"
+                  class="w-160"
                   @input="
                     changeType('full', $event.target.value, 'DAIHYO_NAME')
                   "
@@ -189,7 +204,7 @@
                     <PostCode v-model:value="formData.ADDR_POST">
                       <a-input
                         v-model:value="formData.ADDR_1"
-                        class="!w-40"
+                        class="!w-23"
                         disabled
                       ></a-input
                     ></PostCode> </a-form-item></a-col
@@ -198,6 +213,7 @@
                     <a-input
                       v-model:value="formData.ADDR_2"
                       :maxlength="15"
+                      class="!w-80"
                       @input="changeType('full', $event.target.value, 'ADDR_2')"
                     ></a-input> </a-form-item></a-col
               ></a-row>
@@ -205,6 +221,7 @@
                 <a-input
                   v-model:value="formData.ADDR_3"
                   :maxlength="15"
+                  class="!w-80"
                   @input="changeType('full', $event.target.value, 'ADDR_3')"
                   @change="validate('ADDR_4')"
                 ></a-input>
@@ -213,6 +230,7 @@
                 <a-input
                   v-model:value="formData.ADDR_4"
                   :maxlength="20"
+                  class="!w-103"
                   @input="changeType('full', $event.target.value, 'ADDR_4')"
                 ></a-input>
               </a-form-item>
@@ -229,7 +247,8 @@
               <a-form-item v-bind="validateInfos.ADDR_TEL1">
                 <a-input
                   v-model:value="formData.ADDR_TEL1"
-                  :maxlength="15"
+                  :maxlength="14"
+                  class="w-40"
                   @input="changeType('tel', $event.target.value, 'ADDR_TEL1')"
                 ></a-input>
               </a-form-item>
@@ -240,7 +259,8 @@
             <td>
               <a-input
                 v-model:value="formData.ADDR_TEL2"
-                :maxlength="15"
+                :maxlength="14"
+                class="w-40"
                 @input="changeType('tel', $event.target.value, 'ADDR_TEL2')"
               ></a-input>
             </td>
@@ -250,7 +270,8 @@
             <td>
               <a-input
                 v-model:value="formData.ADDR_FAX"
-                :maxlength="15"
+                :maxlength="14"
+                class="w-40"
                 @input="changeType('tel', $event.target.value, 'ADDR_FAX')"
               ></a-input>
             </td>
@@ -262,6 +283,7 @@
               <a-input
                 v-model:value="formData.ADDR_E_MAIL"
                 :maxlength="50"
+                class="w-140"
                 @input="changeType('half', $event.target.value, 'ADDR_E_MAIL')"
               ></a-input>
             </td>
@@ -275,6 +297,7 @@
                 <ai-select
                   v-model:value="formData.JIMUITAKU_CD"
                   :option="ITAKU_LIST"
+                  class="max-w-150"
                   split-val
                 ></ai-select
               ></a-form-item>
@@ -302,6 +325,7 @@
                   v-model:value="formData.FURI_BANK_CD"
                   :option="BANK_LIST"
                   split-val
+                  class="max-w-65"
                   :disabled="!hasnyuryoku"
                 ></ai-select
               ></a-form-item>
@@ -320,6 +344,7 @@
                   v-model:value="formData.FURI_BANK_SITEN_CD"
                   :option="SITEN_LIST"
                   split-val
+                  class="max-w-65"
                   :disabled="!hasnyuryoku"
                 ></ai-select
               ></a-form-item>
@@ -335,6 +360,7 @@
                   v-model:value="formData.FURI_KOZA_SYUBETU"
                   :option="KOZA_SYUBETU_LIST"
                   split-val
+                  class="max-w-40"
                   :disabled="!hasnyuryoku"
                 ></ai-select
               ></a-form-item>
@@ -352,6 +378,7 @@
                 <a-input
                   v-model:value="formData.FURI_KOZA_NO"
                   :maxlength="7"
+                  class="w-20"
                   :disabled="!hasnyuryoku"
                   @input="
                     changeType('number', $event.target.value, 'FURI_KOZA_NO')
@@ -369,6 +396,7 @@
                 <a-input
                   v-model:value="formData.FURI_KOZA_MEIGI_KANA"
                   :maxlength="80"
+                  class="w-160"
                   :disabled="!hasnyuryoku"
                   @input="
                     changeType(
@@ -388,6 +416,7 @@
               <a-input
                 v-model:value="formData.FURI_KOZA_MEIGI"
                 :maxlength="40"
+                class="w-160"
                 :disabled="!hasnyuryoku"
                 @input="
                   changeType('full', $event.target.value, 'FURI_KOZA_MEIGI')
@@ -414,7 +443,10 @@
               <a-col class="w-full">
                 <th>廃業日</th>
                 <td>
-                  <DateJp v-model:value="formData.HAIGYO_DATE" />
+                  <DateJp
+                    v-model:value="formData.HAIGYO_DATE"
+                    class="max-w-50"
+                  />
                 </td>
               </a-col>
             </a-row>

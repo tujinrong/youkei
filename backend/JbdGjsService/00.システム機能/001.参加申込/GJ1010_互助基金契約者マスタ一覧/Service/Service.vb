@@ -111,6 +111,5 @@ Namespace JBD.GJS.Service.GJ1010
                 End Function)
 
         End Function
-
     End Class
 End Namespace

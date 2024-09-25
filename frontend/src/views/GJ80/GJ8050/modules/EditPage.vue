@@ -20,6 +20,7 @@
                   v-model:value="formData.BANK_CD"
                   :disabled="!isNew"
                   :maxlength="4"
+                  class="max-w-15"
                 ></a-input>
               </a-form-item>
             </td>
@@ -28,7 +29,10 @@
             <th class="required">金融機関名（ｶﾅ）</th>
             <td>
               <a-form-item v-bind="validateInfos.BANK_KANA">
-                <a-input v-model:value="formData.BANK_KANA"></a-input>
+                <a-input
+                  v-model:value="formData.BANK_KANA"
+                  class="max-w-150"
+                ></a-input>
               </a-form-item>
             </td>
           </a-col>
@@ -36,7 +40,10 @@
             <th class="required">金融機関名（漢字）</th>
             <td>
               <a-form-item v-bind="validateInfos.BANK_NAME">
-                <a-input v-model:value="formData.BANK_NAME"></a-input>
+                <a-input
+                  v-model:value="formData.BANK_NAME"
+                  class="max-w-75"
+                ></a-input>
               </a-form-item>
             </td>
           </a-col>

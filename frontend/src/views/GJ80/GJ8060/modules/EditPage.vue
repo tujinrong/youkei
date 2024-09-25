@@ -1,24 +1,21 @@
 <template>
-  <a-card :bordered="false" class="mb-2 h-full">
-    <div class="self_adaption_table form max-w-400">
-      <h1>（GJ8061）事務委託先マスタメンテナンス</h1>
+  <a-modal
+    :visible="modalVisible"
+    centered
+    title="（GJ8061）事務委託先マスタメンテナンス"
+    width="1000px"
+    :body-style="{ height: '800px', overflowY: 'scroll' }"
+    :mask-closable="false"
+    destroy-on-close
+    @cancel="goList"
+  >
+    <div class="edit_table form">
       <b>第{{ formData.KI }}期</b>
       <a-form>
-        <div class="my-2 header_operation flex justify-between w-full">
-          <a-space :size="20">
-            <a-button class="warning-btn" @click="saveData">保存</a-button>
-            <a-button class="danger-btn" :disabled="isNew" @click="deleteData"
-              >削除</a-button
-            >
-          </a-space>
-          <a-button type="primary" class="text-end" @click="goList"
-            >一覧へ</a-button
-          >
-        </div>
         <h2>事務委託先基本登録項目</h2>
         <a-row>
-          <a-col span="12">
-            <th :class="!isNew ? 'bg-readonly' : 'required'">事務委託先</th>
+          <a-col span="24">
+            <th class="required">事務委託先</th>
             <td>
               <a-form-item v-bind="validateInfos.ITAKU_CD">
                 <a-input-number
@@ -27,63 +24,69 @@
                   :max="999"
                   :maxlength="3"
                   :disabled="!isNew"
+                  class="w-15"
                 ></a-input-number>
               </a-form-item>
-            </td>
-          </a-col>
-          <a-col span="12">
+            </td> </a-col></a-row
+        ><a-row>
+          <a-col span="24">
             <th class="required">都道府県</th>
             <td>
               <a-form-item v-bind="validateInfos.KEN_CD">
                 <ai-select
                   v-model:value="formData.KEN_CD"
                   :options="KEN_CD_NAME_LIST"
-                  class="w-full"
+                  class="max-w-35"
                   type="number"
                 ></ai-select>
               </a-form-item>
-            </td>
-          </a-col>
-          <a-col span="12">
+            </td> </a-col
+        ></a-row>
+        <a-row
+          ><a-col span="24">
             <th class="required">事務委託先名称 正式</th>
             <td>
               <a-form-item v-bind="validateInfos.ITAKU_NAME">
                 <a-input
                   v-model:value="formData.ITAKU_NAME"
-                  :maxlength="50"
+                  :maxlength="25"
+                  class="max-w-110"
                 ></a-input>
               </a-form-item>
-            </td>
-          </a-col>
-          <a-col span="12">
-            <th class="required">事務委託先名称 略称</th>
+            </td> </a-col></a-row
+        ><a-row>
+          <a-col span="24">
+            <th class="required" style="text-align: end">略称</th>
             <td>
               <a-form-item v-bind="validateInfos.ITAKU_RYAKU">
                 <a-input
                   v-model:value="formData.ITAKU_RYAKU"
-                  :maxlength="30"
+                  :maxlength="15"
+                  class="max-w-80"
                 ></a-input>
               </a-form-item>
-            </td>
-          </a-col>
-          <a-col span="12">
+            </td> </a-col></a-row
+        ><a-row>
+          <a-col span="24">
             <th>代表者氏名</th>
             <td>
               <a-form-item v-bind="validateInfos.DAIHYO_NAME">
                 <a-input
                   v-model:value="formData.DAIHYO_NAME"
-                  :maxlength="50"
+                  :maxlength="25"
+                  class="max-w-110"
                 ></a-input>
               </a-form-item>
             </td>
           </a-col>
-          <a-col span="12">
+          <a-col span="24">
             <th>担当者氏名</th>
             <td>
               <a-form-item v-bind="validateInfos.TANTO_NAME">
                 <a-input
                   v-model:value="formData.TANTO_NAME"
-                  :maxlength="50"
+                  :maxlength="25"
+                  class="max-w-110"
                 ></a-input>
               </a-form-item>
             </td>
@@ -99,7 +102,7 @@
                   <a-input
                     v-model:value="formData.ADDR_1"
                     disabled
-                    class="!w-40"
+                    class="!w-30"
                   ></a-input>
                 </PostCode>
               </a-form-item>
@@ -107,17 +110,20 @@
                 <a-input
                   v-model:value="formData.ADDR_2"
                   :maxlength="15"
+                  class="max-w-90"
                 ></a-input
               ></a-form-item>
               <a-input
                 v-model:value="formData.ADDR_3"
                 :maxlength="15"
+                class="max-w-90"
                 @change="validate('ADDR_4')"
               ></a-input>
               <a-form-item v-bind="validateInfos.ADDR_4">
                 <a-input
                   v-model:value="formData.ADDR_4"
                   :maxlength="20"
+                  class="max-w-105"
                 ></a-input>
               </a-form-item>
             </td>
@@ -127,56 +133,56 @@
           <a-col>
             <th class="required">連絡先</th>
           </a-col>
-          <a-col :span="7">
-            <th class="required">電話</th>
+          <a-col :span="6">
+            <th class="required" style="width: 50px">電話</th>
             <td>
               <a-form-item v-bind="validateInfos.ADDR_TEL">
                 <a-input
                   v-model:value="formData.ADDR_TEL"
-                  :maxlength="15"
+                  :maxlength="14"
+                  class="max-w-35"
                 ></a-input>
               </a-form-item>
             </td>
           </a-col>
-          <a-col class="flex-1">
-            <th>FAX</th>
+          <a-col :span="8">
+            <th style="width: 70px; text-align: end">ＦＡＸ</th>
             <td>
               <a-input
                 v-model:value="formData.ADDR_FAX"
-                :maxlength="15"
+                :maxlength="14"
+                class="max-w-35"
               ></a-input>
             </td>
           </a-col>
         </a-row>
         <a-row>
-          <a-col>
-            <th style="border-top: none"></th>
-          </a-col>
-          <a-col class="flex-1">
+          <a-col span="24">
             <th>メールアドレス</th>
             <td>
               <a-form-item v-bind="validateInfos.ADDR_E_MAIL">
                 <a-input
                   v-model:value="formData.ADDR_E_MAIL"
                   :maxlength="50"
+                  class="max-w-130"
                 ></a-input>
               </a-form-item>
             </td> </a-col
         ></a-row>
         <a-row>
-          <a-col span="12">
-            <th class="required">金融機関入力情報有無</th>
+          <a-col span="24">
+            <th class="required" style="width: 170px">金融機関入力情報有無</th>
             <td>
               <a-radio-group
                 v-model:value="formData.BANK_INJI_KBN"
                 class="ml-2 pt-1"
               >
-                <a-radio value="1">有</a-radio>
-                <a-radio value="2">無</a-radio>
+                <a-radio :value="1">有</a-radio>
+                <a-radio :value="2">無</a-radio>
               </a-radio-group>
             </td>
           </a-col>
-          <a-col span="12">
+          <a-col span="24">
             <th>まとめ先</th>
             <td>
               <a-form-item v-bind="validateInfos.MATOMESAKI">
@@ -185,44 +191,48 @@
                   :min="0"
                   :max="9"
                   :maxlength="1"
+                  class="w-10"
                 ></a-input-number>
               </a-form-item>
             </td>
           </a-col>
-          <a-col span="12">
+          <a-col span="24">
             <th>申込書類</th>
             <td>
               <a-form-item v-bind="validateInfos.MOSIKOMISYORUI">
                 <a-input
                   v-model:value="formData.MOSIKOMISYORUI"
                   :maxlength="70"
+                  class="max-w-180"
                 ></a-input>
               </a-form-item>
             </td>
           </a-col>
-          <a-col span="12">
+          <a-col span="24">
             <th>請求書・契約書</th>
             <td>
               <a-form-item v-bind="validateInfos.SEIKYUSYO">
                 <a-input
                   v-model:value="formData.SEIKYUSYO"
                   :maxlength="15"
+                  class="max-w-48"
                 ></a-input>
               </a-form-item>
             </td>
           </a-col>
-          <a-col :lg="6" :md="8" :sm="8">
+          <a-col span="24">
             <th>入金方法</th>
             <td>
               <a-form-item v-bind="validateInfos.NYUKINHOHO">
                 <a-input
                   v-model:value="formData.NYUKINHOHO"
                   :maxlength="70"
+                  class="max-w-180"
                 ></a-input>
               </a-form-item>
             </td>
           </a-col>
-          <a-col :lg="6" :md="8" :sm="6">
+          <a-col span="24">
             <th>ラベル発行</th>
             <td>
               <a-form-item v-bind="validateInfos.LABELHAKKO">
@@ -231,11 +241,12 @@
                   :min="0"
                   :max="9"
                   :maxlength="1"
+                  class="w-10"
                 ></a-input-number>
               </a-form-item>
             </td>
           </a-col>
-          <a-col :lg="12" :md="8" :sm="8">
+          <a-col span="24">
             <th>除外フラグ</th>
             <td>
               <a-form-item v-bind="validateInfos.JYOGAI_FLG">
@@ -244,24 +255,40 @@
                   :min="0"
                   :max="99"
                   :maxlength="2"
+                  class="w-15"
                 ></a-input-number>
               </a-form-item>
             </td>
           </a-col>
-          <a-col :span="24"
+          <a-col :span="23"
             ><th>備考</th>
             <td>
-              <a-textarea v-model:value="formData.BIKO" /></td
+              <a-textarea
+                v-model:value="formData.BIKO"
+                :maxlength="127"
+                :auto-size="{ minRows: 3, maxRows: 5 }"
+              /></td
           ></a-col>
         </a-row>
       </a-form>
     </div>
-  </a-card>
+    <template #footer>
+      <div class="pt-2 flex justify-between border-t-1">
+        <a-space :size="20">
+          <a-button class="warning-btn" @click="saveData">保存</a-button>
+          <a-button class="danger-btn" :disabled="isNew" @click="deleteData"
+            >削除</a-button
+          >
+        </a-space>
+        <a-button type="primary" @click="goList">閉じる</a-button>
+      </div>
+    </template></a-modal
+  >
 </template>
 
 <script setup lang="ts">
 import { EnumEditKbn, PageStatus } from '@/enum'
-import { nextTick, onMounted, reactive, ref, watch } from 'vue'
+import { computed, nextTick, onMounted, reactive, ref, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { showDeleteModal, showInfoModal, showSaveModal } from '@/utils/modal'
 import {
@@ -281,21 +308,22 @@ import { InitDetail, Save, Delete } from '../service'
 //属性
 //---------------------------------------------------------------------------
 const props = defineProps<{
-  status: PageStatus
+  editkbn: EnumEditKbn
+  visible: boolean
 }>()
+const emit = defineEmits(['update:visible', 'getTableList'])
 
 //--------------------------------------------------------------------------
 //データ定義
 //--------------------------------------------------------------------------
 const router = useRouter()
 const route = useRoute()
-const isNew = props.status === PageStatus.New
 const editJudge = new Judgement('GJ8060')
 
 const KEN_CD_NAME_LIST = ref<CmCodeNameModel[]>([])
 let upddttm
 const formData = reactive({
-  KI: undefined as number | undefined,
+  KI: -1,
   ITAKU_CD: undefined as number | undefined,
   KEN_CD: undefined as number | undefined,
   ITAKU_NAME: '',
@@ -310,7 +338,7 @@ const formData = reactive({
   ADDR_TEL: '',
   ADDR_FAX: '',
   ADDR_E_MAIL: '',
-  BANK_INJI_KBN: undefined as number | undefined,
+  BANK_INJI_KBN: 1,
   MATOMESAKI: undefined as number | undefined,
   MOSIKOMISYORUI: '',
   SEIKYUSYO: '',
@@ -378,6 +406,12 @@ const rules = reactive({
       },
     },
   ],
+  ADDR_TEL: [
+    {
+      required: true,
+      message: ITEM_REQUIRE_ERROR.Msg.replace('{0}', '電話番号'),
+    },
+  ],
 })
 
 const { validate, clearValidate, validateInfos, resetFields } = Form.useForm(
@@ -388,41 +422,38 @@ const { validate, clearValidate, validateInfos, resetFields } = Form.useForm(
 //---------------------------------------------------------------------------
 //フック関数
 //--------------------------------------------------------------------------
-onMounted(async () => {
-  formData.KI = Number(route.query.KI)
-  if (!isNew) {
-    formData.ITAKU_CD = Number(route.query.ITAKU_CD)
-  }
-  nextTick(() => editJudge.reset())
-
-  // InitDetail({
-  //   KI: formData.KI,
-  //   KEIYAKUSYA_CD: formData.ITAKU_CD,
-  //   NOJO_CD: formData.NOJO_CD,
-  //   EDIT_KBN: isNew ? EnumEditKbn.Add : EnumEditKbn.Edit,
-  // })
-  //   .then((res) => {
-  //     KEN_CD_NAME_LIST.value = res.KEN_CD_NAME_LIST
-  //     if (!isNew) {
-  //       Object.assign(formData, res.KEIYAKUSYA_NOJO)
-  //       formData.ADDR_1 = res.KEIYAKUSYA_NOJO.ADDR_1
-  //       upddttm = res.KEIYAKUSYA_NOJO.UP_DATE
-  //     }
-  //     nextTick(() => editJudge.reset())
-  //   })
-  //   .catch((error) => {
-  //     router.push({ name: route.name, query: { refresh: '1' } })
-  //   })
-})
 
 //--------------------------------------------------------------------------
 //計算定義
 //--------------------------------------------------------------------------
+const modalVisible = computed({
+  get() {
+    return props.visible
+  },
+  set(visible) {
+    emit('update:visible', visible)
+  },
+})
+const isNew = computed(() => (props.editkbn === EnumEditKbn.Add ? true : false))
 
 //--------------------------------------------------------------------------
 //監視定義
 //--------------------------------------------------------------------------
-
+watch(
+  () => props.visible,
+  (newValue) => {
+    if (newValue) {
+      // formData.KI = 8
+      if (!isNew.value) {
+        // formData.ITAKU_CD = 6
+      }
+    }
+    nextTick(() => {
+      editJudge.reset()
+      clearValidate()
+    })
+  }
+)
 watch(formData, () => editJudge.setEdited())
 
 //都道府県を選択した場合、住所（住所１）の値をセットする
@@ -448,17 +479,21 @@ watch(
 //--------------------------------------------------------------------------
 //メソッド
 //--------------------------------------------------------------------------
+const closeModal = () => {
+  resetFields()
+  clearValidate()
+  modalVisible.value = false
+}
 //画面遷移
 const goList = () => {
   editJudge.judgeIsEdited(() => {
-    resetFields()
-    router.push({ name: route.name })
+    closeModal()
   })
 }
 
 //登録処理
 const saveData = async () => {
-  if (!isNew) {
+  if (!isNew.value) {
     if (!editJudge.isPageEdited()) {
       showInfoModal({
         content: '変更したデータはありません。',
@@ -474,11 +509,11 @@ const saveData = async () => {
         await Save({
           KEIYAKUSYA_NOJO: {
             ...formData,
-            UP_DATE: isNew ? undefined : upddttm,
+            UP_DATE: isNew.value ? undefined : upddttm,
           },
-          EDIT_KBN: isNew ? EnumEditKbn.Add : EnumEditKbn.Edit,
+          EDIT_KBN: isNew.value ? EnumEditKbn.Add : EnumEditKbn.Edit,
         })
-        router.push({ name: route.name, query: { refresh: '1' } })
+        closeModal()
         message.success(SAVE_OK_INFO.Msg)
       } catch (error) {}
     },
@@ -499,7 +534,7 @@ const deleteData = () => {
           UP_DATE: upddttm,
           EDIT_KBN: EnumEditKbn.Edit,
         })
-        router.push({ name: route.name, query: { refresh: '1' } })
+        closeModal()
         message.success(DELETE_OK_INFO.Msg)
       } catch (error) {}
     },
@@ -509,11 +544,6 @@ const deleteData = () => {
 
 <style scoped lang="scss">
 th {
-  min-width: 120px;
-}
-
-:deep(.ant-form-item) {
-  width: 100%;
-  margin-bottom: 0;
+  width: 155px;
 }
 </style>

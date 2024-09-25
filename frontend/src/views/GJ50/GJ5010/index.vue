@@ -11,7 +11,7 @@
     <a-card :bordered="false" class="h-full min-h-500px">
       <div>
         <h1>（GJ5010）互助基金納付·互助金交付·基金残高管理表</h1>
-        <div class="self_adaption_table form max-w-200" ref="headRef">
+        <div class="self_adaption_table form" ref="headRef">
           <a-row>
             <a-col span="24">
               <th class="required">対象期</th>
@@ -24,6 +24,7 @@
                     :max="99"
                     :maxlength="2"
                     style="width: 120px"
+                    class="w-20!"
                   ></a-input-number>
                   <span class="!align-middle">期</span>
                 </a-form-item>

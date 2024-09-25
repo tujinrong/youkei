@@ -63,7 +63,7 @@ function isNumber(value) {
 }
 .ellipsis1 {
   padding: 0px 6px !important;
-  padding-top: 4px !important;
+  padding-top: 6px !important;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;

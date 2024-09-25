@@ -27,11 +27,15 @@
               </a-form-item>
             </td>
           </a-col>
-          <a-col :md="24" :lg="24" :xl="12" :xxl="12">
+          <a-col span="24">
             <th class="required">役職名</th>
             <td>
               <a-form-item v-bind="validateInfos.YAKUMEI">
-                <a-input v-model:value="formData.YAKUMEI" :maxlength="30" />
+                <a-input
+                  v-model:value="formData.YAKUMEI"
+                  :maxlength="30"
+                  class="max-w-145"
+                />
               </a-form-item>
             </td>
           </a-col>
@@ -56,32 +60,37 @@
           <a-col span="24">
             <th class="required">住所</th>
             <a-row class="flex-1">
-              <a-col :md="24" :lg="24" :xl="12" :xxl="10">
+              <a-col span="24">
                 <td>
                   <a-form-item v-bind="validateInfos.POST">
-                    <a-input v-model:value="formData.POST" :maxlength="8"
-                  /></a-form-item>
-                </td>
-              </a-col>
-              <a-col :md="24" :lg="24" :xl="24" :xxl="18">
-                <td>
-                  <a-form-item v-bind="validateInfos.ADDR1">
-                    <a-input v-model:value="formData.ADDR1" />
+                    <a-input
+                      v-model:value="formData.POST"
+                      :maxlength="8"
+                      class="max-w-35.5"
+                    />
                   </a-form-item>
                 </td>
               </a-col>
-              <a-col :md="24" :lg="24" :xl="24" :xxl="18">
+              <a-col span="24">
                 <td>
-                  <a-input v-model:value="formData.ADDR2" />
+                  <a-form-item v-bind="validateInfos.ADDR1">
+                    <a-input v-model:value="formData.ADDR1" class="max-w-220" />
+                  </a-form-item>
                 </td>
               </a-col>
-              <a-col :md="24" :lg="24" :xl="12" :xxl="6">
+              <a-col :md="24" :lg="24" :xl="24" :xxl="16">
+                <td>
+                  <a-input v-model:value="formData.ADDR2" class="max-w-228" />
+                </td>
+              </a-col>
+              <a-col :md="24" :lg="24" :xl="12" :xxl="8">
                 <th class="required">発行番号・漢字</th>
                 <td>
                   <a-form-item v-bind="validateInfos.HAKKO_NO_KANJI">
                     <a-input
                       v-model:value="formData.HAKKO_NO_KANJI"
                       :maxlength="4"
+                      class="max-w-40"
                     />
                   </a-form-item>
                 </td>
@@ -91,7 +100,7 @@
           <a-col span="24">
             <th class="required">連絡先１</th>
             <a-row class="flex-1">
-              <a-col :md="24" :lg="24" :xl="12" :xxl="8">
+              <a-col :md="24" :lg="24" :xl="12" :xxl="6">
                 <th class="required">電話１</th>
                 <td>
                   <a-form-item v-bind="validateInfos.TEL1">
@@ -99,7 +108,7 @@
                   /></a-form-item>
                 </td>
               </a-col>
-              <a-col :md="24" :lg="24" :xl="12" :xxl="8">
+              <a-col :md="24" :lg="24" :xl="12" :xxl="6">
                 <th class="required">ＦＡＸ１</th>
                 <td>
                   <a-form-item v-bind="validateInfos.FAX1">
@@ -107,7 +116,7 @@
                   /></a-form-item>
                 </td>
               </a-col>
-              <a-col :md="24" :lg="24" :xl="12" :xxl="8">
+              <a-col :md="24" :lg="24" :xl="12" :xxl="12">
                 <th>E-mail１</th>
                 <td>
                   <a-input v-model:value="formData.E_MAIL1" :maxlength="30" />
@@ -118,19 +127,19 @@
           <a-col span="24">
             <th>連絡先２</th>
             <a-row class="flex-1">
-              <a-col :md="24" :lg="24" :xl="12" :xxl="8">
+              <a-col :md="24" :lg="24" :xl="12" :xxl="6">
                 <th>電話２</th>
                 <td>
                   <a-input v-model:value="formData.TEL2" :maxlength="13" />
                 </td>
               </a-col>
-              <a-col :md="24" :lg="24" :xl="12" :xxl="8">
+              <a-col :md="24" :lg="24" :xl="12" :xxl="6">
                 <th>ＦＡＸ２</th>
                 <td>
                   <a-input v-model:value="formData.FAX2" :maxlength="13" />
                 </td>
               </a-col>
-              <a-col :md="24" :lg="24" :xl="12" :xxl="8">
+              <a-col :md="24" :lg="24" :xl="12" :xxl="12">
                 <th>E-mail２</th>
                 <td>
                   <a-input v-model:value="formData.E_MAIL2" :maxlength="30" />
@@ -138,12 +147,20 @@
               </a-col>
             </a-row>
           </a-col>
-          <a-col span="24">
+          <a-col :md="24" :lg="24" :xl="12" :xxl="16">
             <th class="required">ホームページURL</th>
             <td>
               <a-form-item v-bind="validateInfos.HP_URL">
                 <a-input v-model:value="formData.HP_URL" :maxlength="50"
               /></a-form-item>
+            </td>
+          </a-col>
+          <a-col :md="24" :lg="24" :xl="12" :xxl="8">
+            <th class="required">登録番号</th>
+            <td>
+              <a-form-item v-bind="validateInfos.TOUROKU_NO">
+                <a-input v-model:value="formData.TOUROKU_NO" :maxlength="14" />
+              </a-form-item>
             </td>
           </a-col>
         </a-row>
@@ -176,7 +193,7 @@
                   </a-form-item>
                 </td>
               </a-col>
-              <a-col :md="24" :lg="12" :xl="12" :xxl="6">
+              <a-col :md="24" :lg="12" :xl="12" :xxl="8">
                 <th class="required">口座種別</th>
                 <td>
                   <a-form-item v-bind="validateInfos.FURI_KOZA_SYUBETU">
@@ -188,7 +205,7 @@
                   </a-form-item>
                 </td>
               </a-col>
-              <a-col :md="24" :lg="12" :xl="12" :xxl="6">
+              <a-col :md="24" :lg="12" :xl="12" :xxl="8">
                 <th class="required">口座番号</th>
                 <td>
                   <a-form-item v-bind="validateInfos.FURI_KOZA_NO">
@@ -203,7 +220,7 @@
                   </a-form-item>
                 </td>
               </a-col>
-              <a-col :md="24" :lg="12" :xl="12" :xxl="6">
+              <a-col :md="24" :lg="12" :xl="12" :xxl="8">
                 <th class="required">種別コード</th>
                 <td>
                   <a-form-item v-bind="validateInfos.FURI_SYUBETU">
@@ -384,6 +401,7 @@ const formData = reactive<DetailVM>({
   FAX2: '',
   E_MAIL2: '',
   HP_URL: '',
+  TOUROKU_NO: '',
   FURI_BANK_CD: '',
   FURI_BANK_SITEN_CD: '',
   FURI_KOZA_SYUBETU: 0,
@@ -400,7 +418,6 @@ const formData = reactive<DetailVM>({
   KOFU_KAISYA_CD: 0,
   KOFU_KAISYA_NAME: '',
   KYOKAI_KBN: 0,
-  TOUROKU_NO: '',
 })
 
 /**振込口座プルダウンリスト */
@@ -476,6 +493,12 @@ const rules = reactive({
     {
       required: true,
       message: ITEM_REQUIRE_ERROR.Msg.replace('{0}', 'ホームページURL'),
+    },
+  ],
+  TOUROKU_NO: [
+    {
+      required: true,
+      message: ITEM_REQUIRE_ERROR.Msg.replace('{0}', '登録番号'),
     },
   ],
   FURI_BANK_CD: [

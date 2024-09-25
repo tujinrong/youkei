@@ -85,6 +85,7 @@
     :user-data="userData"
   />
 </template>
+
 <script setup lang="ts">
 import { useElementSize } from '@vueuse/core'
 import { reactive, ref, toRef, watch } from 'vue'
@@ -102,7 +103,7 @@ const tableData = ref<SearchRowVM[]>([
   {
     USER_ID: 'gjs',
     USER_NAME: 'テスト管理者',
-    SIYO_KBN: 10,
+    SIYO_KBN: '管理者',
     TEISI_DATE: undefined,
     TEISI_RIYU: '',
   },

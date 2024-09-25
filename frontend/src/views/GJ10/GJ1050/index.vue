@@ -17,15 +17,15 @@
               <th class="required">対象期</th>
               <td>
                 <a-form-item v-bind="validateInfos.KI">
-                  <span class="!align-middle">第</span>
+                  <span class="!align-middle">第 </span>
                   <a-input-number
                     v-model:value="formData.KI"
                     :min="1"
                     :max="99"
                     :maxlength="2"
-                    style="width: 120px"
+                    class="w-15"
                   ></a-input-number>
-                  <span class="!align-middle">期</span>
+                  <span class="!align-middle"> 期</span>
                 </a-form-item>
               </td>
             </a-col>
@@ -47,6 +47,7 @@
                 <range-select
                   v-model:value="formData.KEIYAKU_KBN"
                   :options="LIST"
+                  class="max-w-110"
                 />
               </td>
             </a-col>
@@ -58,6 +59,7 @@
                     <a-checkbox
                       v-for="(label, key) in KEIYAKU_JYOKYO_LABELS"
                       :key="key"
+                      class="w-30"
                       v-model:checked="formData.KEIYAKU_JYOKYO[key]"
                     >
                       {{ label }}
@@ -74,6 +76,7 @@
                     <a-checkbox
                       v-for="(label, key) in NYURYOKU_JYOKYO_LABELS"
                       :key="key"
+                      class="w-30"
                       v-model:checked="formData.NYURYOKU_JYOKYO[key]"
                     >
                       {{ label }}
@@ -89,6 +92,7 @@
                   <range-select
                     v-model:value="formData.ITAKU_CD"
                     :options="LIST"
+                    class="max-w-110"
                 /></a-form-item>
               </td>
             </a-col>
@@ -186,7 +190,7 @@ const layout = {
   md: 24,
   lg: 24,
   xl: 24,
-  xxl: 12,
+  xxl: 24,
 }
 const rules = reactive({
   KI: [

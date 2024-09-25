@@ -22,7 +22,7 @@
                   :max="99"
                   :maxlength="2"
                   :disabled="isSearched"
-                  class="w-full"
+                  class="w-20"
                   @change="getInitData(searchParams.KI, false)"
                 ></a-input-number>
               </a-form-item>
@@ -36,6 +36,7 @@
                   v-model:value="searchParams.KEIYAKUSYA_CD"
                   :options="KEIYAKUSYA_CD_NAME_LIST"
                   split-val
+                  class="max-w-150"
                   :disabled="isSearched"
                 ></ai-select>
               </a-form-item>
@@ -114,6 +115,7 @@
           title="移動羽数"
           min-width="120px"
           sortable
+          align="right"
           :params="{ order: 3 }"
           :resizable="true"
         ></vxe-column>
@@ -131,6 +133,7 @@
           field="KEIYAKU_HASU_MOTO_ATO"
           title="契約羽数(移動元)"
           min-width="150px"
+          align="right"
           sortable
           :params="{ order: 5 }"
           :resizable="true"
@@ -150,6 +153,7 @@
           field="KEIYAKU_HASU_SAKI_ATO"
           title="契約羽数(移動先)"
           min-width="150px"
+          align="right"
           sortable
           :params="{ order: 7 }"
           :resizable="true"
@@ -182,26 +186,29 @@
       <div class="parent-container">
         <div class="self_adaption_table form w-full">
           <a-row>
-            <a-col span="12">
+            <a-col span="24">
               <th class="required">鶏の種類</th>
               <td>
                 <a-form-item v-bind="validateInfos.TORI_KBN">
                   <ai-select
                     v-model:value="formData.TORI_KBN"
                     :options="LIST"
-                    class="w-full"
+                    class="max-w-50"
                     split-val
                   ></ai-select>
+                  <span>
+                    (1:採卵鶏「成鶏」、2:採卵鶏「育成鶏」、3:肉用鶏、4:種鶏「成鶏」、5:種鶏「育成鶏」、6:うずら、7:あひる、8:きじ、9:ほろほろ鳥、10:七面鳥、11:だちょう)</span
+                  >
                 </a-form-item>
               </td> </a-col
-            ><a-col span="12">
+            ><a-col span="24">
               <th class="required">移動羽数</th>
               <td>
                 <a-form-item v-bind="validateInfos.IDO_HASU">
                   <a-input-number
                     v-model:value="formData.IDO_HASU"
                     v-bind="{ ...mathNumber }"
-                    class="w-full"
+                    class="w-30"
                   ></a-input-number>
                 </a-form-item>
               </td>
@@ -213,6 +220,7 @@
                   <ai-select
                     v-model:value="formData.NOJO_CD_MOTO"
                     :options="LIST"
+                    class="max-w-250"
                     split-val
                   ></ai-select>
                 </a-form-item>
@@ -249,6 +257,7 @@
                   <ai-select
                     v-model:value="formData.NOJO_CD_SAKI"
                     :options="LIST"
+                    class="max-w-250"
                     split-val
                   ></ai-select>
                 </a-form-item>
@@ -279,15 +288,18 @@
                 :td="formData.KEIYAKU_HASU_SAKI_ATO"
               />
             </a-col>
-            <a-col span="12">
+            <a-col span="24">
               <th class="required">移動年月日</th>
               <td>
                 <a-form-item v-bind="validateInfos.KEIYAKU_DATE_FROM">
-                  <DateJp v-model:value="formData.KEIYAKU_DATE_FROM"></DateJp>
+                  <DateJp
+                    v-model:value="formData.KEIYAKU_DATE_FROM"
+                    class="max-w-50"
+                  ></DateJp>
                 </a-form-item>
               </td>
             </a-col>
-            <a-col span="12">
+            <a-col span="24">
               <th class="required">入力確認有無</th>
               <td>
                 <a-radio-group
@@ -389,10 +401,10 @@ const tableDefault = {
 const isEditing = ref(false)
 const isSearched = ref(false)
 const layout = {
-  md: 12,
-  lg: 12,
-  xl: 12,
-  xxl: 6,
+  md: 24,
+  lg: 24,
+  xl: 24,
+  xxl: 24,
 }
 const rules = reactive({
   KI: [

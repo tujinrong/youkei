@@ -11,7 +11,7 @@
     <a-card :bordered="false" class="h-full min-h-500px">
       <div>
         <h1>（GJ1040）契約者別契約情報入力確認チエックリスト作成処理</h1>
-        <div class="self_adaption_table form max-w-200" ref="headRef">
+        <div class="self_adaption_table form" ref="headRef">
           <a-row>
             <a-col span="24">
               <th class="required">対象期</th>
@@ -23,7 +23,7 @@
                     :min="1"
                     :max="99"
                     :maxlength="2"
-                    style="width: 120px"
+                    class="w-15"
                   ></a-input-number>
                   <span class="!align-middle">期</span>
                 </a-form-item>
@@ -40,6 +40,7 @@
                   <range-date
                     v-model:value="formData.REG_DATE"
                     :disabled="!CHOOSE_REG_DATE"
+                    class="max-w-110"
                 /></a-form-item>
               </td>
             </a-col>
@@ -57,6 +58,7 @@
                   <range-date
                     v-model:value="formData.UP_DATE"
                     :disabled="CHOOSE_REG_DATE"
+                    class="max-w-110"
                 /></a-form-item>
               </td>
             </a-col>
@@ -67,6 +69,7 @@
                   <range-select
                     v-model:value="formData.KEIYAKU_KBN"
                     :options="LIST"
+                    class="max-w-110"
                 /></a-form-item>
               </td>
             </a-col>
@@ -78,6 +81,7 @@
                     <a-checkbox
                       v-for="(label, key) in KEIYAKU_JYOKYO_LABELS"
                       :key="key"
+                      class="w-30"
                       v-model:checked="formData.KEIYAKU_JYOKYO[key]"
                     >
                       {{ label }}
@@ -94,6 +98,7 @@
                     <a-checkbox
                       v-for="(label, key) in NYURYOKU_JYOKYO_LABELS"
                       :key="key"
+                      class="w-30"
                       v-model:checked="formData.NYURYOKU_JYOKYO[key]"
                     >
                       {{ label }}
@@ -110,6 +115,7 @@
                     <a-checkbox
                       v-for="(label, key) in KEIYAKUBI_LABELS"
                       :key="key"
+                      class="w-30"
                       v-model:checked="formData.KEIYAKUBI[key]"
                       @change="handleKeiyakubi"
                     >
@@ -125,6 +131,7 @@
                 <range-date
                   v-model:value="formData.KEIYAKUBI_YMD"
                   :disabled="!formData.KEIYAKUBI.NYURYOKU_NOMI"
+                  class="max-w-110"
                 /></td
             ></a-col>
             <a-col span="24">
@@ -134,6 +141,7 @@
                   <range-select
                     v-model:value="formData.NYURYOKUSYA_CD"
                     :options="LIST"
+                    class="max-w-230"
                 /></a-form-item>
               </td>
             </a-col>

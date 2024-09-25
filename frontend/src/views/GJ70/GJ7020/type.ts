@@ -27,10 +27,10 @@ export interface SearchRequest extends DaRequestBase {
   KI?: number;
 
   /** 都道府県 */
-  KEN_CD?: CmCodeFmToModel;
+  KEN_CD: CmCodeFmToModel;
 
   /** 契約者番号 */
-  KEIYAKUSYA_CD?: CmCodeFmToModel;
+  KEIYAKUSYA_CD: CmCodeFmToModel;
 
   /** 契約区分 */
   KEIYAKU_KBN?: CmCodeFmToModel;
@@ -42,25 +42,25 @@ export interface SearchRequest extends DaRequestBase {
   JIMUITAKU_CD?: CmCodeFmToModel;
 
   /** 契約変更 */
-  KEIYAKU_HENKO_KBN?: KeiyakuHenkoKbn;
+  KEIYAKU_HENKO_KBN: KeiyakuHenkoKbn;
 
   /** 請求・返還区分 */
-  SEIKYU_HENKAN_KBN?: SeikyuHenkanKbn;
+  SEIKYU_HENKAN_KBN: SeikyuHenkanKbn;
 
   /** 入金・振込状況 */
-  SYORI_JOKYO_KBN?: SyoriJokyoKbn;
+  SYORI_JOKYO_KBN: SyoriJokyoKbn;
 
   /** 請求・返還日 */
-  SEIKYU_DATE?: CmDateFmToModel;
+  SEIKYU_DATE: CmDateFmToModel;
 
   /** 入金・振込日 */
-  NYUKIN_DATE?: CmDateFmToModel;
+  NYUKIN_DATE: CmDateFmToModel;
 
   /** 出力項目選択 */
-  SYUTURYOKU_KOMOKU_SENTAKU?: number;
+  SYUTURYOKU_KOMOKU_SENTAKU: number;
 
   /** 検索方法 */
-  SEARCH_METHOD?: EnumAndOr;
+  SEARCH_METHOD: EnumAndOr;
 }
 /** CSV出力処理_一覧画面リクエスト */
 export interface CsvExportRequest {

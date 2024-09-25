@@ -1,19 +1,16 @@
 <template>
   <a-card class="h-full">
     <h1>（GJ3011）互助基金契約者情報変更(增羽) 請求書発行</h1>
-    <div class="self_adaption_table form mt-1 max-w-300">
+    <div class="self_adaption_table form mt-1">
       <b>第{{ searchParams.KI }}期</b>
 
       <a-row
-        ><a-col :span="24"
-          ><th class="bg-readonly">契約者</th>
-          <td>
-            <ai-select
-              :value="searchParams.KEIYAKUSYA_CD"
-              disabled
-              :options="LIST"
-            ></ai-select>
-          </td> </a-col
+        ><a-col :span="24">
+          <read-only
+            th="契約者"
+            th-width="100"
+            td="47074:亜伊伊伊伊（伊）"
+          ></read-only></a-col
       ></a-row>
       <a-row
         ><a-col :span="24"
@@ -59,7 +56,9 @@
         ><a-col :span="24"
           ><th class="required">発信番号</th>
           <td>
-            <a-form-item v-bind="validateInfos.SEIKYU_HAKKO_NO_NEN"
+            <a-form-item
+              v-bind="validateInfos.SEIKYU_HAKKO_NO_NEN"
+              class="w-80!"
               >日鶏
               <a-input
                 v-model:value="searchParams.SEIKYU_HAKKO_NO_NEN"

@@ -1,7 +1,5 @@
 <template>
-  <div
-    class="h-full min-h-500px flex-col-stretch gap-12px overflow-hidden lt-sm:overflow-auto flex"
-  >
+  <div class="min-h-fit min-h-500px flex-col-stretch gap-12px flex">
     <a-card ref="headRef" :bordered="false">
       <h1>（GJ8050）金融機関一覧</h1>
       <div class="self_adaption_table form mt-1">
@@ -13,16 +11,20 @@
                 <a-input
                   v-model:value="searchParams.BANK_CD"
                   :maxlength="4"
+                  class="max-w-15"
                 ></a-input>
               </a-form-item>
             </td>
           </a-col>
-
           <a-col v-bind="layout">
             <th>金融機関名（ｶﾅ）</th>
             <td>
               <a-form-item>
-                <a-input v-model:value="searchParams.BANK_KANA"></a-input>
+                <a-input
+                  v-model:value="searchParams.BANK_KANA"
+                  :maxlength="60"
+                  class="max-w-150"
+                ></a-input>
               </a-form-item>
             </td>
           </a-col>
@@ -30,7 +32,11 @@
             <th>金融機関名（漢字）</th>
             <td>
               <a-form-item>
-                <a-input v-model:value="searchParams.BANK_NAME"></a-input>
+                <a-input
+                  v-model:value="searchParams.BANK_NAME"
+                  :maxlength="30"
+                  class="max-w-75"
+                ></a-input>
               </a-form-item>
             </td>
           </a-col>
@@ -49,15 +55,17 @@
         <a-space :size="20">
           <a-button type="primary" @click="searchAll()">検索</a-button>
           <a-button type="primary" @click="reset">条件クリア</a-button>
-          <a-button class="ml-20" type="primary" @click="forwardNew1"
+          <a-button class="ml-50%" type="primary" @click="forwardNew1"
             >新規登録</a-button
           >
-          <a-button type="primary" @click="preview1">プレビュー</a-button>
+          <a-button class="ml-70%" type="primary" @click="preview1"
+            >プレビュー</a-button
+          >
         </a-space>
         <close-page />
       </div>
     </a-card>
-    <a-card :bordered="false" ref="cardRef">
+    <a-card :bordered="false" ref="cardRef1">
       <a-pagination
         v-model:current="pageParams.PAGE_NUM"
         v-model:page-size="pageParams.PAGE_SIZE"
@@ -71,7 +79,7 @@
         class="mt-2"
         ref="xTableRef"
         :column-config="{ resizable: true }"
-        :height="height - 65"
+        :height="height1 - 70"
         :row-config="{ isCurrent: true, isHover: true }"
         :data="bankTableData"
         :sort-config="{ trigger: 'cell', orders: ['desc', 'asc'] }"
@@ -83,7 +91,8 @@
           header-align="center"
           field="BANK_CD"
           title="金融機関"
-          min-width="100"
+          width="150"
+          align="center"
           sortable
           :params="{ order: 1 }"
           :resizable="true"
@@ -96,7 +105,7 @@
           header-align="center"
           field="BANK_KANA"
           title="金融機関名（ｶﾅ）"
-          min-width="160"
+          min-width="400"
           sortable
           :params="{ order: 2 }"
           :resizable="true"
@@ -106,7 +115,7 @@
           header-align="center"
           field="BANK_NAME"
           title="金融機関名（漢字）"
-          min-width="400"
+          width="300"
           sortable
           :params="{ order: 3 }"
           :resizable="false"
@@ -122,6 +131,7 @@
                 <a-input
                   v-model:value="searchParams2.SITEN_CD"
                   :maxlength="3"
+                  class="max-w-15"
                 ></a-input>
               </a-form-item>
             </td>
@@ -134,6 +144,7 @@
                 <a-input
                   v-model:value="searchParams2.SITEN_KANA"
                   :maxlength="20"
+                  class="max-w-150"
                 ></a-input>
               </a-form-item>
             </td>
@@ -145,6 +156,7 @@
                 <a-input
                   v-model:value="searchParams2.SITEN_NAME"
                   :maxlength="20"
+                  class="max-w-75"
                 ></a-input>
               </a-form-item>
             </td>
@@ -164,15 +176,17 @@
         <a-space :size="20">
           <a-button type="primary" @click="searchAll2()">検索</a-button>
           <a-button type="primary" @click="reset2">条件クリア</a-button>
-          <a-button class="ml-20" type="primary" @click="forwardNew2"
+          <a-button class="ml-50%" type="primary" @click="forwardNew2"
             >新規登録</a-button
           >
-          <a-button type="primary" @click="preview2">プレビュー</a-button>
+          <a-button class="ml-70%" type="primary" @click="preview2"
+            >プレビュー</a-button
+          >
         </a-space>
       </div>
       <div v-if="!isSelectBank" class="search-disabled-mask bg-disabled"></div
     ></a-card>
-    <a-card class="flex-1">
+    <a-card ref="cardRef2" class="mb-2">
       <a-pagination
         v-model:current="pageParams2.PAGE_NUM"
         v-model:page-size="pageParams2.PAGE_SIZE"
@@ -187,7 +201,7 @@
         class="mt-2"
         ref="xTableRef2"
         :column-config="{ resizable: true }"
-        :height="height - 500"
+        :height="height2 - 70"
         :row-config="{ isCurrent: true, isHover: true }"
         :data="sitanTableData"
         :sort-config="{ trigger: 'cell', orders: ['desc', 'asc'] }"
@@ -199,7 +213,8 @@
           header-align="center"
           field="BANK_CD"
           title="金融機関"
-          min-width="100"
+          width="150"
+          align="center"
           sortable
           :params="{ order: 1 }"
           :resizable="true"
@@ -209,7 +224,8 @@
           header-align="center"
           field="SITEN_CD"
           title="支店コード"
-          min-width="160"
+          width="130"
+          align="center"
           sortable
           :params="{ order: 2 }"
           :resizable="true"
@@ -234,7 +250,7 @@
           header-align="center"
           field="SITEN_NAME"
           title="支店名（漢字）"
-          min-width="400"
+          width="400"
           sortable
           :params="{ order: 4 }"
           :resizable="false"
@@ -331,12 +347,14 @@ const headRef = ref(null)
 const previewName = ref('')
 const layout = {
   md: 24,
-  lg: 12,
-  xl: 8,
-  xxl: 6,
+  lg: 24,
+  xl: 24,
+  xxl: 24,
 }
-const cardRef = ref()
-const { height } = useElementSize(cardRef)
+const cardRef1 = ref()
+const { height: height1 } = useElementSize(cardRef1)
+const cardRef2 = ref()
+const { height: height2 } = useElementSize(cardRef2)
 const currentRow = ref<SearchBankRowVM | null>(null)
 const currentRow2 = ref<SearchSitenRowVM | null>(null)
 const host = window.location.href.includes('localhost')

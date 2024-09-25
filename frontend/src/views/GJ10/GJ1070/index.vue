@@ -23,7 +23,7 @@
                     :min="1"
                     :max="99"
                     :maxlength="2"
-                    style="width: 120px"
+                    class="w-15"
                   ></a-input-number>
                   <span class="!align-middle">期</span>
                 </a-form-item>
@@ -36,6 +36,7 @@
                   <range-select
                     v-model:value="formData.KEIYAKU_KBN"
                     :options="LIST"
+                    class="max-w-110"
                 /></a-form-item>
               </td>
             </a-col>
@@ -46,6 +47,7 @@
                   <range-select
                     v-model:value="formData.TORI_KBN"
                     :options="LIST"
+                    class="max-w-110"
                 /></a-form-item>
               </td>
             </a-col>
@@ -53,7 +55,10 @@
               <th>都道府県</th>
               <td class="flex">
                 <a-form-item v-bind="validateInfos.KEN_CD">
-                  <range-select v-model:value="formData.KEN_CD" :options="LIST"
+                  <range-select
+                    v-model:value="formData.KEN_CD"
+                    :options="LIST"
+                    class="max-w-110"
                 /></a-form-item>
               </td>
             </a-col>
@@ -126,7 +131,7 @@ const layout = {
   md: 24,
   lg: 24,
   xl: 24,
-  xxl: 12,
+  xxl: 24,
 }
 const rules = reactive({
   KI: [

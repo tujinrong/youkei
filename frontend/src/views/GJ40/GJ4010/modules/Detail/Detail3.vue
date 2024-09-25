@@ -54,6 +54,7 @@
                   <DateJp
                     v-model:value="searchParams.SINSEI_DATE"
                     :notAllowClear="true"
+                    class="w-50!"
                   />
                 </a-form-item>
               </td>
@@ -544,6 +545,7 @@
                 <DateJp
                   v-model:value="formData.TANKA_MST_DATE"
                   :disabled="formData.SYORI_JOKYO_KBN !== 3"
+                  class="w-50!"
                 />
               </td>
             </a-col>

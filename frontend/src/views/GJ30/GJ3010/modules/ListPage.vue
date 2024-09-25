@@ -8,14 +8,13 @@
  * ----------------------------------------------------------------->
 <template>
   <div
-    v-show="detailKbn === FarmManage.Detail"
     class="h-full min-h-500px flex-col-stretch gap-12px overflow-hidden lt-sm:overflow-auto flex"
   >
     <a-card :bordered="false">
       <h1>（GJ3010）互助基金契約者情報変更(增羽)</h1>
       <div class="self_adaption_table form mt-1">
         <a-row>
-          <a-col span="8">
+          <a-col span="12">
             <th class="required">期</th>
             <td>
               <a-form-item v-bind="validateInfos.KI">
@@ -24,13 +23,13 @@
                   :min="0"
                   :max="99"
                   :maxlength="2"
-                  class="w-full"
+                  class="w-20"
                   @change="getInitData(searchParams.KI, false)"
                 ></a-input-number>
               </a-form-item>
-            </td>
-          </a-col>
-          <a-col span="8">
+            </td> </a-col></a-row
+        ><a-row>
+          <a-col span="12">
             <th class="required">契約者</th>
             <td>
               <a-form-item v-bind="validateInfos.KEIYAKUSYA_CD">
@@ -48,18 +47,13 @@
           <a-button type="primary" :disabled="isSearched" @click="search"
             >検索</a-button
           ><a-button type="primary" @click="reset">条件クリア</a-button>
-          <a-button
-            type="primary"
-            :disabled="!isSearched || isEditing"
-            @click="add"
+          <a-button type="primary" :disabled="!isSearched" @click="add"
             >新規登録</a-button
-          ><a-button class="danger-btn" :disabled="!isDataSelected || isEditing"
-            >削除</a-button
           ><a-button
             class="ml-20"
             type="primary"
             @click="turnExportPage"
-            :disabled="!isDataSelected || isEditing"
+            :disabled="!isDataSelected"
             >請求書発行
           </a-button>
         </a-space>
@@ -67,7 +61,7 @@
     ></a-card>
     <a-card class="flex-1">
       <div class="flex justify-between">
-        <h2>1.契約農場別明細 增羽情報(表示)</h2>
+        <h2>契約農場別明細 增羽情報(表示)</h2>
         <a-pagination
           v-model:current="pageParams.PAGE_NUM"
           v-model:page-size="pageParams.PAGE_SIZE"
@@ -95,7 +89,7 @@
           align="center"
           field="KEIYAKU_DATE_FROM"
           title="増羽年月日"
-          min-width="160"
+          min-width="100"
           sortable
           formatter="jpDate"
           :params="{ order: 1 }"
@@ -105,7 +99,7 @@
           header-align="center"
           field="NOJO_NAME"
           title="農場名"
-          min-width="100"
+          min-width="250"
           sortable
           :params="{ order: 2 }"
           ><template #default="{ row }">
@@ -174,137 +168,23 @@
         >
         </vxe-column>
       </vxe-table>
-
-      <h2>2.契約農場別明細 增羽情報(入力)</h2>
-      <a-space :size="20" 　class="mb-2">
-        <a-button
-          :class="{ 'warning-btn': isEditing }"
-          :disabled="!isEditing"
-          @click="save"
-          >保存</a-button
-        ><a-button type="primary" :disabled="!isDataSelected || isEditing"
-          >削除</a-button
-        >
-        <a-button type="primary" :disabled="!isEditing" @click="cancel"
-          >キャンセル</a-button
-        >
-      </a-space>
-      <div class="parent-container">
-        <div class="self_adaption_table form max-w-300">
-          <a-row>
-            <a-col span="24">
-              <th class="required">農場</th>
-              <td>
-                <a-form-item v-bind="validateInfos.NOJO_CD">
-                  <ai-select
-                    v-model:value="formData.NOJO_CD"
-                    :options="LIST"
-                    split-val
-                  ></ai-select>
-                </a-form-item>
-                <a-button
-                  class="ml-2"
-                  type="primary"
-                  :disabled="!isEditing"
-                  @click="addNojo"
-                  >農場登録</a-button
-                >
-              </td>
-            </a-col>
-            <a-col span="24">
-              <read-only thWidth="120" th="農場住所" td="" :hideTd="true" />
-              <read-only th="　〒　" :td="nojoData.ADDR_POST" />
-              <read-only thWidth="100" th="住所1" :td="nojoData.ADDR_1" />
-              <read-only thWidth="100" th="住所2" :td="nojoData.ADDR_2" />
-            </a-col>
-            <a-col span="24">
-              <read-only thWidth="120" th="" :hideTd="true" />
-              <read-only thWidth="100" th="住所3" :td="nojoData.ADDR_3" />
-              <read-only thWidth="100" th="住所4" :td="nojoData.ADDR_4" />
-            </a-col>
-            <a-col span="12">
-              <th class="required">鳥の種類</th>
-              <td>
-                <a-form-item v-bind="validateInfos.TORI_KBN">
-                  <ai-select
-                    v-model:value="formData.TORI_KBN"
-                    :options="LIST"
-                    class="w-full"
-                    split-val
-                  ></ai-select>
-                </a-form-item>
-              </td> </a-col
-            ><a-col span="12">
-              <th class="required">増羽数</th>
-              <td>
-                <a-form-item v-bind="validateInfos.ZOGEN_HASU">
-                  <a-input-number
-                    v-model:value="formData.ZOGEN_HASU"
-                    class="w-full"
-                    v-bind="{ ...mathNumber }"
-                  ></a-input-number>
-                </a-form-item>
-              </td>
-            </a-col>
-            <a-col span="24">
-              <read-only
-                thWidth="130"
-                th="契約羽数(増羽前)"
-                :td="KEIYAKU_HASU"
-              />
-              <read-only
-                thWidth="130"
-                th="契約羽数(増羽後)"
-                :td="Number(formData.ZOGEN_HASU) + Number(KEIYAKU_HASU)"
-              />
-            </a-col>
-            <a-col span="12">
-              <th class="required">増羽年月日</th>
-              <td>
-                <a-form-item v-bind="validateInfos.KEIYAKU_DATE_FROM">
-                  <DateJp v-model:value="formData.KEIYAKU_DATE_FROM"></DateJp>
-                </a-form-item>
-              </td>
-            </a-col>
-            <a-col span="12">
-              <th class="required">検索方法</th>
-              <td>
-                <a-radio-group
-                  v-model:value="formData.SYORI_KBN"
-                  class="ml-2 h-full pt-1"
-                >
-                  <a-radio :value="1">入力中</a-radio>
-                  <a-radio :value="2">入力確定</a-radio>
-                </a-radio-group>
-              </td>
-            </a-col>
-          </a-row>
-        </div>
-        <div
-          v-if="!isEditing"
-          class="search-disabled-mask bg-disabled max-w-300"
-        ></div>
-      </div>
+      <Detail v-model:visible="detailVisible" :editkbn="editkbn"></Detail>
     </a-card>
   </div>
-  <NoJoJoHo
-    v-if="detailKbn === FarmManage.FarmInfo"
-    v-model:detailKbn="detailKbn"
-  />
 </template>
 <script setup lang="ts">
 import { ITEM_REQUIRE_ERROR } from '@/constants/msg'
 import { Form } from 'ant-design-vue'
-import NoJoJoHo from '../../../GJ10/GJ1010/modules/Popup/PopUp_1013.vue'
+
 import { onMounted, reactive, ref, toRef, computed } from 'vue'
 import useSearch from '@/hooks/useSearch'
 import { changeTableSort, mathNumber } from '@/utils/util'
 import { useRoute, useRouter } from 'vue-router'
-import { PageStatus } from '@/enum'
+import { EnumEditKbn, PageStatus } from '@/enum'
 import { VxeTableInstance } from 'vxe-table'
-import { FarmManage } from '@/views/GJ10/GJ1010/constant'
 import { SearchRowVM } from '../type'
 import { nextTick } from 'process'
+import Detail from './DetailPage.vue'
 //--------------------------------------------------------------------------
 //データ定義
 //--------------------------------------------------------------------------
@@ -316,32 +196,7 @@ const createDefaultParams = () => {
 }
 const searchParams = reactive(createDefaultParams())
 const isSearched = ref(false)
-const isEditing = ref(false)
-const detailKbn = ref(FarmManage.Detail)
 
-const createDefaultform = () => {
-  return {
-    NOJO_CD: undefined,
-    TORI_KBN: undefined,
-    ZOGEN_HASU: undefined,
-    KEIYAKU_DATE_FROM: new Date(),
-    SYORI_KBN: 1,
-  }
-}
-
-const formData = reactive(createDefaultform())
-const createDefaultnojo = () => {
-  return {
-    NOJO_CD: undefined,
-    ADDR_POST: '',
-    ADDR_1: '',
-    ADDR_2: '',
-    ADDR_3: '',
-    ADDR_4: '',
-  }
-}
-const nojoData = reactive(createDefaultnojo())
-const KEIYAKU_HASU = ref(undefined) //契約羽数(増羽前)
 const LIST = ref<CmCodeNameModel[]>([])
 const tableData = ref<SearchRowVM[]>([])
 const rules = reactive({
@@ -376,7 +231,8 @@ const tableDefault = {
   SYORI_KBN: '入力確定', // 処理区分 (String类型)
   SEIKYU_KAISU: 216, // 請求回数 (Number类型，可选)
 }
-
+const detailVisible = ref(false)
+const editkbn = ref<EnumEditKbn>(EnumEditKbn.Add)
 const router = useRouter()
 const route = useRoute()
 //--------------------------------------------------------------------------
@@ -425,24 +281,21 @@ const reset = () => {
   clear()
   clearValidate()
   isSearched.value = false
-  isEditing.value = false
 }
 //新規
 const add = () => {
-  isEditing.value = true
+  detailVisible.value = true
+  editkbn.value = EnumEditKbn.Add
 }
 //編集
 const edit = () => {
-  isEditing.value = true
+  detailVisible.value = true
+  editkbn.value = EnumEditKbn.Edit
 }
 //登録
-const save = () => {
-  isEditing.value = false
-}
+const save = () => {}
 //キャンセル
-const cancel = () => {
-  isEditing.value = false
-}
+const cancel = () => {}
 
 //請求書発行
 const turnExportPage = () => {
@@ -452,10 +305,6 @@ const turnExportPage = () => {
       status: PageStatus.Edit,
     },
   })
-}
-//農場登録
-const addNojo = () => {
-  detailKbn.value = FarmManage.FarmInfo
 }
 </script>
 

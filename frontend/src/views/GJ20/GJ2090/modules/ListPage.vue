@@ -14,7 +14,14 @@
       <h1>（GJ2090）契約者積立金等入金・返還入力</h1>
       <div class="self_adaption_table form max-w-400 mt-1">
         <a-row>
-          <a-col v-bind="layout">
+          <a-col
+            v-bind="{
+              md: 24,
+              lg: 24,
+              xl: 24,
+              xxl: 6,
+            }"
+          >
             <th class="required">対象期</th>
             <td>
               <a-form-item v-bind="validateInfos.KI">
@@ -23,12 +30,19 @@
                   :min="1"
                   :max="99"
                   :maxlength="2"
-                  style="width: 100%"
+                  class="w-20!"
                 ></a-input-number>
               </a-form-item>
             </td>
           </a-col>
-          <a-col v-bind="layout">
+          <a-col
+            v-bind="{
+              md: 24,
+              lg: 24,
+              xl: 24,
+              xxl: 18,
+            }"
+          >
             <th>請求·返還回数</th>
             <td class="flex">
               <a-form-item v-bind="validateInfos.SEIKYU_KAISU">
@@ -40,6 +54,7 @@
             <th>都道府県</th>
             <td>
               <range-select
+                style="width: 40%"
                 v-model:value="formData.KEN_CD"
                 :options="KEN_CD_NAME_LIST"
               />
@@ -133,7 +148,7 @@
             <th>入金日・振込日</th>
             <td class="flex">
               <a-form-item v-bind="validateInfos.SEIKYU_DATE">
-                <DateJp v-model:value="formData.SEIKYU_DATE" />
+                <DateJp v-model:value="formData.SEIKYU_DATE" class="w-50!" />
               </a-form-item>
             </td>
           </a-col>
@@ -367,9 +382,9 @@ const { pageParams, totalCount, searchData, clear } = useSearch({
 
 const layout = {
   md: 24,
-  lg: 12,
-  xl: 12,
-  xxl: 12,
+  lg: 24,
+  xl: 24,
+  xxl: 24,
 }
 
 const GJ2091Visible = ref(false)

@@ -12,7 +12,7 @@
     <div class="edit_table form">
       <a-form>
         <a-row>
-          <a-col span="24">
+          <a-col span="7">
             <th class="required">ユーザーID</th>
             <td>
               <a-form-item v-bind="validateInfos.USER_ID">
@@ -26,7 +26,7 @@
           </a-col>
         </a-row>
         <a-row>
-          <a-col span="24">
+          <a-col span="8">
             <th class="required">ユーザー名</th>
             <td>
               <a-form-item v-bind="validateInfos.USER_NAME">
@@ -39,7 +39,7 @@
           </a-col>
         </a-row>
         <a-row>
-          <a-col span="24">
+          <a-col span="8">
             <th class="required">パスワード</th>
             <td>
               <a-form-item v-bind="validateInfos.PASS">
@@ -52,7 +52,7 @@
           </a-col>
         </a-row>
         <a-row class="mt-1">
-          <a-col span="24">
+          <a-col span="8">
             <read-only-pop
               th="パスワード有効期限"
               th-width="150"
@@ -61,7 +61,7 @@
           </a-col>
         </a-row>
         <a-row>
-          <a-col span="24">
+          <a-col span="8">
             <read-only-pop
               th="パスワード変更日"
               th-width="150"
@@ -70,7 +70,7 @@
           </a-col>
         </a-row>
         <a-row>
-          <a-col span="24">
+          <a-col span="8">
             <th class="required">使用区分</th>
             <td>
               <a-form-item v-bind="validateInfos.SIYO_KBN">
@@ -84,7 +84,7 @@
           </a-col>
         </a-row>
         <a-row>
-          <a-col span="24">
+          <a-col span="8">
             <th>使用停止日</th>
             <td>
               <DateJp v-model:value="formData.TEISI_DATE" :disabled="isNew" />
@@ -92,7 +92,7 @@
           </a-col>
         </a-row>
         <a-row>
-          <a-col span="24">
+          <a-col span="12">
             <th>使用停止理由</th>
             <td>
               <a-input

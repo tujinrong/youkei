@@ -6,7 +6,7 @@
       <h1>（GJ8010）コード一覧</h1>
       <div class="self_adaption_table form mt-1">
         <a-row>
-          <a-col :span="12">
+          <a-col :span="24">
             <th class="required">種類区分</th>
             <td>
               <ai-select

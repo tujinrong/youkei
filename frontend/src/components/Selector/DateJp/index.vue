@@ -89,36 +89,45 @@ watch(
 //--------------------------------------------------------------------------
 //フック関数
 //--------------------------------------------------------------------------
+// onMounted(() => {
+//   const inputDom = dateRef.value.$el.querySelector('input')
+//   if (inputDom) {
+//     inputDom.readOnly = false
+//     inputDom.addEventListener('input', (e) => {
+//       e.target.value = e.target.value.toUpperCase() //大文字
+//       inputText = e.target.value
+//     })
+//     dateRef.value.$el.addEventListener('keydown', (e) => {
+//       //Tab/Enter キー
+//       if (e.keyCode == 13 || e.keyCode == 9) {
+//         //補充年
+//         if (new RegExp(/^[0-9A]{1,2}[-\/]?[0-9A]{1,2}$/).test(inputText)) {
+//           inputText = dayjs().year() + '/' + inputText
+//         }
+//         setInputValue(inputText)
+//       }
+//       //Delete/BackSpace キー
+//       if (e.keyCode == 8 || e.keyCode == 46) {
+//         setTimeout(() => {
+//           if (!e.target.value) curVal.value = null
+//         }, 0)
+//       }
+//     })
+//     inputDom.addEventListener('focus', (e) => {
+//       e.target.select()
+//     })
+//   }
+// })
 onMounted(() => {
-  const inputDom = dateRef.value.$el.querySelector('input')
+  const inputDom = dateRef.value.$el.querySelector('.ant-picker-input')
   if (inputDom) {
-    inputDom.readOnly = false
-    inputDom.addEventListener('input', (e) => {
-      e.target.value = e.target.value.toUpperCase() //大文字
-      inputText = e.target.value
-    })
-    dateRef.value.$el.addEventListener('keydown', (e) => {
-      //Tab/Enter キー
-      if (e.keyCode == 13 || e.keyCode == 9) {
-        //補充年
-        if (new RegExp(/^[0-9A]{1,2}[-\/]?[0-9A]{1,2}$/).test(inputText)) {
-          inputText = dayjs().year() + '/' + inputText
-        }
-        setInputValue(inputText)
+    inputDom.addEventListener('keydown', function (event) {
+      if (event.key === 'Backspace') {
+        event.preventDefault()
       }
-      //Delete/BackSpace キー
-      if (e.keyCode == 8 || e.keyCode == 46) {
-        setTimeout(() => {
-          if (!e.target.value) curVal.value = null
-        }, 0)
-      }
-    })
-    inputDom.addEventListener('focus', (e) => {
-      e.target.select()
     })
   }
 })
-
 //--------------------------------------------------------------------------
 //メソッド
 //--------------------------------------------------------------------------

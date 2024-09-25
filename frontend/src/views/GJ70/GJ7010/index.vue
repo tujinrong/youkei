@@ -14,38 +14,36 @@
       ><h1>（GJ7010）互助基金契約者情報検索CSVデ一夕作成</h1>
       <div class="self_adaption_table form mt-1">
         <a-row
-          ><a-col v-bind="layout"
-            ><th class="required">期</th>
+          ><a-col span="24"
+            ><th class="required">対象期</th>
             <td>
-              <a-form-item v-bind="validateInfos.KI">
+              <a-form-item v-bind="validateInfos.KI" class="w-50!">
                 <a-input-number
                   v-model:value="searchParams.KI"
                   :min="1"
                   :max="99"
                   :maxlength="2"
                 ></a-input-number>
-              </a-form-item></td
-          ></a-col>
-          <a-col v-bind="layout"
-            ><th class="required">对象年月</th>
-            <td>
-              <a-form-item v-bind="validateInfos.KEIYAKU_DATE_TO">
+                <span class="align-middle">期</span></a-form-item
+              ><a-form-item v-bind="validateInfos.KEIYAKU_DATE_TO">
                 <MonthJp
                   v-model:value="searchParams.KEIYAKU_DATE_TO"
                   :disabled="!searchParams.KEIYAKU_DATE_NOZOKU_FLG"
                 />　末　現在　(契約情報の契約日)</a-form-item
               >
-            </td></a-col
-          ><a-col v-bind="layout"
+            </td>
+          </a-col>
+          <a-col span="24"
             ><th>都道府県</th>
             <td>
               <a-form-item v-bind="validateInfos.KEN_CD">
                 <range-select
                   v-model:value="searchParams.KEN_CD"
                   :options="LIST"
+                  class="w-150!"
               /></a-form-item></td
           ></a-col>
-          <a-col v-bind="layout"
+          <a-col span="24"
             ><th>契約者番号</th>
             <td>
               <a-form-item v-bind="validateInfos.KEIYAKUSYA_CD">
@@ -53,24 +51,26 @@
                   v-model:value="searchParams.KEIYAKUSYA_CD"
                   :options="LIST"
               /></a-form-item></td></a-col
-          ><a-col v-bind="layout"
+          ><a-col span="24"
             ><th>契約区分</th>
             <td>
               <a-form-item v-bind="validateInfos.KEIYAKUSYA_CD">
                 <range-select
                   v-model:value="searchParams.KEIYAKUSYA_CD"
                   :options="LIST"
+                  class="w-130!"
               /></a-form-item></td
           ></a-col>
-          <a-col v-bind="layout"
+          <a-col span="24"
             ><th>契約状況</th>
             <td>
               <a-form-item v-bind="validateInfos.KEIYAKUSYA_CD">
                 <range-select
                   v-model:value="searchParams.KEIYAKUSYA_CD"
                   :options="LIST"
+                  class="w-130!"
               /></a-form-item></td></a-col
-          ><a-col v-bind="layout"
+          ><a-col span="24"
             ><th>事務委託先</th>
             <td>
               <a-form-item v-bind="validateInfos.KEIYAKUSYA_CD">
@@ -79,24 +79,26 @@
                   :options="LIST"
               /></a-form-item></td
           ></a-col>
-          <a-col v-bind="layout"
+          <a-col span="24"
             ><th>鶏の種類</th>
             <td>
               <a-form-item v-bind="validateInfos.KEIYAKUSYA_CD">
                 <range-select
                   v-model:value="searchParams.KEIYAKUSYA_CD"
                   :options="LIST"
+                  class="w-130!"
               /></a-form-item></td></a-col
-          ><a-col v-bind="layout"
-            ><th>契約年月日<br />(契約者マスタ契約日)</th>
+          ><a-col span="24"
+            ><th>契約年月日</th>
             <td>
-              <a-form-item v-bind="validateInfos.KEIYAKUSYA_CD">
-                <range-select
-                  v-model:value="searchParams.KEIYAKUSYA_CD"
-                  :options="LIST"
-              /></a-form-item></td
-          ></a-col>
-          <a-col v-bind="layout"
+              <a-form-item v-bind="validateInfos.KEIYAKU_DATE" class="w-110!">
+                <range-date
+                  v-model:value="searchParams.KEIYAKU_DATE"
+                  :options="LIST" /></a-form-item
+              ><span class="w-40 mr-a mt-1">(契約者マスタ契約日)</span>
+            </td>
+          </a-col>
+          <a-col span="24"
             ><th>出力項目選択</th>
             <td>
               <a-radio-group
@@ -143,7 +145,7 @@
         v-model:page-size="pageParams.PAGE_SIZE"
         :total="totalCount"
         :page-size-options="['10', '25', '50', '100']"
-        :show-total="(total) => `抽出件数： ${total} 件`"
+        :show-total="(total) => `契約件数： ${total} 件　農場件数：${total} 件`"
         show-less-items
         show-size-changer
         class="m-b-1 text-end"
@@ -193,13 +195,31 @@
         <vxe-column
           header-align="center"
           field="KEIYAKU_KBN_NAME"
-          title="契約区分名"
-          min-width="160"
+          title="契約区分"
+          min-width="120"
           sortable
           :params="{ order: 4 }"
           :resizable="true"
         ></vxe-column>
-
+        <vxe-column
+          header-align="center"
+          field="KEIYAKU_KBN_NAME"
+          title="契約状況"
+          min-width="120"
+          sortable
+          :params="{ order: 4 }"
+          :resizable="true"
+        ></vxe-column>
+        <vxe-column
+          header-align="center"
+          align="center"
+          field="ADDR_TEL1"
+          title="電話番号"
+          min-width="120"
+          sortable
+          :params="{ order: 7 }"
+          :resizable="true"
+        ></vxe-column>
         <vxe-column
           header-align="center"
           align="center"
@@ -214,21 +234,10 @@
         <vxe-column
           header-align="center"
           field="ITAKU_NAME"
-          title="事務委託先名"
+          title="事務委託先"
           min-width="160"
           sortable
           :params="{ order: 6 }"
-          :resizable="true"
-        ></vxe-column>
-
-        <vxe-column
-          header-align="center"
-          align="center"
-          field="ADDR_TEL1"
-          title="電話番号"
-          min-width="160"
-          sortable
-          :params="{ order: 7 }"
           :resizable="true"
         ></vxe-column>
       </vxe-table>

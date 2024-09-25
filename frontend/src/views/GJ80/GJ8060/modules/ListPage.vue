@@ -1,6 +1,6 @@
 <template>
   <div
-    class="h-full min-h-500px flex-col-stretch gap-12px overflow-hidden lt-sm:overflow-auto"
+    class="h-full min-h-500px flex-col-stretch gap-12px overflow-hidden lt-sm:overflow-auto flex"
   >
     <a-card ref="headRef" :bordered="false">
       <h1>（GJ8060）事務委託先一覧</h1>
@@ -15,7 +15,7 @@
                   :min="0"
                   :max="99"
                   :maxlength="2"
-                  class="w-full"
+                  class="w-20"
                   @change="getInitData(searchParams.KI, false)"
                 ></a-input-number>
               </a-form-item>
@@ -24,12 +24,14 @@
           <a-col v-bind="layout">
             <th>都道府県</th>
             <td>
-              <a-form-item v-bind="validateInfos.KEN_CD">
-                <range-select
-                  v-model:value="searchParams.KEN_CD"
-                  :options="KEN_CD_NAME_LIST"
-                ></range-select>
-              </a-form-item>
+              <div class="w-100">
+                <a-form-item v-bind="validateInfos.KEN_CD">
+                  <range-select
+                    v-model:value="searchParams.KEN_CD"
+                    :options="KEN_CD_NAME_LIST"
+                  ></range-select>
+                </a-form-item>
+              </div>
             </td>
           </a-col>
           <a-col v-bind="layout">
@@ -38,8 +40,10 @@
               <a-form-item>
                 <a-input
                   v-model:value="searchParams.ITAKU_NAME"
-                  :maxlength="20"
+                  :maxlength="25"
+                  class="max-w-150"
                 ></a-input>
+                <span>(部分一致)</span>
               </a-form-item>
             </td>
           </a-col>
@@ -52,7 +56,7 @@
                   :min="0"
                   :max="999"
                   :maxlength="3"
-                  class="w-full"
+                  class="w-20"
                 ></a-input-number>
               </a-form-item>
             </td>
@@ -64,9 +68,9 @@
                 <a-input-number
                   v-model:value="searchParams.MATOMESAKI"
                   :min="0"
-                  :max="999"
-                  :maxlength="3"
-                  class="w-full"
+                  :max="9"
+                  :maxlength="1"
+                  class="w-10"
                 ></a-input-number>
               </a-form-item>
             </td>
@@ -86,17 +90,17 @@
         <a-space :size="20">
           <a-button type="primary" @click="searchAll">検索</a-button>
           <a-button type="primary" @click="reset">条件クリア</a-button>
-          <a-button class="ml-20" type="primary" @click="forwardNew"
+          <a-button class="ml-50%" type="primary" @click="forwardNew"
             >新規登録</a-button
           >
-          <a-button class="ml-20" type="primary" @click="reset"
+          <a-button class="ml-100%" type="primary" @click="reset"
             >CSV出力</a-button
           >
         </a-space>
         <close-page />
       </div>
     </a-card>
-    <a-card :bordered="false" class="sm:flex-1-hidden" ref="cardRef">
+    <a-card :bordered="false" class="flex-1" ref="cardRef">
       <a-pagination
         v-model:current="pageParams.PAGE_NUM"
         v-model:page-size="pageParams.PAGE_SIZE"
@@ -124,6 +128,7 @@
           field="ITAKU_CD"
           title="事務委託先"
           min-width="100"
+          align="right"
           sortable
           :params="{ order: 1 }"
           :resizable="true"
@@ -175,6 +180,11 @@
       </vxe-table>
     </a-card>
   </div>
+  <EditPage
+    v-model:visible="editVisible"
+    :editkbn="editkbn"
+    @getTableList="searchAll"
+  />
 </template>
 
 <script lang="ts" setup>
@@ -190,7 +200,7 @@ import { SearchRowVM, SearchRequest } from '@/views/GJ80/GJ8060/type'
 import { Init, Search } from '../service'
 import { Form } from 'ant-design-vue'
 import { VxeTableInstance } from 'vxe-table'
-
+import EditPage from './EditPage.vue'
 //--------------------------------------------------------------------------
 //データ定義
 //--------------------------------------------------------------------------
@@ -227,13 +237,14 @@ const KEN_CD_NAME_LIST = ref<CmCodeNameModel[]>([])
 const headRef = ref(null)
 const layout = {
   md: 24,
-  lg: 12,
-  xl: 8,
-  xxl: 6,
+  lg: 24,
+  xl: 24,
+  xxl: 24,
 }
 const cardRef = ref()
 const { height } = useElementSize(cardRef)
-
+const editVisible = ref(false)
+const editkbn = ref<EnumEditKbn>(EnumEditKbn.Add)
 const rules = reactive({
   KI: [
     { required: true, message: ITEM_REQUIRE_ERROR.Msg.replace('{0}', '期') },
@@ -286,23 +297,12 @@ onBeforeRouteUpdate((to, from) => {
 
 async function forwardNew() {
   await validate()
-  router.push({
-    name: route.name,
-    query: {
-      status: PageStatus.New,
-      KI: searchParams.KI,
-    },
-  })
+  editkbn.value = EnumEditKbn.Add
+  editVisible.value = true
 }
 async function forwardEdit(NOJO_CD) {
-  await validate()
-  router.push({
-    name: route.name,
-    query: {
-      status: PageStatus.Edit,
-      ITAKU_CD: NOJO_CD,
-    },
-  })
+  editkbn.value = EnumEditKbn.Edit
+  editVisible.value = true
 }
 
 //検索処理

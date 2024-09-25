@@ -15,7 +15,7 @@
                     :min="1"
                     :max="99"
                     :maxlength="2"
-                    style="width: 120px"
+                    class="w-15"
                     @change="handleKI(false)"
                   ></a-input-number>
                   <span class="!align-middle">期</span>
@@ -28,7 +28,7 @@
                 <a-form-item v-bind="validateInfos.TAISYOBI_YMD">
                   <DateJp
                     v-model:value="formData.TAISYOBI_YMD"
-                    class="w-full"
+                    class="max-w-50"
                   />
                 </a-form-item>
               </td>
@@ -40,6 +40,7 @@
                   <range-select
                     v-model:value="formData.KEIYAKU_KBN_CD"
                     :options="KEIYAKU_KBN_CD_NAME_LIST"
+                    class="max-w-110"
                 /></a-form-item>
               </td>
             </a-col>
@@ -156,7 +157,7 @@ const layout = {
   md: 24,
   lg: 24,
   xl: 24,
-  xxl: 12,
+  xxl: 24,
 }
 const host = window.location.href.includes('localhost')
   ? 'localhost:9527'

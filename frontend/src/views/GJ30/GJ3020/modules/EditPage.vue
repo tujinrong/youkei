@@ -1,35 +1,26 @@
 <template>
   <a-card class="h-full">
     <h1>（GJ3021）互助基金契約者情報変更（契約区分変更）通知書発行</h1>
-    <div class="self_adaption_table form mt-1 max-w-300">
+    <div class="self_adaption_table form mt-1">
       <b>第{{ searchParams.KI }}期</b>
 
       <a-row
         ><a-col :span="24"
           ><th class="bg-readonly">契約者</th>
-          <td>
-            <ai-select
-              v-model:value="searchParams.KEIYAKUSYA_CD"
-              :options="LIST"
-              split-val
-              disabled
-            ></ai-select></td
-        ></a-col>
+          <td><span class="pt-1">　1003:契約者A</span></td></a-col
+        >
         <a-col :span="24"
           ><th
             class="bg-readonly"
             :style="{
               borderTop: 'none',
             }"
-          ></th>
-          <td>
-            <ai-select
-              v-model:value="searchParams.KEIYAKUSYA_CD"
-              :options="LIST"
-              split-val
-              disabled
-            ></ai-select></td></a-col
-      ></a-row>
+          >
+            　
+          </th>
+          <td><span class="pt-1">　2:企業</span></td></a-col
+        ></a-row
+      >
       <a-row
         ><a-col :span="24"
           ><th>出力区分</th>
@@ -50,7 +41,7 @@
         ></a-row
       >
       <a-col :span="24"
-        ><th class="required">納付期限</th>
+        ><th class="required">振込予定日</th>
         <td>
           <a-form-item v-bind="validateInfos.NOFUKIGEN_DATE">
             <DateJp
@@ -74,7 +65,9 @@
         ><a-col :span="24"
           ><th class="required">発信番号</th>
           <td>
-            <a-form-item v-bind="validateInfos.SEIKYU_HAKKO_NO_NEN"
+            <a-form-item
+              v-bind="validateInfos.SEIKYU_HAKKO_NO_NEN"
+              class="w-60!"
               >日鶏
               <a-input
                 v-model:value="searchParams.SEIKYU_HAKKO_NO_NEN"
@@ -129,7 +122,7 @@ import { useRoute, useRouter } from 'vue-router'
 //--------------------------------------------------------------------------
 const createDefaultParams = () => {
   return {
-    KI: undefined, // 期
+    KI: 8, // 期
     KEIYAKUSYA_CD: undefined, // 契約者番号
     SEIKYU_KAISU: undefined, // 請求返還回数
     TUMITATE_KBN: undefined, // 積立金区分

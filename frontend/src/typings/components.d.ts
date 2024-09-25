@@ -99,5 +99,6 @@ declare module 'vue' {
     ThemeSchemaSwitch: typeof import('./../components/common/theme-schema-switch.vue')['default']
     WaveBg: typeof import('./../components/custom/wave-bg.vue')['default']
     YearJp: typeof import('./../components/Selector/YearJp/index.vue')['default']
+    YearSelector: typeof import('./../components/Selector/YearSelector/index.vue')['default']
   }
 }

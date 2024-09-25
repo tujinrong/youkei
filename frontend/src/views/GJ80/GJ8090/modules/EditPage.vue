@@ -7,43 +7,32 @@
  * 変更履歴　:
  * ----------------------------------------------------------------->
 <template>
-  <a-card :bordered="false" class="mb-2 h-full">
-    <h1>（GJ8091）契約者農場マスタメンテナンス</h1>
-    <div class="self_adaption_table form max-w-160">
+  <a-modal
+    :visible="modalVisible"
+    centered
+    title="（GJ8091）契約者農場マスタメンテナンス"
+    width="1000px"
+    :body-style="{ height: '800px' }"
+    :mask-closable="false"
+    destroy-on-close
+    @cancel="goList"
+  >
+    <div class="edit_table form">
       <b>第{{ formData.KI }}期</b>
       <a-form>
         <a-row>
-          <a-col span="24">
-            <th class="bg-readonly">契約者</th>
-            <td>
-              <a-form-item>
-                <a-input
-                  v-model:value="formData.KEIYAKUSYA_NAME"
-                  :maxlength="20"
-                  disabled
-                ></a-input>
-              </a-form-item>
-            </td>
+          <a-col span="12">
+            <read-only-pop
+              th="契約者"
+              th-width="130"
+              :td="formData.KEIYAKUSYA_NAME"
+            ></read-only-pop>
           </a-col>
         </a-row>
-        <div class="my-2 header_operation flex justify-between w-full">
-          <a-space :size="20">
-            <a-button class="warning-btn" @click="saveData">保存</a-button>
-            <a-button class="danger-btn" :disabled="isNew" @click="deleteData"
-              >削除</a-button
-            >
-            <!-- <a-button v-if="!isNew" :icon="h(LeftOutlined)"></a-button
-          ><span v-if="!isNew">2/5</span>
-          <a-button v-if="!isNew" :icon="h(RightOutlined)"></a-button> -->
-          </a-space>
-          <a-button type="primary" class="text-end" @click="goList"
-            >一覧へ</a-button
-          >
-        </div>
         <b>契約者農場基本登録項目</b>
         <a-row>
           <a-col span="24">
-            <th :class="!isNew ? 'bg-readonly' : 'required'">契約者農場</th>
+            <th class="required">契約者農場</th>
             <td>
               <a-form-item v-bind="validateInfos.NOJO_CD">
                 <a-input-number
@@ -52,6 +41,7 @@
                   :max="999"
                   :maxlength="3"
                   :disabled="!isNew"
+                  class="w-20"
                 ></a-input-number>
               </a-form-item>
             </td>
@@ -65,6 +55,7 @@
                 <a-input
                   v-model:value="formData.NOJO_NAME"
                   :maxlength="20"
+                  class="w-105"
                 ></a-input>
               </a-form-item>
             </td>
@@ -78,7 +69,7 @@
                 <ai-select
                   v-model:value="formData.KEN_CD"
                   :options="KEN_CD_NAME_LIST"
-                  class="w-full"
+                  class="max-w-35"
                   type="number"
                 ></ai-select>
               </a-form-item>
@@ -94,7 +85,7 @@
                   <a-input
                     v-model:value="formData.ADDR_1"
                     disabled
-                    class="!w-40"
+                    class="!w-30"
                   ></a-input
                 ></PostCode>
               </a-form-item>
@@ -102,17 +93,20 @@
                 <a-input
                   v-model:value="formData.ADDR_2"
                   :maxlength="15"
+                  class="max-w-90"
                 ></a-input>
               </a-form-item>
               <a-input
                 v-model:value="formData.ADDR_3"
                 :maxlength="15"
+                class="max-w-90"
                 @change="validate('ADDR_4')"
               ></a-input>
               <a-form-item v-bind="validateInfos.ADDR_4">
                 <a-input
                   v-model:value="formData.ADDR_4"
                   :maxlength="20"
+                  class="max-w-105"
                 ></a-input>
               </a-form-item>
             </td>
@@ -128,6 +122,7 @@
                   :min="0"
                   :max="999"
                   :maxlength="3"
+                  class="w-20"
                 ></a-input-number>
               </a-form-item>
             </td>
@@ -135,13 +130,23 @@
         </a-row>
       </a-form>
     </div>
-  </a-card>
+    <template #footer>
+      <div class="pt-2 flex justify-between border-t-1">
+        <a-space :size="20">
+          <a-button class="warning-btn" @click="saveData">保存</a-button>
+          <a-button class="danger-btn" :disabled="isNew" @click="deleteData"
+            >削除</a-button
+          >
+        </a-space>
+        <a-button type="primary" @click="goList">閉じる</a-button>
+      </div>
+    </template>
+  </a-modal>
 </template>
 
 <script setup lang="ts">
 import { EnumEditKbn, PageStatus } from '@/enum'
-import { nextTick, onMounted, reactive, ref, watch } from 'vue'
-import { useRoute, useRouter } from 'vue-router'
+import { computed, nextTick, onMounted, reactive, ref, watch } from 'vue'
 import { showDeleteModal, showInfoModal, showSaveModal } from '@/utils/modal'
 import {
   DELETE_CONFIRM,
@@ -153,22 +158,24 @@ import {
 import { Form, message } from 'ant-design-vue'
 import PostCode from '@/components/Selector/PostCode/index.vue'
 import { convertToFullWidth } from '@/utils/util'
-import { DetailVM } from '../type'
+import { DetailVM, SearchRequest } from '../type'
 import { Judgement } from '@/utils/judge-edited'
 import { InitDetail, Save, Delete } from '../service'
 //---------------------------------------------------------------------------
 //属性
 //---------------------------------------------------------------------------
 const props = defineProps<{
-  status: PageStatus
+  editkbn: EnumEditKbn
+  visible: boolean
+  keys: any
+  params: SearchRequest
+  name: string
 }>()
-
+const emit = defineEmits(['update:visible', 'getTableList'])
 //--------------------------------------------------------------------------
 //データ定義
 //--------------------------------------------------------------------------
-const router = useRouter()
-const route = useRoute()
-const isNew = props.status === PageStatus.New
+
 const editJudge = new Judgement('GJ8090')
 
 const KEN_CD_NAME_LIST = ref<CmCodeNameModel[]>([])
@@ -256,41 +263,71 @@ const { validate, clearValidate, validateInfos, resetFields } = Form.useForm(
 //---------------------------------------------------------------------------
 //フック関数
 //--------------------------------------------------------------------------
-onMounted(async () => {
-  formData.KI = Number(route.query.KI)
-  formData.KEIYAKUSYA_CD = Number(route.query.KEIYAKUSYA_CD)
-  formData.KEIYAKUSYA_NAME =
-    route.query.KEIYAKUSYA_CD + ' : ' + route.query.KEIYAKUSYA_NAME
-  if (!isNew) formData.NOJO_CD = Number(route.query.NOJO_CD)
-
-  InitDetail({
-    KI: formData.KI,
-    KEIYAKUSYA_CD: formData.KEIYAKUSYA_CD,
-    NOJO_CD: formData.NOJO_CD,
-    EDIT_KBN: isNew ? EnumEditKbn.Add : EnumEditKbn.Edit,
-  })
-    .then((res) => {
-      KEN_CD_NAME_LIST.value = res.KEN_CD_NAME_LIST
-      if (!isNew) {
-        Object.assign(formData, res.KEIYAKUSYA_NOJO)
-        formData.ADDR_1 = res.KEIYAKUSYA_NOJO.ADDR_1
-        upddttm = res.KEIYAKUSYA_NOJO.UP_DATE
-      }
-      nextTick(() => editJudge.reset())
-    })
-    .catch((error) => {
-      router.push({ name: route.name, query: { refresh: '1' } })
-    })
-})
 
 //--------------------------------------------------------------------------
 //計算定義
 //--------------------------------------------------------------------------
+const modalVisible = computed({
+  get() {
+    return props.visible
+  },
+  set(visible) {
+    emit('update:visible', visible)
+  },
+})
+const isNew = computed(() => (props.editkbn === EnumEditKbn.Add ? true : false))
 
 //--------------------------------------------------------------------------
 //監視定義
 //--------------------------------------------------------------------------
-
+watch(
+  () => props.visible,
+  (newV) => {
+    if (newV) {
+      debugger
+      if (isNew.value) {
+        formData.KI = props.params.KI
+        formData.KEIYAKUSYA_CD = props.params.KEIYAKUSYA_CD
+        formData.KEIYAKUSYA_NAME =
+          props.params.KEIYAKUSYA_CD + '：' + props.name
+      } else {
+        debugger
+        // Object.assign(formData,props.keys)
+        formData.KI = props.keys.KI
+        formData.KEIYAKUSYA_CD = props.keys.KEIYAKUSYA_CD
+        formData.KEIYAKUSYA_NAME =
+          props.keys.KEIYAKUSYA_CD + '：' + props.keys.KEIYAKUSYA_NAME
+        formData.NOJO_CD = props.keys.NOJO_CD
+      }
+      InitDetail({
+        KI: formData.KI,
+        KEIYAKUSYA_CD: formData.KEIYAKUSYA_CD,
+        NOJO_CD: formData.NOJO_CD ?? 0,
+        EDIT_KBN: isNew.value ? EnumEditKbn.Add : EnumEditKbn.Edit,
+      })
+        .then((res) => {
+          KEN_CD_NAME_LIST.value = res.KEN_CD_NAME_LIST
+          if (!isNew.value) {
+            Object.assign(formData, res.KEIYAKUSYA_NOJO)
+            formData.ADDR_1 = res.KEIYAKUSYA_NOJO.ADDR_1
+            upddttm = res.KEIYAKUSYA_NOJO.UP_DATE
+          }
+          nextTick(() => {
+            editJudge.reset()
+            clearValidate()
+          })
+        })
+        .catch((error) => {
+          closeModal()
+          emit('getTableList')
+        })
+      nextTick(() => {
+        editJudge.reset()
+        clearValidate()
+      })
+    }
+  }
+)
 watch(formData, () => editJudge.setEdited())
 
 //都道府県を選択した場合、住所（住所１）の値をセットする
@@ -316,17 +353,21 @@ watch(
 //--------------------------------------------------------------------------
 //メソッド
 //--------------------------------------------------------------------------
+const closeModal = () => {
+  resetFields()
+  clearValidate()
+  modalVisible.value = false
+}
 //画面遷移
 const goList = () => {
   editJudge.judgeIsEdited(() => {
-    resetFields()
-    router.push({ name: route.name })
+    closeModal()
   })
 }
 
 //登録処理
 const saveData = async () => {
-  if (!isNew) {
+  if (!isNew.value) {
     if (!editJudge.isPageEdited()) {
       showInfoModal({
         content: '変更したデータはありません。',
@@ -342,11 +383,12 @@ const saveData = async () => {
         await Save({
           KEIYAKUSYA_NOJO: {
             ...formData,
-            UP_DATE: isNew ? undefined : upddttm,
+            UP_DATE: isNew.value ? undefined : upddttm,
           },
-          EDIT_KBN: isNew ? EnumEditKbn.Add : EnumEditKbn.Edit,
+          EDIT_KBN: isNew.value ? EnumEditKbn.Add : EnumEditKbn.Edit,
         })
-        router.push({ name: route.name, query: { refresh: '1' } })
+        closeModal()
+        emit('getTableList')
         message.success(SAVE_OK_INFO.Msg)
       } catch (error) {}
     },
@@ -367,7 +409,8 @@ const deleteData = () => {
           UP_DATE: upddttm,
           EDIT_KBN: EnumEditKbn.Edit,
         })
-        router.push({ name: route.name, query: { refresh: '1' } })
+        closeModal()
+        emit('getTableList')
         message.success(DELETE_OK_INFO.Msg)
       } catch (error) {}
     },
