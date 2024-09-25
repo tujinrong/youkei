@@ -72,7 +72,7 @@
               <td class="flex items-center">
                 <a-form-item v-bind="validateInfos.FURIKOMI_YOTEI_DATE">
                   <DateJp
-                    class="w-50!"
+                    class="max-w-50"
                     v-model:value="formData.FURIKOMI_YOTEI_DATE"
                   />
                   <span>(振込明細表に印字する日を入力)</span>

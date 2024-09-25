@@ -74,7 +74,7 @@
             <td class="flex">
               <a-form-item v-bind="validateInfos.FURIKOMI_YOTEI_DATE">
                 <DateJp
-                  class="w-50!"
+                  class="max-w-50"
                   v-model:value="formData.FURIKOMI_YOTEI_DATE"
                 />
               </a-form-item>

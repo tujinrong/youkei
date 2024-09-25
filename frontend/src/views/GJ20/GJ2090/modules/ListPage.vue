@@ -66,6 +66,7 @@
                   v-model:value="formData.JIMUITAKU_CD"
                   :option="JIMUITAKU_LIST"
                   split-val
+                  class="max-w-115"
                 ></ai-select
               ></a-form-item>
             </td>
@@ -77,7 +78,7 @@
                 <ai-select
                   v-model:value="formData.KEIYAKUSYA_CD"
                   :options="KEIYAKU_KBN_CD_NAME_LIST"
-                  class="w-full"
+                  class="max-w-115"
                   type="number"
                 ></ai-select>
               </a-form-item>
@@ -88,7 +89,7 @@
             <td>
               <a-input
                 v-model:value="formData.KEIYAKUSYA_NAME"
-                class="w-full"
+                class="w-130"
                 :maxlength="50"
               ></a-input>
             </td>
@@ -98,7 +99,7 @@
             <td>
               <a-input
                 v-model:value="formData.KEIYAKUSYA_KANA"
-                class="w-full"
+                class="w-130"
                 :maxlength="50"
               ></a-input>
             </td>
