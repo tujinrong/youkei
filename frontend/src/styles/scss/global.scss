@@ -235,6 +235,6 @@ h2 {
 }
 
 //
-:where(.css-dev-only-do-not-override-8krvbs).ant-card {
+:where(.css-dev-only-do-not-override-8krvbs).ant-card:not(.staticWidth) {
   min-width: 95rem;
 }

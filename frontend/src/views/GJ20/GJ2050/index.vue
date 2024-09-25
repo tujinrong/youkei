@@ -60,11 +60,7 @@
               <th class="required">請求年月日</th>
               <td class="flex">
                 <a-form-item v-bind="validateInfos.SEIKYU_DATE">
-                  <DateJp
-                    v-model:value="formData.SEIKYU_DATE"
-                    class="w-50!"
-                    disabled
-                  />
+                  <DateJp v-model:value="formData.SEIKYU_DATE" disabled />
                 </a-form-item>
               </td>
             </a-col>
@@ -74,7 +70,6 @@
                 <a-form-item v-bind="validateInfos.NOFUKIGEN_DATE">
                   <DateJp
                     v-model:value="formData.NOFUKIGEN_DATE"
-                    class="w-50!"
                     :disabled="
                       formData.SYUTURYOKU_KBN === 1 ||
                       formData.SYUTURYOKU_KBN === 3
@@ -89,7 +84,6 @@
                 <a-form-item v-bind="validateInfos.SEIKYU_HAKKO_DATE">
                   <DateJp
                     v-model:value="formData.SEIKYU_HAKKO_DATE"
-                    class="w-50!"
                     :disabled="
                       formData.SYUTURYOKU_KBN === 1 ||
                       formData.SYUTURYOKU_KBN === 3
@@ -137,7 +131,7 @@
             <a-col v-bind="layout">
               <th>事業委託先</th>
               <td class="flex">
-                <a-form-item v-bind="validateInfos.JIMUITAKU_CD">
+                <a-form-item v-bind="validateInfos.JIMUITAKU_CD" class="w-250!">
                   <range-select
                     v-model:value="formData.JIMUITAKU_CD"
                     :options="ITAKU_CD_NAME_LIST"
@@ -147,7 +141,10 @@
             <a-col v-bind="layout">
               <th>契約者番号</th>
               <td class="flex">
-                <a-form-item v-bind="validateInfos.KEIYAKUSYA_CD">
+                <a-form-item
+                  v-bind="validateInfos.KEIYAKUSYA_CD"
+                  class="w-250!"
+                >
                   <range-select
                     v-model:value="formData.KEIYAKUSYA_CD"
                     :options="KEIYAKUSYA_CD_NAME_LIST"

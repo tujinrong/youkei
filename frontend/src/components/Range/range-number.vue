@@ -11,16 +11,22 @@
     <a-input-number
       :value="value.VALUE_FM"
       :disabled="disabled"
-      class="w-20!"
+      :maxLength="maxLength"
+      :max="max"
+      :min="min"
       @change="change1"
+      :style="{ width: width ? width + 'px' : undefined }"
     />
     <span v-if="unit" class="ml-1">{{ unit }}</span>
     <span class="ml-1 mr-1">～</span>
     <a-input-number
       :value="value.VALUE_TO"
       :disabled="disabled"
-      class="w-20!"
+      :maxLength="maxLength"
+      :max="max"
+      :min="min"
       @change="change2"
+      :style="{ width: width ? width + 'px' : undefined }"
     />
     <span v-if="unit" class="ml-1">{{ unit }}</span>
   </div>
@@ -38,6 +44,10 @@ const props = defineProps<{
   }
   disabled?: boolean
   unit?: ''
+  width?: string
+  maxLength?: number
+  max?: number
+  min?: number
 }>()
 const emit = defineEmits(['update:value'])
 
@@ -52,21 +62,13 @@ const formItemContext = Form.useInjectFormItemContext()
 function change1(val) {
   emit('update:value', {
     VALUE_FM: val ? Number(val) : undefined,
-    VALUE_TO: props.value.VALUE_TO
-      ? Number(props.value.VALUE_TO)
-      : val
-        ? Number(val)
-        : undefined,
+    VALUE_TO: props.value.VALUE_TO,
   })
   formItemContext.onFieldChange()
 }
 function change2(val) {
   emit('update:value', {
-    VALUE_FM: props.value.VALUE_FM
-      ? Number(props.value.VALUE_FM)
-      : val
-        ? Number(val)
-        : undefined,
+    VALUE_FM: props.value.VALUE_FM,
     VALUE_TO: val ? Number(val) : undefined,
   })
   formItemContext.onFieldChange()

@@ -29,6 +29,8 @@
                   <range-number
                     v-model:value="formData.SEIKYU_KAISU"
                     :options="KEIYAKU_KBN_CD_NAME_LIST"
+                    width="65"
+                    :maxLength="3"
                 /></a-form-item>
               </td>
             </a-col>
@@ -102,7 +104,7 @@
             <a-col v-bind="layout">
               <th>事業委託先</th>
               <td class="flex">
-                <a-form-item v-bind="validateInfos.JIMUITAKU_CD">
+                <a-form-item v-bind="validateInfos.JIMUITAKU_CD" class="w-250!">
                   <range-select
                     v-model:value="formData.JIMUITAKU_CD"
                     :options="ITAKU_CD_NAME_LIST"
@@ -112,7 +114,10 @@
             <a-col v-bind="layout">
               <th>契約者番号</th>
               <td class="flex">
-                <a-form-item v-bind="validateInfos.KEIYAKUSYA_CD">
+                <a-form-item
+                  v-bind="validateInfos.KEIYAKUSYA_CD"
+                  class="w-250!"
+                >
                   <range-select
                     v-model:value="formData.KEIYAKUSYA_CD"
                     :options="KEIYAKUSYA_CD_NAME_LIST"
