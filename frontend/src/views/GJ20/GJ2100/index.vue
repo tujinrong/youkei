@@ -15,7 +15,7 @@
                     :min="1"
                     :max="99"
                     :maxlength="2"
-                    class="w-20!"
+                    class="w-14!"
                     @change="handleKI(false)"
                   ></a-input-number>
                   <span class="!align-middle">期</span>
@@ -272,17 +272,17 @@ const rangeCheck = (from: number, to: number, itemName: string) => {
 
 const handleKI = (initflg: boolean) => {
   if (!formData.KI && formData.KI !== 0) return
-  Init({ KI: formData.KI }).then((res) => {
-    if (!initflg) {
-      formData.KEIYAKU_KBN = clearFromToValue
-      formData.JIMUITAKU_CD = clearFromToValue
-    }
-    if (initflg) formData.KI = res.KI //対象期
-    if (initflg) KEIYAKU_KBN_CD_NAME_LIST.value = res.KEIYAKU_KBN_CD_NAME_LIST //契約区分
+  // Init({ KI: formData.KI }).then((res) => {
+  //   if (!initflg) {
+  //     formData.KEIYAKU_KBN = clearFromToValue
+  //     formData.JIMUITAKU_CD = clearFromToValue
+  //   }
+  //   if (initflg) formData.KI = res.KI //対象期
+  //   if (initflg) KEIYAKU_KBN_CD_NAME_LIST.value = res.KEIYAKU_KBN_CD_NAME_LIST //契約区分
 
-    KEN_CD_NAME_LIST.value = res.KEN_CD_NAME_LIST //都道府県
-    ITAKU_CD_NAME_LIST.value = res.ITAKU_CD_NAME_LIST //事務委託先
-  })
+  //   KEN_CD_NAME_LIST.value = res.KEN_CD_NAME_LIST //都道府県
+  //   ITAKU_CD_NAME_LIST.value = res.ITAKU_CD_NAME_LIST //事務委託先
+  // })
 }
 const clear = () => {
   Object.assign(formData, createDefaultParams())

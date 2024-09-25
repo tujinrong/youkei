@@ -35,9 +35,9 @@
                     :min="1"
                     :max="99"
                     :maxlength="2"
-                    class="w-20!"
+                    class="w-14!"
                     @change="handleKI(false)"
-                  ></a-input-number>
+                  />
                   <span class="!align-middle">期</span>
                 </a-form-item>
               </td>
@@ -48,12 +48,11 @@
                 <a-form-item v-bind="validateInfos.SEIKYU_KAISU">
                   <a-input-number
                     v-model:value="formData.SEIKYU_KAISU"
-                    :min="1"
-                    :max="99"
-                    :maxlength="2"
-                    style="width: 120px"
-                    @change="handleKI(false)"
-                  ></a-input-number>
+                    :min="0"
+                    :max="999"
+                    :maxlength="3"
+                    class="w-15"
+                  />
                 </a-form-item>
               </td>
             </a-col>
@@ -104,26 +103,33 @@
               <td>
                 <a-form-item v-bind="validateInfos.KI" class="w-50!">
                   <span class="!align-middle">日鶏</span>
-                  <a-input
+                  <a-input-number
                     v-model:value="formData.KI"
+                    :min="0"
+                    :max="99"
+                    :maxlength="2"
                     :disabled="
                       formData.SYUTURYOKU_KBN === 1 ||
                       formData.SYUTURYOKU_KBN === 3
                     "
-                    class="w-20!"
+                    class="w-14!"
                   />
                   <span class="!align-middle">発</span>
                 </a-form-item>
                 <a-form-item v-bind="validateInfos.KI" class="w-50!">
                   <span class="!align-middle">第</span>
-                  <a-input
+                  <a-input-number
                     v-model:value="formData.KI"
+                    :min="0"
+                    :max="9999"
+                    :maxlength="4"
                     :disabled="
                       formData.SYUTURYOKU_KBN === 1 ||
                       formData.SYUTURYOKU_KBN === 3
                     "
-                    class="w-20!"
+                    class="w-17!"
                   />
+
                   <span class="!align-middle">号</span>
                 </a-form-item>
               </td>
@@ -303,16 +309,16 @@ const rangeCheck = (from: number, to: number, itemName: string) => {
 
 const handleKI = (initflg: boolean) => {
   if (!formData.KI && formData.KI !== 0) return
-  Init({ KI: formData.KI }).then((res) => {
-    if (!initflg) {
-      formData.JIMUITAKU_CD = clearFromToValue
-      formData.KEIYAKUSYA_CD = clearFromToValue
-    }
-    if (initflg) formData.KI = res.KI //対象期
+  // Init({ KI: formData.KI }).then((res) => {
+  //   if (!initflg) {
+  //     formData.JIMUITAKU_CD = clearFromToValue
+  //     formData.KEIYAKUSYA_CD = clearFromToValue
+  //   }
+  //   if (initflg) formData.KI = res.KI //対象期
 
-    ITAKU_CD_NAME_LIST.value = res.ITAKU_CD_NAME_LIST //事務委託先
-    KEIYAKUSYA_CD_NAME_LIST.value = res.KEIYAKUSYA_CD_NAME_LIST //契約者番号
-  })
+  //   ITAKU_CD_NAME_LIST.value = res.ITAKU_CD_NAME_LIST //事務委託先
+  //   KEIYAKUSYA_CD_NAME_LIST.value = res.KEIYAKUSYA_CD_NAME_LIST //契約者番号
+  // })
 }
 const clear = () => {
   Object.assign(formData, createDefaultParams())
