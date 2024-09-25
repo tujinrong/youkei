@@ -81,7 +81,7 @@
                   >
                     {{ label }}
                   </a-checkbox>
-                  <span class="w-20">※ 業していない契約者が対象です</span>
+                  <span class="w-20">※ 廃業していない契約者が対象です</span>
                 </a-space>
               </a-form-item>
             </td>
