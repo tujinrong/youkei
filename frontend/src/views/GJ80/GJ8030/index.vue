@@ -63,11 +63,7 @@
               <a-col span="24">
                 <td>
                   <a-form-item v-bind="validateInfos.POST">
-                    <a-input
-                      v-model:value="formData.POST"
-                      :maxlength="8"
-                      class="max-w-35.5"
-                    />
+                    <PostCode v-model:value="formData.POST"></PostCode>
                   </a-form-item>
                 </td>
               </a-col>
