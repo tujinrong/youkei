@@ -29,8 +29,10 @@
                 <a-form-item v-bind="validateInfos.HASSEI_KAISU">
                   <a-input-number
                     v-model:value="searchParams.HASSEI_KAISU"
-                    :min="0"
-                    class="w-full"
+                    :min="1"
+                    :max="99"
+                    :maxlength="2"
+                    class="w-14"
                   ></a-input-number>
                 </a-form-item>
                 <a-button class="ml-2" type="primary" @click="search"
@@ -57,7 +59,7 @@
                 </a-form-item>
               </td>
             </a-col>
-            <a-col span="14" style="justify-content: end;">
+            <a-col span="14" style="justify-content: end">
               <a-pagination
                 v-model:current="pageParams.PAGE_NUM"
                 v-model:page-size="pageParams.PAGE_SIZE"
@@ -254,7 +256,9 @@
           </tr>
         </table>
 
-        <a-button class="danger-btn m2" :disabled="!isEdit" @click="deleteData">削除</a-button>
+        <a-button class="danger-btn m2" :disabled="!isEdit" @click="deleteData"
+          >削除</a-button
+        >
       </div>
       <h2 class="my-1">2.契約農場別登録明細情報(確認用)</h2>
       <div class="parent-container">
@@ -335,8 +339,12 @@
     <template #footer>
       <div class="pt-2 flex justify-between border-t-1">
         <a-space :size="20">
-          <a-button type="primary" :disabled="!isEdit" @click="openGJ4012">互助金明細入力</a-button>
-          <a-button type="primary" :disabled="!isEdit" @click="closeModal">キャンセル</a-button>
+          <a-button type="primary" :disabled="!isEdit" @click="openGJ4012"
+            >互助金明細入力</a-button
+          >
+          <a-button type="primary" :disabled="!isEdit" @click="closeModal"
+            >キャンセル</a-button
+          >
         </a-space>
         <a-button type="primary" @click="closeModal">閉じる</a-button>
       </div>

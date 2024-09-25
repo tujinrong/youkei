@@ -15,7 +15,7 @@
                     :min="1"
                     :max="99"
                     :maxlength="2"
-                    class="w-20"
+                    class="w-14"
                     @change="handleKI(false)"
                   />
                   <span class="!align-middle">期</span>
@@ -62,7 +62,9 @@
             <a-col :span="24">
               <div class="mb-2 header_operation flex justify-between w-full">
                 <a-space :size="20">
-                  <a-button type="primary" @click="onPreview">プレビュー</a-button>
+                  <a-button type="primary" @click="onPreview"
+                    >プレビュー</a-button
+                  >
                   <a-button type="primary" @click="clear">キャンセル</a-button>
                 </a-space>
                 <close-page />

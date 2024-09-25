@@ -34,7 +34,7 @@
                   :min="1"
                   :max="99"
                   :maxlength="2"
-                  class="w-20"
+                  class="w-14"
                 />
                 <span class="!align-middle">(表示&入力)</span>
               </a-form-item>
@@ -45,7 +45,7 @@
                   :min="1"
                   :max="99"
                   :maxlength="2"
-                  class="w-20"
+                  class="w-14"
                 />
                 <span class="!align-middle">(表示&入力)</span>
               </a-form-item>
@@ -56,9 +56,12 @@
             <td>
               <a-form-item v-bind="validateInfos.HASSEI_KAISU">
                 <div class="flex items-center">
-                  <a-input
+                  <a-input-number
                     v-model:value="formData.HASSEI_KAISU"
-                    class="w-20"
+                    :min="1"
+                    :max="99"
+                    :maxlength="2"
+                    class="w-14"
                     :disabled="formData.SYORI_KBN === 1"
                   />
                   <span>(表示&入力)</span>

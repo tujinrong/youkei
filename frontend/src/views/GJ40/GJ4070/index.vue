@@ -15,7 +15,7 @@
                     :min="1"
                     :max="99"
                     :maxlength="2"
-                    class="w-20"
+                    class="w-14"
                     @change="handleKI(false)"
                   />
                   <span class="!align-middle">期</span>
@@ -26,7 +26,7 @@
               <th class="required">認定回数</th>
               <td class="flex">
                 <a-form-item v-bind="validateInfos.HASSEI_KAISU">
-                  <range-number v-model:value="formData.HASSEI_KAISU"/>
+                  <range-number v-model:value="formData.HASSEI_KAISU" />
                 </a-form-item>
               </td>
             </a-col>
@@ -41,7 +41,8 @@
                       v-model:checked="formData.SYUKEI_KBN[key]"
                     >
                       {{ label }}
-                    </a-checkbox></a-space>
+                    </a-checkbox></a-space
+                  >
                 </a-form-item>
               </td>
             </a-col>
@@ -49,7 +50,9 @@
               <th>出力区分</th>
               <td>
                 <a-form-item v-bind="validateInfos.SYUTURYOKU_KBN">
-                  <a-checkbox v-model:checked="formData.SYUTURYOKU_KBN">発生しない鶏の種類は印字しない</a-checkbox>
+                  <a-checkbox v-model:checked="formData.SYUTURYOKU_KBN"
+                    >発生しない鶏の種類は印字しない</a-checkbox
+                  >
                 </a-form-item>
               </td>
             </a-col>
@@ -58,7 +61,9 @@
             <a-col :span="24">
               <div class="mb-2 header_operation flex justify-between w-full">
                 <a-space :size="20">
-                  <a-button type="primary" @click="onPreview">プレビュー</a-button>
+                  <a-button type="primary" @click="onPreview"
+                    >プレビュー</a-button
+                  >
                   <a-button type="primary" @click="clear">キャンセル</a-button>
                 </a-space>
                 <close-page />
@@ -185,9 +190,9 @@ const rangeCheck = (from: number, to: number, itemName: string) => {
 
 const handleKI = (initflg: boolean) => {
   if (!formData.KI && formData.KI !== 0) return
-  Init({ KI: formData.KI }).then((res) => {
-    if (initflg) formData.KI = res.KI //対象期
-  })
+  // Init({ KI: formData.KI }).then((res) => {
+  //   if (initflg) formData.KI = res.KI //対象期
+  // })
 }
 const clear = () => {
   Object.assign(formData, createDefaultParams())

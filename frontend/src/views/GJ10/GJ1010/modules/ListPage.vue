@@ -32,7 +32,7 @@
               <range-select
                 v-model:value="searchParams.KEN_CD"
                 :options="KEN_CD_NAME_LIST"
-                class="w-120!"
+                class="w-90!"
               />
             </td>
           </a-col>
@@ -55,7 +55,7 @@
               <ai-select
                 v-model:value="searchParams.KEIYAKU_KBN"
                 :options="KEIYAKU_KBN_CD_NAME_LIST"
-                class="w-50!"
+                class="w-37!"
                 type="number"
               ></ai-select>
             </td>
@@ -66,7 +66,7 @@
               <ai-select
                 v-model:value="searchParams.KEIYAKU_JYOKYO"
                 :options="KEIYAKU_KBN_CD_NAME_LIST"
-                class="w-50!"
+                class="w-37!"
                 type="number"
               ></ai-select>
             </td>
@@ -77,7 +77,7 @@
               <a-input
                 v-model:value="searchParams.KEIYAKUSYA_NAME"
                 :maxlength="25"
-                class="w-150"
+                class="w-130"
               ></a-input>
               <span class="w-40!">(部分一致)</span>
             </td>
@@ -88,7 +88,7 @@
               <a-input
                 v-model:value="searchParams.KEIYAKUSYA_KANA"
                 :maxlength="50"
-                class="w-150"
+                class="w-130"
               ></a-input>
               <span class="w-40!">(部分一致)</span>
             </td>
@@ -98,7 +98,7 @@
             <td>
               <a-input
                 v-model:value="searchParams.ADDR"
-                class="w-270"
+                class="w-250"
                 :maxlength="54"
               ></a-input>
               <span class="w-65!">(部分一致)</span>
@@ -122,6 +122,7 @@
               <range-select
                 v-model:value="searchParams.JIMUITAKU_CD"
                 :options="ITAKU_LIST"
+                class="w-250!"
               />
             </td>
           </a-col>
@@ -340,8 +341,12 @@ const KEIYAKU_KBN_CD_NAME_LIST = ref<CmCodeNameModel[]>([
   { CODE: 2, NAME: '企業' },
   { CODE: 3, NAME: '鶏以外' },
 ])
-const KEN_CD_NAME_LIST = ref<CmCodeNameModel[]>([])
-const ITAKU_LIST = ref<CmCodeNameModel[]>([])
+const KEN_CD_NAME_LIST = ref<CmCodeNameModel[]>([
+  { CODE: 46, NAME: '鹿児島県' },
+])
+const ITAKU_LIST = ref<CmCodeNameModel[]>([
+  { CODE: 666, NAME: '事務委託先事務委託先事務委託先事務委託先事務委託先' },
+])
 const tableData = ref<SearchRowVM[]>([])
 const tableDefault = {
   KEIYAKUSYA_CD: 1003,
