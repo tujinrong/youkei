@@ -37,12 +37,13 @@
             </td>
           </a-col>
           <a-col span="24" class="mt-2">
-            <read-only-pop thWidth="132" th="農場住所" td="" :hideTd="true" />
-            <read-only-pop th="　〒　" thWidth="60" :td="nojoData.ADDR_POST" />
+            <read-only-pop thWidth="115" th="農場住所" td="" :hideTd="true" />
+            <read-only-pop th="　〒　" thWidth="50" :td="nojoData.ADDR_POST" />
             <read-only-pop thWidth="60" th="住所1" :td="nojoData.ADDR_1" />
             <read-only-pop thWidth="60" th="住所2" :td="nojoData.ADDR_2" />
           </a-col>
-          <a-col span="24">
+          <a-col span="7"></a-col>
+          <a-col span="17">
             <read-only-pop thWidth="132" th="" :hideTd="true" />
             <read-only-pop thWidth="60" th="住所3" :td="nojoData.ADDR_3" />
             <read-only-pop thWidth="60" th="住所4" :td="nojoData.ADDR_4" />
