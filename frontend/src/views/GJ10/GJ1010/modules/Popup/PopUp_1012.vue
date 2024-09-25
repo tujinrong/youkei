@@ -87,15 +87,14 @@
           <th class="required">契約年月日</th>
           <td>
             <a-form-item v-bind="validateInfos.KEIYAKU_YMD_FM" class="!w-40">
-              <DateJp v-model:value="formData.KEIYAKU_YMD_FM" class="!w-40"
+              <DateJp v-model:value="formData.KEIYAKU_YMD_FM"
             /></a-form-item>
-            <span>～</span>
+            <span class="mx-3">～</span>
             <a-form-item class="!w-40">
               <DateJp
                 v-model:value="formData.KEIYAKU_YMD_TO"
-                disabled
-                class="!w-40" /></a-form-item
-            ><span class="flex items-center"
+                disabled /></a-form-item
+            ><span class="flex items-center ml-2"
               >(契約日を入力する二とで单価を取得します)</span
             >
           </td>

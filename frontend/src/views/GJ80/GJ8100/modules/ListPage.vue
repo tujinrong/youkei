@@ -12,7 +12,6 @@
       <vxe-table
         class="h-full"
         ref="xTableRef"
-        :height="height - 64"
         :column-config="{ resizable: true }"
         :row-config="{ isCurrent: true, isHover: true }"
         :data="tableData"

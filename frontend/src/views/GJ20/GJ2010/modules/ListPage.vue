@@ -11,12 +11,11 @@
         <close-page />
       </div>
     </a-card>
-    <a-card :bordered="false" class="sm:flex-1-hidden" ref="cardRef">
+    <a-card :bordered="false" class="flex-1" ref="cardRef">
       <vxe-table
         class="h-full"
         align="center"
         :column-config="{ resizable: true }"
-        :height="height - 30"
         :row-config="{ isCurrent: true, isHover: true }"
         :data="tableData"
         :sort-config="{ trigger: 'cell', orders: ['desc', 'asc'] }"

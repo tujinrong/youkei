@@ -113,7 +113,6 @@
         class="mt-2"
         ref="xTableRef"
         :column-config="{ resizable: true }"
-        :height="height - 64"
         :row-config="{ isCurrent: true, isHover: true }"
         :data="tableData"
         :sort-config="{ trigger: 'cell', orders: ['desc', 'asc'] }"

@@ -195,7 +195,7 @@
           <a-button class="ml-20" type="primary" @click="">CSV出力</a-button>
         </a-space>
         <close-page /></div></a-card
-    ><a-card class="sm:flex-1-hidden" ref="cardRef">
+    ><a-card class="flex-1" ref="cardRef">
       <a-pagination
         v-model:current="pageParams.PAGE_NUM"
         v-model:page-size="pageParams.PAGE_SIZE"
@@ -210,7 +210,6 @@
         class="mt-2"
         ref="xTableRef"
         :column-config="{ resizable: true }"
-        :height="height - 64"
         :row-config="{ isCurrent: true, isHover: true }"
         :data="tableData"
         :sort-config="{ trigger: 'cell', orders: ['desc', 'asc'] }"
