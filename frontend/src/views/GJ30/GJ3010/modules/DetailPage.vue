@@ -12,8 +12,8 @@
     :visible="modalVisible"
     centered
     title="契約農場別明細 增羽情報(入力)"
-    width="1000px"
-    :body-style="{ height: '800px', overflowY: 'scroll' }"
+    width="800px"
+    :body-style="{ height: '450px' }"
     :mask-closable="false"
     destroy-on-close
     @cancel="goList"
@@ -21,7 +21,7 @@
     <div class="parent-container">
       <div class="edit_table form">
         <a-row>
-          <a-col span="24">
+          <a-col span="24" class="mb-2">
             <th class="required">農場</th>
             <td>
               <a-form-item v-bind="validateInfos.NOJO_CD">
@@ -36,17 +36,25 @@
               >
             </td>
           </a-col>
-          <a-col span="24" class="mt-2">
-            <read-only-pop thWidth="115" th="農場住所" td="" :hideTd="true" />
-            <read-only-pop th="　〒　" thWidth="50" :td="nojoData.ADDR_POST" />
-            <read-only-pop thWidth="60" th="住所1" :td="nojoData.ADDR_1" />
-            <read-only-pop thWidth="60" th="住所2" :td="nojoData.ADDR_2" />
-          </a-col>
-          <a-col span="7"></a-col>
-          <a-col span="17">
-            <read-only-pop thWidth="132" th="" :hideTd="true" />
-            <read-only-pop thWidth="60" th="住所3" :td="nojoData.ADDR_3" />
-            <read-only-pop thWidth="60" th="住所4" :td="nojoData.ADDR_4" />
+          <a-col span="3">
+            <read-only-pop thWidth="90" th="住所" td="" :hideTd="true" /></a-col
+          ><a-col span="5"
+            ><read-only-pop th="　〒" :td="nojoData.ADDR_POST" /></a-col
+          ><a-col span="5"
+            ><read-only-pop th="住所1" :td="nojoData.ADDR_1" /></a-col
+          ><a-col span="11"
+            ><read-only-pop th="住所2" :td="nojoData.ADDR_2"
+          /></a-col>
+
+          <a-col span="24">
+            <read-only-pop
+              thWidth="250"
+              th=""
+              :hideTd="true"
+              :td="nojoData.ADDR_POST"
+            />
+            <read-only-pop th="住所3" :td="nojoData.ADDR_3" />
+            <read-only-pop th="住所4" :td="nojoData.ADDR_4" />
           </a-col>
           <a-col span="13">
             <th class="required">鳥の種類</th>
