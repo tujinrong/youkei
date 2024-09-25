@@ -9,14 +9,15 @@
     destroy-on-close
     @cancel="goList"
     ><div class="modal-container">
-      <div class="edit_table form w-110">
+      <div class="edit_table form w-130">
         <a-form>
           <a-row>
-            <a-col span="12">
+            <a-col span="10">
               <read-only-pop
                 th="種類区分"
                 th-width="100"
                 :td="formData.SYURUI_KBN"
+                :maxlength="20"
                 class="w-120!"
               ></read-only-pop>
             </a-col>
@@ -29,8 +30,8 @@
                   <a-input-number
                     v-model:value="formData.MEISYO_CD"
                     :min="0"
-                    :maxlength="2"
                     :max="99"
+                    :maxlength="2"
                     :disabled="!isNew"
                     class="w-14"
                   ></a-input-number>
