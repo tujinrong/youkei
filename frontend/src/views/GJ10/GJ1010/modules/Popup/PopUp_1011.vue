@@ -12,7 +12,7 @@
     centered
     title="（GJ1011）互助基金契約者マスタメンテナンス（基本情報入力）"
     width="1000px"
-    :body-style="{ height: '800px', overflowY: 'scroll' }"
+    :body-style="{ height: '800px' }"
     :mask-closable="false"
     destroy-on-close
     @cancel="goList"
@@ -104,7 +104,6 @@
               <a-form-item v-bind="validateInfos.KEIYAKU_DATE">
                 <DateJp
                   v-model:value="formData.KEIYAKU_DATE"
-                  class="max-w-50"
                   :disabled="formData.NYU_HEN_DATE"
               /></a-form-item>
             </td>
@@ -129,11 +128,7 @@
             <th>入金日、返還日(入金完了時)</th>
             <td>
               <a-form-item v-bind="validateInfos.NYU_HEN_DATE">
-                <DateJp
-                  v-model:value="formData.NYU_HEN_DATE"
-                  class="max-w-50"
-                  disabled
-                ></DateJp>
+                <DateJp v-model:value="formData.NYU_HEN_DATE" disabled></DateJp>
               </a-form-item>
             </td>
           </a-col>
@@ -443,10 +438,7 @@
               <a-col class="w-full">
                 <th>廃業日</th>
                 <td>
-                  <DateJp
-                    v-model:value="formData.HAIGYO_DATE"
-                    class="max-w-50"
-                  />
+                  <DateJp v-model:value="formData.HAIGYO_DATE" />
                 </td>
               </a-col>
             </a-row>

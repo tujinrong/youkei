@@ -64,7 +64,12 @@
             <read-only
               thWidth="200"
               th="積立金返還人数"
-              :td="formData.HENKAN_NINZU"
+              :td="
+                String(formData.HENKAN_NINZU).replace(
+                  /\B(?=(\d{3})+(?!\d))/g,
+                  ','
+                )
+              "
               after="(人)"
             />
           </a-col>
@@ -72,7 +77,12 @@
             <read-only
               thWidth="200"
               th="積立金返還額合計"
-              :td="formData.HENKAN_GOKEI"
+              :td="
+                String(formData.HENKAN_GOKEI).replace(
+                  /\B(?=(\d{3})+(?!\d))/g,
+                  ','
+                )
+              "
               after="(円) (左記項目は積立金返還処理で算定した结果を保存、表示)"
             /> </a-col
           ><a-col span="24">
@@ -86,10 +96,7 @@
             <th class="required">対象年度(現在処理中)</th>
             <td>
               <a-form-item v-bind="validateInfos.TAISYO_NENDO">
-                <YearSelector
-                  v-model:value="formData.TAISYO_NENDO"
-                  class="w-30!"
-                />
+                <YearSelector v-model:value="formData.TAISYO_NENDO" />
               </a-form-item>
             </td>
           </a-col>
@@ -97,7 +104,7 @@
           <a-col span="24">
             <th>当初対象積立金納付期限</th>
             <td>
-              <DateJp v-model:value="formData.NOFU_KIGEN" class="w-50!" />
+              <DateJp v-model:value="formData.NOFU_KIGEN" />
               <span class="mt-1">
                 (左記期限までに入金済みの時は、契約日は4月1日となる。)</span
               >

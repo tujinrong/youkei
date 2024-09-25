@@ -12,6 +12,7 @@
     v-model:value="yearV"
     :format="Formatter"
     picker="year"
+    class="w-32!"
   />
 </template>
 <script lang="ts" setup>
@@ -99,7 +100,7 @@ const Formatter = (value: Date): string => {
     }
   }
   const formattedYearNum = yearNum < 10 ? `0${yearNum}` : `${yearNum}`
-  return `${yearName}${formattedYearNum}年度`
+  return `${yearName} ${formattedYearNum}年度`
 }
 </script>
 

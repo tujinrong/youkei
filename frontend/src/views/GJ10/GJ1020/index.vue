@@ -292,10 +292,7 @@
               <th class="required">移動年月日</th>
               <td>
                 <a-form-item v-bind="validateInfos.KEIYAKU_DATE_FROM">
-                  <DateJp
-                    v-model:value="formData.KEIYAKU_DATE_FROM"
-                    class="max-w-50"
-                  ></DateJp>
+                  <DateJp v-model:value="formData.KEIYAKU_DATE_FROM"></DateJp>
                 </a-form-item>
               </td>
             </a-col>
