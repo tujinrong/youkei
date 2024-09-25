@@ -11,8 +11,8 @@
     :visible="modalVisible"
     centered
     title="（GJ8091）契約者農場マスタメンテナンス"
-    width="1000px"
-    :body-style="{ height: '800px' }"
+    width="800px"
+    :body-style="{ height: '450px' }"
     :mask-closable="false"
     destroy-on-close
     @cancel="goList"
