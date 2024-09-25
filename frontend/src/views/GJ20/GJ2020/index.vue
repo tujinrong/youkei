@@ -7,9 +7,7 @@
  * 変更履歴　:
  * ----------------------------------------------------------------->
 <template>
-  <div
-    class="h-full min-h-500px flex-col-stretch gap-12px overflow-hidden lt-sm:overflow-auto"
-  >
+  <div class="h-full min-h-500px flex-col-stretch gap-12px">
     <a-card ref="headRef" :bordered="false">
       <h1>（GJ2020）契約者積立金計算処理</h1>
       <div class="self_adaption_table form max-w-250 mt-1">

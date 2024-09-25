@@ -7,9 +7,7 @@
  * 変更履歴　:
  * ----------------------------------------------------------------->
 <template>
-  <div
-    class="h-full min-h-500px flex-col-stretch gap-12px overflow-hidden lt-sm:overflow-auto"
-  >
+  <div class="h-full min-h-500px flex-col-stretch gap-12px">
     <a-card ref="headRef" :bordered="false">
       <h1>（GJ4010）互助金申請情報一覧</h1>
       <div class="self_adaption_table form max-w-400 mt-1">
@@ -163,7 +161,8 @@
         </a-row>
       </div>
       <div class="my-2 flex justify-between max-w-250">
-        <a-space><span>検索方法</span>
+        <a-space
+          ><span>検索方法</span>
           <a-radio-group v-model:value="formData.SEARCH_METHOD">
             <a-radio :value="EnumAndOr.AndCode">すべてを含む(AND)</a-radio>
             <a-radio :value="EnumAndOr.OrCode">いずれかを含む(OR)</a-radio>
@@ -174,8 +173,12 @@
         <a-space :size="20">
           <a-button type="primary" @click="search">検索</a-button>
           <a-button type="primary" @click="clear">条件クリア</a-button>
-          <a-button class="ml-20" type="primary" @click="openGJ4011">経営支援登録</a-button>
-          <a-button class="ml-20" type="primary" @click="openGJ4013">焼却・埋却登録</a-button>
+          <a-button class="ml-20" type="primary" @click="openGJ4011"
+            >経営支援登録</a-button
+          >
+          <a-button class="ml-20" type="primary" @click="openGJ4013"
+            >焼却・埋却登録</a-button
+          >
         </a-space>
         <AButton type="primary" class="ml-a" @click="tabStore.removeActiveTab">
           閉じる
@@ -259,8 +262,8 @@
       </vxe-table>
     </a-card>
   </div>
-  <Detail1 v-model:visible="GJ4011Visible" :editkbn="GJ4011kbn"/>
-  <Detail3 v-model:visible="GJ4013Visible" :editkbn="GJ4013kbn"/>
+  <Detail1 v-model:visible="GJ4011Visible" :editkbn="GJ4011kbn" />
+  <Detail3 v-model:visible="GJ4013Visible" :editkbn="GJ4013kbn" />
 </template>
 <script setup lang="ts">
 import { reactive, ref, toRef } from 'vue'
@@ -274,9 +277,9 @@ import { SearchRequest } from '../type'
 import { VxeTableInstance } from 'vxe-table'
 import DateJp from '@/components/Selector/DateJp/index.vue'
 import { Form } from 'ant-design-vue'
-import {EnumAndOr, EnumEditKbn, PageStatus} from "@/enum";
-import Detail1 from "@/views/GJ40/GJ4010/modules/Detail/Detail1.vue";
-import Detail3 from "@/views/GJ40/GJ4010/modules/Detail/Detail3.vue";
+import { EnumAndOr, EnumEditKbn, PageStatus } from '@/enum'
+import Detail1 from '@/views/GJ40/GJ4010/modules/Detail/Detail1.vue'
+import Detail3 from '@/views/GJ40/GJ4010/modules/Detail/Detail3.vue'
 //--------------------------------------------------------------------------
 //データ定義
 //--------------------------------------------------------------------------
@@ -387,10 +390,10 @@ function search() {
   }
 }
 function openGJ4011(row?: any) {
-    GJ4011Visible.value = true
+  GJ4011Visible.value = true
 }
 function openGJ4013(row?: any) {
-    GJ4013Visible.value = true
+  GJ4013Visible.value = true
 }
 </script>
 <style lang="scss" scoped>

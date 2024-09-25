@@ -7,9 +7,7 @@
  * 変更履歴　:
  * ----------------------------------------------------------------->
 <template>
-  <div
-    class="h-full min-h-500px flex-col-stretch gap-12px overflow-hidden lt-sm:overflow-auto flex"
-  >
+  <div class="h-full min-h-500px flex-col-stretch gap-12px flex">
     <a-card :bordered="false">
       <h1>（GJ3010）互助基金契約者情報変更(增羽)</h1>
       <div class="self_adaption_table form mt-1">

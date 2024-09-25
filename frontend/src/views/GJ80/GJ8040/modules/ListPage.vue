@@ -1,7 +1,5 @@
 <template>
-  <div
-    class="h-full min-h-500px flex-col-stretch gap-12px overflow-hidden lt-sm:overflow-auto"
-  >
+  <div class="h-full min-h-500px flex-col-stretch gap-12px">
     <a-card ref="headRef" :bordered="false">
       <h1>（GJ8040）使用者一覧</h1>
       <div class="mt-1 flex">

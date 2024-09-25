@@ -233,3 +233,8 @@ h2 {
 :where(.css-dev-only-do-not-override-8krvbs).ant-modal .ant-modal-title {
   font-size: 24px;
 }
+
+//
+:where(.css-dev-only-do-not-override-8krvbs).ant-card {
+  min-width: 95rem;
+}
