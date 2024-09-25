@@ -14,7 +14,7 @@
       ><h1>（GJ7010）互助基金契約者情報検索CSVデ一夕作成</h1>
       <div class="self_adaption_table form mt-1">
         <a-row
-          ><a-col span="24"
+          ><a-col span="12"
             ><th class="required">対象期</th>
             <td>
               <a-form-item v-bind="validateInfos.KI" class="w-50!">
@@ -32,9 +32,15 @@
                   :disabled="!searchParams.KEIYAKU_DATE_NOZOKU_FLG"
                 />　末　現在　(契約情報の契約日)</a-form-item
               >
-            </td>
-          </a-col>
-          <a-col span="24"
+            </td> </a-col
+          ><a-col span="12"
+            ><th>契約日未入力者を除く</th>
+            <td>
+              <a-checkbox
+                v-model:checked="searchParams.KEIYAKU_DATE_NOZOKU_FLG"
+              ></a-checkbox></td
+          ></a-col>
+          <a-col span="12"
             ><th>都道府県</th>
             <td>
               <a-form-item v-bind="validateInfos.KEN_CD">
@@ -42,7 +48,13 @@
                   v-model:value="searchParams.KEN_CD"
                   :options="LIST"
                   class="w-90!"
-              /></a-form-item></td
+              /></a-form-item></td></a-col
+          ><a-col span="12"
+            ><th>入金· 返還日未入力者を除く</th>
+            <td>
+              <a-checkbox
+                v-model:checked="searchParams.NYUHEN_DATE_NOZOKU_FLG"
+              ></a-checkbox></td
           ></a-col>
           <a-col span="24"
             ><th>契約者番号</th>
@@ -104,25 +116,14 @@
             <td>
               <a-radio-group
                 v-model:value="searchParams.SYUTURYOKU_KOMOKU_SENTAKU"
+                class="flex items-center"
               >
                 <a-radio :value="1">農場明細を含む</a-radio
                 ><a-radio :value="2">含まない（契約者基本情報のみ）</a-radio>
               </a-radio-group>
             </td></a-col
-          ><a-col v-bind="layout"
-            ><th>契約日未入力者を除く</th>
-            <td>
-              <a-checkbox
-                v-model:checked="searchParams.KEIYAKU_DATE_NOZOKU_FLG"
-              ></a-checkbox></td
-          ></a-col>
-          <a-col v-bind="layout"
-            ><th>入金· 返還日未入力者を除く</th>
-            <td>
-              <a-checkbox
-                v-model:checked="searchParams.NYUHEN_DATE_NOZOKU_FLG"
-              ></a-checkbox></td></a-col
-        ></a-row>
+          >
+        </a-row>
       </div>
       <div class="my-2 flex">
         <a-space

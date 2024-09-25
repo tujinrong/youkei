@@ -171,6 +171,7 @@
             <td>
               <a-radio-group
                 v-model:value="searchParams.SYUTURYOKU_KOMOKU_SENTAKU"
+                class="flex items-center"
               >
                 <a-radio :value="1">積立金ペース(鶏の種類別)</a-radio
                 ><a-radio :value="2">請求ペース(鶏の種類別)</a-radio>
