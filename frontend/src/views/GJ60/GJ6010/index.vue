@@ -13,14 +13,15 @@
                     v-model:value="formData.SYORI_SENTAKU"
                     :options="SYORI_SENTAKU_LIST"
                     split-val
+                    class="w-80!"
                   />
-<!--                  <a-input-number-->
-<!--                    v-model:value="formData.SYORI_SENTAKU"-->
-<!--                    :min="1"-->
-<!--                    :max="3"-->
-<!--                    class="w-20"-->
-<!--                  />-->
-<!--                  <span class="!align-middle ml-2">1: 積立金納付額取込処理&nbsp;&nbsp;2: 互助金交付額取込&nbsp;&nbsp;3: 繰越額算定処理</span>-->
+                  <!--                  <a-input-number-->
+                  <!--                    v-model:value="formData.SYORI_SENTAKU"-->
+                  <!--                    :min="1"-->
+                  <!--                    :max="3"-->
+                  <!--                    class="w-20"-->
+                  <!--                  />-->
+                  <!--                  <span class="!align-middle ml-2">1: 積立金納付額取込処理&nbsp;&nbsp;2: 互助金交付額取込&nbsp;&nbsp;3: 繰越額算定処理</span>-->
                 </a-form-item>
               </td>
             </a-col>
@@ -32,7 +33,7 @@
                 before="第"
                 after="期"
               />
-<!--              <th class="required">対象期(前期)</th>
+              <!--              <th class="required">対象期(前期)</th>
               <td>
                 <a-form-item v-bind="validateInfos.KI">
                   <span class="!align-middle">第</span>
@@ -54,7 +55,9 @@
                 <a-form-item v-bind="validateInfos.SYORI_TYPE">
                   <a-radio-group v-model:value="formData.SYORI_TYPE">
                     <a-radio :value="1">取込処理(未処理)</a-radio>
-                    <a-radio :value="2">取込処理済({{ formData.ZENKI_TUMITATE_DATE }})</a-radio>
+                    <a-radio :value="2"
+                      >取込処理済({{ formData.ZENKI_TUMITATE_DATE }})</a-radio
+                    >
                     <a-radio :value="3">処理キャンセル</a-radio>
                   </a-radio-group>
                 </a-form-item>
@@ -66,7 +69,9 @@
                 <a-form-item v-bind="validateInfos.SYORI_TYPE">
                   <a-radio-group v-model:value="formData.SYORI_TYPE">
                     <a-radio :value="1">取込処理(未処理)</a-radio>
-                    <a-radio :value="2">取込処理済({{ formData.ZENKI_KOFU_DATE }})</a-radio>
+                    <a-radio :value="2"
+                      >取込処理済({{ formData.ZENKI_KOFU_DATE }})</a-radio
+                    >
                     <a-radio :value="3">処理キャンセル</a-radio>
                   </a-radio-group>
                 </a-form-item>
@@ -78,7 +83,9 @@
                 <a-form-item v-bind="validateInfos.SYORI_TYPE">
                   <a-radio-group v-model:value="formData.SYORI_TYPE">
                     <a-radio :value="1">取込処理(未処理)</a-radio>
-                    <a-radio :value="2">取込処理済({{ formData.HENKAN_KEISAN_DATE }})</a-radio>
+                    <a-radio :value="2"
+                      >取込処理済({{ formData.HENKAN_KEISAN_DATE }})</a-radio
+                    >
                     <a-radio :value="3">処理キャンセル</a-radio>
                   </a-radio-group>
                 </a-form-item>

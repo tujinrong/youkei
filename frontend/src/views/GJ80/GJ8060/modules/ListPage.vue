@@ -13,7 +13,7 @@
                   :min="0"
                   :max="99"
                   :maxlength="2"
-                  class="w-20"
+                  class="w-14"
                   @change="getInitData(searchParams.KI, false)"
                 ></a-input-number>
               </a-form-item>
@@ -27,6 +27,7 @@
                   <range-select
                     v-model:value="searchParams.KEN_CD"
                     :options="KEN_CD_NAME_LIST"
+                    class="w-90!"
                   ></range-select>
                 </a-form-item>
               </div>

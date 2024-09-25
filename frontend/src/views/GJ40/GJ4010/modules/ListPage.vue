@@ -76,7 +76,7 @@
               <ai-select
                 v-model:value="formData.KEIYAKU_KBN"
                 :options="KEIYAKU_KBN_CD_NAME_LIST"
-                class="w-full"
+                class="w-37!"
                 type="number"
               ></ai-select>
             </td>
@@ -87,7 +87,7 @@
               <ai-select
                 v-model:value="formData.KEIYAKU_JYOKYO"
                 :options="KEIYAKU_KBN_CD_NAME_LIST"
-                class="w-full"
+                class="w-37!"
                 type="number"
               ></ai-select>
             </td>

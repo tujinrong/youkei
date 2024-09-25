@@ -36,7 +36,7 @@
                   <range-select
                     v-model:value="formData.KEIYAKU_KBN"
                     :options="LIST"
-                    class="w-90!"
+                    class="max-w-78"
                 /></a-form-item>
               </td>
             </a-col>
@@ -47,7 +47,7 @@
                   <range-select
                     v-model:value="formData.TORI_KBN"
                     :options="LIST"
-                    class="w-90!"
+                    class="max-w-78"
                 /></a-form-item>
               </td>
             </a-col>
@@ -58,7 +58,7 @@
                   <range-select
                     v-model:value="formData.KEN_CD"
                     :options="KEN_CD_NAME_LIST"
-                    class="w-90!"
+                    class="max-w-90"
                 /></a-form-item>
               </td>
             </a-col>
@@ -123,6 +123,7 @@ const createDefaultParams = (): ExcelExportRequest => {
 
 const formData = reactive(createDefaultParams())
 const LIST = ref<CmCodeNameModel[]>([])
+
 const KEN_CD_NAME_LIST = ref<CmCodeNameModel[]>([
   { CODE: 46, NAME: '鹿児島県' },
 ])

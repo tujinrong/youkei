@@ -49,7 +49,7 @@
                   <range-select
                     v-model:value="formData.KEIYAKU_KBN"
                     :options="KEIYAKU_KBN_CD_NAME_LIST"
-                    class="max-w-72"
+                    class="max-w-78"
                 /></a-form-item>
               </td>
             </a-col>

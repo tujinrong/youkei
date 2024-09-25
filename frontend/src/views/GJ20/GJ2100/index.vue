@@ -32,6 +32,7 @@
                   <range-select
                     v-model:value="formData.KEIYAKU_KBN"
                     :options="KEIYAKU_KBN_CD_NAME_LIST"
+                    class="max-w-78"
                 /></a-form-item>
               </td>
             </a-col>
@@ -72,6 +73,7 @@
                   <range-select
                     v-model:value="formData.KEN_CD"
                     :options="KEN_CD_NAME_LIST"
+                    class="w-90!"
                     :disabled="formData.SYUKEI_KBN !== 1"
                 /></a-form-item>
               </td>
@@ -84,6 +86,7 @@
                     v-model:value="formData.JIMUITAKU_CD"
                     :options="ITAKU_CD_NAME_LIST"
                     :disabled="formData.SYUKEI_KBN !== 2"
+                    class="w-250!"
                 /></a-form-item>
               </td>
             </a-col>

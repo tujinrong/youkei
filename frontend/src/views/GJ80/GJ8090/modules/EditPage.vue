@@ -69,7 +69,7 @@
                 <ai-select
                   v-model:value="formData.KEN_CD"
                   :options="KEN_CD_NAME_LIST"
-                  class="max-w-35"
+                  class="max-w-50"
                   type="number"
                 ></ai-select>
               </a-form-item>

@@ -60,7 +60,7 @@
                 <a-form-item v-bind="validateInfos.SEIKYU_DATE">
                   <DateJp
                     v-model:value="formData.SEIKYU_DATE"
-                    class="w-50!"
+                    class="max-w-50"
                     disabled
                   />
                 </a-form-item>
@@ -72,7 +72,7 @@
                 <a-form-item v-bind="validateInfos.NOFUKIGEN_DATE">
                   <DateJp
                     v-model:value="formData.NOFUKIGEN_DATE"
-                    class="w-50!"
+                    class="max-w-50"
                     :disabled="
                       formData.SYUTURYOKU_KBN === 1 ||
                       formData.SYUTURYOKU_KBN === 3
@@ -87,7 +87,7 @@
                 <a-form-item v-bind="validateInfos.SEIKYU_HAKKO_DATE">
                   <DateJp
                     v-model:value="formData.SEIKYU_HAKKO_DATE"
-                    class="w-50!"
+                    class="max-w-50"
                     :disabled="
                       formData.SYUTURYOKU_KBN === 1 ||
                       formData.SYUTURYOKU_KBN === 3
@@ -138,6 +138,7 @@
                   <range-select
                     v-model:value="formData.JIMUITAKU_CD"
                     :options="ITAKU_CD_NAME_LIST"
+                    class="w-250!"
                 /></a-form-item>
               </td>
             </a-col>
@@ -148,6 +149,7 @@
                   <range-select
                     v-model:value="formData.KEIYAKUSYA_CD"
                     :options="KEIYAKUSYA_CD_NAME_LIST"
+                    class="w-250!"
                 /></a-form-item>
               </td>
             </a-col>

@@ -146,7 +146,7 @@
             <th>入金日・振込日</th>
             <td class="flex">
               <a-form-item v-bind="validateInfos.SEIKYU_DATE">
-                <DateJp v-model:value="formData.SEIKYU_DATE" class="w-50!" />
+                <DateJp v-model:value="formData.SEIKYU_DATE" class="max-w-50" />
               </a-form-item>
             </td>
           </a-col>
