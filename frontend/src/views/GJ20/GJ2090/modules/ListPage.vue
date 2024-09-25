@@ -52,7 +52,7 @@
             <th>都道府県</th>
             <td>
               <range-select
-                style="width: 40%"
+                class="w-90!"
                 v-model:value="formData.KEN_CD"
                 :options="KEN_CD_NAME_LIST"
               />

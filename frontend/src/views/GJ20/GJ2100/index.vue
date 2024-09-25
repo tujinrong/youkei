@@ -68,7 +68,7 @@
             <a-col v-bind="layout">
               <th>都道府県</th>
               <td>
-                <a-form-item v-bind="validateInfos.KEN_CD" style="width: 40%">
+                <a-form-item v-bind="validateInfos.KEN_CD" class="w-90!">
                   <range-select
                     v-model:value="formData.KEN_CD"
                     :options="KEN_CD_NAME_LIST"

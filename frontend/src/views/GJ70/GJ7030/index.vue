@@ -40,7 +40,7 @@
                 <range-select
                   v-model:value="searchParams.KEN_CD"
                   :options="LIST"
-                  class="w-150!"
+                  class="w-90!"
               /></a-form-item></td
           ></a-col>
           <a-col span="24"

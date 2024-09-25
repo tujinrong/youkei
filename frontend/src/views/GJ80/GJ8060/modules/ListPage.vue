@@ -22,7 +22,7 @@
           <a-col v-bind="layout">
             <th>都道府県</th>
             <td>
-              <div class="w-100">
+              <div class="w-90">
                 <a-form-item v-bind="validateInfos.KEN_CD">
                   <range-select
                     v-model:value="searchParams.KEN_CD"

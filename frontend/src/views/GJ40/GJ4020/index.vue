@@ -97,6 +97,7 @@
                   <range-select
                     v-model:value="formData.KEN_CD"
                     :options="KEN_CD_NAME_LIST"
+                    class="w-90!"
                 /></a-form-item>
               </td>
             </a-col>
