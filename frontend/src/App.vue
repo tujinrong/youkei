@@ -79,7 +79,11 @@ watchEffect(async () => {
 </script>
 
 <template>
-  <ConfigProvider :theme="themeStore.antdTheme" :locale="antdLocale">
+  <ConfigProvider
+    :theme="themeStore.antdTheme"
+    :locale="antdLocale"
+    :autoInsertSpaceInButton="false"
+  >
     <a-spin id="global_loading" :spinning="loading" wrapperClassName="h-full">
       <AppProvider>
         <RouterView class="bg-layout" />
