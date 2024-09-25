@@ -7,7 +7,9 @@
  * 変更履歴　:
  * ----------------------------------------------------------------->
 <template>
-  <div class="h-full min-h-500px flex-col-stretch gap-12px lt-sm:overflow-auto">
+  <div
+    class="h-full min-h-500px flex-col-stretch gap-12px lt-sm:overflow-auto px-4 py-4"
+  >
     <a-card :bordered="false">
       <h1>（GJ1020）互助基金契約者情報変更（移動）</h1>
       <div class="self_adaption_table form mt-1">
@@ -58,7 +60,7 @@
         </a-space>
         <close-page />
       </div> </a-card
-    ><a-card
+    ><a-card class="flex-1"
       ><h2>1.契約農場別明細 移動情報(表示)</h2>
       <div class="flex justify-between">
         <a-pagination
@@ -169,156 +171,9 @@
         >
         </vxe-column>
       </vxe-table>
-
-      <h2>2.契約農場別明細 移動情報(入力)</h2>
-      <a-space :size="20" 　class="mb-2">
-        <a-button
-          :class="{ 'warning-btn': isEditing }"
-          :disabled="!isEditing"
-          @click="save"
-          >登録</a-button
-        >
-        <a-button type="primary" :disabled="!isEditing" @click="cancel"
-          >キャンセル</a-button
-        >
-      </a-space>
-      <div class="parent-container">
-        <div class="self_adaption_table form w-full">
-          <a-row>
-            <a-col span="24">
-              <th class="required">鶏の種類</th>
-              <td>
-                <a-form-item v-bind="validateInfos.TORI_KBN">
-                  <ai-select
-                    v-model:value="formData.TORI_KBN"
-                    :options="LIST"
-                    class="max-w-50"
-                    split-val
-                  ></ai-select>
-                  <span>
-                    (1:採卵鶏「成鶏」、2:採卵鶏「育成鶏」、3:肉用鶏、4:種鶏「成鶏」、5:種鶏「育成鶏」、6:うずら、7:あひる、8:きじ、9:ほろほろ鳥、10:七面鳥、11:だちょう)</span
-                  >
-                </a-form-item>
-              </td> </a-col
-            ><a-col span="24">
-              <th class="required">移動羽数</th>
-              <td>
-                <a-form-item v-bind="validateInfos.IDO_HASU">
-                  <a-input-number
-                    v-model:value="formData.IDO_HASU"
-                    v-bind="{ ...mathNumber }"
-                    class="w-30"
-                    :min="0"
-                    :max="99999999"
-                    :maxlength="10"
-                  ></a-input-number>
-                </a-form-item>
-              </td>
-            </a-col>
-            <a-col span="24">
-              <th class="required">農場(移動元)</th>
-              <td>
-                <a-form-item v-bind="validateInfos.NOJO_CD_MOTO">
-                  <ai-select
-                    v-model:value="formData.NOJO_CD_MOTO"
-                    :options="LIST"
-                    class="max-w-250"
-                    split-val
-                  ></ai-select>
-                </a-form-item>
-              </td>
-            </a-col>
-            <a-col span="24">
-              <read-only thWidth="120" th="農場住所" td="" :hideTd="true" />
-              <read-only th="　〒　" :td="nojoAddr_moto.ADDR_POST" />
-              <read-only thWidth="100" th="住所1" :td="nojoAddr_moto.ADDR_1" />
-              <read-only thWidth="100" th="住所2" :td="nojoAddr_moto.ADDR_2" />
-            </a-col>
-            <a-col span="24">
-              <read-only thWidth="120" th="" :hideTd="true" />
-              <read-only thWidth="100" th="住所3" :td="nojoAddr_moto.ADDR_3" />
-              <read-only thWidth="100" th="住所4" :td="nojoAddr_moto.ADDR_4" />
-            </a-col>
-
-            <a-col span="24">
-              <read-only
-                thWidth="220"
-                th="契約羽数(移動前)"
-                :td="formData.KEIYAKU_HASU_MOTO_MAE"
-              />
-              <read-only
-                thWidth="220"
-                th="契約羽数(移動後)"
-                :td="formData.KEIYAKU_HASU_MOTO_ATO"
-              />
-            </a-col>
-            <a-col span="24">
-              <th class="required">農場(移動先)</th>
-              <td>
-                <a-form-item v-bind="validateInfos.NOJO_CD_SAKI">
-                  <ai-select
-                    v-model:value="formData.NOJO_CD_SAKI"
-                    :options="LIST"
-                    class="max-w-250"
-                    split-val
-                  ></ai-select>
-                </a-form-item>
-                <a-button class="ml-2" type="primary">農場登録</a-button>
-              </td>
-            </a-col>
-            <a-col span="24">
-              <read-only thWidth="120" th="農場住所" td="" :hideTd="true" />
-              <read-only th="　〒　" :td="nojoAddr_saki.ADDR_POST" />
-              <read-only thWidth="100" th="住所1" :td="nojoAddr_saki.ADDR_1" />
-              <read-only thWidth="100" th="住所2" :td="nojoAddr_saki.ADDR_2" />
-            </a-col>
-            <a-col span="24">
-              <read-only thWidth="120" th="" :hideTd="true" />
-              <read-only thWidth="100" th="住所3" :td="nojoAddr_saki.ADDR_3" />
-              <read-only thWidth="100" th="住所4" :td="nojoAddr_saki.ADDR_4" />
-            </a-col>
-
-            <a-col span="24">
-              <read-only
-                thWidth="220"
-                th="契約羽数(移動前)"
-                :td="formData.KEIYAKU_HASU_SAKI_MAE"
-              />
-              <read-only
-                thWidth="220"
-                th="契約羽数(移動後)"
-                :td="formData.KEIYAKU_HASU_SAKI_ATO"
-              />
-            </a-col>
-            <a-col span="24">
-              <th class="required">移動年月日</th>
-              <td>
-                <a-form-item v-bind="validateInfos.KEIYAKU_DATE_FROM">
-                  <DateJp v-model:value="formData.KEIYAKU_DATE_FROM"></DateJp>
-                </a-form-item>
-              </td>
-            </a-col>
-            <a-col span="24">
-              <th class="required">入力確認有無</th>
-              <td>
-                <a-radio-group
-                  v-model:value="formData.SYORI_KBN"
-                  class="ml-2 h-full pt-1"
-                >
-                  <a-radio :value="1">入力中</a-radio>
-                  <a-radio :value="2">入力確認</a-radio>
-                </a-radio-group>
-              </td>
-            </a-col>
-          </a-row>
-        </div>
-        <div
-          v-if="!isEditing"
-          class="search-disabled-mask bg-disabled w-full"
-        ></div>
-      </div>
     </a-card>
   </div>
+  <EditPage v-model:visible="editVisible" :editkbn="editkbn" />
 </template>
 <script lang="ts" setup>
 import { ITEM_REQUIRE_ERROR } from '@/constants/msg'
@@ -330,9 +185,13 @@ import { changeTableSort, mathNumber } from '@/utils/util'
 import { Search } from './service'
 import { getDateJpText } from '@/utils/util'
 import { VxeTableInstance } from 'vxe-table'
+import { EnumEditKbn, PageStatus } from '@/enum'
+import EditPage from './Popup/EditPage.vue'
 //--------------------------------------------------------------------------
 //データ定義
 //--------------------------------------------------------------------------
+const editVisible = ref(false)
+const editkbn = ref<EnumEditKbn>(EnumEditKbn.Add)
 const createDefaultParams = (): Omit<
   SearchRequest,
   keyof CmSearchRequestBase
@@ -343,43 +202,7 @@ const createDefaultParams = (): Omit<
   }
 }
 const searchParams = reactive(createDefaultParams())
-const createDefaultform = () => {
-  return {
-    KI: undefined, // 期
-    KEIYAKUSYA_CD: undefined, // 契約者番号
-    TORI_KBN: undefined, // 鶏の種類コード
-    IDO_HASU: undefined, // 移動羽数
-    NOJO_CD_MOTO: undefined, // 農場コード(移動元)
-    KEIYAKU_HASU_MOTO_MAE: undefined, // 農場(移動元)　契約羽数(移動前)
-    KEIYAKU_HASU_MOTO_ATO: undefined, // 農場(移動元)　契約羽数(移動後)
-    NOJO_CD_SAKI: undefined, // 農場コード(移動先)
-    KEIYAKU_HASU_SAKI_MAE: undefined, // 農場(移動先)　契約羽数(移動前)
-    KEIYAKU_HASU_SAKI_ATO: undefined, // 農場(移動先)　契約羽数(移動後)
-    KEIYAKU_DATE_FROM: null, // 移動年月日
-    SYORI_KBN: 1, // 入力確認有無
-    UP_DATE: null, // データ更新日
-  }
-}
-const formData = reactive(createDefaultform())
-const nojoAddr_moto = reactive<NojoAddrVM>({
-  NOJO_CD: undefined,
-  NOJO_NAME: '',
-  ADDR_POST: '',
-  ADDR_1: '',
-  ADDR_2: '',
-  ADDR_3: '',
-  ADDR_4: '',
-})
-const nojoAddr_saki = reactive<NojoAddrVM>({
-  NOJO_CD: undefined,
-  NOJO_NAME: '',
-  ADDR_POST: '',
-  ADDR_1: '',
-  ADDR_2: '',
-  ADDR_3: '',
-  ADDR_4: '',
-})
-const LIST = ref<CmCodeNameModel[]>([])
+
 const KEIYAKUSYA_CD_NAME_LIST = ref<CmCodeNameModel[]>([
   { CODE: 555, NAME: '契約者名契約者名契約者名契約者名契約者名契約者名契' },
 ])
@@ -460,20 +283,15 @@ function search() {
 }
 //新規
 const add = () => {
-  isEditing.value = true
+  editVisible.value = true
+  editkbn.value = EnumEditKbn.Add
 }
 //編集
 const edit = () => {
-  isEditing.value = true
+  editVisible.value = true
+  editkbn.value = EnumEditKbn.Edit
 }
-//登録
-const save = () => {
-  isEditing.value = false
-}
-//キャンセル
-const cancel = () => {
-  isEditing.value = false
-}
+
 //条件クリア
 const reset = () => {
   clear()

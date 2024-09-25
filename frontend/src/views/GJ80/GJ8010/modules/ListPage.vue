@@ -11,6 +11,7 @@
                 v-model:value="searchParams.SYURUI_KBN"
                 :options="SYURUI_KBN_LIST"
                 split-val
+                class="w-80!"
                 @change="changeKbn"
               ></ai-select>
             </td>
@@ -158,4 +159,8 @@ function goForward(status: PageStatus, row?: any) {
   }
 }
 </script>
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+th {
+  width: 120px;
+}
+</style>
