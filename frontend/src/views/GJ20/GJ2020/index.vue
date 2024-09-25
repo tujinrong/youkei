@@ -10,22 +10,22 @@
   <div class="h-full min-h-500px flex-col-stretch gap-12px">
     <a-card ref="headRef" :bordered="false">
       <h1>（GJ2020）契約者積立金計算処理</h1>
-      <div class="self_adaption_table form max-w-250 mt-1">
+      <div class="self_adaption_table form mt-1">
         <a-row>
-          <a-col span="24">
+          <a-col v-bind="layout">
             <th class="required">処理区分</th>
             <td class="flex">
               <a-form-item v-bind="validateInfos.SYORI_KBN">
                 <a-radio-group v-model:value="formData.SYORI_KBN" class="mt-1">
                   <a-radio :value="0">請求·返還処理</a-radio>
-                  <a-radio :value="1"
-                    >請求·返還取消処理(取消対象に入金済が存在する場合は、取消不可)</a-radio
-                  >
+                  <a-radio :value="1">
+                    請求·返還取消処理(取消対象に入金済が存在する場合は、取消不可)
+                  </a-radio>
                 </a-radio-group>
               </a-form-item>
             </td>
           </a-col>
-          <a-col v-bind="layout">
+          <a-col span="5">
             <th class="required">対象期</th>
             <td>
               <a-form-item v-bind="validateInfos.KI">
@@ -41,7 +41,7 @@
               </a-form-item>
             </td>
           </a-col>
-          <a-col v-bind="layout">
+          <a-col span="7">
             <th>請求·返還回数</th>
             <td>
               <a-form-item v-bind="validateInfos.SEIKYU_KAISU">
@@ -51,15 +51,16 @@
                     :min="0"
                     :max="999"
                     :maxlength="3"
+                    :disabled="formData.SYORI_KBN == 0"
                     class="w-17"
                   ></a-input-number>
                   <!-- <a-input v-model:value="formData.SEIKYU_KAISU" class="w-14" /> -->
-                  <span>(入力&表示)</span>
+                  <span class="w-20">(入力&表示)</span>
                 </div>
               </a-form-item>
             </td>
           </a-col>
-          <a-col v-bind="layout">
+          <a-col span="12">
             <read-only
               thWidth="80"
               th="手数料率"
@@ -75,12 +76,14 @@
                   <a-checkbox
                     v-for="(label, key) in LABELS"
                     :key="key"
+                    class="w-40"
                     v-model:checked="formData.CYOSYU_HENKAN_KBN[key]"
                   >
                     {{ label }}
-                  </a-checkbox></a-space
-                ></a-form-item
-              >
+                  </a-checkbox>
+                  <span class="w-20">※ 業していない契約者が対象です</span>
+                </a-space>
+              </a-form-item>
             </td>
           </a-col>
           <a-col span="24">
@@ -112,7 +115,7 @@
                 <ai-select
                   v-model:value="formData.KEIYAKUSYA_CD"
                   :options="KEIYAKU_KBN_CD_NAME_LIST"
-                  class="w-full"
+                  class="max-w-150"
                   type="number"
                 ></ai-select>
               </a-form-item>
@@ -363,9 +366,9 @@ const { pageParams, totalCount, searchData, clear } = useSearch({
 
 const layout = {
   md: 24,
-  lg: 8,
-  xl: 8,
-  xxl: 8,
+  lg: 24,
+  xl: 24,
+  xxl: 24,
 }
 
 //--------------------------------------------------------------------------
