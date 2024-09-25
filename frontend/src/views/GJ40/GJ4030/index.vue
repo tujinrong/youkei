@@ -87,7 +87,7 @@
                 <ai-select
                   v-model:value="formData.KEIYAKUSYA_CD"
                   :options="KEIYAKU_KBN_CD_NAME_LIST"
-                  class="w-full"
+                  class="max-w-115"
                   type="number"
                 ></ai-select>
               </a-form-item>

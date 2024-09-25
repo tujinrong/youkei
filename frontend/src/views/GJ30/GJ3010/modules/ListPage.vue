@@ -33,8 +33,8 @@
               <a-form-item v-bind="validateInfos.KEIYAKUSYA_CD">
                 <ai-select
                   v-model:value="searchParams.KEIYAKUSYA_CD"
-                  :options="LIST"
-                  class="max-w-150"
+                  :options="KEIYAKUSYA_CD_NAME_LIST"
+                  class="max-w-115"
                   split-val
                 ></ai-select>
               </a-form-item>
@@ -196,6 +196,9 @@ const createDefaultParams = () => {
 const searchParams = reactive(createDefaultParams())
 const isSearched = ref(false)
 
+const KEIYAKUSYA_CD_NAME_LIST = ref<CmCodeNameModel[]>([
+  { CODE: 555, NAME: '契約者名契約者名契約者名契約者名契約者名契約者名契' },
+])
 const LIST = ref<CmCodeNameModel[]>([])
 const tableData = ref<SearchRowVM[]>([])
 const rules = reactive({

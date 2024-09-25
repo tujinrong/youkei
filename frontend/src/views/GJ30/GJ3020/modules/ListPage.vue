@@ -36,7 +36,7 @@
                 <ai-select
                   v-model:value="searchParams.KEIYAKUSYA_CD"
                   :options="LIST"
-                  class="max-w-150"
+                  class="max-w-115"
                   split-val
                 ></ai-select>
               </a-form-item>

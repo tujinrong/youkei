@@ -65,8 +65,10 @@
             <td>
               <a-input-number
                 v-model:value="formData.KEIYASYA_CD"
-                :min="0"
-                class="w-full"
+                :min="1"
+                :max="99999"
+                :maxlength="5"
+                class="w-20"
               ></a-input-number>
             </td>
           </a-col>
@@ -155,6 +157,7 @@
                 <range-select
                   v-model:value="formData.JIMUITAKU_CD"
                   :options="JIMUITAKU_LIST"
+                  class="w-250!"
                 />
               </a-form-item>
             </td>
