@@ -14,7 +14,7 @@
       ><h1>（GJ7020）互助基金契約者積立金情報検索CSVデ一夕作成</h1>
       <div class="self_adaption_table form mt-1">
         <a-row
-          ><a-col span="24"
+          ><a-col span="12"
             ><th class="required">対象期</th>
             <td>
               <a-form-item v-bind="validateInfos.KI">
@@ -29,6 +29,13 @@
               >
             </td></a-col
           >
+          <a-col span="12"
+            ><th>契約日未入力者を除く</th>
+            <td>
+              <a-checkbox
+                v-model:checked="searchParams.KEIYAKU_DATE_NOZOKU_FLG"
+              ></a-checkbox></td
+          ></a-col>
           <a-col span="24"
             ><th>都道府県</th>
             <td>
@@ -170,13 +177,7 @@
                 <a-radio :value="3">請求ペース(合計)</a-radio>
               </a-radio-group>
             </td></a-col
-          ><a-col span="24"
-            ><th>契約日未入力者を除く</th>
-            <td>
-              <a-checkbox
-                v-model:checked="searchParams.KEIYAKU_DATE_NOZOKU_FLG"
-              ></a-checkbox></td
-          ></a-col>
+          >
         </a-row>
       </div>
       <div class="my-2 flex">
