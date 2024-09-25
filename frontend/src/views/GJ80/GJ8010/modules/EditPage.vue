@@ -3,66 +3,69 @@
     :visible="modalVisible"
     centered
     title="（GJ8011）コードマスタメンテナンス"
-    width="1000px"
-    :body-style="{ height: '800px' }"
+    width="800px"
+    :body-style="{ height: '450px' }"
     :mask-closable="false"
     destroy-on-close
     @cancel="goList"
-  >
-    <div class="edit_table form">
-      <a-form>
-        <a-row>
-          <a-col span="8">
-            <read-only-pop
-              th="種類区分"
-              th-width="130"
-              :td="formData.SYURUI_KBN"
-            ></read-only-pop>
-          </a-col>
-        </a-row>
-        <a-row>
-          <a-col span="24">
-            <th class="required">名称コード</th>
-            <td>
-              <a-form-item v-bind="validateInfos.MEISYO_CD">
-                <a-input-number
-                  v-model:value="formData.MEISYO_CD"
-                  :min="0"
-                  :maxlength="2"
-                  :max="99"
-                  :disabled="!isNew"
-                ></a-input-number>
-              </a-form-item>
-            </td>
-          </a-col>
-        </a-row>
-        <a-row>
-          <a-col span="24">
-            <th class="required">名称</th>
-            <td>
-              <a-form-item v-bind="validateInfos.MEISYO">
-                <a-input
-                  v-model:value="formData.MEISYO"
-                  :maxlength="25"
-                ></a-input>
-              </a-form-item>
-            </td>
-          </a-col>
-        </a-row>
-        <a-row>
-          <a-col span="24">
-            <th class="required">略称</th>
-            <td>
-              <a-form-item v-bind="validateInfos.RYAKUSYO">
-                <a-input
-                  v-model:value="formData.RYAKUSYO"
-                  :maxlength="5"
-                ></a-input>
-              </a-form-item>
-            </td>
-          </a-col>
-        </a-row>
-      </a-form>
+    ><div class="modal-container">
+      <div class="edit_table form w-110">
+        <a-form>
+          <a-row>
+            <a-col span="12">
+              <read-only-pop
+                th="種類区分"
+                th-width="100"
+                :td="formData.SYURUI_KBN"
+                class="w-120!"
+              ></read-only-pop>
+            </a-col>
+          </a-row>
+          <a-row>
+            <a-col span="24">
+              <th class="required">名称コード</th>
+              <td>
+                <a-form-item v-bind="validateInfos.MEISYO_CD">
+                  <a-input-number
+                    v-model:value="formData.MEISYO_CD"
+                    :min="0"
+                    :maxlength="2"
+                    :max="99"
+                    :disabled="!isNew"
+                    class="w-14"
+                  ></a-input-number>
+                </a-form-item>
+              </td>
+            </a-col>
+          </a-row>
+          <a-row>
+            <a-col span="24">
+              <th class="required">名称</th>
+              <td>
+                <a-form-item v-bind="validateInfos.MEISYO">
+                  <a-input
+                    v-model:value="formData.MEISYO"
+                    :maxlength="25"
+                  ></a-input>
+                </a-form-item>
+              </td>
+            </a-col>
+          </a-row>
+          <a-row>
+            <a-col span="24">
+              <th class="required">略称</th>
+              <td>
+                <a-form-item v-bind="validateInfos.RYAKUSYO">
+                  <a-input
+                    v-model:value="formData.RYAKUSYO"
+                    :maxlength="5"
+                  ></a-input>
+                </a-form-item>
+              </td>
+            </a-col>
+          </a-row>
+        </a-form>
+      </div>
     </div>
     <template #footer>
       <div class="pt-2 flex justify-between border-t-1">
@@ -233,11 +236,13 @@ const deleteData = () => {
 </script>
 <style lang="scss" scoped>
 th {
-  width: 130px;
+  width: 100px;
 }
-
-:deep(.ant-form-item) {
+.modal-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
   width: 100%;
-  margin-bottom: 0;
 }
 </style>
