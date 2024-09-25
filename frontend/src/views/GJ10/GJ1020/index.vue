@@ -36,7 +36,7 @@
                   v-model:value="searchParams.KEIYAKUSYA_CD"
                   :options="KEIYAKUSYA_CD_NAME_LIST"
                   split-val
-                  class="max-w-150"
+                  class="max-w-115"
                   :disabled="isSearched"
                 ></ai-select>
               </a-form-item>
@@ -208,6 +208,9 @@
                     v-model:value="formData.IDO_HASU"
                     v-bind="{ ...mathNumber }"
                     class="w-30"
+                    :min="0"
+                    :max="99999999"
+                    :maxlength="10"
                   ></a-input-number>
                 </a-form-item>
               </td>
@@ -377,7 +380,9 @@ const nojoAddr_saki = reactive<NojoAddrVM>({
   ADDR_4: '',
 })
 const LIST = ref<CmCodeNameModel[]>([])
-const KEIYAKUSYA_CD_NAME_LIST = ref<CmCodeNameModel[]>([])
+const KEIYAKUSYA_CD_NAME_LIST = ref<CmCodeNameModel[]>([
+  { CODE: 555, NAME: '契約者名契約者名契約者名契約者名契約者名契約者名契' },
+])
 const xTableRef = ref<VxeTableInstance>()
 const tableData = ref<SearchRowVM[]>([])
 const tableDefault = {

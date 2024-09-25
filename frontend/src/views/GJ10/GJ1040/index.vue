@@ -69,7 +69,7 @@
                   <range-select
                     v-model:value="formData.KEIYAKU_KBN"
                     :options="LIST"
-                    class="max-w-110"
+                    class="max-w-78"
                 /></a-form-item>
               </td>
             </a-col>
@@ -140,8 +140,9 @@
                 <a-form-item v-bind="validateInfos.NYURYOKUSYA_CD">
                   <range-select
                     v-model:value="formData.NYURYOKUSYA_CD"
-                    :options="LIST"
+                    :options="NYURYOKUSYA_LIST"
                     class="max-w-230"
+                    type="string"
                 /></a-form-item>
               </td>
             </a-col>
@@ -151,7 +152,8 @@
                 <a-form-item v-bind="validateInfos.ITAKU_CD">
                   <range-select
                     v-model:value="formData.ITAKU_CD"
-                    :options="LIST"
+                    :options="ITAKU_LIST"
+                    class="w-250!"
                 /></a-form-item>
               </td>
             </a-col>
@@ -162,6 +164,7 @@
                   <range-select
                     v-model:value="formData.KEIYAKUSYA_CD"
                     :options="LIST"
+                    class="w-250!"
                 /></a-form-item>
               </td>
             </a-col>
@@ -268,6 +271,13 @@ const KEIYAKUBI_LABELS = {
   MIRYOKU_NOMI: '未入力のみ',
 }
 const LIST = ref<CmCodeNameModel[]>([])
+const ITAKU_LIST = ref<CmCodeNameModel[]>([
+  { CODE: 666, NAME: '事務委託先事務委託先事務委託先事務委託先事務委託先' },
+])
+
+const NYURYOKUSYA_LIST = ref<CmStrCodeNameModel[]>([
+  { CODE: 'user_name1', NAME: 'ユーザー名ユーザー名' },
+])
 const rules = reactive({
   KI: [
     {

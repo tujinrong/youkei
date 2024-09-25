@@ -47,7 +47,7 @@
                 <range-select
                   v-model:value="formData.KEIYAKU_KBN"
                   :options="LIST"
-                  class="max-w-110"
+                  class="max-w-78"
                 />
               </td>
             </a-col>
@@ -92,7 +92,7 @@
                   <range-select
                     v-model:value="formData.ITAKU_CD"
                     :options="LIST"
-                    class="max-w-110"
+                    class="w-90!"
                 /></a-form-item>
               </td>
             </a-col>
@@ -103,6 +103,7 @@
                   <range-select
                     v-model:value="formData.ITAKU_CD"
                     :options="LIST"
+                    class="w-250!"
                 /></a-form-item>
               </td>
             </a-col>
@@ -113,6 +114,7 @@
                   <range-select
                     v-model:value="formData.KEIYAKUSYA_CD"
                     :options="LIST"
+                    class="w-250!"
                 /></a-form-item>
               </td>
             </a-col>

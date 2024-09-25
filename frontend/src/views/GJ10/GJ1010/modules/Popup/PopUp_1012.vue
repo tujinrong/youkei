@@ -21,7 +21,7 @@
         </a-col>
       </a-row>
       <a-row>
-        <a-col span="22">
+        <a-col span="20">
           <th class="required">農場</th>
           <td>
             <a-form-item v-bind="validateInfos.NOJO_CD">
@@ -39,16 +39,16 @@
       </a-row>
       <a-row class="mt-1">
         <a-col span="21">
-          <read-only-pop thWidth="110" th="住所" td="" :hideTd="true" />
+          <read-only-pop thWidth="100" th="住所" td="" :hideTd="true" />
           <read-only-pop th="　〒　" :td="formData.ADDR_POST" />
           <read-only-pop th="住所1" :td="formData.ADDR_1" />
           <read-only-pop th="住所2" :td="formData.ADDR_2" />
         </a-col>
       </a-row>
       <a-row>
-        <a-col span="21">
+        <a-col span="22">
           <read-only-pop
-            thWidth="280"
+            thWidth="356"
             th=""
             :hideTd="true"
             :td="formData.ADDR_POST"
@@ -71,12 +71,16 @@
             </a-form-item>
           </td>
         </a-col>
-        <a-col span="23">
+        <a-col span="30">
           <th class="required">契約羽数</th>
           <td>
             <a-form-item v-bind="validateInfos.KEIYAKU_HASU">
               <a-input-number
                 v-model:value="formData.KEIYAKU_HASU"
+                :min="0"
+                :max="99999999"
+                :maxlength="10"
+                v-bind="{ ...mathNumber }"
               ></a-input-number>
             </a-form-item>
           </td>
@@ -101,7 +105,7 @@
         </a-col>
       </a-row>
       <a-row>
-        <a-col span="24">
+        <a-col span="19">
           <th class="required">備考</th>
           <td>
             <a-input v-model:value="formData.BIKO"></a-input>
@@ -143,6 +147,7 @@ import {
 import { FarmManage } from '../../constant'
 import { VxeTableInstance } from 'vxe-table'
 import { showDeleteModal, showSaveModal } from '@/utils/modal'
+import { mathNumber } from '@/utils/util'
 
 //--------------------------------------------------------------------------
 //データ定義
@@ -159,7 +164,7 @@ const formData = reactive({
   KEIYAKUSYA_NAME: '',
   NOJO_CD: undefined as number | undefined,
   NOJO_NAME: '',
-  ADDR_POST: '',
+  ADDR_POST: '136-0073',
   ADDR_1: '',
   ADDR_2: '',
   ADDR_3: '',
@@ -191,8 +196,12 @@ const isEdit = ref(false)
 
 const editJudge = new Judgement()
 
-const NOJO_CD_CD_NAME_LIST = ref<CmCodeNameModel[]>([])
-const KEI_SYURUI_CD_NAME_LIST = ref<CmCodeNameModel[]>([])
+const NOJO_CD_CD_NAME_LIST = ref<CmCodeNameModel[]>([
+  { CODE: 666, NAME: '農場名農場名農場名農場名農場名農場名農場' },
+])
+const KEI_SYURUI_CD_NAME_LIST = ref<CmCodeNameModel[]>([
+  { CODE: 1, NAME: 'ホロホロ鳥' },
+])
 
 const tableRef = ref<VxeTableInstance>()
 const devicePixelRatio = ref(window.devicePixelRatio)
