@@ -22,7 +22,7 @@
                   :max="99"
                   :maxlength="2"
                   :disabled="isSearched"
-                  class="w-20"
+                  class="w-14"
                   @change="getInitData(searchParams.KI, false)"
                 ></a-input-number>
               </a-form-item>

@@ -14,9 +14,9 @@
           <a-col span="24">
             <th class="required">事業対象期·年度</th>
             <td>
-              <a-form-item v-bind="validateInfos.KI" class="w-70!">
+              <a-form-item v-bind="validateInfos.KI" class="w-32!">
                 <a-input-number
-                  class="w-20"
+                  class="w-14"
                   name="KI"
                   v-model:value="formData.KI"
                   :max="99"
@@ -108,7 +108,7 @@
             <td>
               <a-input-number
                 v-model:value="formData.HASSEI_KAISU"
-                class="w-20"
+                class="w-14"
                 :max="99"
                 :min="1"
                 :maxlength="2"

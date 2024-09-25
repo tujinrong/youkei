@@ -266,30 +266,24 @@ export const generatedRoutes: GeneratedRoute[] = [
           keepAlive: true
         }
       },
-      // {
-      //   name: 'gj20_gj2110',
-      //   path: '/gj20/gj2110',
-      //   component: 'view.gj20_gj2110',
-      //   meta: {
-      //     title: 'gj20_gj2110',
-      //     icon: '',
-      //     roles: ['10', '20', '30'],
-      //     i18nKey: 'route.gj20_gj2110',
-      //     keepAlive: true
-      //   }
-      // },
-      // {
-      //   name: 'gj20_gj2120',
-      //   path: '/gj20/gj2120',
-      //   component: 'view.gj20_gj2120',
-      //   meta: {
-      //     title: 'gj20_gj2120',
-      //     icon: '',
-      //     roles: ['10', '20', '30'],
-      //     i18nKey: 'route.gj20_gj2120',
-      //     keepAlive: true
-      //   }
-      // }
+      {
+        name: 'gj20_gj2110',
+        path: '/gj20/gj2110',
+        component: 'view.gj20_gj2110',
+        meta: {
+          title: 'gj20_gj2110',
+          i18nKey: 'route.gj20_gj2110'
+        }
+      },
+      {
+        name: 'gj20_gj2120',
+        path: '/gj20/gj2120',
+        component: 'view.gj20_gj2120',
+        meta: {
+          title: 'gj20_gj2120',
+          i18nKey: 'route.gj20_gj2120'
+        }
+      }
     ]
   },
   {
@@ -500,19 +494,15 @@ export const generatedRoutes: GeneratedRoute[] = [
           order: 2
         }
       },
-      // {
-      //   name: 'gj60_gj6021',
-      //   path: '/gj60/gj6021',
-      //   component: 'view.gj60_gj6021',
-      //   meta: {
-      //     title: 'gj60_gj6021',
-      //     icon: '',
-      //     roles: ['10', '20', '30'],
-      //     i18nKey: 'route.gj60_gj6021',
-      //     keepAlive: true,
-      //     order: 5
-      //   }
-      // },
+      {
+        name: 'gj60_gj6021',
+        path: '/gj60/gj6021',
+        component: 'view.gj60_gj6021',
+        meta: {
+          title: 'gj60_gj6021',
+          i18nKey: 'route.gj60_gj6021'
+        }
+      },
       {
         name: 'gj60_gj6030',
         path: '/gj60/gj6030',
@@ -673,30 +663,24 @@ export const generatedRoutes: GeneratedRoute[] = [
           keepAlive: true
         }
       },
-      // {
-      //   name: 'gj80_gj8070',
-      //   path: '/gj80/gj8070',
-      //   component: 'view.gj80_gj8070',
-      //   meta: {
-      //     title: 'gj80_gj8070',
-      //     icon: '',
-      //     roles: ['10'],
-      //     i18nKey: 'route.gj80_gj8070',
-      //     keepAlive: true
-      //   }
-      // },
-      // {
-      //   name: 'gj80_gj8080',
-      //   path: '/gj80/gj8080',
-      //   component: 'view.gj80_gj8080',
-      //   meta: {
-      //     title: 'gj80_gj8080',
-      //     icon: '',
-      //     roles: ['10'],
-      //     i18nKey: 'route.gj80_gj8080',
-      //     keepAlive: true
-      //   }
-      // },
+      {
+        name: 'gj80_gj8070',
+        path: '/gj80/gj8070',
+        component: 'view.gj80_gj8070',
+        meta: {
+          title: 'gj80_gj8070',
+          i18nKey: 'route.gj80_gj8070'
+        }
+      },
+      {
+        name: 'gj80_gj8080',
+        path: '/gj80/gj8080',
+        component: 'view.gj80_gj8080',
+        meta: {
+          title: 'gj80_gj8080',
+          i18nKey: 'route.gj80_gj8080'
+        }
+      },
       {
         name: 'gj80_gj8090',
         path: '/gj80/gj8090',

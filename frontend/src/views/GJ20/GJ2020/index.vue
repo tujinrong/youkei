@@ -21,7 +21,7 @@
                 <a-radio-group v-model:value="formData.SYORI_KBN" class="mt-1">
                   <a-radio :value="0">請求·返還処理</a-radio>
                   <a-radio :value="1"
-                  >請求·返還取消処理(取消対象に入金済が存在する場合は、取消不可)</a-radio
+                    >請求·返還取消処理(取消対象に入金済が存在する場合は、取消不可)</a-radio
                   >
                 </a-radio-group>
               </a-form-item>
@@ -37,7 +37,7 @@
                   :min="1"
                   :max="99"
                   :maxlength="2"
-                  style="width: 100%"
+                  class="w-14"
                 ></a-input-number>
                 <!--                <span class="!align-middle">期</span>-->
               </a-form-item>
@@ -48,14 +48,26 @@
             <td>
               <a-form-item v-bind="validateInfos.SEIKYU_KAISU">
                 <div class="flex items-center">
-                  <a-input v-model:value="formData.SEIKYU_KAISU" disabled style="width: 50%;" />
+                  <a-input-number
+                    v-model:value="formData.SEIKYU_KAISU"
+                    :min="0"
+                    :max="999"
+                    :maxlength="3"
+                    class="w-17"
+                  ></a-input-number>
+                  <!-- <a-input v-model:value="formData.SEIKYU_KAISU" class="w-14" /> -->
                   <span>(入力&表示)</span>
                 </div>
               </a-form-item>
             </td>
           </a-col>
           <a-col v-bind="layout">
-            <read-only thWidth="80" th="手数料率" :td="formData.TESURYO_KAISU" after="%" />
+            <read-only
+              thWidth="80"
+              th="手数料率"
+              :td="formData.TESURYO_KAISU"
+              after="%"
+            />
           </a-col>
           <a-col span="24">
             <th class="required">徵収·返還区分</th>
@@ -143,10 +155,32 @@
         :empty-render="{ name: 'NotData' }"
         @sort-change="(e) => changeTableSort(e, toRef(pageParams, 'ORDER_BY'))"
       >
-        <vxe-column header-align="center" align="center" field="KI" title="対象期" width="80" sortable> </vxe-column>
-        <vxe-column header-align="center" align="center" field="SEIKYU_KAISU" title="回数" width="80" sortable>
+        <vxe-column
+          header-align="center"
+          align="center"
+          field="KI"
+          title="対象期"
+          width="80"
+          sortable
+        >
         </vxe-column>
-        <vxe-column header-align="center" align="center" field="SYORI_DATE" title="処理日" min-width="100" sortable>
+        <vxe-column
+          header-align="center"
+          align="center"
+          field="SEIKYU_KAISU"
+          title="回数"
+          width="80"
+          sortable
+        >
+        </vxe-column>
+        <vxe-column
+          header-align="center"
+          align="center"
+          field="SYORI_DATE"
+          title="処理日"
+          min-width="100"
+          sortable
+        >
         </vxe-column>
         <vxe-column
           header-align="center"

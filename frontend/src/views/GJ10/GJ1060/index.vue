@@ -23,7 +23,7 @@
                     :min="1"
                     :max="99"
                     :maxlength="2"
-                    class="w-15"
+                    class="w-14"
                   ></a-input-number>
                   <span class="!align-middle">期</span>
                 </a-form-item>

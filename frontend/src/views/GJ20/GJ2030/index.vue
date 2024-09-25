@@ -15,7 +15,7 @@
                     :min="1"
                     :max="99"
                     :maxlength="2"
-                    class="w-20!"
+                    class="w-14!"
                     @change="handleKI(false)"
                   ></a-input-number>
                   <span class="!align-middle">期</span>
