@@ -16,7 +16,10 @@
             <th class="required">互助金単価マスタ　参照日</th>
             <td class="flex">
               <a-form-item v-bind="validateInfos.TANKA_MST_DATE">
-                <DateJp class="w-50!" v-model:value="formData.TANKA_MST_DATE" />
+                <DateJp
+                  class="max-w-50"
+                  v-model:value="formData.TANKA_MST_DATE"
+                />
               </a-form-item>
             </td>
           </a-col>
@@ -100,7 +103,7 @@
               <div class="flex items-center w-full">
                 <a-input
                   v-model:value="formData.KEIYAKUSYA_NAME"
-                  class="w-full"
+                  class="max-w-115"
                   :maxlength="50"
                   style="width: 80%"
                 />
@@ -114,7 +117,7 @@
               <div class="flex items-center w-full">
                 <a-input
                   v-model:value="formData.KEIYAKUSYA_KANA"
-                  class="w-full"
+                  class="max-w-115"
                   :maxlength="50"
                   style="width: 80%"
                 />
@@ -128,9 +131,8 @@
               <div class="flex items-center w-full">
                 <a-input
                   v-model:value="formData.ADDR"
-                  class="w-full"
+                  class="w-250"
                   :maxlength="50"
-                  style="width: 80%"
                 />
                 <span>(部分一致)</span>
               </div>
@@ -142,9 +144,8 @@
               <div class="flex items-center w-full">
                 <a-input
                   v-model:value="formData.ADDR_TEL"
-                  class="w-full"
+                  class="w-33"
                   :maxlength="50"
-                  style="width: 80%"
                 />
                 <span>(全一致)</span>
               </div>

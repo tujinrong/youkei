@@ -70,7 +70,7 @@
                 <a-form-item v-bind="validateInfos.SEIKYU_HAKKO_DATE">
                   <DateJp
                     v-model:value="formData.SEIKYU_HAKKO_DATE"
-                    class="w-50!"
+                    class="max-w-50"
                     :disabled="formData.SYUTURYOKU_KBN === 2"
                   />
                 </a-form-item>
@@ -82,7 +82,7 @@
                 <a-form-item v-bind="validateInfos.FURIKOMI_YOTEI_DATE">
                   <DateJp
                     v-model:value="formData.FURIKOMI_YOTEI_DATE"
-                    class="w-50!"
+                    class="max-w-50"
                     :disabled="formData.SYUTURYOKU_KBN === 2"
                   />
                 </a-form-item>
