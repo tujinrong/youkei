@@ -147,9 +147,9 @@ const createDefaultParams = () => {
     KI: 8,
     SYORI_SENTAKU: 1,
     SYORI_TYPE: 2,
-    ZENKI_TUMITATE_DATE: '平成06/09/02',
-    ZENKI_KOFU_DATE: '平成06/09/02',
-    HENKAN_KEISAN_DATE: '平成06/09/02',
+    ZENKI_TUMITATE_DATE: '令和06/09/02',
+    ZENKI_KOFU_DATE: '令和06/09/02',
+    HENKAN_KEISAN_DATE: '令和06/09/02',
   }
 }
 const formData = reactive(createDefaultParams() as PreviewRequest)

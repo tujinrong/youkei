@@ -95,7 +95,7 @@
             </td>
           </a-col>
           <a-col v-bind="layout">
-            <th>契約者名(フリガナ)</th>
+            <th>契約者名(漢字)</th>
             <td>
               <a-input
                 v-model:value="formData.KEIYAKUSYA_KANA"
@@ -323,7 +323,7 @@ const createDefaultParams = () => {
       VALUE_TO: undefined as number | undefined,
     },
     SEIKYU_HENKAN_KBN: 1,
-    SYORI_JOKYO_KBN: 1,
+    SYORI_JOKYO_KBN: 2,
     NYUKIN_DATE: {
       VALUE_FM: undefined as Date | undefined,
       VALUE_TO: undefined as Date | undefined,

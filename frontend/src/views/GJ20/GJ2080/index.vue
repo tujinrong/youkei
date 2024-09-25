@@ -133,8 +133,8 @@
                   <a-button type="primary" @click="onPreview"
                     >プレビュー</a-button
                   >
-                  <a-button type="primary">EXCEL出力</a-button>
                   <a-button type="primary" @click="clear">キャンセル</a-button>
+                  <a-button type="primary">EXCEL出力</a-button>
                 </a-space>
                 <close-page />
               </div>

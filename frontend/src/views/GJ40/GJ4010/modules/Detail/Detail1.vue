@@ -26,14 +26,14 @@
             <a-col span="12">
               <th class="required">認定回数</th>
               <td>
-                <a-form-item v-bind="validateInfos.HASSEI_KAISU">
+                <a-form-item v-bind="validateInfos.HASSEI_KAISU" class="w-20!">
                   <a-input-number
                     v-model:value="searchParams.HASSEI_KAISU"
                     :min="1"
                     :max="99"
                     :maxlength="2"
                     class="w-14"
-                  ></a-input-number>
+                  />
                 </a-form-item>
                 <a-button class="ml-2" type="primary" @click="search"
                   >検索</a-button

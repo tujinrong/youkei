@@ -9,7 +9,13 @@
               <th class="required">マスタ選択</th>
               <td>
                 <a-form-item v-bind="validateInfos.MASUTA_SENTAKU">
-                  <a-input-number
+                  <ai-select
+                    v-model:value="formData.MASUTA_SENTAKU"
+                    :options="MASUTA_SENTAKU_LIST"
+                    split-val
+                    class="w-80!"
+                  />
+<!--                  <a-input-number
                     v-model:value="formData.MASUTA_SENTAKU"
                     :min="1"
                     :max="3"
@@ -19,7 +25,7 @@
                     >1: 事務委託先マスタコピー処理&nbsp;&nbsp;2:
                     契約者マスタコピー処理&nbsp;&nbsp;3:
                     農場マスタコピー処理</span
-                  >
+                  >-->
                 </a-form-item>
               </td>
             </a-col>
@@ -89,7 +95,7 @@
 </template>
 
 <script setup lang="ts">
-import { reactive, computed, onMounted, onUnmounted } from 'vue'
+import { reactive, computed, onMounted, onUnmounted, ref} from 'vue'
 import { ITEM_REQUIRE_ERROR } from '@/constants/msg'
 import { Form } from 'ant-design-vue'
 import { Init, Preview } from './service'
@@ -105,6 +111,11 @@ const createDefaultParams = () => {
   }
 }
 const formData = reactive(createDefaultParams() as PreviewRequest)
+const MASUTA_SENTAKU_LIST = ref<CmCodeNameModel[]>([
+  { CODE: 1, NAME: '事務委託先マスタコピー処理' },
+  { CODE: 2, NAME: '契約者マスタコピー処理' },
+  { CODE: 3, NAME: '農場マスタコピー処理' },
+])
 
 const layout = {
   md: 24,

@@ -12,7 +12,7 @@
       <a-form class="border-t-1">
         <a-row class="mt-2">
           <a-col span="4">
-            <th class="required">年 月 日</th>
+            <th class="required" style="text-align: start;">年 月 日</th>
           </a-col>
           <a-col span="20">
             <td class="flex items-center">
@@ -780,7 +780,7 @@
         </a-row>
         <a-row class="mt-2">
           <a-col span="4">
-            <th class="required">手数料率</th>
+            <th class="required" style="text-align: start;">手数料率</th>
           </a-col>
           <a-col span="5">
             <td class="flex items-center">
@@ -796,7 +796,7 @@
             </td>
           </a-col>
           <a-col span="5">
-            <th class="required">互助金交付率</th>
+            <th class="required" style="text-align: start;">互助金交付率</th>
           </a-col>
           <a-col span="5">
             <td class="flex items-center">
@@ -922,5 +922,8 @@ const deleteData = () => {}
 th {
   width: 200px;
   border-right: 1px solid #8a8d92 !important;
+}
+.self_adaption_table .ant-col th {
+  text-align: center;
 }
 </style>
