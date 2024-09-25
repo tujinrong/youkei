@@ -60,22 +60,27 @@
               v-bind="validateInfos.SEIKYU_HAKKO_NO_NEN"
               class="w-80!"
               >日鶏
-              <a-input
+              <a-input-number
                 v-model:value="searchParams.SEIKYU_HAKKO_NO_NEN"
-                :disabled="!hakou"
-                class="max-w-20"
+                :min="0"
+                :max="99"
                 :maxlength="2"
-              ></a-input
-              >発</a-form-item
+                :disabled="!hakou"
+                class="w-14!"
+              />
+              発</a-form-item
             >
             <a-form-item v-bind="validateInfos.SEIKYU_HAKKO_NO_RENBAN"
-              >第<a-input
+              >第
+              <a-input-number
                 v-model:value="searchParams.SEIKYU_HAKKO_NO_RENBAN"
-                :disabled="!hakou"
-                class="max-w-30"
+                :min="0"
+                :max="9999"
                 :maxlength="4"
-              ></a-input
-              >号</a-form-item
+                :disabled="!hakou"
+                class="w-17!"
+              />
+              号</a-form-item
             >
           </td></a-col
         ></a-row

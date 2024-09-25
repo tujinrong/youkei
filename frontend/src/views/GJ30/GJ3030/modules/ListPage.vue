@@ -21,12 +21,14 @@
                   :min="0"
                   :max="99"
                   :maxlength="2"
-                  class="w-full"
+                  class="w-14"
                   @change="getInitData(searchParams.KI, false)"
                 ></a-input-number>
               </a-form-item>
             </td>
           </a-col>
+        </a-row>
+        <a-row>
           <a-col :md="12" :lg="12" :xl="8" :xxl="8">
             <th class="required">契約者(譲渡先)</th>
             <td>

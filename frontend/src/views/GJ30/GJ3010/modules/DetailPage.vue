@@ -67,7 +67,10 @@
               <a-form-item v-bind="validateInfos.ZOGEN_HASU">
                 <a-input-number
                   v-model:value="formData.ZOGEN_HASU"
-                  class="w-full"
+                  :min="0"
+                  :max="99999999"
+                  :maxlength="10"
+                  class="w-28"
                   v-bind="{ ...mathNumber }"
                 ></a-input-number>
               </a-form-item>
