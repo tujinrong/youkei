@@ -265,7 +265,7 @@
             <th>支払口座情報<br />（全銀手順で使用）</th>
             <a-row class="flex-1">
               <a-col :md="24" :lg="12" :xl="12" :xxl="12">
-                <th>金融機関/th></th>
+                <th>金融機関</th>
                 <td>
                   <ai-select
                     v-model:value="formData.KOFU_BANK_CD"

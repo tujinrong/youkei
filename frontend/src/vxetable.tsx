@@ -21,7 +21,9 @@ VXETable.setConfig({
   table: {
     border: true,
     showOverflow: 'tooltip',
-    // minHeight: 36,
+    rowConfig: {
+      height: 28,
+    },
   },
 })
 VXETable.setI18n('ja-JP', jaJP)
