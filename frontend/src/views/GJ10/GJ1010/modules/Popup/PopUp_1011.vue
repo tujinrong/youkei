@@ -12,7 +12,7 @@
     centered
     title="（GJ1011）互助基金契約者マスタメンテナンス（基本情報入力）"
     width="1000px"
-    :body-style="{ height: '800px' }"
+    :body-style="{ minHeight: '800px' }"
     :mask-closable="false"
     destroy-on-close
     @cancel="goList"
