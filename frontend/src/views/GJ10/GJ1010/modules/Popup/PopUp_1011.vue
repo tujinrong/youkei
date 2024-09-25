@@ -92,7 +92,7 @@
                   v-model:value="formData.KEIYAKU_KBN"
                   :options="KEIYAKU_KBN_LIST"
                   split-val
-                  class="max-w-60"
+                  class="max-w-45"
                   placeholder="家族型、企業型、鶏以外"
                 ></ai-select
               ></a-form-item>
@@ -117,7 +117,7 @@
                 <ai-select
                   v-model:value="formData.KEIYAKU_JYOKYO"
                   :option="KEIYAKU_JYOKYO_LIST"
-                  class="max-w-60"
+                  class="max-w-45"
                   placeholder="継続契約、新規契約、未契約者"
                   split-val
                 ></ai-select
@@ -125,10 +125,11 @@
             </td>
           </a-col>
           <a-col span="12" class="flex mb-2">
-            <th>入金日、返還日(入金完了時)</th>
+            <th>入金日、返還日</th>
             <td>
               <a-form-item v-bind="validateInfos.NYU_HEN_DATE">
-                <DateJp v-model:value="formData.NYU_HEN_DATE" disabled></DateJp>
+                <DateJp v-model:value="formData.NYU_HEN_DATE" disabled></DateJp
+                >(入金完了時)
               </a-form-item>
             </td>
           </a-col>
@@ -210,25 +211,36 @@
                       :maxlength="15"
                       class="!w-80"
                       @input="changeType('full', $event.target.value, 'ADDR_2')"
-                    ></a-input> </a-form-item></a-col
-              ></a-row>
-              <a-form-item v-bind="validateInfos.ADDR_3">
-                <a-input
-                  v-model:value="formData.ADDR_3"
-                  :maxlength="15"
-                  class="!w-80"
-                  @input="changeType('full', $event.target.value, 'ADDR_3')"
-                  @change="validate('ADDR_4')"
-                ></a-input>
-              </a-form-item>
-              <a-form-item v-bind="validateInfos.ADDR_4">
-                <a-input
-                  v-model:value="formData.ADDR_4"
-                  :maxlength="20"
-                  class="!w-103"
-                  @input="changeType('full', $event.target.value, 'ADDR_4')"
-                ></a-input>
-              </a-form-item>
+                    ></a-input> </a-form-item
+                ></a-col>
+              </a-row>
+              <a-row>
+                <a-col span="5"></a-col>
+                <a-col span="5">
+                  <a-form-item v-bind="validateInfos.ADDR_3">
+                    <a-input
+                      v-model:value="formData.ADDR_3"
+                      :maxlength="15"
+                      class="!w-80"
+                      @input="changeType('full', $event.target.value, 'ADDR_3')"
+                      @change="validate('ADDR_4')"
+                    ></a-input>
+                  </a-form-item>
+                </a-col>
+              </a-row>
+              <a-row>
+                <a-col span="5"></a-col>
+                <a-col span="5">
+                  <a-form-item v-bind="validateInfos.ADDR_4">
+                    <a-input
+                      v-model:value="formData.ADDR_4"
+                      :maxlength="20"
+                      class="!w-103"
+                      @input="changeType('full', $event.target.value, 'ADDR_4')"
+                    ></a-input>
+                  </a-form-item>
+                </a-col>
+              </a-row>
             </td>
           </a-col>
         </a-row>
@@ -292,7 +304,7 @@
                 <ai-select
                   v-model:value="formData.JIMUITAKU_CD"
                   :option="ITAKU_LIST"
-                  class="max-w-150"
+                  class="max-w-123"
                   split-val
                 ></ai-select
               ></a-form-item>
@@ -544,11 +556,20 @@ const createDefaultParams = () => {
 const formData = reactive(createDefaultParams())
 const hasnyuryoku = ref(true)
 
-const KEN_LIST = ref<CmCodeNameModel[]>([]) // 都道府県情報プルダウンリスト
-const KEIYAKU_KBN_LIST = ref<CmCodeNameModel[]>([]) // 契約区分情報プルダウンリスト
+const KEN_LIST = ref<CmCodeNameModel[]>([{ CODE: 46, NAME: '鹿児島県' }]) // 都道府県情報プルダウンリスト
+const KEIYAKU_KBN_LIST = ref<CmCodeNameModel[]>([
+  { CODE: 1, NAME: '家族' },
+  { CODE: 2, NAME: '企業' },
+  { CODE: 3, NAME: '鶏以外' },
+])
+// 契約区分情報プルダウンリスト
 const KEIYAKU_JYOKYO_LIST = ref<CmCodeNameModel[]>([]) // 契約状況情報プルダウンリスト
-const ITAKU_LIST = ref<CmCodeNameModel[]>([]) // 事務委託先情報プルダウンリスト
-const BANK_LIST = ref<CmCodeNameModel[]>([]) // 金融機関情報プルダウンリスト
+const ITAKU_LIST = ref<CmCodeNameModel[]>([
+  // { CODE: 666, NAME: '事務委託先事務委託先事務委託先事務委託先事務委託先' },
+]) // 事務委託先情報プルダウンリスト
+const BANK_LIST = ref<CmCodeNameModel[]>([
+  { CODE: 6666, NAME: '金融機関テスト金融機関テスト金' },
+]) // 金融機関情報プルダウンリスト
 const SITEN_LIST = ref<CmCodeNameModel[]>([]) // 本支店情報プルダウンリスト
 const KOZA_SYUBETU_LIST = ref<CmCodeNameModel[]>([]) // 口座種別情報プルダウンリスト
 const NYURYOKU_JYOKYO_LIST = ref<CmCodeNameModel[]>([]) // 入力確認有無情報プルダウンリスト
