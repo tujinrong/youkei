@@ -67,7 +67,7 @@
           <td>
             <a-form-item
               v-bind="validateInfos.SEIKYU_HAKKO_NO_NEN"
-              class="w-60!"
+              class="w-35!"
               >日鶏
               <a-input-number
                 v-model:value="searchParams.SEIKYU_HAKKO_NO_NEN"
@@ -80,14 +80,16 @@
               発</a-form-item
             >
             <a-form-item v-bind="validateInfos.SEIKYU_HAKKO_NO_RENBAN"
-              >第<a-input-number
+              >第
+              <a-input-number
                 v-model:value="searchParams.SEIKYU_HAKKO_NO_RENBAN"
                 :min="0"
                 :max="9999"
                 :maxlength="4"
                 :disabled="!hakou"
                 class="w-17!"
-              />号</a-form-item
+              />
+              号</a-form-item
             >
           </td></a-col
         ></a-row

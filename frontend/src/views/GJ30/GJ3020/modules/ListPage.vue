@@ -12,7 +12,7 @@
       <h1>（GJ3020）互助基金契約者情報変更（契約区分変更）</h1>
       <div class="self_adaption_table form mt-1">
         <a-row>
-          <a-col span="8">
+          <a-col span="24">
             <th class="required">期</th>
             <td>
               <a-form-item v-bind="validateInfos.KI">
@@ -29,13 +29,14 @@
           </a-col>
         </a-row>
         <a-row>
-          <a-col span="8">
+          <a-col span="24">
             <th class="required">契約者</th>
             <td>
               <a-form-item v-bind="validateInfos.KEIYAKUSYA_CD">
                 <ai-select
                   v-model:value="searchParams.KEIYAKUSYA_CD"
                   :options="LIST"
+                  class="max-w-150"
                   split-val
                 ></ai-select>
               </a-form-item>

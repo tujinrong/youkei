@@ -12,7 +12,7 @@
       <h1>（GJ3030）互助基金契約者情報変更（譲渡）</h1>
       <div class="self_adaption_table form mt-1">
         <a-row>
-          <a-col :md="12" :lg="12" :xl="8" :xxl="8">
+          <a-col span="24">
             <th class="required">期</th>
             <td>
               <a-form-item v-bind="validateInfos.KI">
@@ -29,13 +29,14 @@
           </a-col>
         </a-row>
         <a-row>
-          <a-col :md="12" :lg="12" :xl="8" :xxl="8">
+          <a-col span="24">
             <th class="required">契約者(譲渡先)</th>
             <td>
               <a-form-item v-bind="validateInfos.KEIYAKUSYA_CD">
                 <ai-select
                   v-model:value="searchParams.KEIYAKUSYA_CD"
                   :options="LIST"
+                  class="max-w-150"
                   split-val
                 ></ai-select>
               </a-form-item>
@@ -131,7 +132,7 @@
       <h2>2.契約農場別明細 讓渡元情報(選択)</h2>
       <div class="self_adaption_table form mt-1">
         <a-row>
-          <a-col :md="12" :lg="12" :xl="8" :xxl="8">
+          <a-col span="24">
             <th class="required">契約者</th>
             <td>
               <a-form-item v-bind="validateInfos.KEIYAKUSYA_CD">
@@ -139,6 +140,7 @@
                   v-model:value="searchParams2.KEIYAKUSYA_CD"
                   :disabled="!isEditing || isSearched2"
                   :options="LIST"
+                  class="max-w-150"
                   split-val
                 ></ai-select>
               </a-form-item></td></a-col
@@ -233,7 +235,7 @@
       <div class="parent-container">
         <div class="self_adaption_table form">
           <a-row>
-            <a-col :md="12" :lg="12" :xl="8" :xxl="8">
+            <a-col span="24">
               <th class="required">譲渡年月日</th>
               <td>
                 <a-form-item v-bind="validateInfos.KEIYAKU_DATE_FROM">
@@ -241,7 +243,7 @@
                 </a-form-item>
               </td>
             </a-col>
-            <a-col :md="12" :lg="12" :xl="8" :xxl="8">
+            <a-col span="24">
               <th class="required">入力確認有無</th>
               <td>
                 <a-radio-group
