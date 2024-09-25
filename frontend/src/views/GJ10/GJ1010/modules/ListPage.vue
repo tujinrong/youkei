@@ -12,7 +12,7 @@
       <h1>（GJ1010）互助基金契約者マスタ一覧</h1>
       <div class="self_adaption_table form mt-1">
         <a-row>
-          <a-col v-bind="layout">
+          <a-col span="12">
             <th class="required">期</th>
             <td>
               <a-form-item v-bind="validateInfos.KI">
@@ -24,6 +24,13 @@
                   class="w-14"
                 ></a-input-number
               ></a-form-item>
+            </td> </a-col
+          ><a-col span="12">
+            <th>未継続・未契約者を除く</th>
+            <td>
+              <a-checkbox
+                v-model:checked="searchParams.NOZOKU_FLG"
+              ></a-checkbox>
             </td>
           </a-col>
           <a-col v-bind="layout">
@@ -124,14 +131,6 @@
                 :options="ITAKU_LIST"
                 class="w-250!"
               />
-            </td>
-          </a-col>
-          <a-col v-bind="layout">
-            <th>未継続・未契約者を除く</th>
-            <td>
-              <a-checkbox
-                v-model:checked="searchParams.NOZOKU_FLG"
-              ></a-checkbox>
             </td>
           </a-col>
         </a-row>
