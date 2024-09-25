@@ -1,6 +1,6 @@
 <!------------------------------------------------------------------
  * 業務名称　: 互助事業システム
- * 機能概要　: 契約羽数增加入力&請求書作成(增羽)
+ * 機能概要　: 契約農場別明細 讓渡元情報(選択)
  * 　　　　　  画面レイアウト・処理
  * 作成日　　: 2024.09.24
  * 作成者　　: wx
@@ -10,41 +10,101 @@
   <a-modal
     :visible="modalVisible"
     centered
-    title="契約区分情報(入力)"
-    width="800px"
-    :body-style="{ height: '450px' }"
+    title="契約農場別明細 讓渡元情報(選択)"
+    width="1000px"
+    :body-style="{ minHeight: '800px' }"
     :mask-closable="false"
     destroy-on-close
     @cancel="goList"
   >
+    <div class="edit_table form mt-1">
+      <a-row>
+        <a-col span="15">
+          <th class="required">契約者</th>
+          <td>
+            <a-form-item v-bind="validateInfos.KEIYAKUSYA_CD">
+              <ai-select
+                v-model:value="searchParams2.KEIYAKUSYA_CD"
+                :disabled="isSearched2"
+                :options="LIST"
+                class="max-w-150"
+                split-val
+              ></ai-select>
+            </a-form-item></td
+        ></a-col>
+        <a-col>
+          <div class="flex ml-5">
+            <a-space :size="20" class="mb-2">
+              <a-button type="primary" @click="search2">検索</a-button
+              ><a-button type="primary" @click="reset">条件クリア</a-button>
+            </a-space>
+          </div>
+        </a-col></a-row
+      >
+    </div>
+    <vxe-table
+      class="my-1"
+      ref="xTableRef2"
+      :column-config="{ resizable: true }"
+      :row-config="{ isCurrent: true, isHover: true }"
+      :data="tableData2"
+      :sort-config="{ trigger: 'cell', orders: ['desc', 'asc'] }"
+      :empty-render="{ name: 'NotData' }"
+      @cell-dblclick="({ row }) => edit()"
+      @sort-change="(e) => changeTableSort(e, toRef(pageParams, 'ORDER_BY'))"
+      ><vxe-column type="checkbox" title="選択" width="100"></vxe-column>
+      <vxe-column
+        header-align="center"
+        field="MOTO_NOJO_NAME"
+        title="農場名(譲渡元)"
+        width="200"
+        sortable
+        :params="{ order: 2 }"
+        ><template #default="{ row }">
+          <a @click="edit()">{{ row.MOTO_NOJO_NAME }}</a>
+        </template>
+      </vxe-column>
+      <vxe-column
+        header-align="center"
+        field="ADDR"
+        title="農場住所"
+        sortable
+        :params="{ order: 4 }"
+      >
+      </vxe-column>
+      <vxe-column
+        header-align="center"
+        field="TORI_KBN_NAME"
+        title="鶏の種類"
+        width="150"
+        sortable
+        :params="{ order: 5 }"
+      >
+      </vxe-column>
+      <vxe-column
+        header-align="center"
+        align="right"
+        field="KEIYAKU_HASU"
+        title="契約羽数"
+        width="150"
+        sortable
+        :resizable="false"
+        :params="{ order: 5 }"
+      >
+      </vxe-column>
+    </vxe-table>
+
     <div class="edit_table form">
       <a-row>
         <a-col span="24">
-          <th class="required">変更年月日</th>
+          <th class="required">譲渡年月日</th>
           <td>
             <a-form-item v-bind="validateInfos.KEIYAKU_DATE_FROM">
               <DateJp v-model:value="formData.KEIYAKU_DATE_FROM"></DateJp>
             </a-form-item>
           </td>
         </a-col>
-      </a-row>
-      <a-row>
-        <a-col span="9" class="mt-2 ml-5">
-          <read-only-pop
-            thWidth="130"
-            th="契約区分(変更前)"
-            :td="formData.KEIYAKU_KBN_MAE"
-          />
-        </a-col> </a-row
-      ><a-row>
-        <a-col span="9" class="ml-5">
-          <read-only-pop
-            thWidth="130"
-            th="契約区分(変更後)"
-            :td="formData.KEIYAKU_KBN_ATO"
-          /> </a-col></a-row
-      ><a-row>
-        <a-col span="11">
+        <a-col span="24">
           <th class="required">入力確認有無</th>
           <td>
             <a-radio-group
@@ -56,16 +116,15 @@
             </a-radio-group>
           </td>
         </a-col>
-        <a-col span="5" class="ml-5">
-          <read-only-pop :td="formData.KEIYAKU_KBN_ATO" />
-        </a-col>
       </a-row>
     </div>
     <template #footer>
       <div class="pt-2 flex justify-between border-t-1">
         <a-space :size="20" class="mb-2">
           <a-button class="warning-btn" @click="saveData">保存</a-button
-          ><a-button class="danger-btn" :disabled="isNew">削除</a-button>
+          ><a-button class="danger-btn" :disabled="isNew" @click="deleteData"
+            >削除</a-button
+          >
           <a-button type="primary">キャンセル</a-button>
         </a-space>
         <a-button type="primary" @click="closeModal">閉じる</a-button>
@@ -76,9 +135,9 @@
 <script setup lang="ts">
 import { EnumEditKbn, PageStatus } from '@/enum'
 import { Form, message } from 'ant-design-vue'
-import { reactive, nextTick, onMounted, ref, watch, computed } from 'vue'
+import { reactive, nextTick, onMounted, ref, watch, computed, toRef } from 'vue'
 import DateJp from '@/components/Selector/DateJp/index.vue'
-import { mathNumber } from '@/utils/util'
+import { changeTableSort } from '@/utils/util'
 import { Judgement } from '@/utils/judge-edited'
 import { showDeleteModal, showInfoModal, showSaveModal } from '@/utils/modal'
 import {
@@ -88,7 +147,9 @@ import {
   SAVE_CONFIRM,
   SAVE_OK_INFO,
 } from '@/constants/msg'
-import { FarmManage } from '@/views/GJ10/GJ1010/constant'
+import { KeiyakuJoho } from '../interface/3030/type'
+import { VxeTableInstance } from 'vxe-table'
+import useSearch from '@/hooks/useSearch'
 
 //--------------------------------------------------------------------------
 //データ定義
@@ -100,20 +161,14 @@ const props = defineProps<{
 const emit = defineEmits(['update:visible'])
 
 const editJudge = new Judgement()
-const createDefaultform = () => {
+const createDefaultParams2 = () => {
   return {
-    KEIYAKU_DATE_FROM: new Date(),
-    KEIYAKU_KBN_MAE: '',
-    KEIYAKU_KBN_ATO: '',
-    SYORI_KBN: 1,
-    UP_DATE: undefined,
+    KEIYAKUSYA_CD: undefined,
   }
 }
-
-const formData = reactive(createDefaultform())
-const detailKbn = ref(FarmManage.Detail)
-const hasnyuryoku = ref(true)
+const searchParams2 = reactive(createDefaultParams2())
 const LIST = ref<CmCodeNameModel[]>([])
+const xTableRef2 = ref<VxeTableInstance>()
 const createDefaultnojo = () => {
   return {
     NOJO_CD: undefined,
@@ -124,86 +179,26 @@ const createDefaultnojo = () => {
     ADDR_4: '',
   }
 }
-
-const nojoData = reactive(createDefaultnojo())
-const KEIYAKU_HASU = ref(undefined) //契約羽数(増羽前)
-const rules = reactive({
-  KEIYAKUSYA_CD: [
-    {
-      required: true,
-      message: ITEM_REQUIRE_ERROR.Msg.replace('{0}', '契約者番号'),
-    },
-  ],
-  KEN_CD: [
-    {
-      required: true,
-      message: ITEM_REQUIRE_ERROR.Msg.replace('{0}', '都道府県'),
-    },
-  ],
-  KEIYAKU_JYOKYO: [
-    {
-      required: true,
-      message: ITEM_REQUIRE_ERROR.Msg.replace('{0}', '契約状況'),
-    },
-  ],
-  KEIYAKU_KBN: [
-    {
-      required: true,
-      message: ITEM_REQUIRE_ERROR.Msg.replace('{0}', '契約区分'),
-    },
-  ],
-  KEIYAKUSYA_KANA: [
-    {
-      required: true,
-      message: ITEM_REQUIRE_ERROR.Msg.replace('{0}', '申込者名(フリガナ)'),
-    },
-  ],
-  KEIYAKUSYA_NAME: [
-    {
-      required: true,
-      message: ITEM_REQUIRE_ERROR.Msg.replace('{0}', '申込者名(個人・団体)'),
-    },
-  ],
-  ADDR_TEL1: [
-    {
-      required: true,
-      message: ITEM_REQUIRE_ERROR.Msg.replace('{0}', '電話番号'),
-    },
-  ],
-  JIMUITAKU_CD: [
-    {
-      required: true,
-      message: ITEM_REQUIRE_ERROR.Msg.replace('{0}', '事務委託先'),
-    },
-  ],
-  ADDR_POST: [
-    {
-      validator: async (_rule, value: string) => {
-        if (!value) {
-          return Promise.reject(
-            ITEM_REQUIRE_ERROR.Msg.replace('{0}', '郵便番号')
-          )
-        } else if (value.replace(/[^0-9]/g, '').length < 7) {
-          return Promise.reject(
-            // ITEM_ILLEGAL_ERROR.Msg.replace('{0}', '郵便番号')
-            ITEM_REQUIRE_ERROR.Msg.replace('{0}', '郵便番号')
-          )
-        }
-        return Promise.resolve()
-      },
-    },
-  ],
-  ADDR_2: [
-    {
-      required: true,
-      message: ITEM_REQUIRE_ERROR.Msg.replace('{0}', '住所２'),
-    },
-  ],
-})
-const { validate, clearValidate, validateInfos, resetFields } = Form.useForm(
-  formData,
-  rules
-)
+const createDefaultform = () => {
+  return {
+    KEIYAKU_DATE_FROM: undefined,
+    SYORI_KBN: 1,
+  }
+}
+const formData = reactive(createDefaultform())
+const isSearched2 = ref(false)
+const tableData2 = ref<KeiyakuJoho[]>([])
+const tableDefault2 = {
+  MOTO_NOJO_CD: 9876,
+  KEIYAKU_KBN: 2,
+  MOTO_NOJO_NAME: '譲渡元農場',
+  ADDR: '東京都中央区1-2-3',
+  TORI_KBN: 1,
+  TORI_KBN_NAME: 'ブロイラー',
+  KEIYAKU_HASU: 5000,
+}
+const isEditing2 = ref(false)
+const rules = reactive({})
 //---------------------------------------------------------------------------
 //フック関数
 //--------------------------------------------------------------------------
@@ -219,6 +214,9 @@ const modalVisible = computed({
     emit('update:visible', visible)
   },
 })
+const isDataSelected2 = computed(() => {
+  return tableData2.value.length > 0 && xTableRef2.value?.getCurrentRecord()
+})
 const isNew = computed(() => (props.editkbn === EnumEditKbn.Add ? true : false))
 //--------------------------------------------------------------------------
 //監視定義
@@ -233,17 +231,19 @@ watch(
     }
   }
 )
-watch(
-  () => formData,
-  () => {
-    editJudge.setEdited()
-  },
-  { deep: true }
-)
+
 //--------------------------------------------------------------------------
 //メソッド
 //--------------------------------------------------------------------------
-
+const { validate, clearValidate, validateInfos, resetFields } = Form.useForm(
+  searchParams2,
+  rules
+)
+const { pageParams, totalCount, searchData, clear } = useSearch({
+  service: undefined,
+  source: tableData2,
+  params: toRef(() => searchParams2),
+})
 //画面遷移
 const goList = () => {
   editJudge.judgeIsEdited(() => {
@@ -252,14 +252,12 @@ const goList = () => {
 }
 
 const closeModal = () => {
-  Object.assign(formData, createDefaultform())
-  hasnyuryoku.value = false
-  clearValidate()
+  resetFields
+  tableData2.value = []
   emit('update:visible', false)
 }
 
 const saveData = async () => {
-  await validate()
   if (!editJudge.isPageEdited()) {
     showInfoModal({
       content: '変更したデータはありません。',
@@ -295,9 +293,21 @@ const deleteData = () => {
     },
   })
 }
-//農場登録
-const addNojo = () => {
-  detailKbn.value = FarmManage.FarmInfo
+function search2() {
+  tableData2.value.push(tableDefault2)
+  if (xTableRef2.value && tableData2.value.length > 0) {
+    xTableRef2.value.setCurrentRow(tableData2.value[0])
+  }
+  isSearched2.value = true
+}
+//条件クリア
+const reset = () => {
+  isSearched2.value = false
+  isEditing2.value = false
+  tableData2.value = []
+}
+const edit = () => {
+  isEditing2.value = true
 }
 </script>
 <style lang="scss" scoped>

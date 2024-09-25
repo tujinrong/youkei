@@ -43,7 +43,7 @@ const props = defineProps<{
     VALUE_TO: number | undefined
   }
   disabled?: boolean
-  unit?: ''
+  unit?: string
   width?: string
   maxLength?: number
   max?: number
