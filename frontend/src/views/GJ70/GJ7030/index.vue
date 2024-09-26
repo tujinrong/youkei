@@ -11,7 +11,7 @@
     class="h-full flex-col-stretch gap-12px overflow lt-sm:overflow-auto flex"
   >
     <a-card class="staticWidth">
-      <div class="max-w-1300px">
+      <div class="max-w-1200px">
         <h1>（GJ7030）互助基金契約者互助金情報検索CSVデ一夕作成</h1>
         <div class="self_adaption_table form mt-1">
           <a-row
@@ -26,7 +26,7 @@
                     :maxlength="2"
                     class="w-14"
                   ></a-input-number>
-                  <span class="align-middle">期</span></a-form-item
+                  <span class="align-middle ml-2">期</span></a-form-item
                 ><a-form-item v-bind="validateInfos.KEISAN_DATE">
                   <MonthJp
                     v-model:value="searchParams.KEISAN_DATE"
@@ -51,7 +51,7 @@
                   <range-select
                     v-model:value="searchParams.KEIYAKUSYA_CD"
                     :options="LIST"
-                    class="max-w-250!"
+                    class="max-w-full!"
                 /></a-form-item></td></a-col
             ><a-col span="24"
               ><th>契約区分</th>
@@ -79,7 +79,7 @@
                   <range-select
                     v-model:value="searchParams.KEIYAKUSYA_CD"
                     :options="LIST"
-                    class="max-w-250!"
+                    class="max-w-full!"
                 /></a-form-item></td
             ></a-col>
             <a-col span="24"

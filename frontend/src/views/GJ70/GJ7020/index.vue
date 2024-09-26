@@ -11,11 +11,11 @@
     class="h-full flex-col-stretch gap-12px overflow lt-sm:overflow-auto flex"
   >
     <a-card class="staticWidth">
-      <div class="max-w-1400px">
+      <div class="max-w-1200px">
         <h1>（GJ7020）互助基金契約者積立金情報検索CSVデ一夕作成</h1>
         <div class="self_adaption_table form mt-1">
           <a-row
-            ><a-col span="12"
+            ><a-col span="17"
               ><th class="required">対象期</th>
               <td>
                 <a-form-item v-bind="validateInfos.KI">
@@ -26,11 +26,11 @@
                     :maxlength="2"
                     class="w-14"
                   ></a-input-number>
-                  <span class="align-middle">期</span></a-form-item
+                  <span class="align-middle ml-2">期</span></a-form-item
                 >
               </td></a-col
             >
-            <a-col span="12"
+            <a-col span="7"
               ><th>契約日未入力者を除く</th>
               <td>
                 <a-checkbox
@@ -54,7 +54,7 @@
                   <range-select
                     v-model:value="searchParams.KEIYAKUSYA_CD"
                     :options="LIST"
-                    class="max-w-250!"
+                    class="max-w-full!"
                 /></a-form-item></td></a-col
             ><a-col span="24"
               ><th>契約区分</th>
@@ -82,14 +82,14 @@
                   <range-select
                     v-model:value="searchParams.KEIYAKUSYA_CD"
                     :options="LIST"
-                    class="max-w-250!"
+                    class="max-w-full!"
                 /></a-form-item></td
             ></a-col>
             <a-col span="24"
               ><th class="required">契約変更</th>
               <td>
                 <a-form-item v-bind="validateInfos.KEIYAKU_HENKO_KBN">
-                  <a-space class="flex-wrap" :size="40">
+                  <a-space class="flex-wrap" :size="10">
                     <a-checkbox
                       v-for="(label, key, index) in KEIYAKU_HENKO_KBN_LABELS"
                       :key="key"
@@ -112,7 +112,7 @@
               ><th class="required">請求・返還区分</th>
               <td>
                 <a-form-item v-bind="validateInfos.SEIKYU_HENKAN_KBN">
-                  <a-space class="flex-wrap" :size="40">
+                  <a-space class="flex-wrap" :size="10">
                     <a-checkbox
                       v-for="(label, key, index) in SEIKYU_HENKAN_KBN_LABELS"
                       :key="key"
@@ -135,7 +135,7 @@
               ><th class="required">入金・振込状況</th>
               <td>
                 <a-form-item v-bind="validateInfos.SYORI_JOKYO_KBN">
-                  <a-space class="flex-wrap" :size="40">
+                  <a-space class="flex-wrap" :size="10">
                     <a-checkbox
                       v-for="(label, key, index) in SYORI_JOKYO_KBN_LABELS"
                       :key="key"

@@ -11,7 +11,7 @@
     class="h-full flex-col-stretch gap-12px overflow lt-sm:overflow-auto flex"
   >
     <a-card class="staticWidth">
-      <div class="max-w-1500px">
+      <div class="max-w-1200px">
         <h1>（GJ7010）互助基金契約者情報検索CSVデ一夕作成</h1>
         <div class="self_adaption_table form mt-1">
           <a-row
@@ -20,7 +20,7 @@
                 md: 24,
                 lg: 24,
                 xl: 24,
-                xxl: 12,
+                xxl: 17,
               }"
               ><th class="required">対象期</th>
               <td>
@@ -32,12 +32,12 @@
                     :maxlength="2"
                     class="w-14"
                   ></a-input-number>
-                  <span class="align-middle">期</span></a-form-item
+                  <span class="align-middle ml-2">期</span></a-form-item
                 ><a-form-item v-bind="validateInfos.KEIYAKU_DATE_TO">
                   <MonthJp
                     v-model:value="searchParams.KEIYAKU_DATE_TO"
                     :disabled="!searchParams.KEIYAKU_DATE_NOZOKU_FLG"
-                  />　末　現在　(契約情報の契約日)</a-form-item
+                  />　末　現在　（契約情報の契約日）</a-form-item
                 >
               </td> </a-col
             ><a-col
@@ -45,7 +45,7 @@
                 md: 24,
                 lg: 24,
                 xl: 24,
-                xxl: 12,
+                xxl: 7,
               }"
               ><th>契約日未入力者を除く</th>
               <td>
@@ -58,7 +58,7 @@
                 md: 24,
                 lg: 24,
                 xl: 24,
-                xxl: 12,
+                xxl: 17,
               }"
               ><th>都道府県</th>
               <td>
@@ -73,7 +73,7 @@
                 md: 24,
                 lg: 24,
                 xl: 24,
-                xxl: 12,
+                xxl: 7,
               }"
               ><th>入金· 返還日未入力者を除く</th>
               <td>
@@ -88,7 +88,7 @@
                   <range-select
                     v-model:value="searchParams.KEIYAKUSYA_CD"
                     :options="LIST"
-                    class="max-w-250!"
+                    class="max-w-full!"
                 /></a-form-item></td></a-col
             ><a-col span="24"
               ><th>契約区分</th>
@@ -116,7 +116,7 @@
                   <range-select
                     v-model:value="searchParams.KEIYAKUSYA_CD"
                     :options="LIST"
-                    class="max-w-250!"
+                    class="max-w-full!"
                 /></a-form-item></td
             ></a-col>
             <a-col span="24"
@@ -135,7 +135,7 @@
                   <range-date
                     v-model:value="searchParams.KEIYAKU_DATE"
                     :options="LIST" /></a-form-item
-                ><span class="w-40 mr-a mt-1">(契約者マスタ契約日)</span>
+                ><span class="w-40 mr-a mt-1">（契約者マスタ契約日）</span>
               </td>
             </a-col>
             <a-col span="24"
