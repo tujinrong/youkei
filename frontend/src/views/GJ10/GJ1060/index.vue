@@ -8,7 +8,7 @@
  * ----------------------------------------------------------------->
 <template>
   <div>
-    <a-card :bordered="false" class="h-full min-h-500px">
+    <a-card :bordered="false" class="h-full min-h-500px staticWidth">
       <div>
         <h1>（GJ1060）家畜防疫互助基金事業加入状況表作成</h1>
         <div class="self_adaption_table form" ref="headRef">
@@ -84,7 +84,7 @@
                   <range-select
                     v-model:value="formData.KEIYAKUSYA_CD"
                     :options="LIST"
-                    class="w-250!"
+                    class="max-w-250!"
                 /></a-form-item>
               </td>
             </a-col>

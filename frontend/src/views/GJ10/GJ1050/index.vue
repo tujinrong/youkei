@@ -8,7 +8,7 @@
  * ----------------------------------------------------------------->
 <template>
   <div>
-    <a-card :bordered="false" class="h-full min-h-500px">
+    <a-card :bordered="false" class="h-full min-h-500px staticWidth">
       <div>
         <h1>（GJ1050）事務委託先別·契約者別生産者積立金等一覧表作成</h1>
         <div class="self_adaption_table form" ref="headRef">
@@ -103,7 +103,7 @@
                   <range-select
                     v-model:value="formData.ITAKU_CD"
                     :options="LIST"
-                    class="w-250!"
+                    class="max-w-250!"
                 /></a-form-item>
               </td>
             </a-col>
@@ -114,7 +114,7 @@
                   <range-select
                     v-model:value="formData.KEIYAKUSYA_CD"
                     :options="LIST"
-                    class="w-250!"
+                    class="max-w-250!"
                 /></a-form-item>
               </td>
             </a-col>

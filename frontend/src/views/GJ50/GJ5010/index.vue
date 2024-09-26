@@ -35,7 +35,7 @@
                 <a-form-item v-bind="validateInfos.JIGYO_SYURYO_NENDO">
                   <year-jp v-model:value="formData.JIGYO_SYURYO_NENDO" /><span
                     class="!align-middle"
-                    >年度(指定年度まで集計)</span
+                    >(指定年度まで集計)</span
                   ></a-form-item
                 >
               </td>
