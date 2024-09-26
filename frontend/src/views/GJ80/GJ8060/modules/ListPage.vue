@@ -207,7 +207,7 @@ const route = useRoute()
 const xTableRef = ref<VxeTableInstance>()
 const createDefaultParams = () => {
   return {
-    KI: -1,
+    KI: 8,
     KEN_CD: {
       VALUE_FM: undefined,
       VALUE_TO: undefined,

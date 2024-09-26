@@ -281,8 +281,8 @@ import { useElementSize } from '@vueuse/core'
 const xTableRef = ref<VxeTableInstance>()
 const createDefaultParams = (): SearchRequest => {
   return {
-    KI: undefined, // 対象期
-    KEISAN_DATE: undefined, // 対象年月
+    KI: 8, // 対象期
+    KEISAN_DATE: new Date(), // 対象年月
     KEN_CD: { VALUE_FM: undefined, VALUE_TO: undefined }, // 都道府県
     KEIYAKUSYA_CD: { VALUE_FM: undefined, VALUE_TO: undefined }, // 契約者番号
     KEIYAKU_KBN: { VALUE_FM: undefined, VALUE_TO: undefined }, // 契約区分

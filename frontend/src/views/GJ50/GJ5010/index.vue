@@ -83,7 +83,7 @@ import { onMounted, reactive, ref } from 'vue'
 //--------------------------------------------------------------------------
 const createDefaultParams = () => {
   return {
-    KI: -1,
+    KI: 8,
     JIGYO_SYURYO_NENDO: 2023,
     SEIKYU_HENKAN_KBN: 1,
   }

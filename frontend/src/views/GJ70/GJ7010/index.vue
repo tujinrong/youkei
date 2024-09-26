@@ -131,7 +131,7 @@
             ><a-col span="24"
               ><th>契約年月日</th>
               <td>
-                <a-form-item v-bind="validateInfos.KEIYAKU_DATE" class="w-110!">
+                <a-form-item v-bind="validateInfos.KEIYAKU_DATE" class="w-90!">
                   <range-date
                     v-model:value="searchParams.KEIYAKU_DATE"
                     :options="LIST" /></a-form-item
@@ -290,7 +290,7 @@ const xTableRef = ref<VxeTableInstance>()
 
 const createDefaultParams = (): SearchRequest => {
   return {
-    KI: undefined, // 対象期
+    KI: 8, // 対象期
     KEIYAKU_DATE_NOZOKU_FLG: true, // 契約日未入力者を除く
     NYUHEN_DATE_NOZOKU_FLG: true, // 入金・返還日未入力者を除く
     KEIYAKU_DATE_TO: new Date(), // 対象年月

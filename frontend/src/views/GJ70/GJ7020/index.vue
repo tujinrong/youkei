@@ -343,7 +343,7 @@ const xTableRef = ref<VxeTableInstance>()
 const createDefaultParams = (): SearchRequest => {
   return {
     KEIYAKU_DATE_NOZOKU_FLG: true,
-    KI: undefined,
+    KI: 8,
     KEN_CD: { VALUE_FM: undefined, VALUE_TO: undefined },
     KEIYAKUSYA_CD: { VALUE_FM: undefined, VALUE_TO: undefined },
     KEIYAKU_KBN: { VALUE_FM: undefined, VALUE_TO: undefined },
