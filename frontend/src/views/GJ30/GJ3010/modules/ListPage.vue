@@ -9,7 +9,7 @@
 <template>
   <div class="h-full min-h-500px flex-col-stretch gap-12px flex">
     <a-card :bordered="false" class="staticWidth">
-      <div class="max-w-600px">
+      <div class="max-w-584px">
         <h1>（GJ3010）互助基金契約者情報変更(增羽)</h1>
         <div class="self_adaption_table form mt-1">
           <a-row>
@@ -191,7 +191,7 @@ import Detail from './DetailPage.vue'
 //--------------------------------------------------------------------------
 const createDefaultParams = () => {
   return {
-    KI: -1,
+    KI: 8,
     KEIYAKUSYA_CD: undefined,
   }
 }

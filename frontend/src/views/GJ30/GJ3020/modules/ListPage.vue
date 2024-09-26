@@ -9,7 +9,7 @@
 <template>
   <div class="h-full flex-col-stretch gap-12px flex">
     <a-card class="staticWidth">
-      <div class="max-w-600px">
+      <div class="max-w-584px">
         <h1>（GJ3020）互助基金契約者情報変更（契約区分変更）</h1>
         <div class="self_adaption_table form mt-1">
           <a-row>
@@ -92,7 +92,8 @@
           align="center"
           field="KEIYAKU_DATE_FROM"
           title="変更年月日"
-          width="160"
+          width="200"
+          min-width="160"
           sortable
           formatter="jpDate"
           :params="{ order: 1 }"
@@ -103,7 +104,8 @@
           align="center"
           field="KEIYAKU_KBN_MAE"
           title="契約区分(変更前)"
-          width="180"
+          width="450"
+          min-width="180"
           sortable
           :params="{ order: 2 }"
         >
@@ -116,7 +118,8 @@
           align="center"
           field="KEIYAKU_KBN_ATO"
           title="契約区分(変更後)"
-          width="180"
+          width="450"
+          min-width="180"
           sortable
           :params="{ order: 3 }"
         >
@@ -125,7 +128,8 @@
           header-align="center"
           field="SYORI_KBN"
           title="処理状況"
-          width="100"
+          width="230"
+          min-width="100"
           sortable
           :params="{ order: 4 }"
         >
@@ -136,7 +140,8 @@
           field="SEIKYU_KAISU"
           title="請求回数"
           sortable
-          width="100"
+          width="200"
+          min-width="100"
           :params="{ order: 5 }"
         >
         </vxe-column>
@@ -163,7 +168,7 @@ import Detail from './DetailPage.vue'
 //--------------------------------------------------------------------------
 const createDefaultParams = () => {
   return {
-    KI: -1,
+    KI: 8,
     KEIYAKUSYA_CD: undefined,
   }
 }
