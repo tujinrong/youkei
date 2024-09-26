@@ -11,7 +11,7 @@
     class="h-full min-h-500px flex-col-stretch gap-12px lt-sm:overflow-auto px-4 py-4"
   >
     <a-card :bordered="false" class="staticWidth">
-      <div class="max-w-600px">
+      <div class="max-w-584px">
         <h1>（GJ1020）互助基金契約者情報変更（移動）</h1>
         <div class="self_adaption_table form mt-1">
           <a-row>

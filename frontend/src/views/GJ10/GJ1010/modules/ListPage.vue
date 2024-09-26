@@ -9,7 +9,7 @@
 <template>
   <div class="h-full min-h-500px flex-col-stretch gap-12px">
     <a-card ref="headRef" :bordered="false" class="staticWidth">
-      <div class="max-w-1200px">
+      <div class="max-w-1150px">
         <h1>（GJ1010）互助基金契約者マスタ一覧</h1>
         <div class="self_adaption_table form mt-1">
           <a-row>
