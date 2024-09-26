@@ -196,7 +196,7 @@ import { onMounted, reactive, ref } from 'vue'
 //--------------------------------------------------------------------------
 const createDefaultParams = () => {
   return {
-    KI: -1, // 対象期
+    KI: 8, // 対象期
     // 登録日範囲
     REG_DATE: {
       VALUE_FM: undefined as Date | undefined, // 開始日

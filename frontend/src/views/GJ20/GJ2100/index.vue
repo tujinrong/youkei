@@ -121,7 +121,7 @@ import { PreviewRequest } from './type'
 //--------------------------------------------------------------------------
 const createDefaultParams = () => {
   return {
-    KI: -1,
+    KI: 8,
     KEIYAKU_KBN: {
       VALUE_FM: undefined as number | undefined,
       VALUE_TO: undefined as number | undefined,
