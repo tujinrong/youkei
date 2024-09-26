@@ -8,7 +8,7 @@
  * ----------------------------------------------------------------->
 <template>
   <div class="h-full min-h-500px flex-col-stretch gap-12px flex">
-    <a-card :bordered="false">
+    <a-card :bordered="false" class="staticWidth">
       <h1>（GJ3010）互助基金契約者情報変更(增羽)</h1>
       <div class="self_adaption_table form mt-1">
         <a-row>
@@ -58,7 +58,7 @@
         </a-space>
         <close-page /></div
     ></a-card>
-    <a-card class="flex-1">
+    <a-card class="flex-1 staticWidth">
       <div class="flex justify-between">
         <h2>契約農場別明細 增羽情報(表示)</h2>
         <a-pagination
@@ -130,7 +130,7 @@
           align="right"
           field="KEIYAKU_HASU_MAE"
           title="契約羽数(増羽前)"
-          min-width="100"
+          min-width="180"
           sortable
           :params="{ order: 5 }"
         >
@@ -140,7 +140,7 @@
           align="right"
           field="KEIYAKU_HASU"
           title="契約羽数(増羽後)"
-          min-width="100"
+          min-width="180"
           sortable
           :params="{ order: 6 }"
         >
@@ -150,7 +150,7 @@
           align="center"
           field="SYORI_KBN"
           title="処理区分"
-          min-width="50"
+          min-width="110"
           sortable
           :params="{ order: 7 }"
         >

@@ -8,7 +8,7 @@
  * ----------------------------------------------------------------->
 <template>
   <div class="h-full flex-col-stretch gap-12px flex">
-    <a-card>
+    <a-card class="staticWidth">
       <h1>（GJ3020）互助基金契約者情報変更（契約区分変更）</h1>
       <div class="self_adaption_table form mt-1">
         <a-row>
@@ -60,7 +60,7 @@
         </a-space>
         <close-page /></div
     ></a-card>
-    <a-card class="flex-1">
+    <a-card class="flex-1 staticWidth">
       <div class="flex justify-between">
         <h2>契約区分情報(表示)</h2>
         <a-pagination
@@ -90,7 +90,7 @@
           align="center"
           field="KEIYAKU_DATE_FROM"
           title="変更年月日"
-          min-width="160"
+          width="160"
           sortable
           formatter="jpDate"
           :params="{ order: 1 }"
@@ -101,7 +101,7 @@
           align="center"
           field="KEIYAKU_KBN_MAE"
           title="契約区分(変更前)"
-          min-width="100"
+          width="180"
           sortable
           :params="{ order: 2 }"
         >
@@ -114,7 +114,7 @@
           align="center"
           field="KEIYAKU_KBN_ATO"
           title="契約区分(変更後)"
-          min-width="100"
+          width="180"
           sortable
           :params="{ order: 3 }"
         >
@@ -123,7 +123,7 @@
           header-align="center"
           field="SYORI_KBN"
           title="処理状況"
-          min-width="100"
+          width="100"
           sortable
           :params="{ order: 4 }"
         >
@@ -133,9 +133,8 @@
           align="right"
           field="SEIKYU_KAISU"
           title="請求回数"
-          min-width="100"
           sortable
-          :resizable="false"
+          width="100"
           :params="{ order: 5 }"
         >
         </vxe-column>

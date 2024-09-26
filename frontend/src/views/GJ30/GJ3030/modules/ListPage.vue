@@ -8,7 +8,7 @@
  * ----------------------------------------------------------------->
 <template>
   <div class="h-full flex-col-stretch gap-12px flex">
-    <a-card>
+    <a-card class="staticWidth">
       <h1>（GJ3030）互助基金契約者情報変更（譲渡）</h1>
       <div class="self_adaption_table form mt-1">
         <a-row>
@@ -60,7 +60,7 @@
         </a-space>
         <close-page /></div
     ></a-card>
-    <a-card class="flex-1">
+    <a-card class="flex-1 staticWidth">
       <div class="flex justify-between flex-1">
         <h2>契約農場別明細 讓渡情報(表示)</h2>
         <a-pagination
@@ -90,7 +90,7 @@
           align="center"
           field="KEIYAKU_DATE_FROM"
           title="変更年月日"
-          width="200"
+          width="160"
           sortable
           formatter="jpDate"
           :params="{ order: 1 }"
@@ -263,7 +263,7 @@ const turnExportPage = () => {
 
 <style lang="scss" scoped>
 th {
-  min-width: 120px;
+  min-width: 140px;
 }
 .search-disabled-mask {
   position: absolute;
