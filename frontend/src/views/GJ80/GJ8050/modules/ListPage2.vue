@@ -179,7 +179,7 @@ import { showInfoModal } from '@/utils/modal'
 //---------------------------------------------------------------------------
 const props = defineProps<{
   visible: boolean
-  bankcd?: string
+  bankcd: string
   URL: string
 }>()
 const emit = defineEmits(['update:visible', 'getTableList'])
@@ -199,7 +199,6 @@ const createDefaultParams2 = () => {
 const searchParams2 = reactive(createDefaultParams2())
 const xTableRef2 = ref<VxeTableInstance>()
 const editVisible2 = ref(false)
-const bankcd = ref()
 const sitencd = ref()
 const editkbn2 = ref<EnumEditKbn>(EnumEditKbn.Add)
 const sitanTableData = ref<SearchSitenRowVM[]>([])
@@ -226,27 +225,21 @@ const modalVisible = computed({
 //--------------------------------------------------------------------------
 
 watch(
-  () => xTableRef2.value?.getCurrentRecord(),
-  (val) => {
-    currentRow2.value = val
-    // searchParams2.BANK_CD = currentRow2.value?.BANK_CD ?? ''
-    bankcd.value = currentRow2.value?.BANK_CD ?? ''
+  () => props.visible,
+  (newV) => {
+    if (newV) {
+      // searchAll2(false)
+      searchParams2.BANK_CD = props.bankcd
+    }
   }
 )
-// watch(
-//   () => props.visible,
-//   (newV) => {
-//     if (newV) {
-//       searchAll2(false)
-//     }
-//   }
-// )
 //--------------------------------------------------------------------------
 //メソッド
 //--------------------------------------------------------------------------
 const closeModal = () => {
   resetFields()
   clearValidate()
+  sitanTableData.value = []
   modalVisible.value = false
 }
 //画面遷移
@@ -282,7 +275,6 @@ const searchAll2 = async (deleteflg: boolean = false) => {
   }
 }
 async function forwardNew2() {
-  bankcd.value = currentRow2.value?.BANK_CD ?? bankcd.value
   editkbn2.value = EnumEditKbn.Add
   editVisible2.value = true
 }
@@ -290,7 +282,6 @@ async function forwardNew2() {
 async function forwardEdit2(BANK_CD, SITEN_CD) {
   editkbn2.value = EnumEditKbn.Edit
   editVisible2.value = true
-  bankcd.value = BANK_CD
   sitencd.value = SITEN_CD
 }
 

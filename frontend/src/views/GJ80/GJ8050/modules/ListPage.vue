@@ -76,7 +76,8 @@
         :show-total="(total) => `抽出件数： ${total} 件`"
         show-less-items
         show-size-changer
-        class="m-b-1 text-end" />
+        class="m-b-1 text-end"
+      />
       <vxe-table
         class="mt-2"
         ref="xTableRef"
@@ -120,8 +121,19 @@
           sortable
           :params="{ order: 3 }"
           :resizable="false"
-        ></vxe-column> </vxe-table
-    ></a-card>
+        ></vxe-column>
+        <vxe-column header-align="center" align="center" title="支店情報"
+          ><template #default="{ row }">
+            <a-button
+              class="max-h-22px mt-2px text-center py-0"
+              type="primary"
+              @click="showSiten(row.BANK_CD)"
+              >支店情報</a-button
+            >
+          </template></vxe-column
+        >
+      </vxe-table></a-card
+    >
   </div>
   <EditPage
     v-model:visible="editVisible1"
@@ -164,7 +176,6 @@ const bankTableData = ref<SearchBankRowVM[]>([])
 const editVisible1 = ref(false)
 const list2Visible = ref(false)
 const editkbn1 = ref<EnumEditKbn>(EnumEditKbn.Add)
-const bankcd = ref()
 const sitencd = ref()
 const sitanTableData = ref<SearchSitenRowVM[]>([])
 //表の高さ
@@ -176,7 +187,7 @@ const layout = {
   xl: 24,
   xxl: 24,
 }
-
+const bankcd = ref('')
 const currentRow = ref<SearchBankRowVM | null>(null)
 const host = window.location.href.includes('localhost')
   ? 'localhost:9527'
@@ -195,16 +206,6 @@ const URL = computed(() => {
 //--------------------------------------------------------------------------
 //監視定義
 //--------------------------------------------------------------------------
-
-watch(
-  () => xTableRef.value?.getCurrentRecord(),
-  (val) => {
-    currentRow.value = val
-    if (sitanTableData.value.length <= 0) {
-      bankcd.value = currentRow.value?.BANK_CD ?? ''
-    }
-  }
-)
 
 //--------------------------------------------------------------------------
 //メソッド
@@ -247,9 +248,9 @@ async function reset() {
   xTableRef.value?.clearSort()
   clear()
 }
-const showSiten = (bankcd: any) => {
+const showSiten = (BANKCD: string) => {
   list2Visible.value = true
-  bankcd.value = bankcd
+  bankcd.value = BANKCD
 }
 //--------------------------------------------------------------------------
 //プレビュー

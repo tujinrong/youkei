@@ -284,14 +284,12 @@ watch(
   () => props.visible,
   (newV) => {
     if (newV) {
-      debugger
       if (isNew.value) {
         formData.KI = props.params.KI
         formData.KEIYAKUSYA_CD = props.params.KEIYAKUSYA_CD
         formData.KEIYAKUSYA_NAME =
           props.params.KEIYAKUSYA_CD + '：' + props.name
       } else {
-        debugger
         // Object.assign(formData,props.keys)
         formData.KI = props.keys.KI
         formData.KEIYAKUSYA_CD = props.keys.KEIYAKUSYA_CD

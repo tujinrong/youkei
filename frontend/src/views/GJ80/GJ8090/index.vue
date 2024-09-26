@@ -266,7 +266,6 @@ async function forwardNew() {
   editVisible.value = true
   editkbn.value = EnumEditKbn.Add
   console.log(name.value)
-  debugger
 }
 async function forwardEdit(NOJO_CD) {
   await validate()
