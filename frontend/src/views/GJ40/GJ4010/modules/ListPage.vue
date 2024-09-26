@@ -8,7 +8,7 @@
  * ----------------------------------------------------------------->
 <template>
   <div class="h-full min-h-500px flex-col-stretch gap-12px">
-    <a-card ref="headRef" :bordered="false">
+    <a-card ref="headRef" :bordered="false" class="staticWidth">
       <h1>（GJ4010）互助金申請情報一覧</h1>
       <div class="self_adaption_table form max-w-400 mt-1">
         <a-row>
@@ -37,7 +37,14 @@
               </a-form-item>
             </td>
           </a-col>
-          <a-col v-bind="layout">
+          <a-col
+            v-bind="{
+              md: 24,
+              lg: 24,
+              xl: 24,
+              xxl: 12,
+            }"
+          >
             <th>認定回数</th>
             <td class="flex">
               <a-form-item v-bind="validateInfos.HASSEI_KAISU">
@@ -45,7 +52,14 @@
               </a-form-item>
             </td>
           </a-col>
-          <a-col v-bind="layout">
+          <a-col
+            v-bind="{
+              md: 24,
+              lg: 24,
+              xl: 24,
+              xxl: 12,
+            }"
+          >
             <th>計算回数</th>
             <td class="flex">
               <a-form-item v-bind="validateInfos.KEISAN_KAISU">
@@ -190,7 +204,7 @@
         </AButton>
       </div>
     </a-card>
-    <a-card :bordered="false" class="flex-1" ref="cardRef">
+    <a-card :bordered="false" class="flex-1 staticWidth" ref="cardRef">
       <a-pagination
         v-model:current="pageParams.PAGE_NUM"
         v-model:page-size="pageParams.PAGE_SIZE"

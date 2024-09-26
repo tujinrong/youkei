@@ -1,6 +1,6 @@
 <template>
   <div>
-    <a-card :bordered="false" class="h-full min-h-500px">
+    <a-card :bordered="false" class="h-full min-h-500px staticWidth">
       <div>
         <h1>（GJ4060）互助金交付金融融機関別振込明細表</h1>
         <div class="self_adaption_table form" ref="headRef">
