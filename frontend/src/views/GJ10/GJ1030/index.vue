@@ -117,7 +117,7 @@ import { PreviewRequest } from './type'
 //--------------------------------------------------------------------------
 const createDefaultParams = () => {
   return {
-    KI: -1,
+    KI: 8,
     TAISYOBI_YMD: new Date().toISOString().split('T')[0],
     KEIYAKU_KBN_CD: {
       VALUE_FM: undefined as number | undefined,

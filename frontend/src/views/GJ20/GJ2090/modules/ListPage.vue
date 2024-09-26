@@ -319,7 +319,7 @@ import Detail2 from '@/views/GJ20/GJ2090/modules/Detail/Detail2.vue'
 const createDefaultParams = () => {
   return {
     SYORI_KBN: 0,
-    KI: undefined,
+    KI: 8,
     SEIKYU_KAISU: {
       VALUE_FM: undefined as number | undefined,
       VALUE_TO: undefined as number | undefined,

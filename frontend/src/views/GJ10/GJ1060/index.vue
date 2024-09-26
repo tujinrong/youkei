@@ -119,7 +119,7 @@ import { ExcelExportRequest } from './type'
 //--------------------------------------------------------------------------
 const createDefaultParams = (): ExcelExportRequest => {
   return {
-    KI: -1,
+    KI: 8,
     SYUTURYOKU_KBN: 1,
     KEIYAKU_DATE_FROM: new Date(),
     KEIYAKU_KBN: {

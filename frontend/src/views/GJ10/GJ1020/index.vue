@@ -199,7 +199,7 @@ const createDefaultParams = (): Omit<
   keyof CmSearchRequestBase
 > => {
   return {
-    KI: -1,
+    KI: 8,
     KEIYAKUSYA_CD: undefined,
   }
 }

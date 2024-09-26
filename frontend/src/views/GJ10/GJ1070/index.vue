@@ -103,7 +103,7 @@ import { ExcelExportRequest } from './type'
 //--------------------------------------------------------------------------
 const createDefaultParams = (): ExcelExportRequest => {
   return {
-    KI: -1,
+    KI: 8,
     KEIYAKU_KBN: {
       VALUE_FM: undefined,
       VALUE_TO: undefined,

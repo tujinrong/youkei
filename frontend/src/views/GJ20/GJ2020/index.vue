@@ -272,7 +272,7 @@ import { Form } from 'ant-design-vue'
 const createDefaultParams = () => {
   return {
     SYORI_KBN: 0,
-    KI: undefined,
+    KI: 8,
     SEIKYU_KAISU: undefined,
     TESURYO_KAISU: undefined,
     SEIKYU_DATE: new Date().toISOString().split('T')[0],

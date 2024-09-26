@@ -188,7 +188,7 @@ import DateJp from '@/components/Selector/DateJp/index.vue'
 //--------------------------------------------------------------------------
 const createDefaultParams = () => {
   return {
-    KI: -1,
+    KI: 8,
     SEIKYU_KAISU: undefined,
     SEIKYU_DATE: new Date().toISOString().split('T')[0],
     NOFUKIGEN_DATE: new Date().toISOString().split('T')[0],
