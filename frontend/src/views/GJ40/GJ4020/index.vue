@@ -162,7 +162,7 @@ import { PreviewRequest } from './type'
 //--------------------------------------------------------------------------
 const createDefaultParams = () => {
   return {
-    KI: -1,
+    KI: 8,
     HASSEI_KAISU: {
       VALUE_FM: undefined as number | undefined,
       VALUE_TO: undefined as number | undefined,

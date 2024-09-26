@@ -318,7 +318,7 @@ import Detail3 from '@/views/GJ40/GJ4010/modules/Detail/Detail3.vue'
 const createDefaultParams = () => {
   return {
     TANKA_MST_DATE: new Date().toISOString().split('T')[0],
-    KI: undefined,
+    KI: 8,
     HASSEI_KAISU: {
       VALUE_FM: undefined as number | undefined,
       VALUE_TO: undefined as number | undefined,
