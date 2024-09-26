@@ -3,106 +3,115 @@
     :visible="modalVisible"
     centered
     title="（GJ8041）使用者マスタメンテナンス"
-    width="1000px"
-    :body-style="{ height: '800px' }"
+    width="800px"
+    :body-style="{ height: '450px' }"
     :mask-closable="false"
     destroy-on-close
     @cancel="goList"
-  >
-    <div class="edit_table form">
-      <a-form>
-        <a-row>
-          <a-col span="7">
-            <th class="required">ユーザーID</th>
-            <td>
-              <a-form-item v-bind="validateInfos.USER_ID">
+    ><div class="modal-container">
+      <div class="edit_table form w-150">
+        <a-form>
+          <a-row>
+            <a-col span="24">
+              <th class="required">ユーザーID</th>
+              <td>
+                <a-form-item v-bind="validateInfos.USER_ID">
+                  <a-input
+                    v-model:value="formData.USER_ID"
+                    :maxlength="10"
+                    :disabled="!isNew"
+                    class="w-30!"
+                  ></a-input>
+                </a-form-item>
+              </td>
+            </a-col>
+          </a-row>
+          <a-row>
+            <a-col span="24">
+              <th class="required">ユーザー名</th>
+              <td>
+                <a-form-item v-bind="validateInfos.USER_NAME">
+                  <a-input
+                    v-model:value="formData.USER_NAME"
+                    :maxlength="20"
+                    class="w-60!"
+                  ></a-input>
+                </a-form-item>
+              </td>
+            </a-col>
+          </a-row>
+          <a-row>
+            <a-col span="24">
+              <th class="required">パスワード</th>
+              <td>
+                <a-form-item v-bind="validateInfos.PASS">
+                  <a-input
+                    v-model:value="formData.PASS"
+                    :maxlength="20"
+                    class="w-60!"
+                  ></a-input>
+                </a-form-item>
+              </td>
+            </a-col>
+          </a-row>
+          <a-row class="mt-1">
+            <a-col span="13">
+              <read-only-pop
+                th="　パスワード有効期限"
+                th-width="150"
+                :td="getDateJpText(formData.PASS_KIGEN_DATE)"
+              ></read-only-pop>
+            </a-col>
+          </a-row>
+          <a-row>
+            <a-col span="13">
+              <read-only-pop
+                th="　パスワード変更日"
+                th-width="150"
+                :td="getDateJpText(formData.PASS_UP_DATE)"
+              ></read-only-pop>
+            </a-col>
+          </a-row>
+          <a-row>
+            <a-col span="24">
+              <th class="required">使用区分</th>
+              <td>
+                <a-form-item v-bind="validateInfos.SIYO_KBN">
+                  <ai-select
+                    v-model:value="formData.SIYO_KBN"
+                    :options="SIYO_KBN_LIST"
+                    split-val
+                    class="w-60!"
+                  ></ai-select
+                ></a-form-item>
+              </td>
+            </a-col>
+          </a-row>
+          <a-row>
+            <a-col span="24">
+              <th>使用停止日</th>
+              <td>
+                <DateJp
+                  v-model:value="formData.TEISI_DATE"
+                  :disabled="isNew"
+                  class="w-50!"
+                />
+              </td>
+            </a-col>
+          </a-row>
+          <a-row>
+            <a-col span="24">
+              <th>使用停止理由</th>
+              <td>
                 <a-input
-                  v-model:value="formData.USER_ID"
-                  :maxlength="10"
-                  :disabled="!isNew"
-                ></a-input>
-              </a-form-item>
-            </td>
-          </a-col>
-        </a-row>
-        <a-row>
-          <a-col span="8">
-            <th class="required">ユーザー名</th>
-            <td>
-              <a-form-item v-bind="validateInfos.USER_NAME">
-                <a-input
-                  v-model:value="formData.USER_NAME"
-                  :maxlength="20"
-                ></a-input>
-              </a-form-item>
-            </td>
-          </a-col>
-        </a-row>
-        <a-row>
-          <a-col span="8">
-            <th class="required">パスワード</th>
-            <td>
-              <a-form-item v-bind="validateInfos.PASS">
-                <a-input
-                  v-model:value="formData.PASS"
-                  :maxlength="20"
-                ></a-input>
-              </a-form-item>
-            </td>
-          </a-col>
-        </a-row>
-        <a-row class="mt-1">
-          <a-col span="8">
-            <read-only-pop
-              th="パスワード有効期限"
-              th-width="150"
-              :td="getDateJpText(formData.PASS_KIGEN_DATE)"
-            ></read-only-pop>
-          </a-col>
-        </a-row>
-        <a-row>
-          <a-col span="8">
-            <read-only-pop
-              th="パスワード変更日"
-              th-width="150"
-              :td="getDateJpText(formData.PASS_UP_DATE)"
-            ></read-only-pop>
-          </a-col>
-        </a-row>
-        <a-row>
-          <a-col span="8">
-            <th class="required">使用区分</th>
-            <td>
-              <a-form-item v-bind="validateInfos.SIYO_KBN">
-                <ai-select
-                  v-model:value="formData.SIYO_KBN"
-                  :options="SIYO_KBN_LIST"
-                  split-val
-                ></ai-select
-              ></a-form-item>
-            </td>
-          </a-col>
-        </a-row>
-        <a-row>
-          <a-col span="8">
-            <th>使用停止日</th>
-            <td>
-              <DateJp v-model:value="formData.TEISI_DATE" :disabled="isNew" />
-            </td>
-          </a-col>
-        </a-row>
-        <a-row>
-          <a-col span="12">
-            <th>使用停止理由</th>
-            <td>
-              <a-input
-                v-model:value="formData.TEISI_RIYU"
-                :disabled="!formData.TEISI_DATE"
-              />
-            </td>
-          </a-col>
-        </a-row>
-      </a-form>
+                  v-model:value="formData.TEISI_RIYU"
+                  :disabled="!formData.TEISI_DATE"
+                />
+              </td>
+            </a-col>
+          </a-row>
+        </a-form>
+      </div>
     </div>
     <template #footer>
       <div class="pt-2 flex justify-between border-t-1">
@@ -303,5 +312,12 @@ const deleteData = () => {
 <style lang="scss" scoped>
 th {
   width: 150px;
+}
+.modal-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
 }
 </style>

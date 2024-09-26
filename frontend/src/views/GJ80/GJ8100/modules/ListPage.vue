@@ -1,7 +1,5 @@
 <template>
-  <div
-    class="h-full min-h-500px flex-col-stretch gap-12px overflow-hidden lt-sm:overflow-auto"
-  >
+  <div class="h-full min-h-500px flex-col-stretch gap-12px">
     <a-card :bordered="false">
       <h1>（GJ8100）消費税率一覧</h1>
       <div class="my-2 flex justify-between">
@@ -14,7 +12,6 @@
       <vxe-table
         class="h-full"
         ref="xTableRef"
-        :height="height - 64"
         :column-config="{ resizable: true }"
         :row-config="{ isCurrent: true, isHover: true }"
         :data="tableData"

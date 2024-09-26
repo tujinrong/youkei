@@ -60,24 +60,27 @@
         ><a-col :span="24"
           ><th class="required">発信番号</th>
           <td>
-            <a-form-item v-bind="validateInfos.SEIKYU_HAKKO_NO_NEN"
+            <a-form-item
+              v-bind="validateInfos.SEIKYU_HAKKO_NO_NEN"
+              class="w-35!"
               >日鶏
               <a-input
                 v-model:value="searchParams.SEIKYU_HAKKO_NO_NEN"
                 :disabled="!hakou"
-                class="max-w-20"
+                class="w-14!"
                 :maxlength="2"
-              ></a-input
-              >発</a-form-item
+              ></a-input>
+              発</a-form-item
             >
             <a-form-item v-bind="validateInfos.SEIKYU_HAKKO_NO_RENBAN"
-              >第<a-input
+              >第
+              <a-input
                 v-model:value="searchParams.SEIKYU_HAKKO_NO_RENBAN"
                 :disabled="!hakou"
-                class="max-w-30"
+                class="w-17!"
                 :maxlength="4"
-              ></a-input
-              >号</a-form-item
+              ></a-input>
+              号</a-form-item
             >
           </td></a-col
         ></a-row

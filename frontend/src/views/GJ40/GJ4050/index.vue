@@ -15,7 +15,9 @@
                   >
                     <a-radio :value="1">初回発行</a-radio>
                     <a-radio :value="2">再発行(初回と同内容)</a-radio>
-                    <a-radio :value="3">修正発行(納付期限、発行日、発信番号変更可能)</a-radio>
+                    <a-radio :value="3"
+                      >修正発行(納付期限、発行日、発信番号変更可能)</a-radio
+                    >
                   </a-radio-group>
                 </a-form-item>
               </td>
@@ -30,7 +32,7 @@
                     :min="1"
                     :max="99"
                     :maxlength="2"
-                    class="w-20"
+                    class="w-14"
                     @change="handleKI(false)"
                   />
                   <span class="!align-middle">期</span>
@@ -42,8 +44,7 @@
                     :min="1"
                     :max="99"
                     :maxlength="2"
-                    class="w-20"
-                    @change="handleKI(false)"
+                    class="w-14"
                   />
                   <span class="!align-middle">回</span>
                 </a-form-item>
@@ -56,10 +57,9 @@
                   <a-input-number
                     v-model:value="formData.KEISAN_KAISU"
                     :min="1"
-                    :max="99"
-                    :maxlength="2"
-                    style="width: 120px"
-                    @change="handleKI(false)"
+                    :max="999"
+                    :maxlength="3"
+                    class="w-15"
                   ></a-input-number>
                 </a-form-item>
               </td>
@@ -70,7 +70,7 @@
                 <a-form-item v-bind="validateInfos.SEIKYU_HAKKO_DATE">
                   <DateJp
                     v-model:value="formData.SEIKYU_HAKKO_DATE"
-                    class="w-50!"
+                    class="max-w-50"
                     :disabled="formData.SYUTURYOKU_KBN === 2"
                   />
                 </a-form-item>
@@ -82,7 +82,7 @@
                 <a-form-item v-bind="validateInfos.FURIKOMI_YOTEI_DATE">
                   <DateJp
                     v-model:value="formData.FURIKOMI_YOTEI_DATE"
-                    class="w-50!"
+                    class="max-w-50"
                     :disabled="formData.SYUTURYOKU_KBN === 2"
                   />
                 </a-form-item>
@@ -93,19 +93,26 @@
               <td>
                 <a-form-item v-bind="validateInfos.KI" class="w-50!">
                   <span class="!align-middle">日鶏</span>
-                  <a-input
+
+                  <a-input-number
                     v-model:value="formData.KI"
+                    :min="0"
+                    :max="99"
+                    :maxlength="2"
                     :disabled="formData.SYUTURYOKU_KBN === 2"
-                    class="w-20"
+                    class="w-14!"
                   />
                   <span class="!align-middle">発</span>
                 </a-form-item>
                 <a-form-item v-bind="validateInfos.KI">
                   <span class="!align-middle">第</span>
-                  <a-input
+                  <a-input-number
                     v-model:value="formData.KI"
+                    :min="0"
+                    :max="9999"
+                    :maxlength="4"
                     :disabled="formData.SYUTURYOKU_KBN === 2"
-                    class="w-20"
+                    class="w-17!"
                   />
                   <span class="!align-middle">号</span>
                 </a-form-item>
@@ -118,6 +125,7 @@
                   <range-select
                     v-model:value="formData.JIMUITAKU_CD"
                     :options="ITAKU_CD_NAME_LIST"
+                    class="w-250!"
                 /></a-form-item>
               </td>
             </a-col>
@@ -128,6 +136,7 @@
                   <range-select
                     v-model:value="formData.KEIYAKUSYA_CD"
                     :options="KEIYAKUSYA_CD_NAME_LIST"
+                    class="w-250!"
                 /></a-form-item>
               </td>
             </a-col>
@@ -288,16 +297,16 @@ const rangeCheck = (from: number, to: number, itemName: string) => {
 
 const handleKI = (initflg: boolean) => {
   if (!formData.KI && formData.KI !== 0) return
-  Init({ KI: formData.KI }).then((res) => {
-    if (!initflg) {
-      formData.JIMUITAKU_CD = clearFromToValue
-      formData.KEIYAKUSYA_CD = clearFromToValue
-    }
-    if (initflg) formData.KI = res.KI //対象期
+  // Init({ KI: formData.KI }).then((res) => {
+  //   if (!initflg) {
+  //     formData.JIMUITAKU_CD = clearFromToValue
+  //     formData.KEIYAKUSYA_CD = clearFromToValue
+  //   }
+  //   if (initflg) formData.KI = res.KI //対象期
 
-    ITAKU_CD_NAME_LIST.value = res.ITAKU_CD_NAME_LIST //事務委託先
-    KEIYAKUSYA_CD_NAME_LIST.value = res.KEIYAKUSYA_CD_NAME_LIST //契約者番号
-  })
+  //   ITAKU_CD_NAME_LIST.value = res.ITAKU_CD_NAME_LIST //事務委託先
+  //   KEIYAKUSYA_CD_NAME_LIST.value = res.KEIYAKUSYA_CD_NAME_LIST //契約者番号
+  // })
 }
 const clear = () => {
   Object.assign(formData, createDefaultParams())

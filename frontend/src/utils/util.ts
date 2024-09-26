@@ -94,7 +94,7 @@ export function getUnKnownDateJpText(value: string): string {
 export const getDateJpText = (value: Date | string | undefined): string => {
   if (value) {
     try {
-      const date = new Date(value); // 确保是 Date 对象
+      const date = new Date(value);
       return (
         new Intl.DateTimeFormat('ja-JP-u-ca-japanese', {
           era: 'long',

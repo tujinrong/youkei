@@ -15,7 +15,7 @@
                     :min="1"
                     :max="99"
                     :maxlength="2"
-                    class="w-20"
+                    class="w-14"
                     @change="handleKI(false)"
                   ></a-input-number>
                   <span class="!align-middle">期</span>
@@ -39,6 +39,7 @@
                   <range-select
                     v-model:value="formData.KEIYAKU_KBN"
                     :options="KEIYAKU_KBN_CD_NAME_LIST"
+                    class="max-w-78"
                 /></a-form-item>
               </td>
             </a-col>
@@ -97,7 +98,8 @@
                   <range-select
                     v-model:value="formData.KEN_CD"
                     :options="KEN_CD_NAME_LIST"
-                  /></a-form-item>
+                    class="w-90!"
+                /></a-form-item>
               </td>
             </a-col>
             <a-col v-bind="layout">
@@ -107,6 +109,7 @@
                   <range-select
                     v-model:value="formData.JIMUITAKU_CD"
                     :options="ITAKU_CD_NAME_LIST"
+                    class="w-250!"
                 /></a-form-item>
               </td>
             </a-col>
@@ -117,6 +120,7 @@
                   <range-select
                     v-model:value="formData.KEIYAKUSYA_CD"
                     :options="KEIYAKUSYA_CD_NAME_LIST"
+                    class="w-250!"
                 /></a-form-item>
               </td>
             </a-col>
@@ -386,19 +390,19 @@ const rangeCheck = (from: number, to: number, itemName: string) => {
 
 const handleKI = (initflg: boolean) => {
   if (!formData.KI && formData.KI !== 0) return
-  Init({ KI: formData.KI }).then((res) => {
-    if (!initflg) {
-      formData.KEIYAKU_KBN = clearFromToValue
-      formData.JIMUITAKU_CD = clearFromToValue
-      formData.KEIYAKUSYA_CD = clearFromToValue
-    }
-    if (initflg) formData.KI = res.KI //対象期
-    if (initflg) KEIYAKU_KBN_CD_NAME_LIST.value = res.KEIYAKU_KBN_CD_NAME_LIST //契約区分
+  // Init({ KI: formData.KI }).then((res) => {
+  //   if (!initflg) {
+  //     formData.KEIYAKU_KBN = clearFromToValue
+  //     formData.JIMUITAKU_CD = clearFromToValue
+  //     formData.KEIYAKUSYA_CD = clearFromToValue
+  //   }
+  //   if (initflg) formData.KI = res.KI //対象期
+  //   if (initflg) KEIYAKU_KBN_CD_NAME_LIST.value = res.KEIYAKU_KBN_CD_NAME_LIST //契約区分
 
-    KEN_CD_NAME_LIST.value = res.KEN_CD_NAME_LIST //事務委託先
-    ITAKU_CD_NAME_LIST.value = res.ITAKU_CD_NAME_LIST //事務委託先
-    KEIYAKUSYA_CD_NAME_LIST.value = res.KEIYAKUSYA_CD_NAME_LIST //契約者番号
-  })
+  //   KEN_CD_NAME_LIST.value = res.KEN_CD_NAME_LIST //事務委託先
+  //   ITAKU_CD_NAME_LIST.value = res.ITAKU_CD_NAME_LIST //事務委託先
+  //   KEIYAKUSYA_CD_NAME_LIST.value = res.KEIYAKUSYA_CD_NAME_LIST //契約者番号
+  // })
 }
 const clear = () => {
   Object.assign(formData, createDefaultParams())

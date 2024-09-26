@@ -30,7 +30,7 @@ const bgColor = computed(() => {
     :style="{ backgroundColor: bgColor }"
   >
     <WaveBg :theme-color="bgThemeColor" />
-    <ACard class="relative z-4">
+    <ACard class="relative z-4 staticWidth">
       <div class="w-450px lt-sm:w-300px">
         <header class="flex">
           <SystemLogo class="size-16 text-left" />

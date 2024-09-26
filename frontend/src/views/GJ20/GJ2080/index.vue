@@ -15,7 +15,7 @@
                     :min="1"
                     :max="99"
                     :maxlength="2"
-                    class="w-20!"
+                    class="w-14!"
                     @change="handleKI(false)"
                   ></a-input-number>
                   <span class="!align-middle">期</span>
@@ -29,6 +29,8 @@
                   <range-number
                     v-model:value="formData.SEIKYU_KAISU"
                     :options="KEIYAKU_KBN_CD_NAME_LIST"
+                    width="65"
+                    :maxLength="3"
                 /></a-form-item>
               </td>
             </a-col>
@@ -64,6 +66,7 @@
                   <range-select
                     v-model:value="formData.KEIYAKU_KBN"
                     :options="KEIYAKU_KBN_CD_NAME_LIST"
+                    class="max-w-78"
                 /></a-form-item>
               </td>
             </a-col>
@@ -102,7 +105,7 @@
             <a-col v-bind="layout">
               <th>事業委託先</th>
               <td class="flex">
-                <a-form-item v-bind="validateInfos.JIMUITAKU_CD">
+                <a-form-item v-bind="validateInfos.JIMUITAKU_CD" class="w-250!">
                   <range-select
                     v-model:value="formData.JIMUITAKU_CD"
                     :options="ITAKU_CD_NAME_LIST"
@@ -112,7 +115,10 @@
             <a-col v-bind="layout">
               <th>契約者番号</th>
               <td class="flex">
-                <a-form-item v-bind="validateInfos.KEIYAKUSYA_CD">
+                <a-form-item
+                  v-bind="validateInfos.KEIYAKUSYA_CD"
+                  class="w-250!"
+                >
                   <range-select
                     v-model:value="formData.KEIYAKUSYA_CD"
                     :options="KEIYAKUSYA_CD_NAME_LIST"
@@ -127,8 +133,8 @@
                   <a-button type="primary" @click="onPreview"
                     >プレビュー</a-button
                   >
-                  <a-button type="primary">EXCEL出力</a-button>
                   <a-button type="primary" @click="clear">キャンセル</a-button>
+                  <a-button type="primary">EXCEL出力</a-button>
                 </a-space>
                 <close-page />
               </div>
@@ -403,18 +409,18 @@ const rangeCheck = (from: number, to: number, itemName: string) => {
 
 const handleKI = (initflg: boolean) => {
   if (!formData.KI && formData.KI !== 0) return
-  Init({ KI: formData.KI }).then((res) => {
-    if (!initflg) {
-      formData.KEIYAKU_KBN = clearFromToValue
-      formData.JIMUITAKU_CD = clearFromToValue
-      formData.KEIYAKUSYA_CD = clearFromToValue
-    }
-    if (initflg) formData.KI = res.KI //対象期
-    if (initflg) KEIYAKU_KBN_CD_NAME_LIST.value = res.KEIYAKU_KBN_CD_NAME_LIST //契約区分
+  // Init({ KI: formData.KI }).then((res) => {
+  //   if (!initflg) {
+  //     formData.KEIYAKU_KBN = clearFromToValue
+  //     formData.JIMUITAKU_CD = clearFromToValue
+  //     formData.KEIYAKUSYA_CD = clearFromToValue
+  //   }
+  //   if (initflg) formData.KI = res.KI //対象期
+  //   if (initflg) KEIYAKU_KBN_CD_NAME_LIST.value = res.KEIYAKU_KBN_CD_NAME_LIST //契約区分
 
-    ITAKU_CD_NAME_LIST.value = res.ITAKU_CD_NAME_LIST //事務委託先
-    KEIYAKUSYA_CD_NAME_LIST.value = res.KEIYAKUSYA_CD_NAME_LIST //契約者番号
-  })
+  //   ITAKU_CD_NAME_LIST.value = res.ITAKU_CD_NAME_LIST //事務委託先
+  //   KEIYAKUSYA_CD_NAME_LIST.value = res.KEIYAKUSYA_CD_NAME_LIST //契約者番号
+  // })
 }
 const clear = () => {
   Object.assign(formData, createDefaultParams())

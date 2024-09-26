@@ -229,3 +229,12 @@ h2 {
   line-height: 1.5;
   word-wrap: break-word;
 }
+//model title fontSize
+:where(.css-dev-only-do-not-override-8krvbs).ant-modal .ant-modal-title {
+  font-size: 24px;
+}
+
+//
+:where(.css-dev-only-do-not-override-8krvbs).ant-card:not(.staticWidth) {
+  min-width: 95rem;
+}

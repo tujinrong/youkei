@@ -45,8 +45,7 @@
                     :min="1"
                     :max="99"
                     :maxlength="2"
-                    class="w-20"
-                    @change="handleKI(false)"
+                    class="w-14"
                   />
                   <span class="!align-middle">期</span>
                 </a-form-item>
@@ -56,7 +55,7 @@
               <th class="required">認定回数</th>
               <td class="flex">
                 <a-form-item v-bind="validateInfos.HASSEI_KAISU">
-                  <range-number v-model:value="formData.HASSEI_KAISU"/>
+                  <range-number v-model:value="formData.HASSEI_KAISU" />
                 </a-form-item>
               </td>
             </a-col>
@@ -64,7 +63,7 @@
               <th class="required">計算回数</th>
               <td class="flex">
                 <a-form-item v-bind="validateInfos.KEISAN_KAISU">
-                  <range-number v-model:value="formData.KEISAN_KAISU"/>
+                  <range-number v-model:value="formData.KEISAN_KAISU" />
                 </a-form-item>
               </td>
             </a-col>
@@ -72,7 +71,10 @@
               <th class="required">振込予定日</th>
               <td class="flex items-center">
                 <a-form-item v-bind="validateInfos.FURIKOMI_YOTEI_DATE">
-                  <DateJp class="w-50!" v-model:value="formData.FURIKOMI_YOTEI_DATE"/>
+                  <DateJp
+                    class="max-w-50"
+                    v-model:value="formData.FURIKOMI_YOTEI_DATE"
+                  />
                   <span>(振込明細表に印字する日を入力)</span>
                 </a-form-item>
               </td>
@@ -82,7 +84,9 @@
             <a-col :span="24">
               <div class="mb-2 header_operation flex justify-between w-full">
                 <a-space :size="20">
-                  <a-button type="primary" @click="onPreview">プレビュー</a-button>
+                  <a-button type="primary" @click="onPreview"
+                    >プレビュー</a-button
+                  >
                   <a-button type="primary" @click="clear">キャンセル</a-button>
                 </a-space>
                 <close-page />
@@ -101,7 +105,7 @@ import { ITEM_REQUIRE_ERROR } from '@/constants/msg'
 import { Form } from 'ant-design-vue'
 import { Init, Preview } from './service'
 import { PreviewRequest } from './type'
-import DateJp from "@/components/Selector/DateJp/index.vue";
+import DateJp from '@/components/Selector/DateJp/index.vue'
 
 //--------------------------------------------------------------------------
 //データ定義
@@ -113,7 +117,7 @@ const createDefaultParams = () => {
     TAISYO_DATA: {
       ITIBU_HENKAN: false,
       ZENGAKU_HENKAN: false,
-      GOJYOKIN_SHIHARAI: false
+      GOJYOKIN_SHIHARAI: false,
     },
     KI: 8,
     HASSEI_KAISU: {

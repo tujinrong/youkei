@@ -7,14 +7,12 @@
  * 変更履歴　:
  * ----------------------------------------------------------------->
 <template>
-  <div
-    class="h-full min-h-500px flex-col-stretch gap-12px overflow-hidden lt-sm:overflow-auto flex"
-  >
+  <div class="h-full min-h-500px flex-col-stretch gap-12px flex">
     <a-card :bordered="false">
       <h1>（GJ3010）互助基金契約者情報変更(增羽)</h1>
       <div class="self_adaption_table form mt-1">
         <a-row>
-          <a-col span="12">
+          <a-col span="24">
             <th class="required">期</th>
             <td>
               <a-form-item v-bind="validateInfos.KI">
@@ -23,19 +21,20 @@
                   :min="0"
                   :max="99"
                   :maxlength="2"
-                  class="w-20"
+                  class="w-14"
                   @change="getInitData(searchParams.KI, false)"
                 ></a-input-number>
               </a-form-item>
             </td> </a-col></a-row
         ><a-row>
-          <a-col span="12">
+          <a-col span="24">
             <th class="required">契約者</th>
             <td>
               <a-form-item v-bind="validateInfos.KEIYAKUSYA_CD">
                 <ai-select
                   v-model:value="searchParams.KEIYAKUSYA_CD"
-                  :options="LIST"
+                  :options="KEIYAKUSYA_CD_NAME_LIST"
+                  class="max-w-115"
                   split-val
                 ></ai-select>
               </a-form-item>
@@ -197,6 +196,9 @@ const createDefaultParams = () => {
 const searchParams = reactive(createDefaultParams())
 const isSearched = ref(false)
 
+const KEIYAKUSYA_CD_NAME_LIST = ref<CmCodeNameModel[]>([
+  { CODE: 555, NAME: '契約者名契約者名契約者名契約者名契約者名契約者名契' },
+])
 const LIST = ref<CmCodeNameModel[]>([])
 const tableData = ref<SearchRowVM[]>([])
 const rules = reactive({

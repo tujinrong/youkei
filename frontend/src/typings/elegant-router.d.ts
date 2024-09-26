@@ -39,8 +39,6 @@ declare module "@elegant-router/types" {
     "gj20_gj2080": "/gj20/gj2080";
     "gj20_gj2090": "/gj20/gj2090";
     "gj20_gj2100": "/gj20/gj2100";
-    "gj20_gj2110": "/gj20/gj2110";
-    "gj20_gj2120": "/gj20/gj2120";
     "gj30": "/gj30";
     "gj30_gj3010": "/gj30/gj3010";
     "gj30_gj3020": "/gj30/gj3020";
@@ -58,7 +56,6 @@ declare module "@elegant-router/types" {
     "gj60": "/gj60";
     "gj60_gj6010": "/gj60/gj6010";
     "gj60_gj6020": "/gj60/gj6020";
-    "gj60_gj6021": "/gj60/gj6021";
     "gj60_gj6030": "/gj60/gj6030";
     "gj60_gj6040": "/gj60/gj6040";
     "gj70": "/gj70";
@@ -72,8 +69,6 @@ declare module "@elegant-router/types" {
     "gj80_gj8040": "/gj80/gj8040";
     "gj80_gj8050": "/gj80/gj8050";
     "gj80_gj8060": "/gj80/gj8060";
-    "gj80_gj8070": "/gj80/gj8070";
-    "gj80_gj8080": "/gj80/gj8080";
     "gj80_gj8090": "/gj80/gj8090";
     "gj80_gj8100": "/gj80/gj8100";
     "home": "/home";
@@ -163,8 +158,6 @@ declare module "@elegant-router/types" {
     | "gj20_gj2080"
     | "gj20_gj2090"
     | "gj20_gj2100"
-    | "gj20_gj2110"
-    | "gj20_gj2120"
     | "gj30_gj3010"
     | "gj30_gj3020"
     | "gj30_gj3030"
@@ -178,7 +171,6 @@ declare module "@elegant-router/types" {
     | "gj50_gj5010"
     | "gj60_gj6010"
     | "gj60_gj6020"
-    | "gj60_gj6021"
     | "gj60_gj6030"
     | "gj60_gj6040"
     | "gj70_gj7010"
@@ -190,8 +182,6 @@ declare module "@elegant-router/types" {
     | "gj80_gj8040"
     | "gj80_gj8050"
     | "gj80_gj8060"
-    | "gj80_gj8070"
-    | "gj80_gj8080"
     | "gj80_gj8090"
     | "gj80_gj8100"
     | "403"

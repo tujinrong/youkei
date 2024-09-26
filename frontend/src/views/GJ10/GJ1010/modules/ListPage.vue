@@ -7,14 +7,12 @@
  * 変更履歴　:
  * ----------------------------------------------------------------->
 <template>
-  <div
-    class="h-full min-h-500px flex-col-stretch gap-12px overflow-hidden lt-sm:overflow-auto"
-  >
+  <div class="h-full min-h-500px flex-col-stretch gap-12px">
     <a-card ref="headRef" :bordered="false">
       <h1>（GJ1010）互助基金契約者マスタ一覧</h1>
       <div class="self_adaption_table form mt-1">
         <a-row>
-          <a-col v-bind="layout">
+          <a-col span="12">
             <th class="required">期</th>
             <td>
               <a-form-item v-bind="validateInfos.KI">
@@ -23,9 +21,16 @@
                   :min="1"
                   :max="99"
                   :maxlength="2"
-                  class="w-20"
+                  class="w-14"
                 ></a-input-number
               ></a-form-item>
+            </td> </a-col
+          ><a-col span="12">
+            <th>未継続・未契約者を除く</th>
+            <td>
+              <a-checkbox
+                v-model:checked="searchParams.NOZOKU_FLG"
+              ></a-checkbox>
             </td>
           </a-col>
           <a-col v-bind="layout">
@@ -34,7 +39,7 @@
               <range-select
                 v-model:value="searchParams.KEN_CD"
                 :options="KEN_CD_NAME_LIST"
-                class="w-120!"
+                class="w-90!"
               />
             </td>
           </a-col>
@@ -57,7 +62,7 @@
               <ai-select
                 v-model:value="searchParams.KEIYAKU_KBN"
                 :options="KEIYAKU_KBN_CD_NAME_LIST"
-                class="w-50!"
+                class="w-37!"
                 type="number"
               ></ai-select>
             </td>
@@ -68,7 +73,7 @@
               <ai-select
                 v-model:value="searchParams.KEIYAKU_JYOKYO"
                 :options="KEIYAKU_KBN_CD_NAME_LIST"
-                class="w-50!"
+                class="w-37!"
                 type="number"
               ></ai-select>
             </td>
@@ -79,7 +84,7 @@
               <a-input
                 v-model:value="searchParams.KEIYAKUSYA_NAME"
                 :maxlength="25"
-                class="w-150"
+                class="w-130"
               ></a-input>
               <span class="w-40!">(部分一致)</span>
             </td>
@@ -90,7 +95,7 @@
               <a-input
                 v-model:value="searchParams.KEIYAKUSYA_KANA"
                 :maxlength="50"
-                class="w-150"
+                class="w-130"
               ></a-input>
               <span class="w-40!">(部分一致)</span>
             </td>
@@ -100,7 +105,7 @@
             <td>
               <a-input
                 v-model:value="searchParams.ADDR"
-                class="w-270"
+                class="w-250"
                 :maxlength="54"
               ></a-input>
               <span class="w-65!">(部分一致)</span>
@@ -124,15 +129,8 @@
               <range-select
                 v-model:value="searchParams.JIMUITAKU_CD"
                 :options="ITAKU_LIST"
+                class="w-250!"
               />
-            </td>
-          </a-col>
-          <a-col v-bind="layout">
-            <th>未継続・未契約者を除く</th>
-            <td>
-              <a-checkbox
-                v-model:checked="searchParams.NOZOKU_FLG"
-              ></a-checkbox>
             </td>
           </a-col>
         </a-row>
@@ -184,7 +182,6 @@
         ref="xTableRef"
         class="mt-2"
         :column-config="{ resizable: true }"
-        :height="height - 70"
         :row-config="{ isCurrent: true, isHover: true }"
         :data="tableData"
         :sort-config="{ trigger: 'cell', orders: ['desc', 'asc'] }"
@@ -342,8 +339,12 @@ const KEIYAKU_KBN_CD_NAME_LIST = ref<CmCodeNameModel[]>([
   { CODE: 2, NAME: '企業' },
   { CODE: 3, NAME: '鶏以外' },
 ])
-const KEN_CD_NAME_LIST = ref<CmCodeNameModel[]>([])
-const ITAKU_LIST = ref<CmCodeNameModel[]>([])
+const KEN_CD_NAME_LIST = ref<CmCodeNameModel[]>([
+  { CODE: 46, NAME: '鹿児島県' },
+])
+const ITAKU_LIST = ref<CmCodeNameModel[]>([
+  { CODE: 666, NAME: '事務委託先事務委託先事務委託先事務委託先事務委託先' },
+])
 const tableData = ref<SearchRowVM[]>([])
 const tableDefault = {
   KEIYAKUSYA_CD: 1003,

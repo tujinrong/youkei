@@ -14,7 +14,7 @@
       ><h1>（GJ7020）互助基金契約者積立金情報検索CSVデ一夕作成</h1>
       <div class="self_adaption_table form mt-1">
         <a-row
-          ><a-col span="24"
+          ><a-col span="12"
             ><th class="required">対象期</th>
             <td>
               <a-form-item v-bind="validateInfos.KI">
@@ -23,12 +23,19 @@
                   :min="1"
                   :max="99"
                   :maxlength="2"
-                  class="w-20"
+                  class="w-14"
                 ></a-input-number>
                 <span class="align-middle">期</span></a-form-item
               >
             </td></a-col
           >
+          <a-col span="12"
+            ><th>契約日未入力者を除く</th>
+            <td>
+              <a-checkbox
+                v-model:checked="searchParams.KEIYAKU_DATE_NOZOKU_FLG"
+              ></a-checkbox></td
+          ></a-col>
           <a-col span="24"
             ><th>都道府県</th>
             <td>
@@ -36,7 +43,7 @@
                 <range-select
                   v-model:value="searchParams.KEN_CD"
                   :options="LIST"
-                  class="w-150!"
+                  class="w-90!"
               /></a-form-item></td
           ></a-col>
           <a-col span="24"
@@ -46,6 +53,7 @@
                 <range-select
                   v-model:value="searchParams.KEIYAKUSYA_CD"
                   :options="LIST"
+                  class="w-250!"
               /></a-form-item></td></a-col
           ><a-col span="24"
             ><th>契約区分</th>
@@ -54,7 +62,7 @@
                 <range-select
                   v-model:value="searchParams.KEIYAKUSYA_CD"
                   :options="LIST"
-                  class="w-130!"
+                  class="max-w-78"
               /></a-form-item></td
           ></a-col>
           <a-col span="24"
@@ -64,7 +72,7 @@
                 <range-select
                   v-model:value="searchParams.KEIYAKUSYA_CD"
                   :options="LIST"
-                  class="w-130!"
+                  class="max-w-78"
               /></a-form-item></td></a-col
           ><a-col span="24"
             ><th>事務委託先</th>
@@ -73,6 +81,7 @@
                 <range-select
                   v-model:value="searchParams.KEIYAKUSYA_CD"
                   :options="LIST"
+                  class="w-250!"
               /></a-form-item></td
           ></a-col>
           <a-col span="24"
@@ -164,19 +173,14 @@
             <td>
               <a-radio-group
                 v-model:value="searchParams.SYUTURYOKU_KOMOKU_SENTAKU"
+                class="flex items-center"
               >
                 <a-radio :value="1">積立金ペース(鶏の種類別)</a-radio
                 ><a-radio :value="2">請求ペース(鶏の種類別)</a-radio>
                 <a-radio :value="3">請求ペース(合計)</a-radio>
               </a-radio-group>
             </td></a-col
-          ><a-col span="24"
-            ><th>契約日未入力者を除く</th>
-            <td>
-              <a-checkbox
-                v-model:checked="searchParams.KEIYAKU_DATE_NOZOKU_FLG"
-              ></a-checkbox></td
-          ></a-col>
+          >
         </a-row>
       </div>
       <div class="my-2 flex">
@@ -195,7 +199,7 @@
           <a-button class="ml-20" type="primary" @click="">CSV出力</a-button>
         </a-space>
         <close-page /></div></a-card
-    ><a-card class="sm:flex-1-hidden" ref="cardRef">
+    ><a-card class="flex-1" ref="cardRef">
       <a-pagination
         v-model:current="pageParams.PAGE_NUM"
         v-model:page-size="pageParams.PAGE_SIZE"
@@ -210,7 +214,6 @@
         class="mt-2"
         ref="xTableRef"
         :column-config="{ resizable: true }"
-        :height="height - 64"
         :row-config="{ isCurrent: true, isHover: true }"
         :data="tableData"
         :sort-config="{ trigger: 'cell', orders: ['desc', 'asc'] }"

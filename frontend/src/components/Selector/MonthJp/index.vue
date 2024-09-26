@@ -12,6 +12,7 @@
     v-model:value="monthV"
     :format="Formatter"
     picker="month"
+    class="w-35!"
   />
 </template>
 <script lang="ts" setup>
@@ -88,7 +89,7 @@ const Formatter = (value: Date): string => {
   }
   const formattedYearNum = yearNum < 10 ? `0${yearNum}` : `${yearNum}`
   const formattedMonth = month < 10 ? `0${month}` : `${month}`
-  return `${yearName}${formattedYearNum}/${formattedMonth}`
+  return `${yearName} ${formattedYearNum}年${formattedMonth}月`
 }
 </script>
 

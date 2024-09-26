@@ -1,7 +1,5 @@
 <template>
-  <div
-    class="h-full min-h-500px flex-col-stretch gap-12px overflow-hidden lt-sm:overflow-auto flex"
-  >
+  <div class="h-full min-h-500px flex-col-stretch gap-12px flex">
     <a-card ref="headRef" :bordered="false">
       <h1>（GJ8060）事務委託先一覧</h1>
       <div class="self_adaption_table form mt-1">
@@ -15,7 +13,7 @@
                   :min="0"
                   :max="99"
                   :maxlength="2"
-                  class="w-20"
+                  class="w-14"
                   @change="getInitData(searchParams.KI, false)"
                 ></a-input-number>
               </a-form-item>
@@ -24,11 +22,12 @@
           <a-col v-bind="layout">
             <th>都道府県</th>
             <td>
-              <div class="w-100">
+              <div class="w-90">
                 <a-form-item v-bind="validateInfos.KEN_CD">
                   <range-select
                     v-model:value="searchParams.KEN_CD"
                     :options="KEN_CD_NAME_LIST"
+                    class="w-90!"
                   ></range-select>
                 </a-form-item>
               </div>
@@ -115,7 +114,6 @@
         class="mt-2"
         ref="xTableRef"
         :column-config="{ resizable: true }"
-        :height="height - 64"
         :row-config="{ isCurrent: true, isHover: true }"
         :data="tableData"
         :sort-config="{ trigger: 'cell', orders: ['desc', 'asc'] }"

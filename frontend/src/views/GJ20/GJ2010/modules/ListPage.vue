@@ -1,27 +1,26 @@
 <template>
-  <div
-    class="h-full min-h-500px flex-col-stretch gap-12px overflow-hidden lt-sm:overflow-auto"
-  >
+  <div class="h-full min-h-500px flex-col-stretch gap-12px">
     <a-card ref="headRef" :bordered="false">
       <h1>（GJ2010）契約者積立金・互助金単価マスタ一覧</h1>
       <div class="mt-1 flex">
         <a-space :size="20">
-          <a-button type="primary" @click="forwardEdit(PageStatus.New)">新規登録</a-button>
+          <a-button type="primary" @click="forwardEdit(PageStatus.New)"
+            >新規登録</a-button
+          >
         </a-space>
         <close-page />
       </div>
     </a-card>
-    <a-card :bordered="false" class="sm:flex-1-hidden" ref="cardRef">
+    <a-card :bordered="false" class="flex-1" ref="cardRef">
       <vxe-table
         class="h-full"
         align="center"
         :column-config="{ resizable: true }"
-        :height="height - 30"
         :row-config="{ isCurrent: true, isHover: true }"
         :data="tableData"
         :sort-config="{ trigger: 'cell', orders: ['desc', 'asc'] }"
         :empty-render="{ name: 'NotData' }"
-        @cell-dblclick="({ row }) => forwardEdit(PageStatus.Edit,row)"
+        @cell-dblclick="({ row }) => forwardEdit(PageStatus.Edit, row)"
         @sort-change="(e) => changeTableSort(e, toRef(pageParams, 'ORDER_BY'))"
       >
         <vxe-column
@@ -33,7 +32,7 @@
           :resizable="true"
         >
           <template #default="{ row }">
-            <a @click="forwardEdit(PageStatus.Edit,row)">{{
+            <a @click="forwardEdit(PageStatus.Edit, row)">{{
               row.TAISYO_DATE_FROM
             }}</a>
           </template>
@@ -47,7 +46,7 @@
           :resizable="true"
         >
           <template #default="{ row }">
-            <a @click="forwardEdit(PageStatus.Edit,row)">{{
+            <a @click="forwardEdit(PageStatus.Edit, row)">{{
               row.TAISYO_DATE_TO
             }}</a>
           </template>
@@ -55,7 +54,7 @@
       </vxe-table>
     </a-card>
   </div>
-  <EditPage v-model:visible="editVisible" :editkbn="editkbn"/>
+  <EditPage v-model:visible="editVisible" :editkbn="editkbn" />
 </template>
 <script setup lang="ts">
 import { useElementSize } from '@vueuse/core'

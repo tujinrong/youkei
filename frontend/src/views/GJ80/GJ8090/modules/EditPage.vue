@@ -11,8 +11,8 @@
     :visible="modalVisible"
     centered
     title="（GJ8091）契約者農場マスタメンテナンス"
-    width="1000px"
-    :body-style="{ height: '800px' }"
+    width="800px"
+    :body-style="{ height: '450px' }"
     :mask-closable="false"
     destroy-on-close
     @cancel="goList"
@@ -69,7 +69,7 @@
                 <ai-select
                   v-model:value="formData.KEN_CD"
                   :options="KEN_CD_NAME_LIST"
-                  class="max-w-35"
+                  class="max-w-50"
                   type="number"
                 ></ai-select>
               </a-form-item>

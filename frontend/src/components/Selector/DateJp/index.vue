@@ -13,7 +13,7 @@
     :format="formatter"
     :disabled-date="disabledDate"
     :allowClear="!notAllowClear"
-    style="width: 100%"
+    class="w-42!"
     @change="inputText = ''"
   />
 </template>
@@ -21,7 +21,7 @@
 <script setup lang="ts">
 import { computed, ref, onMounted, watch, nextTick } from 'vue'
 import dayjs from 'dayjs'
-import { DatePadZero, getDateJpText, getUnKnownDateJpText } from '@/utils/util'
+import { DatePadZero, getUnKnownDateJpText } from '@/utils/util'
 import { showInfoModal } from '@/utils/modal'
 import { E001013 } from '@/constants/msg'
 import { ERA_YEARS } from '@/constants/business'
@@ -221,9 +221,35 @@ function formatter(value): string {
   }
 
   if (props.unknown) {
-    return inputText ? getUnKnownDateJpText(inputText) : getDateJpText(value)
+    return inputText
+      ? getUnKnownDateJpText(inputText)
+      : getDateJpAddSpace(value)
   } else {
-    return dayjs(value).isValid() ? getDateJpText(value) : ''
+    return dayjs(value).isValid() ? getDateJpAddSpace(value) : ''
+  }
+}
+function getDateJpAddSpace(value: Date | string | undefined) {
+  if (value) {
+    try {
+      const date = new Date(value)
+      return (
+        new Intl.DateTimeFormat('ja-JP-u-ca-japanese', {
+          era: 'long',
+          year: '2-digit',
+          month: '2-digit',
+          day: '2-digit',
+        })
+          .format(date)
+          .replace(/(明治|大正|昭和|平成|令和)(?=\S)/g, '$1 ')
+          .replace(/\//, '年')
+          .replace(/\//, '月') + '日'
+      )
+    } catch (error) {
+      console.error(error)
+      return '無効日付'
+    }
+  } else {
+    return ''
   }
 }
 

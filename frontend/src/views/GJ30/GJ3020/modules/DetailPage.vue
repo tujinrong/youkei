@@ -11,17 +11,17 @@
     :visible="modalVisible"
     centered
     title="契約区分情報(入力)"
-    width="1000px"
-    :body-style="{ height: '800px', overflowY: 'scroll' }"
+    width="800px"
+    :body-style="{ height: '450px' }"
     :mask-closable="false"
     destroy-on-close
     @cancel="goList"
   >
     <div class="edit_table form">
       <a-row>
-        <a-col span="8">
+        <a-col span="24">
           <th class="required">変更年月日</th>
-          <td class="w-50!">
+          <td>
             <a-form-item v-bind="validateInfos.KEIYAKU_DATE_FROM">
               <DateJp v-model:value="formData.KEIYAKU_DATE_FROM"></DateJp>
             </a-form-item>
@@ -29,22 +29,22 @@
         </a-col>
       </a-row>
       <a-row>
-        <a-col span="6" class="mt-2">
+        <a-col span="9" class="mt-2 ml-5">
           <read-only-pop
-            thWidth="150"
+            thWidth="130"
             th="契約区分(変更前)"
             :td="formData.KEIYAKU_KBN_MAE"
           />
         </a-col> </a-row
       ><a-row>
-        <a-col span="6">
+        <a-col span="9" class="ml-5">
           <read-only-pop
-            thWidth="150"
+            thWidth="130"
             th="契約区分(変更後)"
             :td="formData.KEIYAKU_KBN_ATO"
           /> </a-col></a-row
       ><a-row>
-        <a-col span="24">
+        <a-col span="11">
           <th class="required">入力確認有無</th>
           <td>
             <a-radio-group
@@ -55,6 +55,9 @@
               <a-radio :value="2">入力確定</a-radio>
             </a-radio-group>
           </td>
+        </a-col>
+        <a-col span="5" class="ml-5">
+          <read-only-pop :td="formData.KEIYAKU_KBN_ATO" />
         </a-col>
       </a-row>
     </div>
@@ -299,7 +302,7 @@ const addNojo = () => {
 </script>
 <style lang="scss" scoped>
 th {
-  width: 130px;
+  width: 150px;
 }
 .thleft {
   :deep(th) {

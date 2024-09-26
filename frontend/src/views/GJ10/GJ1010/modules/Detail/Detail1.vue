@@ -7,187 +7,149 @@
  * 変更履歴　:
  * ----------------------------------------------------------------->
 <template>
-  <a-card :bordered="false" class="h-full">
-    <h1>（GJ1012）互助基金契約者マスタメンテナンス（契約情報入力）</h1>
-    <div class="self_adaption_table form">
-      <b>第{{ formData.KI ?? 8 }}期</b>
-      <h2>1.契約農場別明細情報(表示)</h2>
-      <div class="max-w-100">
-        <a-row>
-          <a-col span="24">
-            <read-only
-              thWidth="100"
-              th="契約者"
-              :td="formData.KEIYAKUSYA_NAME"
-            />
-          </a-col>
-          <a-col span="10"></a-col>
-        </a-row>
+  <div class="h-full min-h-500px flex-col-stretch gap-12px">
+    <a-card :bordered="false" class="h-75">
+      <h1>（GJ1012）互助基金契約者マスタメンテナンス（契約情報入力）</h1>
+      <div class="self_adaption_table form">
+        <b>第{{ formData.KI ?? 8 }}期</b>
+        <h2>1.契約農場別明細情報(表示)</h2>
+        <div class="max-w-100">
+          <a-row>
+            <a-col span="24">
+              <read-only
+                thWidth="100"
+                th="契約者"
+                :td="formData.KEIYAKUSYA_NAME"
+              />
+            </a-col>
+            <a-col span="10"></a-col>
+          </a-row>
+        </div>
+        <div class="my-2 flex justify-between">
+          <a-space :size="20">
+            <a-button type="primary" @click="addData">新規登録</a-button
+            ><a-button class="ml-20" type="primary">前期データコピー</a-button>
+          </a-space>
+          <a-button type="primary" @click="goList">一覧へ</a-button>
+        </div>
       </div>
-      <div class="my-2 flex justify-between">
-        <a-space :size="20">
-          <a-button type="primary" @click="addData">新規登録</a-button
-          ><a-button class="ml-20" type="primary">前期データコピー</a-button>
-        </a-space>
-        <a-button type="primary" @click="goList">一覧へ</a-button>
-      </div>
-    </div>
-    <a-pagination
-      v-model:current="pageParams.PAGE_NUM"
-      v-model:page-size="pageParams.PAGE_SIZE"
-      :total="totalCount"
-      :page-size-options="['10', '25', '50', '100']"
-      :show-total="(total) => `件数： ${total} `"
-      show-less-items
-      show-size-changer
-      class="m-b-1 text-end"
-    />
-    <vxe-table
-      ref="tableRef"
-      class="mt-2"
-      :column-config="{ resizable: true }"
-      :height="144"
-      :row-config="{ isCurrent: true, isHover: true }"
-      :data="tableData"
-      :sort-config="{ trigger: 'cell', orders: ['desc', 'asc'] }"
-      :empty-render="{ name: 'NotData' }"
-      @cell-dblclick="({ row }) => changeData()"
-      @sort-change="(e) => changeTableSort(e, toRef(pageParams, 'ORDER_BY'))"
-    >
-      <vxe-column
-        header-align="center"
-        align="right"
-        field="MEISAI_NO"
-        title="明細番号"
-        width="100"
+      <table v-if="devicePixelRatio <= 1.5" class="my-2 w-200">
+        <tr>
+          <th class="!w-10">鶏の種類</th>
+          <th>採卵鶏(成鷄)</th>
+          <th colspan="1">採卵鶏(育成鶏)</th>
+          <th rowspan="1">肉用鶏</th>
+          <th>種鶏(成鶏)</th>
+          <th>種鶏(育成鶏)</th>
+        </tr>
+        <tr>
+          <th>契約羽数合計</th>
+          <td>{{ hasuGokei.SAIRANKEI_SEIKEI }}</td>
+          <td>{{ hasuGokei.SAIRANKEI_IKUSEIKEI }}</td>
+          <td>{{ hasuGokei.NIKUYOUKEI }}</td>
+          <td>{{ hasuGokei.SYUKEI_SEIKEI }}</td>
+          <td>{{ hasuGokei.SYUKEI_IKUSEIKEI }}</td>
+        </tr>
+        <tr>
+          <th>うずら</th>
+          <th>あひる</th>
+          <th>きじ</th>
+          <th>ほろほろ鳥</th>
+          <th>七面鳥</th>
+          <th>だちょう</th>
+          <th>合計</th>
+        </tr>
+        <tr>
+          <td>{{ hasuGokei.UZURA }}</td>
+          <td>{{ hasuGokei.AHIRU }}</td>
+          <td>{{ hasuGokei.KIJI }}</td>
+          <td>{{ hasuGokei.HOROHOROTORI }}</td>
+          <td>{{ hasuGokei.SICHIMENCHOU }}</td>
+          <td>{{ hasuGokei.DACHOU }}</td>
+          <td>
+            {{ hasuGokei.TOTAL || 0 }}
+          </td>
+        </tr>
+      </table> </a-card
+    ><a-card class="flex-1">
+      <a-pagination
+        v-model:current="pageParams.PAGE_NUM"
+        v-model:page-size="pageParams.PAGE_SIZE"
+        :total="totalCount"
+        :page-size-options="['10', '25', '50', '100']"
+        :show-total="(total) => `件数： ${total} `"
+        show-less-items
+        show-size-changer
+        class="m-b-1 text-end"
+      />
+      <vxe-table
+        ref="tableRef"
+        class="mt-2"
+        :column-config="{ resizable: true }"
+        :row-config="{ isCurrent: true, isHover: true }"
+        :data="tableData"
+        :sort-config="{ trigger: 'cell', orders: ['desc', 'asc'] }"
+        :empty-render="{ name: 'NotData' }"
+        @cell-dblclick="({ row }) => changeData()"
+        @sort-change="(e) => changeTableSort(e, toRef(pageParams, 'ORDER_BY'))"
       >
-        <template #default="{ row }">
-          <a @click="changeData()">{{ row.MEISAI_NO }}</a>
-        </template>
-      </vxe-column>
-      <vxe-column
-        header-align="center"
-        field="NOJO_NAME"
-        title="農場名"
-        width="200"
-      >
-        <template #default="{ row }">
-          <a @click="changeData()">{{ row.NOJO_NAME }}</a>
-        </template>
-      </vxe-column>
-      <vxe-column
-        header-align="center"
-        field="NOJO_ADDR"
-        title="農場住所"
-        min-width="200"
-      >
-      </vxe-column>
-      <vxe-column
-        header-align="center"
-        align="center"
-        field="TORISYURUI"
-        title="鳥の種類"
-        min-width="120"
-      ></vxe-column>
-      <vxe-column
-        header-align="center"
-        align="right"
-        field="KEIYAKUHASU"
-        title="契約羽数"
-        min-width="120"
-      ></vxe-column>
-      <vxe-column
-        header-align="center"
-        field="BIKO"
-        title="備考"
-        min-width="200"
-        :resizable="false"
-      ></vxe-column>
-    </vxe-table>
-    <table v-if="devicePixelRatio <= 1.5" class="my-2 table-fixed">
-      <tr>
-        <th class="!w-10">鶏の種類</th>
-        <th>採卵鶏(成鷄)</th>
-        <th colspan="1">採卵鶏(育成鶏)</th>
-        <th rowspan="1">肉用鶏</th>
-        <th>種鶏(成鶏)</th>
-        <th>種鶏(育成鶏)</th>
-      </tr>
-      <tr>
-        <th>契約羽数合計</th>
-        <td>{{ hasuGokei.SAIRANKEI_SEIKEI }}</td>
-        <td>{{ hasuGokei.SAIRANKEI_IKUSEIKEI }}</td>
-        <td>{{ hasuGokei.NIKUYOUKEI }}</td>
-        <td>{{ hasuGokei.SYUKEI_SEIKEI }}</td>
-        <td>{{ hasuGokei.SYUKEI_IKUSEIKEI }}</td>
-      </tr>
-      <tr>
-        <th>うずら</th>
-        <th>あひる</th>
-        <th>きじ</th>
-        <th>ほろほろ鳥</th>
-        <th>七面鳥</th>
-        <th>だちょう</th>
-        <th>合計</th>
-      </tr>
-      <tr>
-        <td>{{ hasuGokei.UZURA }}</td>
-        <td>{{ hasuGokei.AHIRU }}</td>
-        <td>{{ hasuGokei.KIJI }}</td>
-        <td>{{ hasuGokei.HOROHOROTORI }}</td>
-        <td>{{ hasuGokei.SICHIMENCHOU }}</td>
-        <td>{{ hasuGokei.DACHOU }}</td>
-        <td>
-          {{ hasuGokei.TOTAL || 0 }}
-        </td>
-      </tr>
-    </table>
+        <vxe-column
+          header-align="center"
+          align="right"
+          field="MEISAI_NO"
+          title="明細番号"
+          width="100"
+        >
+          <template #default="{ row }">
+            <a @click="changeData()">{{ row.MEISAI_NO }}</a>
+          </template>
+        </vxe-column>
+        <vxe-column
+          header-align="center"
+          field="NOJO_NAME"
+          title="農場名"
+          width="200"
+        >
+          <template #default="{ row }">
+            <a @click="changeData()">{{ row.NOJO_NAME }}</a>
+          </template>
+        </vxe-column>
+        <vxe-column
+          header-align="center"
+          field="NOJO_ADDR"
+          title="農場住所"
+          min-width="200"
+        >
+        </vxe-column>
+        <vxe-column
+          header-align="center"
+          align="center"
+          field="TORISYURUI"
+          title="鳥の種類"
+          min-width="120"
+        ></vxe-column>
+        <vxe-column
+          header-align="center"
+          align="right"
+          field="KEIYAKUHASU"
+          title="契約羽数"
+          min-width="120"
+        ></vxe-column>
+        <vxe-column
+          header-align="center"
+          field="BIKO"
+          title="備考"
+          min-width="200"
+          :resizable="false"
+        ></vxe-column>
+      </vxe-table>
 
-    <table v-if="devicePixelRatio > 1.5" class="my-2 table-fixed">
-      <tr>
-        <th>鶏の種類</th>
-        <th>採卵鶏(成鷄)</th>
-        <th colspan="1">採卵鶏(育成鶏)</th>
-        <th rowspan="1">肉用鶏</th>
-      </tr>
-      <tr>
-        <th>契約羽数合計</th>
-        <td>{{ hasuGokei.SAIRANKEI_SEIKEI }}</td>
-        <td>{{ hasuGokei.SAIRANKEI_IKUSEIKEI }}</td>
-        <td>{{ hasuGokei.NIKUYOUKEI }}</td>
-      </tr>
-      <tr>
-        <th>種鶏(成鶏)</th>
-        <th>種鶏(育成鶏)</th>
-        <th>うずら</th>
-        <th>あひる</th>
-      </tr>
-      <tr>
-        <td>{{ hasuGokei.SYUKEI_SEIKEI }}</td>
-        <td>{{ hasuGokei.SYUKEI_IKUSEIKEI }}</td>
-        <td>{{ hasuGokei.UZURA }}</td>
-        <td>{{ hasuGokei.AHIRU || 0 }}</td>
-      </tr>
-      <tr>
-        <th>きじ</th>
-        <th>ほろほろ鳥</th>
-        <th>七面鳥</th>
-        <th>だちょう</th>
-        <th>合計</th>
-      </tr>
-      <tr>
-        <td>{{ hasuGokei.KIJI }}</td>
-        <td>{{ hasuGokei.HOROHOROTORI }}</td>
-        <td>{{ hasuGokei.SICHIMENCHOU }}</td>
-        <td>{{ hasuGokei.DACHOU }}</td>
-        <td>{{ hasuGokei.TOTAL || 0 }}</td>
-      </tr>
-    </table>
-    <PopUp1012
-      v-model:visible="popupVisible"
-      :editkbn="popupeditkbn"
-    ></PopUp1012>
-  </a-card>
+      <PopUp1012
+        v-model:visible="popupVisible"
+        :editkbn="popupeditkbn"
+      ></PopUp1012>
+    </a-card>
+  </div>
 </template>
 <script setup lang="ts">
 import useSearch from '@/hooks/useSearch'

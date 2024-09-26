@@ -7,9 +7,7 @@
  * 変更履歴　:
  * ----------------------------------------------------------------->
 <template>
-  <div
-    class="h-full min-h-500px flex-col-stretch gap-12px overflow-hidden lt-sm:overflow-auto"
-  >
+  <div class="h-full min-h-500px flex-col-stretch gap-12px">
     <a-card ref="headRef" :bordered="false">
       <h1>（GJ4010）互助金申請情報一覧</h1>
       <div class="self_adaption_table form max-w-400 mt-1">
@@ -18,7 +16,10 @@
             <th class="required">互助金単価マスタ　参照日</th>
             <td class="flex">
               <a-form-item v-bind="validateInfos.TANKA_MST_DATE">
-                <DateJp class="w-50!" v-model:value="formData.TANKA_MST_DATE" />
+                <DateJp
+                  class="max-w-50"
+                  v-model:value="formData.TANKA_MST_DATE"
+                />
               </a-form-item>
             </td>
           </a-col>
@@ -31,7 +32,7 @@
                   :min="1"
                   :max="99"
                   :maxlength="2"
-                  class="w-20"
+                  class="w-14"
                 ></a-input-number>
               </a-form-item>
             </td>
@@ -58,6 +59,7 @@
               <range-select
                 v-model:value="formData.KEN_CD"
                 :options="KEN_CD_NAME_LIST"
+                class="w-90!"
               />
             </td>
           </a-col>
@@ -66,8 +68,10 @@
             <td>
               <a-input-number
                 v-model:value="formData.KEIYASYA_CD"
-                :min="0"
-                class="w-full"
+                :min="1"
+                :max="99999"
+                :maxlength="5"
+                class="w-20"
               ></a-input-number>
             </td>
           </a-col>
@@ -77,7 +81,7 @@
               <ai-select
                 v-model:value="formData.KEIYAKU_KBN"
                 :options="KEIYAKU_KBN_CD_NAME_LIST"
-                class="w-full"
+                class="w-37!"
                 type="number"
               ></ai-select>
             </td>
@@ -88,7 +92,7 @@
               <ai-select
                 v-model:value="formData.KEIYAKU_JYOKYO"
                 :options="KEIYAKU_KBN_CD_NAME_LIST"
-                class="w-full"
+                class="w-37!"
                 type="number"
               ></ai-select>
             </td>
@@ -99,7 +103,7 @@
               <div class="flex items-center w-full">
                 <a-input
                   v-model:value="formData.KEIYAKUSYA_NAME"
-                  class="w-full"
+                  class="max-w-115"
                   :maxlength="50"
                   style="width: 80%"
                 />
@@ -113,7 +117,7 @@
               <div class="flex items-center w-full">
                 <a-input
                   v-model:value="formData.KEIYAKUSYA_KANA"
-                  class="w-full"
+                  class="max-w-115"
                   :maxlength="50"
                   style="width: 80%"
                 />
@@ -127,9 +131,8 @@
               <div class="flex items-center w-full">
                 <a-input
                   v-model:value="formData.ADDR"
-                  class="w-full"
+                  class="w-250"
                   :maxlength="50"
-                  style="width: 80%"
                 />
                 <span>(部分一致)</span>
               </div>
@@ -141,9 +144,8 @@
               <div class="flex items-center w-full">
                 <a-input
                   v-model:value="formData.ADDR_TEL"
-                  class="w-full"
+                  class="w-33"
                   :maxlength="50"
-                  style="width: 80%"
                 />
                 <span>(全一致)</span>
               </div>
@@ -156,6 +158,7 @@
                 <range-select
                   v-model:value="formData.JIMUITAKU_CD"
                   :options="JIMUITAKU_LIST"
+                  class="w-250!"
                 />
               </a-form-item>
             </td>
@@ -163,7 +166,8 @@
         </a-row>
       </div>
       <div class="my-2 flex justify-between max-w-250">
-        <a-space><span>検索方法</span>
+        <a-space
+          ><span>検索方法</span>
           <a-radio-group v-model:value="formData.SEARCH_METHOD">
             <a-radio :value="EnumAndOr.AndCode">すべてを含む(AND)</a-radio>
             <a-radio :value="EnumAndOr.OrCode">いずれかを含む(OR)</a-radio>
@@ -174,15 +178,19 @@
         <a-space :size="20">
           <a-button type="primary" @click="search">検索</a-button>
           <a-button type="primary" @click="clear">条件クリア</a-button>
-          <a-button class="ml-20" type="primary" @click="openGJ4011">経営支援登録</a-button>
-          <a-button class="ml-20" type="primary" @click="openGJ4013">焼却・埋却登録</a-button>
+          <a-button class="ml-20" type="primary" @click="openGJ4011"
+            >経営支援登録</a-button
+          >
+          <a-button class="ml-20" type="primary" @click="openGJ4013"
+            >焼却・埋却登録</a-button
+          >
         </a-space>
         <AButton type="primary" class="ml-a" @click="tabStore.removeActiveTab">
           閉じる
         </AButton>
       </div>
     </a-card>
-    <a-card :bordered="false" class="sm:flex-1-hidden" ref="cardRef">
+    <a-card :bordered="false" class="flex-1" ref="cardRef">
       <a-pagination
         v-model:current="pageParams.PAGE_NUM"
         v-model:page-size="pageParams.PAGE_SIZE"
@@ -197,7 +205,6 @@
         ref="xTableRef"
         class="mt-2"
         :column-config="{ resizable: true }"
-        :height="height - 70"
         :row-config="{ isCurrent: true, isHover: true }"
         :data="tableData"
         :sort-config="{ trigger: 'cell', orders: ['desc', 'asc'] }"
@@ -259,8 +266,8 @@
       </vxe-table>
     </a-card>
   </div>
-  <Detail1 v-model:visible="GJ4011Visible" :editkbn="GJ4011kbn"/>
-  <Detail3 v-model:visible="GJ4013Visible" :editkbn="GJ4013kbn"/>
+  <Detail1 v-model:visible="GJ4011Visible" :editkbn="GJ4011kbn" />
+  <Detail3 v-model:visible="GJ4013Visible" :editkbn="GJ4013kbn" />
 </template>
 <script setup lang="ts">
 import { reactive, ref, toRef } from 'vue'
@@ -274,9 +281,9 @@ import { SearchRequest } from '../type'
 import { VxeTableInstance } from 'vxe-table'
 import DateJp from '@/components/Selector/DateJp/index.vue'
 import { Form } from 'ant-design-vue'
-import {EnumAndOr, EnumEditKbn, PageStatus} from "@/enum";
-import Detail1 from "@/views/GJ40/GJ4010/modules/Detail/Detail1.vue";
-import Detail3 from "@/views/GJ40/GJ4010/modules/Detail/Detail3.vue";
+import { EnumAndOr, EnumEditKbn, PageStatus } from '@/enum'
+import Detail1 from '@/views/GJ40/GJ4010/modules/Detail/Detail1.vue'
+import Detail3 from '@/views/GJ40/GJ4010/modules/Detail/Detail3.vue'
 //--------------------------------------------------------------------------
 //データ定義
 //--------------------------------------------------------------------------
@@ -387,10 +394,10 @@ function search() {
   }
 }
 function openGJ4011(row?: any) {
-    GJ4011Visible.value = true
+  GJ4011Visible.value = true
 }
 function openGJ4013(row?: any) {
-    GJ4013Visible.value = true
+  GJ4013Visible.value = true
 }
 </script>
 <style lang="scss" scoped>

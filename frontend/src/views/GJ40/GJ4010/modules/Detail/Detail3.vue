@@ -29,8 +29,10 @@
                 <a-form-item v-bind="validateInfos.HASSEI_KAISU">
                   <a-input-number
                     v-model:value="searchParams.HASSEI_KAISU"
-                    :min="0"
-                    class="w-full"
+                    :min="1"
+                    :max="99"
+                    :maxlength="2"
+                    class="w-14"
                   ></a-input-number>
                 </a-form-item>
                 <a-button class="ml-2" type="primary" @click="search"

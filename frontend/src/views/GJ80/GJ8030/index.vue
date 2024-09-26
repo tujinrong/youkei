@@ -63,11 +63,7 @@
               <a-col span="24">
                 <td>
                   <a-form-item v-bind="validateInfos.POST">
-                    <a-input
-                      v-model:value="formData.POST"
-                      :maxlength="8"
-                      class="max-w-35.5"
-                    />
+                    <PostCode v-model:value="formData.POST"></PostCode>
                   </a-form-item>
                 </td>
               </a-col>
@@ -265,7 +261,7 @@
             <th>支払口座情報<br />（全銀手順で使用）</th>
             <a-row class="flex-1">
               <a-col :md="24" :lg="12" :xl="12" :xxl="12">
-                <th>金融機関/th></th>
+                <th>金融機関</th>
                 <td>
                   <ai-select
                     v-model:value="formData.KOFU_BANK_CD"

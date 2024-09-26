@@ -23,7 +23,7 @@
                     :min="1"
                     :max="99"
                     :maxlength="2"
-                    class="w-15"
+                    class="w-14"
                   ></a-input-number>
                   <span class="!align-middle">期</span>
                 </a-form-item>
@@ -72,8 +72,8 @@
                 <a-form-item v-bind="validateInfos.KEN_CD">
                   <range-select
                     v-model:value="formData.KEN_CD"
-                    :options="LIST"
-                    class="max-w-80"
+                    :options="KEN_CD_NAME_LIST"
+                    class="w-90!"
                 /></a-form-item>
               </td>
             </a-col>
@@ -84,6 +84,7 @@
                   <range-select
                     v-model:value="formData.KEIYAKUSYA_CD"
                     :options="LIST"
+                    class="w-250!"
                 /></a-form-item>
               </td>
             </a-col>
@@ -137,6 +138,9 @@ const createDefaultParams = (): ExcelExportRequest => {
 
 const formData = reactive(createDefaultParams())
 const LIST = ref<CmCodeNameModel[]>([])
+const KEN_CD_NAME_LIST = ref<CmCodeNameModel[]>([
+  { CODE: 46, NAME: '鹿児島県' },
+])
 const LABELS = {
   KAZOKU: '家族',
   KIGYO: '企業',

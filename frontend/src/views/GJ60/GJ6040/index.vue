@@ -14,7 +14,7 @@
                     :min="1"
                     :max="99"
                     :maxlength="2"
-                    class="w-20"
+                    class="w-14"
                   />
                 </a-form-item>
               </td>
@@ -27,8 +27,8 @@
                     v-model:value="formData.SEIKYU_KAISU"
                     :min="1"
                     :max="99"
-                    :maxlength="2"
-                    class="w-20"
+                    :maxlength="3"
+                    class="w-15"
                   />
                 </a-form-item>
               </td>
@@ -39,7 +39,7 @@
                 <a-form-item v-bind="validateInfos.FURIKOMI_YOTEI_DATE">
                   <DateJp
                     v-model:value="formData.FURIKOMI_YOTEI_DATE"
-                    class="w-50!"
+                    class="max-w-50"
                   />
                 </a-form-item>
               </td>

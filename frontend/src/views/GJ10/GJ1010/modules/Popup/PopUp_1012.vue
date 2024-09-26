@@ -4,24 +4,29 @@
     :visible="visible"
     centered
     title="2.契約農場別登録明細情報(入力)"
-    width="1000px"
-    :body-style="{ height: '800px' }"
+    width="800px"
+    :body-style="{
+      height: '450px',
+      minWidth: '800px',
+      paddingRight: '50px',
+      paddingTop: '20px',
+    }"
     :mask-closable="false"
     destroy-on-close
     @cancel="goList"
   >
     <div class="edit_table form w-full">
       <a-row>
-        <a-col span="4">
+        <a-col span="5">
           <read-only-pop
             th="明細番号"
-            thWidth="110"
+            thWidth="90"
             :td="formData.MEISAI_NO"
           ></read-only-pop>
         </a-col>
       </a-row>
       <a-row>
-        <a-col span="22">
+        <a-col span="24">
           <th class="required">農場</th>
           <td>
             <a-form-item v-bind="validateInfos.NOJO_CD">
@@ -38,17 +43,20 @@
         </a-col>
       </a-row>
       <a-row class="mt-1">
-        <a-col span="21">
-          <read-only-pop thWidth="110" th="住所" td="" :hideTd="true" />
-          <read-only-pop th="　〒　" :td="formData.ADDR_POST" />
-          <read-only-pop th="住所1" :td="formData.ADDR_1" />
-          <read-only-pop th="住所2" :td="formData.ADDR_2" />
-        </a-col>
+        <a-col span="3">
+          <read-only-pop thWidth="90" th="住所" td="" :hideTd="true" /></a-col
+        ><a-col span="5"
+          ><read-only-pop th="　〒　" :td="formData.ADDR_POST" /></a-col
+        ><a-col span="5"
+          ><read-only-pop th="住所1" :td="formData.ADDR_1" /></a-col
+        ><a-col span="11"
+          ><read-only-pop th="住所2" :td="formData.ADDR_2"
+        /></a-col>
       </a-row>
       <a-row>
-        <a-col span="21">
+        <a-col span="24">
           <read-only-pop
-            thWidth="280"
+            thWidth="250"
             th=""
             :hideTd="true"
             :td="formData.ADDR_POST"
@@ -71,12 +79,16 @@
             </a-form-item>
           </td>
         </a-col>
-        <a-col span="23">
+        <a-col span="30">
           <th class="required">契約羽数</th>
           <td>
             <a-form-item v-bind="validateInfos.KEIYAKU_HASU">
               <a-input-number
                 v-model:value="formData.KEIYAKU_HASU"
+                :min="0"
+                :max="99999999"
+                :maxlength="10"
+                v-bind="{ ...mathNumber }"
               ></a-input-number>
             </a-form-item>
           </td>
@@ -87,22 +99,21 @@
           <th class="required">契約年月日</th>
           <td>
             <a-form-item v-bind="validateInfos.KEIYAKU_YMD_FM" class="!w-40">
-              <DateJp v-model:value="formData.KEIYAKU_YMD_FM" class="!w-40"
+              <DateJp v-model:value="formData.KEIYAKU_YMD_FM"
             /></a-form-item>
-            <span>～</span>
+            <span class="mx-2">～</span>
             <a-form-item class="!w-40">
               <DateJp
                 v-model:value="formData.KEIYAKU_YMD_TO"
-                disabled
-                class="!w-40" /></a-form-item
-            ><span class="flex items-center"
+                disabled /></a-form-item
+            ><span class="flex items-center ml-2"
               >(契約日を入力する二とで单価を取得します)</span
             >
           </td>
         </a-col>
       </a-row>
       <a-row>
-        <a-col span="24">
+        <a-col span="19">
           <th class="required">備考</th>
           <td>
             <a-input v-model:value="formData.BIKO"></a-input>
@@ -144,6 +155,7 @@ import {
 import { FarmManage } from '../../constant'
 import { VxeTableInstance } from 'vxe-table'
 import { showDeleteModal, showSaveModal } from '@/utils/modal'
+import { mathNumber } from '@/utils/util'
 
 //--------------------------------------------------------------------------
 //データ定義
@@ -160,7 +172,7 @@ const formData = reactive({
   KEIYAKUSYA_NAME: '',
   NOJO_CD: undefined as number | undefined,
   NOJO_NAME: '',
-  ADDR_POST: '',
+  ADDR_POST: '136-0073',
   ADDR_1: '',
   ADDR_2: '',
   ADDR_3: '',
@@ -192,8 +204,12 @@ const isEdit = ref(false)
 
 const editJudge = new Judgement()
 
-const NOJO_CD_CD_NAME_LIST = ref<CmCodeNameModel[]>([])
-const KEI_SYURUI_CD_NAME_LIST = ref<CmCodeNameModel[]>([])
+const NOJO_CD_CD_NAME_LIST = ref<CmCodeNameModel[]>([
+  { CODE: 666, NAME: '農場名農場名農場名農場名農場名農場名農場' },
+])
+const KEI_SYURUI_CD_NAME_LIST = ref<CmCodeNameModel[]>([
+  { CODE: 1, NAME: 'ホロホロ鳥' },
+])
 
 const tableRef = ref<VxeTableInstance>()
 const devicePixelRatio = ref(window.devicePixelRatio)
@@ -288,6 +304,6 @@ const addNoJo = () => {
 </script>
 <style lang="scss" scoped>
 th {
-  min-width: 110px;
+  min-width: 90px;
 }
 </style>

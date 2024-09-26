@@ -7,9 +7,7 @@
  * 変更履歴　:
  * ----------------------------------------------------------------->
 <template>
-  <div
-    class="h-full min-h-500px flex-col-stretch gap-12px overflow-hidden lt-sm:overflow-auto"
-  >
+  <div class="h-full min-h-500px flex-col-stretch gap-12px">
     <a-card ref="headRef" :bordered="false">
       <h1>（GJ2090）契約者積立金等入金・返還入力</h1>
       <div class="self_adaption_table form max-w-400 mt-1">
@@ -30,7 +28,7 @@
                   :min="1"
                   :max="99"
                   :maxlength="2"
-                  class="w-20!"
+                  class="w-14!"
                 ></a-input-number>
               </a-form-item>
             </td>
@@ -54,7 +52,7 @@
             <th>都道府県</th>
             <td>
               <range-select
-                style="width: 40%"
+                class="w-90!"
                 v-model:value="formData.KEN_CD"
                 :options="KEN_CD_NAME_LIST"
               />
@@ -68,6 +66,7 @@
                   v-model:value="formData.JIMUITAKU_CD"
                   :option="JIMUITAKU_LIST"
                   split-val
+                  class="max-w-115"
                 ></ai-select
               ></a-form-item>
             </td>
@@ -79,7 +78,7 @@
                 <ai-select
                   v-model:value="formData.KEIYAKUSYA_CD"
                   :options="KEIYAKU_KBN_CD_NAME_LIST"
-                  class="w-full"
+                  class="max-w-115"
                   type="number"
                 ></ai-select>
               </a-form-item>
@@ -90,17 +89,17 @@
             <td>
               <a-input
                 v-model:value="formData.KEIYAKUSYA_NAME"
-                class="w-full"
+                class="w-130"
                 :maxlength="50"
               ></a-input>
             </td>
           </a-col>
           <a-col v-bind="layout">
-            <th>契約者名(フリガナ)</th>
+            <th>契約者名(漢字)</th>
             <td>
               <a-input
                 v-model:value="formData.KEIYAKUSYA_KANA"
-                class="w-full"
+                class="w-130"
                 :maxlength="50"
               ></a-input>
             </td>
@@ -148,7 +147,7 @@
             <th>入金日・振込日</th>
             <td class="flex">
               <a-form-item v-bind="validateInfos.SEIKYU_DATE">
-                <DateJp v-model:value="formData.SEIKYU_DATE" class="w-50!" />
+                <DateJp v-model:value="formData.SEIKYU_DATE" class="max-w-50" />
               </a-form-item>
             </td>
           </a-col>
@@ -187,7 +186,7 @@
         </AButton>
       </div>
     </a-card>
-    <a-card :bordered="false" class="sm:flex-1-hidden" ref="cardRef">
+    <a-card :bordered="false" class="flex-1" ref="cardRef">
       <a-pagination
         v-model:current="pageParams.PAGE_NUM"
         v-model:page-size="pageParams.PAGE_SIZE"
@@ -202,7 +201,6 @@
         ref="xTableRef"
         class="mt-2"
         :column-config="{ resizable: true }"
-        :height="height - 70"
         :row-config="{ isCurrent: true, isHover: true }"
         :data="tableData"
         :sort-config="{ trigger: 'cell', orders: ['desc', 'asc'] }"
@@ -325,7 +323,7 @@ const createDefaultParams = () => {
       VALUE_TO: undefined as number | undefined,
     },
     SEIKYU_HENKAN_KBN: 1,
-    SYORI_JOKYO_KBN: 1,
+    SYORI_JOKYO_KBN: 2,
     NYUKIN_DATE: {
       VALUE_FM: undefined as Date | undefined,
       VALUE_TO: undefined as Date | undefined,

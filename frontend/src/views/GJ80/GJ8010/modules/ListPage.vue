@@ -1,7 +1,5 @@
 <template>
-  <div
-    class="h-full min-h-500px flex-col-stretch gap-12px overflow-hidden lt-sm:overflow-auto"
-  >
+  <div class="h-full min-h-500px flex-col-stretch gap-12px">
     <a-card ref="headRef" :bordered="false">
       <h1>（GJ8010）コード一覧</h1>
       <div class="self_adaption_table form mt-1">
@@ -13,6 +11,7 @@
                 v-model:value="searchParams.SYURUI_KBN"
                 :options="SYURUI_KBN_LIST"
                 split-val
+                class="w-80!"
                 @change="changeKbn"
               ></ai-select>
             </td>
@@ -31,11 +30,10 @@
         <close-page />
       </div>
     </a-card>
-    <a-card :bordered="false" class="sm:flex-1-hidden" ref="cardRef">
+    <a-card :bordered="false" class="flex-1" ref="cardRef">
       <vxe-table
         class="mt-2"
         :column-config="{ resizable: true }"
-        :height="height - 40"
         :row-config="{ isCurrent: true, isHover: true }"
         :data="tableData"
         :sort-config="{ trigger: 'cell', orders: ['desc', 'asc'] }"
@@ -161,4 +159,8 @@ function goForward(status: PageStatus, row?: any) {
   }
 }
 </script>
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+th {
+  width: 120px;
+}
+</style>

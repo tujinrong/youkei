@@ -12,6 +12,7 @@
       :value="value.VALUE_FM"
       :options="options"
       split-val
+      :type="type"
       :disabled="disabled"
       @change="change1"
     />
@@ -31,14 +32,22 @@ import { Form } from 'ant-design-vue'
 //---------------------------------------------------------------------------
 //属性
 //---------------------------------------------------------------------------
-const props = defineProps<{
-  value: {
-    VALUE_FM: number | undefined
-    VALUE_TO: number | undefined
+
+const props = withDefaults(
+  defineProps<{
+    value: {
+      VALUE_FM: string | number | undefined
+      VALUE_TO: string | number | undefined
+    }
+    options: CmCodeNameModel[]
+    disabled?: boolean
+    type?: 'string' | 'number'
+  }>(),
+  {
+    type: 'number',
   }
-  options: CmCodeNameModel[]
-  disabled?: boolean
-}>()
+)
+
 const emit = defineEmits(['update:value'])
 
 //--------------------------------------------------------------------------
@@ -51,23 +60,32 @@ const formItemContext = Form.useInjectFormItemContext()
 //--------------------------------------------------------------------------
 function change1(val) {
   emit('update:value', {
-    VALUE_FM: val ? Number(val) : undefined,
+    VALUE_FM: val ? (props.type === 'number' ? Number(val) : val) : undefined,
     VALUE_TO: props.value.VALUE_TO
-      ? Number(props.value.VALUE_TO)
+      ? props.type === 'number'
+        ? Number(props.value.VALUE_TO)
+        : props.value.VALUE_TO
       : val
-        ? Number(val)
+        ? props.type === 'number'
+          ? Number(val)
+          : val
         : undefined,
   })
   formItemContext.onFieldChange()
 }
+
 function change2(val) {
   emit('update:value', {
     VALUE_FM: props.value.VALUE_FM
-      ? Number(props.value.VALUE_FM)
+      ? props.type === 'number'
+        ? Number(props.value.VALUE_FM)
+        : props.value.VALUE_FM
       : val
-        ? Number(val)
+        ? props.type === 'number'
+          ? Number(val)
+          : val
         : undefined,
-    VALUE_TO: val ? Number(val) : undefined,
+    VALUE_TO: val ? (props.type === 'number' ? Number(val) : val) : undefined,
   })
   formItemContext.onFieldChange()
 }

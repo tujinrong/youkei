@@ -37,7 +37,6 @@ const props = defineProps<{
 
 <style scoped>
 .ellipsis {
-  padding: 2px 14px !important;
   padding-top: 8px !important;
   white-space: nowrap;
   overflow: hidden;

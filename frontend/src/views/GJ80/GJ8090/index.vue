@@ -7,10 +7,8 @@
  * 変更履歴　:
  * ----------------------------------------------------------------->
 <template>
-  <div
-    class="h-full min-h-500px flex-col-stretch gap-12px overflow-hidden lt-sm:overflow-auto my-4 mx-4"
-  >
-    <a-card ref="headRef" :bordered="false">
+  <div class="h-full min-h-500px flex-col-stretch gap-12px my-4 mx-4">
+    <a-card ref="headRef" :bordered="false" class="staticWidth">
       <h1>（GJ8090）契約者農場一覧</h1>
       <div class="self_adaption_table form mt-1">
         <a-row>
@@ -23,7 +21,7 @@
                   :min="1"
                   :max="99"
                   :maxlength="2"
-                  class="w-20"
+                  class="w-14"
                   @change="getInitData(searchParams.KI, false)"
                 ></a-input-number>
               </a-form-item>
@@ -89,7 +87,7 @@
         <close-page />
       </div>
     </a-card>
-    <a-card :bordered="false" class="sm:flex-1-hidden" ref="cardRef">
+    <a-card :bordered="false" class="flex-1 staticWidth" ref="cardRef">
       <a-pagination
         v-model:current="pageParams.PAGE_NUM"
         v-model:page-size="pageParams.PAGE_SIZE"
@@ -104,7 +102,6 @@
         class="mt-2"
         ref="xTableRef"
         :column-config="{ resizable: true }"
-        :height="height - 64"
         :row-config="{ isCurrent: true, isHover: true }"
         :data="tableData"
         :sort-config="{ trigger: 'cell', orders: ['desc', 'asc'] }"

@@ -15,7 +15,7 @@
                     :min="1"
                     :max="99"
                     :maxlength="2"
-                    class="w-20"
+                    class="w-14"
                     @change="handleKI(false)"
                   />
                   <span class="!align-middle">期</span>
@@ -44,6 +44,7 @@
                   <range-select
                     v-model:value="formData.JIMUITAKU_CD"
                     :options="ITAKU_CD_NAME_LIST"
+                    class="w-250!"
                 /></a-form-item>
               </td>
             </a-col>
@@ -54,6 +55,7 @@
                   <range-select
                     v-model:value="formData.KEIYAKUSYA_CD"
                     :options="KEIYAKUSYA_CD_NAME_LIST"
+                    class="w-250!"
                 /></a-form-item>
               </td>
             </a-col>
@@ -62,7 +64,9 @@
             <a-col :span="24">
               <div class="mb-2 header_operation flex justify-between w-full">
                 <a-space :size="20">
-                  <a-button type="primary" @click="onPreview">プレビュー</a-button>
+                  <a-button type="primary" @click="onPreview"
+                    >プレビュー</a-button
+                  >
                   <a-button type="primary" @click="clear">キャンセル</a-button>
                 </a-space>
                 <close-page />

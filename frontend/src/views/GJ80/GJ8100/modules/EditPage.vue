@@ -1,8 +1,8 @@
 <template>
   <a-modal
     :visible="visible"
-    :body-style="{ height: '800px' }"
-    width="1000px"
+    :body-style="{ height: '450px' }"
+    width="800px"
     title="（GJ8101）消費税率マスタメンテナンス"
     centered
     destroy-on-close

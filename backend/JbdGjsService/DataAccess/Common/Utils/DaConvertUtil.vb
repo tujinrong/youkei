@@ -326,6 +326,35 @@ Namespace JBD.GJS.Service
             If flg Then Return "1"
             Return "0"
         End Function
+        ''' -----------------------------------------------------------------------------------------
+        ''' <summary>
+        '''     文字列の指定されたバイト位置から、指定されたバイト数分の文字列を返します。</summary>
+        ''' <param name="stTarget">
+        '''     取り出す元になる文字列。</param>
+        ''' <param name="iStart">
+        '''     取り出しを開始する位置。</param>
+        ''' <param name="iByteSize">
+        '''     取り出すバイト数。</param>
+        ''' <returns>
+        '''     指定されたバイト位置から指定されたバイト数分の文字列。</returns>
+        ''' -----------------------------------------------------------------------------------------
+        Public Shared Function f_MidB(stTarget As String, iStart As Integer, iByteSize As Integer) As String
+
+            Dim hEncoding As System.Text.Encoding = System.Text.Encoding.GetEncoding("Shift_JIS")
+            Dim btBytes As Byte() = hEncoding.GetBytes(stTarget)
+
+            If iStart <= btBytes.Length Then
+                '開始位置から、抽出文字数の文字列を返します
+                If iStart + iByteSize - 1 <= btBytes.Length Then
+                    Return hEncoding.GetString(btBytes, iStart - 1, iByteSize)
+                Else
+                    Return hEncoding.GetString(btBytes, iStart - 1, btBytes.Length - iStart + 1)
+                End If
+            Else
+                Return String.Empty
+            End If
+        End Function
+
 #Region "カナ変換"
         ''' <summary>
         ''' unicode差分(カタカナ-ひらがな)

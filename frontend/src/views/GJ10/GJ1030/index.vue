@@ -15,7 +15,7 @@
                     :min="1"
                     :max="99"
                     :maxlength="2"
-                    class="w-15"
+                    class="w-14"
                     @change="handleKI(false)"
                   ></a-input-number>
                   <span class="!align-middle">期</span>
@@ -40,7 +40,7 @@
                   <range-select
                     v-model:value="formData.KEIYAKU_KBN_CD"
                     :options="KEIYAKU_KBN_CD_NAME_LIST"
-                    class="max-w-110"
+                    class="max-w-78"
                 /></a-form-item>
               </td>
             </a-col>
@@ -67,6 +67,7 @@
                   <range-select
                     v-model:value="formData.ITAKU_CD"
                     :options="ITAKU_CD_NAME_LIST"
+                    class="w-250!"
                 /></a-form-item>
               </td>
             </a-col>
@@ -77,6 +78,7 @@
                   <range-select
                     v-model:value="formData.KEIYAKUSYA_CD"
                     :options="KEIYAKUSYA_CD_NAME_LIST"
+                    class="w-250!"
                 /></a-form-item>
               </td>
             </a-col>

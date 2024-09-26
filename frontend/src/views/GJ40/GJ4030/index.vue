@@ -7,9 +7,7 @@
  * 変更履歴　:
  * ----------------------------------------------------------------->
 <template>
-  <div
-    class="h-full min-h-500px flex-col-stretch gap-12px overflow-hidden lt-sm:overflow-auto"
-  >
+  <div class="h-full min-h-500px flex-col-stretch gap-12px">
     <a-card ref="headRef" :bordered="false">
       <h1>（GJ4030）互助交付金計算処理</h1>
       <div class="self_adaption_table form mt-1">
@@ -20,7 +18,9 @@
               <a-form-item v-bind="validateInfos.SYORI_KBN">
                 <a-radio-group v-model:value="formData.SYORI_KBN" class="mt-1">
                   <a-radio :value="1">計算処理</a-radio>
-                  <a-radio :value="2">計算取消処理(取消対象に補填金支払済が存在する場合は、取消不可)</a-radio>
+                  <a-radio :value="2"
+                    >計算取消処理(取消対象に補填金支払済が存在する場合は、取消不可)</a-radio
+                  >
                 </a-radio-group>
               </a-form-item>
             </td>
@@ -29,14 +29,14 @@
             <th class="required">対象期</th>
             <td>
               <a-form-item v-bind="validateInfos.KI" class="w-50!">
-                  <a-input-number
-                    v-model:value="formData.KI"
-                    :min="1"
-                    :max="99"
-                    :maxlength="2"
-                    class="w-20"
-                  />
-                  <span class="!align-middle">(表示&入力)</span>
+                <a-input-number
+                  v-model:value="formData.KI"
+                  :min="1"
+                  :max="99"
+                  :maxlength="2"
+                  class="w-14"
+                />
+                <span class="!align-middle">(表示&入力)</span>
               </a-form-item>
               <a-form-item v-bind="validateInfos.HASSEI_KAISU">
                 <span class="!align-middle">認定回数</span>
@@ -45,7 +45,7 @@
                   :min="1"
                   :max="99"
                   :maxlength="2"
-                  class="w-20"
+                  class="w-14"
                 />
                 <span class="!align-middle">(表示&入力)</span>
               </a-form-item>
@@ -56,7 +56,14 @@
             <td>
               <a-form-item v-bind="validateInfos.HASSEI_KAISU">
                 <div class="flex items-center">
-                  <a-input v-model:value="formData.HASSEI_KAISU" class="w-20" :disabled="formData.SYORI_KBN === 1" />
+                  <a-input-number
+                    v-model:value="formData.HASSEI_KAISU"
+                    :min="1"
+                    :max="99"
+                    :maxlength="2"
+                    class="w-14"
+                    :disabled="formData.SYORI_KBN === 1"
+                  />
                   <span>(表示&入力)</span>
                 </div>
               </a-form-item>
@@ -66,7 +73,10 @@
             <th class="required">振込予定日</th>
             <td class="flex">
               <a-form-item v-bind="validateInfos.FURIKOMI_YOTEI_DATE">
-                <DateJp class="w-50!" v-model:value="formData.FURIKOMI_YOTEI_DATE" />
+                <DateJp
+                  class="max-w-50"
+                  v-model:value="formData.FURIKOMI_YOTEI_DATE"
+                />
               </a-form-item>
             </td>
           </a-col>
@@ -77,7 +87,7 @@
                 <ai-select
                   v-model:value="formData.KEIYAKUSYA_CD"
                   :options="KEIYAKU_KBN_CD_NAME_LIST"
-                  class="w-full"
+                  class="max-w-115"
                   type="number"
                 ></ai-select>
               </a-form-item>
@@ -96,7 +106,7 @@
         </AButton>
       </div>
     </a-card>
-    <a-card :bordered="false" class="sm:flex-1-hidden" ref="cardRef">
+    <a-card :bordered="false" class="flex-1" ref="cardRef">
       <a-pagination
         v-model:current="pageParams.PAGE_NUM"
         v-model:page-size="pageParams.PAGE_SIZE"
@@ -111,30 +121,93 @@
         ref="xTableRef"
         class="mt-2"
         :column-config="{ resizable: true }"
-        :height="height - 70"
         :row-config="{ isCurrent: true, isHover: true }"
         :data="tableData"
         :sort-config="{ trigger: 'cell', orders: ['desc', 'asc'] }"
         :empty-render="{ name: 'NotData' }"
         @sort-change="(e) => changeTableSort(e, toRef(pageParams, 'ORDER_BY'))"
       >
-        <vxe-column header-align="center" align="center" field="KI" title="対象期" width="80" sortable> </vxe-column>
-        <vxe-column header-align="center" align="center" field="HASSEI_KAISU" title="認定回数" min-width="90" sortable/>
-        <vxe-column header-align="center" align="center" field="KEISAN_KAISU" title="計算回数" min-width="90" sortable/>
-        <vxe-column header-align="center" align="center" field="SYORI_DATE" title="処理日" min-width="100" sortable/>
-        <vxe-column header-align="center" align="center" field="FURI_YOTEI_DATE" title="振込予定日" min-width="100" sortable/>
-        <vxe-column header-align="center" align="right" field="TAISYO_SYASU" title="対象者数" min-width="90" sortable/>
-        <vxe-column header-align="center" align="right" field="KEIEI_KINGAKU" title="経営支援金額" min-width="100" sortable>
+        <vxe-column
+          header-align="center"
+          align="center"
+          field="KI"
+          title="対象期"
+          width="80"
+          sortable
+        >
+        </vxe-column>
+        <vxe-column
+          header-align="center"
+          align="center"
+          field="HASSEI_KAISU"
+          title="認定回数"
+          min-width="90"
+          sortable
+        />
+        <vxe-column
+          header-align="center"
+          align="center"
+          field="KEISAN_KAISU"
+          title="計算回数"
+          min-width="90"
+          sortable
+        />
+        <vxe-column
+          header-align="center"
+          align="center"
+          field="SYORI_DATE"
+          title="処理日"
+          min-width="100"
+          sortable
+        />
+        <vxe-column
+          header-align="center"
+          align="center"
+          field="FURI_YOTEI_DATE"
+          title="振込予定日"
+          min-width="100"
+          sortable
+        />
+        <vxe-column
+          header-align="center"
+          align="right"
+          field="TAISYO_SYASU"
+          title="対象者数"
+          min-width="90"
+          sortable
+        />
+        <vxe-column
+          header-align="center"
+          align="right"
+          field="KEIEI_KINGAKU"
+          title="経営支援金額"
+          min-width="100"
+          sortable
+        >
           <template #default="{ row }">
             {{ Intl.NumberFormat().format(row.KEIEI_KINGAKU) }}
           </template>
         </vxe-column>
-        <vxe-column header-align="center" align="right" field="SYOKYAKU_KINGAKU" title="焼却・埋却金額" min-width="100" sortable>
+        <vxe-column
+          header-align="center"
+          align="right"
+          field="SYOKYAKU_KINGAKU"
+          title="焼却・埋却金額"
+          min-width="100"
+          sortable
+        >
           <template #default="{ row }">
             {{ Intl.NumberFormat().format(row.SYOKYAKU_KINGAKU) }}
           </template>
         </vxe-column>
-        <vxe-column header-align="center" align="right" field="KOFU_KINGAKU" title="合計交付金額" min-width="100" sortable>
+        <vxe-column
+          header-align="center"
+          align="right"
+          field="KOFU_KINGAKU"
+          title="合計交付金額"
+          min-width="100"
+          sortable
+        >
           <template #default="{ row }">
             {{ Intl.NumberFormat().format(row.KOFU_KINGAKU) }}
           </template>
@@ -148,7 +221,7 @@ import { reactive, ref, toRef } from 'vue'
 import { ITEM_REQUIRE_ERROR } from '@/constants/msg'
 import useSearch from '@/hooks/useSearch'
 import { useElementSize } from '@vueuse/core'
-import {changeTableSort} from '@/utils/util'
+import { changeTableSort } from '@/utils/util'
 import { useRoute, useRouter } from 'vue-router'
 import { useTabStore } from '@/store/modules/tab'
 import { SearchRequest, DetailVM } from './type'

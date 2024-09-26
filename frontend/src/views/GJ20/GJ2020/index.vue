@@ -7,27 +7,25 @@
  * 変更履歴　:
  * ----------------------------------------------------------------->
 <template>
-  <div
-    class="h-full min-h-500px flex-col-stretch gap-12px overflow-hidden lt-sm:overflow-auto"
-  >
+  <div class="h-full min-h-500px flex-col-stretch gap-12px">
     <a-card ref="headRef" :bordered="false">
       <h1>（GJ2020）契約者積立金計算処理</h1>
-      <div class="self_adaption_table form max-w-250 mt-1">
+      <div class="self_adaption_table form mt-1">
         <a-row>
-          <a-col span="24">
+          <a-col v-bind="layout">
             <th class="required">処理区分</th>
             <td class="flex">
               <a-form-item v-bind="validateInfos.SYORI_KBN">
                 <a-radio-group v-model:value="formData.SYORI_KBN" class="mt-1">
                   <a-radio :value="0">請求·返還処理</a-radio>
-                  <a-radio :value="1"
-                  >請求·返還取消処理(取消対象に入金済が存在する場合は、取消不可)</a-radio
-                  >
+                  <a-radio :value="1">
+                    請求·返還取消処理(取消対象に入金済が存在する場合は、取消不可)
+                  </a-radio>
                 </a-radio-group>
               </a-form-item>
             </td>
           </a-col>
-          <a-col v-bind="layout">
+          <a-col span="5">
             <th class="required">対象期</th>
             <td>
               <a-form-item v-bind="validateInfos.KI">
@@ -37,25 +35,38 @@
                   :min="1"
                   :max="99"
                   :maxlength="2"
-                  style="width: 100%"
+                  class="w-14"
                 ></a-input-number>
                 <!--                <span class="!align-middle">期</span>-->
               </a-form-item>
             </td>
           </a-col>
-          <a-col v-bind="layout">
+          <a-col span="7">
             <th>請求·返還回数</th>
             <td>
               <a-form-item v-bind="validateInfos.SEIKYU_KAISU">
                 <div class="flex items-center">
-                  <a-input v-model:value="formData.SEIKYU_KAISU" disabled style="width: 50%;" />
-                  <span>(入力&表示)</span>
+                  <a-input-number
+                    v-model:value="formData.SEIKYU_KAISU"
+                    :min="0"
+                    :max="999"
+                    :maxlength="3"
+                    :disabled="formData.SYORI_KBN == 0"
+                    class="w-17"
+                  ></a-input-number>
+                  <!-- <a-input v-model:value="formData.SEIKYU_KAISU" class="w-14" /> -->
+                  <span class="w-20">(入力&表示)</span>
                 </div>
               </a-form-item>
             </td>
           </a-col>
-          <a-col v-bind="layout">
-            <read-only thWidth="80" th="手数料率" :td="formData.TESURYO_KAISU" after="%" />
+          <a-col span="12">
+            <read-only
+              thWidth="80"
+              th="手数料率"
+              :td="formData.TESURYO_KAISU"
+              after="%"
+            />
           </a-col>
           <a-col span="24">
             <th class="required">徵収·返還区分</th>
@@ -65,12 +76,14 @@
                   <a-checkbox
                     v-for="(label, key) in LABELS"
                     :key="key"
+                    class="w-40"
                     v-model:checked="formData.CYOSYU_HENKAN_KBN[key]"
                   >
                     {{ label }}
-                  </a-checkbox></a-space
-                ></a-form-item
-              >
+                  </a-checkbox>
+                  <span class="w-20">※ 廃業していない契約者が対象です</span>
+                </a-space>
+              </a-form-item>
             </td>
           </a-col>
           <a-col span="24">
@@ -102,7 +115,7 @@
                 <ai-select
                   v-model:value="formData.KEIYAKUSYA_CD"
                   :options="KEIYAKU_KBN_CD_NAME_LIST"
-                  class="w-full"
+                  class="max-w-150"
                   type="number"
                 ></ai-select>
               </a-form-item>
@@ -121,7 +134,7 @@
         </AButton>
       </div>
     </a-card>
-    <a-card :bordered="false" class="sm:flex-1-hidden" ref="cardRef">
+    <a-card :bordered="false" class="flex-1" ref="cardRef">
       <a-pagination
         v-model:current="pageParams.PAGE_NUM"
         v-model:page-size="pageParams.PAGE_SIZE"
@@ -136,17 +149,38 @@
         ref="xTableRef"
         class="mt-2"
         :column-config="{ resizable: true }"
-        :height="height - 70"
         :row-config="{ isCurrent: true, isHover: true }"
         :data="tableData"
         :sort-config="{ trigger: 'cell', orders: ['desc', 'asc'] }"
         :empty-render="{ name: 'NotData' }"
         @sort-change="(e) => changeTableSort(e, toRef(pageParams, 'ORDER_BY'))"
       >
-        <vxe-column header-align="center" align="center" field="KI" title="対象期" width="80" sortable> </vxe-column>
-        <vxe-column header-align="center" align="center" field="SEIKYU_KAISU" title="回数" width="80" sortable>
+        <vxe-column
+          header-align="center"
+          align="center"
+          field="KI"
+          title="対象期"
+          width="80"
+          sortable
+        >
         </vxe-column>
-        <vxe-column header-align="center" align="center" field="SYORI_DATE" title="処理日" min-width="100" sortable>
+        <vxe-column
+          header-align="center"
+          align="center"
+          field="SEIKYU_KAISU"
+          title="回数"
+          width="80"
+          sortable
+        >
+        </vxe-column>
+        <vxe-column
+          header-align="center"
+          align="center"
+          field="SYORI_DATE"
+          title="処理日"
+          min-width="100"
+          sortable
+        >
         </vxe-column>
         <vxe-column
           header-align="center"
@@ -332,9 +366,9 @@ const { pageParams, totalCount, searchData, clear } = useSearch({
 
 const layout = {
   md: 24,
-  lg: 8,
-  xl: 8,
-  xxl: 8,
+  lg: 24,
+  xl: 24,
+  xxl: 24,
 }
 
 //--------------------------------------------------------------------------
