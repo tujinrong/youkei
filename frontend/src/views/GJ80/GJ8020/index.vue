@@ -24,13 +24,13 @@
                   :maxlength="2"
                 >
                 </a-input-number
-                ><span class="!align-middle ml-2">期</span></a-form-item
+                ><span class="!align-middle mt-2 ml-2">期</span></a-form-item
               >
               <div class="w-full">
                 <YearSelector
                   v-model:value="formData.JIGYO_NENDO"
                   class="w-30"
-                /><span>～</span>
+                /><span class="!align-middle ml-2">～ </span>
                 <YearSelector
                   v-model:value="formData.JIGYO_SYURYO_NENDO"
                   class="w-30"
@@ -70,7 +70,7 @@
                   ','
                 )
               "
-              after="(人)"
+              after="（人）"
             />
           </a-col>
           <a-col span="24">
@@ -83,7 +83,7 @@
                   ','
                 )
               "
-              after="(円) (左記項目は積立金返還処理で算定した結果を保存、表示)"
+              after="（円）（左記項目は積立金返還処理で算定した結果を保存、表示）"
             /> </a-col
           ><a-col span="24">
             <read-only
@@ -93,7 +93,7 @@
             />
           </a-col>
           <a-col span="24">
-            <th class="required">対象年度(現在処理中)</th>
+            <th class="required">対象年度（現在処理中）</th>
             <td>
               <a-form-item v-bind="validateInfos.TAISYO_NENDO">
                 <YearSelector v-model:value="formData.TAISYO_NENDO" />
@@ -106,7 +106,7 @@
             <td>
               <DateJp v-model:value="formData.NOFU_KIGEN" />
               <span class="mt-1">
-                (左記期限までに入金済みの時は、契約日は4月1日となる。)</span
+                （左記期限までに入金済みの時は、契約日は4月1日となる。）</span
               >
             </td>
           </a-col>
@@ -121,7 +121,7 @@
                 :maxlength="2"
               >
               </a-input-number
-              ><span class="mt-1 ml-1">回</span>
+              ><span class="!align-middle mt-1 ml-2">回</span>
             </td>
           </a-col>
           <a-col span="24">

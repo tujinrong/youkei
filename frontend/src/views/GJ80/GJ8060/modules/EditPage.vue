@@ -135,7 +135,7 @@
           <a-col>
             <th class="required">連絡先</th>
           </a-col>
-          <a-col :span="6">
+          <a-col :span="5">
             <th class="required" style="width: 50px">電話</th>
             <td>
               <a-form-item v-bind="validateInfos.ADDR_TEL">
