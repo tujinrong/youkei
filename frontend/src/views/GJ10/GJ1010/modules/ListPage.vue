@@ -130,7 +130,6 @@
                 <range-select
                   v-model:value="searchParams.JIMUITAKU_CD"
                   :options="ITAKU_LIST"
-                  class="w-250!"
                 />
               </td>
             </a-col>

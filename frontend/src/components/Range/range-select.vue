@@ -9,6 +9,7 @@
 <template>
   <div class="flex items-center w-full">
     <ai-select
+      style="width: calc(50% - 14px / 2)"
       :value="value.VALUE_FM"
       :options="options"
       split-val
@@ -18,6 +19,7 @@
     />
     <span>～</span>
     <ai-select
+      style="width: calc(50% - 14px / 2)"
       :value="value.VALUE_TO"
       :options="options"
       split-val
