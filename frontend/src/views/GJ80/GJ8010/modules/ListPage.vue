@@ -7,7 +7,7 @@
           <a-col
             v-bind="{
               md: 24,
-              lg: 24,
+              lg: 16,
               xl: 12,
               xxl: 8,
             }"
@@ -18,7 +18,7 @@
                 v-model:value="searchParams.SYURUI_KBN"
                 :options="SYURUI_KBN_LIST"
                 split-val
-                class="w-80!"
+                class="w-full!"
                 @change="changeKbn"
               ></ai-select>
             </td>

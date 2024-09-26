@@ -3,7 +3,7 @@
     <a-card ref="headRef" :bordered="false" class="staticWidth">
       <h1>（GJ8050）金融機関一覧</h1>
       <div class="self_adaption_table form mt-1">
-        <div class="max-w-800px">
+        <div class="max-w-750px">
           <a-row>
             <a-col v-bind="layout">
               <th>金融機関コード</th>
@@ -24,7 +24,7 @@
                   <a-input
                     v-model:value="searchParams.BANK_KANA"
                     :maxlength="60"
-                    class="max-w-150"
+                    class="max-w-full"
                   ></a-input>
                 </a-form-item>
               </td>
