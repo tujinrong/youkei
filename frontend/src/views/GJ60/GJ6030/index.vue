@@ -206,7 +206,7 @@ onUnmounted(() => {
 
 <style scoped lang="scss">
 th {
-  width: 220px;
+  width: 230px;
 }
 
 :deep(.ant-card-body) {
