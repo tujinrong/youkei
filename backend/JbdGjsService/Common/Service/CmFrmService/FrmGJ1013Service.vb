@@ -62,57 +62,6 @@ Namespace JBD.GJS.Service.GJ1013
         End Function
 #End Region
 
-#Region "f_Data_Deleate 契約者農場削除処理"
-        '------------------------------------------------------------------
-        'プロシージャ名  :f_Data_Deleate
-        '説明            :契約者農場削除処理
-        '引数            :なし
-        '戻り値          :DaResponseBase
-        '------------------------------------------------------------------
-        Public Shared Function f_Data_Deleate(db As DaDbContext, wNojoCd As DeleteRequest) As DaResponseBase
-
-            Dim wkCmd As New OracleCommand
-            Dim wkSql As String = String.Empty
-            Dim wkRet As Boolean = False
-
-            'ストアドプロシージャの呼び出し
-            wkCmd.Connection = db.Session.Connection
-            wkCmd.CommandType = CommandType.StoredProcedure
-            wkCmd.CommandText = "PKG_GJ8091.GJ8091_KEIYAKU_NOJO_DEL"
-
-            '引き渡し
-            'グループコード
-            Dim paraKI As OracleParameter = wkCmd.Parameters.Add("IN_KI", wNojoCd.KI)
-            Dim paraKEIYAKU_CD As OracleParameter = wkCmd.Parameters.Add("IN_KEIYAKU", wNojoCd.KEIYAKUSYA_CD)
-            Dim paraNOJO_CD As OracleParameter = wkCmd.Parameters.Add("IN_NOJO_CD", wNojoCd.NOJO_CD)
-
-            '戻り
-            Dim p_MSGCD As OracleParameter = wkCmd.Parameters.Add("OU_MSGCD", OracleDbType.Varchar2, 255, DBNull.Value, ParameterDirection.Output)
-            Dim p_MSGNM As OracleParameter = wkCmd.Parameters.Add("OU_MSGNM", OracleDbType.Varchar2, 255, DBNull.Value, ParameterDirection.Output)
-
-            wkCmd.ExecuteNonQuery()
-
-            Debug.Print(wkCmd.Parameters("OU_MSGCD").Value.ToString())
-            If wkCmd.Parameters("OU_MSGCD").Value.ToString() <> "0" Then
-                If wkCmd.Parameters("OU_MSGCD").Value.ToString() = "99" Then
-                    '削除済みは政情終了とみなす
-                    wkRet = True
-                    Return New DaResponseBase(wkCmd.Parameters("OU_MSGNM").Value.ToString() & "。")
-                End If
-            End If
-
-            wkRet = True
-
-            'データベースへの接続を閉じる
-            If Not wkCmd Is Nothing Then
-                wkCmd.Dispose()
-            End If
-
-            Return New DaResponseBase
-
-        End Function
-#End Region
-
 #Region "f_Data_Insert 契約者農場更新処理"
         '------------------------------------------------------------------
         'プロシージャ名  :f_Data_Insert
