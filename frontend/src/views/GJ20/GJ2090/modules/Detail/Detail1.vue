@@ -191,38 +191,27 @@
               after="円"
             />
           </a-col>
-          <a-col span="7">
-            <read-only-pop
-              thWidth="70"
-              th="積立金額"
-              :td="formData.TUMITATE_KIN"
-              v-bind="{ ...mathNumber }"
-              after="円"
-            />
-          </a-col>
-          <a-col span="7">
-            <read-only-pop
-              thWidth="100"
-              th="手数料"
-              :td="formData.TESURYO"
-              v-bind="{ ...mathNumber }"
-              after="円"
-            />
-          </a-col>
-          <a-col span="1" />
-        </a-row>
-        <a-row justify="space-between">
-          <a-col span="7" />
-          <a-col span="7" />
-          <a-col span="7">
-            <read-only-pop
-              thWidth="100"
-              th="積立金等総計"
-              :td="formData.SEIKYU_KIN"
-              after="円"
-            />
-          </a-col>
-          <a-col span="1" />
+          <div class="flex" style="align-items: end">
+            <table class="my-2">
+              <tr style="height: 10px !important">
+                <th>積立金額</th>
+                <th>手数料</th>
+                <th>積立金等総計</th>
+              </tr>
+              <tr>
+                <td>
+                  {{
+                    String(formData.TUMITATE_KIN || 1111111).replace(
+                      /\B(?=(\d{3})+(?!\d))/g,
+                      ','
+                    )
+                  }}
+                </td>
+                <td>{{ formData.TESURYO || 0 }}</td>
+                <td>{{ formData.SEIKYU_KIN || 0 }}</td>
+              </tr>
+            </table>
+          </div>
         </a-row>
         <a-row>
           <a-col span="24">
@@ -391,5 +380,16 @@ th {
 }
 .edit_table .ant-col {
   align-items: center;
+}
+
+tr th {
+  background-color: #ffffe1;
+  border: 1px solid #8a8d92;
+  text-align: center;
+  font-weight: 100;
+}
+tr td {
+  border: 1px solid #8a8d92;
+  text-align: right;
 }
 </style>
