@@ -15,7 +15,7 @@
     </a-radio-group>
     <div v-show="tab === 1" class="edit_table form w-full">
       <a-row>
-        <a-col span="24">
+        <a-col span="12">
           <read-only-pop
             th="契約者番号"
             thWidth="110"
@@ -24,7 +24,7 @@
         </a-col>
       </a-row>
       <a-row>
-        <a-col span="24">
+        <a-col span="12">
           <read-only-pop
             thWidth="110"
             th="契約区分"
@@ -36,28 +36,38 @@
     </div>
     <div v-if="tab === 2" class="edit_table form w-full">
       <a-row>
-        <a-col span="8">
+        <a-col span="12">
           <read-only-pop th="対象農場名" thWidth="110" :td="formData.KI" />
         </a-col>
-        <a-col span="8">
+        <a-col span="6">
           <read-only-pop th="鶏の種類" thWidth="110" :td="formData.KI" />
         </a-col>
-        <a-col span="8">
+        <a-col span="6">
           <read-only-pop th="契約羽数" thWidth="110" :td="formData.KI" />
         </a-col>
       </a-row>
       <a-row>
-        <a-col span="24">
+        <a-col span="2">
           <read-only-pop thWidth="110" th="住所" td="" :hideTd="true" />
-          <read-only-pop thWidth="100" th="住所1" :td="formData.ADDR_1" />
-          <read-only-pop thWidth="100" th="住所2" :td="formData.ADDR_2" />
+        </a-col>
+        <a-col span="5">
+          <read-only-pop thWidth="50" th="住所1" :td="formData.ADDR_1" />
+        </a-col>
+        <a-col span="1"></a-col>
+        <a-col span="10">
+          <read-only-pop thWidth="50" th="住所2" :td="formData.ADDR_2" />
         </a-col>
       </a-row>
       <a-row>
-        <a-col span="24">
+        <a-col span="2">
           <read-only-pop thWidth="110" th="" :hideTd="true" />
-          <read-only-pop thWidth="100" th="住所3" :td="formData.ADDR_3" />
-          <read-only-pop thWidth="100" th="住所4" :td="formData.ADDR_4" />
+        </a-col>
+        <a-col span="8">
+          <read-only-pop thWidth="50" th="住所3" :td="formData.ADDR_3" />
+        </a-col>
+        <a-col span="1"></a-col>
+        <a-col span="7">
+          <read-only-pop thWidth="50" th="住所4" :td="formData.ADDR_4" />
         </a-col>
       </a-row>
       <div class="my-2 my-table">
@@ -236,10 +246,14 @@
       </div>
       <a-row>
         <a-col span="4">
-          <read-only-pop thWidth="150" th="経営支援互助金 算定" :hideTd="true" />
+          <read-only-pop
+            thWidth="150"
+            th="経営支援互助金 算定"
+            :hideTd="true"
+          />
         </a-col>
         <a-col span="8">
-          <th style="width: 210px;">対象羽数(導入羽数等)</th>
+          <th style="width: 210px">対象羽数(導入羽数等)</th>
           <td style="align-items: center">
             <a-input-number
               class="input w-full"
@@ -259,7 +273,11 @@
           />
         </a-col>
         <a-col span="6">
-          <read-only-pop th="＝" :td="hasuGokei.SAIRANKEI_SEIKEI" after="※1&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;" />
+          <read-only-pop
+            th="＝"
+            :td="hasuGokei.SAIRANKEI_SEIKEI"
+            after="※1&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;"
+          />
         </a-col>
       </a-row>
       <a-row>
@@ -347,10 +365,7 @@
       </a-row>
       <a-row>
         <a-col span="4">
-          <read-only-pop
-            th="&emsp;②国庫交付金額"
-            :hideTd="true"
-          />
+          <read-only-pop th="&emsp;②国庫交付金額" :hideTd="true" />
         </a-col>
         <a-col span="8">
           <read-only-pop

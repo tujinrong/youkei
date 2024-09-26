@@ -13,7 +13,7 @@
       <div class="edit_table form">
         <div>
           <a-row>
-            <a-col span="24">
+            <a-col span="12">
               <read-only-pop
                 thWidth="110"
                 th="契約者番号"
@@ -23,7 +23,7 @@
             </a-col>
           </a-row>
           <a-row>
-            <a-col span="12">
+            <a-col span="6">
               <th class="required" style="width: 110px">認定回数</th>
               <td>
                 <a-form-item v-bind="validateInfos.HASSEI_KAISU">
@@ -187,19 +187,19 @@
               </tr>
               <tr>
                 <th style="width: 180px !important">互助金交付対象羽数</th>
-                <td>{{ hasuGokei.SAIRANKEI_SEIKEI }}</td>
-                <td>{{ hasuGokei.SAIRANKEI_IKUSEIKEI }}</td>
-                <td>{{ hasuGokei.NIKUYOUKEI }}</td>
-                <td>{{ hasuGokei.SYUKEI_SEIKEI }}</td>
-                <td>{{ hasuGokei.SYUKEI_IKUSEIKEI }}</td>
+                <td>{{ hasuGokei.SAIRANKEI_SEIKEI || 0 }}</td>
+                <td>{{ hasuGokei.SAIRANKEI_IKUSEIKEI || 0 }}</td>
+                <td>{{ hasuGokei.NIKUYOUKEI || 0 }}</td>
+                <td>{{ hasuGokei.SYUKEI_SEIKEI || 0 }}</td>
+                <td>{{ hasuGokei.SYUKEI_IKUSEIKEI || 0 }}</td>
               </tr>
               <tr>
                 <th>焼却・埋却等互助金交付額</th>
-                <td>{{ hasuGokei.SAIRANKEI_SEIKEI }}</td>
-                <td>{{ hasuGokei.SAIRANKEI_IKUSEIKEI }}</td>
-                <td>{{ hasuGokei.NIKUYOUKEI }}</td>
-                <td>{{ hasuGokei.SYUKEI_SEIKEI }}</td>
-                <td>{{ hasuGokei.SYUKEI_IKUSEIKEI }}</td>
+                <td>{{ hasuGokei.SAIRANKEI_SEIKEI || 0 }}</td>
+                <td>{{ hasuGokei.SAIRANKEI_IKUSEIKEI || 0 }}</td>
+                <td>{{ hasuGokei.NIKUYOUKEI || 0 }}</td>
+                <td>{{ hasuGokei.SYUKEI_SEIKEI || 0 }}</td>
+                <td>{{ hasuGokei.SYUKEI_IKUSEIKEI || 0 }}</td>
               </tr>
               <tr>
                 <th>うずら</th>
@@ -211,23 +211,23 @@
                 <th>合計</th>
               </tr>
               <tr>
-                <td>{{ hasuGokei.UZURA }}</td>
-                <td>{{ hasuGokei.AHIRU }}</td>
-                <td>{{ hasuGokei.KIJI }}</td>
-                <td>{{ hasuGokei.HOROHOROTORI }}</td>
-                <td>{{ hasuGokei.SICHIMENCHOU }}</td>
-                <td>{{ hasuGokei.DACHOU }}</td>
+                <td>{{ hasuGokei.UZURA || 0 }}</td>
+                <td>{{ hasuGokei.AHIRU || 0 }}</td>
+                <td>{{ hasuGokei.KIJI || 0 }}</td>
+                <td>{{ hasuGokei.HOROHOROTORI || 0 }}</td>
+                <td>{{ hasuGokei.SICHIMENCHOU || 0 }}</td>
+                <td>{{ hasuGokei.DACHOU || 0 }}</td>
                 <td>
                   {{ hasuGokei.TOTAL || 0 }}
                 </td>
               </tr>
               <tr>
-                <td>{{ hasuGokei.UZURA }}</td>
-                <td>{{ hasuGokei.AHIRU }}</td>
-                <td>{{ hasuGokei.KIJI }}</td>
-                <td>{{ hasuGokei.HOROHOROTORI }}</td>
-                <td>{{ hasuGokei.SICHIMENCHOU }}</td>
-                <td>{{ hasuGokei.DACHOU }}</td>
+                <td>{{ hasuGokei.UZURA || 0 }}</td>
+                <td>{{ hasuGokei.AHIRU || 0 }}</td>
+                <td>{{ hasuGokei.KIJI || 0 }}</td>
+                <td>{{ hasuGokei.HOROHOROTORI || 0 }}</td>
+                <td>{{ hasuGokei.SICHIMENCHOU || 0 }}</td>
+                <td>{{ hasuGokei.DACHOU || 0 }}</td>
                 <td>
                   {{ hasuGokei.TOTAL || 0 }}
                 </td>
@@ -285,27 +285,40 @@
         </div>
         <div v-if="tab === 2" class="edit_table form w-full">
           <a-row>
-            <a-col span="24">
+            <a-col span="12">
               <read-only-pop thWidth="110" th="農場" :td="formData.NOJO_CD" />
             </a-col>
           </a-row>
           <a-row>
-            <a-col span="24">
+            <a-col span="2">
               <read-only-pop thWidth="110" th="住所" td="" :hideTd="true" />
+            </a-col>
+            <a-col span="4">
               <read-only-pop th="　〒　" :td="formData.ADDR_POST" />
-              <read-only-pop thWidth="100" th="住所1" :td="formData.ADDR_1" />
-              <read-only-pop thWidth="100" th="住所2" :td="formData.ADDR_2" />
+            </a-col>
+            <a-col span="1"></a-col>
+            <a-col span="5">
+              <read-only-pop thWidth="50" th="住所1" :td="formData.ADDR_1" />
+            </a-col>
+            <a-col span="1"></a-col>
+            <a-col span="10">
+              <read-only-pop thWidth="50" th="住所2" :td="formData.ADDR_2" />
             </a-col>
           </a-row>
           <a-row>
-            <a-col span="24">
+            <a-col span="7">
               <read-only-pop thWidth="110" th="" :hideTd="true" />
-              <read-only-pop thWidth="100" th="住所3" :td="formData.ADDR_3" />
-              <read-only-pop thWidth="100" th="住所4" :td="formData.ADDR_4" />
+            </a-col>
+            <a-col span="8">
+              <read-only-pop thWidth="50" th="住所3" :td="formData.ADDR_3" />
+            </a-col>
+            <a-col span="1"></a-col>
+            <a-col span="7">
+              <read-only-pop thWidth="50" th="住所4" :td="formData.ADDR_4" />
             </a-col>
           </a-row>
           <a-row>
-            <a-col span="24">
+            <a-col span="5">
               <read-only-pop
                 thWidth="110"
                 th="鶏の種類"
