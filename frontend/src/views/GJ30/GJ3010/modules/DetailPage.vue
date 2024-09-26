@@ -37,7 +37,11 @@
             </td>
           </a-col>
           <a-col span="3">
-            <read-only-pop thWidth="90" th="住所" td="" :hideTd="true" /></a-col
+            <read-only-pop
+              thWidth="90"
+              th="農場住所"
+              td=""
+              :hideTd="true" /></a-col
           ><a-col span="5"
             ><read-only-pop th="　〒" :td="nojoData.ADDR_POST" /></a-col
           ><a-col span="5"
@@ -85,6 +89,7 @@
               </a-form-item>
             </td> </a-col></a-row
         ><a-row>
+          <a-col span="4"></a-col>
           <a-col span="7" class="mt-2">
             <read-only-pop
               th="契約羽数(増羽前)"
@@ -123,6 +128,9 @@
                 <a-radio :value="2">入力確定</a-radio>
               </a-radio-group>
             </td>
+          </a-col>
+          <a-col span="5">
+            <read-only-pop :td="formData.KEIYAKU_KBN_ATO" />
           </a-col>
         </a-row>
       </div>
@@ -178,6 +186,7 @@ const createDefaultform = () => {
     ZOGEN_HASU: undefined,
     KEIYAKU_DATE_FROM: new Date(),
     SYORI_KBN: 1,
+    KEIYAKU_KBN_ATO: undefined,
   }
 }
 
