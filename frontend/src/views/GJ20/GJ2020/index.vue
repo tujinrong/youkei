@@ -55,7 +55,7 @@
                     class="w-17"
                   ></a-input-number>
                   <!-- <a-input v-model:value="formData.SEIKYU_KAISU" class="w-14" /> -->
-                  <span class="w-20">(入力&表示)</span>
+                  <span>(入力&表示)</span>
                 </div>
               </a-form-item>
             </td>

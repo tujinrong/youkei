@@ -19,7 +19,7 @@
   >
     <slot></slot>
 
-    <ai-select-option
+    <a-select-option
       v-for="opt in options"
       :key="opt"
       :value="opt.NAME ? opt.CODE + ' : ' + opt.NAME : opt.CODE"
@@ -27,7 +27,7 @@
       :disabled="opt.disabled"
     >
       {{ opt.CODE ? opt.CODE + ' : ' + opt.NAME : opt.NAME }}
-    </ai-select-option>
+    </a-select-option>
   </a-select>
 </template>
 
