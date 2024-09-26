@@ -1,6 +1,6 @@
 <template>
   <div class="h-full min-h-500px flex-col-stretch gap-12px">
-    <a-card :bordered="false">
+    <a-card :bordered="false" class="staticWidth">
       <h1>（GJ8100）消費税率一覧</h1>
       <div class="my-2 flex justify-between">
         <a-space :size="20">
@@ -8,7 +8,7 @@
         </a-space>
         <close-page /></div
     ></a-card>
-    <a-card ref="cardRef" class="flex-1">
+    <a-card ref="cardRef" class="flex-1 staticWidth">
       <vxe-table
         class="h-full"
         ref="xTableRef"

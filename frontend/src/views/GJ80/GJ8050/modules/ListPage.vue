@@ -1,6 +1,6 @@
 <template>
   <div class="min-h-fit min-h-500px flex-col-stretch gap-12px flex">
-    <a-card ref="headRef" :bordered="false">
+    <a-card ref="headRef" :bordered="false" class="staticWidth">
       <h1>（GJ8050）金融機関一覧</h1>
       <div class="self_adaption_table form mt-1">
         <a-row>
@@ -65,7 +65,7 @@
         <close-page />
       </div>
     </a-card>
-    <a-card :bordered="false" ref="cardRef1">
+    <a-card :bordered="false" ref="cardRef1" class="staticWidth">
       <a-pagination
         v-model:current="pageParams.PAGE_NUM"
         v-model:page-size="pageParams.PAGE_SIZE"
@@ -120,7 +120,7 @@
           :resizable="false"
         ></vxe-column> </vxe-table
     ></a-card>
-    <a-card>
+    <a-card class="staticWidth">
       <div class="self_adaption_table form mt-1">
         <a-row>
           <a-col v-bind="layout">
@@ -185,7 +185,7 @@
       </div>
       <div v-if="!isSelectBank" class="search-disabled-mask bg-disabled"></div
     ></a-card>
-    <a-card ref="cardRef2" class="mb-2">
+    <a-card ref="cardRef2" class="mb-2 staticWidth">
       <a-pagination
         v-model:current="pageParams2.PAGE_NUM"
         v-model:page-size="pageParams2.PAGE_SIZE"
