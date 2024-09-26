@@ -196,7 +196,7 @@ const rules = reactive({
           VALUE_TO
         }
       ) => {
-        const result = rangeCheck(value.VALUE_FM, value.VALUE_TO, '事業委託先')
+        const result = rangeCheck(value.VALUE_FM, value.VALUE_TO, '事務委託先')
         if (!result.flag) return Promise.reject(result.content)
         return Promise.resolve()
       },
