@@ -57,12 +57,10 @@
         <a-space :size="20">
           <a-button type="primary" @click="searchAll()">検索</a-button>
           <a-button type="primary" @click="reset">条件クリア</a-button>
-          <a-button class="ml-50%" type="primary" @click="forwardNew1"
+          <a-button class="ml-10" type="primary" @click="forwardNew1"
             >新規登録</a-button
           >
-          <a-button class="ml-70%" type="primary" @click="preview1"
-            >プレビュー</a-button
-          >
+          <a-button type="primary" @click="preview1">プレビュー</a-button>
         </a-space>
         <close-page />
       </div>
@@ -122,7 +120,7 @@
           :params="{ order: 3 }"
           :resizable="false"
         ></vxe-column>
-        <vxe-column header-align="center" align="center" title="支店情報"
+        <vxe-column header-align="center" title="支店情報"
           ><template #default="{ row }">
             <a-button
               class="max-h-22px mt-2px text-center py-0"

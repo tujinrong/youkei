@@ -1,6 +1,10 @@
 <template>
   <div>
-    <a-card :bordered="false" class="mb-4 h-full">
+    <a-card
+      :bordered="false"
+      class="mb-4 h-full"
+      style="background-color: aliceblue"
+    >
       <h1>（GJ8020）処理対象期・年度マスタメンテナンス</h1>
       <div class="my-4 flex justify-between">
         <a-space :size="20">
@@ -9,7 +13,7 @@
         </a-space>
         <close-page />
       </div>
-      <div class="self_adaption_table form">
+      <div class="edit_table form">
         <a-row>
           <a-col span="24">
             <th class="required">事業対象期·年度</th>
@@ -37,61 +41,69 @@
                   disabled
                 />
               </div>
-            </td>
-          </a-col>
-          <a-col span="24"
-            ><read-only
-              thWidth="200"
-              th="1.前期積立金取込日"
-              :td="getDateJpText(formData.ZENKI_TUMITATE_DATE)"
-            />
-          </a-col>
-          <a-col span="24">
-            <read-only
-              thWidth="200"
-              th="2.前期交付金取込日"
-              :td="getDateJpText(formData.ZENKI_KOFU_DATE)"
-            />
-          </a-col>
-          <a-col span="24">
-            <read-only
-              thWidth="200"
-              th="3.返還金計算日"
-              :td="getDateJpText(formData.HENKAN_KEISAN_DATE)"
-            />
-          </a-col>
-          <a-col span="24">
-            <read-only
-              thWidth="200"
-              th="積立金返還人数"
-              :td="
-                String(formData.HENKAN_NINZU).replace(
-                  /\B(?=(\d{3})+(?!\d))/g,
-                  ','
-                )
-              "
-              after="（人）"
-            />
-          </a-col>
-          <a-col span="24">
-            <read-only
-              thWidth="200"
-              th="積立金返還額合計"
-              :td="
-                String(formData.HENKAN_GOKEI).replace(
-                  /\B(?=(\d{3})+(?!\d))/g,
-                  ','
-                )
-              "
-              after="（円）（左記項目は積立金返還処理で算定した結果を保存、表示）"
-            /> </a-col
-          ><a-col span="24">
-            <read-only
-              thWidth="200"
-              th="前期積立金返還率"
-              :td="formData.HENKAN_RITU"
-            />
-          </a-col>
+            </td> </a-col
+        ></a-row>
+        <div class="pl-4">
+          <a-row
+            ><a-col span="6" class="mt-2"
+              ><read-only-pop
+                thWidth="200"
+                th="1.前期積立金取込日"
+                :td="getDateJpText(formData.ZENKI_TUMITATE_DATE)"
+              /> </a-col
+          ></a-row>
+          <a-row
+            ><a-col span="6">
+              <read-only-pop
+                thWidth="200"
+                th="2.前期交付金取込日"
+                :td="getDateJpText(formData.ZENKI_KOFU_DATE)"
+              /> </a-col
+          ></a-row>
+          <a-row
+            ><a-col span="6">
+              <read-only-pop
+                thWidth="200"
+                th="3.返還金計算日"
+                :td="getDateJpText(formData.HENKAN_KEISAN_DATE)"
+              /> </a-col
+          ></a-row>
+          <a-row>
+            <a-col span="6">
+              <read-only-pop
+                thWidth="200"
+                th="積立金返還人数"
+                :td="
+                  String(formData.HENKAN_NINZU).replace(
+                    /\B(?=(\d{3})+(?!\d))/g,
+                    ','
+                  )
+                "
+                after="（人）"
+              /> </a-col></a-row
+          ><a-row>
+            <a-col span="13">
+              <read-only-pop
+                thWidth="200"
+                th="積立金返還額合計"
+                :td="
+                  String(formData.HENKAN_GOKEI).replace(
+                    /\B(?=(\d{3})+(?!\d))/g,
+                    ','
+                  )
+                "
+                after="（円）（左記項目は積立金返還処理で算定した結果を保存、表示）"
+              /> </a-col></a-row
+          ><a-row
+            ><a-col span="6">
+              <read-only-pop
+                thWidth="200"
+                th="前期積立金返還率"
+                :td="formData.HENKAN_RITU"
+              /> </a-col
+          ></a-row>
+        </div>
+        <a-row>
           <a-col span="24">
             <th class="required">対象年度（現在処理中）</th>
             <td>
@@ -124,7 +136,7 @@
               ><span class="!align-middle mt-1 ml-2">回</span>
             </td>
           </a-col>
-          <a-col span="24">
+          <a-col span="15">
             <th>備考</th>
             <td>
               <a-input v-model:value="formData.BIKO" :maxlength="80"></a-input>

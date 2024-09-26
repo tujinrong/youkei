@@ -39,7 +39,7 @@
           header-align="center"
           field="USER_NAME"
           title="ユーザ名"
-          min-width="150"
+          min-width="140"
           sortable
           :params="{ order: 2 }"
           :resizable="true"

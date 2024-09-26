@@ -10,9 +10,9 @@
   <a-modal
     :visible="modalVisible"
     centered
-    title="（GJ8050）金融機関一覧"
+    title="支店情報一覧"
     width="1000px"
-    :body-style="{ minHeight: '600px' }"
+    :body-style="{ height: '600px', overflowY: 'scroll' }"
     :mask-closable="false"
     destroy-on-close
     @cancel="goList"
@@ -71,12 +71,10 @@
       <a-space :size="20">
         <a-button type="primary" @click="searchAll2()">検索</a-button>
         <a-button type="primary" @click="reset2">条件クリア</a-button>
-        <a-button class="ml-50%" type="primary" @click="forwardNew2"
+        <a-button class="ml-10" type="primary" @click="forwardNew2"
           >新規登録</a-button
         >
-        <a-button class="ml-70%" type="primary" @click="preview2"
-          >プレビュー</a-button
-        >
+        <a-button type="primary" @click="preview2">プレビュー</a-button>
       </a-space>
     </div>
     <a-pagination
@@ -87,7 +85,7 @@
       :show-total="(total) => `抽出件数： ${total} 件`"
       show-less-items
       show-size-changer
-      class="m-b-1 text-end"
+      class="m-y-1 text-end"
     />
     <vxe-table
       class="mt-2"
@@ -239,6 +237,7 @@ watch(
 const closeModal = () => {
   resetFields()
   clearValidate()
+  reset2()
   sitanTableData.value = []
   modalVisible.value = false
 }
