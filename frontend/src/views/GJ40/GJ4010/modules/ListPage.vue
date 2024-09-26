@@ -172,7 +172,7 @@
                 <range-select
                   v-model:value="formData.JIMUITAKU_CD"
                   :options="JIMUITAKU_LIST"
-                  class="w-250!"
+                  class="max-w-250!"
                 />
               </a-form-item>
             </td>

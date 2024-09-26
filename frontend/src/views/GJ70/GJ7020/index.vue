@@ -53,7 +53,7 @@
                 <range-select
                   v-model:value="searchParams.KEIYAKUSYA_CD"
                   :options="LIST"
-                  class="w-250!"
+                  class="max-w-250!"
               /></a-form-item></td></a-col
           ><a-col span="24"
             ><th>契約区分</th>
@@ -81,7 +81,7 @@
                 <range-select
                   v-model:value="searchParams.KEIYAKUSYA_CD"
                   :options="LIST"
-                  class="w-250!"
+                  class="max-w-250!"
               /></a-form-item></td
           ></a-col>
           <a-col span="24"
