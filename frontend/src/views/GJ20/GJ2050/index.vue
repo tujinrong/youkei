@@ -1,7 +1,7 @@
 <template>
   <div>
     <a-card :bordered="false" class="h-full min-h-500px staticWidth">
-      <div class="max-w-1200px">
+      <div class="max-w-1150px">
         <h1>
           （GJ2050）家畜防疫互助基金積立金等請求書兼返還金通知書（一部返還）
         </h1>
@@ -131,7 +131,10 @@
             <a-col v-bind="layout">
               <th>事務委託先</th>
               <td class="flex">
-                <a-form-item v-bind="validateInfos.JIMUITAKU_CD" class="w-250!">
+                <a-form-item
+                  v-bind="validateInfos.JIMUITAKU_CD"
+                  class="w-full!"
+                >
                   <range-select
                     v-model:value="formData.JIMUITAKU_CD"
                     :options="ITAKU_CD_NAME_LIST"
@@ -143,7 +146,7 @@
               <td class="flex">
                 <a-form-item
                   v-bind="validateInfos.KEIYAKUSYA_CD"
-                  class="w-250!"
+                  class="w-full!"
                 >
                   <range-select
                     v-model:value="formData.KEIYAKUSYA_CD"

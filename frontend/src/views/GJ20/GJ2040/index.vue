@@ -1,7 +1,7 @@
 <template>
   <div>
     <a-card :bordered="false" class="h-full min-h-500px staticWidth">
-      <div class="max-w-1200px">
+      <div class="max-w-1150px">
         <h1>（GJ2040）家畜防疫互助基金積立金等請求書兼返還金通知書</h1>
         <div class="self_adaption_table form" ref="headRef">
           <a-row>
@@ -27,7 +27,7 @@
               <th class="required">対象期</th>
               <td>
                 <a-form-item v-bind="validateInfos.KI">
-                  <span class="!align-middle">第</span>
+                  <span class="!align-middle">第 </span>
                   <a-input-number
                     v-model:value="formData.KI"
                     :min="1"
@@ -36,7 +36,7 @@
                     class="w-14!"
                     @change="handleKI(false)"
                   />
-                  <span class="!align-middle w-20!">期</span>
+                  <span class="!align-middle w-20!"> 期</span>
                 </a-form-item>
               </td>
             </a-col>
@@ -138,7 +138,7 @@
                   <range-select
                     v-model:value="formData.JIMUITAKU_CD"
                     :options="ITAKU_CD_NAME_LIST"
-                    class="max-w-250!"
+                    class="max-w-full!"
                 /></a-form-item>
               </td>
             </a-col>
@@ -149,7 +149,7 @@
                   <range-select
                     v-model:value="formData.KEIYAKUSYA_CD"
                     :options="KEIYAKUSYA_CD_NAME_LIST"
-                    class="max-w-250!"
+                    class="max-w-full!"
                 /></a-form-item>
               </td>
             </a-col>

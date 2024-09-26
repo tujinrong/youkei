@@ -115,7 +115,7 @@
           <a-col span="13"></a-col>
           <a-col span="5">
             <read-only-pop
-              thWidth="110"
+              thWidth="100"
               th="積立金等総計"
               :td="formData.SEIKYU_KIN"
               after="円"

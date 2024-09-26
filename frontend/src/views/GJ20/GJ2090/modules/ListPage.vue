@@ -39,7 +39,7 @@
                 md: 24,
                 lg: 24,
                 xl: 24,
-                xxl: 8,
+                xxl: 11,
               }"
             >
               <th>請求·返還回数</th>
@@ -54,7 +54,7 @@
                 md: 24,
                 lg: 24,
                 xl: 24,
-                xxl: 10,
+                xxl: 7,
               }"
             >
               <th>入金日・振込日</th>
@@ -171,17 +171,6 @@
                   <range-date
                     v-model:value="formData.NYUKIN_DATE"
                     class="w-full"
-                  />
-                </a-form-item>
-              </td>
-            </a-col>
-            <a-col v-bind="layout">
-              <th>入金日・振込日</th>
-              <td class="flex">
-                <a-form-item v-bind="validateInfos.SEIKYU_DATE">
-                  <DateJp
-                    v-model:value="formData.SEIKYU_DATE"
-                    class="max-w-50"
                   />
                 </a-form-item>
               </td>

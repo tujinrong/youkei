@@ -1,7 +1,7 @@
 <template>
   <div>
     <a-card :bordered="false" class="h-full min-h-500px staticWidth">
-      <div class="max-w-1200px">
+      <div class="max-w-1150px">
         <h1>（GJ2070）家畜防疫互助金積立金等請求通知書（新規加入者）</h1>
         <div class="self_adaption_table form" ref="headRef">
           <a-row>
@@ -138,7 +138,7 @@
                   <range-select
                     v-model:value="formData.JIMUITAKU_CD"
                     :options="ITAKU_CD_NAME_LIST"
-                    class="max-w-250!"
+                    class="max-w-full!"
                 /></a-form-item>
               </td>
             </a-col>
@@ -149,7 +149,7 @@
                   <range-select
                     v-model:value="formData.KEIYAKUSYA_CD"
                     :options="KEIYAKUSYA_CD_NAME_LIST"
-                    class="max-w-250!"
+                    class="max-w-full!"
                 /></a-form-item>
               </td>
             </a-col>

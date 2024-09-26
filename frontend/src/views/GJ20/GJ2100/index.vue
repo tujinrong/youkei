@@ -1,7 +1,7 @@
 <template>
   <div>
     <a-card :bordered="false" class="h-full min-h-500px staticWidth">
-      <div class="max-w-1200px">
+      <div class="max-w-1150px">
         <h1>（GJ2100）生産者積立金等集計表作成処理（鶏の種類別）</h1>
         <div class="self_adaption_table form" ref="headRef">
           <a-row>
@@ -9,7 +9,7 @@
               <th class="required">対象期</th>
               <td>
                 <a-form-item v-bind="validateInfos.KI">
-                  <span class="!align-middle">第</span>
+                  <span class="!align-middle">第 </span>
                   <a-input-number
                     v-model:value="formData.KI"
                     :min="1"
@@ -18,7 +18,7 @@
                     class="w-14!"
                     @change="handleKI(false)"
                   ></a-input-number>
-                  <span class="!align-middle">期</span>
+                  <span class="!align-middle"> 期</span>
                 </a-form-item>
               </td>
             </a-col>
@@ -85,7 +85,7 @@
                     v-model:value="formData.JIMUITAKU_CD"
                     :options="ITAKU_CD_NAME_LIST"
                     :disabled="formData.SYUKEI_KBN !== 2"
-                    class="max-w-250!"
+                    class="max-w-full!"
                 /></a-form-item>
               </td>
             </a-col>

@@ -1,7 +1,7 @@
 <template>
   <div>
     <a-card :bordered="false" class="h-full min-h-500px staticWidth">
-      <div class="max-w-1200px">
+      <div class="max-w-1150px">
         <h1>（GJ2080）生産者積立金等請求・返還一覧表（処理確定・未処理）</h1>
         <div class="self_adaption_table form" ref="headRef">
           <a-row>
@@ -9,7 +9,7 @@
               <th class="required">対象期</th>
               <td>
                 <a-form-item v-bind="validateInfos.KI">
-                  <span class="!align-middle">第</span>
+                  <span class="!align-middle">第 </span>
                   <a-input-number
                     v-model:value="formData.KI"
                     :min="1"
@@ -18,7 +18,7 @@
                     class="w-14!"
                     @change="handleKI(false)"
                   ></a-input-number>
-                  <span class="!align-middle">期</span>
+                  <span class="!align-middle"> 期</span>
                 </a-form-item>
               </td>
             </a-col>
@@ -109,7 +109,7 @@
               <td class="flex">
                 <a-form-item
                   v-bind="validateInfos.JIMUITAKU_CD"
-                  class="max-w-250!"
+                  class="max-w-full!"
                 >
                   <range-select
                     v-model:value="formData.JIMUITAKU_CD"
@@ -122,7 +122,7 @@
               <td class="flex">
                 <a-form-item
                   v-bind="validateInfos.KEIYAKUSYA_CD"
-                  class="max-w-250!"
+                  class="max-w-full!"
                 >
                   <range-select
                     v-model:value="formData.KEIYAKUSYA_CD"
