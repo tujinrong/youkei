@@ -12,24 +12,26 @@
     <div class="parent-container">
       <div class="edit_table form w-full">
         <a-row>
-          <a-col span="8">
+          <a-col span="6">
             <read-only-pop
               th="契約者番号"
               thWidth="110"
               :td="String(formData.KEIYAKUSYA_CD)"
             ></read-only-pop>
           </a-col>
+          <a-col span="1"></a-col>
           <a-col span="8">
             <read-only-pop
               th="都道府県"
-              thWidth="110"
+              thWidth="75"
               :td="formData.KEN_CD_NAME"
             ></read-only-pop>
           </a-col>
+          <a-col span="1"></a-col>
           <a-col span="8">
             <read-only-pop
               th="処理状況"
-              thWidth="110"
+              thWidth="75"
               :td="formData.SYORI_JOKYO_KBN_NAME"
             ></read-only-pop>
           </a-col>
@@ -61,6 +63,7 @@
               :td="getDateJpText(formData.SEIKYU_DATE)"
             />
           </a-col>
+          <a-col span="1"></a-col>
           <a-col span="5" class="thleft">
             <read-only-pop
               th="請求回数"
@@ -80,7 +83,8 @@
               after="円"
             />
           </a-col>
-          <a-col span="6" style="flex-flow: column" class="thleft">
+          <a-col span="1"></a-col>
+          <a-col span="5" style="flex-flow: column" class="thleft">
             <div class="flex">
               <read-only-pop
                 thWidth="90"
@@ -92,7 +96,8 @@
             </div>
             <div class="flex"></div>
           </a-col>
-          <a-col span="5" class="thleft">
+          <a-col span="1"></a-col>
+          <a-col span="4" class="thleft">
             <read-only-pop
               thWidth="60"
               th="手数料"
@@ -101,9 +106,10 @@
               after="円"
             />
           </a-col>
-          <a-col span="6">
+          <a-col span="1"></a-col>
+          <a-col span="5">
             <read-only-pop
-              thWidth="140"
+              thWidth="80"
               th="返還金額(預かり金)"
               :td="formData.TESURYO"
               v-bind="{ ...mathNumber }"
@@ -113,7 +119,7 @@
         </a-row>
         <a-row>
           <a-col span="13"></a-col>
-          <a-col span="5">
+          <a-col span="5" class="thleft">
             <read-only-pop
               thWidth="100"
               th="積立金等総計"
@@ -236,7 +242,7 @@
           </a-col>
           <a-col span="15" offset="1">
             <read-only-pop
-              thWidth="100"
+              thWidth="80"
               th="積立金額"
               :td="formData.BANK_NAME"
               after="円(返還金額(預かり金) + 入金額)"
@@ -248,7 +254,7 @@
             <!--            <th style="width: 110px; border-top: none"></th>-->
             <!--            <td style="border-bottom: none; border-top: none"></td>-->
             <read-only-pop
-              thWidth="100"
+              thWidth="80"
               th="手数料額"
               :td="formData.FURI_KOZA_NO"
               after="円"
@@ -260,7 +266,7 @@
             <!--            <th style="width: 110px; border-top: none"></th>-->
             <!--            <td style="border-top: none"></td>-->
             <read-only-pop
-              thWidth="100"
+              thWidth="80"
               th="入金額"
               :td="formData.FURI_KOZA_MEIGI_KANA"
               after="円"

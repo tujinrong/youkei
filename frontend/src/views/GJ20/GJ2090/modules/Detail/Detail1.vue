@@ -12,30 +12,32 @@
     <div class="parent-container">
       <div class="edit_table form w-full">
         <a-row>
-          <a-col span="8">
+          <a-col span="6">
             <read-only-pop
               th="契約者番号"
               thWidth="140"
               :td="formData.KEIYAKUSYA_CD"
             />
           </a-col>
+          <a-col span="1"></a-col>
           <a-col span="8">
             <read-only-pop
               th="都道府県"
-              thWidth="140"
+              thWidth="70"
               :td="formData.KEN_CD_NAME"
             />
           </a-col>
+          <a-col span="1"></a-col>
           <a-col span="8">
             <read-only-pop
               th="処理状況"
-              thWidth="110"
+              thWidth="70"
               :td="formData.SYORI_JOKYO_KBN_NAME"
             />
           </a-col>
         </a-row>
         <a-row>
-          <a-col span="13">
+          <a-col span="14">
             <read-only-pop
               thWidth="140"
               th="契約者名"
@@ -44,14 +46,14 @@
           </a-col>
         </a-row>
         <a-row>
-          <a-col span="13">
+          <a-col span="14">
             <read-only-pop thWidth="140" th="" :hideTd="true" />
             <read-only-pop :hideTh="true" :td="formData.KEIYAKUSYA_KANA" />
           </a-col>
         </a-row>
         <a-row>
           <a-col span="7">
-            <read-only-pop thWidth="140" th="住所" :hideTd="true" />
+            <read-only-pop thWidth="125" th="住所" :hideTd="true" />
             <read-only-pop th="　〒　" :td="formData.ADDR_POST" />
           </a-col>
         </a-row>
@@ -63,40 +65,48 @@
         <a-row>
           <a-col span="10">
             <read-only-pop th="連絡先" thWidth="140" :hideTd="true" />
-            <read-only-pop th="電話1" thWidth="80" :td="formData.ADDR_TEL1" />
+            <read-only-pop th="電話1" thWidth="70" :td="formData.ADDR_TEL1" />
           </a-col>
-          <a-col span="7">
-            <read-only-pop th="電話2" thWidth="80" :td="formData.ADDR_TEL2" />
+          <a-col span="1"></a-col>
+          <a-col span="6">
+            <read-only-pop th="電話2" thWidth="50" :td="formData.ADDR_TEL2" />
           </a-col>
-          <a-col span="7">
-            <read-only-pop th="FAX" thWidth="80" :td="formData.ADDR_FAX" />
+          <a-col span="1"></a-col>
+          <a-col span="6">
+            <read-only-pop th="FAX" thWidth="40" :td="formData.ADDR_FAX" />
           </a-col>
         </a-row>
         <a-row>
-          <a-col span="24">
+          <a-col span="17">
             <read-only-pop
               thWidth="140"
               th="振込・返還口座情報"
               :hideTd="true"
             />
             <read-only-pop
-              thWidth="130"
+              thWidth="70"
               th="金融機関"
               :td="formData.BANK_NAME"
             />
-            <read-only-pop thWidth="130" th="支店" :td="formData.SITEN_NAME" />
+          </a-col>
+          <a-col span="1"></a-col>
+          <a-col span="6">
+            <read-only-pop thWidth="40" th="支店" :td="formData.SITEN_NAME" />
           </a-col>
         </a-row>
         <a-row>
-          <a-col span="24">
+          <a-col span="10">
             <read-only-pop thWidth="140" th="" :hideTd="true" />
             <read-only-pop
-              thWidth="130"
+              thWidth="70"
               th="口座種別"
               :td="formData.FURI_KOZA_SYUBETU_NAME"
             />
+          </a-col>
+          <a-col span="1"></a-col>
+          <a-col span="6">
             <read-only-pop
-              thWidth="130"
+              thWidth="70"
               th="口座番号"
               :td="formData.FURI_KOZA_NO"
             />
@@ -132,7 +142,7 @@
         </a-row>
         <h2 class="mt3 mb1">請求入金内容</h2>
         <a-row>
-          <a-col span="24">
+          <a-col span="5">
             <read-only-pop th="対象期" thWidth="140" :td="formData.KI" />
           </a-col>
         </a-row>

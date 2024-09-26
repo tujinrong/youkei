@@ -41,27 +41,32 @@
           </td>
         </a-col>
       </a-row>
-      <a-row class="mt-1">
-        <a-col span="3">
-          <read-only-pop thWidth="90" th="住所" td="" :hideTd="true" /></a-col
-        ><a-col span="5"
-          ><read-only-pop th="　〒　" :td="formData.ADDR_POST" /></a-col
-        ><a-col span="5"
-          ><read-only-pop th="住所1" :td="formData.ADDR_1" /></a-col
-        ><a-col span="11"
-          ><read-only-pop th="住所2" :td="formData.ADDR_2"
-        /></a-col>
+      <a-row>
+        <a-col span="2">
+          <read-only-pop thWidth="110" th="住所" td="" :hideTd="true" />
+        </a-col>
+        <a-col span="4">
+          <read-only-pop th="　〒　" :td="formData.ADDR_POST" />
+        </a-col>
+        <a-col span="1"></a-col>
+        <a-col span="5">
+          <read-only-pop thWidth="50" th="住所1" :td="formData.ADDR_1" />
+        </a-col>
+        <a-col span="1"></a-col>
+        <a-col span="11">
+          <read-only-pop thWidth="50" th="住所2" :td="formData.ADDR_2" />
+        </a-col>
       </a-row>
       <a-row>
-        <a-col span="24">
-          <read-only-pop
-            thWidth="250"
-            th=""
-            :hideTd="true"
-            :td="formData.ADDR_POST"
-          />
-          <read-only-pop th="住所3" :td="formData.ADDR_3" />
-          <read-only-pop th="住所4" :td="formData.ADDR_4" />
+        <a-col span="7">
+          <read-only-pop thWidth="110" th="" :hideTd="true" />
+        </a-col>
+        <a-col span="8">
+          <read-only-pop thWidth="50" th="住所3" :td="formData.ADDR_3" />
+        </a-col>
+        <a-col span="1"></a-col>
+        <a-col span="8">
+          <read-only-pop thWidth="50" th="住所4" :td="formData.ADDR_4" />
         </a-col>
       </a-row>
       <a-row>
