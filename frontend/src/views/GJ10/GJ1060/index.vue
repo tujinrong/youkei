@@ -9,7 +9,7 @@
 <template>
   <div>
     <a-card :bordered="false" class="h-full min-h-500px staticWidth">
-      <div>
+      <div class="max-w-1200px">
         <h1>（GJ1060）家畜防疫互助基金事業加入状況表作成</h1>
         <div class="self_adaption_table form" ref="headRef">
           <a-row>
@@ -89,18 +89,20 @@
               </td>
             </a-col>
           </a-row>
-          <a-row class="m-t-1">
-            <a-col :span="24">
-              <div class="mb-2 header_operation flex justify-between w-full">
-                <a-space :size="20">
-                  <a-button type="primary">EXCEL出力</a-button>
-                  <a-button type="primary">条件クリア</a-button>
-                </a-space>
-                <close-page />
-              </div>
-            </a-col>
-          </a-row>
         </div>
+      </div>
+      <div>
+        <a-row class="m-t-1">
+          <a-col :span="24">
+            <div class="mb-2 header_operation flex justify-between w-full">
+              <a-space :size="20">
+                <a-button type="primary">EXCEL出力</a-button>
+                <a-button type="primary">条件クリア</a-button>
+              </a-space>
+              <close-page />
+            </div>
+          </a-col>
+        </a-row>
       </div>
     </a-card>
   </div>

@@ -9,196 +9,198 @@
 <template>
   <div class="h-full min-h-500px flex-col-stretch gap-12px">
     <a-card ref="headRef" :bordered="false" class="staticWidth">
-      <h1>（GJ4010）互助金申請情報一覧</h1>
-      <div class="self_adaption_table form max-w-400 mt-1">
-        <a-row>
-          <a-col span="24">
-            <th class="required">互助金単価マスタ　参照日</th>
-            <td class="flex">
-              <a-form-item v-bind="validateInfos.TANKA_MST_DATE">
-                <DateJp
-                  class="max-w-50"
-                  v-model:value="formData.TANKA_MST_DATE"
-                />
-              </a-form-item>
-            </td>
-          </a-col>
-          <a-col v-bind="layout">
-            <th class="required">期</th>
-            <td>
-              <a-form-item v-bind="validateInfos.KI">
-                <a-input-number
-                  v-model:value="formData.KI"
-                  :min="1"
-                  :max="99"
-                  :maxlength="2"
-                  class="w-14"
-                ></a-input-number>
-              </a-form-item>
-            </td>
-          </a-col>
-          <a-col
-            v-bind="{
-              md: 24,
-              lg: 24,
-              xl: 24,
-              xxl: 12,
-            }"
-          >
-            <th>認定回数</th>
-            <td class="flex">
-              <a-form-item v-bind="validateInfos.HASSEI_KAISU">
-                <range-number
-                  v-model:value="formData.HASSEI_KAISU"
-                  :min="1"
-                  :max="99"
-                  :maxlength="2"
-                  class="max-w-34"
-                />
-              </a-form-item>
-            </td>
-          </a-col>
-          <a-col
-            v-bind="{
-              md: 24,
-              lg: 24,
-              xl: 24,
-              xxl: 12,
-            }"
-          >
-            <th>計算回数</th>
-            <td class="flex">
-              <a-form-item v-bind="validateInfos.KEISAN_KAISU">
-                <range-number
-                  v-model:value="formData.KEISAN_KAISU"
-                  :min="1"
-                  :max="999"
-                  :maxlength="3"
-                  class="max-w-36"
-                />
-              </a-form-item>
-            </td>
-          </a-col>
-          <a-col v-bind="layout">
-            <th>都道府県</th>
-            <td>
-              <range-select
-                v-model:value="formData.KEN_CD"
-                :options="KEN_CD_NAME_LIST"
-                class="w-90!"
-              />
-            </td>
-          </a-col>
-          <a-col v-bind="layout">
-            <th>契約者番号</th>
-            <td>
-              <a-input-number
-                v-model:value="formData.KEIYASYA_CD"
-                :min="1"
-                :max="99999"
-                :maxlength="5"
-                class="w-20"
-              ></a-input-number>
-            </td>
-          </a-col>
-          <a-col v-bind="layout">
-            <th>契約区分</th>
-            <td>
-              <ai-select
-                v-model:value="formData.KEIYAKU_KBN"
-                :options="KEIYAKU_KBN_CD_NAME_LIST"
-                class="w-37!"
-                type="number"
-              ></ai-select>
-            </td>
-          </a-col>
-          <a-col v-bind="layout">
-            <th>契約状況</th>
-            <td>
-              <ai-select
-                v-model:value="formData.KEIYAKU_JYOKYO"
-                :options="KEIYAKU_KBN_CD_NAME_LIST"
-                class="w-37!"
-                type="number"
-              ></ai-select>
-            </td>
-          </a-col>
-          <a-col v-bind="layout">
-            <th>契約者名</th>
-            <td>
-              <div class="flex items-center w-full">
-                <a-input
-                  v-model:value="formData.KEIYAKUSYA_NAME"
-                  class="max-w-115"
-                  :maxlength="50"
-                  style="width: 80%"
-                />
-                <span>(部分一致)</span>
-              </div>
-            </td>
-          </a-col>
-          <a-col v-bind="layout">
-            <th>契約者名(フリガナ)</th>
-            <td>
-              <div class="flex items-center w-full">
-                <a-input
-                  v-model:value="formData.KEIYAKUSYA_KANA"
-                  class="max-w-115"
-                  :maxlength="50"
-                  style="width: 80%"
-                />
-                <span>(部分一致)</span>
-              </div>
-            </td>
-          </a-col>
-          <a-col v-bind="layout">
-            <th>住所</th>
-            <td>
-              <div class="flex items-center w-full">
-                <a-input
-                  v-model:value="formData.ADDR"
-                  class="w-250"
-                  :maxlength="50"
-                />
-                <span>(部分一致)</span>
-              </div>
-            </td>
-          </a-col>
-          <a-col v-bind="layout">
-            <th>電話番号</th>
-            <td>
-              <div class="flex items-center w-full">
-                <a-input
-                  v-model:value="formData.ADDR_TEL"
-                  class="w-33"
-                  :maxlength="50"
-                />
-                <span>(全一致)</span>
-              </div>
-            </td>
-          </a-col>
-          <a-col v-bind="layout">
-            <th>事務委託先</th>
-            <td>
-              <a-form-item v-bind="validateInfos.JIMUITAKU_CD">
+      <div class="max-w-1300px">
+        <h1>（GJ4010）互助金申請情報一覧</h1>
+        <div class="self_adaption_table form max-w-400 mt-1">
+          <a-row>
+            <a-col span="24">
+              <th class="required">互助金単価マスタ　参照日</th>
+              <td class="flex">
+                <a-form-item v-bind="validateInfos.TANKA_MST_DATE">
+                  <DateJp
+                    class="max-w-50"
+                    v-model:value="formData.TANKA_MST_DATE"
+                  />
+                </a-form-item>
+              </td>
+            </a-col>
+            <a-col v-bind="layout">
+              <th class="required">期</th>
+              <td>
+                <a-form-item v-bind="validateInfos.KI">
+                  <a-input-number
+                    v-model:value="formData.KI"
+                    :min="1"
+                    :max="99"
+                    :maxlength="2"
+                    class="w-14"
+                  ></a-input-number>
+                </a-form-item>
+              </td>
+            </a-col>
+            <a-col
+              v-bind="{
+                md: 24,
+                lg: 24,
+                xl: 24,
+                xxl: 12,
+              }"
+            >
+              <th>認定回数</th>
+              <td class="flex">
+                <a-form-item v-bind="validateInfos.HASSEI_KAISU">
+                  <range-number
+                    v-model:value="formData.HASSEI_KAISU"
+                    :min="1"
+                    :max="99"
+                    :maxlength="2"
+                    class="max-w-34"
+                  />
+                </a-form-item>
+              </td>
+            </a-col>
+            <a-col
+              v-bind="{
+                md: 24,
+                lg: 24,
+                xl: 24,
+                xxl: 12,
+              }"
+            >
+              <th>計算回数</th>
+              <td class="flex">
+                <a-form-item v-bind="validateInfos.KEISAN_KAISU">
+                  <range-number
+                    v-model:value="formData.KEISAN_KAISU"
+                    :min="1"
+                    :max="999"
+                    :maxlength="3"
+                    class="max-w-36"
+                  />
+                </a-form-item>
+              </td>
+            </a-col>
+            <a-col v-bind="layout">
+              <th>都道府県</th>
+              <td>
                 <range-select
-                  v-model:value="formData.JIMUITAKU_CD"
-                  :options="JIMUITAKU_LIST"
-                  class="max-w-250!"
+                  v-model:value="formData.KEN_CD"
+                  :options="KEN_CD_NAME_LIST"
+                  class="w-90!"
                 />
-              </a-form-item>
-            </td>
-          </a-col>
-        </a-row>
-      </div>
-      <div class="my-2 flex justify-between max-w-250">
-        <a-space
-          ><span>検索方法</span>
-          <a-radio-group v-model:value="formData.SEARCH_METHOD">
-            <a-radio :value="EnumAndOr.AndCode">すべてを含む(AND)</a-radio>
-            <a-radio :value="EnumAndOr.OrCode">いずれかを含む(OR)</a-radio>
-          </a-radio-group>
-        </a-space>
+              </td>
+            </a-col>
+            <a-col v-bind="layout">
+              <th>契約者番号</th>
+              <td>
+                <a-input-number
+                  v-model:value="formData.KEIYASYA_CD"
+                  :min="1"
+                  :max="99999"
+                  :maxlength="5"
+                  class="w-20"
+                ></a-input-number>
+              </td>
+            </a-col>
+            <a-col v-bind="layout">
+              <th>契約区分</th>
+              <td>
+                <ai-select
+                  v-model:value="formData.KEIYAKU_KBN"
+                  :options="KEIYAKU_KBN_CD_NAME_LIST"
+                  class="w-37!"
+                  type="number"
+                ></ai-select>
+              </td>
+            </a-col>
+            <a-col v-bind="layout">
+              <th>契約状況</th>
+              <td>
+                <ai-select
+                  v-model:value="formData.KEIYAKU_JYOKYO"
+                  :options="KEIYAKU_KBN_CD_NAME_LIST"
+                  class="w-37!"
+                  type="number"
+                ></ai-select>
+              </td>
+            </a-col>
+            <a-col v-bind="layout">
+              <th>契約者名</th>
+              <td>
+                <div class="flex items-center w-full">
+                  <a-input
+                    v-model:value="formData.KEIYAKUSYA_NAME"
+                    class="max-w-115"
+                    :maxlength="50"
+                    style="width: 80%"
+                  />
+                  <span>(部分一致)</span>
+                </div>
+              </td>
+            </a-col>
+            <a-col v-bind="layout">
+              <th>契約者名(フリガナ)</th>
+              <td>
+                <div class="flex items-center w-full">
+                  <a-input
+                    v-model:value="formData.KEIYAKUSYA_KANA"
+                    class="max-w-115"
+                    :maxlength="50"
+                    style="width: 80%"
+                  />
+                  <span>(部分一致)</span>
+                </div>
+              </td>
+            </a-col>
+            <a-col v-bind="layout">
+              <th>住所</th>
+              <td>
+                <div class="flex items-center w-full">
+                  <a-input
+                    v-model:value="formData.ADDR"
+                    class="w-250"
+                    :maxlength="50"
+                  />
+                  <span>(部分一致)</span>
+                </div>
+              </td>
+            </a-col>
+            <a-col v-bind="layout">
+              <th>電話番号</th>
+              <td>
+                <div class="flex items-center w-full">
+                  <a-input
+                    v-model:value="formData.ADDR_TEL"
+                    class="w-33"
+                    :maxlength="50"
+                  />
+                  <span>(全一致)</span>
+                </div>
+              </td>
+            </a-col>
+            <a-col v-bind="layout">
+              <th>事務委託先</th>
+              <td>
+                <a-form-item v-bind="validateInfos.JIMUITAKU_CD">
+                  <range-select
+                    v-model:value="formData.JIMUITAKU_CD"
+                    :options="JIMUITAKU_LIST"
+                    class="max-w-250!"
+                  />
+                </a-form-item>
+              </td>
+            </a-col>
+          </a-row>
+        </div>
+        <div class="my-2 flex justify-between max-w-250">
+          <a-space
+            ><span>検索方法</span>
+            <a-radio-group v-model:value="formData.SEARCH_METHOD">
+              <a-radio :value="EnumAndOr.AndCode">すべてを含む(AND)</a-radio>
+              <a-radio :value="EnumAndOr.OrCode">いずれかを含む(OR)</a-radio>
+            </a-radio-group>
+          </a-space>
+        </div>
       </div>
       <div class="my-2 flex">
         <a-space :size="20">

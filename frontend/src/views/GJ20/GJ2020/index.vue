@@ -9,119 +9,124 @@
 <template>
   <div class="h-full min-h-500px flex-col-stretch gap-12px">
     <a-card ref="headRef" :bordered="false" class="staticWidth">
-      <h1>（GJ2020）契約者積立金計算処理</h1>
-      <div class="self_adaption_table form mt-1">
-        <a-row>
-          <a-col v-bind="layout">
-            <th class="required">処理区分</th>
-            <td class="flex">
-              <a-form-item v-bind="validateInfos.SYORI_KBN">
-                <a-radio-group v-model:value="formData.SYORI_KBN" class="mt-1">
-                  <a-radio :value="0">請求·返還処理</a-radio>
-                  <a-radio :value="1">
-                    請求·返還取消処理(取消対象に入金済が存在する場合は、取消不可)
-                  </a-radio>
-                </a-radio-group>
-              </a-form-item>
-            </td>
-          </a-col>
-          <a-col span="5">
-            <th class="required">対象期</th>
-            <td>
-              <a-form-item v-bind="validateInfos.KI">
-                <!--                <span class="!align-middle">第</span>-->
-                <a-input-number
-                  v-model:value="formData.KI"
-                  :min="1"
-                  :max="99"
-                  :maxlength="2"
-                  class="w-14"
-                ></a-input-number>
-                <!--                <span class="!align-middle">期</span>-->
-              </a-form-item>
-            </td>
-          </a-col>
-          <a-col span="7">
-            <th>請求·返還回数</th>
-            <td>
-              <a-form-item v-bind="validateInfos.SEIKYU_KAISU">
-                <div class="flex items-center">
-                  <a-input-number
-                    v-model:value="formData.SEIKYU_KAISU"
-                    :min="0"
-                    :max="999"
-                    :maxlength="3"
-                    :disabled="formData.SYORI_KBN == 0"
-                    class="w-15"
-                  ></a-input-number>
-                  <!-- <a-input v-model:value="formData.SEIKYU_KAISU" class="w-14" /> -->
-                  <span>(入力&表示)</span>
-                </div>
-              </a-form-item>
-            </td>
-          </a-col>
-          <a-col span="12">
-            <read-only
-              thWidth="80"
-              th="手数料率"
-              :td="formData.TESURYO_KAISU"
-              after="%"
-            />
-          </a-col>
-          <a-col span="24">
-            <th class="required">徵収·返還区分</th>
-            <td class="flex">
-              <a-form-item v-bind="validateInfos.CYOSYU_HENKAN_KBN">
-                <a-space class="flex-wrap">
-                  <a-checkbox
-                    v-for="(label, key) in LABELS"
-                    :key="key"
-                    class="w-40"
-                    v-model:checked="formData.CYOSYU_HENKAN_KBN[key]"
+      <div class="max-w-1400px">
+        <h1>（GJ2020）契約者積立金計算処理</h1>
+        <div class="self_adaption_table form mt-1">
+          <a-row>
+            <a-col v-bind="layout">
+              <th class="required">処理区分</th>
+              <td class="flex">
+                <a-form-item v-bind="validateInfos.SYORI_KBN">
+                  <a-radio-group
+                    v-model:value="formData.SYORI_KBN"
+                    class="mt-1"
                   >
-                    {{ label }}
-                  </a-checkbox>
-                  <span class="w-20">※ 廃業していない契約者が対象です</span>
-                </a-space>
-              </a-form-item>
-            </td>
-          </a-col>
-          <a-col span="24">
-            <th class="required">請求·返還年月日</th>
-            <td class="flex">
-              <a-form-item v-bind="validateInfos.SEIKYU_DATE">
-                <DateJp v-model:value="formData.SEIKYU_DATE" />
-              </a-form-item>
-            </td>
-          </a-col>
-          <a-col span="24">
-            <th class="required">納付期限</th>
-            <td class="flex">
-              <a-form-item v-bind="validateInfos.KIGEN_DATE">
-                <DateJp v-model:value="formData.KIGEN_DATE" />
-              </a-form-item>
-            </td>
-            <th class="required">振込予定日</th>
-            <td class="flex">
-              <a-form-item v-bind="validateInfos.FURIKOMI_YOTEI_DATE">
-                <DateJp v-model:value="formData.FURIKOMI_YOTEI_DATE" />
-              </a-form-item>
-            </td>
-          </a-col>
-          <a-col span="24">
-            <th>契約者番号</th>
-            <td class="flex">
-              <a-form-item v-bind="validateInfos.KEIYAKUSYA_CD">
-                <ai-select
-                  v-model:value="formData.KEIYAKUSYA_CD"
-                  :options="KEIYAKU_KBN_CD_NAME_LIST"
-                  class="max-w-150"
-                  type="number"
-                ></ai-select>
-              </a-form-item>
-            </td>
-          </a-col>
-        </a-row>
+                    <a-radio :value="0">請求·返還処理</a-radio>
+                    <a-radio :value="1">
+                      請求·返還取消処理(取消対象に入金済が存在する場合は、取消不可)
+                    </a-radio>
+                  </a-radio-group>
+                </a-form-item>
+              </td>
+            </a-col>
+            <a-col span="5">
+              <th class="required">対象期</th>
+              <td>
+                <a-form-item v-bind="validateInfos.KI">
+                  <!--                <span class="!align-middle">第</span>-->
+                  <a-input-number
+                    v-model:value="formData.KI"
+                    :min="1"
+                    :max="99"
+                    :maxlength="2"
+                    class="w-14"
+                  ></a-input-number>
+                  <!--                <span class="!align-middle">期</span>-->
+                </a-form-item>
+              </td>
+            </a-col>
+            <a-col span="7">
+              <th>請求·返還回数</th>
+              <td>
+                <a-form-item v-bind="validateInfos.SEIKYU_KAISU">
+                  <div class="flex items-center">
+                    <a-input-number
+                      v-model:value="formData.SEIKYU_KAISU"
+                      :min="0"
+                      :max="999"
+                      :maxlength="3"
+                      :disabled="formData.SYORI_KBN == 0"
+                      class="w-15"
+                    ></a-input-number>
+                    <!-- <a-input v-model:value="formData.SEIKYU_KAISU" class="w-14" /> -->
+                    <span>(入力&表示)</span>
+                  </div>
+                </a-form-item>
+              </td>
+            </a-col>
+            <a-col span="12">
+              <read-only
+                thWidth="80"
+                th="手数料率"
+                :td="formData.TESURYO_KAISU"
+                after="%"
+              />
+            </a-col>
+            <a-col span="24">
+              <th class="required">徵収·返還区分</th>
+              <td class="flex">
+                <a-form-item v-bind="validateInfos.CYOSYU_HENKAN_KBN">
+                  <a-space class="flex-wrap">
+                    <a-checkbox
+                      v-for="(label, key) in LABELS"
+                      :key="key"
+                      class="w-40"
+                      v-model:checked="formData.CYOSYU_HENKAN_KBN[key]"
+                    >
+                      {{ label }}
+                    </a-checkbox>
+                    <span class="w-20">※ 廃業していない契約者が対象です</span>
+                  </a-space>
+                </a-form-item>
+              </td>
+            </a-col>
+            <a-col span="24">
+              <th class="required">請求·返還年月日</th>
+              <td class="flex">
+                <a-form-item v-bind="validateInfos.SEIKYU_DATE">
+                  <DateJp v-model:value="formData.SEIKYU_DATE" />
+                </a-form-item>
+              </td>
+            </a-col>
+            <a-col span="24">
+              <th class="required">納付期限</th>
+              <td class="flex">
+                <a-form-item v-bind="validateInfos.KIGEN_DATE">
+                  <DateJp v-model:value="formData.KIGEN_DATE" />
+                </a-form-item>
+              </td>
+              <th class="required">振込予定日</th>
+              <td class="flex">
+                <a-form-item v-bind="validateInfos.FURIKOMI_YOTEI_DATE">
+                  <DateJp v-model:value="formData.FURIKOMI_YOTEI_DATE" />
+                </a-form-item>
+              </td>
+            </a-col>
+            <a-col span="24">
+              <th>契約者番号</th>
+              <td class="flex">
+                <a-form-item v-bind="validateInfos.KEIYAKUSYA_CD">
+                  <ai-select
+                    v-model:value="formData.KEIYAKUSYA_CD"
+                    :options="KEIYAKU_KBN_CD_NAME_LIST"
+                    class="max-w-150"
+                    type="number"
+                  ></ai-select>
+                </a-form-item>
+              </td>
+            </a-col>
+          </a-row>
+        </div>
       </div>
       <div class="my-2 flex">
         <a-space :size="20">

@@ -9,186 +9,194 @@
 <template>
   <div class="h-full min-h-500px flex-col-stretch gap-12px">
     <a-card ref="headRef" :bordered="false" class="staticWidth">
-      <h1>（GJ2090）契約者積立金等入金・返還入力</h1>
-      <div class="self_adaption_table form max-w-400 mt-1">
-        <a-row>
-          <a-col
-            v-bind="{
-              md: 24,
-              lg: 24,
-              xl: 24,
-              xxl: 6,
-            }"
-          >
-            <th class="required">対象期</th>
-            <td>
-              <a-form-item v-bind="validateInfos.KI">
-                <a-input-number
-                  v-model:value="formData.KI"
-                  :min="1"
-                  :max="99"
-                  :maxlength="2"
-                  class="w-14!"
-                ></a-input-number>
-              </a-form-item>
-            </td>
-          </a-col>
-          <a-col
-            v-bind="{
-              md: 24,
-              lg: 24,
-              xl: 24,
-              xxl: 8,
-            }"
-          >
-            <th>請求·返還回数</th>
-            <td class="flex">
-              <a-form-item v-bind="validateInfos.SEIKYU_KAISU">
-                <range-number v-model:value="formData.SEIKYU_KAISU" unit="回"
-              /></a-form-item>
-            </td>
-          </a-col>
-          <a-col
-            v-bind="{
-              md: 24,
-              lg: 24,
-              xl: 24,
-              xxl: 10,
-            }"
-          >
-            <th>入金日・振込日</th>
-            <td class="flex">
-              <a-form-item v-bind="validateInfos.SEIKYU_DATE">
-                <DateJp v-model:value="formData.SEIKYU_DATE" class="max-w-50" />
-              </a-form-item>
-            </td>
-          </a-col>
-          <a-col v-bind="layout">
-            <th>都道府県</th>
-            <td>
-              <range-select
-                class="w-90!"
-                v-model:value="formData.KEN_CD"
-                :options="KEN_CD_NAME_LIST"
-              />
-            </td>
-          </a-col>
-          <a-col v-bind="layout">
-            <th>事務委託先</th>
-            <td>
-              <a-form-item v-bind="validateInfos.JIMUITAKU_CD">
-                <ai-select
-                  v-model:value="formData.JIMUITAKU_CD"
-                  :option="JIMUITAKU_LIST"
-                  split-val
-                  class="max-w-115"
-                ></ai-select
-              ></a-form-item>
-            </td>
-          </a-col>
-          <a-col v-bind="layout">
-            <th>契約者番号</th>
-            <td class="flex">
-              <a-input-number
-                v-model="validateInfos.KEIYAKUSYA_CD"
-                :min="1"
-                :max="99999"
-                :maxlength="5"
-                class="w-20"
-              ></a-input-number>
-            </td>
-          </a-col>
-          <a-col v-bind="layout">
-            <th>契約者名(カナ)</th>
-            <td>
-              <a-input
-                v-model:value="formData.KEIYAKUSYA_NAME"
-                class="w-130"
-                :maxlength="50"
-              ></a-input>
-              <span class="w-40">（部分一致）</span>
-            </td>
-          </a-col>
-          <a-col v-bind="layout">
-            <th>契約者名(漢字)</th>
-            <td>
-              <a-input
-                v-model:value="formData.KEIYAKUSYA_KANA"
-                class="w-130"
-                :maxlength="50"
-              ></a-input>
-              <span class="w-40">（部分一致）</span>
-            </td>
-          </a-col>
-          <a-col v-bind="layout">
-            <th>請求·返還回数(入金金額)</th>
-            <td class="flex">
-              <a-form-item v-bind="validateInfos.SAGUKU_SEIKYU_KIN">
-                <range-number
-                  v-model:value="formData.SAGUKU_SEIKYU_KIN"
-                  unit="円"
-              /></a-form-item>
-            </td>
-          </a-col>
-          <a-col v-bind="layout">
-            <th class="required">納付方法</th>
-            <td class="flex">
-              <a-form-item v-bind="validateInfos.SEIKYU_HENKAN_KBN">
-                <a-radio-group
-                  v-model:value="formData.SEIKYU_HENKAN_KBN"
-                  class="mt-1"
-                >
-                  <a-radio :value="1">入金</a-radio>
-                  <a-radio :value="2">返還</a-radio>
-                </a-radio-group>
-              </a-form-item>
-            </td>
-          </a-col>
-          <a-col v-bind="layout">
-            <th class="required">処理状況</th>
-            <td class="flex">
-              <a-form-item v-bind="validateInfos.SYORI_JOKYO_KBN">
-                <a-radio-group
-                  v-model:value="formData.SYORI_JOKYO_KBN"
-                  class="mt-1"
-                >
-                  <a-radio :value="1">全て</a-radio>
-                  <a-radio :value="2">未入金・未返還分</a-radio>
-                  <a-radio :value="3">入金・返還済分</a-radio>
-                </a-radio-group>
-              </a-form-item>
-            </td>
-          </a-col>
-
-          <a-col v-bind="layout">
-            <th>入金・返還日</th>
-            <td class="flex">
-              <a-form-item v-bind="validateInfos.NYUKIN_DATE">
-                <range-date
-                  v-model:value="formData.NYUKIN_DATE"
-                  class="w-full"
+      <div class="max-w-1300px">
+        <h1>（GJ2090）契約者積立金等入金・返還入力</h1>
+        <div class="self_adaption_table form max-w-400 mt-1">
+          <a-row>
+            <a-col
+              v-bind="{
+                md: 24,
+                lg: 24,
+                xl: 24,
+                xxl: 6,
+              }"
+            >
+              <th class="required">対象期</th>
+              <td>
+                <a-form-item v-bind="validateInfos.KI">
+                  <a-input-number
+                    v-model:value="formData.KI"
+                    :min="1"
+                    :max="99"
+                    :maxlength="2"
+                    class="w-14!"
+                  ></a-input-number>
+                </a-form-item>
+              </td>
+            </a-col>
+            <a-col
+              v-bind="{
+                md: 24,
+                lg: 24,
+                xl: 24,
+                xxl: 8,
+              }"
+            >
+              <th>請求·返還回数</th>
+              <td class="flex">
+                <a-form-item v-bind="validateInfos.SEIKYU_KAISU">
+                  <range-number v-model:value="formData.SEIKYU_KAISU" unit="回"
+                /></a-form-item>
+              </td>
+            </a-col>
+            <a-col
+              v-bind="{
+                md: 24,
+                lg: 24,
+                xl: 24,
+                xxl: 10,
+              }"
+            >
+              <th>入金日・振込日</th>
+              <td class="flex">
+                <a-form-item v-bind="validateInfos.SEIKYU_DATE">
+                  <DateJp
+                    v-model:value="formData.SEIKYU_DATE"
+                    class="max-w-50"
+                  />
+                </a-form-item>
+              </td>
+            </a-col>
+            <a-col v-bind="layout">
+              <th>都道府県</th>
+              <td>
+                <range-select
+                  class="w-90!"
+                  v-model:value="formData.KEN_CD"
+                  :options="KEN_CD_NAME_LIST"
                 />
-              </a-form-item>
-            </td>
-          </a-col>
-          <a-col v-bind="layout">
-            <th>入金日・振込日</th>
-            <td class="flex">
-              <a-form-item v-bind="validateInfos.SEIKYU_DATE">
-                <DateJp v-model:value="formData.SEIKYU_DATE" class="max-w-50" />
-              </a-form-item>
-            </td>
-          </a-col>
-        </a-row>
-      </div>
-      <div class="my-2 flex justify-between max-w-250">
-        <a-space
-          ><span>検索方法</span>
-          <a-radio-group v-model:value="formData.SEARCH_METHOD">
-            <a-radio :value="EnumAndOr.AndCode">すべてを含む(AND)</a-radio>
-            <a-radio :value="EnumAndOr.OrCode">いずれかを含む(OR)</a-radio>
-          </a-radio-group>
-        </a-space>
+              </td>
+            </a-col>
+            <a-col v-bind="layout">
+              <th>事務委託先</th>
+              <td>
+                <a-form-item v-bind="validateInfos.JIMUITAKU_CD">
+                  <ai-select
+                    v-model:value="formData.JIMUITAKU_CD"
+                    :option="JIMUITAKU_LIST"
+                    split-val
+                    class="max-w-115"
+                  ></ai-select
+                ></a-form-item>
+              </td>
+            </a-col>
+            <a-col v-bind="layout">
+              <th>契約者番号</th>
+              <td class="flex">
+                <a-input-number
+                  v-model="validateInfos.KEIYAKUSYA_CD"
+                  :min="1"
+                  :max="99999"
+                  :maxlength="5"
+                  class="w-20"
+                ></a-input-number>
+              </td>
+            </a-col>
+            <a-col v-bind="layout">
+              <th>契約者名(カナ)</th>
+              <td>
+                <a-input
+                  v-model:value="formData.KEIYAKUSYA_NAME"
+                  class="w-130"
+                  :maxlength="50"
+                ></a-input>
+                <span class="w-40">（部分一致）</span>
+              </td>
+            </a-col>
+            <a-col v-bind="layout">
+              <th>契約者名(漢字)</th>
+              <td>
+                <a-input
+                  v-model:value="formData.KEIYAKUSYA_KANA"
+                  class="w-130"
+                  :maxlength="50"
+                ></a-input>
+                <span class="w-40">（部分一致）</span>
+              </td>
+            </a-col>
+            <a-col v-bind="layout">
+              <th>請求·返還回数(入金金額)</th>
+              <td class="flex">
+                <a-form-item v-bind="validateInfos.SAGUKU_SEIKYU_KIN">
+                  <range-number
+                    v-model:value="formData.SAGUKU_SEIKYU_KIN"
+                    unit="円"
+                /></a-form-item>
+              </td>
+            </a-col>
+            <a-col v-bind="layout">
+              <th class="required">納付方法</th>
+              <td class="flex">
+                <a-form-item v-bind="validateInfos.SEIKYU_HENKAN_KBN">
+                  <a-radio-group
+                    v-model:value="formData.SEIKYU_HENKAN_KBN"
+                    class="mt-1"
+                  >
+                    <a-radio :value="1">入金</a-radio>
+                    <a-radio :value="2">返還</a-radio>
+                  </a-radio-group>
+                </a-form-item>
+              </td>
+            </a-col>
+            <a-col v-bind="layout">
+              <th class="required">処理状況</th>
+              <td class="flex">
+                <a-form-item v-bind="validateInfos.SYORI_JOKYO_KBN">
+                  <a-radio-group
+                    v-model:value="formData.SYORI_JOKYO_KBN"
+                    class="mt-1"
+                  >
+                    <a-radio :value="1">全て</a-radio>
+                    <a-radio :value="2">未入金・未返還分</a-radio>
+                    <a-radio :value="3">入金・返還済分</a-radio>
+                  </a-radio-group>
+                </a-form-item>
+              </td>
+            </a-col>
+
+            <a-col v-bind="layout">
+              <th>入金・返還日</th>
+              <td class="flex">
+                <a-form-item v-bind="validateInfos.NYUKIN_DATE">
+                  <range-date
+                    v-model:value="formData.NYUKIN_DATE"
+                    class="w-full"
+                  />
+                </a-form-item>
+              </td>
+            </a-col>
+            <a-col v-bind="layout">
+              <th>入金日・振込日</th>
+              <td class="flex">
+                <a-form-item v-bind="validateInfos.SEIKYU_DATE">
+                  <DateJp
+                    v-model:value="formData.SEIKYU_DATE"
+                    class="max-w-50"
+                  />
+                </a-form-item>
+              </td>
+            </a-col>
+          </a-row>
+        </div>
+        <div class="my-2 flex justify-between max-w-250">
+          <a-space
+            ><span>検索方法</span>
+            <a-radio-group v-model:value="formData.SEARCH_METHOD">
+              <a-radio :value="EnumAndOr.AndCode">すべてを含む(AND)</a-radio>
+              <a-radio :value="EnumAndOr.OrCode">いずれかを含む(OR)</a-radio>
+            </a-radio-group>
+          </a-space>
+        </div>
       </div>
       <div class="my-2 flex">
         <a-space :size="20">

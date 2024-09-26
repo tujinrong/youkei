@@ -1,7 +1,7 @@
 <template>
   <div>
     <a-card :bordered="false" class="h-full min-h-500px staticWidth">
-      <div>
+      <div class="max-w-1200px">
         <h1>（GJ4040）互助金交付一覧（互助金種類・鶏の種類・農場）</h1>
         <div class="self_adaption_table form" ref="headRef">
           <a-row>
@@ -29,10 +29,10 @@
                   <range-number
                     v-model:value="formData.HASSEI_KAISU"
                     :options="KEIYAKU_KBN_CD_NAME_LIST"
-                                      :min="1"
-                  :max="99"
-                  :maxlength="2"
-                  class="max-w-34"
+                    :min="1"
+                    :max="99"
+                    :maxlength="2"
+                    class="max-w-34"
                 /></a-form-item>
               </td>
             </a-col>
@@ -44,9 +44,9 @@
                     v-model:value="formData.KEISAN_KAISU"
                     :options="KEIYAKU_KBN_CD_NAME_LIST"
                     :min="1"
-                  :max="999"
-                  :maxlength="3"
-                  class="max-w-36"
+                    :max="999"
+                    :maxlength="3"
+                    class="max-w-36"
                 /></a-form-item>
               </td>
             </a-col>
@@ -84,20 +84,22 @@
               </td>
             </a-col>
           </a-row>
-          <a-row class="m-t-1">
-            <a-col :span="24">
-              <div class="mb-2 header_operation flex justify-between w-full">
-                <a-space :size="20">
-                  <a-button type="primary" @click="onPreview"
-                    >プレビュー</a-button
-                  >
-                  <a-button type="primary" @click="clear">キャンセル</a-button>
-                </a-space>
-                <close-page />
-              </div>
-            </a-col>
-          </a-row>
         </div>
+      </div>
+      <div>
+        <a-row class="m-t-1">
+          <a-col :span="24">
+            <div class="mb-2 header_operation flex justify-between w-full">
+              <a-space :size="20">
+                <a-button type="primary" @click="onPreview"
+                  >プレビュー</a-button
+                >
+                <a-button type="primary" @click="clear">キャンセル</a-button>
+              </a-space>
+              <close-page />
+            </div>
+          </a-col>
+        </a-row>
       </div>
     </a-card>
   </div>

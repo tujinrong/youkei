@@ -10,132 +10,135 @@
   <div
     class="h-full flex-col-stretch gap-12px overflow lt-sm:overflow-auto flex"
   >
-    <a-card class="staticWidth"
-      ><h1>（GJ7030）互助基金契約者互助金情報検索CSVデ一夕作成</h1>
-      <div class="self_adaption_table form mt-1">
-        <a-row
-          ><a-col span="24"
-            ><th class="required">対象期</th>
-            <td>
-              <a-form-item v-bind="validateInfos.KI" class="w-50!">
-                <a-input-number
-                  v-model:value="searchParams.KI"
-                  :min="1"
-                  :max="99"
-                  :maxlength="2"
-                  class="w-14"
-                ></a-input-number>
-                <span class="align-middle">期</span></a-form-item
-              ><a-form-item v-bind="validateInfos.KEISAN_DATE">
-                <MonthJp
-                  v-model:value="searchParams.KEISAN_DATE"
-                />　末　現在</a-form-item
-              >
-            </td></a-col
-          >
-          <a-col span="24"
-            ><th>都道府県</th>
-            <td>
-              <a-form-item v-bind="validateInfos.KEN_CD">
-                <range-select
-                  v-model:value="searchParams.KEN_CD"
-                  :options="LIST"
-                  class="w-90!"
-              /></a-form-item></td
-          ></a-col>
-          <a-col span="24"
-            ><th>契約者番号</th>
-            <td>
-              <a-form-item v-bind="validateInfos.KEIYAKUSYA_CD">
-                <range-select
-                  v-model:value="searchParams.KEIYAKUSYA_CD"
-                  :options="LIST"
-                  class="max-w-250!"
-              /></a-form-item></td></a-col
-          ><a-col span="24"
-            ><th>契約区分</th>
-            <td>
-              <a-form-item v-bind="validateInfos.KEIYAKUSYA_CD">
-                <range-select
-                  v-model:value="searchParams.KEIYAKUSYA_CD"
-                  :options="LIST"
-                  class="max-w-78"
-              /></a-form-item></td
-          ></a-col>
-          <a-col span="24"
-            ><th>契約状況</th>
-            <td>
-              <a-form-item v-bind="validateInfos.KEIYAKUSYA_CD">
-                <range-select
-                  v-model:value="searchParams.KEIYAKUSYA_CD"
-                  :options="LIST"
-                  class="max-w-78"
-              /></a-form-item></td></a-col
-          ><a-col span="24"
-            ><th>事務委託先</th>
-            <td>
-              <a-form-item v-bind="validateInfos.KEIYAKUSYA_CD">
-                <range-select
-                  v-model:value="searchParams.KEIYAKUSYA_CD"
-                  :options="LIST"
-                  class="max-w-250!"
-              /></a-form-item></td
-          ></a-col>
-          <a-col span="24"
-            ><th>認定回数</th>
-            <td>
-              <a-form-item v-bind="validateInfos.HASSEI_KAISU">
-                <range-number v-model:value="searchParams.HASSEI_KAISU"
-              /></a-form-item></td
-          ></a-col>
-          <a-col span="24"
-            ><th class="required">交付通知書</th>
-            <td>
-              <a-space :size="40" class="align-middle!">
-                <a-checkbox
-                  v-model:checked="searchParams.SYORI_JOKYO.HAKKO_ZUMI"
-                  >発行済</a-checkbox
+    <a-card class="staticWidth">
+      <div class="max-w-1300px">
+        <h1>（GJ7030）互助基金契約者互助金情報検索CSVデ一夕作成</h1>
+        <div class="self_adaption_table form mt-1">
+          <a-row
+            ><a-col span="24"
+              ><th class="required">対象期</th>
+              <td>
+                <a-form-item v-bind="validateInfos.KI" class="w-50!">
+                  <a-input-number
+                    v-model:value="searchParams.KI"
+                    :min="1"
+                    :max="99"
+                    :maxlength="2"
+                    class="w-14"
+                  ></a-input-number>
+                  <span class="align-middle">期</span></a-form-item
+                ><a-form-item v-bind="validateInfos.KEISAN_DATE">
+                  <MonthJp
+                    v-model:value="searchParams.KEISAN_DATE"
+                  />　末　現在</a-form-item
                 >
-                <a-checkbox v-model:checked="searchParams.SYORI_JOKYO.MI_HAKKO"
-                  >未発行</a-checkbox
-                ></a-space
-              >
-            </td></a-col
-          ><a-col span="24"
-            ><th>通知書発行日</th>
-            <td>
-              <a-form-item
-                v-bind="validateInfos.KOFUTUTI_HAKKO_DATE"
-                class="max-w-90!"
-              >
-                <range-date
-                  v-model:value="
-                    searchParams.KOFUTUTI_HAKKO_DATE
-                  " /></a-form-item
-              ><span class="w-40 mt-1">(発行済のみ有効)</span>
-            </td>
-          </a-col>
-          <a-col span="24"
-            ><th>出力項目選択</th>
-            <td>
-              <a-radio-group
-                v-model:value="searchParams.SYUTURYOKU_KOMOKU_SENTAKU"
-              >
-                <a-radio :value="1">互助金明細を含む(農場別)</a-radio
-                ><a-radio :value="2">含まない（振込金額等のみ）</a-radio>
-              </a-radio-group>
-            </td></a-col
-          ></a-row
-        >
-      </div>
-      <div class="my-2 flex">
-        <a-space
-          ><span>検索方法</span>
-          <a-radio-group v-model:value="searchParams.SEARCH_METHOD">
-            <a-radio :value="EnumAndOr.AndCode">すべてを含む(AND)</a-radio>
-            <a-radio :value="EnumAndOr.OrCode">いずれかを含む(OR)</a-radio>
-          </a-radio-group></a-space
-        >
+              </td></a-col
+            >
+            <a-col span="24"
+              ><th>都道府県</th>
+              <td>
+                <a-form-item v-bind="validateInfos.KEN_CD">
+                  <range-select
+                    v-model:value="searchParams.KEN_CD"
+                    :options="LIST"
+                    class="w-90!"
+                /></a-form-item></td
+            ></a-col>
+            <a-col span="24"
+              ><th>契約者番号</th>
+              <td>
+                <a-form-item v-bind="validateInfos.KEIYAKUSYA_CD">
+                  <range-select
+                    v-model:value="searchParams.KEIYAKUSYA_CD"
+                    :options="LIST"
+                    class="max-w-250!"
+                /></a-form-item></td></a-col
+            ><a-col span="24"
+              ><th>契約区分</th>
+              <td>
+                <a-form-item v-bind="validateInfos.KEIYAKUSYA_CD">
+                  <range-select
+                    v-model:value="searchParams.KEIYAKUSYA_CD"
+                    :options="LIST"
+                    class="max-w-78"
+                /></a-form-item></td
+            ></a-col>
+            <a-col span="24"
+              ><th>契約状況</th>
+              <td>
+                <a-form-item v-bind="validateInfos.KEIYAKUSYA_CD">
+                  <range-select
+                    v-model:value="searchParams.KEIYAKUSYA_CD"
+                    :options="LIST"
+                    class="max-w-78"
+                /></a-form-item></td></a-col
+            ><a-col span="24"
+              ><th>事務委託先</th>
+              <td>
+                <a-form-item v-bind="validateInfos.KEIYAKUSYA_CD">
+                  <range-select
+                    v-model:value="searchParams.KEIYAKUSYA_CD"
+                    :options="LIST"
+                    class="max-w-250!"
+                /></a-form-item></td
+            ></a-col>
+            <a-col span="24"
+              ><th>認定回数</th>
+              <td>
+                <a-form-item v-bind="validateInfos.HASSEI_KAISU">
+                  <range-number v-model:value="searchParams.HASSEI_KAISU"
+                /></a-form-item></td
+            ></a-col>
+            <a-col span="24"
+              ><th class="required">交付通知書</th>
+              <td>
+                <a-space :size="40" class="align-middle!">
+                  <a-checkbox
+                    v-model:checked="searchParams.SYORI_JOKYO.HAKKO_ZUMI"
+                    >発行済</a-checkbox
+                  >
+                  <a-checkbox
+                    v-model:checked="searchParams.SYORI_JOKYO.MI_HAKKO"
+                    >未発行</a-checkbox
+                  ></a-space
+                >
+              </td></a-col
+            ><a-col span="24"
+              ><th>通知書発行日</th>
+              <td>
+                <a-form-item
+                  v-bind="validateInfos.KOFUTUTI_HAKKO_DATE"
+                  class="max-w-90!"
+                >
+                  <range-date
+                    v-model:value="
+                      searchParams.KOFUTUTI_HAKKO_DATE
+                    " /></a-form-item
+                ><span class="w-40 mt-1">(発行済のみ有効)</span>
+              </td>
+            </a-col>
+            <a-col span="24"
+              ><th>出力項目選択</th>
+              <td>
+                <a-radio-group
+                  v-model:value="searchParams.SYUTURYOKU_KOMOKU_SENTAKU"
+                >
+                  <a-radio :value="1">互助金明細を含む(農場別)</a-radio
+                  ><a-radio :value="2">含まない（振込金額等のみ）</a-radio>
+                </a-radio-group>
+              </td></a-col
+            ></a-row
+          >
+        </div>
+        <div class="my-2 flex">
+          <a-space
+            ><span>検索方法</span>
+            <a-radio-group v-model:value="searchParams.SEARCH_METHOD">
+              <a-radio :value="EnumAndOr.AndCode">すべてを含む(AND)</a-radio>
+              <a-radio :value="EnumAndOr.OrCode">いずれかを含む(OR)</a-radio>
+            </a-radio-group></a-space
+          >
+        </div>
       </div>
       <div class="flex">
         <a-space :size="20">

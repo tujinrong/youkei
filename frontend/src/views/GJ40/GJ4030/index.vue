@@ -9,91 +9,96 @@
 <template>
   <div class="h-full min-h-500px flex-col-stretch gap-12px">
     <a-card ref="headRef" :bordered="false" class="staticWidth">
-      <h1>（GJ4030）互助交付金計算処理</h1>
-      <div class="self_adaption_table form mt-1">
-        <a-row>
-          <a-col span="24">
-            <th class="required">処理区分</th>
-            <td class="flex">
-              <a-form-item v-bind="validateInfos.SYORI_KBN">
-                <a-radio-group v-model:value="formData.SYORI_KBN" class="mt-1">
-                  <a-radio :value="1">計算処理</a-radio>
-                  <a-radio :value="2"
-                    >計算取消処理(取消対象に補填金支払済が存在する場合は、取消不可)</a-radio
+      <div class="max-w-800px">
+        <h1>（GJ4030）互助交付金計算処理</h1>
+        <div class="self_adaption_table form mt-1">
+          <a-row>
+            <a-col span="24">
+              <th class="required">処理区分</th>
+              <td class="flex">
+                <a-form-item v-bind="validateInfos.SYORI_KBN">
+                  <a-radio-group
+                    v-model:value="formData.SYORI_KBN"
+                    class="mt-1"
                   >
-                </a-radio-group>
-              </a-form-item>
-            </td>
-          </a-col>
-          <a-col span="24">
-            <th class="required">対象期</th>
-            <td>
-              <a-form-item v-bind="validateInfos.KI" class="w-50!">
-                <a-input-number
-                  v-model:value="formData.KI"
-                  :min="1"
-                  :max="99"
-                  :maxlength="2"
-                  class="w-14"
-                />
-                <span class="!align-middle">(表示&入力)</span>
-              </a-form-item>
-              <a-form-item v-bind="validateInfos.HASSEI_KAISU">
-                <span class="!align-middle">認定回数</span>
-                <a-input-number
-                  v-model:value="formData.HASSEI_KAISU"
-                  :min="1"
-                  :max="99"
-                  :maxlength="2"
-                  class="w-14"
-                />
-                <span class="!align-middle">(表示&入力)</span>
-              </a-form-item>
-            </td>
-          </a-col>
-          <a-col span="24">
-            <th>計算回数</th>
-            <td>
-              <a-form-item v-bind="validateInfos.HASSEI_KAISU">
-                <div class="flex items-center">
+                    <a-radio :value="1">計算処理</a-radio>
+                    <a-radio :value="2"
+                      >計算取消処理(取消対象に補填金支払済が存在する場合は、取消不可)</a-radio
+                    >
+                  </a-radio-group>
+                </a-form-item>
+              </td>
+            </a-col>
+            <a-col span="24">
+              <th class="required">対象期</th>
+              <td>
+                <a-form-item v-bind="validateInfos.KI" class="w-50!">
+                  <a-input-number
+                    v-model:value="formData.KI"
+                    :min="1"
+                    :max="99"
+                    :maxlength="2"
+                    class="w-14"
+                  />
+                  <span class="!align-middle">(表示&入力)</span>
+                </a-form-item>
+                <a-form-item v-bind="validateInfos.HASSEI_KAISU">
+                  <span class="!align-middle">認定回数</span>
                   <a-input-number
                     v-model:value="formData.HASSEI_KAISU"
                     :min="1"
                     :max="99"
                     :maxlength="2"
                     class="w-14"
-                    :disabled="formData.SYORI_KBN === 1"
                   />
-                  <span>(表示&入力)</span>
-                </div>
-              </a-form-item>
-            </td>
-          </a-col>
-          <a-col span="24">
-            <th class="required">振込予定日</th>
-            <td class="flex">
-              <a-form-item v-bind="validateInfos.FURIKOMI_YOTEI_DATE">
-                <DateJp
-                  class="max-w-50"
-                  v-model:value="formData.FURIKOMI_YOTEI_DATE"
-                />
-              </a-form-item>
-            </td>
-          </a-col>
-          <a-col span="24">
-            <th>契約者番号</th>
-            <td class="flex">
-              <a-form-item v-bind="validateInfos.KEIYAKUSYA_CD">
-                <ai-select
-                  v-model:value="formData.KEIYAKUSYA_CD"
-                  :options="KEIYAKU_KBN_CD_NAME_LIST"
-                  class="max-w-115"
-                  type="number"
-                ></ai-select>
-              </a-form-item>
-            </td>
-          </a-col>
-        </a-row>
+                  <span class="!align-middle">(表示&入力)</span>
+                </a-form-item>
+              </td>
+            </a-col>
+            <a-col span="24">
+              <th>計算回数</th>
+              <td>
+                <a-form-item v-bind="validateInfos.HASSEI_KAISU">
+                  <div class="flex items-center">
+                    <a-input-number
+                      v-model:value="formData.HASSEI_KAISU"
+                      :min="1"
+                      :max="99"
+                      :maxlength="2"
+                      class="w-14"
+                      :disabled="formData.SYORI_KBN === 1"
+                    />
+                    <span>(表示&入力)</span>
+                  </div>
+                </a-form-item>
+              </td>
+            </a-col>
+            <a-col span="24">
+              <th class="required">振込予定日</th>
+              <td class="flex">
+                <a-form-item v-bind="validateInfos.FURIKOMI_YOTEI_DATE">
+                  <DateJp
+                    class="max-w-50"
+                    v-model:value="formData.FURIKOMI_YOTEI_DATE"
+                  />
+                </a-form-item>
+              </td>
+            </a-col>
+            <a-col span="24">
+              <th>契約者番号</th>
+              <td class="flex">
+                <a-form-item v-bind="validateInfos.KEIYAKUSYA_CD">
+                  <ai-select
+                    v-model:value="formData.KEIYAKUSYA_CD"
+                    :options="KEIYAKU_KBN_CD_NAME_LIST"
+                    class="max-w-115"
+                    type="number"
+                  ></ai-select>
+                </a-form-item>
+              </td>
+            </a-col>
+          </a-row>
+        </div>
       </div>
       <div class="my-2 flex">
         <a-space :size="20">

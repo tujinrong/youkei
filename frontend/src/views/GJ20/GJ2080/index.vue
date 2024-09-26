@@ -1,7 +1,7 @@
 <template>
   <div>
     <a-card :bordered="false" class="h-full min-h-500px staticWidth">
-      <div>
+      <div class="max-w-1200px">
         <h1>（GJ2080）生産者積立金等請求・返還一覧表（処理確定・未処理）</h1>
         <div class="self_adaption_table form" ref="headRef">
           <a-row>
@@ -131,21 +131,23 @@
               </td>
             </a-col>
           </a-row>
-          <a-row class="m-t-1">
-            <a-col :span="24">
-              <div class="mb-2 header_operation flex justify-between w-full">
-                <a-space :size="20">
-                  <a-button type="primary" @click="onPreview"
-                    >プレビュー</a-button
-                  >
-                  <a-button type="primary" @click="clear">キャンセル</a-button>
-                  <a-button type="primary">EXCEL出力</a-button>
-                </a-space>
-                <close-page />
-              </div>
-            </a-col>
-          </a-row>
         </div>
+      </div>
+      <div>
+        <a-row class="m-t-1">
+          <a-col :span="24">
+            <div class="mb-2 header_operation flex justify-between w-full">
+              <a-space :size="20">
+                <a-button type="primary" @click="onPreview"
+                  >プレビュー</a-button
+                >
+                <a-button type="primary" @click="clear">キャンセル</a-button>
+                <a-button type="primary">EXCEL出力</a-button>
+              </a-space>
+              <close-page />
+            </div>
+          </a-col>
+        </a-row>
       </div>
     </a-card>
   </div>

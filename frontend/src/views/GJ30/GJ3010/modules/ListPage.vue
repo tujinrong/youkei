@@ -9,37 +9,39 @@
 <template>
   <div class="h-full min-h-500px flex-col-stretch gap-12px flex">
     <a-card :bordered="false" class="staticWidth">
-      <h1>（GJ3010）互助基金契約者情報変更(增羽)</h1>
-      <div class="self_adaption_table form mt-1">
-        <a-row>
-          <a-col span="24">
-            <th class="required">期</th>
-            <td>
-              <a-form-item v-bind="validateInfos.KI">
-                <a-input-number
-                  v-model:value="searchParams.KI"
-                  :min="0"
-                  :max="99"
-                  :maxlength="2"
-                  class="w-14"
-                  @change="getInitData(searchParams.KI, false)"
-                ></a-input-number>
-              </a-form-item>
-            </td> </a-col></a-row
-        ><a-row>
-          <a-col span="24">
-            <th class="required">契約者</th>
-            <td>
-              <a-form-item v-bind="validateInfos.KEIYAKUSYA_CD">
-                <ai-select
-                  v-model:value="searchParams.KEIYAKUSYA_CD"
-                  :options="KEIYAKUSYA_CD_NAME_LIST"
-                  class="max-w-115"
-                  split-val
-                ></ai-select>
-              </a-form-item>
-            </td> </a-col
-        ></a-row>
+      <div class="max-w-600px">
+        <h1>（GJ3010）互助基金契約者情報変更(增羽)</h1>
+        <div class="self_adaption_table form mt-1">
+          <a-row>
+            <a-col span="24">
+              <th class="required">期</th>
+              <td>
+                <a-form-item v-bind="validateInfos.KI">
+                  <a-input-number
+                    v-model:value="searchParams.KI"
+                    :min="0"
+                    :max="99"
+                    :maxlength="2"
+                    class="w-14"
+                    @change="getInitData(searchParams.KI, false)"
+                  ></a-input-number>
+                </a-form-item>
+              </td> </a-col></a-row
+          ><a-row>
+            <a-col span="24">
+              <th class="required">契約者</th>
+              <td>
+                <a-form-item v-bind="validateInfos.KEIYAKUSYA_CD">
+                  <ai-select
+                    v-model:value="searchParams.KEIYAKUSYA_CD"
+                    :options="KEIYAKUSYA_CD_NAME_LIST"
+                    class="max-w-115"
+                    split-val
+                  ></ai-select>
+                </a-form-item>
+              </td> </a-col
+          ></a-row>
+        </div>
       </div>
       <div class="flex mt-2">
         <a-space :size="20">
