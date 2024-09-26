@@ -342,7 +342,7 @@
                   v-model:value="formData.SAIRANKEI_IKUSEIKEI"
                   :min="1"
                 />
-                (焼却・埋却等羽数が対象)
+                <span>（焼却・埋却等羽数が対象）</span>
               </td>
             </a-col>
           </a-row>
