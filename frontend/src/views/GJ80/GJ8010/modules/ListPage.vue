@@ -1,6 +1,6 @@
 <template>
-  <div class="h-full min-h-500px flex-col-stretch gap-12px">
-    <a-card ref="headRef" :bordered="false">
+  <div class="h-full min-h-500px flex-col-stretch gap-12px staticWidth">
+    <a-card ref="headRef" :bordered="false" class="staticWidth">
       <h1>（GJ8010）コード一覧</h1>
       <div class="self_adaption_table form mt-1">
         <a-row>
@@ -30,7 +30,7 @@
         <close-page />
       </div>
     </a-card>
-    <a-card :bordered="false" class="flex-1" ref="cardRef">
+    <a-card :bordered="false" class="flex-1 staticWidth" ref="cardRef">
       <vxe-table
         class="mt-2"
         :column-config="{ resizable: true }"

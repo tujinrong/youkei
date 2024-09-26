@@ -1,6 +1,6 @@
 <template>
   <div class="h-full min-h-500px flex-col-stretch gap-12px">
-    <a-card ref="headRef" :bordered="false">
+    <a-card ref="headRef" :bordered="false" class="staticWidth">
       <h1>（GJ8040）使用者一覧</h1>
       <div class="mt-1 flex">
         <a-space :size="20">
@@ -11,7 +11,7 @@
         <close-page />
       </div>
     </a-card>
-    <a-card :bordered="false" class="flex-1" ref="cardRef">
+    <a-card :bordered="false" class="flex-1 staticWidth" ref="cardRef">
       <vxe-table
         class="h-full"
         :column-config="{ resizable: true }"
