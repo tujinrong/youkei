@@ -119,6 +119,7 @@
               header-align="center"
               field="ADDR"
               title="農場住所"
+              min-width="100"
               sortable
               :params="{ order: 3 }"
             >

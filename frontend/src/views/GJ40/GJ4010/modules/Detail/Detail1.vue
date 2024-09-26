@@ -151,7 +151,7 @@
           align="right"
           field="KOFU_KIN"
           title="経営支援互助金額"
-          min-width="130"
+          min-width="140"
           :resizable="false"
         ></vxe-column>
       </vxe-table>
@@ -280,12 +280,12 @@
               <read-only-pop thWidth="50" th="住所1" :td="formData.ADDR_1" />
             </a-col>
             <a-col span="1"></a-col>
-            <a-col span="10">
+            <a-col span="11">
               <read-only-pop thWidth="50" th="住所2" :td="formData.ADDR_2" />
             </a-col>
           </a-row>
           <a-row>
-            <a-col span="7">
+            <a-col span="8">
               <read-only-pop thWidth="110" th="" :hideTd="true" />
             </a-col>
             <a-col span="8">
@@ -297,27 +297,27 @@
             </a-col>
           </a-row>
           <a-row>
-            <a-col span="5">
+            <a-col span="7">
               <read-only-pop
-                thWidth="110"
+                thWidth="155"
                 th="鶏の種類"
                 :td="formData.TORI_KBN"
               />
             </a-col>
           </a-row>
           <a-row>
-            <a-col span="6">
+            <a-col span="7">
               <read-only-pop
-                thWidth="110"
+                thWidth="155"
                 th="契約羽数"
                 :td="formData.KEIYAKU_HASU"
               />
             </a-col>
           </a-row>
           <a-row>
-            <a-col span="7">
+            <a-col span="8">
               <read-only-pop
-                thWidth="150"
+                thWidth="155"
                 th="互助金交付対象羽数"
                 :td="formData.KOFU_HASU"
               />
@@ -340,9 +340,9 @@
             </a-col>
           </a-row>
           <a-row>
-            <a-col span="7">
+            <a-col span="8">
               <read-only-pop
-                thWidth="150"
+                thWidth="155"
                 th="経営支援互助金交付額"
                 :td="formData.KOFU_KIN"
               />
@@ -358,7 +358,7 @@
             <a-col span="1"></a-col>
             <a-col span="7">
               <read-only-pop
-                thWidth="100"
+                thWidth="150"
                 th="国庫交付額"
                 :td="formData.KUNI_KOFU_KIN"
               />
