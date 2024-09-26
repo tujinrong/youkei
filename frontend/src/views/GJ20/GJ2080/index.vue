@@ -1,6 +1,6 @@
 <template>
   <div>
-    <a-card :bordered="false" class="h-full min-h-500px">
+    <a-card :bordered="false" class="h-full min-h-500px staticWidth">
       <div>
         <h1>（GJ2080）生産者積立金等請求・返還一覧表（処理確定・未処理）</h1>
         <div class="self_adaption_table form" ref="headRef">
@@ -105,7 +105,10 @@
             <a-col v-bind="layout">
               <th>事業委託先</th>
               <td class="flex">
-                <a-form-item v-bind="validateInfos.JIMUITAKU_CD" class="w-250!">
+                <a-form-item
+                  v-bind="validateInfos.JIMUITAKU_CD"
+                  class="max-w-250!"
+                >
                   <range-select
                     v-model:value="formData.JIMUITAKU_CD"
                     :options="ITAKU_CD_NAME_LIST"
@@ -117,7 +120,7 @@
               <td class="flex">
                 <a-form-item
                   v-bind="validateInfos.KEIYAKUSYA_CD"
-                  class="w-250!"
+                  class="max-w-250!"
                 >
                   <range-select
                     v-model:value="formData.KEIYAKUSYA_CD"

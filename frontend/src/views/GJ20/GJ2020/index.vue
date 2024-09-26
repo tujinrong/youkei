@@ -8,7 +8,7 @@
  * ----------------------------------------------------------------->
 <template>
   <div class="h-full min-h-500px flex-col-stretch gap-12px">
-    <a-card ref="headRef" :bordered="false">
+    <a-card ref="headRef" :bordered="false" class="staticWidth">
       <h1>（GJ2020）契約者積立金計算処理</h1>
       <div class="self_adaption_table form mt-1">
         <a-row>
@@ -134,7 +134,7 @@
         </AButton>
       </div>
     </a-card>
-    <a-card :bordered="false" class="flex-1" ref="cardRef">
+    <a-card :bordered="false" class="flex-1 staticWidth" ref="cardRef">
       <a-pagination
         v-model:current="pageParams.PAGE_NUM"
         v-model:page-size="pageParams.PAGE_SIZE"

@@ -8,7 +8,7 @@
  * ----------------------------------------------------------------->
 <template>
   <div class="h-full min-h-500px flex-col-stretch gap-12px">
-    <a-card ref="headRef" :bordered="false">
+    <a-card ref="headRef" :bordered="false" class="staticWidth">
       <h1>（GJ2090）契約者積立金等入金・返還入力</h1>
       <div class="self_adaption_table form max-w-400 mt-1">
         <a-row>
@@ -38,7 +38,7 @@
               md: 24,
               lg: 24,
               xl: 24,
-              xxl: 18,
+              xxl: 8,
             }"
           >
             <th>請求·返還回数</th>
@@ -46,6 +46,21 @@
               <a-form-item v-bind="validateInfos.SEIKYU_KAISU">
                 <range-number v-model:value="formData.SEIKYU_KAISU" unit="回"
               /></a-form-item>
+            </td>
+          </a-col>
+          <a-col
+            v-bind="{
+              md: 24,
+              lg: 24,
+              xl: 24,
+              xxl: 10,
+            }"
+          >
+            <th>入金日・振込日</th>
+            <td class="flex">
+              <a-form-item v-bind="validateInfos.SEIKYU_DATE">
+                <DateJp v-model:value="formData.SEIKYU_DATE" class="max-w-50" />
+              </a-form-item>
             </td>
           </a-col>
           <a-col v-bind="layout">
@@ -143,14 +158,7 @@
               </a-form-item>
             </td>
           </a-col>
-          <a-col v-bind="layout">
-            <th>入金日・振込日</th>
-            <td class="flex">
-              <a-form-item v-bind="validateInfos.SEIKYU_DATE">
-                <DateJp v-model:value="formData.SEIKYU_DATE" class="max-w-50" />
-              </a-form-item>
-            </td>
-          </a-col>
+
           <a-col v-bind="layout">
             <th>入金・返還日</th>
             <td class="flex">
@@ -186,7 +194,7 @@
         </AButton>
       </div>
     </a-card>
-    <a-card :bordered="false" class="flex-1" ref="cardRef">
+    <a-card :bordered="false" class="flex-1 staticWidth" ref="cardRef">
       <a-pagination
         v-model:current="pageParams.PAGE_NUM"
         v-model:page-size="pageParams.PAGE_SIZE"

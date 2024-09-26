@@ -41,16 +41,6 @@
           <th rowspan="1">肉用鶏</th>
           <th>種鶏(成鶏)</th>
           <th>種鶏(育成鶏)</th>
-        </tr>
-        <tr>
-          <th>契約羽数合計</th>
-          <td>{{ hasuGokei.SAIRANKEI_SEIKEI }}</td>
-          <td>{{ hasuGokei.SAIRANKEI_IKUSEIKEI }}</td>
-          <td>{{ hasuGokei.NIKUYOUKEI }}</td>
-          <td>{{ hasuGokei.SYUKEI_SEIKEI }}</td>
-          <td>{{ hasuGokei.SYUKEI_IKUSEIKEI }}</td>
-        </tr>
-        <tr>
           <th>うずら</th>
           <th>あひる</th>
           <th>きじ</th>
@@ -60,6 +50,12 @@
           <th>合計</th>
         </tr>
         <tr>
+          <th>契約羽数合計</th>
+          <td>{{ hasuGokei.SAIRANKEI_SEIKEI }}</td>
+          <td>{{ hasuGokei.SAIRANKEI_IKUSEIKEI }}</td>
+          <td>{{ hasuGokei.NIKUYOUKEI }}</td>
+          <td>{{ hasuGokei.SYUKEI_SEIKEI }}</td>
+          <td>{{ hasuGokei.SYUKEI_IKUSEIKEI }}</td>
           <td>{{ hasuGokei.UZURA }}</td>
           <td>{{ hasuGokei.AHIRU }}</td>
           <td>{{ hasuGokei.KIJI }}</td>
@@ -71,7 +67,7 @@
           </td>
         </tr>
       </table> </a-card
-    ><a-card class="flex-1">
+    ><a-card class="flex-1 staticWidth">
       <a-pagination
         v-model:current="pageParams.PAGE_NUM"
         v-model:page-size="pageParams.PAGE_SIZE"

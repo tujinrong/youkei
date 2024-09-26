@@ -1,6 +1,6 @@
 <template>
   <div>
-    <a-card :bordered="false" class="h-full min-h-500px">
+    <a-card :bordered="false" class="h-full min-h-500px staticWidth">
       <div>
         <h1>（GJ2030）生産者積立金等請求・返還一覧表</h1>
         <div class="self_adaption_table form" ref="headRef">
@@ -99,7 +99,7 @@
                   <range-select
                     v-model:value="formData.JIMUITAKU_CD"
                     :options="ITAKU_CD_NAME_LIST"
-                    class="w-250!"
+                    class="max-w-250!"
                 /></a-form-item>
               </td>
             </a-col>
@@ -110,7 +110,7 @@
                   <range-select
                     v-model:value="formData.KEIYAKUSYA_CD"
                     :options="KEIYAKUSYA_CD_NAME_LIST"
-                    class="w-250!"
+                    class="max-w-250!"
                 /></a-form-item>
               </td>
             </a-col>

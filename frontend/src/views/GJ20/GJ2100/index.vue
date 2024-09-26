@@ -1,6 +1,6 @@
 <template>
   <div>
-    <a-card :bordered="false" class="h-full min-h-500px">
+    <a-card :bordered="false" class="h-full min-h-500px staticWidth">
       <div>
         <h1>（GJ2100）生産者積立金等集計表作成処理（鶏の種類別）</h1>
         <div class="self_adaption_table form" ref="headRef">
@@ -86,7 +86,7 @@
                     v-model:value="formData.JIMUITAKU_CD"
                     :options="ITAKU_CD_NAME_LIST"
                     :disabled="formData.SYUKEI_KBN !== 2"
-                    class="w-250!"
+                    class="max-w-250!"
                 /></a-form-item>
               </td>
             </a-col>
