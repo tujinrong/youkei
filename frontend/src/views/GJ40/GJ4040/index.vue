@@ -1,7 +1,7 @@
 <template>
   <div>
     <a-card :bordered="false" class="h-full min-h-500px staticWidth">
-      <div class="max-w-1200px">
+      <div class="max-w-1150px">
         <h1>（GJ4040）互助金交付一覧（互助金種類・鶏の種類・農場）</h1>
         <div class="self_adaption_table form" ref="headRef">
           <a-row>
@@ -9,7 +9,7 @@
               <th class="required">対象期</th>
               <td>
                 <a-form-item v-bind="validateInfos.KI">
-                  <span class="!align-middle">第</span>
+                  <span class="!align-middle mr-2">第</span>
                   <a-input-number
                     v-model:value="formData.KI"
                     :min="1"
@@ -18,7 +18,7 @@
                     class="w-14"
                     @change="handleKI(false)"
                   ></a-input-number>
-                  <span class="!align-middle">期</span>
+                  <span class="!align-middle ml-2">期</span>
                 </a-form-item>
               </td>
             </a-col>
@@ -68,7 +68,7 @@
                   <range-select
                     v-model:value="formData.JIMUITAKU_CD"
                     :options="ITAKU_CD_NAME_LIST"
-                    class="max-w-250!"
+                    class="max-w-full!"
                 /></a-form-item>
               </td>
             </a-col>
@@ -79,7 +79,7 @@
                   <range-select
                     v-model:value="formData.KEIYAKUSYA_CD"
                     :options="KEIYAKUSYA_CD_NAME_LIST"
-                    class="max-w-250!"
+                    class="max-w-full!"
                 /></a-form-item>
               </td>
             </a-col>

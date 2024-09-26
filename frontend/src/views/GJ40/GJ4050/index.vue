@@ -1,7 +1,7 @@
 <template>
   <div>
     <a-card :bordered="false" class="h-full min-h-500px staticWidth">
-      <div class="max-w-1200px">
+      <div class="max-w-1150px">
         <h1>（GJ4050）互助金交付金通知書発行処理</h1>
         <div class="self_adaption_table form" ref="headRef">
           <a-row>
@@ -15,9 +15,9 @@
                   >
                     <a-radio :value="1">初回発行</a-radio>
                     <a-radio :value="2">再発行(初回と同内容)</a-radio>
-                    <a-radio :value="3"
-                      >修正発行(納付期限、発行日、発信番号変更可能)</a-radio
-                    >
+                    <a-radio :value="3">
+                      修正発行(納付期限、発行日、発信番号変更可能)
+                    </a-radio>
                   </a-radio-group>
                 </a-form-item>
               </td>
@@ -25,8 +25,8 @@
             <a-col v-bind="layout">
               <th class="required">対象期・認定回数</th>
               <td>
-                <a-form-item v-bind="validateInfos.KI" class="w-50!">
-                  <span class="!align-middle">第</span>
+                <a-form-item v-bind="validateInfos.KI" class="w-35!">
+                  <span class="!align-middle mr-2">第</span>
                   <a-input-number
                     v-model:value="formData.KI"
                     :min="1"
@@ -35,10 +35,10 @@
                     class="w-14"
                     @change="handleKI(false)"
                   />
-                  <span class="!align-middle">期</span>
+                  <span class="!align-middle ml-2">期</span>
                 </a-form-item>
                 <a-form-item v-bind="validateInfos.HASSEI_KAISU">
-                  <span class="!align-middle">認定</span>
+                  <span class="!align-middle mr-2">認定</span>
                   <a-input-number
                     v-model:value="formData.HASSEI_KAISU"
                     :min="1"
@@ -46,7 +46,7 @@
                     :maxlength="2"
                     class="w-14"
                   />
-                  <span class="!align-middle">回</span>
+                  <span class="!align-middle ml-2">回</span>
                 </a-form-item>
               </td>
             </a-col>
@@ -91,8 +91,8 @@
             <a-col v-bind="layout">
               <th class="required">発信番号</th>
               <td>
-                <a-form-item v-bind="validateInfos.KI" class="w-50!">
-                  <span class="!align-middle">日鶏</span>
+                <a-form-item v-bind="validateInfos.KI" class="w-35!">
+                  <span class="!align-middle mr-2">日鶏</span>
 
                   <a-input-number
                     v-model:value="formData.KI"
@@ -102,10 +102,10 @@
                     :disabled="formData.SYUTURYOKU_KBN === 2"
                     class="w-14!"
                   />
-                  <span class="!align-middle">発</span>
+                  <span class="!align-middle ml-2">発</span>
                 </a-form-item>
                 <a-form-item v-bind="validateInfos.KI">
-                  <span class="!align-middle">第</span>
+                  <span class="!align-middle mr-2">第</span>
                   <a-input-number
                     v-model:value="formData.KI"
                     :min="0"
@@ -114,7 +114,7 @@
                     :disabled="formData.SYUTURYOKU_KBN === 2"
                     class="w-17!"
                   />
-                  <span class="!align-middle">号</span>
+                  <span class="!align-middle ml-2">号</span>
                 </a-form-item>
               </td>
             </a-col>
@@ -125,7 +125,7 @@
                   <range-select
                     v-model:value="formData.JIMUITAKU_CD"
                     :options="ITAKU_CD_NAME_LIST"
-                    class="max-w-250!"
+                    class="max-w-full!"
                 /></a-form-item>
               </td>
             </a-col>
@@ -136,7 +136,7 @@
                   <range-select
                     v-model:value="formData.KEIYAKUSYA_CD"
                     :options="KEIYAKUSYA_CD_NAME_LIST"
-                    class="max-w-250!"
+                    class="max-w-full!"
                 /></a-form-item>
               </td>
             </a-col>

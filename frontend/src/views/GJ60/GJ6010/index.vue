@@ -28,7 +28,7 @@
             <a-col v-bind="layout">
               <read-only
                 thWidth="230"
-                th="対象期(前期)"
+                th="対象期（前期）"
                 :td="formData.KI"
                 before="第"
                 after="期"
@@ -54,9 +54,9 @@
               <td class="flex">
                 <a-form-item v-bind="validateInfos.SYORI_TYPE">
                   <a-radio-group v-model:value="formData.SYORI_TYPE">
-                    <a-radio :value="1">取込処理(未処理)</a-radio>
+                    <a-radio :value="1">取込処理（未処理）</a-radio>
                     <a-radio :value="2"
-                      >取込処理済({{ formData.ZENKI_TUMITATE_DATE }})</a-radio
+                      >取込処理済（{{ formData.ZENKI_TUMITATE_DATE }}）</a-radio
                     >
                     <a-radio :value="3">処理キャンセル</a-radio>
                   </a-radio-group>
@@ -68,9 +68,9 @@
               <td class="flex">
                 <a-form-item v-bind="validateInfos.SYORI_TYPE">
                   <a-radio-group v-model:value="formData.SYORI_TYPE">
-                    <a-radio :value="1">取込処理(未処理)</a-radio>
+                    <a-radio :value="1">取込処理（未処理）</a-radio>
                     <a-radio :value="2"
-                      >取込処理済({{ formData.ZENKI_KOFU_DATE }})</a-radio
+                      >取込処理済（{{ formData.ZENKI_KOFU_DATE }}）</a-radio
                     >
                     <a-radio :value="3">処理キャンセル</a-radio>
                   </a-radio-group>
@@ -82,9 +82,9 @@
               <td class="flex">
                 <a-form-item v-bind="validateInfos.SYORI_TYPE">
                   <a-radio-group v-model:value="formData.SYORI_TYPE">
-                    <a-radio :value="1">取込処理(未処理)</a-radio>
+                    <a-radio :value="1">取込処理（未処理）</a-radio>
                     <a-radio :value="2"
-                      >取込処理済({{ formData.HENKAN_KEISAN_DATE }})</a-radio
+                      >取込処理済（{{ formData.HENKAN_KEISAN_DATE }}）</a-radio
                     >
                     <a-radio :value="3">処理キャンセル</a-radio>
                   </a-radio-group>
@@ -96,7 +96,7 @@
                 thWidth="230"
                 th="前期積立金返還人数"
                 :td="formData.ZENKI_HENKAN_NINSU"
-                after="(人)"
+                after="（人）"
               />
             </a-col>
             <a-col v-bind="layout">
@@ -104,7 +104,7 @@
                 thWidth="230"
                 th="前期積立金返還金合計"
                 :td="formData.ZENKI_HENKAN_GOKEI"
-                after="(円)"
+                after="（円）"
               />
             </a-col>
             <a-col v-bind="layout">

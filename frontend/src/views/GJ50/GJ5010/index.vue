@@ -17,7 +17,7 @@
               <th class="required">対象期</th>
               <td>
                 <a-form-item v-bind="validateInfos.KI">
-                  <span class="!align-middle">第</span>
+                  <span class="!align-middle mr-2">第</span>
                   <a-input-number
                     v-model:value="formData.KI"
                     :min="1"
@@ -25,7 +25,7 @@
                     :maxlength="2"
                     class="w-14"
                   ></a-input-number>
-                  <span class="!align-middle">期</span>
+                  <span class="!align-middle ml-2">期</span>
                 </a-form-item>
               </td>
             </a-col>
@@ -34,8 +34,8 @@
               <td>
                 <a-form-item v-bind="validateInfos.JIGYO_SYURYO_NENDO">
                   <year-jp v-model:value="formData.JIGYO_SYURYO_NENDO" /><span
-                    class="!align-middle"
-                    >(指定年度まで集計)</span
+                    class="!align-middle mt-1"
+                    >（指定年度まで集計）</span
                   ></a-form-item
                 >
               </td>
