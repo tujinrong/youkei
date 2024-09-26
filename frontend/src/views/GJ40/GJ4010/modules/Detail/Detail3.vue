@@ -4,7 +4,7 @@
     centered
     title="（GJ4013）焼却・埋却等互助金申請情報入力（契約交付情報表示）"
     width="1200px"
-    :body-style="{ height: '800px' }"
+    :body-style="{ minHeight: '600px' }"
     :mask-closable="false"
     destroy-on-close
     @cancel="goList"

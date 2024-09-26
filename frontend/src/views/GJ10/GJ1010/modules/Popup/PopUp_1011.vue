@@ -11,7 +11,7 @@
     :visible="modalVisible"
     centered
     title="（GJ1011）互助基金契約者マスタメンテナンス（基本情報入力）"
-    width="1000px"
+    width="1200px"
     :body-style="{ minHeight: '800px' }"
     :mask-closable="false"
     destroy-on-close
@@ -29,7 +29,7 @@
                   v-model:value="formData.KEIYAKUSYA_CD"
                   :disabled="!isNew"
                   :maxlength="5"
-                  class="w-20"
+                  class="w-30"
                 >
                 </a-input
               ></a-form-item>
@@ -42,7 +42,7 @@
                 <a-input
                   v-model:value="formData.SEISANSYA_CD"
                   :maxlength="5"
-                  class="w-20"
+                  class="w-30"
                   @input="
                     changeType('number', $event.target.value, 'SEISANSYA_CD')
                   "
@@ -73,7 +73,7 @@
                 <a-input
                   v-model:value="formData.NIKKEIKYO_CD"
                   :maxlength="5"
-                  class="w-20"
+                  class="w-30"
                   @input="
                     changeType('number', $event.target.value, 'SEISANSYA_CD')
                   "
@@ -92,7 +92,7 @@
                   v-model:value="formData.KEIYAKU_KBN"
                   :options="KEIYAKU_KBN_LIST"
                   split-val
-                  class="max-w-45"
+                  class="max-w-55"
                   placeholder="家族型、企業型、鶏以外"
                 ></ai-select
               ></a-form-item>
@@ -117,7 +117,7 @@
                 <ai-select
                   v-model:value="formData.KEIYAKU_JYOKYO"
                   :option="KEIYAKU_JYOKYO_LIST"
-                  class="max-w-45"
+                  class="max-w-65"
                   placeholder="継続契約、新規契約、未契約者"
                   split-val
                 ></ai-select
@@ -215,7 +215,7 @@
                 ></a-col>
               </a-row>
               <a-row>
-                <a-col span="5"></a-col>
+                <a-col class="w-150px"></a-col>
                 <a-col span="5">
                   <a-form-item v-bind="validateInfos.ADDR_3">
                     <a-input
@@ -229,7 +229,7 @@
                 </a-col>
               </a-row>
               <a-row>
-                <a-col span="5"></a-col>
+                <a-col class="w-150px"></a-col>
                 <a-col span="5">
                   <a-form-item v-bind="validateInfos.ADDR_4">
                     <a-input

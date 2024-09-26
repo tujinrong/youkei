@@ -4,7 +4,7 @@
     centered
     title="（GJ2092）契約者積立金等分割入金確認"
     width="1000px"
-    :body-style="{ height: '800px' }"
+    :body-style="{ minHeight: '600px' }"
     :mask-closable="false"
     destroy-on-close
     @cancel="goList"

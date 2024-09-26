@@ -4,7 +4,7 @@
     centered
     title="（GJ2091）契約者積立金等入金・返還確認"
     width="1000px"
-    :body-style="{ height: '800px' }"
+    :body-style="{ height: '600px' }"
     :mask-closable="false"
     destroy-on-close
     @cancel="goList"

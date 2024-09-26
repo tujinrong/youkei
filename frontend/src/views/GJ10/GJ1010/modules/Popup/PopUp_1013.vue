@@ -12,7 +12,7 @@
     centered
     title="（GJ1013）互助基金契約者マスタメンテナンス(農場情報入力)"
     width="1000px"
-    :body-style="{ height: '800px' }"
+    :body-style="{ height: '600px' }"
     :mask-closable="false"
     destroy-on-close
     @cancel="goList"

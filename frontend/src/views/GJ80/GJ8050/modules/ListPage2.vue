@@ -11,7 +11,7 @@
     :visible="modalVisible"
     centered
     title="（GJ8050）金融機関一覧"
-    width="1200px"
+    width="1000px"
     :body-style="{ minHeight: '600px' }"
     :mask-closable="false"
     destroy-on-close
@@ -104,7 +104,7 @@
         header-align="center"
         field="BANK_CD"
         title="金融機関"
-        width="150"
+        width="120"
         align="center"
         sortable
         :params="{ order: 1 }"
@@ -115,7 +115,7 @@
         header-align="center"
         field="SITEN_CD"
         title="支店コード"
-        width="130"
+        width="120"
         align="center"
         sortable
         :params="{ order: 2 }"
@@ -131,7 +131,7 @@
         header-align="center"
         field="SITEN_KANA"
         title="支店名（ｶﾅ）"
-        min-width="400"
+        min-width="300"
         sortable
         :params="{ order: 3 }"
         :resizable="false"
@@ -141,7 +141,7 @@
         header-align="center"
         field="SITEN_NAME"
         title="支店名（漢字）"
-        width="400"
+        width="300"
         sortable
         :params="{ order: 4 }"
         :resizable="false"

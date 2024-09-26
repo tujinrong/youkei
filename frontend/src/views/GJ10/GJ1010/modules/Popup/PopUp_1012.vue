@@ -4,10 +4,9 @@
     :visible="visible"
     centered
     title="2.契約農場別登録明細情報(入力)"
-    width="800px"
+    width="1000px"
     :body-style="{
-      height: '450px',
-      minWidth: '800px',
+      height: '600px',
       paddingRight: '50px',
       paddingTop: '20px',
     }"

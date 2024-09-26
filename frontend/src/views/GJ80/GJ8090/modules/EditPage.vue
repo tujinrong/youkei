@@ -12,7 +12,7 @@
     centered
     title="（GJ8091）契約者農場マスタメンテナンス"
     width="800px"
-    :body-style="{ height: '450px' }"
+    :body-style="{ minHeight: '450px' }"
     :mask-closable="false"
     destroy-on-close
     @cancel="goList"

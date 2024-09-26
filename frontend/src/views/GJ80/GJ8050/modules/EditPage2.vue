@@ -3,7 +3,7 @@
     :visible="modalVisible"
     centered
     title="（GJ8052）支店マスタメンテナンス"
-    width="1200px"
+    width="1000px"
     :body-style="{
       minHeight: '600px',
       paddingTop: '50px',

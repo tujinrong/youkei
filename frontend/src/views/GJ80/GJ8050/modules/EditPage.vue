@@ -3,7 +3,7 @@
     :visible="modalVisible"
     centered
     title="（GJ8051）金融機関マスタメンテナンス"
-    width="1200px"
+    width="1000px"
     :body-style="{
       minHeight: '600px',
       paddingTop: '50px',

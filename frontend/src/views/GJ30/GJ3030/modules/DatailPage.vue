@@ -11,8 +11,8 @@
     :visible="modalVisible"
     centered
     title="契約農場別明細 讓渡元情報(選択)"
-    width="1000px"
-    :body-style="{ minHeight: '800px' }"
+    width="800px"
+    :body-style="{ minHeight: '450px' }"
     :mask-closable="false"
     destroy-on-close
     @cancel="goList"

@@ -3,8 +3,8 @@
     :visible="modalVisible"
     centered
     title="（GJ8061）事務委託先マスタメンテナンス"
-    width="1000px"
-    :body-style="{ height: '800px' }"
+    width="1200px"
+    :body-style="{ minHeight: '600px' }"
     :mask-closable="false"
     destroy-on-close
     @cancel="goList"
@@ -50,7 +50,7 @@
                 <a-input
                   v-model:value="formData.ITAKU_NAME"
                   :maxlength="25"
-                  class="max-w-110"
+                  class="w-140"
                 ></a-input>
               </a-form-item>
             </td> </a-col></a-row
@@ -62,7 +62,7 @@
                 <a-input
                   v-model:value="formData.ITAKU_RYAKU"
                   :maxlength="15"
-                  class="max-w-80"
+                  class="max-w-110"
                 ></a-input>
               </a-form-item>
             </td> </a-col></a-row
@@ -74,7 +74,7 @@
                 <a-input
                   v-model:value="formData.DAIHYO_NAME"
                   :maxlength="25"
-                  class="max-w-110"
+                  class="max-w-140"
                 ></a-input>
               </a-form-item>
             </td>
@@ -86,7 +86,7 @@
                 <a-input
                   v-model:value="formData.TANTO_NAME"
                   :maxlength="25"
-                  class="max-w-110"
+                  class="max-w-140"
                 ></a-input>
               </a-form-item>
             </td>
@@ -97,22 +97,24 @@
           <a-col span="24">
             <th class="required">住所</th>
             <td class="flex-col">
-              <a-form-item v-bind="validateInfos.ADDR_POST">
-                <PostCode v-model:value="formData.ADDR_POST">
-                  <a-input
-                    v-model:value="formData.ADDR_1"
-                    disabled
-                    class="!w-30"
-                  ></a-input>
-                </PostCode>
-              </a-form-item>
-              <a-form-item v-bind="validateInfos.ADDR_2">
-                <a-input
-                  v-model:value="formData.ADDR_2"
-                  :maxlength="15"
-                  class="max-w-90"
-                ></a-input
-              ></a-form-item>
+              <a-row>
+                <a-col>
+                  <a-form-item v-bind="validateInfos.ADDR_POST">
+                    <PostCode v-model:value="formData.ADDR_POST">
+                      <a-input
+                        v-model:value="formData.ADDR_1"
+                        disabled
+                        class="!w-30"
+                      ></a-input>
+                    </PostCode> </a-form-item></a-col
+                ><a-col>
+                  <a-form-item v-bind="validateInfos.ADDR_2">
+                    <a-input
+                      v-model:value="formData.ADDR_2"
+                      :maxlength="15"
+                      class="w-90"
+                    ></a-input></a-form-item></a-col
+              ></a-row>
               <a-input
                 v-model:value="formData.ADDR_3"
                 :maxlength="15"
@@ -123,7 +125,7 @@
                 <a-input
                   v-model:value="formData.ADDR_4"
                   :maxlength="20"
-                  class="max-w-105"
+                  class="w-105"
                 ></a-input>
               </a-form-item>
             </td>
@@ -164,7 +166,7 @@
                 <a-input
                   v-model:value="formData.ADDR_E_MAIL"
                   :maxlength="50"
-                  class="max-w-130"
+                  class="max-w-160"
                 ></a-input>
               </a-form-item>
             </td> </a-col
@@ -196,14 +198,13 @@
               </a-form-item>
             </td>
           </a-col>
-          <a-col span="24">
+          <a-col span="23">
             <th>申込書類</th>
             <td>
               <a-form-item v-bind="validateInfos.MOSIKOMISYORUI">
                 <a-input
                   v-model:value="formData.MOSIKOMISYORUI"
                   :maxlength="70"
-                  class="max-w-180"
                 ></a-input>
               </a-form-item>
             </td>
@@ -220,14 +221,13 @@
               </a-form-item>
             </td>
           </a-col>
-          <a-col span="24">
+          <a-col span="23">
             <th>入金方法</th>
             <td>
               <a-form-item v-bind="validateInfos.NYUKINHOHO">
                 <a-input
                   v-model:value="formData.NYUKINHOHO"
                   :maxlength="70"
-                  class="max-w-180"
                 ></a-input>
               </a-form-item>
             </td>
@@ -323,7 +323,7 @@ const editJudge = new Judgement('GJ8060')
 const KEN_CD_NAME_LIST = ref<CmCodeNameModel[]>([])
 let upddttm
 const formData = reactive({
-  KI: -1,
+  KI: 8,
   ITAKU_CD: undefined as number | undefined,
   KEN_CD: undefined as number | undefined,
   ITAKU_NAME: '',
