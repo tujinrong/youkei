@@ -4,7 +4,7 @@
     centered
     title="（GJ8052）支店マスタメンテナンス"
     width="1000px"
-    :body-style="{ height: '800px' }"
+    :body-style="{ height: '800px', paddingTop: '50px', paddingLeft: '50px' }"
     :mask-closable="false"
     destroy-on-close
     @cancel="goList"
@@ -70,9 +70,7 @@
             >削除</a-button
           >
         </a-space>
-        <a-button type="primary" class="text-end" @click="goList"
-          >閉じる</a-button
-        >
+        <a-button type="primary" @click="goList">閉じる</a-button>
       </div>
     </template></a-modal
   >

@@ -4,7 +4,7 @@
     centered
     title="（GJ8061）事務委託先マスタメンテナンス"
     width="1000px"
-    :body-style="{ height: '800px', overflowY: 'scroll' }"
+    :body-style="{ height: '800px' }"
     :mask-closable="false"
     destroy-on-close
     @cancel="goList"
