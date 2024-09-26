@@ -1,8 +1,8 @@
 <template>
   <a-card class="h-full">
     <h1>（GJ3011）互助基金契約者情報変更(增羽) 請求書発行</h1>
-    <div class="self_adaption_table form mt-1">
-      <b>第{{ searchParams.KI }}期</b>
+    <div class="self_adaption_table form mt-1 max-w-250">
+      <b>第 {{ searchParams.KI }} 期</b>
 
       <a-row
         ><a-col :span="24">
@@ -118,7 +118,7 @@ import { useRoute, useRouter } from 'vue-router'
 //--------------------------------------------------------------------------
 const createDefaultParams = () => {
   return {
-    KI: -1, // 期
+    KI: 8, // 期
     KEIYAKUSYA_CD: 0, // 契約者番号
     SYUTURYOKU_KBN: 1, // 出力区分
     NOFUKIGEN_DATE: undefined, // 納付期限

@@ -1,19 +1,16 @@
 <template>
   <a-card class="h-full">
     <h1>（GJ3031）互助基金契約者情報変更（讓渡） 請求書発行</h1>
-    <div class="self_adaption_table form mt-1 max-w-300">
-      <b>第{{ searchParams.KI }}期</b>
+    <div class="self_adaption_table form mt-1 max-w-250">
+      <b>第 {{ searchParams.KI }} 期</b>
 
       <a-row
         ><a-col :span="24"
-          ><th class="bg-readonly">契約者</th>
-          <td>
-            <ai-select
-              v-model:value="searchParams.KEIYAKUSYA_CD"
-              :options="LIST"
-              split-val
-              disabled
-            ></ai-select></td
+          ><read-only
+            th="契約者"
+            th-width="100"
+            td="47074:亜伊伊伊伊（伊）"
+          ></read-only
         ></a-col>
       </a-row>
       <a-row
@@ -118,7 +115,7 @@ import { useRoute, useRouter } from 'vue-router'
 //--------------------------------------------------------------------------
 const createDefaultParams = () => {
   return {
-    KI: -1,
+    KI: 8,
     KEIYAKUSYA_CD: undefined,
     SEIKYU_KAISU: 2,
     TUMITATE_KBN: 1,
