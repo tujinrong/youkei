@@ -125,7 +125,7 @@
                 <range-select
                   v-model:value="searchParams.KEIYAKUSYA_CD"
                   :options="LIST"
-                  class="w-130!"
+                  class="max-w-78"
               /></a-form-item></td></a-col
           ><a-col span="24"
             ><th>契約年月日</th>

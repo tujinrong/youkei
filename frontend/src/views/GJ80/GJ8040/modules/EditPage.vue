@@ -81,7 +81,7 @@
                     v-model:value="formData.SIYO_KBN"
                     :options="SIYO_KBN_LIST"
                     split-val
-                    class="w-60!"
+                    class="max-w-50"
                   ></ai-select
                 ></a-form-item>
               </td>
@@ -94,7 +94,7 @@
                 <DateJp
                   v-model:value="formData.TEISI_DATE"
                   :disabled="isNew"
-                  class="w-50!"
+                  class="max-w-50!"
                 />
               </td>
             </a-col>
@@ -169,7 +169,7 @@ const formData = reactive({
   TEISI_RIYU: '',
 })
 
-const SIYO_KBN_LIST = ref<CmCodeNameModel[]>([])
+const SIYO_KBN_LIST = ref<CmCodeNameModel[]>([{ CODE: 30, NAME: 'オペレータ' }])
 const rules = reactive({
   USER_ID: [
     {

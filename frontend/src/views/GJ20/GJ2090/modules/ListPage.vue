@@ -89,14 +89,13 @@
           <a-col v-bind="layout">
             <th>契約者番号</th>
             <td class="flex">
-              <a-form-item v-bind="validateInfos.KEIYAKUSYA_CD">
-                <ai-select
-                  v-model:value="formData.KEIYAKUSYA_CD"
-                  :options="KEIYAKU_KBN_CD_NAME_LIST"
-                  class="max-w-115"
-                  type="number"
-                ></ai-select>
-              </a-form-item>
+              <a-input-number
+                v-model="validateInfos.KEIYAKUSYA_CD"
+                :min="1"
+                :max="99999"
+                :maxlength="5"
+                class="w-20"
+              ></a-input-number>
             </td>
           </a-col>
           <a-col v-bind="layout">

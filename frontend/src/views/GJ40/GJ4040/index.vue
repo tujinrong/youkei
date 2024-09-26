@@ -29,6 +29,10 @@
                   <range-number
                     v-model:value="formData.HASSEI_KAISU"
                     :options="KEIYAKU_KBN_CD_NAME_LIST"
+                                      :min="1"
+                  :max="99"
+                  :maxlength="2"
+                  class="max-w-34"
                 /></a-form-item>
               </td>
             </a-col>
@@ -39,6 +43,10 @@
                   <range-number
                     v-model:value="formData.KEISAN_KAISU"
                     :options="KEIYAKU_KBN_CD_NAME_LIST"
+                    :min="1"
+                  :max="999"
+                  :maxlength="3"
+                  class="max-w-36"
                 /></a-form-item>
               </td>
             </a-col>

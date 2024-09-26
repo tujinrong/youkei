@@ -63,7 +63,7 @@
                 <ai-select
                   v-model:value="formData.TORI_KBN"
                   :options="LIST"
-                  class="w-full"
+                  class="max-w-40"
                   split-val
                 ></ai-select>
               </a-form-item>
@@ -107,7 +107,7 @@
               <a-form-item v-bind="validateInfos.KEIYAKU_DATE_FROM">
                 <DateJp
                   v-model:value="formData.KEIYAKU_DATE_FROM"
-                  class="w-50!"
+                  class="max-w-50!"
                 ></DateJp>
               </a-form-item>
             </td>

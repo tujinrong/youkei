@@ -113,7 +113,7 @@
         </a-col>
       </a-row>
       <a-row>
-        <a-col span="19">
+        <a-col span="23">
           <th class="required">備考</th>
           <td>
             <a-input v-model:value="formData.BIKO"></a-input>

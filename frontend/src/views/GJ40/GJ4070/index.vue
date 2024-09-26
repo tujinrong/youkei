@@ -26,7 +26,13 @@
               <th class="required">認定回数</th>
               <td class="flex">
                 <a-form-item v-bind="validateInfos.HASSEI_KAISU">
-                  <range-number v-model:value="formData.HASSEI_KAISU" />
+                  <range-number
+                    v-model:value="formData.HASSEI_KAISU"
+                    :min="1"
+                    :max="99"
+                    :maxlength="2"
+                    class="max-w-34"
+                  />
                 </a-form-item>
               </td>
             </a-col>
