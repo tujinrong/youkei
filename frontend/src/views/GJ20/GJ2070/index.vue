@@ -16,9 +16,9 @@
                     <a-radio :value="1">仮発行</a-radio>
                     <a-radio :value="2">初回発行</a-radio>
                     <a-radio :value="3">再発行(初回と同内容)</a-radio>
-                    <a-radio :value="4"
-                      >修正発行(納付期限、発行日、発信番号変更可能)</a-radio
-                    >
+                    <a-radio :value="4">
+                      修正発行(納付期限、発行日、発信番号変更可能)
+                    </a-radio>
                   </a-radio-group>
                 </a-form-item>
               </td>
@@ -27,7 +27,7 @@
               <th class="required">対象期</th>
               <td>
                 <a-form-item v-bind="validateInfos.KI">
-                  <span class="!align-middle">第</span>
+                  <span class="!align-middle">第 </span>
                   <a-input-number
                     v-model:value="formData.KI"
                     :min="1"
@@ -36,7 +36,7 @@
                     class="w-14!"
                     @change="handleKI(false)"
                   />
-                  <span class="!align-middle">期</span>
+                  <span class="!align-middle"> 期</span>
                 </a-form-item>
               </td>
             </a-col>
@@ -99,8 +99,8 @@
             <a-col v-bind="layout">
               <th class="required">発信番号</th>
               <td>
-                <a-form-item v-bind="validateInfos.KI" class="w-50!">
-                  <span class="!align-middle">日鶏</span>
+                <a-form-item v-bind="validateInfos.KI" class="w-35!">
+                  <span class="!align-middle">日鶏 </span>
                   <a-input-number
                     v-model:value="formData.KI"
                     :min="0"
@@ -112,10 +112,10 @@
                     "
                     class="w-14!"
                   />
-                  <span class="!align-middle">発</span>
+                  <span class="!align-middle"> 発</span>
                 </a-form-item>
                 <a-form-item v-bind="validateInfos.KI" class="w-50!">
-                  <span class="!align-middle">第</span>
+                  <span class="!align-middle">第 </span>
                   <a-input-number
                     v-model:value="formData.KI"
                     :min="0"
@@ -127,7 +127,7 @@
                     "
                     class="w-17!"
                   />
-                  <span class="!align-middle">号</span>
+                  <span class="!align-middle"> 号</span>
                 </a-form-item>
               </td>
             </a-col>

@@ -78,6 +78,7 @@
                     <a-checkbox
                       v-for="(label, key) in SEIKYU_HENKAN_KBN_LABELS"
                       :key="key"
+                      class="w-35"
                       v-model:checked="formData.SEIKYU_HENKAN_KBN[key]"
                     >
                       {{ label }}
@@ -94,6 +95,7 @@
                     <a-checkbox
                       v-for="(label, key) in SYORI_JYOKYO_KBN_LABELS"
                       :key="key"
+                      class="w-35"
                       v-model:checked="formData.SYORI_JYOKYO_KBN[key]"
                     >
                       {{ label }}

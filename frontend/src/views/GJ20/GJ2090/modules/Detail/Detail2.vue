@@ -90,14 +90,7 @@
                 after="円"
               />
             </div>
-            <div class="flex">
-              <read-only-pop
-                thWidth="110"
-                th="積立金等総計"
-                :td="formData.SEIKYU_KIN"
-                after="円"
-              />
-            </div>
+            <div class="flex"></div>
           </a-col>
           <a-col span="5" class="thleft">
             <read-only-pop
@@ -114,6 +107,17 @@
               th="返還金額(預かり金)"
               :td="formData.TESURYO"
               v-bind="{ ...mathNumber }"
+              after="円"
+            />
+          </a-col>
+        </a-row>
+        <a-row>
+          <a-col span="13"></a-col>
+          <a-col span="5">
+            <read-only-pop
+              thWidth="110"
+              th="積立金等総計"
+              :td="formData.SEIKYU_KIN"
               after="円"
             />
           </a-col>

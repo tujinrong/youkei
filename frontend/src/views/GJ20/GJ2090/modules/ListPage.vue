@@ -107,6 +107,7 @@
                 class="w-130"
                 :maxlength="50"
               ></a-input>
+              <span class="w-40">（部分一致）</span>
             </td>
           </a-col>
           <a-col v-bind="layout">
@@ -117,6 +118,7 @@
                 class="w-130"
                 :maxlength="50"
               ></a-input>
+              <span class="w-40">（部分一致）</span>
             </td>
           </a-col>
           <a-col v-bind="layout">
@@ -167,6 +169,14 @@
                   v-model:value="formData.NYUKIN_DATE"
                   class="w-full"
                 />
+              </a-form-item>
+            </td>
+          </a-col>
+          <a-col v-bind="layout">
+            <th>入金日・振込日</th>
+            <td class="flex">
+              <a-form-item v-bind="validateInfos.SEIKYU_DATE">
+                <DateJp v-model:value="formData.SEIKYU_DATE" class="max-w-50" />
               </a-form-item>
             </td>
           </a-col>
@@ -337,6 +347,7 @@ const createDefaultParams = () => {
       VALUE_TO: undefined as Date | undefined,
     },
     SEARCH_METHOD: EnumAndOr.AndCode,
+    SEIKYU_DATE: '',
   }
 }
 const formData = reactive(createDefaultParams())

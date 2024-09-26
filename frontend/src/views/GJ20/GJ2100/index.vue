@@ -74,7 +74,6 @@
                     v-model:value="formData.KEN_CD"
                     :options="KEN_CD_NAME_LIST"
                     class="w-90!"
-                    :disabled="formData.SYUKEI_KBN !== 1"
                 /></a-form-item>
               </td>
             </a-col>
