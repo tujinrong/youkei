@@ -55,7 +55,13 @@
               <th class="required">認定回数</th>
               <td class="flex">
                 <a-form-item v-bind="validateInfos.HASSEI_KAISU">
-                  <range-number v-model:value="formData.HASSEI_KAISU" />
+                  <range-number
+                    v-model:value="formData.HASSEI_KAISU"
+                    :min="1"
+                    :max="99"
+                    :maxlength="2"
+                    class="max-w-34"
+                  />
                 </a-form-item>
               </td>
             </a-col>
@@ -63,7 +69,13 @@
               <th class="required">計算回数</th>
               <td class="flex">
                 <a-form-item v-bind="validateInfos.KEISAN_KAISU">
-                  <range-number v-model:value="formData.KEISAN_KAISU" />
+                  <range-number
+                    v-model:value="formData.KEISAN_KAISU"
+                    :min="1"
+                    :max="999"
+                    :maxlength="3"
+                    class="max-w-36"
+                  />
                 </a-form-item>
               </td>
             </a-col>

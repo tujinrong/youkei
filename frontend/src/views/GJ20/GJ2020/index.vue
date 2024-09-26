@@ -52,7 +52,7 @@
                     :max="999"
                     :maxlength="3"
                     :disabled="formData.SYORI_KBN == 0"
-                    class="w-17"
+                    class="w-15"
                   ></a-input-number>
                   <!-- <a-input v-model:value="formData.SEIKYU_KAISU" class="w-14" /> -->
                   <span>(入力&表示)</span>

@@ -26,7 +26,7 @@
                   <a-input-number
                     v-model:value="formData.SEIKYU_KAISU"
                     :min="1"
-                    :max="99"
+                    :max="999"
                     :maxlength="3"
                     class="w-15"
                   />

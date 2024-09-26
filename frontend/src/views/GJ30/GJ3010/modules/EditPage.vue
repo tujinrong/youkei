@@ -23,9 +23,9 @@
               <a-radio :value="1">仮発行</a-radio>
               <a-radio :value="2">初回発行</a-radio>
               <a-radio :value="3">再発行(初回と同内容)</a-radio>
-              <a-radio :value="4"
-                >修正発行(納付期限、発行日、発行番号変更可能)</a-radio
-              >
+              <a-radio :value="4">
+                修正発行(納付期限、発行日、発行番号変更可能)
+              </a-radio>
               <a-radio :value="5">請求書取消</a-radio>
             </a-radio-group>
           </td></a-col

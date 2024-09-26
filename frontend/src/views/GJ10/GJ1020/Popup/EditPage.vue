@@ -48,7 +48,7 @@
             </a-form-item>
           </td>
         </a-col>
-        <a-col span="24">
+        <a-col span="22">
           <th class="required">農場(移動元)</th>
           <td>
             <a-form-item v-bind="validateInfos.NOJO_CD_MOTO">

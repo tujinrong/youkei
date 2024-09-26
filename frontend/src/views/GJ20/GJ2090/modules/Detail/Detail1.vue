@@ -22,7 +22,7 @@
           <a-col span="8">
             <read-only-pop
               th="都道府県"
-              thWidth="110"
+              thWidth="140"
               :td="formData.KEN_CD_NAME"
             />
           </a-col>
@@ -35,23 +35,22 @@
           </a-col>
         </a-row>
         <a-row>
-          <a-col span="24">
+          <a-col span="13">
             <read-only-pop
               thWidth="140"
               th="契約者名"
-              td=""
               :td="formData.KEIYAKUSYA_NAME"
             />
           </a-col>
         </a-row>
         <a-row>
-          <a-col span="24">
+          <a-col span="13">
             <read-only-pop thWidth="140" th="" :hideTd="true" />
             <read-only-pop :hideTh="true" :td="formData.KEIYAKUSYA_KANA" />
           </a-col>
         </a-row>
         <a-row>
-          <a-col span="24">
+          <a-col span="7">
             <read-only-pop thWidth="140" th="住所" :hideTd="true" />
             <read-only-pop th="　〒　" :td="formData.ADDR_POST" />
           </a-col>
@@ -75,8 +74,16 @@
         </a-row>
         <a-row>
           <a-col span="24">
-            <read-only-pop thWidth="140" th="振込・返還口座情報" :hideTd="true" />
-            <read-only-pop thWidth="130" th="金融機関" :td="formData.BANK_NAME" />
+            <read-only-pop
+              thWidth="140"
+              th="振込・返還口座情報"
+              :hideTd="true"
+            />
+            <read-only-pop
+              thWidth="130"
+              th="金融機関"
+              :td="formData.BANK_NAME"
+            />
             <read-only-pop thWidth="130" th="支店" :td="formData.SITEN_NAME" />
           </a-col>
         </a-row>
@@ -152,7 +159,7 @@
               :td="formData.SEIKYU_HENKAN_KBN_NAME"
             />
           </a-col>
-          <a-col span="1"/>
+          <a-col span="1" />
         </a-row>
         <a-row>
           <a-col span="8">
@@ -192,11 +199,11 @@
               after="円"
             />
           </a-col>
-          <a-col span="1"/>
+          <a-col span="1" />
         </a-row>
         <a-row justify="space-between">
-          <a-col span="7"/>
-          <a-col span="7"/>
+          <a-col span="7" />
+          <a-col span="7" />
           <a-col span="7">
             <read-only-pop
               thWidth="100"
@@ -205,7 +212,7 @@
               after="円"
             />
           </a-col>
-          <a-col span="1"/>
+          <a-col span="1" />
         </a-row>
         <a-row>
           <a-col span="24">
@@ -220,11 +227,22 @@
     <template #footer>
       <div class="pt-2 flex justify-between border-t-1">
         <a-space :size="20">
-          <a-button class="warning-btn" :disabled="!formData.NYUKIN_DATE" @click="saveData">入金登録</a-button>
-          <a-button type="primary" :disabled="!formData.NYUKIN_DATE" @click="closeModal"
+          <a-button
+            class="warning-btn"
+            :disabled="!formData.NYUKIN_DATE"
+            @click="saveData"
+            >入金登録</a-button
+          >
+          <a-button
+            type="primary"
+            :disabled="!formData.NYUKIN_DATE"
+            @click="closeModal"
             >入金取消</a-button
           >
-          <a-button type="primary" :disabled="!formData.NYUKIN_DATE" @click="openGJ2092"
+          <a-button
+            type="primary"
+            :disabled="!formData.NYUKIN_DATE"
+            @click="openGJ2092"
             >分割入金</a-button
           >
         </a-space>
@@ -262,9 +280,9 @@ const formData = reactive<DetailVM>({
   KEN_CD_NAME: '',
   SYORI_JOKYO_KBN: undefined as number | undefined,
   SYORI_JOKYO_KBN_NAME: '',
-  KEIYAKUSYA_NAME: '',
+  KEIYAKUSYA_NAME: '契約者名契約者名契約者名契約者名契約者名契約者名契',
   KEIYAKUSYA_KANA: '',
-  ADDR_POST: '',
+  ADDR_POST: '136-0073',
   ADDR: '',
   ADDR_TEL1: '',
   ADDR_TEL2: '',

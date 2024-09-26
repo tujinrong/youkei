@@ -37,7 +37,11 @@
             </td>
           </a-col>
           <a-col span="3">
-            <read-only-pop thWidth="90" th="住所" td="" :hideTd="true" /></a-col
+            <read-only-pop
+              thWidth="90"
+              th="農場住所"
+              td=""
+              :hideTd="true" /></a-col
           ><a-col span="5"
             ><read-only-pop th="　〒" :td="nojoData.ADDR_POST" /></a-col
           ><a-col span="5"
@@ -63,7 +67,7 @@
                 <ai-select
                   v-model:value="formData.TORI_KBN"
                   :options="LIST"
-                  class="w-full"
+                  class="max-w-40"
                   split-val
                 ></ai-select>
               </a-form-item>
@@ -85,6 +89,7 @@
               </a-form-item>
             </td> </a-col></a-row
         ><a-row>
+          <a-col span="4"></a-col>
           <a-col span="7" class="mt-2">
             <read-only-pop
               th="契約羽数(増羽前)"
@@ -107,7 +112,7 @@
               <a-form-item v-bind="validateInfos.KEIYAKU_DATE_FROM">
                 <DateJp
                   v-model:value="formData.KEIYAKU_DATE_FROM"
-                  class="w-50!"
+                  class="max-w-50!"
                 ></DateJp>
               </a-form-item>
             </td>
@@ -123,6 +128,9 @@
                 <a-radio :value="2">入力確定</a-radio>
               </a-radio-group>
             </td>
+          </a-col>
+          <a-col span="5">
+            <read-only-pop :td="formData.KEIYAKU_KBN_ATO" />
           </a-col>
         </a-row>
       </div>
@@ -178,6 +186,7 @@ const createDefaultform = () => {
     ZOGEN_HASU: undefined,
     KEIYAKU_DATE_FROM: new Date(),
     SYORI_KBN: 1,
+    KEIYAKU_KBN_ATO: undefined,
   }
 }
 
