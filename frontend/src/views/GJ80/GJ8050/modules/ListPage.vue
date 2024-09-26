@@ -3,53 +3,55 @@
     <a-card ref="headRef" :bordered="false" class="staticWidth">
       <h1>（GJ8050）金融機関一覧</h1>
       <div class="self_adaption_table form mt-1">
-        <a-row>
-          <a-col v-bind="layout">
-            <th>金融機関コード</th>
-            <td>
-              <a-form-item>
-                <a-input
-                  v-model:value="searchParams.BANK_CD"
-                  :maxlength="4"
-                  class="max-w-15"
-                ></a-input>
-              </a-form-item>
-            </td>
-          </a-col>
-          <a-col v-bind="layout">
-            <th>金融機関名（ｶﾅ）</th>
-            <td>
-              <a-form-item>
-                <a-input
-                  v-model:value="searchParams.BANK_KANA"
-                  :maxlength="60"
-                  class="max-w-150"
-                ></a-input>
-              </a-form-item>
-            </td>
-          </a-col>
-          <a-col v-bind="layout">
-            <th>金融機関名（漢字）</th>
-            <td>
-              <a-form-item>
-                <a-input
-                  v-model:value="searchParams.BANK_NAME"
-                  :maxlength="30"
-                  class="max-w-75"
-                ></a-input>
-              </a-form-item>
-            </td>
-          </a-col>
-        </a-row>
-      </div>
-      <div class="my-2 flex">
-        <a-space
-          ><span>検索方法</span>
-          <a-radio-group v-model:value="searchParams.SEARCH_METHOD">
-            <a-radio :value="EnumAndOr.AndCode">すべてを含む(AND)</a-radio>
-            <a-radio :value="EnumAndOr.OrCode">いずれかを含む(OR)</a-radio>
-          </a-radio-group></a-space
-        >
+        <div class="max-w-800px">
+          <a-row>
+            <a-col v-bind="layout">
+              <th>金融機関コード</th>
+              <td>
+                <a-form-item>
+                  <a-input
+                    v-model:value="searchParams.BANK_CD"
+                    :maxlength="4"
+                    class="max-w-15"
+                  ></a-input>
+                </a-form-item>
+              </td>
+            </a-col>
+            <a-col v-bind="layout">
+              <th>金融機関名（ｶﾅ）</th>
+              <td>
+                <a-form-item>
+                  <a-input
+                    v-model:value="searchParams.BANK_KANA"
+                    :maxlength="60"
+                    class="max-w-150"
+                  ></a-input>
+                </a-form-item>
+              </td>
+            </a-col>
+            <a-col v-bind="layout">
+              <th>金融機関名（漢字）</th>
+              <td>
+                <a-form-item>
+                  <a-input
+                    v-model:value="searchParams.BANK_NAME"
+                    :maxlength="30"
+                    class="max-w-75"
+                  ></a-input>
+                </a-form-item>
+              </td>
+            </a-col>
+          </a-row>
+        </div>
+        <div class="my-2 flex">
+          <a-space
+            ><span>検索方法</span>
+            <a-radio-group v-model:value="searchParams.SEARCH_METHOD">
+              <a-radio :value="EnumAndOr.AndCode">すべてを含む(AND)</a-radio>
+              <a-radio :value="EnumAndOr.OrCode">いずれかを含む(OR)</a-radio>
+            </a-radio-group></a-space
+          >
+        </div>
       </div>
       <div class="flex">
         <a-space :size="20">
@@ -122,54 +124,56 @@
     ></a-card>
     <a-card class="staticWidth">
       <div class="self_adaption_table form mt-1">
-        <a-row>
-          <a-col v-bind="layout">
-            <th>支店コード</th>
-            <td>
-              <a-form-item>
-                <a-input
-                  v-model:value="searchParams2.SITEN_CD"
-                  :maxlength="3"
-                  class="max-w-15"
-                ></a-input>
-              </a-form-item>
-            </td>
-          </a-col>
+        <div class="max-w-800px">
+          <a-row>
+            <a-col v-bind="layout">
+              <th>支店コード</th>
+              <td>
+                <a-form-item>
+                  <a-input
+                    v-model:value="searchParams2.SITEN_CD"
+                    :maxlength="3"
+                    class="max-w-15"
+                  ></a-input>
+                </a-form-item>
+              </td>
+            </a-col>
 
-          <a-col v-bind="layout">
-            <th>支店名（ｶﾅ）</th>
-            <td>
-              <a-form-item>
-                <a-input
-                  v-model:value="searchParams2.SITEN_KANA"
-                  :maxlength="20"
-                  class="max-w-150"
-                ></a-input>
-              </a-form-item>
-            </td>
-          </a-col>
-          <a-col v-bind="layout">
-            <th>支店名（漢字）</th>
-            <td>
-              <a-form-item>
-                <a-input
-                  v-model:value="searchParams2.SITEN_NAME"
-                  :maxlength="20"
-                  class="max-w-75"
-                ></a-input>
-              </a-form-item>
-            </td>
-          </a-col>
-        </a-row>
-      </div>
-      <div class="my-2 flex">
-        <a-space
-          ><span>検索方法</span>
-          <a-radio-group v-model:value="searchParams2.SEARCH_METHOD">
-            <a-radio :value="EnumAndOr.AndCode">すべてを含む(AND)</a-radio>
-            <a-radio :value="EnumAndOr.OrCode">いずれかを含む(OR)</a-radio>
-          </a-radio-group></a-space
-        >
+            <a-col v-bind="layout">
+              <th>支店名（ｶﾅ）</th>
+              <td>
+                <a-form-item>
+                  <a-input
+                    v-model:value="searchParams2.SITEN_KANA"
+                    :maxlength="20"
+                    class="max-w-150"
+                  ></a-input>
+                </a-form-item>
+              </td>
+            </a-col>
+            <a-col v-bind="layout">
+              <th>支店名（漢字）</th>
+              <td>
+                <a-form-item>
+                  <a-input
+                    v-model:value="searchParams2.SITEN_NAME"
+                    :maxlength="20"
+                    class="max-w-75"
+                  ></a-input>
+                </a-form-item>
+              </td>
+            </a-col>
+          </a-row>
+        </div>
+        <div class="my-2 flex">
+          <a-space
+            ><span>検索方法</span>
+            <a-radio-group v-model:value="searchParams2.SEARCH_METHOD">
+              <a-radio :value="EnumAndOr.AndCode">すべてを含む(AND)</a-radio>
+              <a-radio :value="EnumAndOr.OrCode">いずれかを含む(OR)</a-radio>
+            </a-radio-group></a-space
+          >
+        </div>
       </div>
       <div class="flex">
         <a-space :size="20">

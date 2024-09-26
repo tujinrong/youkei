@@ -9,74 +9,76 @@
 <template>
   <div class="h-full min-h-500px flex-col-stretch gap-12px my-4 mx-4">
     <a-card ref="headRef" :bordered="false" class="staticWidth">
-      <h1>（GJ8090）契約者農場一覧</h1>
-      <div class="self_adaption_table form mt-1">
-        <a-row>
-          <a-col v-bind="layout">
-            <th class="required">期</th>
-            <td>
-              <a-form-item v-bind="validateInfos.KI">
-                <a-input-number
-                  v-model:value="searchParams.KI"
-                  :min="1"
-                  :max="99"
-                  :maxlength="2"
-                  class="w-14"
-                  @change="getInitData(searchParams.KI, false)"
-                ></a-input-number>
-              </a-form-item>
-            </td>
-          </a-col>
-          <a-col v-bind="layout">
-            <th class="required">契約者</th>
-            <td>
-              <a-form-item v-bind="validateInfos.KEIYAKUSYA_CD">
-                <ai-select
-                  v-model:value="searchParams.KEIYAKUSYA_CD"
-                  :options="KEIYAKUSYA_CD_NAME_LIST"
-                  class="max-w-200"
-                  split-val
-                ></ai-select>
-              </a-form-item>
-            </td>
-          </a-col>
-          <a-col v-bind="layout">
-            <th>農場番号</th>
-            <td>
-              <a-form-item>
-                <a-input-number
-                  v-model:value="searchParams.NOJO_CD"
-                  :min="0"
-                  :max="999"
-                  :maxlength="3"
-                  class="w-20"
-                ></a-input-number>
-              </a-form-item>
-            </td>
-          </a-col>
-          <a-col v-bind="layout">
-            <th>農場名</th>
-            <td>
-              <a-form-item>
-                <a-input
-                  v-model:value="searchParams.NOJO_NAME"
-                  :maxlength="20"
-                  class="w-100"
-                ></a-input>
-                <span>(部分一致)</span>
-              </a-form-item>
-            </td>
-          </a-col>
-        </a-row>
-      </div>
-      <div class="my-2 flex">
-        <a-space
-          ><span>検索方法</span>
-          <a-radio-group v-model:value="searchParams.SEARCH_METHOD">
-            <a-radio :value="EnumAndOr.AndCode">すべてを含む(AND)</a-radio>
-            <a-radio :value="EnumAndOr.OrCode">いずれかを含む(OR)</a-radio>
-          </a-radio-group></a-space
-        >
+      <div class="max-w-1000px">
+        <h1>（GJ8090）契約者農場一覧</h1>
+        <div class="self_adaption_table form mt-1">
+          <a-row>
+            <a-col v-bind="layout">
+              <th class="required">期</th>
+              <td>
+                <a-form-item v-bind="validateInfos.KI">
+                  <a-input-number
+                    v-model:value="searchParams.KI"
+                    :min="1"
+                    :max="99"
+                    :maxlength="2"
+                    class="w-14"
+                    @change="getInitData(searchParams.KI, false)"
+                  ></a-input-number>
+                </a-form-item>
+              </td>
+            </a-col>
+            <a-col v-bind="layout">
+              <th class="required">契約者</th>
+              <td>
+                <a-form-item v-bind="validateInfos.KEIYAKUSYA_CD">
+                  <ai-select
+                    v-model:value="searchParams.KEIYAKUSYA_CD"
+                    :options="KEIYAKUSYA_CD_NAME_LIST"
+                    class="max-w-200"
+                    split-val
+                  ></ai-select>
+                </a-form-item>
+              </td>
+            </a-col>
+            <a-col v-bind="layout">
+              <th>農場番号</th>
+              <td>
+                <a-form-item>
+                  <a-input-number
+                    v-model:value="searchParams.NOJO_CD"
+                    :min="0"
+                    :max="999"
+                    :maxlength="3"
+                    class="w-20"
+                  ></a-input-number>
+                </a-form-item>
+              </td>
+            </a-col>
+            <a-col v-bind="layout">
+              <th>農場名</th>
+              <td>
+                <a-form-item>
+                  <a-input
+                    v-model:value="searchParams.NOJO_NAME"
+                    :maxlength="20"
+                    class="w-100"
+                  ></a-input>
+                  <span>(部分一致)</span>
+                </a-form-item>
+              </td>
+            </a-col>
+          </a-row>
+        </div>
+        <div class="my-2 flex">
+          <a-space
+            ><span>検索方法</span>
+            <a-radio-group v-model:value="searchParams.SEARCH_METHOD">
+              <a-radio :value="EnumAndOr.AndCode">すべてを含む(AND)</a-radio>
+              <a-radio :value="EnumAndOr.OrCode">いずれかを含む(OR)</a-radio>
+            </a-radio-group></a-space
+          >
+        </div>
       </div>
       <div class="flex">
         <a-space :size="20">
