@@ -1,6 +1,6 @@
 <template>
   <div>
-    <a-card :bordered="false" class="h-full min-h-500px">
+    <a-card :bordered="false" class="h-full min-h-500px staticWidth">
       <div>
         <h1>（GJ6010）生産者積立金返還金計算処理</h1>
         <div class="self_adaption_table form" ref="headRef">
@@ -27,7 +27,7 @@
             </a-col>
             <a-col v-bind="layout">
               <read-only
-                thWidth="220"
+                thWidth="230"
                 th="対象期(前期)"
                 :td="formData.KI"
                 before="第"
@@ -93,7 +93,7 @@
             </a-col>
             <a-col v-bind="layout">
               <read-only
-                thWidth="220"
+                thWidth="230"
                 th="前期積立金返還人数"
                 :td="formData.ZENKI_HENKAN_NINSU"
                 after="(人)"
@@ -101,7 +101,7 @@
             </a-col>
             <a-col v-bind="layout">
               <read-only
-                thWidth="220"
+                thWidth="230"
                 th="前期積立金返還金合計"
                 :td="formData.ZENKI_HENKAN_GOKEI"
                 after="(円)"
@@ -109,7 +109,7 @@
             </a-col>
             <a-col v-bind="layout">
               <read-only
-                thWidth="220"
+                thWidth="230"
                 th="前期積立金返還率"
                 :td="formData.ZENKI_HENKAN_RITU"
               />
@@ -242,7 +242,7 @@ onUnmounted(() => {
 
 <style scoped lang="scss">
 th {
-  width: 220px;
+  width: 230px;
 }
 
 :deep(.ant-card-body) {

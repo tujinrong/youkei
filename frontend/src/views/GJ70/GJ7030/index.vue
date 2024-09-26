@@ -10,7 +10,7 @@
   <div
     class="h-full flex-col-stretch gap-12px overflow lt-sm:overflow-auto flex"
   >
-    <a-card
+    <a-card class="staticWidth"
       ><h1>（GJ7030）互助基金契約者互助金情報検索CSVデ一夕作成</h1>
       <div class="self_adaption_table form mt-1">
         <a-row
@@ -50,7 +50,7 @@
                 <range-select
                   v-model:value="searchParams.KEIYAKUSYA_CD"
                   :options="LIST"
-                  class="w-250!"
+                  class="max-w-250!"
               /></a-form-item></td></a-col
           ><a-col span="24"
             ><th>契約区分</th>
@@ -78,7 +78,7 @@
                 <range-select
                   v-model:value="searchParams.KEIYAKUSYA_CD"
                   :options="LIST"
-                  class="w-250!"
+                  class="max-w-250!"
               /></a-form-item></td
           ></a-col>
           <a-col span="24"
@@ -106,13 +106,13 @@
             <td>
               <a-form-item
                 v-bind="validateInfos.KOFUTUTI_HAKKO_DATE"
-                class="w-110!"
+                class="max-w-90!"
               >
                 <range-date
                   v-model:value="
                     searchParams.KOFUTUTI_HAKKO_DATE
                   " /></a-form-item
-              ><span class="w-40 mr-a mt-1">(発行済のみ有効)</span>
+              ><span class="w-40 mt-1">(発行済のみ有効)</span>
             </td>
           </a-col>
           <a-col span="24"
@@ -144,7 +144,7 @@
           <a-button class="ml-20" type="primary" @click="">CSV出力</a-button>
         </a-space>
         <close-page /></div></a-card
-    ><a-card class="flex-1" ref="cardRef">
+    ><a-card class="flex-1 staticWidth" ref="cardRef">
       <a-pagination
         v-model:current="pageParams.PAGE_NUM"
         v-model:page-size="pageParams.PAGE_SIZE"

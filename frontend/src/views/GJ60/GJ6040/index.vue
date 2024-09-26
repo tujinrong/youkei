@@ -1,6 +1,6 @@
 <template>
   <div>
-    <a-card :bordered="false" class="h-full min-h-500px">
+    <a-card :bordered="false" class="h-full min-h-500px staticWidth">
       <div>
         <h1>（GJ6040）積立金返還金振込データ作成(全銀手順)</h1>
         <div class="self_adaption_table form" ref="headRef">

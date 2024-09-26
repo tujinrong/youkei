@@ -10,7 +10,7 @@
   <div
     class="h-full flex-col-stretch gap-12px overflow lt-sm:overflow-auto flex"
   >
-    <a-card
+    <a-card class="staticWidth"
       ><h1>（GJ7020）互助基金契約者積立金情報検索CSVデ一夕作成</h1>
       <div class="self_adaption_table form mt-1">
         <a-row
@@ -199,7 +199,7 @@
           <a-button class="ml-20" type="primary" @click="">CSV出力</a-button>
         </a-space>
         <close-page /></div></a-card
-    ><a-card class="flex-1" ref="cardRef">
+    ><a-card class="flex-1 staticWidth" ref="cardRef">
       <a-pagination
         v-model:current="pageParams.PAGE_NUM"
         v-model:page-size="pageParams.PAGE_SIZE"

@@ -10,11 +10,17 @@
   <div
     class="h-full flex-col-stretch gap-12px overflow lt-sm:overflow-auto flex"
   >
-    <a-card
+    <a-card class="staticWidth"
       ><h1>（GJ7010）互助基金契約者情報検索CSVデ一夕作成</h1>
       <div class="self_adaption_table form mt-1">
         <a-row
-          ><a-col span="12"
+          ><a-col
+            v-bind="{
+              md: 24,
+              lg: 24,
+              xl: 24,
+              xxl: 12,
+            }"
             ><th class="required">対象期</th>
             <td>
               <a-form-item v-bind="validateInfos.KI" class="w-50!">
@@ -33,14 +39,26 @@
                 />　末　現在　(契約情報の契約日)</a-form-item
               >
             </td> </a-col
-          ><a-col span="12"
+          ><a-col
+            v-bind="{
+              md: 24,
+              lg: 24,
+              xl: 24,
+              xxl: 12,
+            }"
             ><th>契約日未入力者を除く</th>
             <td>
               <a-checkbox
                 v-model:checked="searchParams.KEIYAKU_DATE_NOZOKU_FLG"
               ></a-checkbox></td
           ></a-col>
-          <a-col span="12"
+          <a-col
+            v-bind="{
+              md: 24,
+              lg: 24,
+              xl: 24,
+              xxl: 12,
+            }"
             ><th>都道府県</th>
             <td>
               <a-form-item v-bind="validateInfos.KEN_CD">
@@ -49,7 +67,13 @@
                   :options="LIST"
                   class="w-90!"
               /></a-form-item></td></a-col
-          ><a-col span="12"
+          ><a-col
+            v-bind="{
+              md: 24,
+              lg: 24,
+              xl: 24,
+              xxl: 12,
+            }"
             ><th>入金· 返還日未入力者を除く</th>
             <td>
               <a-checkbox
@@ -143,7 +167,7 @@
           <a-button class="ml-20" type="primary" @click="">CSV出力</a-button>
         </a-space>
         <close-page /></div></a-card
-    ><a-card :bordered="false" class="flex-1" ref="cardRef">
+    ><a-card :bordered="false" class="flex-1 staticWidth" ref="cardRef">
       <a-pagination
         v-model:current="pageParams.PAGE_NUM"
         v-model:page-size="pageParams.PAGE_SIZE"

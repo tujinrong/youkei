@@ -1,6 +1,6 @@
 <template>
   <div>
-    <a-card :bordered="false" class="h-full min-h-500px">
+    <a-card :bordered="false" class="h-full min-h-500px staticWidth">
       <div>
         <h1>（GJ6030）各種マスタの次期対応コピー処理</h1>
         <div class="self_adaption_table form" ref="headRef">
@@ -15,7 +15,7 @@
                     split-val
                     class="w-80!"
                   />
-<!--                  <a-input-number
+                  <!--                  <a-input-number
                     v-model:value="formData.MASUTA_SENTAKU"
                     :min="1"
                     :max="3"
@@ -95,7 +95,7 @@
 </template>
 
 <script setup lang="ts">
-import { reactive, computed, onMounted, onUnmounted, ref} from 'vue'
+import { reactive, computed, onMounted, onUnmounted, ref } from 'vue'
 import { ITEM_REQUIRE_ERROR } from '@/constants/msg'
 import { Form } from 'ant-design-vue'
 import { Init, Preview } from './service'
