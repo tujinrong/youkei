@@ -1,7 +1,7 @@
 <template>
   <div class="h-full min-h-500px flex-col-stretch gap-12px flex">
     <a-card ref="headRef" :bordered="false" class="staticWidth">
-      <div class="max-w-800px">
+      <div class="max-w-780px">
         <h1>（GJ8060）事務委託先一覧</h1>
         <div class="self_adaption_table form mt-1">
           <a-row>

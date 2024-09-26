@@ -10,7 +10,7 @@
   <a-modal
     :visible="modalVisible"
     centered
-    title="（GJ8051）金融機関マスタメンテナンス"
+    title="（GJ8050）金融機関一覧"
     width="1200px"
     :body-style="{ minHeight: '600px' }"
     :mask-closable="false"
