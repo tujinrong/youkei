@@ -455,7 +455,7 @@
               </a-col>
             </a-row>
           </a-col>
-          <a-col :span="14"
+          <a-col :span="12"
             ><th style="width: fit-content">備考</th>
             <td>
               <a-textarea
@@ -561,9 +561,14 @@ const KEIYAKU_KBN_LIST = ref<CmCodeNameModel[]>([
   { CODE: 1, NAME: '家族' },
   { CODE: 2, NAME: '企業' },
   { CODE: 3, NAME: '鶏以外' },
-])
-// 契約区分情報プルダウンリスト
-const KEIYAKU_JYOKYO_LIST = ref<CmCodeNameModel[]>([]) // 契約状況情報プルダウンリスト
+]) // 契約区分情報プルダウンリスト
+
+const KEIYAKU_JYOKYO_LIST = ref<CmCodeNameModel[]>([
+  { CODE: 1, NAME: '新規' },
+  { CODE: 2, NAME: '継続' },
+  { CODE: 3, NAME: '未継' },
+]) // 契約状況情報プルダウンリスト
+
 const ITAKU_LIST = ref<CmCodeNameModel[]>([
   // { CODE: 666, NAME: '事務委託先事務委託先事務委託先事務委託先事務委託先' },
 ]) // 事務委託先情報プルダウンリスト
@@ -632,7 +637,6 @@ const rules = reactive({
           )
         } else if (value.replace(/[^0-9]/g, '').length < 7) {
           return Promise.reject(
-            // ITEM_ILLEGAL_ERROR.Msg.replace('{0}', '郵便番号')
             ITEM_REQUIRE_ERROR.Msg.replace('{0}', '郵便番号')
           )
         }
