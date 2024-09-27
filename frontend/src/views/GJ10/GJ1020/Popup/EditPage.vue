@@ -16,7 +16,8 @@
     :mask-closable="false"
     destroy-on-close
     @cancel="goList"
-    ><div class="edit_table form w-full">
+  >
+    <div class="edit_table form w-full">
       <a-row>
         <a-col span="24">
           <th class="required">鶏の種類</th>
@@ -25,15 +26,24 @@
               <ai-select
                 v-model:value="formData.TORI_KBN"
                 :options="LIST"
-                class="max-w-50"
+                class="max-w-40"
                 split-val
-              ></ai-select>
-              <span>
-                (1:採卵鶏「成鶏」、2:採卵鶏「育成鶏」、3:肉用鶏、4:種鶏「成鶏」、5:種鶏「育成鶏」、6:うずら、7:あひる、8:きじ、9:ほろほろ鳥、10:七面鳥、11:だちょう)</span
               >
+              </ai-select>
+              <span>
+                （1:採卵鶏「成鶏」、2:採卵鶏「育成鶏」、3:肉用鶏、4:種鶏「成鶏」、5:種鶏「育成鶏」、
+              </span>
             </a-form-item>
-          </td> </a-col
-        ><a-col span="24">
+          </td>
+        </a-col>
+        <a-row>
+          <a-col span="24" class="ml-75">
+            <span>
+              6:うずら、7:あひる、8:きじ、9:ほろほろ鳥、10:七面鳥、11:だちょう）
+            </span>
+          </a-col>
+        </a-row>
+        <a-col span="24">
           <th class="required">移動羽数</th>
           <td>
             <a-form-item v-bind="validateInfos.IDO_HASU">
@@ -48,20 +58,21 @@
             </a-form-item>
           </td>
         </a-col>
-        <a-col span="22">
+        <a-col span="24">
           <th class="required">農場(移動元)</th>
           <td>
             <a-form-item v-bind="validateInfos.NOJO_CD_MOTO">
               <ai-select
                 v-model:value="formData.NOJO_CD_MOTO"
                 :options="LIST"
-                class="max-w-250"
+                class="max-w-185"
                 split-val
               ></ai-select>
             </a-form-item>
           </td>
         </a-col>
-        <a-col span="24" class="mt-2">
+      </a-row>
+      <!-- <a-col span="24" class="mt-2">
           <read-only-pop thWidth="120" th="農場住所" td="" :hideTd="true" />
           <read-only-pop th="　〒　" :td="nojoAddr_moto.ADDR_POST" />
           <read-only-pop thWidth="100" th="住所1" :td="nojoAddr_moto.ADDR_1" />
@@ -71,20 +82,54 @@
           <read-only-pop thWidth="120" th="" :hideTd="true" />
           <read-only-pop thWidth="100" th="住所3" :td="nojoAddr_moto.ADDR_3" />
           <read-only-pop thWidth="100" th="住所4" :td="nojoAddr_moto.ADDR_4" />
+        </a-col> -->
+      <a-row>
+        <a-col span="3">
+          <read-only-pop thWidth="120" th="農場住所" td="" :hideTd="true" />
         </a-col>
-
-        <a-col span="24">
+        <a-col span="4">
+          <read-only-pop thWidth="30" th="〒" :td="nojoAddr_moto.ADDR_POST" />
+        </a-col>
+        <a-col span="1"></a-col>
+        <a-col span="5">
+          <read-only-pop thWidth="50" th="住所1" :td="nojoAddr_moto.ADDR_1" />
+        </a-col>
+        <a-col span="1"></a-col>
+        <a-col span="10">
+          <read-only-pop thWidth="50" th="住所2" :td="nojoAddr_moto.ADDR_2" />
+        </a-col>
+      </a-row>
+      <a-row>
+        <a-col span="8">
+          <read-only-pop thWidth="120" th="" :hideTd="true" />
+        </a-col>
+        <a-col span="8">
+          <read-only-pop thWidth="50" th="住所3" :td="nojoAddr_moto.ADDR_3" />
+        </a-col>
+        <a-col span="1"></a-col>
+        <a-col span="7">
+          <read-only-pop thWidth="50" th="住所4" :td="nojoAddr_moto.ADDR_4" />
+        </a-col>
+      </a-row>
+      <a-row>
+        <a-col span="3"></a-col>
+        <a-col span="10">
           <read-only-pop
-            thWidth="220"
+            thWidth="120"
             th="契約羽数(移動前)"
             :td="formData.KEIYAKU_HASU_MOTO_MAE"
           />
+        </a-col>
+        <a-col span="1"></a-col>
+        <a-col span="10">
           <read-only-pop
-            thWidth="220"
+            thWidth="120"
             th="契約羽数(移動後)"
             :td="formData.KEIYAKU_HASU_MOTO_ATO"
           />
         </a-col>
+      </a-row>
+      <a-row>
         <a-col span="24">
           <th class="required">農場(移動先)</th>
           <td>
@@ -99,6 +144,8 @@
             <a-button class="ml-2" type="primary">農場登録</a-button>
           </td>
         </a-col>
+      </a-row>
+      <!-- <a-row>
         <a-col span="24" class="mt-2">
           <read-only-pop thWidth="120" th="農場住所" td="" :hideTd="true" />
           <read-only-pop th="　〒　" :td="nojoAddr_saki.ADDR_POST" />
@@ -109,8 +156,36 @@
           <read-only-pop thWidth="120" th="" :hideTd="true" />
           <read-only-pop thWidth="100" th="住所3" :td="nojoAddr_saki.ADDR_3" />
           <read-only-pop thWidth="100" th="住所4" :td="nojoAddr_saki.ADDR_4" />
+        </a-col> -->
+      <a-row>
+        <a-col span="3">
+          <read-only-pop thWidth="120" th="農場住所" td="" :hideTd="true" />
         </a-col>
-
+        <a-col span="4">
+          <read-only-pop thWidth="30" th="〒" :td="nojoAddr_saki.ADDR_POST" />
+        </a-col>
+        <a-col span="1"></a-col>
+        <a-col span="5">
+          <read-only-pop thWidth="50" th="住所1" :td="nojoAddr_saki.ADDR_1" />
+        </a-col>
+        <a-col span="1"></a-col>
+        <a-col span="10">
+          <read-only-pop thWidth="50" th="住所2" :td="nojoAddr_saki.ADDR_2" />
+        </a-col>
+      </a-row>
+      <a-row>
+        <a-col span="8">
+          <read-only-pop thWidth="120" th="" :hideTd="true" />
+        </a-col>
+        <a-col span="8">
+          <read-only-pop thWidth="50" th="住所3" :td="nojoAddr_saki.ADDR_3" />
+        </a-col>
+        <a-col span="1"></a-col>
+        <a-col span="7">
+          <read-only-pop thWidth="50" th="住所4" :td="nojoAddr_saki.ADDR_4" />
+        </a-col>
+      </a-row>
+      <!-- <a-row>
         <a-col span="24">
           <read-only-pop
             thWidth="220"
@@ -122,7 +197,26 @@
             th="契約羽数(移動後)"
             :td="formData.KEIYAKU_HASU_SAKI_ATO"
           />
+        </a-col> -->
+      <a-row>
+        <a-col span="3"></a-col>
+        <a-col span="10">
+          <read-only-pop
+            thWidth="120"
+            th="契約羽数(移動前)"
+            :td="formData.KEIYAKU_HASU_SAKI_MAE"
+          />
         </a-col>
+        <a-col span="1"></a-col>
+        <a-col span="10">
+          <read-only-pop
+            thWidth="120"
+            th="契約羽数(移動後)"
+            :td="formData.KEIYAKU_HASU_SAKI_MAE"
+          />
+        </a-col>
+      </a-row>
+      <a-row>
         <a-col span="24">
           <th class="required">移動年月日</th>
           <td>
