@@ -48,6 +48,7 @@
       :column-config="{ resizable: true }"
       :row-config="{ isCurrent: true, isHover: true }"
       :data="tableData2"
+      height="310px"
       :sort-config="{ trigger: 'cell', orders: ['desc', 'asc'] }"
       :empty-render="{ name: 'NotData' }"
       @cell-dblclick="({ row }) => edit()"

@@ -41,7 +41,7 @@
           </td>
         </a-col>
       </a-row>
-      <a-row>
+      <a-row class="mt-2">
         <a-col span="2">
           <read-only-pop thWidth="110" th="住所" td="" :hideTd="true" />
         </a-col>
@@ -105,7 +105,7 @@
             <a-form-item v-bind="validateInfos.KEIYAKU_YMD_FM" class="!w-40">
               <DateJp v-model:value="formData.KEIYAKU_YMD_FM"
             /></a-form-item>
-            <span class="mx-2">～</span>
+            <span class="ml-2 mt-1">～</span>
             <a-form-item class="!w-40">
               <DateJp
                 v-model:value="formData.KEIYAKU_YMD_TO"

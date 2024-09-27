@@ -78,7 +78,7 @@
         ref="xTableRef"
         class="mt-2 vxe-table-pop"
         :column-config="{ resizable: true }"
-        max-height="200px"
+        max-height="160px"
         :row-config="{ isCurrent: true, isHover: true }"
         :data="tableData"
         :sort-config="{ trigger: 'cell', orders: ['desc', 'asc'] }"

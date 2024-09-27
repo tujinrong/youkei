@@ -29,7 +29,7 @@
             ></read-only-pop>
           </a-col>
         </a-row>
-        <b>契約者農場基本登録項目</b>
+        <h2 class="mt-4">契約者農場基本登録項目</h2>
         <a-row>
           <a-col span="24">
             <th class="required">契約者農場</th>

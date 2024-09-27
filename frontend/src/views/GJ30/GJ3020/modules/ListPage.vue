@@ -92,8 +92,7 @@
           align="center"
           field="KEIYAKU_DATE_FROM"
           title="変更年月日"
-          width="200"
-          min-width="160"
+          width="160"
           sortable
           formatter="jpDate"
           :params="{ order: 1 }"
@@ -104,8 +103,6 @@
           align="center"
           field="KEIYAKU_KBN_MAE"
           title="契約区分(変更前)"
-          width="450"
-          min-width="180"
           sortable
           :params="{ order: 2 }"
         >
@@ -118,18 +115,16 @@
           align="center"
           field="KEIYAKU_KBN_ATO"
           title="契約区分(変更後)"
-          width="450"
-          min-width="180"
           sortable
           :params="{ order: 3 }"
         >
         </vxe-column>
         <vxe-column
           header-align="center"
+          align="center"
           field="SYORI_KBN"
           title="処理状況"
-          width="230"
-          min-width="100"
+          width="130"
           sortable
           :params="{ order: 4 }"
         >
@@ -140,8 +135,7 @@
           field="SEIKYU_KAISU"
           title="請求回数"
           sortable
-          width="200"
-          min-width="100"
+          width="120"
           :params="{ order: 5 }"
         >
         </vxe-column>

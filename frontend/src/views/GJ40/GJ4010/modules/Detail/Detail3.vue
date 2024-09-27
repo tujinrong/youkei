@@ -83,7 +83,7 @@
                 :column-config="{ resizable: true }"
                 :row-config="{ isCurrent: true, isHover: true }"
                 :data="tableData"
-                max-height="420px"
+                height="420px"
                 :sort-config="{ trigger: 'cell', orders: ['desc', 'asc'] }"
                 :empty-render="{ name: 'NotData' }"
                 @cell-click="({ row }) => changeData()"
