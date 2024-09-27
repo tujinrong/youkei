@@ -74,12 +74,12 @@
                   </a-form-item>
                 </td>
               </a-col>
-              <a-col :md="24" :lg="24" :xl="24" :xxl="16">
+              <a-col span="16">
                 <td>
                   <a-input v-model:value="formData.ADDR2" class="max-w-228" />
                 </td>
               </a-col>
-              <a-col :md="24" :lg="24" :xl="12" :xxl="8">
+              <a-col span="8">
                 <th class="required">発行番号・漢字</th>
                 <td>
                   <a-form-item v-bind="validateInfos.HAKKO_NO_KANJI">
@@ -96,7 +96,7 @@
           <a-col span="24">
             <th class="required">連絡先１</th>
             <a-row class="flex-1">
-              <a-col :md="24" :lg="24" :xl="12" :xxl="6">
+              <a-col span="6">
                 <th class="required w-20!">電話１</th>
                 <td>
                   <a-form-item v-bind="validateInfos.TEL1">
@@ -104,7 +104,7 @@
                   /></a-form-item>
                 </td>
               </a-col>
-              <a-col :md="24" :lg="24" :xl="12" :xxl="6">
+              <a-col span="6">
                 <th class="required text-end! w-30!">ＦＡＸ１</th>
                 <td>
                   <a-form-item v-bind="validateInfos.FAX1">
@@ -112,7 +112,7 @@
                   /></a-form-item>
                 </td>
               </a-col>
-              <a-col :md="24" :lg="24" :xl="12" :xxl="12">
+              <a-col span="12">
                 <th class="text-end!">E-mail１</th>
                 <td>
                   <a-input v-model:value="formData.E_MAIL1" :maxlength="30" />
@@ -123,19 +123,19 @@
           <a-col span="24">
             <th>連絡先２</th>
             <a-row class="flex-1">
-              <a-col :md="24" :lg="24" :xl="12" :xxl="6">
+              <a-col span="6">
                 <th class="w-20!">電話２</th>
                 <td>
                   <a-input v-model:value="formData.TEL2" :maxlength="13" />
                 </td>
               </a-col>
-              <a-col :md="24" :lg="24" :xl="12" :xxl="6">
+              <a-col span="6">
                 <th class="text-end! w-30!">ＦＡＸ２</th>
                 <td>
                   <a-input v-model:value="formData.FAX2" :maxlength="13" />
                 </td>
               </a-col>
-              <a-col :md="24" :lg="24" :xl="12" :xxl="12">
+              <a-col span="12">
                 <th class="text-end!">E-mail２</th>
                 <td>
                   <a-input v-model:value="formData.E_MAIL2" :maxlength="30" />
@@ -143,7 +143,7 @@
               </a-col>
             </a-row>
           </a-col>
-          <a-col :md="24" :lg="24" :xl="12" :xxl="16">
+          <a-col span="16">
             <th class="required">ホームページURL</th>
             <td>
               <a-form-item v-bind="validateInfos.HP_URL">
@@ -151,8 +151,8 @@
               /></a-form-item>
             </td>
           </a-col>
-          <a-col :md="24" :lg="24" :xl="12" :xxl="8">
-            <th class="required">登録番号</th>
+          <a-col span="8">
+            <th class="required text-end!">登録番号</th>
             <td>
               <a-form-item v-bind="validateInfos.TOUROKU_NO">
                 <a-input v-model:value="formData.TOUROKU_NO" :maxlength="14" />
@@ -168,7 +168,7 @@
               >
             </th>
             <a-row class="flex-1">
-              <a-col :md="24" :lg="24" :xl="12" :xxl="12">
+              <a-col span="12">
                 <th class="required">金融機関</th>
                 <td>
                   <a-form-item v-bind="validateInfos.FURI_BANK_CD">
@@ -181,8 +181,8 @@
                   </a-form-item>
                 </td>
               </a-col>
-              <a-col :md="24" :lg="12" :xl="12" :xxl="12">
-                <th class="required">本支店</th>
+              <a-col span="12">
+                <th class="required text-end!">本支店</th>
                 <td>
                   <a-form-item v-bind="validateInfos.FURI_BANK_SITEN_CD">
                     <ai-select
@@ -193,7 +193,7 @@
                   </a-form-item>
                 </td>
               </a-col>
-              <a-col :md="24" :lg="12" :xl="12" :xxl="8">
+              <a-col span="8">
                 <th class="required">口座種別</th>
                 <td>
                   <a-form-item v-bind="validateInfos.FURI_KOZA_SYUBETU">
@@ -205,7 +205,7 @@
                   </a-form-item>
                 </td>
               </a-col>
-              <a-col :md="24" :lg="12" :xl="12" :xxl="8">
+              <a-col span="8">
                 <th class="required text-end!">口座番号</th>
                 <td>
                   <a-form-item v-bind="validateInfos.FURI_KOZA_NO">
@@ -220,7 +220,7 @@
                   </a-form-item>
                 </td>
               </a-col>
-              <a-col :md="24" :lg="12" :xl="12" :xxl="8">
+              <a-col span="8">
                 <th class="required text-end!">種別コード</th>
                 <td>
                   <a-form-item v-bind="validateInfos.FURI_SYUBETU">
@@ -267,7 +267,7 @@
               ><br />（全銀手順で使用）
             </th>
             <a-row class="flex-1">
-              <a-col :md="24" :lg="12" :xl="12" :xxl="12">
+              <a-col span="12">
                 <th>金融機関</th>
                 <td>
                   <ai-select
@@ -279,7 +279,7 @@
                   </ai-select>
                 </td>
               </a-col>
-              <a-col :md="24" :lg="12" :xl="12" :xxl="12">
+              <a-col span="12">
                 <th class="text-end!">本支店</th>
                 <td>
                   <ai-select
@@ -290,7 +290,7 @@
                   </ai-select>
                 </td>
               </a-col>
-              <a-col :md="24" :lg="12" :xl="8" :xxl="6">
+              <a-col span="6">
                 <th>口座種別</th>
                 <td>
                   <ai-select
@@ -301,7 +301,7 @@
                   </ai-select>
                 </td>
               </a-col>
-              <a-col :md="24" :lg="12" :xl="8" :xxl="6">
+              <a-col span="6">
                 <th class="text-end!">口座番号</th>
                 <td>
                   <a-input-number
@@ -315,7 +315,7 @@
                   </a-input-number>
                 </td>
               </a-col>
-              <a-col :md="24" :lg="12" :xl="8" :xxl="6">
+              <a-col span="6">
                 <th class="text-end!">種別コード</th>
                 <td>
                   <a-input-number
@@ -329,7 +329,7 @@
                   </a-input-number>
                 </td>
               </a-col>
-              <a-col :md="24" :lg="12" :xl="8" :xxl="6">
+              <a-col span="6">
                 <th class="text-end!">コード区分</th>
                 <td>
                   <a-input-number
@@ -342,7 +342,7 @@
                   ></a-input-number>
                 </td>
               </a-col>
-              <a-col :md="24" :lg="24" :xl="20" :xxl="6">
+              <a-col span="6">
                 <th>依頼人コード</th>
                 <td>
                   <a-input-number
@@ -354,7 +354,7 @@
                   </a-input-number>
                 </td>
               </a-col>
-              <a-col :md="24" :lg="24" :xl="20" :xxl="18">
+              <a-col span="18">
                 <th class="w-60! text-end!">振込依頼人名（ﾌﾘｶﾞﾅ）</th>
                 <td>
                   <a-input
