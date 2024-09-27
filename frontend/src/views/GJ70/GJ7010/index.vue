@@ -134,16 +134,21 @@
                 <a-form-item v-bind="validateInfos.KEIYAKU_DATE" class="w-90!">
                   <range-date
                     v-model:value="searchParams.KEIYAKU_DATE"
-                    :options="LIST" /></a-form-item
-                ><span class="w-40 mr-a mt-1">（契約者マスタ契約日）</span>
+                    :options="LIST"
+                  /><span v-if="devicePixelRatio > 1.5" class="w-40 mr-a mt-1"
+                    >（契約者マスタ契約日）</span
+                  ></a-form-item
+                ><span v-show="devicePixelRatio <= 1.5" class="w-40 mr-a mt-1"
+                  >（契約者マスタ契約日）</span
+                >
               </td>
             </a-col>
             <a-col span="24"
               ><th>出力項目選択</th>
-              <td>
+              <td class="flex">
                 <a-radio-group
                   v-model:value="searchParams.SYUTURYOKU_KOMOKU_SENTAKU"
-                  class="flex items-center"
+                  class="mt-1"
                 >
                   <a-radio :value="1">農場明細を含む</a-radio
                   ><a-radio :value="2">含まない（契約者基本情報のみ）</a-radio>
@@ -349,6 +354,7 @@ const layout = {
   xl: 12,
   xxl: 12,
 }
+const devicePixelRatio = ref(window.devicePixelRatio)
 const cardRef = ref()
 const { height } = useElementSize(cardRef)
 const rules = reactive({
@@ -386,6 +392,9 @@ watch(
     searchParams.KEIYAKU_DATE_TO = undefined
   }
 )
+window.addEventListener('resize', function () {
+  devicePixelRatio.value = window.devicePixelRatio
+})
 //--------------------------------------------------------------------------
 //メソッド
 //--------------------------------------------------------------------------

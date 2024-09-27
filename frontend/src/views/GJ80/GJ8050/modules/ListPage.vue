@@ -118,9 +118,8 @@
           width="350"
           sortable
           :params="{ order: 3 }"
-          :resizable="false"
         ></vxe-column>
-        <vxe-column header-align="center" title="支店情報"
+        <vxe-column header-align="center" title="支店情報" min-width="120"
           ><template #default="{ row }">
             <a-button
               class="max-h-22px mt-2px text-center py-0"

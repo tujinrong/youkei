@@ -91,7 +91,7 @@
             <a-col v-bind="layout">
               <th class="required">発信番号</th>
               <td>
-                <a-form-item v-bind="validateInfos.KI" class="w-35!">
+                <a-form-item v-bind="validateInfos.KI" class="w-40!">
                   <span class="!align-middle mr-2">日鶏</span>
 
                   <a-input-number

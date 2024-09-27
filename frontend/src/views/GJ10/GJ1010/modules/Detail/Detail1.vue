@@ -33,7 +33,7 @@
           <a-button type="primary" @click="goList">一覧へ</a-button>
         </div>
       </div>
-      <table v-if="devicePixelRatio <= 1.5" class="my-2 w-200">
+      <table class="my-2 w-200">
         <tr>
           <th class="!w-10">鶏の種類</th>
           <th>採卵鶏(成鷄)</th>

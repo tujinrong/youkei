@@ -48,7 +48,6 @@
         <a-tabs v-model:activeKey="tab">
           <a-tab-pane key="1" tab="1.契約農場別明細情報(交付情報)(表示)"
             ><div class="edit_table form">
-              <!--        <div>-->
               <a-row type="flex" justify="space-between">
                 <a-col span="10">
                   <th class="required">申請日</th>
@@ -75,15 +74,13 @@
                   />
                 </a-col>
               </a-row>
-              <!--        </div>-->
-
               <vxe-table
                 ref="xTableRef"
                 class="mt-2 vxe-table-pop"
                 :column-config="{ resizable: true }"
                 :row-config="{ isCurrent: true, isHover: true }"
                 :data="tableData"
-                height="420px"
+                height="400px"
                 :sort-config="{ trigger: 'cell', orders: ['desc', 'asc'] }"
                 :empty-render="{ name: 'NotData' }"
                 @cell-click="({ row }) => changeData()"

@@ -158,7 +158,7 @@
                 <div class="flex items-center w-full">
                   <a-input
                     v-model:value="formData.ADDR"
-                    class="w-250"
+                    class="max-w-250"
                     :maxlength="50"
                   />
                   <span>(部分一致)</span>
@@ -206,12 +206,8 @@
         <a-space :size="20">
           <a-button type="primary" @click="search">検索</a-button>
           <a-button type="primary" @click="clear">条件クリア</a-button>
-          <a-button class="ml-20" type="primary" @click="openGJ4011"
-            >経営支援登録</a-button
-          >
-          <a-button class="ml-20" type="primary" @click="openGJ4013"
-            >焼却・埋却登録</a-button
-          >
+          <a-button type="primary" @click="openGJ4011">経営支援登録</a-button>
+          <a-button type="primary" @click="openGJ4013">焼却・埋却登録</a-button>
         </a-space>
         <AButton type="primary" class="ml-a" @click="tabStore.removeActiveTab">
           閉じる

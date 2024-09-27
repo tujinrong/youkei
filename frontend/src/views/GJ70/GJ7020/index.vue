@@ -15,7 +15,13 @@
         <h1>（GJ7020）互助基金契約者積立金情報検索CSVデ一夕作成</h1>
         <div class="self_adaption_table form mt-1">
           <a-row
-            ><a-col span="17"
+            ><a-col
+              v-bind="{
+                md: 12,
+                lg: 12,
+                xl: 12,
+                xxl: 17,
+              }"
               ><th class="required">対象期</th>
               <td>
                 <a-form-item v-bind="validateInfos.KI">
@@ -30,7 +36,13 @@
                 >
               </td></a-col
             >
-            <a-col span="7"
+            <a-col
+              v-bind="{
+                md: 12,
+                lg: 12,
+                xl: 12,
+                xxl: 7,
+              }"
               ><th>契約日未入力者を除く</th>
               <td>
                 <a-checkbox
@@ -171,10 +183,10 @@
             </a-col>
             <a-col span="24"
               ><th>出力項目選択</th>
-              <td>
+              <td class="flex">
                 <a-radio-group
                   v-model:value="searchParams.SYUTURYOKU_KOMOKU_SENTAKU"
-                  class="flex items-center"
+                  class="mt-1"
                 >
                   <a-radio :value="1">積立金ペース(鶏の種類別)</a-radio
                   ><a-radio :value="2">請求ペース(鶏の種類別)</a-radio>

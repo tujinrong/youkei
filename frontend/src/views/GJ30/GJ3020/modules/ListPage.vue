@@ -53,7 +53,7 @@
           <a-button type="primary" :disabled="!isSearched" @click="add"
             >新規登録</a-button
           ><a-button
-            class="ml-20"
+            class="ml-10"
             type="primary"
             @click="turnExportPage"
             :disabled="!isDataSelected"
@@ -62,9 +62,9 @@
         </a-space>
         <close-page /></div
     ></a-card>
-    <a-card class="flex-1 staticWidth">
-      <div class="flex justify-between">
-        <h2>契約区分情報(表示)</h2>
+    <a-card class="flex-1 staticWidth"
+      ><h2>契約区分情報(表示)</h2>
+      <div class="flex justify-end">
         <a-pagination
           v-model:current="pageParams.PAGE_NUM"
           v-model:page-size="pageParams.PAGE_SIZE"
@@ -104,6 +104,7 @@
           field="KEIYAKU_KBN_MAE"
           title="契約区分(変更前)"
           sortable
+          min-width="300"
           :params="{ order: 2 }"
         >
           <template #default="{ row }">
@@ -116,6 +117,7 @@
           field="KEIYAKU_KBN_ATO"
           title="契約区分(変更後)"
           sortable
+          min-width="300"
           :params="{ order: 3 }"
         >
         </vxe-column>

@@ -568,7 +568,7 @@ const goList = () => {
 
 const closeModal = () => {
   editJudge.judgeIsEdited(() => {
-    tab.value = 1
+    tab.value = '1'
     clearValidate()
     resetFields()
     emit('update:visible', false)

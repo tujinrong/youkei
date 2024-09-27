@@ -51,7 +51,7 @@
           <a-button type="primary" :disabled="!isSearched" @click="add"
             >新規登録</a-button
           ><a-button
-            class="ml-20"
+            class="ml-10"
             type="primary"
             @click="turnExportPage"
             :disabled="!isDataSelected"
@@ -61,8 +61,8 @@
         <close-page /></div
     ></a-card>
     <a-card class="flex-1 staticWidth">
-      <div class="flex justify-between">
-        <h2>契約農場別明細 增羽情報(表示)</h2>
+      <h2>契約農場別明細 增羽情報(表示)</h2>
+      <div class="flex justify-end">
         <a-pagination
           v-model:current="pageParams.PAGE_NUM"
           v-model:page-size="pageParams.PAGE_SIZE"

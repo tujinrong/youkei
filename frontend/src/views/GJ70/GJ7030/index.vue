@@ -111,10 +111,13 @@
                   class="max-w-90!"
                 >
                   <range-date
-                    v-model:value="
-                      searchParams.KOFUTUTI_HAKKO_DATE
-                    " /></a-form-item
-                ><span class="w-40 mt-1">(発行済のみ有効)</span>
+                    v-model:value="searchParams.KOFUTUTI_HAKKO_DATE"
+                  /><span v-if="devicePixelRatio > 1.5" class="w-40 mt-1"
+                    >(発行済のみ有効)</span
+                  ></a-form-item
+                ><span v-show="devicePixelRatio <= 1.5" class="w-40 mt-1"
+                  >(発行済のみ有効)</span
+                >
               </td>
             </a-col>
             <a-col span="24"
@@ -341,6 +344,8 @@ const rules = reactive({
     },
   ],
 })
+const devicePixelRatio = ref(window.devicePixelRatio)
+
 //--------------------------------------------------------------------------
 //計算定義
 //--------------------------------------------------------------------------
@@ -353,7 +358,9 @@ onMounted(() => {})
 //--------------------------------------------------------------------------
 //監視定義
 //--------------------------------------------------------------------------
-
+window.addEventListener('resize', function () {
+  devicePixelRatio.value = window.devicePixelRatio
+})
 //--------------------------------------------------------------------------
 //メソッド
 //--------------------------------------------------------------------------

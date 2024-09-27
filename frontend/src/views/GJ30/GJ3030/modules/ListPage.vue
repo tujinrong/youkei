@@ -52,19 +52,18 @@
           ><a-button type="primary" @click="reset">条件クリア</a-button>
           <a-button
             type="primary"
-            class="ml-20"
             :disabled="!isSearched || isEditing"
             @click="add"
             >新規登録</a-button
-          ><a-button class="ml-20" type="primary" @click="turnExportPage"
+          ><a-button class="ml-10" type="primary" @click="turnExportPage"
             >通知書発行
           </a-button>
         </a-space>
         <close-page /></div
     ></a-card>
-    <a-card class="flex-1 staticWidth">
-      <div class="flex justify-between flex-1">
-        <h2>契約農場別明細 讓渡情報(表示)</h2>
+    <a-card class="flex-1 staticWidth"
+      ><h2>契約農場別明細 讓渡情報(表示)</h2>
+      <div class="flex justify-end">
         <a-pagination
           v-model:current="pageParams.PAGE_NUM"
           v-model:page-size="pageParams.PAGE_SIZE"
@@ -103,6 +102,7 @@
           field="MOTO_KEIYAKUSYA_NAME"
           title="契約者名(譲渡元)"
           sortable
+          min-width="300"
           :params="{ order: 2 }"
           ><template #default="{ row }">
             <a @click="edit()">{{ row.MOTO_KEIYAKUSYA_NAME }}</a>
