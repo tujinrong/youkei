@@ -6,45 +6,45 @@
     width="1200px"
     :body-style="{
       height: tab === '2' ? '767px' : '600px',
-      overflowY: tab === '2' ? 'hidden' : 'scroll',
+      overflowY: tab === '2' ? 'hidden' : 'hidden',
     }"
     :mask-closable="false"
     destroy-on-close
     @cancel="goList"
   >
     <div class="parent-container">
+      <div class="self_adaption_table form ml-1">
+        <a-row>
+          <a-col span="12">
+            <read-only
+              thWidth="110"
+              th="契約者番号"
+              :td="searchParams.KEIYAKUSYA_CD"
+              :after="searchParams.KEIYAKUSYA_NAME"
+            />
+          </a-col>
+        </a-row>
+        <a-row>
+          <a-col span="12">
+            <th class="required" style="width: 110px">認定回数</th>
+            <td>
+              <a-form-item v-bind="validateInfos.HASSEI_KAISU" class="w-20!">
+                <a-input-number
+                  v-model:value="searchParams.HASSEI_KAISU"
+                  :min="1"
+                  :max="99"
+                  :maxlength="2"
+                  class="w-14"
+                ></a-input-number>
+              </a-form-item>
+              <a-button class="ml-2" type="primary" @click="search"
+                >検索</a-button
+              >
+            </td>
+          </a-col>
+        </a-row>
+      </div>
       <div class="edit_table form">
-        <div>
-          <a-row>
-            <a-col span="12">
-              <read-only-pop
-                thWidth="110"
-                th="契約者番号"
-                :td="searchParams.KEIYAKUSYA_CD"
-                :after="searchParams.KEIYAKUSYA_NAME"
-              />
-            </a-col>
-          </a-row>
-          <a-row>
-            <a-col span="6">
-              <th class="required" style="width: 110px">認定回数</th>
-              <td>
-                <a-form-item v-bind="validateInfos.HASSEI_KAISU">
-                  <a-input-number
-                    v-model:value="searchParams.HASSEI_KAISU"
-                    :min="1"
-                    :max="99"
-                    :maxlength="2"
-                    class="w-14"
-                  ></a-input-number>
-                </a-form-item>
-                <a-button class="ml-2" type="primary" @click="search"
-                  >検索</a-button
-                >
-              </td>
-            </a-col>
-          </a-row>
-        </div>
         <a-tabs v-model:activeKey="tab">
           <a-tab-pane key="1" tab="1.契約農場別明細情報(交付情報)(表示)"
             ><div class="edit_table form">
@@ -83,6 +83,7 @@
                 :column-config="{ resizable: true }"
                 :row-config="{ isCurrent: true, isHover: true }"
                 :data="tableData"
+                max-height="420px"
                 :sort-config="{ trigger: 'cell', orders: ['desc', 'asc'] }"
                 :empty-render="{ name: 'NotData' }"
                 @cell-click="({ row }) => changeData()"

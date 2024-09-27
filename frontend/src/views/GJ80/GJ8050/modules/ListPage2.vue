@@ -12,12 +12,12 @@
     centered
     title="支店情報一覧"
     width="1000px"
-    :body-style="{ height: '600px', overflowY: 'scroll' }"
+    :body-style="{ height: '600px' }"
     :mask-closable="false"
     destroy-on-close
     @cancel="goList"
   >
-    <div class="edit_table form mt-1">
+    <div class="self_adaption_table form mt-1">
       <a-row>
         <a-col span="24">
           <th>支店コード</th>
@@ -93,6 +93,7 @@
       :column-config="{ resizable: true }"
       :row-config="{ isCurrent: true, isHover: true }"
       :data="sitanTableData"
+      max-height="370px"
       :sort-config="{ trigger: 'cell', orders: ['desc', 'asc'] }"
       :empty-render="{ name: 'NotData' }"
       @cell-dblclick="({ row }) => forwardEdit2(row.BANK_CD, row.SITEN_CD)"

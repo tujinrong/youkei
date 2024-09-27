@@ -4,17 +4,17 @@
     centered
     title="（GJ4011）経営支援互助金申請情報入力（契約・交付情報表示）"
     width="1200px"
-    :body-style="{ minHeight: '600px' }"
+    :body-style="{ minHeight: '600px', minWidth: '1000px' }"
     :mask-closable="false"
     destroy-on-close
     @cancel="goList"
   >
     <div class="parent-container">
-      <div class="edit_table form">
+      <div class="self_adaption_table form">
         <div>
           <a-row>
             <a-col span="12">
-              <read-only-pop
+              <read-only
                 thWidth="110"
                 th="契約者番号"
                 :td="searchParams.KEIYAKUSYA_CD"
@@ -47,19 +47,18 @@
       <div class="edit_table form">
         <div>
           <a-row type="flex" justify="space-between">
-            <a-col span="10">
+            <a-col span="12">
               <th class="required">申請日</th>
               <td>
                 <a-form-item v-bind="validateInfos.SINSEI_DATE">
                   <DateJp
                     v-model:value="searchParams.SINSEI_DATE"
                     :notAllowClear="true"
-                    class="max-w-50!"
                   />
                 </a-form-item>
               </td>
             </a-col>
-            <a-col span="14" style="justify-content: end">
+            <a-col span="12" style="justify-content: end">
               <a-pagination
                 v-model:current="pageParams.PAGE_NUM"
                 v-model:page-size="pageParams.PAGE_SIZE"
@@ -215,156 +214,101 @@
           </tr>
         </table>
 
-        <table v-if="devicePixelRatio > 1.5" class="my-2 table-fixed">
-          <tr>
-            <th>鶏の種類</th>
-            <th>採卵鶏(成鷄)</th>
-            <th colspan="1">採卵鶏(育成鶏)</th>
-            <th rowspan="1">肉用鶏</th>
-          </tr>
-          <tr>
-            <th>契約羽数合計</th>
-            <td>{{ hasuGokei.SAIRANKEI_SEIKEI }}</td>
-            <td>{{ hasuGokei.SAIRANKEI_IKUSEIKEI }}</td>
-            <td>{{ hasuGokei.NIKUYOUKEI }}</td>
-          </tr>
-          <tr>
-            <th>種鶏(成鶏)</th>
-            <th>種鶏(育成鶏)</th>
-            <th>うずら</th>
-            <th>あひる</th>
-          </tr>
-          <tr>
-            <td>{{ hasuGokei.SYUKEI_SEIKEI }}</td>
-            <td>{{ hasuGokei.SYUKEI_IKUSEIKEI }}</td>
-            <td>{{ hasuGokei.UZURA }}</td>
-            <td>{{ hasuGokei.AHIRU || 0 }}</td>
-          </tr>
-          <tr>
-            <th>きじ</th>
-            <th>ほろほろ鳥</th>
-            <th>七面鳥</th>
-            <th>だちょう</th>
-            <th>合計</th>
-          </tr>
-          <tr>
-            <td>{{ hasuGokei.KIJI }}</td>
-            <td>{{ hasuGokei.HOROHOROTORI }}</td>
-            <td>{{ hasuGokei.SICHIMENCHOU }}</td>
-            <td>{{ hasuGokei.DACHOU }}</td>
-            <td>{{ hasuGokei.TOTAL || 0 }}</td>
-          </tr>
-        </table>
-
         <a-button class="danger-btn m2" :disabled="!isEdit" @click="deleteData"
           >削除</a-button
         >
       </div>
       <h2 class="my-1">2.契約農場別登録明細情報(確認用)</h2>
-      <div class="parent-container">
-        <div class="edit_table form w-full">
-          <a-row>
-            <a-col span="12">
-              <read-only-pop thWidth="110" th="農場" :td="formData.NOJO_CD" />
-            </a-col>
-          </a-row>
-          <a-row>
-            <a-col span="2">
-              <read-only-pop thWidth="110" th="住所" td="" :hideTd="true" />
-            </a-col>
-            <a-col span="4">
-              <read-only-pop th="　〒　" :td="formData.ADDR_POST" />
-            </a-col>
-            <a-col span="1"></a-col>
-            <a-col span="5">
-              <read-only-pop thWidth="50" th="住所1" :td="formData.ADDR_1" />
-            </a-col>
-            <a-col span="1"></a-col>
-            <a-col span="11">
-              <read-only-pop thWidth="50" th="住所2" :td="formData.ADDR_2" />
-            </a-col>
-          </a-row>
-          <a-row>
-            <a-col span="8">
-              <read-only-pop thWidth="110" th="" :hideTd="true" />
-            </a-col>
-            <a-col span="8">
-              <read-only-pop thWidth="50" th="住所3" :td="formData.ADDR_3" />
-            </a-col>
-            <a-col span="1"></a-col>
-            <a-col span="7">
-              <read-only-pop thWidth="50" th="住所4" :td="formData.ADDR_4" />
-            </a-col>
-          </a-row>
-          <a-row>
-            <a-col span="7">
-              <read-only-pop
-                thWidth="155"
-                th="鶏の種類"
-                :td="formData.TORI_KBN"
-              />
-            </a-col>
-          </a-row>
-          <a-row>
-            <a-col span="7">
-              <read-only-pop
-                thWidth="155"
-                th="契約羽数"
-                :td="formData.KEIYAKU_HASU"
-              />
-            </a-col>
-          </a-row>
-          <a-row>
-            <a-col span="8">
-              <read-only-pop
-                thWidth="155"
-                th="互助金交付対象羽数"
-                :td="formData.KOFU_HASU"
-              />
-            </a-col>
-            <a-col span="1"></a-col>
-            <a-col span="7">
-              <read-only-pop
-                thWidth="100"
-                th="互助金交付率"
-                :td="formData.KOFU_RITU"
-              />
-            </a-col>
-            <a-col span="1"></a-col>
-            <a-col span="7">
-              <read-only-pop
-                thWidth="150"
-                th="家伝法違反減額率"
-                :td="formData.GENGAKU_RITU"
-              />
-            </a-col>
-          </a-row>
-          <a-row>
-            <a-col span="8">
-              <read-only-pop
-                thWidth="155"
-                th="経営支援互助金交付額"
-                :td="formData.KOFU_KIN"
-              />
-            </a-col>
-            <a-col span="1"></a-col>
-            <a-col span="7">
-              <read-only-pop
-                thWidth="100"
-                th="積立金交付額"
-                :td="formData.SEI_TUMITATE_KIN"
-              />
-            </a-col>
-            <a-col span="1"></a-col>
-            <a-col span="7">
-              <read-only-pop
-                thWidth="150"
-                th="国庫交付額"
-                :td="formData.KUNI_KOFU_KIN"
-              />
-            </a-col>
-          </a-row>
-        </div>
+      <div class="self_adaption_table form w-full">
+        <a-row>
+          <a-col span="13">
+            <read-only thWidth="110" th="農場" :td="formData.NOJO_CD" />
+          </a-col>
+        </a-row>
+        <a-row>
+          <a-col span="6">
+            <read-only thWidth="110" th="住所" td="" :hideTd="true" />
+            <read-only th="　〒　" :td="formData.ADDR_POST" />
+          </a-col>
+
+          <a-col span="7">
+            <read-only thWidth="50" th="住所1" :td="formData.ADDR_1" />
+          </a-col>
+          <a-col span="11">
+            <read-only thWidth="50" th="住所2" :td="formData.ADDR_2" />
+          </a-col>
+        </a-row>
+        <a-row>
+          <a-col span="6">
+            <read-only thWidth="110" th="" :hideTd="true" />
+          </a-col>
+          <a-col span="8">
+            <read-only thWidth="50" th="住所3" :td="formData.ADDR_3" />
+          </a-col>
+          <a-col span="10">
+            <read-only thWidth="50" th="住所4" :td="formData.ADDR_4" />
+          </a-col>
+        </a-row>
+        <a-row>
+          <a-col span="6">
+            <read-only thWidth="110" th="鶏の種類" :td="formData.TORI_KBN" />
+          </a-col>
+        </a-row>
+        <a-row>
+          <a-col span="6">
+            <read-only
+              thWidth="110"
+              th="契約羽数"
+              :td="formData.KEIYAKU_HASU"
+            />
+          </a-col>
+        </a-row>
+        <a-row>
+          <a-col span="7">
+            <read-only
+              thWidth="155"
+              th="互助金交付対象羽数"
+              :td="formData.KOFU_HASU"
+            />
+          </a-col>
+          <a-col span="8">
+            <read-only
+              thWidth="100"
+              th="互助金交付率"
+              :td="formData.KOFU_RITU"
+            />
+          </a-col>
+          <a-col span="9">
+            <read-only
+              thWidth="150"
+              th="家伝法違反減額率"
+              :td="formData.GENGAKU_RITU"
+            />
+          </a-col>
+        </a-row>
+        <a-row>
+          <a-col span="7">
+            <read-only
+              thWidth="155"
+              th="経営支援互助金交付額"
+              :td="formData.KOFU_KIN"
+            />
+          </a-col>
+          <a-col span="8">
+            <read-only
+              thWidth="100"
+              th="積立金交付額"
+              :td="formData.SEI_TUMITATE_KIN"
+            />
+          </a-col>
+          <a-col span="9">
+            <read-only
+              thWidth="150"
+              th="国庫交付額"
+              :td="formData.KUNI_KOFU_KIN"
+            />
+          </a-col>
+        </a-row>
       </div>
     </div>
     <template #footer>
@@ -544,7 +488,7 @@ const deleteData = () => {}
 </script>
 <style lang="scss" scoped>
 th {
-  min-width: 110px; //絶対変えられない
+  min-width: 110px;
 }
 
 tr th {
