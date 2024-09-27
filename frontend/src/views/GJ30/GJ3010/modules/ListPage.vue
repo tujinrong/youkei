@@ -50,13 +50,7 @@
           ><a-button type="primary" @click="reset">条件クリア</a-button>
           <a-button type="primary" :disabled="!isSearched" @click="add"
             >新規登録</a-button
-          ><a-button
-            class="ml-10"
-            type="primary"
-            @click="turnExportPage"
-            :disabled="!isDataSelected"
-            >請求書発行
-          </a-button>
+          >
         </a-space>
         <close-page /></div
     ></a-card>
@@ -91,7 +85,7 @@
           align="center"
           field="KEIYAKU_DATE_FROM"
           title="増羽年月日"
-          min-width="100"
+          width="100"
           sortable
           formatter="jpDate"
           :params="{ order: 1 }"
@@ -101,7 +95,6 @@
           header-align="center"
           field="NOJO_NAME"
           title="農場名"
-          min-width="250"
           sortable
           :params="{ order: 2 }"
           ><template #default="{ row }">
@@ -113,7 +106,7 @@
           align="center"
           field="TORI_KBN_NAME"
           title="鳥の種類"
-          min-width="100"
+          width="100"
           sortable
           :params="{ order: 3 }"
         >
@@ -123,7 +116,7 @@
           align="right"
           field="ZO_HASU"
           title="増羽数"
-          min-width="100"
+          width="100"
           sortable
           :params="{ order: 4 }"
         >
@@ -133,7 +126,7 @@
           align="right"
           field="KEIYAKU_HASU_MAE"
           title="契約羽数(増羽前)"
-          min-width="180"
+          width="180"
           sortable
           :params="{ order: 5 }"
         >
@@ -143,7 +136,7 @@
           align="right"
           field="KEIYAKU_HASU"
           title="契約羽数(増羽後)"
-          min-width="180"
+          width="180"
           sortable
           :params="{ order: 6 }"
         >
@@ -153,7 +146,7 @@
           align="center"
           field="SYORI_KBN"
           title="処理区分"
-          min-width="110"
+          width="110"
           sortable
           :params="{ order: 7 }"
         >
@@ -163,13 +156,24 @@
           align="right"
           field="SEIKYU_KAISU"
           title="請求回数"
-          min-width="100"
+          width="100"
           sortable
           :params="{ order: 8 }"
           :resizable="false"
         >
         </vxe-column>
+        <vxe-column header-align="center" title="請求書発行" width="140"
+          ><template #default="{ row }">
+            <a-button
+              class="max-h-22px mt-2px text-center py-0"
+              type="primary"
+              @click="() => (previewVisible = true)"
+              >請求書発行</a-button
+            >
+          </template></vxe-column
+        >
       </vxe-table>
+      <Preview v-model:visible="previewVisible"></Preview>
       <Detail v-model:visible="detailVisible" :editkbn="editkbn"></Detail>
     </a-card>
   </div>
@@ -187,6 +191,7 @@ import { VxeTableInstance } from 'vxe-table'
 import { SearchRowVM } from '../type'
 import { nextTick } from 'process'
 import Detail from './DetailPage.vue'
+import Preview from './EditPage.vue'
 //--------------------------------------------------------------------------
 //データ定義
 //--------------------------------------------------------------------------
@@ -203,6 +208,7 @@ const KEIYAKUSYA_CD_NAME_LIST = ref<CmCodeNameModel[]>([
   { CODE: 555, NAME: '契約者名契約者名契約者名契約者名契約者名契約者名契' },
 ])
 const LIST = ref<CmCodeNameModel[]>([])
+const previewVisible = ref(false)
 const tableData = ref<SearchRowVM[]>([])
 const rules = reactive({
   KI: [
@@ -315,7 +321,7 @@ const turnExportPage = () => {
 
 <style lang="scss" scoped>
 th {
-  min-width: 120px;
+  width: 120px;
 }
 .search-disabled-mask {
   position: absolute;

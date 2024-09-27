@@ -1,6 +1,14 @@
 <template>
-  <a-card class="h-320px">
-    <h1>（GJ3011）互助基金契約者情報変更(增羽) 請求書発行</h1>
+  <a-modal
+    :visible="modalVisible"
+    centered
+    title="（GJ3011）互助基金契約者情報変更(增羽) 請求書発行"
+    width="800px"
+    :body-style="{ height: '450px', paddingTop: '30px' }"
+    :mask-closable="false"
+    destroy-on-close
+    @cancel="goList"
+  >
     <div class="self_adaption_table form mt-1 max-w-250">
       <b>第 {{ searchParams.KI }} 期</b>
 
@@ -85,26 +93,20 @@
           </td></a-col
         ></a-row
       >
-      <a-row class="m-t-2">
-        <a-col :span="24">
-          <div class="mb-2 header_operation flex justify-between w-full">
-            <a-space :size="20">
-              <a-button type="primary">プレビュー</a-button>
-              <a-button
-                type="primary"
-                :disabled="searchParams.SYUTURYOKU_KBN !== 5"
-                >請求書取消</a-button
-              >
-              <a-button type="primary">キャンセル</a-button>
-            </a-space>
-            <a-button class="ml-a" type="primary" @click="goList"
-              >一覧へ</a-button
-            >
-          </div>
-        </a-col>
-      </a-row>
     </div>
-  </a-card>
+    <template #footer>
+      <div class="pt-2 flex justify-between border-t-1">
+        <a-space :size="20">
+          <a-button type="primary">プレビュー</a-button>
+          <a-button type="primary" :disabled="searchParams.SYUTURYOKU_KBN !== 5"
+            >請求書取消</a-button
+          >
+          <a-button type="primary">キャンセル</a-button>
+        </a-space>
+        <a-button type="primary" @click="goList">閉じる</a-button>
+      </div>
+    </template></a-modal
+  >
 </template>
 <script lang="ts" setup>
 import { ITEM_REQUIRE_ERROR } from '@/constants/msg'
@@ -112,7 +114,13 @@ import { PageStatus } from '@/enum'
 import { Form } from 'ant-design-vue'
 import { computed, onMounted, reactive, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
-
+//---------------------------------------------------------------------------
+//属性
+//---------------------------------------------------------------------------
+const props = defineProps<{
+  visible: boolean
+}>()
+const emit = defineEmits(['update:visible'])
 //--------------------------------------------------------------------------
 //データ定義
 //--------------------------------------------------------------------------
@@ -132,10 +140,7 @@ const searchParams = reactive(createDefaultParams())
 const KEIYAKUSYA = ref('')
 const router = useRouter()
 const route = useRoute()
-const props = defineProps<{
-  status: PageStatus
-}>()
-const isNew = props.status === PageStatus.New
+
 const LIST = ref<CmCodeNameModel[]>([])
 const rules = reactive({
   NOFUKIGEN_DATE: [
@@ -169,6 +174,14 @@ const rules = reactive({
 const hakou = computed(() => {
   return searchParams.SYUTURYOKU_KBN === 2 || searchParams.SYUTURYOKU_KBN === 4
 })
+const modalVisible = computed({
+  get() {
+    return props.visible
+  },
+  set(visible) {
+    emit('update:visible', visible)
+  },
+})
 //---------------------------------------------------------------------------
 //フック関数
 //--------------------------------------------------------------------------
@@ -187,8 +200,12 @@ const { validate, clearValidate, validateInfos } = Form.useForm(
   rules
 )
 //画面遷移
+const closeModal = () => {
+  clearValidate()
+  modalVisible.value = false
+}
 const goList = () => {
-  router.push({ name: route.name })
+  closeModal()
 }
 </script>
 

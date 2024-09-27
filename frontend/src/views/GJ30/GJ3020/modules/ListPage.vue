@@ -52,13 +52,7 @@
           ><a-button type="primary" @click="reset">条件クリア</a-button>
           <a-button type="primary" :disabled="!isSearched" @click="add"
             >新規登録</a-button
-          ><a-button
-            class="ml-10"
-            type="primary"
-            @click="turnExportPage"
-            :disabled="!isDataSelected"
-            >通知書発行
-          </a-button>
+          >
         </a-space>
         <close-page /></div
     ></a-card>
@@ -142,9 +136,19 @@
           :params="{ order: 5 }"
         >
         </vxe-column>
+        <vxe-column header-align="center" title="通知書発行" width="140"
+          ><template #default="{ row }">
+            <a-button
+              class="max-h-22px mt-2px text-center py-0"
+              type="primary"
+              @click="() => (previewVisible = true)"
+              >通知書発行</a-button
+            >
+          </template></vxe-column
+        >
       </vxe-table>
     </a-card>
-
+    <Preview v-model:visible="previewVisible"></Preview>
     <Detail v-model:visible="detailVisible" :editkbn="editkbn"></Detail>
   </div>
 </template>
@@ -160,6 +164,8 @@ import { VxeTableInstance } from 'vxe-table'
 import { nextTick } from 'process'
 import { SearchRowVM } from '../interface/3020/type'
 import Detail from './DetailPage.vue'
+import Preview from './EditPage.vue'
+
 //--------------------------------------------------------------------------
 //データ定義
 //--------------------------------------------------------------------------
@@ -238,6 +244,8 @@ const tableDefault = {
 
 const router = useRouter()
 const route = useRoute()
+const previewVisible = ref(false)
+
 //--------------------------------------------------------------------------
 //計算定義
 //--------------------------------------------------------------------------

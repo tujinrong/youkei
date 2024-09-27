@@ -93,7 +93,7 @@
       :column-config="{ resizable: true }"
       :row-config="{ isCurrent: true, isHover: true }"
       :data="sitanTableData"
-      max-height="370px"
+      height="370px"
       :sort-config="{ trigger: 'cell', orders: ['desc', 'asc'] }"
       :empty-render="{ name: 'NotData' }"
       @cell-dblclick="({ row }) => forwardEdit2(row.BANK_CD, row.SITEN_CD)"

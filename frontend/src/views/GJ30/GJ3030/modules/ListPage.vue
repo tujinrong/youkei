@@ -55,9 +55,7 @@
             :disabled="!isSearched || isEditing"
             @click="add"
             >新規登録</a-button
-          ><a-button class="ml-10" type="primary" @click="turnExportPage"
-            >通知書発行
-          </a-button>
+          >
         </a-space>
         <close-page /></div
     ></a-card>
@@ -129,9 +127,21 @@
           :resizable="false"
           :params="{ order: 5 }"
         >
-        </vxe-column>
+        </vxe-column
+        ><vxe-column header-align="center" title="通知書発行" width="140"
+          ><template #default="{ row }">
+            <a-button
+              class="max-h-22px mt-2px text-center py-0"
+              type="primary"
+              @click="() => (previewVisible = true)"
+              >通知書発行</a-button
+            >
+          </template></vxe-column
+        >
       </vxe-table>
     </a-card>
+    <Preview v-model:visible="previewVisible"></Preview>
+
     <Detail v-model:visible="detailVisible" :editkbn="editkbn"></Detail>
   </div>
 </template>
@@ -147,6 +157,8 @@ import { VxeTableInstance } from 'vxe-table'
 import { nextTick } from 'process'
 import { KeiyakuJoho, SearchRowVM } from '../interface/3030/type'
 import Detail from './DatailPage.vue'
+import Preview from './EditPage.vue'
+
 //--------------------------------------------------------------------------
 //データ定義
 //--------------------------------------------------------------------------
@@ -198,6 +210,7 @@ const route = useRoute()
 const isDataSelected = computed(() => {
   return tableData1.value.length > 0 && xTableRef.value?.getCurrentRecord()
 })
+const previewVisible = ref(false)
 
 //---------------------------------------------------------------------------
 //フック関数
