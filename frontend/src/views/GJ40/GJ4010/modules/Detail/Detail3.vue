@@ -193,7 +193,12 @@
                   <read-only-pop th="　〒　" :td="formData.ADDR_POST" />
                 </a-col>
                 <a-col span="1"></a-col>
-                <a-col span="5">
+              </a-row>
+              <a-row>
+                <a-col span="2">
+                  <read-only-pop thWidth="110" th="" td="" :hideTd="true" />
+                </a-col>
+                <a-col span="8">
                   <read-only-pop
                     thWidth="50"
                     th="住所1"
@@ -201,7 +206,7 @@
                   />
                 </a-col>
                 <a-col span="1"></a-col>
-                <a-col span="10">
+                <a-col span="7">
                   <read-only-pop
                     thWidth="50"
                     th="住所2"
@@ -210,7 +215,7 @@
                 </a-col>
               </a-row>
               <a-row>
-                <a-col span="7">
+                <a-col span="2">
                   <read-only-pop thWidth="110" th="" :hideTd="true" />
                 </a-col>
                 <a-col span="8">

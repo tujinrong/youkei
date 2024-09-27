@@ -231,10 +231,10 @@
             <read-only th="　〒　" thWidth="50" :td="formData.ADDR_POST" />
           </a-col>
 
-          <a-col span="7">
+          <a-col span="8">
             <read-only thWidth="50" th="住所1" :td="formData.ADDR_1" />
           </a-col>
-          <a-col span="11">
+          <a-col span="10">
             <read-only thWidth="50" th="住所2" :td="formData.ADDR_2" />
           </a-col>
         </a-row>

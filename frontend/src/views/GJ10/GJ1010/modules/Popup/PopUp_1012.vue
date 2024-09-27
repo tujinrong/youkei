@@ -50,7 +50,12 @@
           <read-only-pop th="　〒　" :td="formData.ADDR_POST" />
         </a-col>
         <a-col span="1"></a-col>
-        <a-col span="5">
+      </a-row>
+      <a-row class="mt-2">
+        <a-col span="2">
+          <read-only-pop thWidth="120" th="" td="" :hideTd="true" />
+        </a-col>
+        <a-col span="8">
           <read-only-pop thWidth="50" th="住所1" :td="formData.ADDR_1" />
         </a-col>
         <a-col span="1"></a-col>
@@ -59,14 +64,14 @@
         </a-col>
       </a-row>
       <a-row>
-        <a-col span="7">
+        <a-col span="2">
           <read-only-pop thWidth="110" th="" :hideTd="true" />
         </a-col>
         <a-col span="8">
           <read-only-pop thWidth="50" th="住所3" :td="formData.ADDR_3" />
         </a-col>
         <a-col span="1"></a-col>
-        <a-col span="8">
+        <a-col span="11">
           <read-only-pop thWidth="50" th="住所4" :td="formData.ADDR_4" />
         </a-col>
       </a-row>

@@ -49,6 +49,7 @@
           ><a-col span="11"
             ><read-only-pop th="住所2" :td="nojoData.ADDR_2"
           /></a-col>
+          <a-row> </a-row>
 
           <a-col span="24">
             <read-only-pop
