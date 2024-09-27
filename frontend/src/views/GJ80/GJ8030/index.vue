@@ -6,13 +6,7 @@
       style="background-color: aliceblue"
     >
       <h1>（GJ8030）日本養鶏協会マスタメンテナンス</h1>
-      <div class="my-4 flex justify-between">
-        <a-space :size="20">
-          <a-button class="warning-btn" @click="save">保存</a-button>
-          <a-button type="primary" @click="cancel">キャンセル</a-button>
-        </a-space>
-        <close-page />
-      </div>
+
       <div class="edit_table form">
         <a-row>
           <a-col span="12">
@@ -368,6 +362,13 @@
             </a-row>
           </a-col>
         </a-row>
+      </div>
+      <div class="py-2 my-4 flex justify-between border-t-1">
+        <a-space :size="20">
+          <a-button class="warning-btn" @click="save">保存</a-button>
+          <a-button type="primary" @click="cancel">キャンセル</a-button>
+        </a-space>
+        <close-page />
       </div>
     </a-card>
   </div>

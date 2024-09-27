@@ -6,14 +6,8 @@
       style="background-color: aliceblue"
     >
       <h1>（GJ8020）処理対象期・年度マスタメンテナンス</h1>
-      <div class="my-4 flex justify-between">
-        <a-space :size="20">
-          <a-button class="warning-btn" @click="save">保存</a-button>
-          <a-button type="primary" @click="cancel">キャンセル</a-button>
-        </a-space>
-        <close-page />
-      </div>
-      <div class="edit_table form">
+
+      <div class="edit_table form pt-5 pl-5">
         <a-row>
           <a-col span="24">
             <th class="required">事業対象期·年度</th>
@@ -143,6 +137,13 @@
             </td>
           </a-col>
         </a-row>
+      </div>
+      <div class="py-2 my-4 flex justify-between border-t-1">
+        <a-space :size="20">
+          <a-button class="warning-btn" @click="save">保存</a-button>
+          <a-button type="primary" @click="cancel">キャンセル</a-button>
+        </a-space>
+        <close-page />
       </div>
     </a-card>
   </div>
