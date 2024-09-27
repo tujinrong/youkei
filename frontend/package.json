@@ -64,6 +64,7 @@
     "tailwind-merge": "2.4.0",
     "vue": "3.4.31",
     "vue-draggable-plus": "0.5.0",
+    "vue-echarts": "^7.0.3",
     "vue-i18n": "9.13.1",
     "vue-router": "4.4.0",
     "vxe-pc-ui": "^4.0.76",

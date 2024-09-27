@@ -49,6 +49,7 @@
                     v-model:value="formData.PASS"
                     :maxlength="20"
                     class="w-60!"
+                    type="password"
                   ></a-input>
                 </a-form-item>
               </td>
@@ -151,7 +152,7 @@ const props = defineProps<{
   visible: boolean
   userData?: SearchRowVM
 }>()
-const emit = defineEmits(['update:visible'])
+const emit = defineEmits(['update:visible', 'getTableData'])
 //--------------------------------------------------------------------------
 //データ定義
 //--------------------------------------------------------------------------
@@ -227,27 +228,23 @@ watch(
   () => props.visible,
   (newValue) => {
     if (newValue) {
-      if (!isNew.value) {
-        if (props.userData) {
-          Object.assign(formData, props.userData)
-        }
-      }
+      const userId = props.userData ? props.userData.USER_ID : undefined
+      Object.assign(formData, props.userData)
+      nextTick(() => editJudge.reset())
       // InitDetail({
-      //   USER_ID: formData.USER_ID,
-      //   EDIT_KBN: isNew.value ? EnumEditKbn.Add : EnumEditKbn.Edit,
+      //   USER_ID: userId,
+      //   // EDIT_KBN: isNew.value ? EnumEditKbn.Add : EnumEditKbn.Edit,
       // })
       //   .then((res) => {
       //     SIYO_KBN_LIST.value = res.SIYO_KBN_LIST
-      //     if (!isNew.value) {
-      //       Object.assign(formData, res.CODE_VM)
-      //       upddttm = res.CODE_VM.UP_DATE
-      //     }
+      //     Object.assign(formData, res.USER)
+      //     upddttm = res.USER.UP_DATE
       //     nextTick(() => editJudge.reset())
       //   })
       //   .catch((error) => {
-      //     router.push({ name: route.name, query: { refresh: '1' } })
+      //     closeModal()
       //   })
-      nextTick(() => editJudge.reset())
+      // nextTick(() => editJudge.reset())
     }
   }
 )
@@ -257,11 +254,10 @@ watch(formData, () => editJudge.setEdited())
 //--------------------------------------------------------------------------
 //画面遷移
 const closeModal = () => {
-  editJudge.judgeIsEdited(() => {
-    resetFields()
-    clearValidate()
-    modalVisible.value = false
-  })
+  resetFields()
+  clearValidate()
+  modalVisible.value = false
+  emit('getTableData')
 }
 const goList = () => {
   editJudge.judgeIsEdited(() => {

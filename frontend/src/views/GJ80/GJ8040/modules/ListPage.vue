@@ -50,7 +50,7 @@
         </vxe-column>
         <vxe-column
           header-align="center"
-          field="SIYO_KBN"
+          field="SIYO_KBN_NAME"
           title="使用区分"
           width="120"
           sortable
@@ -63,6 +63,7 @@
           title="使用停止日"
           min-width="150"
           sortable
+          formatter="JpDate"
           :params="{ order: 4 }"
           :resizable="true"
         ></vxe-column>
@@ -80,31 +81,25 @@
     v-model:visible="editVisible"
     :editkbn="editkbn"
     :user-data="userData"
+    @getTableData="init"
   />
 </template>
 
 <script setup lang="ts">
 import { useElementSize } from '@vueuse/core'
-import { reactive, ref, toRef, watch } from 'vue'
+import { onMounted, reactive, ref, toRef, watch } from 'vue'
 import { SearchRowVM } from '../type'
 import { EnumEditKbn, PageStatus } from '@/enum'
 import { changeTableSort } from '@/utils/util'
 import EditPage from './EditPage.vue'
+import { Search } from '../service'
 
 //--------------------------------------------------------------------------
 //データ定義
 //--------------------------------------------------------------------------
 const cardRef = ref()
 const { height } = useElementSize(cardRef)
-const tableData = ref<SearchRowVM[]>([
-  {
-    USER_ID: 'gjs',
-    USER_NAME: 'テスト管理者',
-    SIYO_KBN: '管理者',
-    TEISI_DATE: undefined,
-    TEISI_RIYU: '',
-  },
-])
+const tableData = ref<SearchRowVM[]>()
 const editVisible = ref(false)
 const editkbn = ref<EnumEditKbn>(EnumEditKbn.Add)
 const userData = ref<SearchRowVM>()
@@ -114,16 +109,18 @@ const pageParams = reactive({
 //--------------------------------------------------------------------------
 //監視定義
 //--------------------------------------------------------------------------
-watch(
-  () => editVisible.value,
-  (newValue) => {
-    // if (!newValue) searchData()
-  }
-)
+
+onMounted(() => {
+  init()
+})
 //--------------------------------------------------------------------------
 //メソッド
 //--------------------------------------------------------------------------
 
+const init = async () => {
+  const res = await Search()
+  tableData.value = res.KEKKA_LIST
+}
 function goForward(status: PageStatus, row?: any) {
   editVisible.value = true
   if (status === PageStatus.Edit) {

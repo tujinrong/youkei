@@ -297,7 +297,7 @@ async function reset2() {
 
 async function preview2() {
   try {
-    await PreviewSiten({ ...searchParams2 })
+    await PreviewSiten({ ...searchParams2, BANK_CD: props.bankcd })
     const openNew = () => {
       window.open(props.URL, '_blank')
     }
@@ -309,7 +309,7 @@ const channel = new BroadcastChannel('channel_preview')
 channel.onmessage = (event) => {
   if (event.data.isMounted) {
     channel.postMessage({
-      params: JSON.stringify(searchParams2),
+      params: JSON.stringify({ ...searchParams2, BANK_CD: props.bankcd }),
       name: 'S80502',
     })
   }
