@@ -19,7 +19,7 @@
   >
     <div class="self_adaption_table form mt-1">
       <a-row>
-        <a-col span="24">
+        <a-col span="19">
           <th>支店コード</th>
           <td>
             <a-form-item>
@@ -32,19 +32,19 @@
           </td>
         </a-col>
 
-        <a-col span="24">
+        <a-col span="19">
           <th>支店名（ｶﾅ）</th>
           <td>
             <a-form-item>
               <a-input
                 v-model:value="searchParams2.SITEN_KANA"
                 :maxlength="20"
-                class="max-w-150"
+                class="max-w-full"
               ></a-input>
             </a-form-item>
           </td>
         </a-col>
-        <a-col span="24">
+        <a-col span="19">
           <th>支店名（漢字）</th>
           <td>
             <a-form-item>
