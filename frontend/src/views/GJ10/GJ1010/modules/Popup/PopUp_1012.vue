@@ -7,8 +7,9 @@
     width="1000px"
     :body-style="{
       height: '600px',
-      paddingRight: '50px',
-      paddingTop: '20px',
+      paddingRight: '30px',
+      paddingLeft: '30px',
+      paddingTop: '50px',
     }"
     :mask-closable="false"
     destroy-on-close

@@ -8,7 +8,7 @@
  * ----------------------------------------------------------------->
 <template>
   <div class="h-full min-h-500px flex-col-stretch gap-12px">
-    <a-card :bordered="false" class="h-75">
+    <a-card :bordered="false" class="h-65">
       <h1>（GJ1012）互助基金契約者マスタメンテナンス（契約情報入力）</h1>
       <div class="self_adaption_table form">
         <b>第{{ formData.KI ?? 8 }}期</b>
@@ -83,6 +83,7 @@
         class="mt-2"
         :column-config="{ resizable: true }"
         :row-config="{ isCurrent: true, isHover: true }"
+        height="480px"
         :data="tableData"
         :sort-config="{ trigger: 'cell', orders: ['desc', 'asc'] }"
         :empty-render="{ name: 'NotData' }"

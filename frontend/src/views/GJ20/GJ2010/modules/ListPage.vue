@@ -18,6 +18,7 @@
         :column-config="{ resizable: true }"
         :row-config="{ isCurrent: true, isHover: true }"
         :data="tableData"
+        height="650px"
         :sort-config="{ trigger: 'cell', orders: ['desc', 'asc'] }"
         :empty-render="{ name: 'NotData' }"
         @cell-dblclick="({ row }) => forwardEdit(PageStatus.Edit, row)"
@@ -26,7 +27,7 @@
         <vxe-column
           field="TAISYO_DATE_FROM"
           title="年月日(自)"
-          min-width="80"
+          width="160"
           sortable
           :params="{ order: 1 }"
           :resizable="true"
@@ -40,7 +41,7 @@
         <vxe-column
           field="TAISYO_DATE_TO"
           title="年月日(至)"
-          min-width="160"
+          width="160"
           sortable
           :params="{ order: 2 }"
           :resizable="true"
