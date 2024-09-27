@@ -44,7 +44,7 @@
           </a-col>
         </a-row>
       </div>
-      <div class="edit_table form">
+      <div class="edit_table form mt-2">
         <a-tabs v-model:activeKey="tab">
           <a-tab-pane key="1" tab="1.契約農場別明細情報(交付情報)(表示)"
             ><div class="edit_table form">
