@@ -185,19 +185,6 @@
           <read-only-pop thWidth="50" th="住所4" :td="nojoAddr_saki.ADDR_4" />
         </a-col>
       </a-row>
-      <!-- <a-row>
-        <a-col span="24">
-          <read-only-pop
-            thWidth="220"
-            th="契約羽数(移動前)"
-            :td="formData.KEIYAKU_HASU_SAKI_MAE"
-          />
-          <read-only-pop
-            thWidth="220"
-            th="契約羽数(移動後)"
-            :td="formData.KEIYAKU_HASU_SAKI_ATO"
-          />
-        </a-col> -->
       <a-row>
         <a-col span="3"></a-col>
         <a-col span="10">
