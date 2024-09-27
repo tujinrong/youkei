@@ -228,7 +228,7 @@
         <a-row>
           <a-col span="6">
             <read-only thWidth="110" th="住所" td="" :hideTd="true" />
-            <read-only th="　〒　" :td="formData.ADDR_POST" />
+            <read-only th="　〒　" thWidth="50" :td="formData.ADDR_POST" />
           </a-col>
 
           <a-col span="7">
@@ -239,13 +239,11 @@
           </a-col>
         </a-row>
         <a-row>
-          <a-col span="6">
+          <a-col span="13">
             <read-only thWidth="110" th="" :hideTd="true" />
-          </a-col>
-          <a-col span="8">
             <read-only thWidth="50" th="住所3" :td="formData.ADDR_3" />
           </a-col>
-          <a-col span="10">
+          <a-col span="11">
             <read-only thWidth="50" th="住所4" :td="formData.ADDR_4" />
           </a-col>
         </a-row>

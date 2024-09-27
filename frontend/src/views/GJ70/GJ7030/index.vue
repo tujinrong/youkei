@@ -125,6 +125,7 @@
               <td>
                 <a-radio-group
                   v-model:value="searchParams.SYUTURYOKU_KOMOKU_SENTAKU"
+                  class="mt-1"
                 >
                   <a-radio :value="1">互助金明細を含む(農場別)</a-radio
                   ><a-radio :value="2">含まない（振込金額等のみ）</a-radio>

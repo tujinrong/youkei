@@ -12,6 +12,7 @@
       <vxe-table
         class="h-full"
         ref="xTableRef"
+        height="650px"
         :column-config="{ resizable: true }"
         :row-config="{ isCurrent: true, isHover: true }"
         :data="tableData"
@@ -22,27 +23,37 @@
           header-align="center"
           field="TAX_DATE_FROM"
           title="適用開始日"
-          min-width="80"
+          width="160"
           align="center"
           :resizable="true"
           ><template #default="{ row }">
-            <a @click="edit">{{ row.TAX_DATE_FROM }}</a>
+            <a @click="edit">{{
+              row.TAX_DATE_FROM
+                ? getDateJpText(new Date(row.TAX_DATE_FROM))
+                : ''
+            }}</a>
           </template>
         </vxe-column>
         <vxe-column
           header-align="center"
           field="TAX_DATE_TO"
           title="適用終了日"
-          min-width="160"
+          width="160"
           align="center"
           :resizable="true"
-        >
+          ><template #default="{ row }">
+            <a @click="edit">{{
+              row.TAX_DATE_FROM
+                ? getDateJpText(new Date(row.TAX_DATE_FROM))
+                : ''
+            }}</a>
+          </template>
         </vxe-column>
         <vxe-column
           header-align="center"
           field="TAX_RITU"
           title="消費税率（%）"
-          min-width="100"
+          width="120"
           align="right"
           :resizable="true"
         ></vxe-column>
@@ -56,13 +67,14 @@ import { ref } from 'vue'
 import { VxeTableInstance } from 'vxe-pc-ui'
 import EditModal from './EditPage.vue'
 import { useElementSize } from '@vueuse/core'
+import { getDateJpText } from '@/utils/util'
 const visible = ref(false)
 const editModalRef = ref()
 const xTableRef = ref<VxeTableInstance>()
 const tableData = ref([
-  { TAX_DATE_FROM: '1', TAX_DATE_TO: '1', TAX_RITU: '1' },
-  { TAX_DATE_FROM: '1', TAX_DATE_TO: '1', TAX_RITU: '2' },
-  { TAX_DATE_FROM: '1', TAX_DATE_TO: '1', TAX_RITU: '3' },
+  { TAX_DATE_FROM: new Date(), TAX_DATE_TO: new Date(), TAX_RITU: '1' },
+  { TAX_DATE_FROM: new Date(), TAX_DATE_TO: new Date(), TAX_RITU: '2' },
+  { TAX_DATE_FROM: new Date(), TAX_DATE_TO: new Date(), TAX_RITU: '3' },
 ])
 const cardRef = ref()
 const { height } = useElementSize(cardRef)
