@@ -12,7 +12,12 @@
     centered
     title="契約農場別明細 移動情報(入力)"
     width="1000px"
-    :body-style="{ minHeight: '600px' }"
+    :body-style="{
+      height: '600px',
+      paddingRight: '30px',
+      paddingLeft: '30px',
+      paddingTop: '50px',
+    }"
     :mask-closable="false"
     destroy-on-close
     @cancel="goList"
@@ -170,25 +175,29 @@
         <a-col span="4">
           <read-only-pop thWidth="30" th="〒" :td="nojoAddr_saki.ADDR_POST" />
         </a-col>
-        <a-col span="1"></a-col>
+      </a-row>
+      <a-row class="mt-2">
+        <a-col span="3">
+          <read-only-pop thWidth="120" th="" td="" :hideTd="true" />
+        </a-col>
         <a-col span="5">
-          <read-only-pop thWidth="50" th="住所1" :td="nojoAddr_saki.ADDR_1" />
+          <read-only-pop thWidth="50" th="住所1" :td="nojoAddr_moto.ADDR_1" />
         </a-col>
         <a-col span="1"></a-col>
         <a-col span="10">
-          <read-only-pop thWidth="50" th="住所2" :td="nojoAddr_saki.ADDR_2" />
+          <read-only-pop thWidth="50" th="住所2" :td="nojoAddr_moto.ADDR_2" />
         </a-col>
       </a-row>
-      <a-row>
-        <a-col span="8">
-          <read-only-pop thWidth="120" th="" :hideTd="true" />
+      <a-row class="mt-2">
+        <a-col span="3">
+          <read-only-pop thWidth="120" th="" td="" :hideTd="true" />
         </a-col>
-        <a-col span="8">
-          <read-only-pop thWidth="50" th="住所3" :td="nojoAddr_saki.ADDR_3" />
+        <a-col span="5">
+          <read-only-pop thWidth="50" th="住所3" :td="nojoAddr_moto.ADDR_3" />
         </a-col>
         <a-col span="1"></a-col>
-        <a-col span="7">
-          <read-only-pop thWidth="50" th="住所4" :td="nojoAddr_saki.ADDR_4" />
+        <a-col span="10">
+          <read-only-pop thWidth="50" th="住所4" :td="nojoAddr_moto.ADDR_4" />
         </a-col>
       </a-row>
       <a-row>

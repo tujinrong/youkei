@@ -12,7 +12,12 @@
     centered
     title="契約区分情報(入力)"
     width="800px"
-    :body-style="{ height: '450px' }"
+    :body-style="{
+      height: '450px',
+      paddingRight: '30px',
+      paddingLeft: '30px',
+      paddingTop: '50px',
+    }"
     :mask-closable="false"
     destroy-on-close
     @cancel="goList"
