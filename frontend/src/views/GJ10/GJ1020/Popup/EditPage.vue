@@ -83,7 +83,7 @@
           <read-only-pop thWidth="100" th="住所3" :td="nojoAddr_moto.ADDR_3" />
           <read-only-pop thWidth="100" th="住所4" :td="nojoAddr_moto.ADDR_4" />
         </a-col> -->
-      <a-row>
+      <a-row class="mt-2">
         <a-col span="3">
           <read-only-pop thWidth="120" th="農場住所" td="" :hideTd="true" />
         </a-col>
@@ -157,7 +157,7 @@
           <read-only-pop thWidth="100" th="住所3" :td="nojoAddr_saki.ADDR_3" />
           <read-only-pop thWidth="100" th="住所4" :td="nojoAddr_saki.ADDR_4" />
         </a-col> -->
-      <a-row>
+      <a-row class="mt-2">
         <a-col span="3">
           <read-only-pop thWidth="120" th="農場住所" td="" :hideTd="true" />
         </a-col>
