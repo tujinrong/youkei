@@ -163,14 +163,14 @@ const formData = reactive({
   USER_ID: '',
   USER_NAME: '',
   PASS: '',
-  PASS_KIGEN_DATE: new Date(),
-  PASS_UP_DATE: new Date(),
+  PASS_KIGEN_DATE: undefined,
+  PASS_UP_DATE: undefined,
   SIYO_KBN: undefined,
-  TEISI_DATE: new Date(),
+  TEISI_DATE: undefined,
   TEISI_RIYU: '',
 })
 
-const SIYO_KBN_LIST = ref<CmCodeNameModel[]>([{ CODE: 30, NAME: 'オペレータ' }])
+const SIYO_KBN_LIST = ref<CmCodeNameModel[]>()
 const rules = reactive({
   USER_ID: [
     {
@@ -229,22 +229,25 @@ watch(
   (newValue) => {
     if (newValue) {
       const userId = props.userData ? props.userData.USER_ID : undefined
-      Object.assign(formData, props.userData)
-      nextTick(() => editJudge.reset())
-      // InitDetail({
-      //   USER_ID: userId,
-      //   // EDIT_KBN: isNew.value ? EnumEditKbn.Add : EnumEditKbn.Edit,
-      // })
-      //   .then((res) => {
-      //     SIYO_KBN_LIST.value = res.SIYO_KBN_LIST
-      //     Object.assign(formData, res.USER)
-      //     upddttm = res.USER.UP_DATE
-      //     nextTick(() => editJudge.reset())
-      //   })
-      //   .catch((error) => {
-      //     closeModal()
-      //   })
+      // Object.assign(formData, props.userData)
       // nextTick(() => editJudge.reset())
+      InitDetail({
+        USER_ID: userId,
+        EDIT_KBN: isNew.value ? EnumEditKbn.Add : EnumEditKbn.Edit,
+      })
+        .then((res) => {
+          SIYO_KBN_LIST.value = res.SIYO_KBN_LIST
+          Object.assign(formData, res.USER)
+          upddttm = res.USER.UP_DATE
+          nextTick(() => {
+            editJudge.reset()
+            clearValidate()
+          })
+        })
+        .catch((error) => {
+          closeModal()
+        })
+      nextTick(() => editJudge.reset())
     }
   }
 )
