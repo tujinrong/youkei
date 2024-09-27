@@ -1,5 +1,5 @@
 <template>
-  <a-card class="h-full">
+  <a-card class="h-355px">
     <h1>（GJ3021）互助基金契約者情報変更（契約区分変更）通知書発行</h1>
     <div class="self_adaption_table form mt-1 max-w-250">
       <b>第 {{ searchParams.KI }} 期</b>

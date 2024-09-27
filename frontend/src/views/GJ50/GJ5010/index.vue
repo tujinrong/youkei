@@ -8,7 +8,7 @@
  * ----------------------------------------------------------------->
 <template>
   <div>
-    <a-card :bordered="false" class="h-full min-h-500px staticWidth">
+    <a-card :bordered="false" class="h-215px min-h-215px staticWidth">
       <div class="max-w-600px">
         <h1>（GJ5010）互助基金納付·互助金交付·基金残高管理表</h1>
         <div class="self_adaption_table form" ref="headRef">

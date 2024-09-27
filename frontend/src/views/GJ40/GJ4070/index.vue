@@ -1,6 +1,6 @@
 <template>
   <div>
-    <a-card :bordered="false" class="h-full min-h-500px staticWidth">
+    <a-card :bordered="false" class="h-250px min-h-250px staticWidth">
       <div class="max-w-500px">
         <h1>（GJ4070）互助金交付集計表</h1>
         <div class="self_adaption_table form" ref="headRef">

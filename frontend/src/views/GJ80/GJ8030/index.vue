@@ -2,7 +2,7 @@
   <div>
     <a-card
       :bordered="false"
-      class="mb-4 h-full"
+      class="mb-4 h-720px"
       style="background-color: aliceblue"
     >
       <h1>（GJ8030）日本養鶏協会マスタメンテナンス</h1>

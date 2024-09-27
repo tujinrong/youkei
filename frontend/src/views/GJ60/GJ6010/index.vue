@@ -1,6 +1,6 @@
 <template>
   <div>
-    <a-card :bordered="false" class="h-full min-h-500px staticWidth">
+    <a-card :bordered="false" class="h-400px min-h-400px staticWidth">
       <div class="max-w-800px">
         <h1>（GJ6010）生産者積立金返還金計算処理</h1>
         <div class="self_adaption_table form" ref="headRef">

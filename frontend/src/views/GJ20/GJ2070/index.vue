@@ -1,6 +1,6 @@
 <template>
   <div>
-    <a-card :bordered="false" class="h-full min-h-500px staticWidth">
+    <a-card :bordered="false" class="h-440px min-h-440px staticWidth">
       <div class="max-w-1150px">
         <h1>（GJ2070）家畜防疫互助金積立金等請求通知書（新規加入者）</h1>
         <div class="self_adaption_table form" ref="headRef">

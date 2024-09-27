@@ -1,6 +1,6 @@
 <template>
   <div>
-    <a-card :bordered="false" class="h-full min-h-500px staticWidth">
+    <a-card :bordered="false" class="h-325px min-h-325px staticWidth">
       <div class="max-w-1150px">
         <h1>（GJ2100）生産者積立金等集計表作成処理（鶏の種類別）</h1>
         <div class="self_adaption_table form" ref="headRef">
