@@ -168,7 +168,7 @@ Namespace JBD.GJS.Service.GJ1012
 
         End Function
 
-        <DisplayName("前期データコピー処理_詳細画面処理")>
+        <DisplayName("保存処理_詳細画面処理")>
         Public Shared Function Save(req As SaveRequest) As DaResponseBase
             Return Transction(req,
                 Function(db)
@@ -205,7 +205,7 @@ Namespace JBD.GJS.Service.GJ1012
 
         End Function
 
-        <DisplayName("削除処理_細画面処理")>
+        <DisplayName("削除処理_詳細画面処理")>
         Public Shared Function Delete(req As DeleteRequest) As DaResponseBase
             Return Transction(req,
                 Function(db)

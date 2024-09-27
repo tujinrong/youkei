@@ -186,7 +186,7 @@ Namespace JBD.GJS.Service.GJ1011
 
         End Function
 
-        <DisplayName("削除処理_細画面処理")>
+        <DisplayName("削除処理_詳細画面処理")>
         Public Shared Function Delete(req As DeleteRequest) As DaResponseBase
             Return Transction(req,
                 Function(db)
