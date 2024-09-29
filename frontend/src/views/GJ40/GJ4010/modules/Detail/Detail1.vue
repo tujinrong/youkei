@@ -4,7 +4,7 @@
     centered
     title="（GJ4011）経営支援互助金申請情報入力（契約・交付情報表示）"
     width="1200px"
-    :body-style="{ minHeight: '600px', minWidth: '1000px' }"
+    :body-style="{ minHeight: '600px' }"
     :mask-closable="false"
     destroy-on-close
     @cancel="goList"

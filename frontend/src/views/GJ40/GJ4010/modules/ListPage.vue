@@ -158,8 +158,9 @@
                 <div class="flex items-center w-full">
                   <a-input
                     v-model:value="formData.ADDR"
-                    class="max-w-250"
+                    class="max-w-1150px"
                     :maxlength="50"
+                    style="width: 80%"
                   />
                   <span>(部分一致)</span>
                 </div>

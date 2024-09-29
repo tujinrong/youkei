@@ -9,7 +9,7 @@
 <template>
   <div class="h-full min-h-500px flex-col-stretch gap-12px">
     <a-card ref="headRef" :bordered="false" class="staticWidth">
-      <div class="max-w-1400px">
+      <div class="max-w-1150px">
         <h1>（GJ2020）契約者積立金計算処理</h1>
         <div class="self_adaption_table form mt-1">
           <a-row>
@@ -29,7 +29,13 @@
                 </a-form-item>
               </td>
             </a-col>
-            <a-col span="5">
+            <a-col
+              v-bind="{
+                md: 24,
+                lg: 24,
+                xl: 24,
+                xxl: 5,
+              }">
               <th class="required">対象期</th>
               <td>
                 <a-form-item v-bind="validateInfos.KI">
@@ -45,7 +51,13 @@
                 </a-form-item>
               </td>
             </a-col>
-            <a-col span="7">
+            <a-col
+              v-bind="{
+                md: 24,
+                lg: 24,
+                xl: 24,
+                xxl: 7,
+              }">
               <th>請求·返還回数</th>
               <td>
                 <a-form-item v-bind="validateInfos.SEIKYU_KAISU">
@@ -64,7 +76,13 @@
                 </a-form-item>
               </td>
             </a-col>
-            <a-col span="12">
+            <a-col
+              v-bind="{
+                md: 24,
+                lg: 24,
+                xl: 24,
+                xxl: 12,
+              }">
               <read-only
                 thWidth="80"
                 th="手数料率"
@@ -98,13 +116,27 @@
                 </a-form-item>
               </td>
             </a-col>
-            <a-col span="24">
+            <a-col
+              v-bind="{
+                md: 24,
+                lg: 24,
+                xl: 24,
+                xxl: 12,
+              }">
               <th class="required">納付期限</th>
               <td class="flex">
                 <a-form-item v-bind="validateInfos.KIGEN_DATE">
                   <DateJp v-model:value="formData.KIGEN_DATE" />
                 </a-form-item>
               </td>
+            </a-col>
+            <a-col
+              v-bind="{
+                md: 24,
+                lg: 24,
+                xl: 24,
+                xxl: 12,
+              }">
               <th class="required">振込予定日</th>
               <td class="flex">
                 <a-form-item v-bind="validateInfos.FURIKOMI_YOTEI_DATE">

@@ -417,7 +417,7 @@
             <a-col span="4">
               <th class="required">&emsp;入力確認有無</th>
             </a-col>
-            <a-col span="7">
+            <a-col span="8">
               <td style="align-items: center; height: 100%">
                 <a-radio-group v-model:value="formData.SYORI_JOKYO_KBN">
                   <a-radio :value="1">入力中</a-radio>
@@ -426,7 +426,7 @@
                 </a-radio-group>
               </td>
             </a-col>
-            <a-col span="6">
+            <a-col span="12">
               <th>確定年月日</th>
               <td>
                 <DateJp

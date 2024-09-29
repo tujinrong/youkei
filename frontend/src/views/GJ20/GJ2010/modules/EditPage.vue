@@ -28,9 +28,9 @@
         </a-col>
       </a-row>
     </div>
-    <div class="self_adaption_table form w-1000px pl-25">
-      <a-row class="mt-2"
-        ><div style="width: 100%; text-align: end">(单位：円)</div>
+    <div class="self_adaption_table form pl-25">
+      <a-row class="mt-2">
+        <div style="width: 100%; text-align: end">(单位：円)</div>
         <a-row>
           <a-col span="4">
             <th>契約区分</th>

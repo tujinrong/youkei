@@ -61,10 +61,10 @@
               th="請求日"
               thWidth="110"
               :td="getDateJpText(formData.SEIKYU_DATE)"
+              after="&nbsp;&nbsp;"
             />
           </a-col>
-          <a-col span="1"></a-col>
-          <a-col span="5" class="thleft">
+          <a-col span="5" offset="1" class="thleft">
             <read-only-pop
               th="請求回数"
               thWidth="90"
@@ -83,8 +83,7 @@
               after="円"
             />
           </a-col>
-          <a-col span="1"></a-col>
-          <a-col span="5" style="flex-flow: column" class="thleft">
+          <a-col span="5" offset="1" style="flex-flow: column" class="thleft">
             <div class="flex">
               <read-only-pop
                 thWidth="90"
@@ -107,7 +106,7 @@
             />
           </a-col>
           <a-col span="1"></a-col>
-          <a-col span="5">
+          <a-col span="5" class="read-only-pop-line-height">
             <read-only-pop
               thWidth="80"
               th="返還金額(預かり金)"
@@ -190,7 +189,7 @@
               ></vxe-column>
             </vxe-table>
           </a-col>
-          <a-col span="8">
+          <a-col span="8" style="height: 100%">
             <a-row>
               <a-col span="24">
                 <read-only-pop
@@ -232,7 +231,7 @@
           <a-button class="danger-btn">削除</a-button>
         </a-space>
         <a-row>
-          <a-col span="8">
+          <a-col span="7">
             <th class="required" style="width: 110px">入金・振込日</th>
             <td style="border-bottom: none">
               <a-form-item v-bind="validateInfos.NYUKIN_DATE">
@@ -240,9 +239,9 @@
               </a-form-item>
             </td>
           </a-col>
-          <a-col span="15" offset="1">
+          <a-col span="11" offset="1" class="thleft">
             <read-only-pop
-              thWidth="80"
+              thWidth="90"
               th="積立金額"
               :td="formData.BANK_NAME"
               after="円(返還金額(預かり金) + 入金額)"
@@ -250,11 +249,9 @@
           </a-col>
         </a-row>
         <a-row>
-          <a-col span="10" offset="9">
-            <!--            <th style="width: 110px; border-top: none"></th>-->
-            <!--            <td style="border-bottom: none; border-top: none"></td>-->
+          <a-col span="6" offset="8" class="thleft">
             <read-only-pop
-              thWidth="80"
+              thWidth="90"
               th="手数料額"
               :td="formData.FURI_KOZA_NO"
               after="円"
@@ -262,11 +259,9 @@
           </a-col>
         </a-row>
         <a-row>
-          <a-col span="10" offset="9">
-            <!--            <th style="width: 110px; border-top: none"></th>-->
-            <!--            <td style="border-top: none"></td>-->
+          <a-col span="6" offset="8" class="thleft">
             <read-only-pop
-              thWidth="80"
+              thWidth="90"
               th="入金額"
               :td="formData.FURI_KOZA_MEIGI_KANA"
               after="円"
@@ -473,6 +468,16 @@ th {
 .thleft {
   :deep(th) {
     text-align: right;
+  }
+}
+.read-only-pop-line-height {
+  :deep(th) {
+    line-height: 1.5;
+  }
+}
+.row-list {
+  :deep(th) {
+    height: 28px;
   }
 }
 </style>
