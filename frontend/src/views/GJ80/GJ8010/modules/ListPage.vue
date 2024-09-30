@@ -87,7 +87,14 @@
       </vxe-table>
     </a-card>
   </div>
-  <EditPage v-model:visible="editVisible" :editkbn="editkbn" />
+  <EditPage
+    v-model:visible="editVisible"
+    :editkbn="editkbn"
+    :SYURUI_KBN="searchParams.SYURUI_KBN"
+    :SYURUI_NM="SYURUI_NM"
+    :MEISYO_CD="meisyocd"
+    @get-table-list="searchData"
+  />
 </template>
 <script setup lang="ts">
 import { ref, reactive, toRef, watch, onMounted, computed } from 'vue'
@@ -108,49 +115,36 @@ const createDefaultParams = (): SearchRequest => {
     SYURUI_KBN: undefined,
   } as SearchRequest
 }
-const SYURUI_KBN_LIST = ref<CmCodeNameModel[]>([
-  { CODE: '1', NAME: '契約者区分' },
-])
+const SYURUI_KBN_LIST = ref<CmCodeNameModel[]>([])
 const searchParams = reactive(createDefaultParams())
 const cardRef = ref()
 const { height } = useElementSize(cardRef)
 const tableData = ref<SearchRowVM[]>([])
 const editVisible = ref(false)
 const editkbn = ref<EnumEditKbn>(EnumEditKbn.Add)
-
+const meisyocd = ref()
+const SYURUI_NM = ref()
 //--------------------------------------------------------------------------
 //監視定義
 //--------------------------------------------------------------------------
-watch(
-  () => editVisible.value,
-  (newValue) => {
-    // if (!newValue) searchData()
-  }
-)
+
 //--------------------------------------------------------------------------
 //メソッド
 //--------------------------------------------------------------------------
 
 //初期化処理
 onMounted(() => {
-  // getInitData()
+  getInitData()
 })
 
 const getInitData = () => {
-  Init().then((res) => {
+  Init({ ...searchParams }).then((res) => {
     SYURUI_KBN_LIST.value = res.SYURUI_KBN_LIST
   })
 }
 
 const changeKbn = () => {
-  // searchData()
-  tableData.value = [
-    {
-      MEISYO_CD: 1,
-      MEISYO: '家族',
-      RYAKUSYO: '家',
-    },
-  ]
+  searchData()
 }
 //検索処理
 const { pageParams, searchData } = useSearch({
@@ -159,11 +153,16 @@ const { pageParams, searchData } = useSearch({
   params: toRef(() => searchParams),
 })
 
-function goForward(status: PageStatus, row?: any) {
+function goForward(status: PageStatus, row?: SearchRowVM) {
   if (status === PageStatus.Edit || status === PageStatus.New) {
-    editVisible.value = true
     editkbn.value =
       status === PageStatus.Edit ? EnumEditKbn.Edit : EnumEditKbn.Add
+    meisyocd.value = row?.MEISYO_CD || 0
+    SYURUI_NM.value = SYURUI_KBN_LIST.value.find(
+      (e) => e.CODE == searchParams.SYURUI_KBN
+    )?.NAME
+
+    editVisible.value = true
   }
 }
 </script>

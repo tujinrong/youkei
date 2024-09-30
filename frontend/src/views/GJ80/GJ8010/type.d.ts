@@ -11,9 +11,10 @@ import { EnumAndOr, EnumEditKbn } from '@/enum'
 //-------------------------------------------------------------------
 //リクエスト
 //-------------------------------------------------------------------
-
+export interface InitRequest extends DaRequestBase {
+}
 /**検索処理(一覧画面) */
-export interface SearchRequest {
+export interface SearchRequest extends CmSearchRequestBase{
   /**種類区分 */
   SYURUI_KBN: number | undefined
 }
@@ -21,17 +22,17 @@ export interface SearchRequest {
 /**削除処理(一覧画面) */
 export interface DeleteRequest extends DaRequestBase {
   /**種類区分 */
-  SYURUI_KBN: string
+  SYURUI_KBN?: number
   /**名称コード */
-  MEISYO_CD: number
+  MEISYO_CD?: number
   /**更新時間 */
   UP_DATE?: Date
 }
 
 /**検索処理(詳細画面) */
-export interface SearchDetailRequest extends DaRequestBase {
+export interface InitDetailRequest extends DaRequestBase {
   /**種類区分 */
-  SYURUI_KBN: string
+  SYURUI_KBN: number|undefined
   /**名称コード */
   MEISYO_CD: number
 }
@@ -39,7 +40,7 @@ export interface SearchDetailRequest extends DaRequestBase {
 /**登録処理(詳細画面) */
 export interface SaveRequest extends DaRequestBase {
   /**コード情報 */
-  CODE_VM: DetailVM
+  CODE: DetailVM
   /**編集区分 */
   EDIT_KBN: EnumEditKbn
 }
@@ -65,9 +66,9 @@ export interface SearchResponse extends CmSearchResponseBase {
 }
 
 /**検索処理(詳細画面) */
-export interface SearchDetailResponse extends DaResponseBase {
+export interface InitDetailResponse extends DaResponseBase {
   /**コード情報 */
-  CODE_VM: DetailVM
+  CODE: DetailVM
 }
 
 //-------------------------------------------------------------------
@@ -86,9 +87,9 @@ export interface SearchRowVM {
 /**契約者農場情報 */
 export interface DetailVM {
   /**種類区分 */
-  SYURUI_KBN: string
+  SYURUI_KBN?: number
   /**名称コード */
-  MEISYO_CD: number
+  MEISYO_CD?: number
   /**名称 */
   MEISYO: string
   /**略称 */

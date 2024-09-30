@@ -49,7 +49,7 @@ function isNumber(value) {
 
 <style scoped>
 .ellipsis {
-  margin-left: 6px !important;
+  margin-left: 2px !important;
   padding: 0px 6px !important;
   padding-top: 4px !important;
   white-space: nowrap;

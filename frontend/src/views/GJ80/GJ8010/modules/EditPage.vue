@@ -16,7 +16,7 @@
               <read-only-pop
                 th="種類区分"
                 th-width="100"
-                :td="formData.SYURUI_KBN"
+                :td="formData.SYURUI_NM"
                 :maxlength="20"
                 class="w-120!"
               ></read-only-pop>
@@ -97,22 +97,26 @@ import {
 } from '@/constants/msg'
 import { Form, message } from 'ant-design-vue'
 import { showDeleteModal, showSaveModal } from '@/utils/modal'
-import { Delete, Save } from '../service'
+import { Delete, InitDetail, Save } from '../service'
 
 const props = defineProps<{
   editkbn: EnumEditKbn
   visible: boolean
+  SYURUI_KBN?: number
+  MEISYO_CD?: number
+  SYURUI_NM?: string
 }>()
-const emit = defineEmits(['update:visible'])
+const emit = defineEmits(['update:visible', 'getTableList'])
 
 const editJudge = new Judgement('')
 let upddttm
 const formData = reactive({
-  SYURUI_KBN: '',
+  SYURUI_NM: '',
+  SYURUI_KBN: undefined as number | undefined,
   MEISYO_CD: undefined as number | undefined,
   MEISYO: '',
   RYAKUSYO: '',
-} as DetailVM)
+})
 
 const rules = reactive({
   MEISYO_CD: [
@@ -156,12 +160,28 @@ const isNew = computed(() => (props.editkbn === EnumEditKbn.Add ? true : false))
 //--------------------------------------------------------------------------
 watch(
   () => props.visible,
-  (newValue) => {
-    if (newValue) {
-      nextTick(() => editJudge.reset())
+  async (newValue) => {
+    if (!newValue) return
+    formData.SYURUI_NM = props.SYURUI_NM ?? ''
+    formData.SYURUI_KBN = props.SYURUI_KBN
+    if (!isNew.value) {
+      try {
+        formData.MEISYO_CD = props.MEISYO_CD
+        const res = await InitDetail({
+          MEISYO_CD: formData.MEISYO_CD || 0,
+          SYURUI_KBN: formData.SYURUI_KBN,
+          EDIT_KBN: EnumEditKbn.Edit,
+        })
+        Object.assign(formData, res.CODE)
+        upddttm = res.CODE.UP_DATE
+      } catch (error) {
+        closeModal()
+      }
     }
+    nextTick(() => editJudge.reset())
   }
 )
+
 watch(formData, () => editJudge.setEdited())
 
 watch(
@@ -182,11 +202,10 @@ watch(
 //メソッド
 //--------------------------------------------------------------------------
 const closeModal = () => {
-  editJudge.judgeIsEdited(() => {
-    resetFields()
-    clearValidate()
-    modalVisible.value = false
-  })
+  resetFields()
+  clearValidate()
+  modalVisible.value = false
+  emit('getTableList')
 }
 //画面遷移
 const goList = () => {
@@ -203,7 +222,7 @@ const saveData = async () => {
     onOk: async () => {
       try {
         await Save({
-          CODE_VM: {
+          CODE: {
             ...formData,
             UP_DATE: isNew.value ? undefined : upddttm,
           },
@@ -211,7 +230,9 @@ const saveData = async () => {
         })
         closeModal()
         message.success(SAVE_OK_INFO.Msg)
-      } catch (error) {}
+      } catch (error) {
+        closeModal()
+      }
     },
   })
 }
@@ -230,7 +251,9 @@ const deleteData = () => {
         })
         closeModal()
         message.success(DELETE_OK_INFO.Msg)
-      } catch (error) {}
+      } catch (error) {
+        closeModal()
+      }
     },
   })
 }

@@ -12,8 +12,8 @@ import {
   DeleteRequest,
   InitResponse,
   SaveRequest,
-  SearchDetailRequest,
-  SearchDetailResponse,
+  InitDetailRequest,
+  InitDetailResponse,
   SearchRequest,
   SearchResponse,
 } from './type'
@@ -22,9 +22,9 @@ const servicename = 'GJ8010'
 const servicename2 = 'GJ8011'
 
 /** 初期化処理(一覧画面) */
-export const Init = (): Promise<InitResponse> => {
+export const Init = (params: DaRequestBase): Promise<InitResponse> => {
   const methodname = 'Init'
-  return api(servicename, methodname)
+  return api(servicename, methodname,params)
 }
 
 /** 検索処理(一覧画面) */
@@ -34,10 +34,10 @@ export const Search = (params: SearchRequest): Promise<SearchResponse> => {
 }
 
 /** 検索処理(詳細画面) */
-export const SearchDetail = (
-  params: SearchDetailRequest
-): Promise<SearchDetailResponse> => {
-  const methodname = 'SearchDetail'
+export const InitDetail = (
+  params: InitDetailRequest
+): Promise<InitDetailResponse> => {
+  const methodname = 'InitDetail'
   return api(servicename2, methodname, params, undefined, { loading: true })
 }
 

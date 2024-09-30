@@ -27,9 +27,10 @@ Namespace JBD.GJS.Service.GJ8011
         wkSb.AppendLine("     ,T.RYAKUSYO")
         wkSb.AppendLine("    , T.REG_DATE ")
         wkSb.AppendLine("    , T.REG_ID ")
+            wkSb.AppendLine("    , T.UP_DATE")
 
-        wkSb.AppendLine("  from")
-        wkSb.AppendLine("    TM_CODE T ")
+            wkSb.AppendLine("  from")
+            wkSb.AppendLine("    TM_CODE T ")
         wkSb.AppendLine("    left join TM_CODE  KBN")
         wkSb.AppendLine("      on 1 = 1 ")
         wkSb.AppendLine("      and KBN.SYURUI_KBN = 0 ")
