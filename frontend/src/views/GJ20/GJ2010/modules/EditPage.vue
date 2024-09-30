@@ -30,8 +30,8 @@
     </div>
     <div class="self_adaption_table form pl-25">
       <a-row class="mt-2">
-        <div style="width: 100%; text-align: end">(单位：円)</div>
-        <a-row>
+        <div class="w-full" style="text-align: end">(单位：円)</div>
+        <a-row class="w-full">
           <a-col span="4">
             <th>契約区分</th>
           </a-col>
@@ -48,7 +48,7 @@
             <th>焼却·埋却等互助金(単価)</th>
           </a-col>
         </a-row>
-        <a-row>
+        <a-row class="w-full">
           <a-col span="4">
             <th>家族型</th>
           </a-col>
@@ -277,7 +277,7 @@
             </a-row>
           </a-col>
         </a-row>
-        <a-row>
+        <a-row class="w-full">
           <a-col span="4">
             <th>企業型</th>
           </a-col>
@@ -506,7 +506,7 @@
             </a-row>
           </a-col>
         </a-row>
-        <a-row>
+        <a-row class="w-full">
           <a-col span="4">
             <th>鶏以外</th>
           </a-col>
@@ -924,7 +924,7 @@ const deleteData = () => {}
 </script>
 <style lang="scss" scoped>
 th {
-  width: 200px;
+  width: 100%;
   border-right: 1px solid #8a8d92 !important;
 }
 .self_adaption_table .ant-col th {
