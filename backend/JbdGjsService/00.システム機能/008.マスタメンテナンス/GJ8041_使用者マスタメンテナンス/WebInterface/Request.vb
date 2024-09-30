@@ -2,8 +2,8 @@
 ' 業務名称　: 互助事業システム
 ' 機能概要　: 使用者マスタメンテナンス
 '             リクエストインターフェース
-' 作成日　　: 2024.07.21
-' 作成者　　: 宋 峰
+' 作成日　　: 2024.09.27
+' 作成者　　: 唐
 ' 変更履歴　:
 ' *******************************************************************
 
@@ -14,11 +14,6 @@ Namespace JBD.GJS.Service.GJ8041
     ''' </summary>
     Public Class InitDetailRequest
         Inherits DaRequestBase
-
-        ''' <summary>
-        ''' ユーザーID
-        ''' </summary>
-        Public Property USER_ID As String = String.Empty
 
     End Class
 
@@ -40,11 +35,6 @@ Namespace JBD.GJS.Service.GJ8041
     ''' </summary>
     Public Class DeleteRequest
         Inherits DaRequestBase
-
-        ''' <summary>
-        ''' ユーザーID
-        ''' </summary>
-        Public Property USER_ID As String = String.Empty
 
         ''' <summary>
         ''' データ更新日

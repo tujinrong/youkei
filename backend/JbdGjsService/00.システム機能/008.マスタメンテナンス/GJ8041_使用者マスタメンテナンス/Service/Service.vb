@@ -2,12 +2,10 @@
 ' 業務名称　: 互助事業システム
 ' 機能概要　: 使用者マスタメンテナンス
 '            サービス処理
-' 作成日　　: 2024.07.21
-' 作成者　　: 宋 峰
+' 作成日　　: 2024.09.27
+' 作成者　　: 唐
 ' 変更履歴　:
 ' *******************************************************************
-
-Imports JbdGjsService.JBD.GJS.Service.GJ8091
 
 Namespace JBD.GJS.Service.GJ8041
 
@@ -57,6 +55,19 @@ Namespace JBD.GJS.Service.GJ8041
                             'データ結果判定
                             If dt.Rows.Count = 0 Then
                                 Return New InitDetailResponse("該当データが存在しませんでした。")
+                            End If
+                            Dim cdt As DataTable = dt.Copy()
+                            ds.Tables.Add(cdt)
+                        Case EnumEditKbn.Add       '新規入力
+                            '検索コントロールマスタデータ取得用ＳＱＬ作成
+                            sql = FrmGJ8041Service.f_TM_CONTROL_Data_Select()
+                            
+                            'データSelect 
+                            Dim dt = FrmService.f_Select_ODP(db, sql).Tables(0)
+
+                            'データ結果判定
+                            If dt.Rows.Count = 0 Then
+                                Return New InitDetailResponse("コントロールマスタが設定されていません。")
                             End If
                             Dim cdt As DataTable = dt.Copy()
                             ds.Tables.Add(cdt)
