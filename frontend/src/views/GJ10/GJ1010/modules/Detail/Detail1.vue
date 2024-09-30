@@ -83,7 +83,7 @@
         class="mt-2"
         :column-config="{ resizable: true }"
         :row-config="{ isCurrent: true, isHover: true }"
-        height="480px"
+        min-height="480px"
         :data="tableData"
         :sort-config="{ trigger: 'cell', orders: ['desc', 'asc'] }"
         :empty-render="{ name: 'NotData' }"

@@ -35,7 +35,8 @@
                 lg: 24,
                 xl: 24,
                 xxl: 5,
-              }">
+              }"
+            >
               <th class="required">対象期</th>
               <td>
                 <a-form-item v-bind="validateInfos.KI">
@@ -57,7 +58,8 @@
                 lg: 24,
                 xl: 24,
                 xxl: 7,
-              }">
+              }"
+            >
               <th>請求·返還回数</th>
               <td>
                 <a-form-item v-bind="validateInfos.SEIKYU_KAISU">
@@ -82,7 +84,8 @@
                 lg: 24,
                 xl: 24,
                 xxl: 12,
-              }">
+              }"
+            >
               <read-only
                 thWidth="80"
                 th="手数料率"
@@ -122,7 +125,8 @@
                 lg: 24,
                 xl: 24,
                 xxl: 12,
-              }">
+              }"
+            >
               <th class="required">納付期限</th>
               <td class="flex">
                 <a-form-item v-bind="validateInfos.KIGEN_DATE">
@@ -136,7 +140,8 @@
                 lg: 24,
                 xl: 24,
                 xxl: 12,
-              }">
+              }"
+            >
               <th class="required">振込予定日</th>
               <td class="flex">
                 <a-form-item v-bind="validateInfos.FURIKOMI_YOTEI_DATE">
@@ -188,7 +193,7 @@
         :column-config="{ resizable: true }"
         :row-config="{ isCurrent: true, isHover: true }"
         :data="tableData"
-        height="380px"
+        min-height="380px"
         :sort-config="{ trigger: 'cell', orders: ['desc', 'asc'] }"
         :empty-render="{ name: 'NotData' }"
         @sort-change="(e) => changeTableSort(e, toRef(pageParams, 'ORDER_BY'))"
