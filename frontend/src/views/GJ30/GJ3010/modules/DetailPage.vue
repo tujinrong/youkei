@@ -48,24 +48,21 @@
               td=""
               :hideTd="true" /></a-col
           ><a-col span="5"
-            ><read-only-pop th="　〒" :td="nojoData.ADDR_POST" /></a-col
-          ><a-col span="5"
+            ><read-only-pop th-width="45" th="　〒" :td="nojoData.ADDR_POST"
+          /></a-col> </a-row
+        ><a-row>
+          <a-col span="5" offset="3"
             ><read-only-pop th="住所1" :td="nojoData.ADDR_1" /></a-col
-          ><a-col span="11"
-            ><read-only-pop th="住所2" :td="nojoData.ADDR_2"
-          /></a-col>
-          <a-row> </a-row>
-
-          <a-col span="24">
-            <read-only-pop
-              thWidth="250"
-              th=""
-              :hideTd="true"
-              :td="nojoData.ADDR_POST"
-            />
-            <read-only-pop th="住所3" :td="nojoData.ADDR_3" />
-            <read-only-pop th="住所4" :td="nojoData.ADDR_4" />
-          </a-col>
+          ><a-col span="11" offset="1"
+            ><read-only-pop th="住所2" :td="nojoData.ADDR_2" /></a-col
+        ></a-row>
+        <a-row>
+          <a-col span="5" offset="3"
+            ><read-only-pop th="住所3" :td="nojoData.ADDR_1" /></a-col
+          ><a-col span="11" offset="1"
+            ><read-only-pop th="住所4" :td="nojoData.ADDR_2"
+          /></a-col> </a-row
+        ><a-row>
           <a-col span="13">
             <th class="required">鳥の種類</th>
             <td>
