@@ -258,14 +258,16 @@
             />
           </a-col>
         </a-row>
-        <a-row>
-          <a-col span="6" offset="8" class="thleft">
-            <read-only-pop
-              thWidth="90"
-              th="入金額"
-              :td="formData.FURI_KOZA_MEIGI_KANA"
-              after="円"
-            />
+        <a-row class="mb-1">
+          <a-col span="6" offset="8">
+            <th class="required text-right! w-90px!">入金額</th>
+            <td>
+              <a-input-number
+                v-model:value="formData.FURI_KOZA_MEIGI_KANA"
+                v-bind="{ ...mathNumber }"
+                class="w-full"
+              /><span class="mt-1 ml-1"> 円</span>
+            </td>
           </a-col>
         </a-row>
         <a-row>

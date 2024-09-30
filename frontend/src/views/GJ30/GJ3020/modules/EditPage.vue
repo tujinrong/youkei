@@ -75,7 +75,7 @@
           <td>
             <a-form-item
               v-bind="validateInfos.SEIKYU_HAKKO_NO_NEN"
-              class="w-35!"
+              class="w-40!"
               >日鶏
               <a-input-number
                 v-model:value="searchParams.SEIKYU_HAKKO_NO_NEN"
