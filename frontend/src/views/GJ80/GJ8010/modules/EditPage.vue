@@ -231,7 +231,7 @@ const saveData = async () => {
         closeModal()
         message.success(SAVE_OK_INFO.Msg)
       } catch (error) {
-        closeModal()
+        // closeModal()
       }
     },
   })
@@ -252,7 +252,7 @@ const deleteData = () => {
         closeModal()
         message.success(DELETE_OK_INFO.Msg)
       } catch (error) {
-        closeModal()
+        // closeModal()
       }
     },
   })
