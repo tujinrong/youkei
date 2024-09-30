@@ -71,8 +71,13 @@ Namespace JBD.GJS.Service.GJ8011
 
         wkCmd.ExecuteNonQuery()
         Debug.Print(wkCmd.Parameters("OU_MSGCD").Value.ToString())
+    
         If wkCmd.Parameters("OU_MSGCD").Value.ToString() <> "0" Then
-            Throw New Exception(wkCmd.Parameters("OU_MSGCD").Value.ToString() & ":" & wkCmd.Parameters("OU_MSGNM").Value.ToString())
+           If String.Compare(wkCmd.Parameters("OU_MSGCD").Value.ToString(), "99", StringComparison.OrdinalIgnoreCase) = 0 Then 
+               Return New DaResponseBase(EnumServiceResult.Exception, "データはすでに削除後の為、削除できません。")
+           Else
+               Return New DaResponseBase(EnumServiceResult.Exception , wkCmd.Parameters("OU_MSGNM").Value.ToString())
+        　End If　
         End If
 
         wkRet = True

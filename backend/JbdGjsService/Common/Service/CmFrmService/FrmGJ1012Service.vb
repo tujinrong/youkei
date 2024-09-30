@@ -356,7 +356,7 @@ Namespace JBD.GJS.Service.GJ1012
             wkCmd.ExecuteNonQuery()
             Debug.Print(wkCmd.Parameters("OU_MSGCD").Value.ToString())
             If wkCmd.Parameters("OU_MSGCD").Value.ToString() <> "0" Then
-                Throw New Exception(wkCmd.Parameters("OU_MSGCD").Value.ToString() & ":" & wkCmd.Parameters("OU_MSGNM").Value.ToString())
+                Return New DaResponseBase(EnumServiceResult.Exception , wkCmd.Parameters("OU_MSGNM").Value.ToString())
             End If
 
             wkRet = True

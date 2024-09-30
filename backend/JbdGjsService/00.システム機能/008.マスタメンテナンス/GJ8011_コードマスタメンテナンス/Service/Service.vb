@@ -143,6 +143,10 @@ Namespace JBD.GJS.Service.GJ8011
                                     Return New DaResponseBase("データを更新できません。他のユーザーによって変更された可能性があります。")
                                 End If
                             End If
+                        Case EnumEditKbn.Add       '新規入力
+                            If dt.Rows.Count > 0 Then
+                                Return New DaResponseBase("データは既に登録されています。")
+                            End If
                     End Select
 
                     '保存処理

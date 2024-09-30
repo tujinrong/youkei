@@ -139,7 +139,7 @@ Namespace JBD.GJS.Service.GJ8051
                 If wkCmd.Parameters("OU_MSGCD").Value.ToString() = "99" Then
                     '削除済みは政情終了とみなす
                     wkRet = True
-                    Return New DaResponseBase(wkCmd.Parameters("OU_MSGNM").Value.ToString() & "。")
+                    Return New DaResponseBase(EnumServiceResult.Exception , wkCmd.Parameters("OU_MSGNM").Value.ToString() & "。")
                 End If
             End If
 
