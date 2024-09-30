@@ -7,8 +7,6 @@
 ' 変更履歴　:
 ' *******************************************************************
 
-Imports OracleInternal.Json
-
 Namespace JBD.GJS.Service.GJ8041
 
     Public Class FrmGJ8041Service
@@ -108,6 +106,7 @@ Namespace JBD.GJS.Service.GJ8041
         End Function
 
 #End Region
+
 #Region "f_Data_Deleate 使用者マスタデータ削除処理"
         '------------------------------------------------------------------
         'プロシージャ名  :f_Data_Deleate
@@ -156,6 +155,25 @@ Namespace JBD.GJS.Service.GJ8041
         End Function
 #End Region
 
+#Region "f_TM_CONTROL_Data_Select コントロールマスタデータ取得"
+    '------------------------------------------------------------------
+    'プロシージャ名  :f_TM_CONTROL_Data_Select
+    '説明            :コントロールマスタデータ取得
+    '引数            :
+    '戻り値          :String
+    '------------------------------------------------------------------
+    Public Shared Function f_TM_CONTROL_Data_Select() As String
+
+        Dim sSql As String = String.Empty
+        Dim dstDataControl As New DataSet
+        Dim ret As Boolean = False
+        sSql = " SELECT " & vbCrLf
+        sSql += "  PASS_KIGEN" & vbCrLf
+        sSql += " FROM" & vbCrLf
+        sSql += "  TM_CONTROL" & vbCrLf
+        Return sSql
+    End Function
+#End Region
 
     End Class
 

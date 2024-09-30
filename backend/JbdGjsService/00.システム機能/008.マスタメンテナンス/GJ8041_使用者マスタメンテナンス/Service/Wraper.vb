@@ -2,8 +2,8 @@
 ' 業務名称　: 互助事業システム
 ' 機能概要　: 使用者マスタメンテナンス
 ' 　　　　　　DB項目から画面項目に変換
-' 作成日　　: 2024.07.21
-' 作成者　　: 宋 峰
+' 作成日　　: 2024.09.27
+' 作成者　　: 唐
 ' 変更履歴　:
 ' *******************************************************************
 
@@ -46,6 +46,15 @@ Namespace JBD.GJS.Service.GJ8041
                         item.USER.TEISI_DATE = DaConvertUtil.CDate(row("TEISI_DATE"))
                         item.USER.TEISI_RIYU = DaConvertUtil.CStr(row("TEISI_RIYU"))
                         item.USER.UP_DATE = DaConvertUtil.CDate(row("UP_DATE"))
+                    End If
+                Case EnumEditKbn.Add　　　'新規入力
+                    dt = ds.Tables(1)
+                    If dt.Rows.Count > 0 Then
+                        Dim row As DataRow = dt.Rows(0)
+                        Dim pPASS_KIGEN = DaConvertUtil.CInt(WordHenkan("N", "S", row("PASS_KIGEN")))
+                        Dim pPASS_UP_DATE = Now
+                        Dim pPASS_KIGEN_DATE = DateAdd(DateInterval.Day, pPASS_KIGEN, pPASS_UP_DATE)
+                        item.USER.PASS_KIGEN_DATE = pPASS_KIGEN_DATE
                     End If
             End Select
 
