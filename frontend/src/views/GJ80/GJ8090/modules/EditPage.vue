@@ -27,108 +27,111 @@
               th-width="130"
               :td="formData.KEIYAKUSYA_NAME"
             ></read-only-pop>
-          </a-col>
-        </a-row>
-        <h2 class="mt-4">契約者農場基本登録項目</h2>
-        <a-row>
-          <a-col span="24">
-            <th class="required">契約者農場</th>
-            <td>
-              <a-form-item v-bind="validateInfos.NOJO_CD">
-                <a-input-number
-                  v-model:value="formData.NOJO_CD"
-                  :min="0"
-                  :max="999"
-                  :maxlength="3"
-                  :disabled="!isNew"
-                  class="w-20"
-                ></a-input-number>
-              </a-form-item>
-            </td>
-          </a-col>
-        </a-row>
-        <a-row>
-          <a-col span="24">
-            <th class="required">農場名称</th>
-            <td>
-              <a-form-item v-bind="validateInfos.NOJO_NAME">
-                <a-input
-                  v-model:value="formData.NOJO_NAME"
-                  :maxlength="20"
-                  class="w-105"
-                ></a-input>
-              </a-form-item>
-            </td>
-          </a-col>
-        </a-row>
-        <a-row>
-          <a-col span="24">
-            <th class="required">都道府県</th>
-            <td>
-              <a-form-item v-bind="validateInfos.KEN_CD">
-                <ai-select
-                  v-model:value="formData.KEN_CD"
-                  :options="KEN_CD_NAME_LIST"
-                  class="max-w-50"
-                  type="number"
-                ></ai-select>
-              </a-form-item>
-            </td>
-          </a-col>
-        </a-row>
-        <a-row>
-          <a-col span="24">
-            <th class="required">住所</th>
-            <td class="flex-col">
-              <a-form-item v-bind="validateInfos.ADDR_POST">
-                <PostCode v-model:value="formData.ADDR_POST">
+          </a-col> </a-row
+      ></a-form>
+      <h2 class="mt-4">契約者農場基本登録項目</h2>
+      <div class="ml-10">
+        <a-form>
+          <a-row>
+            <a-col span="24">
+              <th class="required">契約者農場</th>
+              <td>
+                <a-form-item v-bind="validateInfos.NOJO_CD">
+                  <a-input-number
+                    v-model:value="formData.NOJO_CD"
+                    :min="0"
+                    :max="999"
+                    :maxlength="3"
+                    :disabled="!isNew"
+                    class="w-20"
+                  ></a-input-number>
+                </a-form-item>
+              </td>
+            </a-col>
+          </a-row>
+          <a-row>
+            <a-col span="24">
+              <th class="required">農場名称</th>
+              <td>
+                <a-form-item v-bind="validateInfos.NOJO_NAME">
                   <a-input
-                    v-model:value="formData.ADDR_1"
-                    disabled
-                    class="!w-30"
-                  ></a-input
-                ></PostCode>
-              </a-form-item>
-              <a-form-item v-bind="validateInfos.ADDR_2">
+                    v-model:value="formData.NOJO_NAME"
+                    :maxlength="20"
+                    class="w-105"
+                  ></a-input>
+                </a-form-item>
+              </td>
+            </a-col>
+          </a-row>
+          <a-row>
+            <a-col span="24">
+              <th class="required">都道府県</th>
+              <td>
+                <a-form-item v-bind="validateInfos.KEN_CD">
+                  <ai-select
+                    v-model:value="formData.KEN_CD"
+                    :options="KEN_CD_NAME_LIST"
+                    class="max-w-50"
+                    type="number"
+                  ></ai-select>
+                </a-form-item>
+              </td>
+            </a-col>
+          </a-row>
+          <a-row>
+            <a-col span="24">
+              <th class="required">住所</th>
+              <td class="flex-col">
+                <a-form-item v-bind="validateInfos.ADDR_POST">
+                  <PostCode v-model:value="formData.ADDR_POST">
+                    <a-input
+                      v-model:value="formData.ADDR_1"
+                      disabled
+                      class="!w-30"
+                    ></a-input
+                  ></PostCode>
+                </a-form-item>
+                <a-form-item v-bind="validateInfos.ADDR_2">
+                  <a-input
+                    v-model:value="formData.ADDR_2"
+                    :maxlength="15"
+                    class="max-w-90"
+                  ></a-input>
+                </a-form-item>
                 <a-input
-                  v-model:value="formData.ADDR_2"
+                  v-model:value="formData.ADDR_3"
                   :maxlength="15"
                   class="max-w-90"
+                  @change="validate('ADDR_4')"
                 ></a-input>
-              </a-form-item>
-              <a-input
-                v-model:value="formData.ADDR_3"
-                :maxlength="15"
-                class="max-w-90"
-                @change="validate('ADDR_4')"
-              ></a-input>
-              <a-form-item v-bind="validateInfos.ADDR_4">
-                <a-input
-                  v-model:value="formData.ADDR_4"
-                  :maxlength="20"
-                  class="max-w-105"
-                ></a-input>
-              </a-form-item>
-            </td>
-          </a-col>
-        </a-row>
-        <a-row>
-          <a-col span="24">
-            <th class="required">明細番号</th>
-            <td>
-              <a-form-item v-bind="validateInfos.MEISAI_NO">
-                <a-input-number
-                  v-model:value="formData.MEISAI_NO"
-                  :min="0"
-                  :max="999"
-                  :maxlength="3"
-                  class="w-20"
-                ></a-input-number>
-              </a-form-item>
-            </td>
-          </a-col>
-        </a-row>
-      </a-form>
+                <a-form-item v-bind="validateInfos.ADDR_4">
+                  <a-input
+                    v-model:value="formData.ADDR_4"
+                    :maxlength="20"
+                    class="max-w-105"
+                  ></a-input>
+                </a-form-item>
+              </td>
+            </a-col>
+          </a-row>
+          <a-row>
+            <a-col span="24">
+              <th class="required">明細番号</th>
+              <td>
+                <a-form-item v-bind="validateInfos.MEISAI_NO">
+                  <a-input-number
+                    v-model:value="formData.MEISAI_NO"
+                    :min="0"
+                    :max="999"
+                    :maxlength="3"
+                    class="w-20"
+                  ></a-input-number>
+                </a-form-item>
+              </td>
+            </a-col>
+          </a-row>
+        </a-form>
+      </div>
     </div>
     <template #footer>
       <div class="pt-2 flex justify-between border-t-1">
