@@ -130,7 +130,7 @@
         header-align="center"
         field="SITEN_KANA"
         title="支店名（ｶﾅ）"
-        width="300"
+        min-width="300"
         sortable
         :params="{ order: 3 }"
         :resizable="false"
@@ -140,7 +140,7 @@
         header-align="center"
         field="SITEN_NAME"
         title="支店名（漢字）"
-        width="200"
+        width="300"
         sortable
         :params="{ order: 4 }"
         :resizable="false"

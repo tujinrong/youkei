@@ -53,7 +53,7 @@
           header-align="center"
           field="MEISYO_CD"
           title="名称コード"
-          width="100"
+          width="120"
           sortable
           :params="{ order: 1 }"
           :resizable="true"
@@ -66,7 +66,7 @@
           header-align="center"
           field="MEISYO"
           title="名称"
-          width="140"
+          min-width="300"
           sortable
           :params="{ order: 2 }"
           :resizable="true"
@@ -79,7 +79,7 @@
           header-align="center"
           field="RYAKUSYO"
           title="略称"
-          width="120"
+          width="200"
           sortable
           :params="{ order: 3 }"
           :resizable="false"

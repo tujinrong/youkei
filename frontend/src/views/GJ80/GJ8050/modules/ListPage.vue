@@ -106,7 +106,7 @@
           header-align="center"
           field="BANK_KANA"
           title="金融機関名（ｶﾅ）"
-          width="350"
+          width="400"
           sortable
           :params="{ order: 2 }"
           :resizable="true"
@@ -116,11 +116,11 @@
           header-align="center"
           field="BANK_NAME"
           title="金融機関名（漢字）"
-          width="250"
+          width="350"
           sortable
           :params="{ order: 3 }"
         ></vxe-column>
-        <vxe-column header-align="center" title="支店情報" width="240"
+        <vxe-column header-align="center" title="支店情報" min-width="120"
           ><template #default="{ row }">
             <a-button
               class="max-h-22px mt-2px text-center py-0"

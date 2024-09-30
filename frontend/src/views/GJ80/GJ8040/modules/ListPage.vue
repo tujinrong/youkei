@@ -40,7 +40,7 @@
           header-align="center"
           field="USER_NAME"
           title="ユーザ名"
-          width="250"
+          min-width="140"
           sortable
           :params="{ order: 2 }"
           :resizable="true"
@@ -62,7 +62,7 @@
           header-align="center"
           field="TEISI_DATE"
           title="使用停止日"
-          width="200"
+          min-width="150"
           sortable
           formatter="JpDate"
           :params="{ order: 4 }"
@@ -72,7 +72,7 @@
           header-align="center"
           field="TEISI_RIYU"
           title="使用停止理由"
-          width="500"
+          min-width="400"
           :resizable="false"
         ></vxe-column>
       </vxe-table>
