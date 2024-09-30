@@ -130,7 +130,7 @@
           header-align="center"
           field="NOJO_NAME"
           title="農場名"
-          min-width="160"
+          width="300"
           sortable
           :params="{ order: 2 }"
           :resizable="true"
@@ -143,7 +143,7 @@
           header-align="center"
           field="ADDR"
           title="農場住所"
-          min-width="500"
+          width="500"
           sortable
           :params="{ order: 3 }"
           :resizable="false"

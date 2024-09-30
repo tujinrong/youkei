@@ -126,7 +126,7 @@
           header-align="center"
           field="ITAKU_CD"
           title="事務委託先"
-          min-width="100"
+          width="100"
           align="right"
           sortable
           :params="{ order: 1 }"
@@ -140,7 +140,7 @@
           header-align="center"
           field="ITAKU_NAME"
           title="事務委託先名"
-          min-width="400"
+          width="300"
           sortable
           :params="{ order: 2 }"
           :resizable="true"
@@ -153,7 +153,7 @@
           header-align="center"
           field="ADDR_TEL"
           title="電話番号"
-          min-width="160"
+          width="150"
           sortable
           :params="{ order: 3 }"
           :resizable="false"
@@ -162,7 +162,7 @@
           header-align="center"
           field="ADDR_POST"
           title="郵便番号"
-          min-width="200"
+          width="100"
           sortable
           :params="{ order: 4 }"
           :resizable="false"
@@ -171,7 +171,7 @@
           header-align="center"
           field="ADDR"
           title="住所"
-          min-width="600"
+          width="500"
           sortable
           :params="{ order: 5 }"
           :resizable="false"
