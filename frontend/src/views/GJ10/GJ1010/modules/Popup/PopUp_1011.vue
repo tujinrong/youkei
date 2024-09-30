@@ -473,6 +473,7 @@
       <div class="pt-2 flex justify-between border-t-1">
         <a-space :size="20">
           <a-button class="warning-btn" @click="saveData">保存</a-button>
+          <a-button class="warning-btn" @click=""> 保存して継続登録 </a-button>
           <a-button class="danger-btn" :disabled="isNew" @click="deleteData"
             >削除</a-button
           >

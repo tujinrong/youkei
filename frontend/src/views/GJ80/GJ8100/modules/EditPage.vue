@@ -48,9 +48,7 @@
       <div class="pt-2 flex justify-between border-t-1">
         <a-space :size="20">
           <a-button class="warning-btn" @click="save"> 保存 </a-button>
-          <a-button class="warning-btn" @click="continueSave">
-            保存して継続登録
-          </a-button>
+
           <a-button class="danger-btn" @click="delete"> 削除 </a-button>
         </a-space>
         <a-button type="primary" @click="closeModal">閉じる</a-button>

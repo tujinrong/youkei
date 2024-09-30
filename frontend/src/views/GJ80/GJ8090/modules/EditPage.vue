@@ -134,6 +134,9 @@
       <div class="pt-2 flex justify-between border-t-1">
         <a-space :size="20">
           <a-button class="warning-btn" @click="saveData">保存</a-button>
+          <a-button class="warning-btn" @click="continueSave">
+            保存して継続登録
+          </a-button>
           <a-button class="danger-btn" :disabled="isNew" @click="deleteData"
             >削除</a-button
           >
@@ -354,6 +357,7 @@ watch(
 const closeModal = () => {
   resetFields()
   clearValidate()
+  emit('getTableList')
   modalVisible.value = false
 }
 //画面遷移
@@ -364,6 +368,17 @@ const goList = () => {
 }
 
 //登録処理
+const saveDB = async () => {
+  try {
+    await Save({
+      KEIYAKUSYA_NOJO: {
+        ...formData,
+        UP_DATE: isNew.value ? undefined : upddttm,
+      },
+      EDIT_KBN: isNew.value ? EnumEditKbn.Add : EnumEditKbn.Edit,
+    })
+  } catch (error) {}
+}
 const saveData = async () => {
   if (!isNew.value) {
     if (!editJudge.isPageEdited()) {
@@ -377,22 +392,22 @@ const saveData = async () => {
   showSaveModal({
     content: SAVE_CONFIRM.Msg,
     onOk: async () => {
-      try {
-        await Save({
-          KEIYAKUSYA_NOJO: {
-            ...formData,
-            UP_DATE: isNew.value ? undefined : upddttm,
-          },
-          EDIT_KBN: isNew.value ? EnumEditKbn.Add : EnumEditKbn.Edit,
-        })
-        closeModal()
-        emit('getTableList')
-        message.success(SAVE_OK_INFO.Msg)
-      } catch (error) {}
+      await saveDB()
+      closeModal()
+      message.success(SAVE_OK_INFO.Msg)
     },
   })
 }
-
+const continueSave = () => {
+  showSaveModal({
+    content: SAVE_CONFIRM.Msg,
+    onOk: async () => {
+      await saveDB()
+      resetFields()
+      message.success(SAVE_OK_INFO.Msg)
+    },
+  })
+}
 //削除処理
 const deleteData = () => {
   showDeleteModal({
@@ -408,7 +423,6 @@ const deleteData = () => {
           EDIT_KBN: EnumEditKbn.Edit,
         })
         closeModal()
-        emit('getTableList')
         message.success(DELETE_OK_INFO.Msg)
       } catch (error) {}
     },
