@@ -28,12 +28,12 @@
         </a-col>
       </a-row>
     </div>
-    <div class="self_adaption_table form pl-25">
+    <div class="self_adaption_table form pl-25 pr-25">
       <a-row class="mt-2">
         <div class="w-full" style="text-align: end">(单位：円)</div>
         <a-row class="w-full">
           <a-col span="4">
-            <th>契約区分</th>
+            <th style="border-left: 1px solid #8a8d92 !important">契約区分</th>
           </a-col>
           <a-col span="5">
             <th>鳥の種類</th>
@@ -50,7 +50,7 @@
         </a-row>
         <a-row class="w-full">
           <a-col span="4">
-            <th>家族型</th>
+            <th style="border-left: 1px solid #8a8d92 !important">家族型</th>
           </a-col>
           <a-col span="20">
             <a-row class="flex-1">
@@ -279,7 +279,7 @@
         </a-row>
         <a-row class="w-full">
           <a-col span="4">
-            <th>企業型</th>
+            <th style="border-left: 1px solid #8a8d92 !important">企業型</th>
           </a-col>
           <a-col span="20">
             <a-row class="flex-1">
@@ -287,7 +287,7 @@
                 <th>採卵鶏(成鶏)</th>
               </a-col>
               <a-col span="6">
-                <td>
+                <td style="border-bottom: none">
                   <a-form-item>
                     <a-input-number
                       v-model:value="formData.TUMITATE_TANKA"
@@ -300,7 +300,7 @@
                 </td>
               </a-col>
               <a-col span="6">
-                <td>
+                <td style="border-bottom: none">
                   <a-form-item>
                     <a-input-number
                       v-model:value="formData.KEIEISIEN_TANKA"
@@ -314,7 +314,7 @@
                 </td>
               </a-col>
               <a-col span="6">
-                <td>
+                <td style="border-bottom: none">
                   <a-form-item>
                     <a-input-number
                       v-model:value="formData.SYOKYAKU_TANKA"
@@ -375,7 +375,7 @@
                 <th>肉用鶏</th>
               </a-col>
               <a-col span="6">
-                <td>
+                <td style="border-bottom: none">
                   <a-form-item>
                     <a-input-number
                       v-model:value="formData.TUMITATE_TANKA"
@@ -388,7 +388,7 @@
                 </td>
               </a-col>
               <a-col span="6">
-                <td>
+                <td style="border-bottom: none">
                   <a-form-item>
                     <a-input-number
                       v-model:value="formData.KEIEISIEN_TANKA"
@@ -402,7 +402,7 @@
                 </td>
               </a-col>
               <a-col span="6">
-                <td>
+                <td style="border-bottom: none">
                   <a-form-item>
                     <a-input-number
                       v-model:value="formData.SYOKYAKU_TANKA"
@@ -463,7 +463,7 @@
                 <th>種鶏(育成鷄)</th>
               </a-col>
               <a-col span="6">
-                <td>
+                <td style="border-bottom: none">
                   <a-form-item>
                     <a-input-number
                       v-model:value="formData.TUMITATE_TANKA"
@@ -476,7 +476,7 @@
                 </td>
               </a-col>
               <a-col span="6">
-                <td>
+                <td style="border-bottom: none">
                   <a-form-item>
                     <a-input-number
                       v-model:value="formData.KEIEISIEN_TANKA"
@@ -490,7 +490,7 @@
                 </td>
               </a-col>
               <a-col span="6">
-                <td>
+                <td style="border-bottom: none">
                   <a-form-item>
                     <a-input-number
                       v-model:value="formData.SYOKYAKU_TANKA"
@@ -508,7 +508,7 @@
         </a-row>
         <a-row class="w-full">
           <a-col span="4">
-            <th>鶏以外</th>
+            <th style="border-left: 1px solid #8a8d92 !important">鶏以外</th>
           </a-col>
           <a-col span="20">
             <a-row class="flex-1">
@@ -925,6 +925,7 @@ const deleteData = () => {}
 <style lang="scss" scoped>
 th {
   width: 100%;
+  border-left: none !important;
   border-right: 1px solid #8a8d92 !important;
 }
 .self_adaption_table .ant-col th {
