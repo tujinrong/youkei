@@ -131,13 +131,19 @@ Namespace JBD.GJS.Service.GJ8011
                     'データ結果判定
                     '新規の場合
                     Dim bNew As Boolean = True
-                    If dt.Rows.Count > 0 Then '変更の場合
-                        'データの独占性
-                        If CDate(dt.Rows(0)("UP_DATE")) > req.CODE.UP_DATE
-                            Return New DaResponseBase("データを更新できません。他のユーザーによって変更された可能性があります。")
-                        End If
-                        bNew = False
-                    End If
+                    'データの独占性
+                    Select Case req.EDIT_KBN
+                        Case EnumEditKbn.Edit       '変更入力
+                            bNew = False
+                            If dt.Rows.Count ＝ 0 Then
+                                Return New DaResponseBase("データが存在しないため、データを変更できません。")
+                            Else If dt.Rows.Count > 0 Then
+                                'データの独占性
+                                If CDate(dt.Rows(0)("UP_DATE")) > req.CODE.UP_DATE
+                                    Return New DaResponseBase("データを更新できません。他のユーザーによって変更された可能性があります。")
+                                End If
+                            End If
+                    End Select 
 
                     '保存処理
                     Dim res = FrmGJ8011Service.f_TM_CODE_Update(db, req, bNew)
