@@ -90,16 +90,17 @@
           <a-col span="24">
             <th class="required">連絡先１</th>
             <a-row class="flex-1">
-              <a-col span="6">
-                <th class="required w-20!">電話１</th>
+              <a-col span="5">
+                <th class="required w-18!">電話１</th>
                 <td>
                   <a-form-item v-bind="validateInfos.TEL1">
                     <a-input v-model:value="formData.TEL1" :maxlength="13"
                   /></a-form-item>
                 </td>
               </a-col>
+              <a-col span="1"></a-col>
               <a-col span="6">
-                <th class="required text-end! w-30!">ＦＡＸ１</th>
+                <th class="required w-21!">ＦＡＸ１</th>
                 <td>
                   <a-form-item v-bind="validateInfos.FAX1">
                     <a-input v-model:value="formData.FAX1" :maxlength="13"
@@ -117,14 +118,15 @@
           <a-col span="24">
             <th>連絡先２</th>
             <a-row class="flex-1">
-              <a-col span="6">
-                <th class="w-20!">電話２</th>
+              <a-col span="5">
+                <th class="w-18!">電話２</th>
                 <td>
                   <a-input v-model:value="formData.TEL2" :maxlength="13" />
                 </td>
               </a-col>
+              <a-col span="1"></a-col>
               <a-col span="6">
-                <th class="text-end! w-30!">ＦＡＸ２</th>
+                <th class="w-21!">ＦＡＸ２</th>
                 <td>
                   <a-input v-model:value="formData.FAX2" :maxlength="13" />
                 </td>
@@ -349,7 +351,7 @@
                 </td>
               </a-col>
               <a-col span="18">
-                <th class="w-60! text-end!">振込依頼人名（ﾌﾘｶﾞﾅ）</th>
+                <th class="w-58! text-end!">振込依頼人名（ﾌﾘｶﾞﾅ）</th>
                 <td>
                   <a-input
                     v-model:value="formData.KOFU_KAISYA_NAME"
