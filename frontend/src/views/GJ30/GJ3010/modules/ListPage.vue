@@ -85,7 +85,7 @@
           align="center"
           field="KEIYAKU_DATE_FROM"
           title="増羽年月日"
-          width="100"
+          width="160"
           sortable
           formatter="jpDate"
           :params="{ order: 1 }"
