@@ -10,7 +10,7 @@
 Namespace JBD.GJS.Service.GJ1010
 
     ''' <summary>
-    ''' 初期化処理_一覧画面処理
+    ''' 初期化処理_一覧画面
     ''' </summary>
     Public Class InitRequest
         Inherits DaRequestBase
@@ -23,7 +23,7 @@ Namespace JBD.GJS.Service.GJ1010
     End Class
 
     ''' <summary>
-    ''' 検索処理_一覧画面処理
+    ''' 検索処理_一覧画面
     ''' </summary>
     Public Class SearchRequest
         Inherits CmSearchRequestBase

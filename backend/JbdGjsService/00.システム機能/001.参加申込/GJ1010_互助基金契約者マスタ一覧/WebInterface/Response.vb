@@ -10,7 +10,7 @@
 Namespace JBD.GJS.Service.GJ1010
 
     ''' <summary>
-    ''' 初期化処理_一覧画面処理(成功)
+    ''' 初期化処理_一覧画面(成功)
     ''' </summary>
     Public Class InitResponse
         Inherits DaResponseBase
@@ -51,7 +51,7 @@ Namespace JBD.GJS.Service.GJ1010
     End Class
 
     ''' <summary>
-    ''' 検索処理_一覧画面処理処理(成功)
+    ''' 検索処理_一覧画面(成功)
     ''' </summary>
     Public Class SearchResponse
         Inherits CmSearchResponseBase

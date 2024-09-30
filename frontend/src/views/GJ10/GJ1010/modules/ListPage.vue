@@ -39,7 +39,7 @@
               <td>
                 <range-select
                   v-model:value="searchParams.KEN_CD"
-                  :options="KEN_CD_NAME_LIST"
+                  :options="KEN_LIST"
                   class="w-90!"
                 />
               </td>
@@ -62,7 +62,7 @@
               <td>
                 <ai-select
                   v-model:value="searchParams.KEIYAKU_KBN"
-                  :options="KEIYAKU_KBN_CD_NAME_LIST"
+                  :options="KEIYAKU_KBN_LIST"
                   class="w-37!"
                   type="number"
                 ></ai-select>
@@ -73,7 +73,7 @@
               <td>
                 <ai-select
                   v-model:value="searchParams.KEIYAKU_JYOKYO"
-                  :options="KEIYAKU_KBN_CD_NAME_LIST"
+                  :options="KEIYAKU_JYOKYO_LIST"
                   class="w-37!"
                   type="number"
                 ></ai-select>
@@ -147,7 +147,7 @@
       </div>
       <div class="flex">
         <a-space :size="20">
-          <a-button type="primary" @click="search">検索</a-button>
+          <a-button type="primary" @click="searchAll">検索</a-button>
           <a-button type="primary" @click="clear">条件クリア</a-button>
           <a-button
             class="ml-40%"
@@ -236,7 +236,7 @@
         </vxe-column>
         <vxe-column
           header-align="center"
-          field="KEIYAKU_KBN"
+          field="KEIYAKU_KBN_NAME"
           title="契約区分"
           min-width="120"
           align="center"
@@ -245,7 +245,7 @@
         ></vxe-column>
         <vxe-column
           header-align="center"
-          field="KEIYAKU_JYOKYO"
+          field="KEIYAKU_JYOKYO_NAME"
           title="契約状況"
           min-width="120"
           align="center"
@@ -254,7 +254,7 @@
         ></vxe-column>
         <vxe-column
           header-align="center"
-          field="ADDR_TEL"
+          field="ADDR_TEL1"
           title="電話番号"
           min-width="150"
           sortable
@@ -262,7 +262,7 @@
         ></vxe-column>
         <vxe-column
           header-align="center"
-          field="KEN_CD"
+          field="KEN_CD_NAME"
           title="都道府県"
           min-width="150"
           sortable
@@ -270,7 +270,7 @@
         ></vxe-column>
         <vxe-column
           header-align="center"
-          field="JIMUITAKU_CD1"
+          field="ITAKU_RYAKU"
           title="事務委託先"
           min-width="200"
           sortable
@@ -284,8 +284,7 @@
 </template>
 <script setup lang="ts">
 import { EnumAndOr, EnumEditKbn, PageStatus } from '@/enum'
-import { computed, reactive, ref, toRef, nextTick } from 'vue'
-import { showInfoModal } from '@/utils/modal'
+import { computed, reactive, ref, toRef, nextTick, onMounted } from 'vue'
 import { ITEM_REQUIRE_ERROR } from '@/constants/msg'
 import useSearch from '@/hooks/useSearch'
 import { useElementSize } from '@vueuse/core'
@@ -293,37 +292,41 @@ import { changeTableSort } from '@/utils/util'
 import { Form } from 'ant-design-vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useTabStore } from '@/store/modules/tab'
-import { SearchRequest, SearchRowVM } from '../type'
+import { SearchRequest, SearchRowVM } from '../service/1010/type'
 import { VxeTableInstance } from 'vxe-table'
 import { convertToHalfNumber } from '@/utils/util'
-import { Search } from '../service'
+
 import EditPage from './Popup/PopUp_1011.vue'
+import { Init, Search } from '../service/1010/service'
 //--------------------------------------------------------------------------
 //データ定義
 //--------------------------------------------------------------------------
-const createDefaultParams = () => {
+const createDefaultParams = (): SearchRequest => {
   return {
-    KI: 8,
+    KI: -1,
     KEN_CD: {
       VALUE_FM: undefined,
       VALUE_TO: undefined,
     },
+    NOZOKU_FLG: true,
     KEIYAKUSYA_CD: undefined,
     KEIYAKU_KBN: undefined,
     KEIYAKU_JYOKYO: undefined,
-    KEIYAKUSYA_NAME: '',
-    KEIYAKUSYA_KANA: '',
-    ADDR: '',
-    ADDR_TEL1: '',
+    KEIYAKUSYA_NAME: undefined,
+    KEIYAKUSYA_KANA: undefined,
+    ADDR: undefined,
+    ADDR_TEL1: undefined,
     JIMUITAKU_CD: {
       VALUE_FM: undefined,
       VALUE_TO: undefined,
     },
-    NOZOKU_FLG: true,
     SEARCH_METHOD: EnumAndOr.AndCode,
   } as SearchRequest
 }
 const searchParams = reactive(createDefaultParams())
+const keyList = reactive({
+  KI: undefined,
+})
 const layout = {
   md: 24,
   lg: 24,
@@ -336,17 +339,12 @@ const tabStore = useTabStore()
 const cardRef = ref()
 const xTableRef = ref<VxeTableInstance>()
 const { height } = useElementSize(cardRef)
-const KEIYAKU_KBN_CD_NAME_LIST = ref<CmCodeNameModel[]>([
-  { CODE: 1, NAME: '家族' },
-  { CODE: 2, NAME: '企業' },
-  { CODE: 3, NAME: '鶏以外' },
-])
-const KEN_CD_NAME_LIST = ref<CmCodeNameModel[]>([
-  { CODE: 46, NAME: '鹿児島県' },
-])
-const ITAKU_LIST = ref<CmCodeNameModel[]>([
-  { CODE: 666, NAME: '事務委託先事務委託先事務委託先事務委託先事務委託先' },
-])
+
+const KEN_LIST = ref<CmCodeNameModel[]>([])
+const KEIYAKU_KBN_LIST = ref<CmCodeNameModel[]>([])
+const KEIYAKU_JYOKYO_LIST = ref<CmCodeNameModel[]>([])
+const ITAKU_LIST = ref<CmCodeNameModel[]>([])
+
 const tableData = ref<SearchRowVM[]>([])
 const tableDefault = {
   KEIYAKUSYA_CD: 1003,
@@ -381,6 +379,28 @@ const rules = reactive({
 //監視定義
 //--------------------------------------------------------------------------
 
+//---------------------------------------------------------------------------
+//フック関数
+//--------------------------------------------------------------------------
+onMounted(() => {
+  getInitData(searchParams.KI, true)
+})
+
+//初期化処理
+const getInitData = (KI: number, initflg: boolean) => {
+  if (!KI && KI !== 0) {
+    return
+  }
+  Init({ KI: KI, EDIT_KBN: EnumEditKbn.Add }).then((res) => {
+    if (initflg) searchParams.KI = res.KI
+    KEN_LIST.value = res.KEN_LIST
+    KEIYAKU_KBN_LIST.value = res.KEIYAKU_KBN_LIST
+    KEIYAKU_JYOKYO_LIST.value = res.KEIYAKU_JYOKYO_LIST
+    ITAKU_LIST.value = res.ITAKU_LIST
+    nextTick(() => clearValidate())
+  })
+}
+
 //--------------------------------------------------------------------------
 //メソッド
 //--------------------------------------------------------------------------
@@ -395,9 +415,12 @@ const handleTel = () => {
   )
 }
 //検索処理
-function search() {
-  // searchData()
-  tableData.value.push(tableDefault)
+
+const searchAll = async () => {
+  tableData.value = []
+  const res = await searchData()
+  keyList.KI = res.KI
+
   if (xTableRef.value && tableData.value.length > 0) {
     xTableRef.value.setCurrentRow(tableData.value[0])
   }

@@ -40,9 +40,14 @@ Namespace JBD.GJS.Service.GJ1010
         Public Property KEIYAKU_KBN_NAME As String = String.Empty
 
         ''' <summary>
-        ''' 契約状況
+        ''' 契約状況コード
         ''' </summary>
-        Public Property KEIYAKU_JYOKYO As String = String.Empty
+        Public Property KEIYAKU_JYOKYO As Integer = Nothing
+
+        ''' <summary>
+        ''' 契約状況名
+        ''' </summary>
+        Public Property KEIYAKU_JYOKYO_NAME As String = String.Empty
 
         ''' <summary>
         ''' 電話番号
@@ -50,9 +55,19 @@ Namespace JBD.GJS.Service.GJ1010
         Public Property ADDR_TEL1 As String = String.Empty
 
         ''' <summary>
-        ''' 都道府県
+        ''' 都道府県コード
+        ''' </summary>
+        Public Property KEN_CD As Integer = Nothing
+
+        ''' <summary>
+        ''' 都道府県コード名
         ''' </summary>
         Public Property KEN_CD_NAME As String = String.Empty
+
+        ''' <summary>
+        ''' 事務委託先番号
+        ''' </summary>
+        Public Property JIMUITAKU_CD As Integer = Nothing
 
         ''' <summary>
         ''' 事務委託先略称

@@ -19,8 +19,6 @@ import {
   InitDetailResponse_1013,
   InitNojoRequest,
   InitNojoResponse,
-  InitRequest,
-  InitResponse,
   SaveRequest,
   SaveRequest_1012,
   SaveRequest_1013,
@@ -28,8 +26,6 @@ import {
   SearchDetailRequest_1012,
   SearchDetailResponse,
   SearchDetailResponse_1012,
-  SearchRequest,
-  SearchResponse,
 } from './type'
 
 const servicename1 = 'GJ1010'
@@ -40,17 +36,17 @@ const servicename4 = 'GJ1013'
 //--------------------------------------------------------------------------
 //GJ1010
 //--------------------------------------------------------------------------
-/** 初期化処理(一覧画面) */
-export const Init = (params: InitRequest): Promise<InitResponse> => {
-  const methodname = 'Init'
-  return api(servicename1, methodname, params, undefined, { loading: true })
-}
+// /** 初期化処理(一覧画面) */
+// export const Init = (params: InitRequest): Promise<InitResponse> => {
+//   const methodname = 'Init'
+//   return api(servicename1, methodname, params, undefined, { loading: true })
+// }
 
-/** 検索処理(一覧画面) */
-export const Search = (params: SearchRequest): Promise<SearchResponse> => {
-  const methodname = 'Search'
-  return api(servicename1, methodname, params, undefined, { loading: true })
-}
+// /** 検索処理(一覧画面) */
+// export const Search = (params: SearchRequest): Promise<SearchResponse> => {
+//   const methodname = 'Search'
+//   return api(servicename1, methodname, params, undefined, { loading: true })
+// }
 //--------------------------------------------------------------------------
 //GJ1011
 //--------------------------------------------------------------------------

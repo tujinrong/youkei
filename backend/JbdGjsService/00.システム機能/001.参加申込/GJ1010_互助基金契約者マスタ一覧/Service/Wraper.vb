@@ -79,9 +79,12 @@ Namespace JBD.GJS.Service.GJ1010
                     item.KEIYAKUSYA_KANA = DaConvertUtil.CStr(row("KEIYAKUSYA_KANA"))
                     item.KEIYAKU_KBN = DaConvertUtil.CInt(DaConvertUtil.CStr(row("KEIYAKU_KBN")))
                     item.KEIYAKU_KBN_NAME = DaConvertUtil.CStr(row("KEIYAKU_KBN_NM"))
-                    item.KEIYAKU_JYOKYO = DaConvertUtil.CStr(row("KEIYAKU_JYOKYO"))
+                    item.KEIYAKU_JYOKYO = DaConvertUtil.CInt(row("KEIYAKU_JYOKYO"))
+                    item.KEIYAKU_JYOKYO_NAME = DaConvertUtil.CStr(row("KEIYAKU_JYOKYO_NM"))
                     item.ADDR_TEL1 = DaConvertUtil.CStr(row("ADDR_TEL1"))
+                    item.KEN_CD = DaConvertUtil.CInt(row("KEN_CD"))
                     item.KEN_CD_NAME = DaConvertUtil.CStr(row("KEN_NM"))
+                    item.JIMUITAKU_CD = DaConvertUtil.CInt(row("JIMUITAKU_CD"))
                     item.ITAKU_RYAKU = DaConvertUtil.CStr(row("ITAKU_RYAKU"))
                     res.KEKKA_LIST.Add(item)
                 Next

@@ -123,7 +123,6 @@ Namespace JBD.GJS.Service.GJ1010
             '未契約者(契約日=NULL)除く
             If wKbn.NOZOKU_FLG Then
                 If pJoken = "" Then
-                Else
                     pJoken += wkANDorOR & vbCrLf
                 End If
                 pJoken += "(KYK.KEIYAKU_DATE IS NOT NULL AND KEIYAKU_JYOKYO IN (1,2))" & vbCrLf
@@ -185,6 +184,7 @@ Namespace JBD.GJS.Service.GJ1010
             wSql &= "        T1.KEIYAKU_KBN,                            "
             wSql &= "        T1.KEIYAKU_KBN_NM,                            "
             wSql &= "        T1.KEIYAKU_JYOKYO,                            "
+            wSql &= "        T1.KEIYAKU_JYOKYO_NM,                            "
             wSql &= "        T1.ADDR_TEL1,                            "
             wSql &= "        T1.KEN_CD,                            "
             wSql &= "        T1.KEN_NM,                            "

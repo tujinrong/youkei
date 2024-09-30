@@ -13,36 +13,36 @@ import { EnumAndOr } from '@/enum'
 //リクエスト
 //-------------------------------------------------------------------
 //1010
-export interface InitRequest extends DaRequestBase {
-  /**期 */
-  KI: number
-}
-export interface SearchRequest extends CmSearchRequestBase {
-  /**期 */
-  KI: number
-  /**都道府県 */
-  KEN_CD: CmCodeFmToModel
-  /**未継続・未契約者を除く */
-  NOZOKU_FLG: boolean
-  /**契約者番号 */
-  KEIYAKUSYA_CD: number | undefined
-  /**契約区分 */
-  KEIYAKU_KBN: number | undefined
-  /**契約状況 */
-  KEIYAKU_JYOKYO: number | undefined
-  /**契約者名 */
-  KEIYAKUSYA_NAME: string
-  /**契約者名（ﾌﾘｶﾞﾅ） */
-  KEIYAKUSYA_KANA: string
-  /**住所 */
-  ADDR: string
-  /**電話番号 */
-  ADDR_TEL1: string
-  /**事務委託先 */
-  JIMUITAKU_CD: CmCodeFmToModel
-  /**検索方法 */
-  SEARCH_METHOD: EnumAndOr
-}
+// export interface InitRequest extends DaRequestBase {
+//   /**期 */
+//   KI: number
+// }
+// export interface SearchRequest extends CmSearchRequestBase {
+//   /**期 */
+//   KI: number
+//   /**都道府県 */
+//   KEN_CD: CmCodeFmToModel
+//   /**未継続・未契約者を除く */
+//   NOZOKU_FLG: boolean
+//   /**契約者番号 */
+//   KEIYAKUSYA_CD: number | undefined
+//   /**契約区分 */
+//   KEIYAKU_KBN: number | undefined
+//   /**契約状況 */
+//   KEIYAKU_JYOKYO: number | undefined
+//   /**契約者名 */
+//   KEIYAKUSYA_NAME: string
+//   /**契約者名（ﾌﾘｶﾞﾅ） */
+//   KEIYAKUSYA_KANA: string
+//   /**住所 */
+//   ADDR: string
+//   /**電話番号 */
+//   ADDR_TEL1: string
+//   /**事務委託先 */
+//   JIMUITAKU_CD: CmCodeFmToModel
+//   /**検索方法 */
+//   SEARCH_METHOD: EnumAndOr
+// }
 //1011
 export interface InitDetailRequest extends DaRequestBase {
   /**期 */
@@ -156,25 +156,25 @@ export interface SaveRequest_1013 extends DaRequestBase {
 //レスポンス
 //-------------------------------------------------------------------
 //1010
-export interface InitResponse extends DaResponseBase {
-  /**期 */
-  KI: number
-  /**都道府県情報プルダウンリスト */
-  KEN_LIST: CmCodeNameModel[]
-  /**契約区分情報プルダウンリスト */
-  KEIYAKU_KBN_LIST: CmCodeNameModel[]
-  /**契約状況情報プルダウンリスト */
-  KEIYAKU_JYOKYO_LIST: CmCodeNameModel[]
-  /**事務委託先情報プルダウンリスト */
-  ITAKU_LIST: CmCodeNameModel[]
-}
+// export interface InitResponse extends DaResponseBase {
+//   /**期 */
+//   KI: number
+//   /**都道府県情報プルダウンリスト */
+//   KEN_LIST: CmCodeNameModel[]
+//   /**契約区分情報プルダウンリスト */
+//   KEIYAKU_KBN_LIST: CmCodeNameModel[]
+//   /**契約状況情報プルダウンリスト */
+//   KEIYAKU_JYOKYO_LIST: CmCodeNameModel[]
+//   /**事務委託先情報プルダウンリスト */
+//   ITAKU_LIST: CmCodeNameModel[]
+// }
 
-export interface SearchResponse extends CmSearchResponseBase {
-  /**期 */
-  KI: number
-  /**契約者情報リスト */
-  KEKKA_LIST: SearchRowVM[]
-}
+// export interface SearchResponse extends CmSearchResponseBase {
+//   /**期 */
+//   KI: number
+//   /**契約者情報リスト */
+//   KEKKA_LIST: SearchRowVM[]
+// }
 
 //1011
 export interface InitDetailResponse extends DaResponseBase {
@@ -240,24 +240,24 @@ export interface InitDetailResponse_1013 extends DaResponseBase {
 //-------------------------------------------------------------------
 
 //1010
-export interface SearchRowVM {
-  /**契約者番号 */
-  KEIYAKUSYA_CD: number
-  /**契約者名 */
-  KEIYAKUSYA_NAME: string
-  /**フリガナ */
-  KEIYAKUSYA_KANA: string
-  /**契約区分 */
-  KEIYAKU_KBN_NAME: string
-  /**契約状況 */
-  KEIYAKU_JYOKYO_NAME: string
-  /**電話番号 */
-  ADDR_TEL1: string
-  /**都道府県 */
-  KEN_CD_NAME: string
-  /**事務委託先 */
-  JIMUITAKU_NAME: string
-}
+// export interface SearchRowVM {
+//   /**契約者番号 */
+//   KEIYAKUSYA_CD: number
+//   /**契約者名 */
+//   KEIYAKUSYA_NAME: string
+//   /**フリガナ */
+//   KEIYAKUSYA_KANA: string
+//   /**契約区分 */
+//   KEIYAKU_KBN_NAME: string
+//   /**契約状況 */
+//   KEIYAKU_JYOKYO_NAME: string
+//   /**電話番号 */
+//   ADDR_TEL1: string
+//   /**都道府県 */
+//   KEN_CD_NAME: string
+//   /**事務委託先 */
+//   JIMUITAKU_NAME: string
+// }
 
 //1011
 export interface DetailVM {
