@@ -3,7 +3,7 @@
     <a-card
       :bordered="false"
       class="mb-4 h-full"
-      style="background-color: #f7f7f7"
+      style="background-color: aliceblue"
     >
       <h1>（GJ8020）処理対象期・年度マスタメンテナンス</h1>
 

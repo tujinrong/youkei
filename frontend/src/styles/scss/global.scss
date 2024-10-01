@@ -180,8 +180,6 @@
   background: #f5f5f5 !important;
 }
 
-
-
 a {
   color: rgb(var(--primary-color));
   &:hover {
@@ -217,14 +215,16 @@ h2 {
   position: relative;
 }
 //popup　content
-:where(.css-dev-only-do-not-override-8krvbs) .ant-modal:not(.ant-modal-confirm) .ant-modal-content {
-  background-color: #f7f7f7;
+:where(.css-dev-only-do-not-override-8krvbs)
+  .ant-modal:not(.ant-modal-confirm)
+  .ant-modal-content {
+  background-color: aliceblue;
 }
 //popup title
 :where(.css-dev-only-do-not-override-8krvbs).ant-modal .ant-modal-title {
   margin: 0;
   color: rgba(0, 0, 0, 0.88);
-  background-color: #f7f7f7;
+  background-color: aliceblue;
   font-weight: 400;
   font-size: 24px;
   line-height: 1.5;
