@@ -54,10 +54,24 @@
               @click="goForward(PageStatus.New)"
               >新規登録</a-button
             >
+            <a-button
+              type="primary"
+              :disabled="
+                !(searchParams.SYURUI_KBN && xTableRef?.getCurrentRecord())
+              "
+              @click="
+                goForward(
+                  PageStatus.Edit,
+                  xTableRef?.getCurrentRecord() ?? null
+                )
+              "
+              >変更（表示）</a-button
+            >
           </a-space>
           <close-page />
         </div>
         <vxe-table
+          ref="xTableRef"
           class="mt-2"
           :column-config="{ resizable: true }"
           :row-config="{ isCurrent: true, isHover: true }"
@@ -79,11 +93,6 @@
             :params="{ order: 1 }"
             :resizable="true"
           >
-            <template #default="{ row }">
-              <a @click="goForward(PageStatus.Edit, row)">{{
-                row.MEISYO_CD
-              }}</a>
-            </template>
           </vxe-column>
           <vxe-column
             header-align="center"
@@ -94,9 +103,6 @@
             :params="{ order: 2 }"
             :resizable="true"
           >
-            <template #default="{ row }">
-              <a @click="goForward(PageStatus.Edit, row)">{{ row.MEISYO }}</a>
-            </template>
           </vxe-column>
           <vxe-column
             header-align="center"
@@ -129,6 +135,7 @@ import { useElementSize } from '@vueuse/core'
 import { SearchRequest, SearchRowVM } from '../type'
 import { Init, Search } from '../service'
 import EditPage from './EditPage.vue'
+import { VxeTableInstance } from 'vxe-pc-ui'
 
 //--------------------------------------------------------------------------
 //データ定義
@@ -141,8 +148,7 @@ const createDefaultParams = (): SearchRequest => {
 }
 const SYURUI_KBN_LIST = ref<CmCodeNameModel[]>([])
 const searchParams = reactive(createDefaultParams())
-const cardRef = ref()
-const { height } = useElementSize(cardRef)
+const xTableRef = ref<VxeTableInstance>()
 const tableData = ref<SearchRowVM[]>([])
 const editVisible = ref(false)
 const editkbn = ref<EnumEditKbn>(EnumEditKbn.Add)
