@@ -21,47 +21,52 @@
                   :min="1"
                   :maxlength="2"
                 >
-                </a-input-number
-                ><span class="!align-middle mt-2 ml-2">期</span></a-form-item
-              >
+                </a-input-number>
+                <span class="!align-middle mt-2 ml-2">期</span>
+              </a-form-item>
               <div class="w-full">
                 <YearSelector
                   v-model:value="formData.JIGYO_NENDO"
                   class="w-30"
-                /><span class="!align-middle ml-2">～ </span>
+                />
+                <span class="!align-middle ml-2 mr-2">～</span>
                 <YearSelector
                   v-model:value="formData.JIGYO_SYURYO_NENDO"
                   class="w-30"
                   disabled
                 />
               </div>
-            </td> </a-col
-        ></a-row>
+            </td>
+          </a-col>
+        </a-row>
         <div class="pl-4">
-          <a-row
-            ><a-col span="6" class="mt-2"
-              ><read-only-pop
+          <a-row>
+            <a-col span="6" class="mt-2">
+              <read-only-pop
                 thWidth="200"
                 th="1.前期積立金取込日"
                 :td="getDateJpText(formData.ZENKI_TUMITATE_DATE)"
-              /> </a-col
-          ></a-row>
-          <a-row
-            ><a-col span="6">
+              />
+            </a-col>
+          </a-row>
+          <a-row>
+            <a-col span="6">
               <read-only-pop
                 thWidth="200"
                 th="2.前期交付金取込日"
                 :td="getDateJpText(formData.ZENKI_KOFU_DATE)"
-              /> </a-col
-          ></a-row>
-          <a-row
-            ><a-col span="6">
+              />
+            </a-col>
+          </a-row>
+          <a-row>
+            <a-col span="6">
               <read-only-pop
                 thWidth="200"
                 th="3.返還金計算日"
                 :td="getDateJpText(formData.HENKAN_KEISAN_DATE)"
-              /> </a-col
-          ></a-row>
+              />
+            </a-col>
+          </a-row>
           <a-row>
             <a-col span="6">
               <read-only-pop
@@ -74,8 +79,10 @@
                   )
                 "
                 after="（人）"
-              /> </a-col></a-row
-          ><a-row>
+              />
+            </a-col>
+          </a-row>
+          <a-row>
             <a-col span="13">
               <read-only-pop
                 thWidth="200"
@@ -87,15 +94,18 @@
                   )
                 "
                 after="（円）（左記項目は積立金返還処理で算定した結果を保存、表示）"
-              /> </a-col></a-row
-          ><a-row
-            ><a-col span="6">
+              />
+            </a-col>
+          </a-row>
+          <a-row>
+            <a-col span="6">
               <read-only-pop
                 thWidth="200"
                 th="前期積立金返還率"
                 :td="formData.HENKAN_RITU"
-              /> </a-col
-          ></a-row>
+              />
+            </a-col>
+          </a-row>
         </div>
         <a-row>
           <a-col span="24">
@@ -106,14 +116,13 @@
               </a-form-item>
             </td>
           </a-col>
-
           <a-col span="24">
             <th>当初対象積立金納付期限</th>
             <td>
               <DateJp v-model:value="formData.NOFU_KIGEN" />
               <span class="mt-1">
-                （左記期限までに入金済みの時は、契約日は4月1日となる。）</span
-              >
+                （左記期限までに入金済みの時は、契約日は4月1日となる。）
+              </span>
             </td>
           </a-col>
           <a-col span="24">
@@ -126,8 +135,8 @@
                 :min="1"
                 :maxlength="2"
               >
-              </a-input-number
-              ><span class="!align-middle mt-1 ml-2">回</span>
+              </a-input-number>
+              <span class="!align-middle mt-1 ml-2">回</span>
             </td>
           </a-col>
           <a-col span="15">
@@ -148,6 +157,7 @@
     </a-card>
   </div>
 </template>
+
 <script setup lang="ts">
 import { Judgement } from '@/utils/judge-edited'
 import { Form, message } from 'ant-design-vue'

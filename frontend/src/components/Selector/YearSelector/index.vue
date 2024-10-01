@@ -1,5 +1,5 @@
 <!------------------------------------------------------------------
- * 業務名称　: 健康管理システム
+ * 業務名称　: 互助事業システム
  * 機能概要　: 和暦(月)
  * 　　　　　  共通コンポーネント
  * 作成日　　: 2024.09.04
@@ -15,6 +15,7 @@
     class="w-32!"
   />
 </template>
+
 <script lang="ts" setup>
 import dayjs, { Dayjs } from 'dayjs'
 import { computed, onMounted, ref, watch } from 'vue'
