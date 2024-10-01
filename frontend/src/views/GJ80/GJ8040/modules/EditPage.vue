@@ -216,7 +216,7 @@ const modalVisible = computed({
     emit('update:visible', visible)
   },
 })
-const isNew = computed(() => (props.editkbn === EnumEditKbn.Add ? true : false))
+const isNew = computed(() => props.editkbn === EnumEditKbn.Add)
 //---------------------------------------------------------------------------
 //フック関数
 //--------------------------------------------------------------------------

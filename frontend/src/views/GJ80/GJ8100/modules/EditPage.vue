@@ -30,16 +30,16 @@
         <a-col span="24">
           <th class="required">消費税率（%）</th>
           <td>
-            <a-form-item v-bind="validateInfos.TAX_RITU">
-              <a-input
+            <a-form-item v-bind="validateInfos.TAX_RITU" class="max-w-15">
+              <a-input-number
                 v-model:value="formData.TAX_RITU"
                 :min="0"
                 :max="99"
                 :maxlength="2"
                 class="max-w-15"
               />
-              <span> %</span>
             </a-form-item>
+            <span class="flex items-center ml-2">%</span>
           </td>
         </a-col>
       </a-row>
@@ -49,7 +49,7 @@
         <a-space :size="20">
           <a-button class="warning-btn" @click="save"> 保存 </a-button>
 
-          <a-button class="danger-btn" @click="delete"> 削除 </a-button>
+          <a-button class="danger-btn" @click="deleteData"> 削除 </a-button>
         </a-space>
         <a-button type="primary" @click="closeModal">閉じる</a-button>
       </div>
@@ -57,30 +57,45 @@
   </a-modal>
 </template>
 <script setup lang="ts">
-import { ITEM_REQUIRE_ERROR, SAVE_CONFIRM, SAVE_OK_INFO } from '@/constants/msg'
+import {
+  DELETE_CONFIRM,
+  DELETE_OK_INFO,
+  ITEM_REQUIRE_ERROR,
+  SAVE_CONFIRM,
+  SAVE_OK_INFO,
+} from '@/constants/msg'
 import { Judgement } from '@/utils/judge-edited'
-import { showInfoModal, showSaveModal } from '@/utils/modal'
+import { showDeleteModal, showSaveModal } from '@/utils/modal'
 import { Form, message } from 'ant-design-vue'
-import { nextTick, onMounted, reactive, watch } from 'vue'
-// interface Props {
-//   visible: boolean
-// }
+import { computed, nextTick, reactive, ref, watch } from 'vue'
+import { Delete, InitDetail, Save } from '../service'
+import { SearchRowVM } from '../type'
+import { EnumEditKbn } from '@/enum'
+
+const props = defineProps<{
+  editkbn: EnumEditKbn
+}>()
+let upddttm
+const isNew = computed(() => props.editkbn === EnumEditKbn.Add)
 const model = defineModel('visible')
 const editJudge = new Judgement()
-const formData = reactive({
+const formData = reactive<SearchRowVM>({
   TAX_DATE_FROM: undefined,
   TAX_DATE_TO: undefined,
   TAX_RITU: undefined,
 })
 
-onMounted(() => {
-  nextTick(() => editJudge.reset())
-})
 watch(
   () => model.value,
-  (newValue) => {
+  async (newValue) => {
     if (newValue) {
-      nextTick(() => editJudge.reset())
+      if (newValue && !isNew.value) {
+        //await init()
+      }
+      nextTick(() => {
+        editJudge.reset()
+        clearValidate()
+      })
     }
   }
 )
@@ -116,12 +131,27 @@ const { validate, clearValidate, validateInfos, resetFields } = Form.useForm(
   formData,
   rules
 )
-const save = () => {
+
+//初期化処理
+const init = async () => {
+  try {
+    const res = await InitDetail({ TAX_DATE_FROM: formData.TAX_DATE_FROM })
+    Object.assign(formData, res.TAX)
+    upddttm = res.TAX.UP_DATE
+  } catch (error) {}
+}
+
+//登録処理
+const save = async () => {
+  await validate()
   showSaveModal({
     content: SAVE_CONFIRM.Msg,
     onOk: async () => {
-      message.success(SAVE_OK_INFO.Msg)
-      closeModal()
+      try {
+        //await Save({ TAX: { ...formData, UP_DATE: upddttm } })
+        message.success(SAVE_OK_INFO.Msg)
+        closeModal()
+      } catch (error) {}
     },
   })
 }
@@ -134,6 +164,25 @@ const continueSave = () => {
     },
   })
 }
+
+//削除処理
+const deleteData = () => {
+  showDeleteModal({
+    handleDB: true,
+    content: DELETE_CONFIRM.Msg,
+    onOk: async () => {
+      try {
+        // await Delete({
+        //   TAX_DATE_FROM: formData.TAX_DATE_FROM,
+        //   UP_DATE: upddttm,
+        // })
+        closeModal()
+        message.success(DELETE_OK_INFO.Msg)
+      } catch (error) {}
+    },
+  })
+}
+
 const closeModal = () => {
   editJudge.judgeIsEdited(() => {
     Object.assign(formData, {
@@ -146,8 +195,9 @@ const closeModal = () => {
 }
 
 const setEditModal = (data) => {
-  Object.assign(formData, data)
+  formData.TAX_DATE_FROM = data
 }
+
 defineExpose({
   setEditModal,
 })

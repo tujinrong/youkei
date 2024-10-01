@@ -16,7 +16,7 @@
         :column-config="{ resizable: true }"
         :row-config="{ isCurrent: true, isHover: true }"
         :data="tableData"
-        @cell-dblclick="() => edit()"
+        @cell-dblclick="({ row }) => edit(row.TAX_DATE_FROM)"
         :empty-render="{ name: 'NotData' }"
       >
         <vxe-column
@@ -27,7 +27,7 @@
           align="center"
           :resizable="true"
           ><template #default="{ row }">
-            <a @click="edit">{{
+            <a @click="edit(row.TAX_DATE_FROM)">{{
               row.TAX_DATE_FROM
                 ? getDateJpText(new Date(row.TAX_DATE_FROM))
                 : ''
@@ -42,7 +42,7 @@
           align="center"
           :resizable="true"
           ><template #default="{ row }">
-            <a @click="edit">{{
+            <a @click="edit(row.TAX_DATE_FROM)">{{
               row.TAX_DATE_FROM
                 ? getDateJpText(new Date(row.TAX_DATE_FROM))
                 : ''
@@ -60,34 +60,43 @@
       </vxe-table>
     </a-card>
   </div>
-  <EditModal v-model:visible="visible" ref="editModalRef" />
+  <EditModal
+    v-model:visible="visible"
+    ref="editModalRef"
+    v-bind="{ editkbn }"
+  />
 </template>
 <script setup lang="ts">
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
 import { VxeTableInstance } from 'vxe-pc-ui'
 import EditModal from './EditPage.vue'
-import { useElementSize } from '@vueuse/core'
 import { getDateJpText } from '@/utils/util'
+import { EnumEditKbn } from '@/enum'
+import { Search } from '../service'
+import { SearchRowVM } from '../type'
 const visible = ref(false)
+const editkbn = ref<EnumEditKbn>(EnumEditKbn.Add)
 const editModalRef = ref()
 const xTableRef = ref<VxeTableInstance>()
-const tableData = ref([
-  { TAX_DATE_FROM: new Date(), TAX_DATE_TO: new Date(), TAX_RITU: '1' },
-  { TAX_DATE_FROM: new Date(), TAX_DATE_TO: new Date(), TAX_RITU: '2' },
-  { TAX_DATE_FROM: new Date(), TAX_DATE_TO: new Date(), TAX_RITU: '3' },
+const tableData = ref<SearchRowVM[]>([
+  { TAX_DATE_FROM: new Date(), TAX_DATE_TO: new Date(), TAX_RITU: 1 },
+  { TAX_DATE_FROM: new Date(), TAX_DATE_TO: new Date(), TAX_RITU: 2 },
+  { TAX_DATE_FROM: new Date(), TAX_DATE_TO: new Date(), TAX_RITU: 3 },
 ])
 const cardRef = ref()
-const { height } = useElementSize(cardRef)
+
+onMounted(async () => {
+  // const res = await Search()
+  // tableData.value = res.KEKKA_LIST
+})
 const add = () => {
+  editkbn.value = EnumEditKbn.Add
   visible.value = true
 }
-const edit = () => {
-  const currentRow = xTableRef.value?.getCurrentRecord()
-  if (currentRow) {
-    editModalRef.value.setEditModal(currentRow)
-    visible.value = true
-  } else {
-  }
+const edit = (val) => {
+  editModalRef.value.setEditModal(val)
+  editkbn.value = EnumEditKbn.Edit
+  visible.value = true
 }
 </script>
 <style lang="scss" scoped></style>
