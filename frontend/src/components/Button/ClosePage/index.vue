@@ -27,7 +27,7 @@ const routeStore = useRouteStore()
 //--------------------------------------------------------------------------
 const close = async () => {
   showConfirmModal({
-    content: '終了しました、よろしいですか？',
+    content: '終了します。よろしいですか？',
     onOk: async () => {
       tabStore.removeActiveTab()
       routeStore.reCacheRoutesByKey(route.name as RouteKey)
