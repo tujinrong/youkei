@@ -2594,6 +2594,65 @@ ACoDateCheckEdit_Exit3:
         End Function
 #End Region
 
+#Region "f_makeCSVByStream CSV文字列生成"
+        ''' <summary>
+        ''' CSV文字列生成
+        ''' </summary>
+        ''' <param name="wkDT"></param>
+        ''' <returns></returns>
+        ''' <remarks></remarks>
+        Public Function f_makeCSVByStream(ByVal wkDT As DataTable, wkFile As String) As FileStream
+            Dim wkSB As New System.Text.StringBuilder
+            Dim wkLine As New List(Of String)
+            Dim wkValue As Object
+
+            'ヘッダ
+            For c As Integer = 0 To wkDT.Columns.Count - 1
+                wkLine.Add(wkDT.Columns(c).ColumnName)
+            Next
+            wkSB.AppendLine(String.Join(",", wkLine.ToArray))
+
+
+            For Each wkRow As DataRow In wkDT.Rows
+                wkLine.Clear()
+                For c As Integer = 0 To wkDT.Columns.Count - 1
+                    wkValue = wkRow.Item(c)
+                    Select Case True
+                        Case wkValue Is Nothing, IsDBNull(wkValue)
+                            'NULLの場合は空を代入。
+                            wkLine.Add("")
+                        Case TypeOf wkValue Is String
+                            '文字列の場合はダブルクオートで囲む。
+                            wkLine.Add("""" & wkValue.ToString & """")
+                        Case TypeOf wkValue Is Date
+                            '日付の場合はyyyy/MM/dd形式に
+                            wkLine.Add(DirectCast(wkValue, Date).ToString("yyyy/MM/dd"))
+                        Case Else
+                            '数字などの場合はそのまま文字列に。
+                            wkLine.Add(wkValue.ToString)
+                    End Select
+
+                Next
+
+                wkSB.AppendLine(String.Join(",", wkLine.ToArray))
+
+            Next
+
+            Using fs As New FileStream(wkFile, FileMode.Create, FileAccess.Write)
+                Using writer As New StreamWriter(fs, System.Text.Encoding.GetEncoding("Shift-JIS"))
+                    writer.Write(wkSB.ToString)
+                End Using
+            End Using
+
+            Return fs
+        End Function
+
+        Private Function fs() As FileStream
+            Throw New NotImplementedException()
+        End Function
+
+#End Region
+
 #End Region
 
 #Region "データ取得クラス"
