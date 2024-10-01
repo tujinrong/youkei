@@ -239,3 +239,9 @@ h2 {
 .vxe-header--column {
   font-weight: 400;
 }
+
+.wrap-modal {
+  .ant-modal-content {
+    padding: 20px 0 !important;
+  }
+}
