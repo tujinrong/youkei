@@ -1,6 +1,11 @@
 <template>
   <div class="h-full min-h-500px flex-col-stretch gap-12px staticWidth">
-    <a-card ref="headRef" :bordered="false" class="staticWidth">
+    <a-card
+      ref="headRef"
+      :bordered="false"
+      class="staticWidth"
+      :body-style="{ backgroundColor: 'aliceblue' }"
+    >
       <h1>（GJ8010）コード一覧</h1>
       <div class="self_adaption_table form mt-1">
         <a-row>
@@ -36,14 +41,12 @@
         </a-space>
         <close-page />
       </div>
-    </a-card>
-    <a-card :bordered="false" class="flex-1 staticWidth" ref="cardRef">
       <vxe-table
         class="mt-2"
         :column-config="{ resizable: true }"
         :row-config="{ isCurrent: true, isHover: true }"
         :data="tableData"
-        min-height="600px"
+        min-height="680px"
         :sort-config="{ trigger: 'cell', orders: ['desc', 'asc'] }"
         :empty-render="{ name: 'NotData' }"
         @cell-dblclick="({ row }) => goForward(PageStatus.Edit, row)"

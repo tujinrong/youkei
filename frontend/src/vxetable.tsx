@@ -24,7 +24,7 @@ VXETable.setConfig({
     rowConfig: {
       height: 28,
     },
-    minHeight:168,
+    minHeight: 168,
   },
 })
 VXETable.setI18n('ja-JP', jaJP)
