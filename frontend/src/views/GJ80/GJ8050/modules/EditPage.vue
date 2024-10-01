@@ -58,7 +58,9 @@
       <div class="pt-2 flex justify-between border-t-1">
         <a-space :size="20">
           <a-button class="warning-btn" @click="saveData"> 保存 </a-button>
-          <a-button class="warning-btn" @click=""> 保存して継続登録 </a-button>
+          <a-button class="warning-btn" @click="continueSave">
+            保存して継続登録
+          </a-button>
 
           <a-button class="danger-btn" :disabled="isNew" @click="deleteData">
             削除
@@ -158,24 +160,10 @@ const isNew = computed(() => (props.editkbn === EnumEditKbn.Add ? true : false))
 //--------------------------------------------------------------------------
 watch(
   () => props.visible,
-  (newValue) => {
+  async (newValue) => {
     if (newValue && !isNew.value) {
       formData.BANK_CD = props.bankcd ?? ''
-      InitBankDetail({
-        BANK_CD: formData.BANK_CD ?? '',
-        EDIT_KBN: EnumEditKbn.Edit,
-      })
-        .then((res) => {
-          Object.assign(formData, res.BANK)
-          upddttm = res.BANK.UP_DATE
-          nextTick(() => {
-            editJudge.reset()
-            clearValidate()
-          })
-        })
-        .catch((error) => {
-          emit('getTableList', false)
-        })
+      await init()
     }
     nextTick(() => {
       editJudge.reset()
@@ -198,8 +186,31 @@ const goList = () => {
     closeModal()
   })
 }
-
+//初期化処理
+const init = async () => {
+  try {
+    const res = await InitBankDetail({
+      BANK_CD: formData.BANK_CD ?? '',
+      EDIT_KBN: EnumEditKbn.Edit,
+    })
+    Object.assign(formData, res.BANK)
+    upddttm = res.BANK.UP_DATE
+    nextTick(() => {
+      editJudge.reset()
+      clearValidate()
+    })
+  } catch (error) {
+    emit('getTableList', false)
+  }
+}
 //登録処理
+const saveDB = async () => {
+  await SaveBank({
+    BANK: { ...formData, UP_DATE: upddttm },
+    EDIT_KBN: isNew.value ? EnumEditKbn.Add : EnumEditKbn.Edit,
+  })
+}
+
 const saveData = async () => {
   if (!isNew.value) {
     if (!editJudge.isPageEdited()) {
@@ -214,14 +225,24 @@ const saveData = async () => {
     content: SAVE_CONFIRM.Msg,
     onOk: async () => {
       try {
-        await SaveBank({
-          BANK: { ...formData, UP_DATE: upddttm },
-          EDIT_KBN: isNew.value ? EnumEditKbn.Add : EnumEditKbn.Edit,
-        })
+        await saveDB()
         emit('getTableList', false)
         closeModal()
         message.success(SAVE_OK_INFO.Msg)
       } catch (error) {}
+    },
+  })
+}
+
+//保存して継続登録
+const continueSave = async () => {
+  await validate()
+  showSaveModal({
+    content: SAVE_CONFIRM.Msg,
+    onOk: async () => {
+      await saveDB()
+      message.success(SAVE_OK_INFO.Msg)
+      await init()
     },
   })
 }

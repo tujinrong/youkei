@@ -375,15 +375,13 @@ const init = async (isEditOrContinue: boolean) => {
 }
 //登録処理
 const saveDB = async () => {
-  try {
-    await Save({
-      KEIYAKUSYA_NOJO: {
-        ...formData,
-        UP_DATE: isNew.value ? undefined : upddttm,
-      },
-      EDIT_KBN: isNew.value ? EnumEditKbn.Add : EnumEditKbn.Edit,
-    })
-  } catch (error) {}
+  await Save({
+    KEIYAKUSYA_NOJO: {
+      ...formData,
+      UP_DATE: isNew.value ? undefined : upddttm,
+    },
+    EDIT_KBN: isNew.value ? EnumEditKbn.Add : EnumEditKbn.Edit,
+  })
 }
 const saveData = async () => {
   if (!isNew.value) {
@@ -404,7 +402,10 @@ const saveData = async () => {
     },
   })
 }
-const continueSave = () => {
+
+//保存して継続登録
+const continueSave = async () => {
+  await validate()
   showSaveModal({
     content: SAVE_CONFIRM.Msg,
     onOk: async () => {
