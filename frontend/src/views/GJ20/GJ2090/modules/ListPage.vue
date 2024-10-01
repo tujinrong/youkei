@@ -217,7 +217,7 @@
         :column-config="{ resizable: true }"
         :row-config="{ isCurrent: true, isHover: true }"
         :data="tableData"
-        min-height="230px"
+        height="210px"
         :sort-config="{ trigger: 'cell', orders: ['desc', 'asc'] }"
         :empty-render="{ name: 'NotData' }"
         @cell-dblclick="({ row }) => openGJ2092(row)"

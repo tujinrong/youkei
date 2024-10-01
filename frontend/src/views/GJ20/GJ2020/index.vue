@@ -193,7 +193,7 @@
         :column-config="{ resizable: true }"
         :row-config="{ isCurrent: true, isHover: true }"
         :data="tableData"
-        min-height="380px"
+        height="380px"
         :sort-config="{ trigger: 'cell', orders: ['desc', 'asc'] }"
         :empty-render="{ name: 'NotData' }"
         @sort-change="(e) => changeTableSort(e, toRef(pageParams, 'ORDER_BY'))"

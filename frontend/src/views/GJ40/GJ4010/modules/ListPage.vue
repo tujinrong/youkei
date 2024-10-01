@@ -7,7 +7,7 @@
  * 変更履歴　:
  * ----------------------------------------------------------------->
 <template>
-  <div class="h-full min-h-500px flex-col-stretch gap-12px">
+  <div class="h-500px flex-col-stretch gap-12px">
     <a-card ref="headRef" :bordered="false" class="staticWidth">
       <div class="max-w-1300px">
         <h1>（GJ4010）互助金申請情報一覧</h1>
@@ -232,7 +232,7 @@
         :column-config="{ resizable: true }"
         :row-config="{ isCurrent: true, isHover: true }"
         :data="tableData"
-        min-height="160px"
+        height="150px"
         :sort-config="{ trigger: 'cell', orders: ['desc', 'asc'] }"
         :empty-render="{ name: 'NotData' }"
         @cell-dblclick="({ row }) => openGJ4013(row)"

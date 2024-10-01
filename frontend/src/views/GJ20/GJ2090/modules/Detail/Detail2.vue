@@ -108,7 +108,7 @@
           <a-col span="1"></a-col>
           <a-col span="5" class="read-only-pop-line-height">
             <read-only-pop
-              thWidth="80"
+              thWidth="82"
               th="返還金額(預かり金)"
               :td="formData.TESURYO"
               v-bind="{ ...mathNumber }"
@@ -133,6 +133,7 @@
               ref="xTableRef"
               class="vxe-table-pop"
               :column-config="{ resizable: true }"
+              height="100px"
               max-height="300px"
               :row-config="{ isCurrent: true, isHover: true }"
               :data="tableData"
