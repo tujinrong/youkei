@@ -94,7 +94,7 @@
           <a-button class="ml-50%" type="primary" @click="forwardNew"
             >新規登録</a-button
           >
-          <a-button class="ml-100%" type="primary" @click="reset"
+          <a-button class="ml-100%" type="primary" @click="csvOutput"
             >CSV出力</a-button
           > </a-space
         ><close-page /></div
@@ -182,6 +182,7 @@
   <EditPage
     v-model:visible="editVisible"
     :editkbn="editkbn"
+    v-bind="{ ITAKU_CD: ITAKU_CD }"
     @getTableList="searchAll"
   />
 </template>
@@ -196,7 +197,7 @@ import { changeTableSort, convertToFullWidth } from '@/utils/util'
 import { useTabStore } from '@/store/modules/tab'
 import { useElementSize } from '@vueuse/core'
 import { SearchRowVM, SearchRequest } from '@/views/GJ80/GJ8060/type'
-import { Init, Search } from '../service'
+import { Init, Search, CsvExport } from '../service'
 import { Form } from 'ant-design-vue'
 import { VxeTableInstance } from 'vxe-table'
 import EditPage from './EditPage.vue'
@@ -220,7 +221,7 @@ const createDefaultParams = () => {
   }
 }
 const searchParams = reactive(createDefaultParams())
-
+const ITAKU_CD = ref('')
 const KEIYAKUSYA_CD_NAME_LIST = ref<CmCodeNameModel[]>([])
 const tableData = ref<SearchRowVM[]>([])
 const mockData: SearchRowVM = {
@@ -273,23 +274,23 @@ onMounted(() => {
 
 //初期化処理
 const getInitData = (KI: number | undefined, initflg: boolean) => {
-  // if (!KI && KI !== 0) {
-  //   return
-  // }
-  // Init({ KI: KI, EDIT_KBN: EnumEditKbn.Add }).then((res) => {
-  //   if (initflg) searchParams.KI = res.KI
-  //   // searchParams.KEIYAKUSYA_CD = undefined
-  //   KEIYAKUSYA_CD_NAME_LIST.value = res.KEIYAKUSYA_CD_NAME_LIST
-  //   nextTick(() => clearValidate())
-  // })
+  if (!KI && KI !== 0) {
+    return
+  }
+  Init({ KI: KI, EDIT_KBN: EnumEditKbn.Add }).then((res) => {
+    if (initflg) searchParams.KI = res.KI
+    // searchParams.KEIYAKUSYA_CD = undefined
+    KEN_CD_NAME_LIST.value = res.KEN_LIST
+    nextTick(() => clearValidate())
+  })
 }
 
-onBeforeRouteUpdate((to, from) => {
-  if (to.query.refresh) {
-    pageParams.PAGE_NUM = 1
-    searchAll()
-  }
-})
+// onBeforeRouteUpdate((to, from) => {
+//   if (to.query.refresh) {
+//     pageParams.PAGE_NUM = 1
+//     searchAll()
+//   }
+// })
 //--------------------------------------------------------------------------
 //メソッド
 //--------------------------------------------------------------------------
@@ -301,6 +302,7 @@ async function forwardNew() {
 }
 async function forwardEdit(NOJO_CD) {
   editkbn.value = EnumEditKbn.Edit
+  ITAKU_CD.value = NOJO_CD
   editVisible.value = true
 }
 
@@ -308,7 +310,7 @@ async function forwardEdit(NOJO_CD) {
 const { pageParams, totalCount, searchData, clear } = useSearch({
   service: Search,
   source: tableData,
-  params: toRef(() => searchParams),
+  params: toRef(() => ({ NYURYOKU_JOHO: searchParams })),
   validate,
 })
 
@@ -319,8 +321,12 @@ async function reset() {
 }
 
 const searchAll = async () => {
-  // const res = await searchData()
-  tableData.value.push(mockData)
+  await searchData()
+  //tableData.value
+}
+
+const csvOutput = async () => {
+  await CsvExport({ NYURYOKU_JOHO: searchParams })
 }
 //--------------------------------------------------------------------------
 //監視定義

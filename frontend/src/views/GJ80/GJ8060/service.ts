@@ -34,6 +34,12 @@ export const Search = (params: SearchRequest): Promise<SearchResponse> => {
   return api(servicename, methodname, params, undefined, { loading: true })
 }
 
+/** CSV出力処理(一覧画面) */
+export const CsvExport = (params: SearchRequest): Promise<SearchResponse> => {
+  const methodname = 'CsvExport'
+  return api(servicename, methodname, params, undefined, { loading: true })
+}
+
 /** 初期化処理(詳細画面) */
 export const InitDetail = (
   params: InitDetailRequest

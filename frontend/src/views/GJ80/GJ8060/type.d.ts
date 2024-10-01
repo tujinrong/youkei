@@ -22,6 +22,66 @@ export interface InitRequest extends DaRequestBase {
 
 /**検索処理(一覧画面) */
 export interface SearchRequest extends CmSearchRequestBase {
+  /**検索条件入力情報 */
+  NYURYOKU_JOHO: SearchVM
+}
+
+/**初期化処理(詳細画面) */
+export interface InitDetailRequest extends DaRequestBase {
+  /**期 */
+  KI: number
+  /**事務委託先番号 */
+  ITAKU_CD: number
+}
+
+/**登録処理(詳細画面) */
+export interface SaveRequest extends DaRequestBase {
+  /**事務委託先情報 */
+  ITAKU: DetailVM
+}
+
+/**削除処理(一覧画面) */
+export interface DeleteRequest extends DaRequestBase {
+  /**期 */
+  KI: number
+  /**事務委託先番号 */
+  ITAKU_CD: number
+  /**更新時間 */
+  UP_DATE: Date
+}
+//-------------------------------------------------------------------
+//レスポンス
+//-------------------------------------------------------------------
+
+/**初期化処理(一覧画面) */
+export interface InitResponse extends DaResponseBase {
+  /**対象期 */
+  KI: number
+  /**都道府県情報プルダウンリスト */
+  KEN_LIST: CmCodeNameModel[]
+}
+
+/**検索処理(一覧画面) */
+export interface SearchResponse extends CmSearchResponseBase {
+  /**期 */
+  KI: number
+  /**事務委託先情報リスト */
+  KEKKA_LIST: SearchRowVM[]
+}
+
+/**初期化処理(詳細画面) */
+export interface InitDetailResponse extends DaResponseBase {
+  /**都道府県情報プルダウンリスト */
+  KEN_CD_NAME_LIST: CmCodeNameModel[]
+  /**事務委託先情報 */
+  ITAKU: DetailVM
+}
+
+//-------------------------------------------------------------------
+//ビューモデル
+//-------------------------------------------------------------------
+
+export interface SearchVM {
   /**期 */
   KI: number | undefined
   /**都道府県コード */
@@ -35,72 +95,6 @@ export interface SearchRequest extends CmSearchRequestBase {
   /**検索方法 */
   SEARCH_METHOD: EnumAndOr
 }
-
-/**初期化処理(詳細画面) */
-export interface InitDetailRequest extends DaRequestBase {
-  /**期 */
-  KI: number
-  /**契約者番号 */
-  KEIYAKUSYA_CD: number
-  /**農場コード */
-  NOJO_CD: number
-}
-
-/**登録処理(詳細画面) */
-export interface SaveRequest extends DaRequestBase {
-  /**契約者農場情報 */
-  KEIYAKUSYA_NOJO: DetailVM
-  /**編集区分 */
-  EDIT_KBN: EnumEditKbn
-}
-
-/**削除処理(一覧画面) */
-export interface DeleteRequest extends DaRequestBase {
-  /**期 */
-  KI: number
-  /**契約者番号 */
-  KEIYAKUSYA_CD: number
-  /**農場コード */
-  NOJO_CD: number
-  /**更新時間 */
-  UP_DATE: Date
-}
-//-------------------------------------------------------------------
-//レスポンス
-//-------------------------------------------------------------------
-
-/**初期化処理(一覧画面) */
-export interface InitResponse extends DaResponseBase {
-  /**対象期 */
-  KI: number
-  /**契約者情報プルダウンリスト */
-  KEIYAKUSYA_CD_NAME_LIST: CmCodeNameModel[]
-}
-
-/**検索処理(一覧画面) */
-export interface SearchResponse extends CmSearchResponseBase {
-  /**期 */
-  KI: number
-  /**契約者番号 */
-  KEIYAKUSYA_CD: number
-  /**契約者農場情報リスト */
-  KEKKA_LIST: SearchRowVM[]
-}
-
-/**初期化処理(詳細画面) */
-export interface InitDetailResponse extends DaResponseBase {
-  /**契約者名 */
-  KEIYAKUSYA_NAME: string
-  /**都道府県情報プルダウンリスト */
-  KEN_CD_NAME_LIST: CmCodeNameModel[]
-  /**契約者農場情報 */
-  KEIYAKUSYA_NOJO: DetailVM
-}
-
-//-------------------------------------------------------------------
-//ビューモデル
-//-------------------------------------------------------------------
-
 export interface SearchRowVM {
   /** 事務委託先 */
   ITAKU_CD: number

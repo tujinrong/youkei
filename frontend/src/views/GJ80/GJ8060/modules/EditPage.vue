@@ -314,6 +314,7 @@ import { InitDetail, Save, Delete } from '../service'
 const props = defineProps<{
   editkbn: EnumEditKbn
   visible: boolean
+  ITAKU_CD: string
 }>()
 const emit = defineEmits(['update:visible', 'getTableList'])
 
@@ -438,18 +439,24 @@ const modalVisible = computed({
     emit('update:visible', visible)
   },
 })
-const isNew = computed(() => (props.editkbn === EnumEditKbn.Add ? true : false))
+const isNew = computed(() => props.editkbn === EnumEditKbn.Add)
 
 //--------------------------------------------------------------------------
 //監視定義
 //--------------------------------------------------------------------------
 watch(
   () => props.visible,
-  (newValue) => {
+  async (newValue) => {
     if (newValue) {
       // formData.KI = 8
       if (!isNew.value) {
         // formData.ITAKU_CD = 6
+        const res = await InitDetail({
+          KI: formData.KI,
+          ITAKU_CD: +props.ITAKU_CD,
+        })
+        Object.assign(formData, res.ITAKU)
+        KEN_CD_NAME_LIST.value = res.KEN_CD_NAME_LIST
       }
     }
     nextTick(() => {
@@ -511,11 +518,10 @@ const saveData = async () => {
     onOk: async () => {
       try {
         await Save({
-          KEIYAKUSYA_NOJO: {
+          ITAKU: {
             ...formData,
             UP_DATE: isNew.value ? undefined : upddttm,
           },
-          EDIT_KBN: isNew.value ? EnumEditKbn.Add : EnumEditKbn.Edit,
         })
         closeModal()
         message.success(SAVE_OK_INFO.Msg)
@@ -533,10 +539,8 @@ const deleteData = () => {
       try {
         await Delete({
           KI: formData.KI,
-          KEIYAKUSYA_CD: formData.ITAKU_CD,
-          NOJO_CD: formData.NOJO_CD,
+          ITAKU_CD: formData.ITAKU_CD,
           UP_DATE: upddttm,
-          EDIT_KBN: EnumEditKbn.Edit,
         })
         closeModal()
         message.success(DELETE_OK_INFO.Msg)
