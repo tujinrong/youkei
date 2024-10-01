@@ -288,7 +288,7 @@ const isNew = computed(() => (props.editkbn === EnumEditKbn.Add ? true : false))
 //--------------------------------------------------------------------------
 watch(
   () => props.visible,
-  (newV) => {
+  async (newV) => {
     if (newV) {
       if (isNew.value) {
         formData.KI = props.params.KI
@@ -303,28 +303,7 @@ watch(
           props.keys.KEIYAKUSYA_CD + '：' + props.keys.KEIYAKUSYA_NAME
         formData.NOJO_CD = props.keys.NOJO_CD
       }
-      InitDetail({
-        KI: formData.KI,
-        KEIYAKUSYA_CD: formData.KEIYAKUSYA_CD,
-        NOJO_CD: formData.NOJO_CD ?? 0,
-        EDIT_KBN: isNew.value ? EnumEditKbn.Add : EnumEditKbn.Edit,
-      })
-        .then((res) => {
-          KEN_CD_NAME_LIST.value = res.KEN_CD_NAME_LIST
-          if (!isNew.value) {
-            Object.assign(formData, res.KEIYAKUSYA_NOJO)
-            formData.ADDR_1 = res.KEIYAKUSYA_NOJO.ADDR_1
-            upddttm = res.KEIYAKUSYA_NOJO.UP_DATE
-          }
-          nextTick(() => {
-            editJudge.reset()
-            clearValidate()
-          })
-        })
-        .catch((error) => {
-          closeModal()
-          emit('getTableList')
-        })
+      await init(!isNew.value)
       nextTick(() => {
         editJudge.reset()
         clearValidate()
@@ -370,6 +349,30 @@ const goList = () => {
   })
 }
 
+//初期化処理
+const init = async (isEditOrContinue: boolean) => {
+  try {
+    const res = await InitDetail({
+      KI: formData.KI,
+      KEIYAKUSYA_CD: formData.KEIYAKUSYA_CD,
+      NOJO_CD: formData.NOJO_CD ?? 0,
+      EDIT_KBN: !isEditOrContinue ? EnumEditKbn.Add : EnumEditKbn.Edit,
+    })
+    KEN_CD_NAME_LIST.value = res.KEN_CD_NAME_LIST
+    if (isEditOrContinue) {
+      Object.assign(formData, res.KEIYAKUSYA_NOJO)
+      formData.ADDR_1 = res.KEIYAKUSYA_NOJO.ADDR_1
+      upddttm = res.KEIYAKUSYA_NOJO.UP_DATE
+    }
+    nextTick(() => {
+      editJudge.reset()
+      clearValidate()
+    })
+  } catch (error) {
+    closeModal()
+    emit('getTableList')
+  }
+}
 //登録処理
 const saveDB = async () => {
   try {
@@ -406,8 +409,8 @@ const continueSave = () => {
     content: SAVE_CONFIRM.Msg,
     onOk: async () => {
       await saveDB()
-      resetFields()
       message.success(SAVE_OK_INFO.Msg)
+      await init(true)
     },
   })
 }
