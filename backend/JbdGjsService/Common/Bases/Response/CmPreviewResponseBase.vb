@@ -13,7 +13,7 @@ Namespace JBD.GJS.Service
         Public Property filenm As String                                          'ファイル名
 
         <JsonIgnore>
-        Public Property data As Byte()                                            'データ
+        Public Property data As MemoryStream                                            'データ
         Public Property contenttype As String                                     'コンテンツタイプ
 
         Public Sub New()

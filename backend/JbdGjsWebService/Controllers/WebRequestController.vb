@@ -50,6 +50,11 @@ Namespace JBD.GJS.WebService
             End Using
 
             '結果を返す
+            If webReq.METHOD_NAME = "CsvExport" Then
+                If res.RETURN_CODE = 0 Then
+                    Return File(res.data, res.contenttype, res.filenm)
+                End If
+            End If
             Return res
         End Function
     End Class

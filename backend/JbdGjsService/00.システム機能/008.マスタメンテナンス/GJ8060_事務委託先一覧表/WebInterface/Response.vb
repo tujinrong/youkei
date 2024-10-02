@@ -66,29 +66,4 @@ Namespace JBD.GJS.Service.GJ8060
 
     End Class
 
-    ''' <summary>
-    ''' CSV出力処理_一覧画面処理(成功)
-    ''' </summary>
-    Public Class CsvExportResponse
-        Inherits DaResponseBase
-
-        ''' <summary>
-        ''' ドキュメント情報
-        ''' </summary>
-        Public Property DATA As FileStream
-
-
-        Public Sub New()
-
-        End Sub
-
-        Public Sub New(msg As String)
-            MyBase.New(msg)
-        End Sub
-
-        Public Sub New(recode As EnumServiceResult, msg As String)
-            MyBase.New(recode, msg)
-        End Sub
-
-    End Class
 End Namespace

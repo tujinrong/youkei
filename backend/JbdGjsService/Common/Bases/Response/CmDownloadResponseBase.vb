@@ -11,5 +11,18 @@ Namespace JBD.GJS.Service
         Inherits CmPreviewResponseBase
         Public Property downloadtype As EnumDownloadType = EnumDownloadType.Data 'ファイルタイプ
         Public Property filefullnm As String                                      'ファイル名(パス含む)
+
+        Public Sub New()
+
+        End Sub
+
+        Public Sub New(msg As String)
+            MyBase.New(msg)
+        End Sub
+
+        Public Sub New(recode As EnumServiceResult,msg As String)
+            MyBase.New(recode, msg)
+        End Sub
+
     End Class
 End Namespace

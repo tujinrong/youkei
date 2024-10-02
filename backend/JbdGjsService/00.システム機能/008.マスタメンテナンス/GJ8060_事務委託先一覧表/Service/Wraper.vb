@@ -57,10 +57,12 @@ Namespace JBD.GJS.Service.GJ8060
         ''' <summary>
         ''' CSV出力処理_一覧画面
         ''' </summary>
-        Public Shared Function CsvExportResponse(dt As DataTable) As CsvExportResponse
-            Dim res = New CsvExportResponse()
+        Public Shared Function CsvExportResponse(dt As DataTable) As CmDownloadResponseBase
+            Dim res = New CmDownloadResponseBase()
             'CSV作成(日時はサブルーチンでセット)
-            res.DATA = f_makeCSVByStream(dt, "JIMUITAKUSAKI_")
+            res.data = FrmService.f_makeCSVByStream(dt)
+            res.contenttype = "application/stream"
+            res.filenm = f_FileDialog("csv","JIMUITAKUSAKI_")
             Return res
         End Function
     End Class

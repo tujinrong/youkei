@@ -6,6 +6,7 @@
 ' 作成者　　: 宋 峰
 ' 変更履歴　:
 ' *******************************************************************
+Imports System.Text
 Imports JbdGjsDb.JBD.GJS.Db
 
 Namespace JBD.GJS.Common
@@ -2376,74 +2377,69 @@ ACoDateCheckEdit_Exit3:
         '　　　　　　　　:2. fileNm(ByRef) String  [参照時]帳票ID & 帳票名をセット [戻り]ファイル名を含むパス
         '戻り値          :Boolean(正常True/エラーFalse)
         '------------------------------------------------------------------
-        Public Function f_FileDialog(ByVal OutputMode As String, ByRef fileNm As String) As Boolean
+        Public Function f_FileDialog(ByVal OutputMode As String, ByRef fileNm As String) As String
 
             ' OpenFileDialog の新しいインスタンスを生成する (デザイナから追加している場合は必要ない)
             'Dim OpenFileDialog1 As New SaveFileDialog
 
-            'Try
-            '    OpenFileDialog1.Title = "名前を付けて保存"
 
-            '    Select Case OutputMode
-            '        Case "pdf"
-            '            'PDF出力
+                'OpenFileDialog1.Title = "名前を付けて保存"
 
-            '            '初期値を制御マスタ設定のパスにする。
-            '            OpenFileDialog1.InitialDirectory = myREPORT_PDF_PATH
-            '            'ファイルの種類を設定
-            '            OpenFileDialog1.Filter = "PDFファイル(*.pdf)|*.pdf"
+                Select Case OutputMode
+                    Case "pdf"
+                        'PDF出力
 
-            '        Case "xls"
-            '            'Excel出力
+                        ''初期値を制御マスタ設定のパスにする。
+                        'OpenFileDialog1.InitialDirectory = myREPORT_PDF_PATH
+                        ''ファイルの種類を設定
+                        'OpenFileDialog1.Filter = "PDFファイル(*.pdf)|*.pdf"
 
-            '            '初期値を制御マスタ設定のパスにする。
-            '            OpenFileDialog1.InitialDirectory = myREPORT_EXCEL_PATH
-            '            'ファイルの種類を設定
-            '            OpenFileDialog1.Filter = "Excel 97-2003 ブック(*.xls)|*.xls"
+                    Case "xls"
+                        'Excel出力
 
-
-            '        Case "xlsx"         '2015/03/23 ADD Start
-            '            'Excel出力
-            '            '初期値を制御マスタ設定のパスにする。
-            '            OpenFileDialog1.InitialDirectory = myREPORT_EXCEL_PATH
-            '            'ファイルの種類を設定
-            '            OpenFileDialog1.Filter = "Excel ブック(*.xlsx)|*.xlsx"
-            '            '2015/03/23 ADD End
-
-            '        Case "csv"
-            '            'CSV出力
-
-            '            '初期値を制御マスタ設定のパスにする。
-            '            OpenFileDialog1.InitialDirectory = myREPORT_EXCEL_PATH
-            '            'ファイルの種類を設定
-            '            OpenFileDialog1.Filter = "CSVカンマ区切り(*.csv)|*.csv"
+                        ''初期値を制御マスタ設定のパスにする。
+                        'OpenFileDialog1.InitialDirectory = myREPORT_EXCEL_PATH
+                        ''ファイルの種類を設定
+                        'OpenFileDialog1.Filter = "Excel 97-2003 ブック(*.xls)|*.xls"
 
 
-            '    End Select
+                    Case "xlsx"         '2015/03/23 ADD Start
+                        'Excel出力
+                        ''初期値を制御マスタ設定のパスにする。
+                        'OpenFileDialog1.InitialDirectory = myREPORT_EXCEL_PATH
+                        ''ファイルの種類を設定
+                        'OpenFileDialog1.Filter = "Excel ブック(*.xlsx)|*.xlsx"
+                        ''2015/03/23 ADD End
 
-            '    ' 初期表示するファイル名を設定する(帳票ID+帳票名+yyyyMMddHHmmss[+.pdf/.xls])
-            '    OpenFileDialog1.FileName = fileNm & Now.ToString("yyyyMMddHHmmss")
+                    Case "csv"
+                        'CSV出力
 
-            '    '' ダイアログボックスを閉じる前に現在のディレクトリを復元する (初期値 False)
-            '    OpenFileDialog1.RestoreDirectory = True
-            '    'ユーザーが既に存在するファイル名を指定した場合に [名前を付けて保存] ダイアログ ボックスで警告を表示するかどうかを示す値を取得または設定します。
-            '    OpenFileDialog1.OverwritePrompt = True
+                        '初期値を制御マスタ設定のパスにする。
+                        'OpenFileDialog1.InitialDirectory = myREPORT_EXCEL_PATH
+                        ''ファイルの種類を設定
+                        'OpenFileDialog1.Filter = "CSVカンマ区切り(*.csv)|*.csv"
 
-            '    If OpenFileDialog1.ShowDialog() = DialogResult.OK Then
-            '        fileNm = OpenFileDialog1.FileName
-            '    Else
-            '        fileNm = ""
-            '        Return False
-            '    End If
 
-            '    Return True
+                End Select
 
-            'Catch ex As Exception
-            '    Throw New Exception(ex.Message)
-            'Finally
-            '    OpenFileDialog1.Dispose()
-            'End Try
-            Return True
+                ' 初期表示するファイル名を設定する(帳票ID+帳票名+yyyyMMddHHmmss[+.pdf/.xls])
+                Return fileNm & Now.ToString("yyyyMMddHHmmss")
+
+                ''' ダイアログボックスを閉じる前に現在のディレクトリを復元する (初期値 False)
+                'OpenFileDialog1.RestoreDirectory = True
+                ''ユーザーが既に存在するファイル名を指定した場合に [名前を付けて保存] ダイアログ ボックスで警告を表示するかどうかを示す値を取得または設定します。
+                'OpenFileDialog1.OverwritePrompt = True
+
+                'If OpenFileDialog1.ShowDialog() = DialogResult.OK Then
+                '    fileNm = OpenFileDialog1.FileName
+                'Else
+                '    fileNm = ""
+                '    Return False
+                'End If
+
+                'Return True
+
+
         End Function
 #End Region
 
@@ -2592,65 +2588,6 @@ ACoDateCheckEdit_Exit3:
             Return f_makeCSVByDT(wkDT, "")
 
         End Function
-#End Region
-
-#Region "f_makeCSVByStream CSV文字列生成"
-        ''' <summary>
-        ''' CSV文字列生成
-        ''' </summary>
-        ''' <param name="wkDT"></param>
-        ''' <returns></returns>
-        ''' <remarks></remarks>
-        Public Function f_makeCSVByStream(ByVal wkDT As DataTable, wkFile As String) As FileStream
-            Dim wkSB As New System.Text.StringBuilder
-            Dim wkLine As New List(Of String)
-            Dim wkValue As Object
-
-            'ヘッダ
-            For c As Integer = 0 To wkDT.Columns.Count - 1
-                wkLine.Add(wkDT.Columns(c).ColumnName)
-            Next
-            wkSB.AppendLine(String.Join(",", wkLine.ToArray))
-
-
-            For Each wkRow As DataRow In wkDT.Rows
-                wkLine.Clear()
-                For c As Integer = 0 To wkDT.Columns.Count - 1
-                    wkValue = wkRow.Item(c)
-                    Select Case True
-                        Case wkValue Is Nothing, IsDBNull(wkValue)
-                            'NULLの場合は空を代入。
-                            wkLine.Add("")
-                        Case TypeOf wkValue Is String
-                            '文字列の場合はダブルクオートで囲む。
-                            wkLine.Add("""" & wkValue.ToString & """")
-                        Case TypeOf wkValue Is Date
-                            '日付の場合はyyyy/MM/dd形式に
-                            wkLine.Add(DirectCast(wkValue, Date).ToString("yyyy/MM/dd"))
-                        Case Else
-                            '数字などの場合はそのまま文字列に。
-                            wkLine.Add(wkValue.ToString)
-                    End Select
-
-                Next
-
-                wkSB.AppendLine(String.Join(",", wkLine.ToArray))
-
-            Next
-
-            Using fs As New FileStream(wkFile, FileMode.Create, FileAccess.Write)
-                Using writer As New StreamWriter(fs, System.Text.Encoding.GetEncoding("Shift-JIS"))
-                    writer.Write(wkSB.ToString)
-                End Using
-            End Using
-
-            Return fs
-        End Function
-
-        Private Function fs() As FileStream
-            Throw New NotImplementedException()
-        End Function
-
 #End Region
 
 #End Region

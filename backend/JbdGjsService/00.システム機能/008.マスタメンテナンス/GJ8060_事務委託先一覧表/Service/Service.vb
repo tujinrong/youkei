@@ -107,7 +107,7 @@ Namespace JBD.GJS.Service.GJ8060
         End Function
 
         <DisplayName("CSV出力処理_一覧画面処理")>
-        Public Shared Function CsvExport(req As SearchRequest) As CsvExportResponse
+        Public Shared Function CsvExport(req As SearchRequest) As CmDownloadResponseBase
             Return Nolock(req,
                 Function(db)
 
@@ -136,9 +136,9 @@ Namespace JBD.GJS.Service.GJ8060
                     '5.データ加工処理
                     '-------------------------------------------------------------
                     Dim dt = ds.Tables(0)
-                    'If dt.Rows.Count = 0 Then
-                        Return New CsvExportResponse(EnumServiceResult.ServiceAlert2, "指定された条件に一致するデータは存在しません。")
-                    'End If
+                    If dt.Rows.Count = 0 Then
+                        Return New CmDownloadResponseBase(EnumServiceResult.ServiceAlert2, "指定された条件に一致するデータは存在しません。")
+                    End If
                     Dim res = Wraper.CsvExportResponse(dt)
 
                     '-------------------------------------------------------------
