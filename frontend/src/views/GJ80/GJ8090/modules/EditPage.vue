@@ -288,8 +288,8 @@ const isNew = computed(() => (props.editkbn === EnumEditKbn.Add ? true : false))
 //--------------------------------------------------------------------------
 watch(
   () => props.visible,
-  async (newV) => {
-    if (newV) {
+  async (newValue) => {
+    if (newValue) {
       if (isNew.value) {
         formData.KI = props.params.KI
         formData.KEIYAKUSYA_CD = props.params.KEIYAKUSYA_CD

@@ -62,7 +62,7 @@ Namespace JBD.GJS.Service.GJ1010
         End Function
 
         ''' <summary>
-        ''' 検索処理_一覧画面処理
+        ''' 検索処理_一覧画面
         ''' </summary>
         Public Shared Function SearchResponse(dt As DataTable) As SearchResponse
             Dim res = New SearchResponse()

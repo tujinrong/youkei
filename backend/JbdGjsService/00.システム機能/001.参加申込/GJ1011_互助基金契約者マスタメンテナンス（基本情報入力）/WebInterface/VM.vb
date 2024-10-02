@@ -10,7 +10,7 @@
 Namespace JBD.GJS.Service.GJ1011
 
     ''' <summary>
-    ''' 金融機関情報
+    ''' 契約者情報
     ''' </summary>
     Public Class DetailVM
         ''' <summary>

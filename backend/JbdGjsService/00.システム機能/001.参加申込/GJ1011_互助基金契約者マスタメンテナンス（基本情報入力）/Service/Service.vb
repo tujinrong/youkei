@@ -7,15 +7,14 @@
 ' 変更履歴　:
 ' *******************************************************************
 
-Imports OracleInternal
-Imports OracleInternal.Json
+
 
 Namespace JBD.GJS.Service.GJ1011
 
     ''' <summary>
-    ''' 初期化処理_金融機関詳細画面
+    ''' 互助基金契約者マスタメンテナンス（基本情報入力）
     ''' </summary>
-    <DisplayName("初期化処理_詳細画面")>
+    <DisplayName("互助基金契約者マスタメンテナンス（基本情報入力）")>
     Public Class Service
         Inherits CmServiceBase
 
@@ -50,18 +49,17 @@ Namespace JBD.GJS.Service.GJ1011
                     Dim dt2 = f_CodeMaster_Data_Select(1, 0)
                     Dim dt3 = f_CodeMaster_Data_Select(2, 1)
                     Dim sql1 = f_Bank_Data_Select()
-                    Dim sql2 = f_BankShop_Data_Select(req.FURI_BANK_CD)
-
                     'データSelect 
                     Dim ds5 = FrmService.f_Select_ODP(db, sql1)
                     Dim dt5 = ds5.Tables(0)
-
-                    Dim ds6 = FrmService.f_Select_ODP(db, sql2)
-
                     Dim dt6 As DataTable = Nothing
-                    dt6 = ds6.Tables(0)
-
                     Dim dt7 = f_CodeMaster_Data_Select(4, 0)
+
+                    If Not String.IsNullOrEmpty(req.FURI_BANK_CD) Then
+                        Dim sql2 = f_BankShop_Data_Select(req.FURI_BANK_CD)
+                        Dim ds6 = FrmService.f_Select_ODP(db, sql2)
+                        dt6 = ds6.Tables(0)
+                    End If
 
                     '-------------------------------------------------------------
                     '5.データ加工処理

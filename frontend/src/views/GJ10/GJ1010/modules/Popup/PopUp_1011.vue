@@ -116,10 +116,10 @@
               <a-form-item v-bind="validateInfos.KEIYAKU_JYOKYO">
                 <ai-select
                   v-model:value="formData.KEIYAKU_JYOKYO"
-                  :option="KEIYAKU_JYOKYO_LIST"
-                  class="max-w-65"
-                  placeholder="継続契約、新規契約、未契約者"
+                  :options="KEIYAKU_JYOKYO_LIST"
                   split-val
+                  class="max-w-55"
+                  placeholder="継続契約、新規契約、未継続者"
                 ></ai-select
               ></a-form-item>
             </td>
@@ -303,7 +303,7 @@
               <a-form-item v-bind="validateInfos.JIMUITAKU_CD">
                 <ai-select
                   v-model:value="formData.JIMUITAKU_CD"
-                  :option="ITAKU_LIST"
+                  :options="JIMUITAKU_LIST"
                   class="max-w-123"
                   split-val
                 ></ai-select
@@ -330,10 +330,11 @@
               <a-form-item v-bind="validateInfos.FURI_BANK_CD">
                 <ai-select
                   v-model:value="formData.FURI_BANK_CD"
-                  :option="BANK_LIST"
+                  :options="BANK_LIST"
                   split-val
                   class="max-w-65"
                   :disabled="!hasnyuryoku"
+                  @change="handleInitDetail(false)"
                 ></ai-select
               ></a-form-item>
             </td>
@@ -349,7 +350,7 @@
               <a-form-item v-bind="validateInfos.FURI_BANK_SITEN_CD">
                 <ai-select
                   v-model:value="formData.FURI_BANK_SITEN_CD"
-                  :option="SITEN_LIST"
+                  :options="SITEN_LIST"
                   split-val
                   class="max-w-65"
                   :disabled="!hasnyuryoku"
@@ -365,7 +366,7 @@
               <a-form-item v-bind="validateInfos.FURI_KOZA_SYUBETU">
                 <ai-select
                   v-model:value="formData.FURI_KOZA_SYUBETU"
-                  :option="KOZA_SYUBETU_LIST"
+                  :options="KOZA_SYUBETU_LIST"
                   split-val
                   class="max-w-40"
                   :disabled="!hasnyuryoku"
@@ -472,7 +473,7 @@
     <template #footer>
       <div class="pt-2 flex justify-between border-t-1">
         <a-space :size="20">
-          <a-button class="warning-btn" @click="saveData">保存</a-button>
+          <a-button class="warning-btn" @click="">保存</a-button>
           <a-button class="warning-btn" @click=""> 保存して継続登録 </a-button>
           <a-button class="danger-btn" :disabled="isNew" @click="deleteData"
             >削除</a-button
@@ -498,7 +499,7 @@ import {
   SAVE_CONFIRM,
   SAVE_OK_INFO,
 } from '@/constants/msg'
-import { DetailVM } from '../../type'
+
 import {
   convertALLToHalfWidth,
   convertToFullWidth,
@@ -507,26 +508,29 @@ import {
   convertToKaNa,
   convertToFuRiGaNa,
 } from '@/utils/util'
-import { InitDetail, Save, SearchDetail } from '../../service'
+import { InitDetail, SearchDetail } from '../../service/1011/service'
+import { DetailVM, SearchDetailRequest } from '../../service/1011/type'
 //--------------------------------------------------------------------------
 //データ定義
 //--------------------------------------------------------------------------
 const props = defineProps<{
   editkbn: EnumEditKbn
   visible: boolean
+  params: SearchDetailRequest
+  keys: any
 }>()
 const emit = defineEmits(['update:visible'])
 
 const editJudge = new Judgement()
 const createDefaultParams = () => {
   return {
-    KI: undefined as number | undefined, //期
+    KI: -1, //期
     KEIYAKUSYA_CD: undefined as number | undefined, //契約者番号
     SEISANSYA_CD: undefined as number | undefined, //経営安定対策事業生産者番号
     KEN_CD: undefined as number | undefined, //都道府県
     NIKKEIKYO_CD: undefined as number | undefined, //日鶏協番号
     KEIYAKU_KBN: undefined as number | undefined, //契約区分
-    KEIYAKU_DATE: new Date() as Date | undefined, //契約日
+    KEIYAKU_DATE: undefined as Date | undefined, //契約日
     KEIYAKU_JYOKYO: undefined as number | undefined, //契約状況
     NYU_HEN_DATE: undefined as Date | undefined, //入金日、返還日
     KEIYAKUSYA_KANA: '', //申込者名(ﾌﾘｶﾞﾅ)
@@ -548,37 +552,24 @@ const createDefaultParams = () => {
     FURI_KOZA_NO: '', //口座番号
     FURI_KOZA_MEIGI_KANA: '', //口座名義人（カナ）
     FURI_KOZA_MEIGI: '', //口座名義人（漢字）
-    NYURYOKU_JYOKYO: 2 as number | undefined, //入力確認有無(入力状況)
+    NYURYOKU_JYOKYO: 1 as number | undefined, //入力確認有無(入力状況)
     BIKO: '', //備考
-    HAIGYO_DATE: new Date() as Date | undefined, //廃業日
-    UP_DATE: new Date() as Date | undefined, //データ更新日
+    HAIGYO_DATE: undefined as Date | undefined, //廃業日
+    UP_DATE: undefined as Date | undefined, //データ更新日
   } as DetailVM
 }
 const formData = reactive(createDefaultParams())
 const hasnyuryoku = ref(true)
 
-const KEN_LIST = ref<CmCodeNameModel[]>([{ CODE: 46, NAME: '鹿児島県' }]) // 都道府県情報プルダウンリスト
-const KEIYAKU_KBN_LIST = ref<CmCodeNameModel[]>([
-  { CODE: 1, NAME: '家族' },
-  { CODE: 2, NAME: '企業' },
-  { CODE: 3, NAME: '鶏以外' },
-]) // 契約区分情報プルダウンリスト
+const KEN_LIST = ref<CmCodeNameModel[]>([]) // 都道府県情報プルダウンリスト
+const KEIYAKU_KBN_LIST = ref<CmCodeNameModel[]>([]) // 契約区分情報プルダウンリスト
 
-const KEIYAKU_JYOKYO_LIST = ref<CmCodeNameModel[]>([
-  { CODE: 1, NAME: '新規' },
-  { CODE: 2, NAME: '継続' },
-  { CODE: 3, NAME: '未継' },
-]) // 契約状況情報プルダウンリスト
+const KEIYAKU_JYOKYO_LIST = ref<CmCodeNameModel[]>([]) // 契約状況情報プルダウンリスト
 
-const ITAKU_LIST = ref<CmCodeNameModel[]>([
-  // { CODE: 666, NAME: '事務委託先事務委託先事務委託先事務委託先事務委託先' },
-]) // 事務委託先情報プルダウンリスト
-const BANK_LIST = ref<CmCodeNameModel[]>([
-  { CODE: 6666, NAME: '金融機関テスト金融機関テスト金' },
-]) // 金融機関情報プルダウンリスト
+const JIMUITAKU_LIST = ref<CmCodeNameModel[]>([]) // 事務委託先情報プルダウンリスト
+const BANK_LIST = ref<CmCodeNameModel[]>([]) // 金融機関情報プルダウンリスト
 const SITEN_LIST = ref<CmCodeNameModel[]>([]) // 本支店情報プルダウンリスト
 const KOZA_SYUBETU_LIST = ref<CmCodeNameModel[]>([]) // 口座種別情報プルダウンリスト
-const NYURYOKU_JYOKYO_LIST = ref<CmCodeNameModel[]>([]) // 入力確認有無情報プルダウンリスト
 
 const rules = reactive({
   KEIYAKUSYA_CD: [
@@ -687,12 +678,22 @@ const isNew = computed(() => (props.editkbn === EnumEditKbn.Add ? true : false))
 //--------------------------------------------------------------------------
 watch(
   () => props.visible,
-  (newValue) => {
+  async (newValue) => {
     if (newValue) {
-      // InitDetail()
-      // SearchDetail()
-      if (!isNew && formData.FURI_BANK_CD) hasnyuryoku.value = true
-      nextTick(() => editJudge.reset())
+      if (isNew.value) {
+        formData.KI = props.params.KI
+      } else {
+        formData.KI = props.keys.KI
+        formData.KEIYAKUSYA_CD = props.keys.KEIYAKUSYA_CD
+      }
+      await handleInitDetail(true)
+      if (!isNew.value) {
+        handleSearchDetail()
+      }
+      nextTick(() => {
+        editJudge.reset()
+        clearValidate()
+      })
     }
   }
 )
@@ -725,6 +726,43 @@ const goList = () => {
   closeModal()
 }
 
+const handleInitDetail = async (initflg: boolean) => {
+  try {
+    if (!initflg) {
+      formData.FURI_BANK_SITEN_CD = ''
+    }
+    const res = await InitDetail({
+      KI: props.params.KI,
+      FURI_BANK_CD: formData.FURI_BANK_CD,
+    })
+
+    KEN_LIST.value = res.KEN_LIST
+    KEIYAKU_KBN_LIST.value = res.KEIYAKU_KBN_LIST
+    KEIYAKU_JYOKYO_LIST.value = res.KEIYAKU_JYOKYO_LIST
+    JIMUITAKU_LIST.value = res.JIMUITAKU_LIST
+    BANK_LIST.value = res.BANK_LIST
+    SITEN_LIST.value = res.SITEN_LIST
+    KOZA_SYUBETU_LIST.value = res.KOZA_SYUBETU_LIST
+
+    nextTick(() => {
+      editJudge.reset()
+      clearValidate()
+    })
+  } catch (error) {
+    closeModal()
+    // emit('getTableList')
+  }
+}
+
+const handleSearchDetail = async () => {
+  const res = await SearchDetail({
+    KI: props.keys.KI,
+    KEIYAKUSYA_CD: props.keys.KEIYAKUSYA_CD,
+    EDIT_KBN: props.editkbn,
+  })
+  Object.assign(formData, res.KEIYAKUSYA)
+}
+
 const closeModal = () => {
   editJudge.judgeIsEdited(() => {
     Object.assign(formData, createDefaultParams())
@@ -734,25 +772,25 @@ const closeModal = () => {
   })
 }
 
-const saveData = async () => {
-  await validate()
-  if (!editJudge.isPageEdited()) {
-    showInfoModal({
-      content: '変更したデータはありません。',
-    })
-  } else {
-    showSaveModal({
-      content: SAVE_CONFIRM.Msg,
-      onOk: async () => {
-        try {
-          await Save({ KEIYAKUSYA: formData })
-          closeModal()
-          message.success(SAVE_OK_INFO.Msg)
-        } catch (error) {}
-      },
-    })
-  }
-}
+// const saveData = async () => {
+//   await validate()
+//   if (!editJudge.isPageEdited()) {
+//     showInfoModal({
+//       content: '変更したデータはありません。',
+//     })
+//   } else {
+//     showSaveModal({
+//       content: SAVE_CONFIRM.Msg,
+//       onOk: async () => {
+//         try {
+//           await Save({ KEIYAKUSYA: formData })
+//           closeModal()
+//           message.success(SAVE_OK_INFO.Msg)
+//         } catch (error) {}
+//       },
+//     })
+//   }
+// }
 const deleteData = () => {
   showDeleteModal({
     handleDB: true,

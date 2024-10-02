@@ -149,10 +149,7 @@
         <a-space :size="20">
           <a-button type="primary" @click="searchAll">検索</a-button>
           <a-button type="primary" @click="clear">条件クリア</a-button>
-          <a-button
-            class="ml-40%"
-            type="primary"
-            @click="goForward(PageStatus.New)"
+          <a-button class="ml-40%" type="primary" @click="forwardAdd"
             >新規登録</a-button
           >
           <a-button
@@ -188,7 +185,7 @@
         height="200px"
         :sort-config="{ trigger: 'cell', orders: ['desc', 'asc'] }"
         :empty-render="{ name: 'NotData' }"
-        @cell-dblclick="({ row }) => goForward(PageStatus.Edit, row)"
+        @cell-dblclick="({ row }) => forwardEdit(row.KEIYAKUSYA_CD)"
         @sort-change="(e) => changeTableSort(e, toRef(pageParams, 'ORDER_BY'))"
       >
         <vxe-column
@@ -201,7 +198,7 @@
           :params="{ order: 1 }"
         >
           <template #default="{ row }">
-            <a @click="goForward(PageStatus.Edit, row)">{{
+            <a @click="forwardEdit(row.KEIYAKUSYA_CD)">{{
               row.KEIYAKUSYA_CD
             }}</a>
           </template>
@@ -215,7 +212,7 @@
           :params="{ order: 2 }"
         >
           <template #default="{ row }">
-            <a @click="goForward(PageStatus.Edit, row)">{{
+            <a @click="forwardEdit(row.KEIYAKUSYA_CD)">{{
               row.KEIYAKUSYA_NAME
             }}</a>
           </template>
@@ -229,7 +226,7 @@
           :params="{ order: 3 }"
         >
           <template #default="{ row }">
-            <a @click="goForward(PageStatus.Edit, row)">{{
+            <a @click="forwardEdit(row.KEIYAKUSYA_CD)">{{
               row.KEIYAKUSYA_KANA
             }}</a>
           </template>
@@ -280,7 +277,12 @@
       </vxe-table>
     </a-card>
   </div>
-  <EditPage v-model:visible="editVisible" :editkbn="editkbn" />
+  <EditPage
+    v-model:visible="editVisible"
+    :editkbn="editkbn"
+    :params="searchParams"
+    :keys="keyList"
+  />
 </template>
 <script setup lang="ts">
 import { EnumAndOr, EnumEditKbn, PageStatus } from '@/enum'
@@ -326,6 +328,7 @@ const createDefaultParams = (): SearchRequest => {
 const searchParams = reactive(createDefaultParams())
 const keyList = reactive({
   KI: undefined,
+  KEIYAKUSYA_CD: undefined,
 })
 const layout = {
   md: 24,
@@ -439,6 +442,18 @@ function goForward(status: PageStatus, row?: any) {
       status: status,
     },
   })
+}
+async function forwardAdd() {
+  await validate()
+  editVisible.value = true
+  editkbn.value = EnumEditKbn.Add
+}
+
+async function forwardEdit(KEIYAKUSYA_CD) {
+  await validate()
+  editVisible.value = true
+  editkbn.value = EnumEditKbn.Edit
+  keyList.KEIYAKUSYA_CD = KEIYAKUSYA_CD
 }
 </script>
 <style lang="scss" scoped>

@@ -11,7 +11,6 @@ import {
   CopyRequest,
   DeleteRequest,
   DeleteRequest_1012,
-  InitDetailRequest,
   InitDetailRequest_1012,
   InitDetailRequest_1013,
   InitDetailResponse,
@@ -28,7 +27,6 @@ import {
   SearchDetailResponse_1012,
 } from './type'
 
-const servicename1 = 'GJ1010'
 const servicename2 = 'GJ1011'
 const servicename3 = 'GJ1012'
 const servicename4 = 'GJ1013'
@@ -36,47 +34,11 @@ const servicename4 = 'GJ1013'
 //--------------------------------------------------------------------------
 //GJ1010
 //--------------------------------------------------------------------------
-// /** 初期化処理(一覧画面) */
-// export const Init = (params: InitRequest): Promise<InitResponse> => {
-//   const methodname = 'Init'
-//   return api(servicename1, methodname, params, undefined, { loading: true })
-// }
 
-// /** 検索処理(一覧画面) */
-// export const Search = (params: SearchRequest): Promise<SearchResponse> => {
-//   const methodname = 'Search'
-//   return api(servicename1, methodname, params, undefined, { loading: true })
-// }
 //--------------------------------------------------------------------------
 //GJ1011
 //--------------------------------------------------------------------------
-/** 初期化処理_詳細画面 */
-export const InitDetail = (
-  params: InitDetailRequest
-): Promise<InitDetailResponse> => {
-  const methodname = 'InitDetail'
-  return api(servicename2, methodname, params)
-}
 
-/** 検索処理_詳細画面 */
-export const SearchDetail = (
-  params: SearchDetailRequest
-): Promise<SearchDetailResponse> => {
-  const methodname = 'SearchDetail'
-  return api(servicename2, methodname, params)
-}
-
-/** 保存処理_詳細画面 */
-export const Save = (params: SaveRequest): Promise<DaResponseBase> => {
-  const methodname = 'Save'
-  return api(servicename2, methodname, params)
-}
-
-/** 削除処理_詳細画面 */
-export const Delete = (params: DeleteRequest): Promise<DaResponseBase> => {
-  const methodname = 'Delete'
-  return api(servicename2, methodname, params)
-}
 //--------------------------------------------------------------------------
 //GJ1012
 //--------------------------------------------------------------------------

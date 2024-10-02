@@ -10,7 +10,7 @@
 Namespace JBD.GJS.Service.GJ1011
 
     ''' <summary>
-    ''' 初期化処理_一覧画面
+    ''' 互助基金契約者マスタメンテナンス（基本情報入力）
     ''' </summary>
     Public Class Converter
         Inherits CmConerterBase
