@@ -39,6 +39,8 @@ Namespace JBD.GJS.Service.GJ8060
             Dim res = New SearchResponse()
             'データ結果判定
             res.KEKKA_LIST = New List(Of SearchRowVM)
+            res.TOTAL_ROW_COUNT = DaConvertUtil.Cint(DaConvertUtil.CStr(dt.Rows(0)("RCNT")))
+            res.TOTAL_PAGE_COUNT = DaConvertUtil.Cint(DaConvertUtil.CStr(dt.Rows(0)("PCNT")))
             ' dt をループし、List にデータを追加します。
             For Each row As DataRow In dt.Rows
                 Dim item As New SearchRowVM

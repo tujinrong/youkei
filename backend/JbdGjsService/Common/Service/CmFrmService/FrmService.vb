@@ -131,6 +131,30 @@ Namespace JBD.GJS.Service
         End Function
 #End Region
 
+#Region "f_Search_SQLMakePage ページ分割されたデータＳＱＬ作成処理"
+        '------------------------------------------------------------------
+        'プロシージャ名  :f_Search_SQLMakePage
+        '説明            :ページ分割されたデータＳＱＬ作成処理
+        '引数            :なし
+        '戻り値          :Sql String
+        '------------------------------------------------------------------
+        Public Shared Function f_Search_SQLMakePage(psize As Integer, pnum As Integer,  sql2 As String) As String
+            '==SQL作成====================
+            Dim wSql = ""
+            wSql &= "SELECT * "
+            wSql &= "  FROM ( "
+            wSql &= " SELECT  T1.* ,                               "
+            wSql &= "        COUNT(1) OVER() AS RCNT,               "
+            wSql &= "        CEIL(COUNT(1) OVER()/ " & psize & " ) AS PCNT   , ROWNUM AS RM  "
+            wSql &= " FROM                                            "
+            wSql &= " ( " & sql2 & " ) "
+            wSql &= "  T1  )  "
+            wSql &= " WHERE RM <= (" & psize & " * " & pnum & " )    "
+            wSql &= "   AND RM >  (" & psize & " * " & pnum & " - " & psize & ") "
+            Return wSql
+        End Function
+#End Region
+
 #Region "コードマスタメンテナンスＳＱＬ文作成"
     ''' <summary>
     ''' ＳＱＬ文作成

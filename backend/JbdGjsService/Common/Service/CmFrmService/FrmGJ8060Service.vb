@@ -134,7 +134,7 @@ Namespace JBD.GJS.Service.GJ8060
 
         End Select
 
-        Return ""
+        Return wSql
 
     End Function
 
