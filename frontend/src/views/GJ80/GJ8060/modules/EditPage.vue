@@ -299,6 +299,7 @@ import {
   DELETE_CONFIRM,
   DELETE_OK_INFO,
   ITEM_REQUIRE_ERROR,
+  ITEM_SELECTREQUIRE_ERROR,
   SAVE_CONFIRM,
   SAVE_OK_INFO,
 } from '@/constants/msg'
@@ -321,8 +322,6 @@ const emit = defineEmits(['update:visible', 'getTableList'])
 //--------------------------------------------------------------------------
 //データ定義
 //--------------------------------------------------------------------------
-const router = useRouter()
-const route = useRoute()
 const editJudge = new Judgement('GJ8060')
 
 const KEN_CD_NAME_LIST = ref<CmCodeNameModel[]>([])
@@ -354,22 +353,28 @@ const formData = reactive({
 } as DetailVM)
 
 const rules = reactive({
-  NOJO_CD: [
+  ITAKU_CD: [
     {
       required: true,
-      message: ITEM_REQUIRE_ERROR.Msg.replace('{0}', '農場番号'),
-    },
-  ],
-  NOJO_NAME: [
-    {
-      required: true,
-      message: ITEM_REQUIRE_ERROR.Msg.replace('{0}', '農場名称'),
+      message: ITEM_REQUIRE_ERROR.Msg.replace('{0}', '事務委託先'),
     },
   ],
   KEN_CD: [
     {
       required: true,
-      message: ITEM_REQUIRE_ERROR.Msg.replace('{0}', '都道府県'),
+      message: ITEM_SELECTREQUIRE_ERROR.Msg.replace('{0}', '都道府県'),
+    },
+  ],
+  ITAKU_NAME: [
+    {
+      required: true,
+      message: ITEM_REQUIRE_ERROR.Msg.replace('{0}', '事務委託先名称（正式）'),
+    },
+  ],
+  ITAKU_RYAKU: [
+    {
+      required: true,
+      message: ITEM_REQUIRE_ERROR.Msg.replace('{0}', '事務委託先名称（略称）'),
     },
   ],
   ADDR_POST: [
@@ -393,22 +398,6 @@ const rules = reactive({
     {
       required: true,
       message: ITEM_REQUIRE_ERROR.Msg.replace('{0}', '住所２'),
-    },
-  ],
-  MEISAI_NO: [
-    {
-      required: true,
-      message: ITEM_REQUIRE_ERROR.Msg.replace('{0}', '明細番号'),
-    },
-  ],
-  ADDR_4: [
-    {
-      validator: async (_rule, value: string) => {
-        if (value && !formData.ADDR_3) {
-          return Promise.reject('前の住所入力欄が未入力です。')
-        }
-        return Promise.resolve()
-      },
     },
   ],
   ADDR_TEL: [
@@ -448,16 +437,15 @@ watch(
   () => props.visible,
   async (newValue) => {
     if (newValue) {
-      // formData.KI = 8
+      const res = await InitDetail({
+        KI: formData.KI,
+        ITAKU_CD: +props.ITAKU_CD,
+        EDIT_KBN: props.editkbn,
+      })
       if (!isNew.value) {
-        // formData.ITAKU_CD = 6
-        const res = await InitDetail({
-          KI: formData.KI,
-          ITAKU_CD: +props.ITAKU_CD,
-        })
         Object.assign(formData, res.ITAKU)
-        KEN_CD_NAME_LIST.value = res.KEN_CD_NAME_LIST
       }
+      KEN_CD_NAME_LIST.value = res.KEN_CD_NAME_LIST
     }
     nextTick(() => {
       editJudge.reset()
@@ -477,15 +465,15 @@ watch(
   }
 )
 
-watch(
-  () => [formData.NOJO_NAME, formData.ADDR_2, formData.ADDR_3, formData.ADDR_4],
-  ([newNOJO_NAME, newADDR_2, newADDR_3, newADDR_4]) => {
-    formData.NOJO_NAME = convertToFullWidth(newNOJO_NAME)
-    formData.ADDR_2 = convertToFullWidth(newADDR_2)
-    formData.ADDR_3 = convertToFullWidth(newADDR_3)
-    formData.ADDR_4 = convertToFullWidth(newADDR_4)
-  }
-)
+// watch(
+//   () => [formData.NOJO_NAME, formData.ADDR_2, formData.ADDR_3, formData.ADDR_4],
+//   ([newNOJO_NAME, newADDR_2, newADDR_3, newADDR_4]) => {
+//     formData.NOJO_NAME = convertToFullWidth(newNOJO_NAME)
+//     formData.ADDR_2 = convertToFullWidth(newADDR_2)
+//     formData.ADDR_3 = convertToFullWidth(newADDR_3)
+//     formData.ADDR_4 = convertToFullWidth(newADDR_4)
+//   }
+// )
 
 //--------------------------------------------------------------------------
 //メソッド

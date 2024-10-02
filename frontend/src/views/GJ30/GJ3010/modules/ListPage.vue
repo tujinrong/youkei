@@ -56,7 +56,10 @@
     ></a-card>
     <a-card class="flex-1 staticWidth">
       <h2>契約農場別明細 增羽情報(表示)</h2>
-      <div class="flex justify-end">
+      <div class="flex justify-between">
+        <a-button type="primary" @click="() => (previewVisible = true)"
+          >請求書発行</a-button
+        >
         <a-pagination
           v-model:current="pageParams.PAGE_NUM"
           v-model:page-size="pageParams.PAGE_SIZE"
@@ -162,16 +165,6 @@
           :resizable="false"
         >
         </vxe-column>
-        <vxe-column header-align="center" title="請求書発行" width="140"
-          ><template #default="{ row }">
-            <a-button
-              class="max-h-22px mt-2px text-center py-0"
-              type="primary"
-              @click="() => (previewVisible = true)"
-              >請求書発行</a-button
-            >
-          </template></vxe-column
-        >
       </vxe-table>
       <Preview v-model:visible="previewVisible"></Preview>
       <Detail v-model:visible="detailVisible" :editkbn="editkbn"></Detail>

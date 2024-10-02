@@ -66,23 +66,32 @@
       </div>
     </a-card>
     <a-card :bordered="false" ref="cardRef1" class="staticWidth flex-1">
-      <a-pagination
-        v-model:current="pageParams.PAGE_NUM"
-        v-model:page-size="pageParams.PAGE_SIZE"
-        :total="totalCount"
-        :page-size-options="['10', '25', '50', '100']"
-        :show-total="(total) => `抽出件数： ${total} 件`"
-        show-less-items
-        show-size-changer
-        class="m-b-1 text-end"
-      />
+      <div class="flex justify-between">
+        <a-button
+          class="m-b-1"
+          type="primary"
+          :disabled="!isSelected"
+          @click="showSiten(xTableRef?.getCurrentRecord()?.BANK_CD)"
+          >支店情報</a-button
+        >
+        <a-pagination
+          v-model:current="pageParams.PAGE_NUM"
+          v-model:page-size="pageParams.PAGE_SIZE"
+          :total="totalCount"
+          :page-size-options="['10', '25', '50', '100']"
+          :show-total="(total) => `抽出件数： ${total} 件`"
+          show-less-items
+          show-size-changer
+          class="m-b-1"
+        />
+      </div>
       <vxe-table
         class="mt-2"
         ref="xTableRef"
         :column-config="{ resizable: true }"
         :row-config="{ isCurrent: true, isHover: true }"
         :data="bankTableData"
-        height="480px"
+        height="500px"
         :sort-config="{ trigger: 'cell', orders: ['desc', 'asc'] }"
         :empty-render="{ name: 'NotData' }"
         @cell-dblclick="({ row }) => forwardEdit1(row.BANK_CD)"
@@ -92,7 +101,7 @@
           header-align="center"
           field="BANK_CD"
           title="金融機関"
-          width="120"
+          width="500"
           align="center"
           sortable
           :params="{ order: 1 }"
@@ -106,7 +115,7 @@
           header-align="center"
           field="BANK_KANA"
           title="金融機関名（ｶﾅ）"
-          width="400"
+          width="500"
           sortable
           :params="{ order: 2 }"
           :resizable="true"
@@ -116,22 +125,11 @@
           header-align="center"
           field="BANK_NAME"
           title="金融機関名（漢字）"
-          width="350"
+          min-width="500"
           sortable
           :params="{ order: 3 }"
-        ></vxe-column>
-        <vxe-column header-align="center" title="支店情報" min-width="120"
-          ><template #default="{ row }">
-            <a-button
-              class="max-h-22px mt-2px text-center py-0"
-              type="primary"
-              @click="showSiten(row.BANK_CD)"
-              >支店情報</a-button
-            >
-          </template></vxe-column
-        >
-      </vxe-table></a-card
-    >
+        ></vxe-column> </vxe-table
+    ></a-card>
   </div>
   <EditPage
     v-model:visible="editVisible1"
@@ -196,7 +194,10 @@ const URL = computed(() => {
 //--------------------------------------------------------------------------
 //計算定義
 //--------------------------------------------------------------------------
-
+const isSelected = computed(() => {
+  if (xTableRef) return xTableRef.value?.getCurrentRecord()
+  return false
+})
 //---------------------------------------------------------------------------
 //フック関数
 //--------------------------------------------------------------------------
@@ -216,6 +217,7 @@ const { pageParams, totalCount, searchData, clear } = useSearch({
   service: SearchBank,
   source: bankTableData,
   params: toRef(() => searchParams),
+  tableRef: xTableRef,
   // validate,
 })
 
@@ -226,9 +228,6 @@ const searchAll = async (deleteflg: boolean = false) => {
       type: 'warning',
       content: '指定された条件に一致するデータは存在しません。',
     })
-  }
-  if (xTableRef.value && bankTableData.value.length > 0) {
-    xTableRef.value.setCurrentRow(bankTableData.value[0])
   }
 }
 async function forwardNew1() {

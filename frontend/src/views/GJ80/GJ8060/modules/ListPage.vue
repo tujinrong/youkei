@@ -188,24 +188,19 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, reactive, toRef, watch, onMounted, computed, nextTick } from 'vue'
-import { useRouter, useRoute, onBeforeRouteUpdate } from 'vue-router'
-import { EnumAndOr, EnumEditKbn, PageStatus } from '@/enum'
-import useSearch from '@/hooks/useSearch'
 import { ITEM_REQUIRE_ERROR } from '@/constants/msg'
-import { changeTableSort, convertToFullWidth } from '@/utils/util'
-import { useTabStore } from '@/store/modules/tab'
-import { useElementSize } from '@vueuse/core'
-import { SearchRowVM, SearchRequest } from '@/views/GJ80/GJ8060/type'
-import { Init, Search, CsvExport } from '../service'
+import { EnumAndOr, EnumEditKbn } from '@/enum'
+import useSearch from '@/hooks/useSearch'
+import { changeTableSort } from '@/utils/util'
+import { SearchRowVM } from '@/views/GJ80/GJ8060/type'
 import { Form } from 'ant-design-vue'
+import { nextTick, onMounted, reactive, ref, toRef } from 'vue'
 import { VxeTableInstance } from 'vxe-table'
+import { CsvExport, Init, Search } from '../service'
 import EditPage from './EditPage.vue'
 //--------------------------------------------------------------------------
 //データ定義
 //--------------------------------------------------------------------------
-const router = useRouter()
-const route = useRoute()
 const xTableRef = ref<VxeTableInstance>()
 const createDefaultParams = () => {
   return {
@@ -222,16 +217,7 @@ const createDefaultParams = () => {
 }
 const searchParams = reactive(createDefaultParams())
 const ITAKU_CD = ref('')
-const KEIYAKUSYA_CD_NAME_LIST = ref<CmCodeNameModel[]>([])
 const tableData = ref<SearchRowVM[]>([])
-const mockData: SearchRowVM = {
-  ADDR: '東京都千代田区丸の内1-1-1',
-  ITAKU_CD: 67890,
-  ITAKU_NAME: '株式会社大手',
-  ADDR_TEL: '03-1234-5678',
-  ADDR_POST: '100-0005',
-}
-
 const KEN_CD_NAME_LIST = ref<CmCodeNameModel[]>([])
 //表の高さ
 const headRef = ref(null)
@@ -242,7 +228,6 @@ const layout = {
   xxl: 24,
 }
 const cardRef = ref()
-const { height } = useElementSize(cardRef)
 const editVisible = ref(false)
 const editkbn = ref<EnumEditKbn>(EnumEditKbn.Add)
 const rules = reactive({
@@ -279,7 +264,6 @@ const getInitData = (KI: number | undefined, initflg: boolean) => {
   }
   Init({ KI: KI, EDIT_KBN: EnumEditKbn.Add }).then((res) => {
     if (initflg) searchParams.KI = res.KI
-    // searchParams.KEIYAKUSYA_CD = undefined
     KEN_CD_NAME_LIST.value = res.KEN_LIST
     nextTick(() => clearValidate())
   })

@@ -61,7 +61,10 @@
     ></a-card>
     <a-card class="flex-1 staticWidth"
       ><h2>契約農場別明細 讓渡情報(表示)</h2>
-      <div class="flex justify-end">
+      <div class="flex justify-between">
+        <a-button type="primary" @click="() => (previewVisible = true)"
+          >通知書発行</a-button
+        >
         <a-pagination
           v-model:current="pageParams.PAGE_NUM"
           v-model:page-size="pageParams.PAGE_SIZE"
@@ -127,17 +130,7 @@
           :resizable="false"
           :params="{ order: 5 }"
         >
-        </vxe-column
-        ><vxe-column header-align="center" title="通知書発行" width="140"
-          ><template #default="{ row }">
-            <a-button
-              class="max-h-22px mt-2px text-center py-0"
-              type="primary"
-              @click="() => (previewVisible = true)"
-              >通知書発行</a-button
-            >
-          </template></vxe-column
-        >
+        </vxe-column>
       </vxe-table>
     </a-card>
     <Preview v-model:visible="previewVisible"></Preview>
