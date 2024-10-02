@@ -94,7 +94,7 @@ export function getUnKnownDateJpText(value: string): string {
 export const getDateJpText = (value: Date | string | undefined): string => {
   if (value) {
     try {
-      const date = new Date(value);
+      const date = new Date(value)
       return (
         new Intl.DateTimeFormat('ja-JP-u-ca-japanese', {
           era: 'long',
@@ -105,16 +105,15 @@ export const getDateJpText = (value: Date | string | undefined): string => {
           .format(date)
           .replace(/\//, '年')
           .replace(/\//, '月') + '日'
-      );
+      )
     } catch (error) {
-      console.error(error);
-      return '無効日付';
+      console.error(error)
+      return '無効日付'
     }
   } else {
-    return '';
+    return ''
   }
-};
-
+}
 
 /**和暦取得(日時) */
 export const getDateHmsJpText = (value: Date): string => {
@@ -209,6 +208,8 @@ export function changeTableSort(e: any, orderby: Ref): void {
     orderby.value = e.column.params.order
   } else if (e.order === 'desc') {
     orderby.value = e.column.params.order * -1
+  } else {
+    orderby.value = 0
   }
 }
 //--------------------------------------------------------------------------

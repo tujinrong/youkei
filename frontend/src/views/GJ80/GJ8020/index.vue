@@ -142,7 +142,7 @@
           <a-col span="15">
             <th>備考</th>
             <td>
-              <a-input v-model:value="formData.BIKO" :maxlength="80"></a-input>
+              <a-input v-model:value="formData.BIKO" :maxlength="40"></a-input>
             </td>
           </a-col>
         </a-row>
@@ -172,7 +172,7 @@ import {
 } from '@/constants/msg'
 import { showConfirmModal, showSaveModal } from '@/utils/modal'
 import dayjs from 'dayjs'
-import { getDateJpText } from '@/utils/util'
+import { getDateJpText, convertToFullWidth } from '@/utils/util'
 
 const formData = reactive<DetailVM>({
   KI: undefined as number | undefined,
@@ -187,7 +187,7 @@ const formData = reactive<DetailVM>({
   TAISYO_NENDO: undefined as number | undefined,
   NOFU_KIGEN: '',
   HASSEI_KAISU: undefined as number | undefined,
-  BIKO: undefined as number | undefined,
+  BIKO: undefined as string | undefined,
 })
 
 const editJudge = new Judgement('GJ8020')
@@ -262,6 +262,18 @@ const cancel = () => {
     },
   })
 }
+
+//--------------------------------------------------------------------------
+//監視定義
+//--------------------------------------------------------------------------
+watch(
+  () => formData.BIKO,
+  (newVal) => {
+    if (newVal) {
+      formData.BIKO = convertToFullWidth(newVal)
+    }
+  }
+)
 </script>
 <style lang="scss" scoped>
 th {
