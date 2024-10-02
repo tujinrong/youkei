@@ -77,7 +77,7 @@
             isHover: true,
           }"
           :data="tableData"
-          height="668px"
+          height="660px"
           :sort-config="{ trigger: 'cell', orders: ['desc', 'asc'] }"
           :empty-render="{ name: 'NotData' }"
           @cell-dblclick="({ row }) => goForward(PageStatus.Edit, row)"

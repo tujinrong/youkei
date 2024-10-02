@@ -350,7 +350,7 @@ export const mathNumber = {
   parser: (value) => value.replace(/(,*)/g, ''),
 }
 
-/**制限入力は、全角・半角の数字、アルファベット、スペース及び記号を半角に変換(URL用)*/
+/**全角・半角の数字、アルファベット、スペース及び記号を半角に変換*/
 export function convertToAllowedCharacters(input: string): string {
   const fullWidthToHalfWidth = input
     .replace(/[！-～]/g, (ch) => String.fromCharCode(ch.charCodeAt(0) - 0xfee0))

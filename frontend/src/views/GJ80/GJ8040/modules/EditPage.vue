@@ -35,6 +35,7 @@
                     v-model:value="formData.USER_NAME"
                     :maxlength="20"
                     class="w-60!"
+                    @input="checkUserNameInput"
                   ></a-input>
                 </a-form-item>
               </td>
@@ -49,7 +50,6 @@
                     v-model:value="formData.PASS"
                     :maxlength="20"
                     class="w-60!"
-                    type="password"
                   ></a-input>
                 </a-form-item>
               </td>
@@ -124,25 +124,21 @@
         </a-space>
         <a-button type="primary" @click="goList">閉じる</a-button>
       </div>
-    </template></a-modal
-  >
+    </template>
+  </a-modal>
 </template>
 <script setup lang="ts">
-import {
-  DELETE_CONFIRM,
-  DELETE_OK_INFO,
-  ITEM_REQUIRE_ERROR,
-  SAVE_CONFIRM,
-  SAVE_OK_INFO,
-} from '@/constants/msg'
-import { EnumEditKbn, PageStatus } from '@/enum'
-import { showDeleteModal, showSaveModal } from '@/utils/modal'
-import { Form, message } from 'ant-design-vue'
-import { computed, nextTick, onMounted, reactive, ref, watch } from 'vue'
-import { useRoute, useRouter } from 'vue-router'
-import { Delete, InitDetail, Save } from '../service'
+import { ITEM_REQUIRE_ERROR } from '@/constants/msg'
+import { EnumEditKbn } from '@/enum'
+import { Form } from 'ant-design-vue'
+import { computed, nextTick, reactive, ref, watch } from 'vue'
+import { InitDetail } from '../service'
 import { Judgement } from '@/utils/judge-edited'
-import { getDateJpText } from '@/utils/util'
+import {
+  convertKanaToHalfWidth,
+  convertToHalfWidth,
+  getDateJpText,
+} from '@/utils/util'
 import { SearchRowVM } from '../type'
 //---------------------------------------------------------------------------
 //属性
@@ -217,6 +213,22 @@ const modalVisible = computed({
   },
 })
 const isNew = computed(() => props.editkbn === EnumEditKbn.Add)
+
+const checkUserNameInput = () => {
+  const userInput = formData.USER_NAME
+  const fullWidthChars = userInput.match(/[^\x00-\x7F]/g) || []
+  const fullWidthCount = fullWidthChars.length
+  const halfWidthCount = userInput.length - fullWidthCount
+
+  if (fullWidthCount > 10) {
+    formData.USER_NAME = userInput.slice(0, 10)
+  }
+
+  if (fullWidthCount + halfWidthCount > 20) {
+    formData.USER_NAME = userInput.slice(0, 20)
+  }
+}
+
 //---------------------------------------------------------------------------
 //フック関数
 //--------------------------------------------------------------------------
@@ -251,7 +263,19 @@ watch(
     }
   }
 )
+
 watch(formData, () => editJudge.setEdited())
+
+watch(
+  () => formData,
+  (newVal) => {
+    if (newVal) {
+      formData.USER_ID = convertKanaToHalfWidth(newVal.USER_ID)
+      formData.PASS = convertToHalfWidth(newVal.PASS)
+    }
+  },
+  { deep: true }
+)
 //--------------------------------------------------------------------------
 //メソッド
 //--------------------------------------------------------------------------
