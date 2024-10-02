@@ -148,7 +148,43 @@ export function createRequest<
 
   return request
 }
+/**
+ * create a request instance
+ *
+ * @param axiosConfig axios config
+ * @param options request options
+ */
+export function createDownloadRequest<
+  ResponseData = any,
+  State = Record<string, unknown>,
+>(
+  axiosConfig?: CreateAxiosDefaults,
+  options?: Partial<RequestOption<ResponseData>>
+) {
+  const { instance, opts, cancelRequest, cancelAllRequest } =
+    createCommonRequest<ResponseData>(axiosConfig, options)
 
+  const request: RequestInstance<State> = async function request<
+    T = any,
+    R extends ResponseType = 'json',
+  >(config: CustomAxiosRequestConfig) {
+    const response: AxiosResponse<ResponseData> = await instance(config)
+
+    const responseType = response.config?.responseType || 'json'
+
+    if (responseType === 'json') {
+      return opts.transformBackendResponse(response)
+    }
+
+    return response as MappedType<R, T>
+  } as RequestInstance<State>
+
+  request.cancelRequest = cancelRequest
+  request.cancelAllRequest = cancelAllRequest
+  request.state = {} as State
+
+  return request
+}
 /**
  * create a flat request instance
  *

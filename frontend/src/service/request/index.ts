@@ -1,4 +1,8 @@
-import { BACKEND_ERROR_CODE, createRequest } from '@sa/axios'
+import {
+  BACKEND_ERROR_CODE,
+  createDownloadRequest,
+  createRequest,
+} from '@sa/axios'
 import { useAuthStore } from '@/store/modules/auth'
 import { sessionStg } from '@/utils/storage'
 import { getServiceBaseURL } from '@/utils/service'
@@ -147,7 +151,7 @@ export const request = createRequest<
   }
 )
 
-export const downloadReq = createRequest<any, RequestInstanceState>(
+export const downloadReq = createDownloadRequest<any, RequestInstanceState>(
   {
     baseURL,
     timeout: 18 * 60 * 10000,
@@ -232,34 +236,7 @@ export const downloadReq = createRequest<any, RequestInstanceState>(
       return null
     },
     transformBackendResponse(response) {
-      const blob = new Blob([response.data.DATA], {
-        type: response.headers['content-type'],
-      })
-      const contentDisposition = response.headers['content-disposition']
-      let filename = 'downloaded-file.ext'
-
-      if (
-        contentDisposition &&
-        contentDisposition.indexOf('attachment') !== -1
-      ) {
-        const match = contentDisposition.match(
-          /filename[^;=\n]*=((['"]).*?\2|[^;\n]*)/
-        )
-        if (match != null && match[1]) {
-          filename = decodeURIComponent(match[1].replace(/['"]/g, ''))
-        }
-      }
-
-      const urlObject = window.URL.createObjectURL(blob)
-      const a = document.createElement('a')
-      a.href = urlObject
-      a.download = filename
-      document.body.appendChild(a)
-      a.click()
-      a.remove()
-      window.URL.revokeObjectURL(urlObject)
-      // resolve(res)
-      return response.data
+      return response
     },
     onError(error) {
       closeGlobalLoading(error.response?.config)

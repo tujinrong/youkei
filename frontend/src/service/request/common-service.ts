@@ -146,6 +146,27 @@ export function download(
     data: body,
     headers,
     extra,
+  }).then((res: any) => {
+    const blob = res.data
+    let fileName = ''
+    const contentDisposition = res.headers['content-disposition']
+    if (contentDisposition) {
+      fileName = decodeURIComponent(
+        res.headers['content-disposition'].split('=')[1].replace("UTF-8''", '')
+      )
+    }
+    document.createElement('a')
+    // 非IEダウンロード
+    const elink = document.createElement('a')
+    elink.download = fileName
+    elink.target = '_blank'
+    elink.style.display = 'none'
+    elink.href = URL.createObjectURL(blob)
+    document.body.appendChild(elink)
+    elink.click()
+    URL.revokeObjectURL(elink.href)
+    document.body.removeChild(elink)
+    //resolve(res)
   })
 }
 
