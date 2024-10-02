@@ -38,7 +38,7 @@ export interface InitDetailRequest extends DaRequestBase {
   /**期 */
   KI: number
   /**契約者番号 */
-  KEIYAKUSYA_CD: number|undefined
+  KEIYAKUSYA_CD: number | undefined
   /**農場コード */
   NOJO_CD: number
 }
@@ -56,7 +56,7 @@ export interface DeleteRequest extends DaRequestBase {
   /**期 */
   KI: number
   /**契約者番号 */
-  KEIYAKUSYA_CD: number|undefined
+  KEIYAKUSYA_CD: number | undefined
   /**農場コード */
   NOJO_CD: number
   /**更新時間 */
@@ -112,7 +112,7 @@ export interface DetailVM {
   /**期 */
   KI: number
   /**契約者番号 */
-  KEIYAKUSYA_CD: number|undefined
+  KEIYAKUSYA_CD: number | undefined
   /**契約者名 */
   KEIYAKUSYA_NAME: string
   /**農場コード */

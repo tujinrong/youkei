@@ -324,7 +324,7 @@ export function convertToTel(input: string) {
 
 /**平仮名に変換*/
 export function convertToKaNa(input: string): string {
-  return input.replace(/[^\u3040-\u309F\u30A0-\u30FF\uFF00-\uFFEF\s]/g, '')
+  return input.replace(/[^\u3040-\u309F\u30A0-\u30FF\uFF00-\uFFEF\s()]/g, '')
 }
 
 /**フリガナに変換*/
@@ -340,4 +340,11 @@ export function convertToFuRiGaNa(input: string): string {
 export const mathNumber = {
   formatter: (value) => value.replace(/\B(?=(\d{3})+(?!\d))/g, ','),
   parser: (value) => value.replace(/(,*)/g, ''),
+}
+
+/**
+ * 制限入力は、数字、短めのライン、アルファベット、@、。、スラッシュ
+ */
+export function convertToAllowedCharacters(input: string): string {
+  return input.replace(/[^0-9A-Za-z\-@./]/g, '')
 }

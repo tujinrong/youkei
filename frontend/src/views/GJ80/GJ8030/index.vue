@@ -64,13 +64,21 @@
               <a-col span="24">
                 <td>
                   <a-form-item v-bind="validateInfos.ADDR1">
-                    <a-input v-model:value="formData.ADDR1" class="max-w-228" />
+                    <a-input
+                      v-model:value="formData.ADDR1"
+                      :maxlength="40"
+                      class="max-w-228"
+                    />
                   </a-form-item>
                 </td>
               </a-col>
               <a-col span="16">
                 <td>
-                  <a-input v-model:value="formData.ADDR2" class="max-w-228" />
+                  <a-input
+                    v-model:value="formData.ADDR2"
+                    :maxlength="40"
+                    class="max-w-228"
+                  />
                 </td>
               </a-col>
               <a-col span="8">
@@ -79,7 +87,7 @@
                   <a-form-item v-bind="validateInfos.HAKKO_NO_KANJI">
                     <a-input
                       v-model:value="formData.HAKKO_NO_KANJI"
-                      :maxlength="4"
+                      :maxlength="2"
                       class="max-w-40"
                     />
                   </a-form-item>
@@ -94,8 +102,8 @@
                 <th class="required w-18!">電話１</th>
                 <td>
                   <a-form-item v-bind="validateInfos.TEL1">
-                    <a-input v-model:value="formData.TEL1" :maxlength="13"
-                  /></a-form-item>
+                    <a-input v-model:value="formData.TEL1" :maxlength="14" />
+                  </a-form-item>
                 </td>
               </a-col>
               <a-col span="1"></a-col>
@@ -103,14 +111,19 @@
                 <th class="required w-21!">ＦＡＸ１</th>
                 <td>
                   <a-form-item v-bind="validateInfos.FAX1">
-                    <a-input v-model:value="formData.FAX1" :maxlength="13"
-                  /></a-form-item>
+                    <a-input v-model:value="formData.FAX1" :maxlength="14" />
+                  </a-form-item>
                 </td>
               </a-col>
               <a-col span="12">
                 <th class="text-end!">E-mail１</th>
                 <td>
-                  <a-input v-model:value="formData.E_MAIL1" :maxlength="30" />
+                  <a-form-item v-bind="validateInfos.E_MAIL1">
+                    <a-input
+                      v-model:value="formData.E_MAIL1"
+                      :maxlength="100"
+                    />
+                  </a-form-item>
                 </td>
               </a-col>
             </a-row>
@@ -121,20 +134,24 @@
               <a-col span="5">
                 <th class="w-18!">電話２</th>
                 <td>
-                  <a-input v-model:value="formData.TEL2" :maxlength="13" />
+                  <a-form-item v-bind="validateInfos.TEL2">
+                    <a-input v-model:value="formData.TEL2" :maxlength="14" />
+                  </a-form-item>
                 </td>
               </a-col>
               <a-col span="1"></a-col>
               <a-col span="6">
                 <th class="w-21!">ＦＡＸ２</th>
                 <td>
-                  <a-input v-model:value="formData.FAX2" :maxlength="13" />
+                  <a-form-item v-bind="validateInfos.FAX2">
+                    <a-input v-model:value="formData.FAX2" :maxlength="14" />
+                  </a-form-item>
                 </td>
               </a-col>
               <a-col span="12">
                 <th class="text-end!">E-mail２</th>
                 <td>
-                  <a-input v-model:value="formData.E_MAIL2" :maxlength="30" />
+                  <a-input v-model:value="formData.E_MAIL2" :maxlength="100" />
                 </td>
               </a-col>
             </a-row>
@@ -237,7 +254,7 @@
                   <a-form-item v-bind="validateInfos.FURI_KOZA_MEIGI_KANA">
                     <a-input
                       v-model:value="formData.FURI_KOZA_MEIGI_KANA"
-                      :maxlength="40"
+                      :maxlength="80"
                     />
                   </a-form-item>
                 </td>
@@ -389,6 +406,15 @@ import {
   SAVE_CONFIRM,
   SAVE_OK_INFO,
 } from '@/constants/msg'
+import {
+  convertToTel,
+  convertToFullWidth,
+  convertToHalfWidth,
+  convertToAllowedCharacters,
+  convertToFuRiGaNa,
+  convertToKaNa,
+  convertALLToHalfWidth,
+} from '@/utils/util'
 
 const formData = reactive<DetailVM>({
   KYOKAI_NAME: '',
@@ -541,7 +567,7 @@ const rules = reactive({
     {
       required: true,
       message: ITEM_REQUIRE_ERROR.Msg.replace('{0}', '口座名義人（カナ）'),
-      max: 40,
+      max: 80,
     },
   ],
   FURI_KOZA_MEIGI: [
@@ -623,7 +649,35 @@ const cancel = () => {
     },
   })
 }
+
+//--------------------------------------------------------------------------
+//監視定義
+//--------------------------------------------------------------------------
+watch(
+  () => formData,
+  (newVal) => {
+    if (newVal) {
+      formData.HAKKO_NO_KANJI = convertToFullWidth(newVal.HAKKO_NO_KANJI)
+      formData.FURI_KOZA_MEIGI = convertToFullWidth(newVal.FURI_KOZA_MEIGI)
+      formData.TEL1 = convertToTel(newVal.TEL1)
+      formData.FAX1 = convertToTel(newVal.FAX1)
+      formData.TEL2 = convertToTel(newVal.TEL2)
+      formData.FAX2 = convertToTel(newVal.FAX2)
+      formData.E_MAIL1 = convertToHalfWidth(newVal.E_MAIL1)
+      formData.E_MAIL2 = convertToHalfWidth(newVal.E_MAIL2)
+      formData.HP_URL = convertToHalfWidth(newVal.HP_URL)
+      formData.FURI_KOZA_MEIGI_KANA = convertToHalfWidth(
+        newVal.FURI_KOZA_MEIGI_KANA
+      )
+      formData.FURI_KOZA_MEIGI_KANA = convertToKaNa(newVal.FURI_KOZA_MEIGI_KANA)
+      formData.HP_URL = convertToAllowedCharacters(newVal.HP_URL)
+      formData.TOUROKU_NO = convertToAllowedCharacters(newVal.TOUROKU_NO)
+    }
+  },
+  { deep: true }
+)
 </script>
+
 <style lang="scss" scoped>
 th {
   width: 140px;
