@@ -151,9 +151,11 @@ export function download(
     let fileName = ''
     const contentDisposition = res.headers['content-disposition']
     if (contentDisposition) {
-      fileName = decodeURIComponent(
-        res.headers['content-disposition'].split('=')[1].replace("UTF-8''", '')
-      )
+      const filenameMatch = contentDisposition.match(/filename="?([^";]+)"?/)
+      fileName =
+        filenameMatch && filenameMatch[1]
+          ? decodeURIComponent(filenameMatch[1])
+          : ''
     }
     document.createElement('a')
     // 非IEダウンロード
