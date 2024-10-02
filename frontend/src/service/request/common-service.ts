@@ -151,7 +151,7 @@ export function download(
     let fileName = ''
     const contentDisposition = res.headers['content-disposition']
     if (contentDisposition) {
-      const filenameMatch = contentDisposition.match(/filename="?([^";]+)"?/)
+      const filenameMatch = contentDisposition.match(/csvname="?([^";]+)"?/)
       fileName =
         filenameMatch && filenameMatch[1]
           ? decodeURIComponent(filenameMatch[1])
