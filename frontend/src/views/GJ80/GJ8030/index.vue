@@ -151,7 +151,12 @@
               <a-col span="12">
                 <th class="text-end!">E-mail２</th>
                 <td>
-                  <a-input v-model:value="formData.E_MAIL2" :maxlength="100" />
+                  <a-form-item v-bind="validateInfos.E_MAIL1">
+                    <a-input
+                      v-model:value="formData.E_MAIL2"
+                      :maxlength="100"
+                    />
+                  </a-form-item>
                 </td>
               </a-col>
             </a-row>
@@ -409,11 +414,9 @@ import {
 import {
   convertToTel,
   convertToFullWidth,
-  convertToHalfWidth,
   convertToAllowedCharacters,
-  convertToFuRiGaNa,
-  convertToKaNa,
-  convertALLToHalfWidth,
+  convertKanaToHalfWidth,
+  convertToAllowedCharactersOnly,
 } from '@/utils/util'
 
 const formData = reactive<DetailVM>({
@@ -658,20 +661,21 @@ watch(
   (newVal) => {
     if (newVal) {
       formData.HAKKO_NO_KANJI = convertToFullWidth(newVal.HAKKO_NO_KANJI)
-      formData.FURI_KOZA_MEIGI = convertToFullWidth(newVal.FURI_KOZA_MEIGI)
       formData.TEL1 = convertToTel(newVal.TEL1)
       formData.FAX1 = convertToTel(newVal.FAX1)
       formData.TEL2 = convertToTel(newVal.TEL2)
       formData.FAX2 = convertToTel(newVal.FAX2)
-      formData.E_MAIL1 = convertToHalfWidth(newVal.E_MAIL1)
-      formData.E_MAIL2 = convertToHalfWidth(newVal.E_MAIL2)
-      formData.HP_URL = convertToHalfWidth(newVal.HP_URL)
-      formData.FURI_KOZA_MEIGI_KANA = convertToHalfWidth(
+      formData.E_MAIL1 = convertToAllowedCharacters(newVal.E_MAIL1)
+      formData.E_MAIL2 = convertToAllowedCharacters(newVal.E_MAIL2)
+      formData.HP_URL = convertToAllowedCharacters(newVal.HP_URL)
+      formData.TOUROKU_NO = convertToAllowedCharactersOnly(newVal.TOUROKU_NO)
+      formData.FURI_KOZA_MEIGI_KANA = convertKanaToHalfWidth(
         newVal.FURI_KOZA_MEIGI_KANA
       )
-      formData.FURI_KOZA_MEIGI_KANA = convertToKaNa(newVal.FURI_KOZA_MEIGI_KANA)
-      formData.HP_URL = convertToAllowedCharacters(newVal.HP_URL)
-      formData.TOUROKU_NO = convertToAllowedCharacters(newVal.TOUROKU_NO)
+      formData.FURI_KOZA_MEIGI = convertToFullWidth(newVal.FURI_KOZA_MEIGI)
+      formData.KOFU_KAISYA_NAME = convertKanaToHalfWidth(
+        newVal.KOFU_KAISYA_NAME
+      )
     }
   },
   { deep: true }

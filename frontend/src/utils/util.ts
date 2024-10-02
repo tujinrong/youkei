@@ -301,13 +301,21 @@ export function convertToHalfWidth(input: string): string {
     .replace(/　/g, ' ')
 }
 
+/**全角のアルファペット、数字及びスペースを半角に変換*/
+export function convertToAllowedCharactersOnly(input: string): string {
+  return input
+    .replace(/[！-～]/g, (ch) => String.fromCharCode(ch.charCodeAt(0) - 0xfee0))
+    .replace(/　/g, ' ')
+    .replace(/[^A-Za-z0-9\s]/g, '')
+}
+
 //すべての文字を半角に変換
 export function convertALLToHalfWidth(input: string): string {
   return input.replace(/[^\u0020-\u007E\uFF61-\uFF9F]/g, '')
 }
 
 /**半角数字に変換*/
-export function convertToHalfNumber(input: string) {
+export function convertToHalfNumber(input: string): string {
   return input
     .replace(/[！-～]/g, (ch) => String.fromCharCode(ch.charCodeAt(0) - 0xfee0))
     .replace(/　/g, ' ')
@@ -317,7 +325,7 @@ export function convertToHalfNumber(input: string) {
 /**電話番号に変換*/
 export function convertToTel(input: string) {
   return input
-    .replace(/[！-～]/g, (ch) => String.fromCharCode(ch.charCodeAt(0) - 0xfee0)) // 全角标点符号转半角
+    .replace(/[！-～]/g, (ch) => String.fromCharCode(ch.charCodeAt(0) - 0xfee0))
     .replace(/　/g, ' ')
     .replace(/[^0-9-]/g, '')
 }
@@ -342,9 +350,41 @@ export const mathNumber = {
   parser: (value) => value.replace(/(,*)/g, ''),
 }
 
-/**
- * 制限入力は、数字、短めのライン、アルファベット、@、。、スラッシュ
- */
+/**制限入力は、全角・半角の数字、アルファベット、スペース及び記号を半角に変換(URL用)*/
 export function convertToAllowedCharacters(input: string): string {
-  return input.replace(/[^0-9A-Za-z\-@./]/g, '')
+  const fullWidthToHalfWidth = input
+    .replace(/[！-～]/g, (ch) => String.fromCharCode(ch.charCodeAt(0) - 0xfee0))
+    .replace(/　/g, ' ')
+
+  return fullWidthToHalfWidth.replace(
+    /[^0-9A-Za-z\-@./!"#$%&'()=~|[\]{}^;:,.\\`+*<>?_ ]/g,
+    ''
+  )
+}
+
+/**カタカナは全角を半角に変換し、平仮名を半角カタカナに変換し、制限された文字のみ許可*/
+export function convertKanaToHalfWidth(input: string): string {
+  const hiragana =
+    'あいうえおかきくけこさしすせそたちつてとなにぬねのはひふへほまみむめもやゆよらりるれろわをんぁぃぅぇぉっゃゅょ'
+  const fullWidthKana =
+    'アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲンァィゥェォッャュョ'
+  const halfWidthKana =
+    'ｱｲｳｴｵｶｷｸｹｺｻｼｽｾｿﾀﾁﾂﾃﾄﾅﾆﾇﾈﾉﾊﾋﾌﾍﾎﾏﾐﾑﾒﾓﾔﾕﾖﾗﾘﾙﾚﾛﾜｦﾝｧｨｩｪｫｯｬｭｮ'
+
+  const convertChar = (char: string) => {
+    const hiraganaIndex = hiragana.indexOf(char)
+    if (hiraganaIndex > -1) return halfWidthKana[hiraganaIndex] // 平仮名 -> 半角カタカナ
+    const fullWidthIndex = fullWidthKana.indexOf(char)
+    if (fullWidthIndex > -1) return halfWidthKana[fullWidthIndex] // 全角カタカナ -> 半角カタカナ
+    if (char === 'ー') return 'ｰ' // 全角'ー' -> 半角
+    if (char.match(/[！-～]/)) {
+      return String.fromCharCode(char.charCodeAt(0) - 0xfee0) // 全角数字、アルファベット -> 半角
+    }
+    if (char === '　') return ' ' // 全角スペース -> 半角スペース
+    return char
+  }
+  const allowedCharacters =
+    /[\u3040-\u309F\u30A0-\u30FF\uFF00-\uFFEF\u0020-\u007Eー]/g
+
+  return (input.match(allowedCharacters) || []).map(convertChar).join('')
 }
