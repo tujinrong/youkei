@@ -1,4 +1,5 @@
 import { Ref, reactive, ref, unref, watch, nextTick } from 'vue'
+import { VxeTableInstance } from 'vxe-pc-ui'
 
 export default function useSearch({
   service,
@@ -6,6 +7,7 @@ export default function useSearch({
   source,
   listname = 'KEKKA_LIST',
   validate,
+  tableRef,
 }: {
   service: (request) => Promise<CmSearchResponseBase & { [prop: string]: any }>
   params: Ref<{ [prop: string]: any }> | null
@@ -14,6 +16,7 @@ export default function useSearch({
   listname?: string
   /**検索前のバリデーション */
   validate?: () => Promise<any>
+  tableRef?: Ref<VxeTableInstance | undefined>
 }) {
   const loading = ref(false)
   const totalCount = ref(0)
@@ -50,6 +53,12 @@ export default function useSearch({
 
       source.value = res[listname]
       loading.value = false
+      setTimeout(() => {
+        if (tableRef) {
+          tableRef.value?.setCurrentRow(source.value[0])
+          tableRef.value?.scrollTo(0, 0)
+        }
+      }, 0)
       return await Promise.resolve(res)
     } catch (error) {
       loading.value = false

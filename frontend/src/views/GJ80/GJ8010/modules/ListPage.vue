@@ -56,9 +56,7 @@
             >
             <a-button
               type="primary"
-              :disabled="
-                !(searchParams.SYURUI_KBN && xTableRef?.getCurrentRecord())
-              "
+              :disabled="!searchParams.SYURUI_KBN"
               @click="
                 goForward(
                   PageStatus.Edit,
@@ -74,7 +72,10 @@
           ref="xTableRef"
           class="mt-2"
           :column-config="{ resizable: true }"
-          :row-config="{ isCurrent: true, isHover: true }"
+          :row-config="{
+            isCurrent: true,
+            isHover: true,
+          }"
           :data="tableData"
           height="668px"
           :sort-config="{ trigger: 'cell', orders: ['desc', 'asc'] }"
@@ -136,6 +137,7 @@ import { SearchRequest, SearchRowVM } from '../type'
 import { Init, Search } from '../service'
 import EditPage from './EditPage.vue'
 import { VxeTableInstance } from 'vxe-pc-ui'
+import { showInfoModal } from '@/utils/modal'
 
 //--------------------------------------------------------------------------
 //データ定義
@@ -181,10 +183,17 @@ const { pageParams, searchData } = useSearch({
   service: Search,
   source: tableData,
   params: toRef(() => searchParams),
+  tableRef: xTableRef,
 })
 
 function goForward(status: PageStatus, row?: SearchRowVM) {
   if (status === PageStatus.Edit || status === PageStatus.New) {
+    if (status === PageStatus.Edit && !row) {
+      showInfoModal({
+        content: 'データが選択されていません。',
+      })
+      return
+    }
     editkbn.value =
       status === PageStatus.Edit ? EnumEditKbn.Edit : EnumEditKbn.Add
     meisyocd.value = row?.MEISYO_CD || 0
