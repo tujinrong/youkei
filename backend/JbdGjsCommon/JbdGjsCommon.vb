@@ -6,7 +6,7 @@
 ' 作成者　　: 宋 峰
 ' 変更履歴　:
 ' *******************************************************************
-Imports System.Text
+
 Imports JbdGjsDb.JBD.GJS.Db
 
 Namespace JBD.GJS.Common
@@ -2382,7 +2382,7 @@ ACoDateCheckEdit_Exit3:
             ' OpenFileDialog の新しいインスタンスを生成する (デザイナから追加している場合は必要ない)
             'Dim OpenFileDialog1 As New SaveFileDialog
 
-
+              Dim rFileNm As String = String.Empty
                 'OpenFileDialog1.Title = "名前を付けて保存"
 
                 Select Case OutputMode
@@ -2418,12 +2418,12 @@ ACoDateCheckEdit_Exit3:
                         'OpenFileDialog1.InitialDirectory = myREPORT_EXCEL_PATH
                         ''ファイルの種類を設定
                         'OpenFileDialog1.Filter = "CSVカンマ区切り(*.csv)|*.csv"
-
+                        rFileNm = fileNm & Now.ToString("yyyyMMddHHmmss") & ".csv"
 
                 End Select
 
                 ' 初期表示するファイル名を設定する(帳票ID+帳票名+yyyyMMddHHmmss[+.pdf/.xls])
-                Return fileNm & Now.ToString("yyyyMMddHHmmss")
+                Return rFileNm
 
                 ''' ダイアログボックスを閉じる前に現在のディレクトリを復元する (初期値 False)
                 'OpenFileDialog1.RestoreDirectory = True
