@@ -6,7 +6,7 @@
  * 作成者　　: 高 弘昆
  * 変更履歴　:
  * -----------------------------------------------------------------*/
-import { api, api2 } from '@/service/request/common-service'
+import { api, api2, download } from '@/service/request/common-service'
 
 import {
   DeleteRequest,
@@ -37,7 +37,7 @@ export const Search = (params: SearchRequest): Promise<SearchResponse> => {
 /** CSV出力処理(一覧画面) */
 export const CsvExport = (params: SearchRequest): Promise<SearchResponse> => {
   const methodname = 'CsvExport'
-  return api(servicename, methodname, params, undefined, { loading: true })
+  return download(servicename, methodname, params)
 }
 
 /** 初期化処理(詳細画面) */

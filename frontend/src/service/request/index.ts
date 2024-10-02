@@ -147,6 +147,155 @@ export const request = createRequest<
   }
 )
 
+export const downloadReq = createRequest<any, RequestInstanceState>(
+  {
+    baseURL,
+    timeout: 18 * 60 * 10000,
+    headers: {
+      //
+    },
+  },
+  {
+    async onRequest(config) {
+      const { headers } = config
+      config.responseType = 'blob'
+      const token = sessionStg.get('token')
+      Object.assign(headers, { token })
+      config.headers['Accept'] = 'application/stream'
+
+      //Global Loading
+      const { extra } = config as RequestConfig
+      if (extra?.loading) {
+        const appStore = useAppStore()
+        appStore.setLoading(true)
+      }
+
+      return config
+    },
+    isBackendSuccess(response) {
+      closeGlobalLoading(response.config)
+
+      return response.data.RETURN_CODE === EnumServiceResult.OK
+    },
+    async onBackendFail(response, instance) {
+      closeGlobalLoading(response.config)
+
+      const authStore = useAuthStore()
+      function handleLogout() {
+        authStore.resetStore()
+      }
+
+      const { extra } = response.config as RequestConfig
+      const { data } = response
+      const message = data?.MESSAGE
+      const code = data?.RETURN_CODE
+      // インターフェイス要求が間違っている場合、統一されたエラーメッセージが表示されます。
+      if (code === EnumServiceResult.ServiceError) {
+        showInfoModal({
+          type: 'error',
+          content: message,
+          onOk: () => extra?.onNextOk?.(data),
+        })
+      } else if (code === EnumServiceResult.ServiceAlert) {
+        showConfirmModal({
+          title: 'アラート',
+          content: message,
+          onOk: () => extra?.onNextOk?.(data),
+          onCancel: () => extra?.onNextCancel?.(data),
+        })
+      } else if (code === EnumServiceResult.ServiceAlert2) {
+        showInfoModal({
+          type: 'warning',
+          content: message,
+          onOk: () => extra?.onNextOk?.(data),
+        })
+      } else if (code === EnumServiceResult.Exception) {
+        showInfoModal({
+          title: '例外',
+          type: 'error',
+          content: message,
+        })
+      } else if (code === EnumServiceResult.AuthError) {
+        Modal.destroyAll()
+        handleLogout()
+      } else if (code === EnumServiceResult.InterruptionError) {
+        Modal.destroyAll()
+        showInfoModal({
+          title: 'エラー',
+          type: 'error',
+          content: message,
+          onOk: () => {
+            extra?.onNextOk ? extra?.onNextOk?.(data) : router.back()
+          },
+        })
+      }
+      return null
+    },
+    transformBackendResponse(response) {
+      const blob = new Blob([response.data.DATA], {
+        type: response.headers['content-type'],
+      })
+      const contentDisposition = response.headers['content-disposition']
+      let filename = 'downloaded-file.ext'
+
+      if (
+        contentDisposition &&
+        contentDisposition.indexOf('attachment') !== -1
+      ) {
+        const match = contentDisposition.match(
+          /filename[^;=\n]*=((['"]).*?\2|[^;\n]*)/
+        )
+        if (match != null && match[1]) {
+          filename = decodeURIComponent(match[1].replace(/['"]/g, ''))
+        }
+      }
+
+      const urlObject = window.URL.createObjectURL(blob)
+      const a = document.createElement('a')
+      a.href = urlObject
+      a.download = filename
+      document.body.appendChild(a)
+      a.click()
+      a.remove()
+      window.URL.revokeObjectURL(urlObject)
+      // resolve(res)
+      return response.data
+    },
+    onError(error) {
+      closeGlobalLoading(error.response?.config)
+
+      // when the request is fail, you can show error message
+      const authStore = useAuthStore()
+      function handleLogout() {
+        authStore.resetStore()
+      }
+
+      let message = error.message
+      // get backend error message and code
+      if (error.code === BACKEND_ERROR_CODE) {
+        message = error.response?.data?.MESSAGE || message
+      } else {
+        showErrorMsg(request.state, message)
+      }
+
+      if (error.response?.status === 401) {
+        Modal.destroyAll()
+        showInfoModal({
+          type: 'warning',
+          content: CM_AUTH_ERROR.Msg,
+          onOk: () => handleLogout(),
+        })
+      }
+      if (error.response?.status === 500) {
+        showInfoModal({
+          type: 'error',
+          content: 'サーバーエラーです。管理者に連絡してください。',
+        })
+      }
+    },
+  }
+)
+
 //close global loading
 function closeGlobalLoading(config?: InternalAxiosRequestConfig) {
   if (!config) return

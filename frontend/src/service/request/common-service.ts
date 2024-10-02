@@ -7,7 +7,7 @@
  * 変更履歴　:
  * -----------------------------------------------------------------*/
 import { AxiosRequestHeaders } from 'axios'
-import { request } from './index'
+import { request, downloadReq } from './index'
 
 /** ログイン処理 */
 export async function login(
@@ -125,27 +125,29 @@ export function api2(
 //   })
 // }
 
-// /** ダウンロード処理 */
-// export function download(
-//   servicename: string,
-//   methodname: string,
-//   data: unknown,
-//   headers?: RawAxiosRequestHeaders & { loading?: boolean }
-// ): Promise<any> {
-//   const params = {
-//     servicename,
-//     methodname,
-//     bizrequest: {
-//       data: JSON.stringify(data),
-//     },
-//   }
-//   return http.download({
-//     url: '/AFCT/Download/WebRequestDownload',
-//     method: RequestEnum.POST,
-//     params,
-//     headers,
-//   })
-// }
+/** ダウンロード処理 */
+export function download(
+  SERVICE_NAME: string,
+  METHOD_NAME: string,
+  data?: any,
+  headers?: AxiosRequestHeaders,
+  extra?: Api.Common.RequestConfigExtra
+): Promise<any> {
+  const body = {
+    SERVICE_NAME,
+    METHOD_NAME,
+    BIZ_REQUEST: {
+      DATA: JSON.stringify(data) || '',
+    },
+  }
+  return downloadReq({
+    url: '/GJS/WebRequest',
+    method: 'post',
+    data: body,
+    headers,
+    extra,
+  })
+}
 
 // /** アップロード処理 */
 // export function upload(
