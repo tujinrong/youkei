@@ -86,8 +86,8 @@ const tableData = ref<SearchRowVM[]>([
 const cardRef = ref()
 
 onMounted(async () => {
-  // const res = await Search()
-  // tableData.value = res.KEKKA_LIST
+  const res = await Search()
+  tableData.value = res.KEKKA_LIST
 })
 const add = () => {
   editkbn.value = EnumEditKbn.Add

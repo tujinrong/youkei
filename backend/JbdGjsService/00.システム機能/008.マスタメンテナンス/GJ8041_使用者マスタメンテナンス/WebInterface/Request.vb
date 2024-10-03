@@ -36,6 +36,7 @@ Namespace JBD.GJS.Service.GJ8041
     Public Class DeleteRequest
         Inherits DaRequestBase
 
+        Public Property USERID As String = String.Empty
         ''' <summary>
         ''' データ更新日
         ''' </summary>

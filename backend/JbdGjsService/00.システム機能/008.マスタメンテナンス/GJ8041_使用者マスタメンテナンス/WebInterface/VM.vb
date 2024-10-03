@@ -17,7 +17,7 @@ Namespace JBD.GJS.Service.GJ8041
         ''' <summary>
         ''' ユーザーID
         ''' </summary>
-        Public Property USER_ID As String = String.Empty
+        Public Property USERID As String = String.Empty
 
         ''' <summary>
         ''' ユーザー名

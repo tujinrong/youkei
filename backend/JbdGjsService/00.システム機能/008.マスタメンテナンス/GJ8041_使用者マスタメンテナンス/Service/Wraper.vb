@@ -37,7 +37,7 @@ Namespace JBD.GJS.Service.GJ8041
                     dt = ds.Tables(1)
                     If dt.Rows.Count > 0 Then
                         Dim row As DataRow = dt.Rows(0)
-                        item.USER.USER_ID = DaConvertUtil.CStr(WordHenkan("N", "S", row("USER_ID")))
+                        item.USER.USERID = DaConvertUtil.CStr(WordHenkan("N", "S", row("USER_ID")))
                         item.USER.USER_NAME = DaConvertUtil.CStr(WordHenkan("N", "S", row("USER_NAME")))
                         item.USER.PASS = DaConvertUtil.CStr(WordHenkan("N", "S", row("PASS")))
                         item.USER.PASS_KIGEN_DATE = DaConvertUtil.CDate(row("PASS_KIGEN_DATE"))

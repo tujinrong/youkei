@@ -110,7 +110,7 @@ Namespace JBD.GJS.Service.GJ8041
                     '-------------------------------------------------------------
                     '検索結果出力用ＳＱＬ作成
                     Dim sReq As New InitDetailRequest()
-                    sReq.USER_ID = req.USER.USER_ID
+                    sReq.USERID = req.USER.USERID
                     Dim sql = FrmGJ8041Service.f_SetForm_Data(sReq)
 
                     'データSelect 

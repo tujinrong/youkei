@@ -55,7 +55,7 @@ Namespace JBD.GJS.Service.GJ8041
 
             '引き渡し
             'ユーザーID 
-            Cmd.Parameters.Add("IN_USER_USER_ID", wNojoCd.USER.USER_ID)
+            Cmd.Parameters.Add("IN_USER_USER_ID", wNojoCd.USER.USERID)
             '最新ログイン番号
             Cmd.Parameters.Add("IN_USER_NEW_LOGIN_NO", pLOGINUSERID)
             'ユーザー名 
@@ -126,7 +126,7 @@ Namespace JBD.GJS.Service.GJ8041
             wkCmd.CommandText = "PKG_GJ8041.GJ8041_USER_DEL"
 
             '引き渡し
-            wkCmd.Parameters.Add("IN_USER_USER_ID", wNojoCd.USER_ID)
+            wkCmd.Parameters.Add("IN_USER_USER_ID", wNojoCd.USERID)
 
             '戻り
             Dim p_MSGCD As OracleParameter = wkCmd.Parameters.Add("OU_MSGCD", OracleDbType.Varchar2, 255, DBNull.Value, ParameterDirection.Output)
