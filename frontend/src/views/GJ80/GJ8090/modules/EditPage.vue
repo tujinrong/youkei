@@ -343,7 +343,6 @@ watch(
 const closeModal = () => {
   resetFields()
   clearValidate()
-  emit('getTableList')
   modalVisible.value = false
 }
 //画面遷移
@@ -402,6 +401,7 @@ const saveData = async () => {
     onOk: async () => {
       await saveDB()
       closeModal()
+      emit('getTableList')
       message.success(SAVE_OK_INFO.Msg)
     },
   })
@@ -449,6 +449,7 @@ const deleteData = () => {
           EDIT_KBN: EnumEditKbn.Edit,
         })
         closeModal()
+        emit('getTableList')
         message.success(DELETE_OK_INFO.Msg)
       } catch (error) {}
     },

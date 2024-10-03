@@ -298,7 +298,6 @@ const closeModal = () => {
   resetFields()
   clearValidate()
   modalVisible.value = false
-  emit('getTableData')
 }
 const goList = () => {
   editJudge.judgeIsEdited(() => {
@@ -320,6 +319,8 @@ const saveData = async () => {
           },
           EDIT_KBN: isNew.value ? EnumEditKbn.Add : EnumEditKbn.Edit,
         })
+        closeModal()
+        emit('getTableData')
         message.success(SAVE_OK_INFO.Msg)
       } catch (error) {}
     },
@@ -338,6 +339,8 @@ const deleteData = () => {
           UP_DATE: upddttm,
           EDIT_KBN: EnumEditKbn.Edit,
         })
+        closeModal()
+        emit('getTableData')
         message.success(DELETE_OK_INFO.Msg)
       } catch (error) {}
     },

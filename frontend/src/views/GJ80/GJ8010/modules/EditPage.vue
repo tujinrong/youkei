@@ -206,7 +206,6 @@ const closeModal = () => {
   resetFields()
   clearValidate()
   modalVisible.value = false
-  emit('getTableList')
 }
 //画面遷移
 const goList = () => {
@@ -230,6 +229,7 @@ const saveData = async () => {
           EDIT_KBN: isNew.value ? EnumEditKbn.Add : EnumEditKbn.Edit,
         })
         closeModal()
+        emit('getTableList')
         message.success(SAVE_OK_INFO.Msg)
       } catch (error) {
         // closeModal()
@@ -251,6 +251,7 @@ const deleteData = () => {
           UP_DATE: upddttm,
         })
         closeModal()
+        emit('getTableList')
         message.success(DELETE_OK_INFO.Msg)
       } catch (error) {
         // closeModal()

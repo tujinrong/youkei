@@ -482,7 +482,6 @@ watch(
 const closeModal = () => {
   resetFields()
   clearValidate()
-  emit('getTableList')
   modalVisible.value = false
 }
 //画面遷移
@@ -515,6 +514,7 @@ const saveData = async () => {
           EDIT_KBN: props.editkbn,
         })
         closeModal()
+        emit('getTableList')
         message.success(SAVE_OK_INFO.Msg)
       } catch (error) {}
     },
@@ -535,6 +535,7 @@ const deleteData = () => {
           EDIT_KBN: props.editkbn,
         })
         closeModal()
+        emit('getTableList')
         message.success(DELETE_OK_INFO.Msg)
       } catch (error) {}
     },
