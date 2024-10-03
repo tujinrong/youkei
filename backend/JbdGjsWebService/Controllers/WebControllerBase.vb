@@ -32,7 +32,7 @@ Namespace JBD.GJS.WebService
                         r.browser = GetInfo(nameof(DaRequestBase.browser))
                     If authflg Then
                         r.token = GetInfo("Token")
-                        r.USER_ID = GetInfo(nameof(DaRequestBase.USER_ID))
+                        'r.USER_ID = GetInfo(nameof(DaRequestBase.USER_ID))
                         r.kinoid = GetInfo(NameOf(DaRequestBase.kinoid))
                     End If
                 End If

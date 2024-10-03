@@ -14,7 +14,6 @@ Namespace JBD.GJS.Service.GJ8041
     ''' </summary>
     Public Class InitDetailRequest
         Inherits DaRequestBase
-
     End Class
 
     ''' <summary>
