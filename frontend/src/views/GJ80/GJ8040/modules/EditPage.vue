@@ -15,9 +15,9 @@
             <a-col span="24">
               <th class="required">ユーザーID</th>
               <td>
-                <a-form-item v-bind="validateInfos.USER_ID">
+                <a-form-item v-bind="validateInfos.USERID">
                   <a-input
-                    v-model:value="formData.USER_ID"
+                    v-model:value="formData.USERID"
                     :maxlength="10"
                     :disabled="!isNew"
                     class="w-30!"
@@ -128,11 +128,17 @@
   </a-modal>
 </template>
 <script setup lang="ts">
-import { ITEM_REQUIRE_ERROR } from '@/constants/msg'
+import {
+  DELETE_CONFIRM,
+  DELETE_OK_INFO,
+  ITEM_REQUIRE_ERROR,
+  SAVE_CONFIRM,
+  SAVE_OK_INFO,
+} from '@/constants/msg'
 import { EnumEditKbn } from '@/enum'
-import { Form } from 'ant-design-vue'
+import { Form, message } from 'ant-design-vue'
 import { computed, nextTick, reactive, ref, watch } from 'vue'
-import { InitDetail } from '../service'
+import { Delete, InitDetail, Save } from '../service'
 import { Judgement } from '@/utils/judge-edited'
 import {
   convertKanaToHalfWidth,
@@ -140,6 +146,7 @@ import {
   getDateJpText,
 } from '@/utils/util'
 import { SearchRowVM } from '../type'
+import { showDeleteModal, showSaveModal } from '@/utils/modal'
 //---------------------------------------------------------------------------
 //属性
 //---------------------------------------------------------------------------
@@ -156,7 +163,7 @@ const emit = defineEmits(['update:visible', 'getTableData'])
 const editJudge = new Judgement('GJ8040')
 let upddttm
 const formData = reactive({
-  USER_ID: '',
+  USERID: '',
   USER_NAME: '',
   PASS: '',
   PASS_KIGEN_DATE: undefined,
@@ -168,7 +175,7 @@ const formData = reactive({
 
 const SIYO_KBN_LIST = ref<CmCodeNameModel[]>()
 const rules = reactive({
-  USER_ID: [
+  USERID: [
     {
       required: true,
       message: ITEM_REQUIRE_ERROR.Msg.replace('{0}', 'ユーザーID'),
@@ -247,11 +254,11 @@ watch(
   () => props.visible,
   (newValue) => {
     if (newValue) {
-      const userId = props.userData ? props.userData.USER_ID : undefined
+      const userId = props.userData ? props.userData.USERID : ''
       // Object.assign(formData, props.userData)
       // nextTick(() => editJudge.reset())
       InitDetail({
-        USER_ID: userId,
+        USERID: userId,
         EDIT_KBN: isNew.value ? EnumEditKbn.Add : EnumEditKbn.Edit,
       })
         .then((res) => {
@@ -277,7 +284,7 @@ watch(
   () => formData,
   (newVal) => {
     if (newVal) {
-      formData.USER_ID = convertKanaToHalfWidth(newVal.USER_ID)
+      formData.USERID = convertKanaToHalfWidth(newVal.USERID)
       formData.PASS = convertToHalfWidth(newVal.PASS)
     }
   },
@@ -302,41 +309,39 @@ const goList = () => {
 //登録処理
 const saveData = async () => {
   await validate()
-  // showSaveModal({
-  //   content: SAVE_CONFIRM.Msg,
-  //   onOk: async () => {
-  //     try {
-  //       await Save({
-  //         CODE_VM: {
-  //           ...formData,
-  //           UP_DATE: isNew.value ? undefined : upddttm,
-  //         },
-  //         EDIT_KBN: isNew.value ? EnumEditKbn.Add : EnumEditKbn.Edit,
-  //       })
-  //       router.push({ name: route.name, query: { refresh: '1' } })
-  //       message.success(SAVE_OK_INFO.Msg)
-  //     } catch (error) {}
-  //   },
-  // })
+  showSaveModal({
+    content: SAVE_CONFIRM.Msg,
+    onOk: async () => {
+      try {
+        await Save({
+          USER: {
+            ...formData,
+            UP_DATE: isNew.value ? undefined : upddttm,
+          },
+          EDIT_KBN: isNew.value ? EnumEditKbn.Add : EnumEditKbn.Edit,
+        })
+        message.success(SAVE_OK_INFO.Msg)
+      } catch (error) {}
+    },
+  })
 }
 
 //削除処理
 const deleteData = () => {
-  // showDeleteModal({
-  //   handleDB: true,
-  //   content: DELETE_CONFIRM.Msg,
-  //   onOk: async () => {
-  //     try {
-  //       await Delete({
-  //         USER_ID: formData.USER_ID,
-  //         UP_DATE: upddttm,
-  //         EDIT_KBN: EnumEditKbn.Edit,
-  //       })
-  //       router.push({ name: route.name, query: { refresh: '1' } })
-  //       message.success(DELETE_OK_INFO.Msg)
-  //     } catch (error) {}
-  //   },
-  // })
+  showDeleteModal({
+    handleDB: true,
+    content: DELETE_CONFIRM.Msg,
+    onOk: async () => {
+      try {
+        await Delete({
+          USERID: formData.USERID,
+          UP_DATE: upddttm,
+          EDIT_KBN: EnumEditKbn.Edit,
+        })
+        message.success(DELETE_OK_INFO.Msg)
+      } catch (error) {}
+    },
+  })
 }
 </script>
 <style lang="scss" scoped>

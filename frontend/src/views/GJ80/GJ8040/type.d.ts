@@ -14,7 +14,7 @@
 /**削除処理(一覧画面) */
 export interface DeleteRequest extends DaRequestBase {
   /**ユーザID */
-  USER_ID: string
+  USERID: string
   /**更新時間 */
   UP_DATE: Date
 }
@@ -22,7 +22,7 @@ export interface DeleteRequest extends DaRequestBase {
 /**検索処理(詳細画面) */
 export interface InitDetailRequest extends DaRequestBase {
   /**ユーザID */
-  USER_ID?: string
+  USERID: string
 }
 
 /**登録処理(詳細画面) */
@@ -55,7 +55,7 @@ export interface InitDetailResponse extends DaResponseBase {
 
 export interface SearchRowVM {
   /**ユーザID */
-  USER_ID: string
+  USERID: string
   /**ユーザ名 */
   USER_NAME: string
   /**使用区分  */
@@ -69,7 +69,7 @@ export interface SearchRowVM {
 /**契約者農場情報 */
 export interface DetailVM {
   /**ユーザID */
-  USER_ID: string
+  USERID: string
   /**ユーザ名 */
   USER_NAME: string
   /**パスワード */
