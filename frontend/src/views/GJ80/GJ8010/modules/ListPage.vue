@@ -1,28 +1,14 @@
 <template>
   <div class="h-full min-h-450px flex-col-stretch gap-12px staticWidth">
     <div>
-      <h1
-        style="
-          background: linear-gradient(to right, #c6e3ff, #f1f8ff);
-          color: #191970;
-        "
-      >
-        （GJ8010）コード一覧
-      </h1>
-      <a-divider
-        style="
-          height: 14px;
-          margin: 0;
-          background: linear-gradient(to right, #6495ed, #e3ecfc);
-        "
-      />
-
       <a-card
         ref="headRef"
         :bordered="false"
         class="staticWidth"
         :body-style="{ backgroundColor: 'aliceblue' }"
       >
+        <h1>（GJ8010）コード一覧</h1>
+
         <div class="self_adaption_table form mt-1">
           <a-row>
             <a-col

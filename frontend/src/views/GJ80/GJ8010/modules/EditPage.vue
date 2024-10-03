@@ -1,30 +1,14 @@
 <template>
   <a-modal
     :open="modalVisible"
-    wrapClassName="wrap-modal"
     centered
     width="800px"
+    title="（GJ8011）コードマスタメンテナンス"
     :body-style="{ height: '450px' }"
     :mask-closable="false"
     destroy-on-close
     @cancel="goList"
-    ><template #title
-      ><h1
-        style="
-          background: linear-gradient(to right, #c6e3ff, #f1f8ff);
-          color: #191970;
-        "
-      >
-        （GJ8011）コードマスタメンテナンス
-      </h1>
-      <a-divider
-        style="
-          height: 14px;
-          margin: 0;
-          background: linear-gradient(to right, #6495ed, #e3ecfc);
-        "
-    /></template>
-
+  >
     <div class="modal-container">
       <div class="edit_table form w-130">
         <a-form>
@@ -86,7 +70,7 @@
       </div>
     </div>
     <template #footer>
-      <div class="pt-2 flex justify-between border-t-1 px-6">
+      <div class="pt-2 flex justify-between border-t-1">
         <a-space :size="20">
           <a-button class="warning-btn" @click="saveData"> 保存 </a-button>
           <a-button class="danger-btn" :disabled="isNew" @click="deleteData">

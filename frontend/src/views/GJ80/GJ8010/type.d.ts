@@ -11,10 +11,9 @@ import { EnumAndOr, EnumEditKbn } from '@/enum'
 //-------------------------------------------------------------------
 //リクエスト
 //-------------------------------------------------------------------
-export interface InitRequest extends DaRequestBase {
-}
+export interface InitRequest extends DaRequestBase {}
 /**検索処理(一覧画面) */
-export interface SearchRequest extends CmSearchRequestBase{
+export interface SearchRequest extends CmSearchRequestBase {
   /**種類区分 */
   SYURUI_KBN: number | undefined
 }
@@ -32,7 +31,7 @@ export interface DeleteRequest extends DaRequestBase {
 /**検索処理(詳細画面) */
 export interface InitDetailRequest extends DaRequestBase {
   /**種類区分 */
-  SYURUI_KBN: number|undefined
+  SYURUI_KBN: number | undefined
   /**名称コード */
   MEISYO_CD: number
 }
@@ -41,8 +40,6 @@ export interface InitDetailRequest extends DaRequestBase {
 export interface SaveRequest extends DaRequestBase {
   /**コード情報 */
   CODE: DetailVM
-  /**編集区分 */
-  EDIT_KBN: EnumEditKbn
 }
 
 //-------------------------------------------------------------------
@@ -57,10 +54,6 @@ export interface InitResponse extends DaResponseBase {
 
 /**検索処理(一覧画面) */
 export interface SearchResponse extends CmSearchResponseBase {
-  /**期 */
-  KI: number
-  /**契約者番号 */
-  KEIYAKUSYA_CD: number
   /**契約者農場情報リスト */
   KEKKA_LIST: SearchRowVM[]
 }
