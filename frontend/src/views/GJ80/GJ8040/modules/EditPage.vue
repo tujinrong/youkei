@@ -33,9 +33,9 @@
                 <a-form-item v-bind="validateInfos.USER_NAME">
                   <a-input
                     v-model:value="formData.USER_NAME"
+                    v-fullwidth-limit
                     :maxlength="20"
                     class="w-60!"
-                    @input="checkUserNameInput"
                   ></a-input>
                 </a-form-item>
               </td>
@@ -220,28 +220,6 @@ const modalVisible = computed({
   },
 })
 const isNew = computed(() => props.editkbn === EnumEditKbn.Add)
-
-const checkUserNameInput = () => {
-  const userInput = formData.USER_NAME
-  let byteCount = 0
-  let result = ''
-
-  for (let i = 0; i < userInput.length; i++) {
-    const char = userInput[i]
-
-    if (char.match(/[^\x00-\x7F]/)) {
-      byteCount += 2
-    } else {
-      byteCount += 1
-    }
-
-    if (byteCount > 20) {
-      break
-    }
-    result += char
-  }
-  formData.USER_NAME = result
-}
 
 //---------------------------------------------------------------------------
 //フック関数

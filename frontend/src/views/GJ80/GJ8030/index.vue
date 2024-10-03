@@ -13,7 +13,10 @@
             <th class="required">協会名称</th>
             <td>
               <a-form-item v-bind="validateInfos.KYOKAI_NAME">
-                <a-input v-model:value="formData.KYOKAI_NAME"
+                <a-input
+                  v-model:value="formData.KYOKAI_NAME"
+                  v-fullwidth-limit
+                  :maxlength="30"
               /></a-form-item>
             </td>
           </a-col>
@@ -21,7 +24,11 @@
             <th class="required text-end!">支援事業名</th>
             <td>
               <a-form-item v-bind="validateInfos.JIGYO_NAME">
-                <a-input v-model:value="formData.JIGYO_NAME" />
+                <a-input
+                  v-model:value="formData.JIGYO_NAME"
+                  v-fullwidth-limit
+                  :maxlength="30"
+                />
               </a-form-item>
             </td>
           </a-col>
@@ -29,7 +36,11 @@
             <th class="required">役職名</th>
             <td>
               <a-form-item v-bind="validateInfos.YAKUMEI">
-                <a-input v-model:value="formData.YAKUMEI" />
+                <a-input
+                  v-model:value="formData.YAKUMEI"
+                  v-fullwidth-limit
+                  :maxlength="30"
+                />
               </a-form-item>
             </td>
           </a-col>
@@ -39,7 +50,11 @@
             <th class="required">会長名</th>
             <td>
               <a-form-item v-bind="validateInfos.KAICHO_NAME">
-                <a-input v-model:value="formData.KAICHO_NAME" />
+                <a-input
+                  v-model:value="formData.KAICHO_NAME"
+                  v-fullwidth-limit
+                  :maxlength="30"
+                />
               </a-form-item>
             </td>
           </a-col>
@@ -47,7 +62,11 @@
             <th class="text-end!">予備</th>
             <td>
               <a-form-item v-bind="validateInfos.YOBI1">
-                <a-input v-model:value="formData.YOBI1" />
+                <a-input
+                  v-model:value="formData.YOBI1"
+                  v-fullwidth-limit
+                  :maxlength="30"
+                />
               </a-form-item>
             </td>
           </a-col>
@@ -66,14 +85,24 @@
               <a-col span="24">
                 <td>
                   <a-form-item v-bind="validateInfos.ADDR1">
-                    <a-input v-model:value="formData.ADDR1" class="max-w-228" />
+                    <a-input
+                      v-model:value="formData.ADDR1"
+                      class="max-w-228"
+                      v-fullwidth-limit
+                      :maxlength="40"
+                    />
                   </a-form-item>
                 </td>
               </a-col>
               <a-col span="16">
                 <td>
                   <a-form-item v-bind="validateInfos.ADDR2">
-                    <a-input v-model:value="formData.ADDR2" class="max-w-228" />
+                    <a-input
+                      v-model:value="formData.ADDR2"
+                      class="max-w-228"
+                      v-fullwidth-limit
+                      :maxlength="40"
+                    />
                   </a-form-item>
                 </td>
               </a-col>
@@ -631,64 +660,6 @@ onMounted(async () => {
 //--------------------------------------------------------------------------
 //監視定義
 //--------------------------------------------------------------------------
-/** 協会名称 */
-watch(
-  () => formData.KYOKAI_NAME,
-  (newVal) => {
-    formData.KYOKAI_NAME = validateLength(newVal, maxLength.value)
-  }
-)
-
-/** 支援事業名 */
-watch(
-  () => formData.JIGYO_NAME,
-  (newVal) => {
-    formData.JIGYO_NAME = validateLength(newVal, maxLength.value)
-  }
-)
-
-/** 役職名 */
-watch(
-  () => formData.YAKUMEI,
-  (newVal) => {
-    formData.YAKUMEI = validateLength(newVal, maxLength.value)
-  }
-)
-
-/** 会長名 */
-watch(
-  () => formData.KAICHO_NAME,
-  (newVal) => {
-    formData.KAICHO_NAME = validateLength(newVal, maxLength.value)
-  }
-)
-
-/** 予備 */
-watch(
-  () => formData.YOBI1,
-  (newVal) => {
-    formData.YOBI1 = validateLength(newVal, maxLength.value)
-  }
-)
-
-/** 住所1 */
-watch(
-  () => formData.ADDR1,
-  (newVal) => {
-    const maxLength = 40
-    formData.ADDR1 = validateLength(newVal, maxLength)
-  }
-)
-
-/** 住所2 */
-watch(
-  () => formData.ADDR2,
-  (newVal) => {
-    const maxLength = 40
-    formData.ADDR2 = validateLength(newVal, maxLength)
-  }
-)
-
 /** 発行番号・漢字 */
 watch(
   () => formData.HAKKO_NO_KANJI,
