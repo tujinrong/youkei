@@ -14,6 +14,7 @@ Namespace JBD.GJS.Service.GJ8041
     ''' </summary>
     Public Class InitDetailRequest
         Inherits DaRequestBase
+        Public Property USERID As String = String.Empty
     End Class
 
     ''' <summary>

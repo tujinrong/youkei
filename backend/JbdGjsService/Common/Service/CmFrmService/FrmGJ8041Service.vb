@@ -26,7 +26,7 @@ Namespace JBD.GJS.Service.GJ8041
             wSql += " FROM" & vbCrLf
             wSql += "  TM_USER" & vbCrLf
             wSql += " WHERE" & vbCrLf
-            wSql += "  USER_ID = '" & req.USER_ID & "'" & vbCrLf
+            wSql += "  USER_ID = '" & req.USERID & "'" & vbCrLf
             Return wSql
         End Function
 #End Region
