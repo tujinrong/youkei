@@ -148,8 +148,9 @@ export function createRequest<
 
   return request
 }
+
 /**
- * create a request instance
+ * create a downloadRequest instance
  *
  * @param axiosConfig axios config
  * @param options request options
@@ -172,8 +173,38 @@ export function createDownloadRequest<
 
     const responseType = response.config?.responseType || 'json'
 
-    if (responseType === 'json') {
-      return opts.transformBackendResponse(response)
+    if (responseType === 'blob') {
+      return new Promise((resolve, reject) => {
+        try {
+          const blob = response.data as Blob
+          let fileName = ''
+          const contentDisposition = response.headers['content-disposition']
+          if (contentDisposition) {
+            const filenameMatch = contentDisposition.match(
+              /filename="?([^";]+)"?/
+            )
+            fileName =
+              filenameMatch && filenameMatch[1]
+                ? decodeURIComponent(filenameMatch[1])
+                : ''
+          }
+          document.createElement('a')
+          // 非IEダウンロード
+          const elink = document.createElement('a')
+          elink.download = fileName
+          elink.target = '_blank'
+          elink.style.display = 'none'
+          elink.href = URL.createObjectURL(blob)
+          document.body.appendChild(elink)
+          elink.click()
+          URL.revokeObjectURL(elink.href)
+          document.body.removeChild(elink)
+          resolve(response)
+        } catch (error) {
+          reject(error)
+        }
+      })
+      //return opts.transformBackendResponse(response)
     }
 
     return response as MappedType<R, T>
@@ -185,6 +216,7 @@ export function createDownloadRequest<
 
   return request
 }
+
 /**
  * create a flat request instance
  *
