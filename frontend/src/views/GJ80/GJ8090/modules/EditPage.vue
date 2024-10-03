@@ -137,7 +137,11 @@
       <div class="pt-2 flex justify-between border-t-1">
         <a-space :size="20">
           <a-button class="warning-btn" @click="saveData">保存</a-button>
-          <a-button class="warning-btn" @click="continueSave">
+          <a-button
+            class="warning-btn"
+            :disabled="!isNew"
+            @click="continueSave"
+          >
             保存して継続登録
           </a-button>
           <a-button class="danger-btn" :disabled="isNew" @click="deleteData"
@@ -403,7 +407,7 @@ const saveData = async () => {
   })
 }
 
-//保存して継続登録
+//保存して継続登録(新規モードのみ)
 const continueSave = async () => {
   await validate()
   showSaveModal({
@@ -411,7 +415,22 @@ const continueSave = async () => {
     onOk: async () => {
       await saveDB()
       message.success(SAVE_OK_INFO.Msg)
-      await init(true)
+      Object.assign(formData, {
+        NOJO_CD: undefined,
+        NOJO_NAME: '',
+        KEN_CD: undefined,
+        ADDR_POST: '',
+        ADDR_1: '',
+        ADDR_2: '',
+        ADDR_3: '',
+        ADDR_4: '',
+        MEISAI_NO: undefined,
+      })
+
+      nextTick(() => {
+        clearValidate()
+        editJudge.reset()
+      })
     },
   })
 }

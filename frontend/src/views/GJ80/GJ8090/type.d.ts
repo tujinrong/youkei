@@ -47,8 +47,6 @@ export interface InitDetailRequest extends DaRequestBase {
 export interface SaveRequest extends DaRequestBase {
   /**契約者農場情報 */
   KEIYAKUSYA_NOJO: DetailVM
-  /**編集区分 */
-  EDIT_KBN: EnumEditKbn
 }
 
 /**削除処理(一覧画面) */
