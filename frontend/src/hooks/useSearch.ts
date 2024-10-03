@@ -54,7 +54,7 @@ export default function useSearch({
       source.value = res[listname]
       loading.value = false
       setTimeout(() => {
-        if (tableRef) {
+        if (tableRef && source.value.length > 0) {
           tableRef.value?.setCurrentRow(source.value[0])
           tableRef.value?.scrollTo(0, 0)
         }

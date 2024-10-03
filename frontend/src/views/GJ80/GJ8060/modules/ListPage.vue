@@ -305,8 +305,8 @@ async function reset() {
 }
 
 const searchAll = async () => {
+  tableData.value = []
   await searchData()
-  //tableData.value
 }
 
 const csvOutput = async () => {
