@@ -47,6 +47,16 @@ Namespace JBD.GJS.Service.GJ8061
         Inherits DaRequestBase
 
         ''' <summary>
+        ''' 期
+        ''' </summary>
+        Public Property KI As Integer? = Nothing
+
+        ''' <summary>
+        ''' 事務委託先番号
+        ''' </summary>
+        Public Property ITAKU_CD As Integer? = Nothing
+
+        ''' <summary>
         ''' データ更新日
         ''' </summary>
         Public Property UP_DATE As DateTime?
