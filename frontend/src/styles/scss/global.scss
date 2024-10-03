@@ -259,3 +259,8 @@ h2 {
 input[disabled] {
   color: #adb2b8 !important;
 }
+
+//loading spin
+.ant-spin-nested-loading > div > .ant-spin {
+  max-height: 100vh;
+}

@@ -96,7 +96,4 @@ watchEffect(async () => {
 :deep(.ant-spin-container) {
   height: 100%;
 }
-:deep(.ant-spin.ant-spin-spinning) {
-  max-height: fit-content;
-}
 </style>
