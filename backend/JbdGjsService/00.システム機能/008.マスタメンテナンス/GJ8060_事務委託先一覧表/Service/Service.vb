@@ -45,6 +45,11 @@ Namespace JBD.GJS.Service.GJ8060
                     Dim sql = f_Ken_Data_Select()
                     Dim ds = FrmService.f_Select_ODP(db, sql)
                     Dim dt = ds.Tables(0)
+                    
+                    'データ結果判定
+                    If dt.Rows.Count = 0 Then
+                        Return New InitResponse("コントロールマスタが設定されていません。")
+                    End If
 
                     '-------------------------------------------------------------
                     '5.データ加工処理

@@ -35,17 +35,4 @@ Namespace JBD.GJS.Service.GJ8060
 
     End Class
 
-   ''' <summary>
-    ''' CSV出力処理_一覧画面
-    ''' </summary>
-    Public Class CsvExportRequest
-        Inherits CmSearchRequestBase
-
-        ''' <summary>
-        ''' CSV出力条件入力情報
-        ''' </summary>
-        Public Property NYURYOKU_JOHO As SearchVM
-
-    End Class
-
 End Namespace
