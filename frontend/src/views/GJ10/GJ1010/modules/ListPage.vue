@@ -314,10 +314,10 @@ const createDefaultParams = (): SearchRequest => {
     KEIYAKUSYA_CD: undefined,
     KEIYAKU_KBN: undefined,
     KEIYAKU_JYOKYO: undefined,
-    KEIYAKUSYA_NAME: undefined,
-    KEIYAKUSYA_KANA: undefined,
-    ADDR: undefined,
-    ADDR_TEL1: undefined,
+    KEIYAKUSYA_NAME: '',
+    KEIYAKUSYA_KANA: '',
+    ADDR: '',
+    ADDR_TEL1: '',
     JIMUITAKU_CD: {
       VALUE_FM: undefined,
       VALUE_TO: undefined,
@@ -349,16 +349,7 @@ const KEIYAKU_JYOKYO_LIST = ref<CmCodeNameModel[]>([])
 const ITAKU_LIST = ref<CmCodeNameModel[]>([])
 
 const tableData = ref<SearchRowVM[]>([])
-const tableDefault = {
-  KEIYAKUSYA_CD: 1003,
-  KEIYAKUSYA_NAME: '亜伊伊伊伊伊伊伊亜伊',
-  KEIYAKUSYA_KANA: 'ｲｲｱｱｱｲｱｲｱｲｱｱｱｲｱｱｲｱｱｱｲｱｱｱ',
-  KEIYAKU_KBN_NAME: '企業',
-  KEIYAKU_JYOKYO_NAME: '継続',
-  ADDR_TEL1: '1111-21-1121',
-  KEN_CD_NAME: '1北海道',
-  JIMUITAKU_NAME: '（宇）宇亜宇伊亜宇伊',
-}
+
 const editVisible = ref(false)
 const editkbn = ref<EnumEditKbn>(EnumEditKbn.Add)
 const { pageParams, totalCount, searchData, clear } = useSearch({

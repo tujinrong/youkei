@@ -120,23 +120,25 @@ Namespace JBD.GJS.Service.GJ1011
                         item.KEIYAKUSYA.KEIYAKU_JYOKYO = DaConvertUtil.CInt(WordHenkan("N", "S", row("KEIYAKU_JYOKYO")))
                         '入金日、返還日
                         If Not IsDBNull(row("NYU_HEN_DATE")) AndAlso Not IsNothing(row("NYU_HEN_DATE")) Then
-                            item.KEIYAKUSYA.NYU_HEN_DATE = DaConvertUtil.CNDate(row("NYU_HEN_DATE"))
+                            item.KEIYAKUSYA.NYU_HEN_DATE = DaConvertUtil.CDate(row("NYU_HEN_DATE"))
                         End If
                         '契約日
                         If Not IsDBNull(row("KEIYAKU_DATE")) AndAlso Not IsNothing(row("KEIYAKU_DATE")) Then
-                            item.KEIYAKUSYA.KEIYAKU_DATE = DaConvertUtil.CNDate(row("KEIYAKU_DATE"))
+                            item.KEIYAKUSYA.KEIYAKU_DATE = DaConvertUtil.CDate(row("KEIYAKU_DATE"))
                         End If
                         '契約状況
                         item.KEIYAKUSYA.KEIYAKU_JYOKYO = DaConvertUtil.CInt(WordHenkan("N", "S", row("KEIYAKU_JYOKYO")))
                         '経営安定対策事業生産者番号
-                        item.KEIYAKUSYA.SEISANSYA_CD = DaConvertUtil.CInt(WordHenkan("N", "S", row("SEISANSYA_CD")))
+                        If Not IsDBNull(row("SEISANSYA_CD")) AndAlso Not IsNothing(row("SEISANSYA_CD")) Then
+                            item.KEIYAKUSYA.SEISANSYA_CD = DaConvertUtil.CInt(WordHenkan("N", "S", row("SEISANSYA_CD")))
+                        End If
                         '日鶏協番号
-                        item.KEIYAKUSYA.NIKKEIKYO_CD = DaConvertUtil.CInt(WordHenkan("N", "S", row("NIKKEIKYO_CD")))
-
+                        If Not IsDBNull(row("NIKKEIKYO_CD")) AndAlso Not IsNothing(row("NIKKEIKYO_CD")) Then
+                            item.KEIYAKUSYA.NIKKEIKYO_CD = DaConvertUtil.CInt(WordHenkan("N", "S", row("NIKKEIKYO_CD")))
+                        End If
                         '↓==========================================================================↓
                         '↓      申請者基本情報２                    　                              ↓
                         '↓==========================================================================↓
-
                         '契約者名
                         item.KEIYAKUSYA.KEIYAKUSYA_NAME = DaConvertUtil.CStr(WordHenkan("N", "S", row("KEIYAKUSYA_NAME")))
                         '契約者名（フリガナ）
@@ -173,7 +175,9 @@ Namespace JBD.GJS.Service.GJ1011
                         '振込先支店コード
                         item.KEIYAKUSYA.FURI_BANK_SITEN_CD = DaConvertUtil.CStr(WordHenkan("N", "S", row("FURI_BANK_SITEN_CD")))
                         '口座種別
-                        item.KEIYAKUSYA.FURI_KOZA_SYUBETU = DaConvertUtil.CInt(WordHenkan("N", "S", row("FURI_KOZA_SYUBETU")))
+                        If Not IsDBNull(row("FURI_KOZA_SYUBETU")) AndAlso Not IsNothing(row("FURI_KOZA_SYUBETU")) Then
+                            item.KEIYAKUSYA.FURI_KOZA_SYUBETU = DaConvertUtil.CInt(WordHenkan("N", "S", row("FURI_KOZA_SYUBETU")))
+                        End If
                         '口座番号
                         item.KEIYAKUSYA.FURI_KOZA_NO = DaConvertUtil.CStr(WordHenkan("N", "S", row("FURI_KOZA_NO")))
                         '口座名義人
@@ -186,11 +190,11 @@ Namespace JBD.GJS.Service.GJ1011
                         item.KEIYAKUSYA.NYURYOKU_JYOKYO = DaConvertUtil.CInt(WordHenkan("N", "S", row("NYURYOKU_JYOKYO")))
                         '廃業日
                         If Not IsDBNull(row("HAIGYO_DATE")) AndAlso Not IsNothing(row("HAIGYO_DATE")) Then
-                            item.KEIYAKUSYA.HAIGYO_DATE = DaConvertUtil.CNDate(row("HAIGYO_DATE"))
+                            item.KEIYAKUSYA.HAIGYO_DATE = DaConvertUtil.CDate(row("HAIGYO_DATE"))
                         End If
 
-                        item.KEIYAKUSYA.UP_DATE = DaConvertUtil.CNDate(row("UP_DATE"))
-                        End If
+                        item.KEIYAKUSYA.UP_DATE = DaConvertUtil.CDate(row("UP_DATE"))
+                    End If
             End Select
 
             Return item

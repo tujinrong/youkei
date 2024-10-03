@@ -56,11 +56,11 @@ export interface SaveRequest extends DaRequestBase {
 
 export interface DeleteRequest extends DaRequestBase {
   /**期 */
-  KI: number
+  KI: number | undefined
   /**契約者番号 */
   KEIYAKUSYA_CD: number | undefined
   /**データ更新日 */
-  UP_DATE: Date
+  UP_DATE: Date | undefined
 }
 
 //-------------------------------------------------------------------

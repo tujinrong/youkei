@@ -16,7 +16,7 @@ Namespace JBD.GJS.Service.GJ8030
     Public Class Service
         Inherits CmServiceBase
 
-        <DisplayName("初期化処理_詳細画面処理")>
+        <DisplayName("初期化処理_詳細画面")>
         Public Shared Function InitDetail(req As InitDetailRequest) As InitDetailResponse
             Return Nolock(req,
                 Function(db)
@@ -65,7 +65,7 @@ Namespace JBD.GJS.Service.GJ8030
 
 
 
-        <DisplayName("検索処理_詳細画面処理")>
+        <DisplayName("検索処理_詳細画面")>
         Public Shared Function SearchDetail(req As DaRequestBase) As SearchDetailResponse
             Return Nolock(req,
                 Function(db)
@@ -110,7 +110,7 @@ Namespace JBD.GJS.Service.GJ8030
 
         End Function
 
-        <DisplayName("保存処理_詳細画面処理")>
+        <DisplayName("保存処理_詳細画面")>
         Public Shared Function Save(req As SaveRequest) As DaResponseBase
             Return Transction(req,
                 Function(db)

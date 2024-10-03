@@ -174,7 +174,7 @@ Namespace JBD.GJS.Service.GJ1011
             '備考    
             Cmd.Parameters.Add("IN_FURI_KOZA_BIKO", wNojoCd.KEIYAKUSYA.BIKO)
             '入力状況    
-            Cmd.Parameters.Add("IN_NYURYOKU_JYOKYO", wNojoCd.KEIYAKUSYA.NYURYOKU_JYOKYO + 1)
+            Cmd.Parameters.Add("IN_NYURYOKU_JYOKYO", wNojoCd.KEIYAKUSYA.NYURYOKU_JYOKYO)
             '廃業日
             If wNojoCd.KEIYAKUSYA.HAIGYO_DATE Is Nothing OrElse wNojoCd.KEIYAKUSYA.HAIGYO_DATE = New Date Then
                 Cmd.Parameters.Add("IN_HAIGYO_DATE", DBNull.Value)
