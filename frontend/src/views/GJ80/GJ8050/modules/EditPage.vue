@@ -61,7 +61,11 @@
       <div class="pt-2 flex justify-between border-t-1">
         <a-space :size="20">
           <a-button class="warning-btn" @click="saveData"> 保存 </a-button>
-          <a-button class="warning-btn" @click="continueSave">
+          <a-button
+            class="warning-btn"
+            :disabled="!isNew"
+            @click="continueSave"
+          >
             保存して継続登録
           </a-button>
 
@@ -272,7 +276,7 @@ const saveData = async () => {
   })
 }
 
-//保存して継続登録
+//保存して継続登録(新規モードのみ)
 const continueSave = async () => {
   await validate()
   showSaveModal({
@@ -280,7 +284,11 @@ const continueSave = async () => {
     onOk: async () => {
       await saveDB()
       message.success(SAVE_OK_INFO.Msg)
-      await init()
+      resetFields()
+      clearValidate()
+      nextTick(() => {
+        editJudge.reset()
+      })
     },
   })
 }
@@ -306,6 +314,6 @@ const deleteData = () => {
 </script>
 <style lang="scss" scoped>
 th {
-  width: 150px;
+  width: 200px;
 }
 </style>
