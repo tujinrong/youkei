@@ -34,9 +34,9 @@ Namespace JBD.GJS.Service.GJ8061
         Inherits DaRequestBase
 
         ''' <summary>
-        ''' 使用者情報
+        ''' 事務委託先情報
         ''' </summary>
-        Public Property USER As DetailVM = New DetailVM
+        Public Property ITAKU As DetailVM = New DetailVM
 
     End Class
 

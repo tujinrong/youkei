@@ -74,65 +74,66 @@ Namespace JBD.GJS.Service.GJ8061
         End Function
 
 
-        '<DisplayName("保存処理_詳細画面処理")>
-        'Public Shared Function Save(req As SaveRequest) As DaResponseBase
-        '    Return Transction(req,
-        '        Function(db)
+        <DisplayName("保存処理_詳細画面処理")>
+        Public Shared Function Save(req As SaveRequest) As DaResponseBase
+            Return Transction(req,
+                Function(db)
 
-        '            '-------------------------------------------------------------
-        '            '1.初期化
-        '            '-------------------------------------------------------------
+                    '-------------------------------------------------------------
+                    '1.初期化
+                    '-------------------------------------------------------------
 
-        '            '-------------------------------------------------------------
-        '            '2.データ取得
-        '            '-------------------------------------------------------------
+                    '-------------------------------------------------------------
+                    '2.データ取得
+                    '-------------------------------------------------------------
 
-        '            '-------------------------------------------------------------
-        '            '3.チェック処理
-        '            '-------------------------------------------------------------
+                    '-------------------------------------------------------------
+                    '3.チェック処理
+                    '-------------------------------------------------------------
 
-        '            '-------------------------------------------------------------
-        '            '4.ビジネスロジック処理
-        '            '-------------------------------------------------------------
-        '            '検索結果出力用ＳＱＬ作成
-        '            Dim sReq As New InitDetailRequest()
-        '            sReq.USER_ID = req.USER.USER_ID
-        '            Dim sql = FrmGJ8041Service.f_SetForm_Data(sReq)
+                    '-------------------------------------------------------------
+                    '4.ビジネスロジック処理
+                    '-------------------------------------------------------------
+                    '検索結果出力用ＳＱＬ作成
+                    Dim sReq As New InitDetailRequest()
+                    sReq.KI = req.ITAKU.KI
+                    sReq.ITAKU_CD = req.ITAKU.ITAKU_CD
+                    Dim iSql = FrmGJ8061Service.f_Search_SQLMake(sReq)
 
-        '            'データSelect 
-        '            Dim dt = FrmService.f_Select_ODP(db, sql).Tables(0)
+                    'データSelect 
+                    Dim dt = FrmService.f_Select_ODP(db, iSql).Tables(0)
 
-        '            'データの独占性
-        '            Select Case req.EDIT_KBN
-        '                Case EnumEditKbn.Edit       '変更入力
-        '                    If dt.Rows.Count = 0 Then
-        '                        Return New DaResponseBase("データが存在しないため、データを変更できません。")
-        '                    Else
-        '                        If CDate(dt.Rows(0)("UP_DATE")) > req.USER.UP_DATE Then
-        '                            Return New DaResponseBase("データを更新できません。他のユーザーによって変更された可能性があります。")
-        '                        End If
-        '                    End If
-        '                Case EnumEditKbn.Add       '新規入力
-        '                    If dt.Rows.Count > 0 Then
-        '                        Return New DaResponseBase("データは既に登録されています。")
-        '                    End If
-        '            End Select
+                    'データの独占性
+                    Select Case req.EDIT_KBN
+                        Case EnumEditKbn.Edit       '変更入力
+                            If dt.Rows.Count = 0 Then
+                                Return New DaResponseBase("データが存在しないため、データを変更できません。")
+                            Else
+                                If CDate(dt.Rows(0)("UP_DATE")) > req.ITAKU.UP_DATE Then
+                                    Return New DaResponseBase("データを更新できません。他のユーザーによって変更された可能性があります。")
+                                End If
+                            End If
+                        Case EnumEditKbn.Add       '新規入力
+                            If dt.Rows.Count > 0 Then
+                                Return New DaResponseBase("データは既に登録されています。")
+                            End If
+                    End Select
 
-        '            '保存処理
-        '            Dim res = FrmGJ8041Service.f_Data_Update(db, req)
+                    '保存処理
+                    Dim res = FrmGJ8061Service.f_Data_Update(db, req)
 
-        '            '-------------------------------------------------------------
-        '            '5.データ加工処理
-        '            '-------------------------------------------------------------
+                    '-------------------------------------------------------------
+                    '5.データ加工処理
+                    '-------------------------------------------------------------
 
-        '            '-------------------------------------------------------------
-        '            '6.正常返し
-        '            '-------------------------------------------------------------
-        '            Return res
+                    '-------------------------------------------------------------
+                    '6.正常返し
+                    '-------------------------------------------------------------
+                    Return res
 
-        '        End Function)
+                End Function)
 
-        'End Function
+        End Function
 
         <DisplayName("削除処理_詳細画面処理")>
         Public Shared Function Delete(req As DeleteRequest) As DaResponseBase
