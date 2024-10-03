@@ -83,12 +83,10 @@
   </a-modal>
 </template>
 <script setup lang="ts">
-import { EnumEditKbn, PageStatus } from '@/enum'
+import { EnumEditKbn } from '@/enum'
 import { Judgement } from '@/utils/judge-edited'
 import { computed, nextTick, reactive, watch } from 'vue'
-import { useRoute, useRouter } from 'vue-router'
-import { DetailVM } from '../type'
-import { convertToFullWidth } from '@/utils/util'
+import { convertToFullWidth, convertToHalfNumber } from '@/utils/util'
 import {
   DELETE_CONFIRM,
   DELETE_OK_INFO,
@@ -189,14 +187,16 @@ watch(
   () => formData.MEISYO,
   (newValue) => {
     if (newValue) formData.MEISYO = convertToFullWidth(newValue)
-  }
+  },
+  { deep: true }
 )
 
 watch(
   () => formData.RYAKUSYO,
   (newValue) => {
     if (newValue) formData.RYAKUSYO = convertToFullWidth(newValue)
-  }
+  },
+  { deep: true }
 )
 
 //--------------------------------------------------------------------------

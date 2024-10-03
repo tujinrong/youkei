@@ -315,15 +315,17 @@ export function convertALLToHalfWidth(input: string): string {
 }
 
 /**半角数字に変換*/
-export function convertToHalfNumber(input: string): string {
-  return input
+export function convertToHalfNumber(input: number | string): number {
+  const result = String(input)
     .replace(/[！-～]/g, (ch) => String.fromCharCode(ch.charCodeAt(0) - 0xfee0))
     .replace(/　/g, ' ')
     .replace(/[^0-9\s]/g, '')
+
+  return Number(result)
 }
 
 /**電話番号に変換*/
-export function convertToTel(input: string) {
+export function convertToTel(input: string): string {
   return input
     .replace(/[！-～]/g, (ch) => String.fromCharCode(ch.charCodeAt(0) - 0xfee0))
     .replace(/　/g, ' ')
@@ -355,9 +357,10 @@ export function convertToAllowedCharacters(input: string): string {
   const fullWidthToHalfWidth = input
     .replace(/[！-～]/g, (ch) => String.fromCharCode(ch.charCodeAt(0) - 0xfee0))
     .replace(/　/g, ' ')
+    .replace(/「」/g, '｢｣')
 
   return fullWidthToHalfWidth.replace(
-    /[^0-9A-Za-z\-@./!"#$%&'()=~|[\]{}^;:,.\\`+*<>?_ ]/g,
+    /[^0-9A-Za-z\-@./!"#$%&'()=~|｢｣[\]{}^;:,.\\`+*<>?_ ]/g,
     ''
   )
 }
@@ -387,4 +390,20 @@ export function convertKanaToHalfWidth(input: string): string {
     /[\u3040-\u309F\u30A0-\u30FF\uFF00-\uFFEF\u0020-\u007Eー]/g
 
   return (input.match(allowedCharacters) || []).map(convertChar).join('')
+}
+
+/**入力文字列を確認し、全バイト長(フルウィット:2バイト、ハーフウィット:1バイト)が指定された制限を超えないことを確認 */
+export function validateLength(input: string, length: number): string {
+  let byteCount = 0
+  let result = ''
+
+  for (let i = 0; i < input.length; i++) {
+    const char = input[i]
+    byteCount += char.match(/[^\x00-\x7F]/) ? 2 : 1
+    if (byteCount > length) {
+      break
+    }
+    result += char
+  }
+  return result
 }

@@ -47,9 +47,7 @@
               <a-form-item v-bind="validateInfos.BANK_NAME">
                 <a-input
                   v-model:value="formData.BANK_NAME"
-                  :maxlength="30"
                   class="max-w-75"
-                  @input="checkUserNameInput(30)"
                 ></a-input>
               </a-form-item>
             </td>
@@ -89,10 +87,14 @@ import {
 import { EnumEditKbn } from '@/enum'
 import { showDeleteModal, showInfoModal, showSaveModal } from '@/utils/modal'
 import { Form, message } from 'ant-design-vue'
-import { computed, nextTick, reactive, watch } from 'vue'
+import { computed, nextTick, reactive, ref, watch } from 'vue'
 import { Judgement } from '@/utils/judge-edited'
 import { DeleteBank, InitBankDetail, SaveBank } from '../service/8051/service'
-import { convertKanaToHalfWidth, convertToHalfNumber } from '@/utils/util'
+import {
+  validateLength,
+  convertKanaToHalfWidth,
+  convertToHalfNumber,
+} from '@/utils/util'
 //---------------------------------------------------------------------------
 //属性
 //---------------------------------------------------------------------------
@@ -108,7 +110,7 @@ const emit = defineEmits(['update:visible', 'getTableList'])
 //--------------------------------------------------------------------------
 
 const editJudge = new Judgement('GJ8051')
-let upddttm
+let upddttm: Date | undefined
 
 const formData = reactive({
   BANK_CD: '',
@@ -163,28 +165,6 @@ const modalVisible = computed({
 })
 const isNew = computed(() => (props.editkbn === EnumEditKbn.Add ? true : false))
 
-const checkUserNameInput = (maxlength: number) => {
-  const userInput = formData.BANK_NAME
-  let byteCount = 0
-  let result = ''
-
-  for (let i = 0; i < userInput.length; i++) {
-    const char = userInput[i]
-
-    if (char.match(/[^\x00-\x7F]/)) {
-      byteCount += 2
-    } else {
-      byteCount += 1
-    }
-
-    if (byteCount > maxlength) {
-      break
-    }
-    result += char
-  }
-  formData.BANK_NAME = result
-}
-
 //--------------------------------------------------------------------------
 //監視定義
 //--------------------------------------------------------------------------
@@ -204,14 +184,31 @@ watch(
 watch(formData, () => editJudge.setEdited())
 
 watch(
-  () => formData,
+  () => formData.BANK_CD,
   (newVal) => {
     if (newVal) {
-      formData.BANK_CD = convertToHalfNumber(newVal.BANK_CD)
-      formData.BANK_KANA = convertKanaToHalfWidth(newVal.BANK_KANA)
+      formData.BANK_CD = convertToHalfNumber(newVal)
     }
   },
   { deep: true }
+)
+
+watch(
+  () => formData.BANK_KANA,
+  (newVal) => {
+    if (newVal) {
+      formData.BANK_KANA = convertKanaToHalfWidth(newVal)
+    }
+  },
+  { deep: true }
+)
+
+watch(
+  () => formData.BANK_NAME,
+  (newVal) => {
+    const maxLength = 30
+    formData.BANK_NAME = validateLength(newVal, maxLength)
+  }
 )
 
 //--------------------------------------------------------------------------

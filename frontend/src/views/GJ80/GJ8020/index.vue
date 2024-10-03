@@ -171,7 +171,6 @@ import {
   SAVE_OK_INFO,
 } from '@/constants/msg'
 import { showConfirmModal, showSaveModal } from '@/utils/modal'
-import dayjs from 'dayjs'
 import { getDateJpText, convertToFullWidth } from '@/utils/util'
 
 const formData = reactive<DetailVM>({
@@ -215,6 +214,18 @@ const { validate, clearValidate, validateInfos, resetFields } = Form.useForm(
 onMounted(async () => {
   init()
 })
+
+//--------------------------------------------------------------------------
+//監視定義
+//--------------------------------------------------------------------------
+watch(
+  () => formData.BIKO,
+  (newVal) => {
+    if (newVal) {
+      formData.BIKO = convertToFullWidth(newVal)
+    }
+  }
+)
 
 watch(
   () => formData,
@@ -262,18 +273,6 @@ const cancel = () => {
     },
   })
 }
-
-//--------------------------------------------------------------------------
-//監視定義
-//--------------------------------------------------------------------------
-watch(
-  () => formData.BIKO,
-  (newVal) => {
-    if (newVal) {
-      formData.BIKO = convertToFullWidth(newVal)
-    }
-  }
-)
 </script>
 <style lang="scss" scoped>
 th {

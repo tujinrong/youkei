@@ -13,7 +13,7 @@
             <th class="required">協会名称</th>
             <td>
               <a-form-item v-bind="validateInfos.KYOKAI_NAME">
-                <a-input v-model:value="formData.KYOKAI_NAME" :maxlength="30"
+                <a-input v-model:value="formData.KYOKAI_NAME"
               /></a-form-item>
             </td>
           </a-col>
@@ -21,7 +21,7 @@
             <th class="required text-end!">支援事業名</th>
             <td>
               <a-form-item v-bind="validateInfos.JIGYO_NAME">
-                <a-input v-model:value="formData.JIGYO_NAME" :maxlength="30" />
+                <a-input v-model:value="formData.JIGYO_NAME" />
               </a-form-item>
             </td>
           </a-col>
@@ -29,7 +29,7 @@
             <th class="required">役職名</th>
             <td>
               <a-form-item v-bind="validateInfos.YAKUMEI">
-                <a-input v-model:value="formData.YAKUMEI" :maxlength="30" />
+                <a-input v-model:value="formData.YAKUMEI" />
               </a-form-item>
             </td>
           </a-col>
@@ -39,14 +39,16 @@
             <th class="required">会長名</th>
             <td>
               <a-form-item v-bind="validateInfos.KAICHO_NAME">
-                <a-input v-model:value="formData.KAICHO_NAME" :maxlength="30" />
+                <a-input v-model:value="formData.KAICHO_NAME" />
               </a-form-item>
             </td>
           </a-col>
           <a-col span="12">
             <th class="text-end!">予備</th>
             <td>
-              <a-input v-model:value="formData.YOBI1" :maxlength="30" />
+              <a-form-item v-bind="validateInfos.YOBI1">
+                <a-input v-model:value="formData.YOBI1" />
+              </a-form-item>
             </td>
           </a-col>
         </a-row>
@@ -64,21 +66,15 @@
               <a-col span="24">
                 <td>
                   <a-form-item v-bind="validateInfos.ADDR1">
-                    <a-input
-                      v-model:value="formData.ADDR1"
-                      :maxlength="40"
-                      class="max-w-228"
-                    />
+                    <a-input v-model:value="formData.ADDR1" class="max-w-228" />
                   </a-form-item>
                 </td>
               </a-col>
               <a-col span="16">
                 <td>
-                  <a-input
-                    v-model:value="formData.ADDR2"
-                    :maxlength="40"
-                    class="max-w-228"
-                  />
+                  <a-form-item v-bind="validateInfos.ADDR2">
+                    <a-input v-model:value="formData.ADDR2" class="max-w-228" />
+                  </a-form-item>
                 </td>
               </a-col>
               <a-col span="8">
@@ -151,7 +147,7 @@
               <a-col span="12">
                 <th class="text-end!">E-mail２</th>
                 <td>
-                  <a-form-item v-bind="validateInfos.E_MAIL1">
+                  <a-form-item v-bind="validateInfos.E_MAIL2">
                     <a-input
                       v-model:value="formData.E_MAIL2"
                       :maxlength="100"
@@ -400,7 +396,7 @@
 <script setup lang="ts">
 import { Judgement } from '@/utils/judge-edited'
 import { Form, message } from 'ant-design-vue'
-import { onMounted, reactive, watch } from 'vue'
+import { onMounted, reactive, ref, watch } from 'vue'
 import { InitDetail, Save, SearchDetail } from './service'
 import { DetailVM } from './type'
 import { showConfirmModal, showSaveModal } from '@/utils/modal'
@@ -417,6 +413,7 @@ import {
   convertToAllowedCharacters,
   convertKanaToHalfWidth,
   convertToHalfWidthProhibitSymbol,
+  validateLength,
 } from '@/utils/util'
 
 const formData = reactive<DetailVM>({
@@ -462,6 +459,8 @@ const option1 = reactive({
   KOZA_SYUBETU_LIST: [],
 })
 
+const maxLength = ref(30)
+
 /**支払口座プルダウンリスト  */
 const option2 = reactive({
   BANK_LIST: [],
@@ -494,6 +493,12 @@ const rules = reactive({
       message: ITEM_REQUIRE_ERROR.Msg.replace('{0}', '会長名'),
     },
   ],
+  YOBI1: [
+    {
+      required: false,
+      message: ITEM_REQUIRE_ERROR.Msg.replace('{0}', '予備'),
+    },
+  ],
   POST: [
     {
       required: true,
@@ -504,6 +509,12 @@ const rules = reactive({
     {
       required: true,
       message: ITEM_REQUIRE_ERROR.Msg.replace('{0}', '住所1'),
+    },
+  ],
+  ADDR2: [
+    {
+      required: false,
+      message: ITEM_REQUIRE_ERROR.Msg.replace('{0}', '住所2'),
     },
   ],
   HAKKO_NO_KANJI: [
@@ -522,6 +533,30 @@ const rules = reactive({
     {
       required: true,
       message: ITEM_REQUIRE_ERROR.Msg.replace('{0}', 'ＦＡＸ１'),
+    },
+  ],
+  E_MAIL1: [
+    {
+      required: false,
+      message: ITEM_REQUIRE_ERROR.Msg.replace('{0}', 'E-mail１'),
+    },
+  ],
+  TEL2: [
+    {
+      required: false,
+      message: ITEM_REQUIRE_ERROR.Msg.replace('{0}', '電話２'),
+    },
+  ],
+  FAX2: [
+    {
+      required: false,
+      message: ITEM_REQUIRE_ERROR.Msg.replace('{0}', 'ＦＡＸ２'),
+    },
+  ],
+  E_MAIL2: [
+    {
+      required: false,
+      message: ITEM_REQUIRE_ERROR.Msg.replace('{0}', 'E-mail２'),
     },
   ],
   HP_URL: [
@@ -592,12 +627,231 @@ onMounted(async () => {
   const res = await SearchDetail({})
   Object.assign(formData, res.KYOKAI)
 })
+
+//--------------------------------------------------------------------------
+//監視定義
+//--------------------------------------------------------------------------
+/** 協会名称 */
+watch(
+  () => formData.KYOKAI_NAME,
+  (newVal) => {
+    formData.KYOKAI_NAME = validateLength(newVal, maxLength.value)
+  }
+)
+
+/** 支援事業名 */
+watch(
+  () => formData.JIGYO_NAME,
+  (newVal) => {
+    formData.JIGYO_NAME = validateLength(newVal, maxLength.value)
+  }
+)
+
+/** 役職名 */
+watch(
+  () => formData.YAKUMEI,
+  (newVal) => {
+    formData.YAKUMEI = validateLength(newVal, maxLength.value)
+  }
+)
+
+/** 会長名 */
+watch(
+  () => formData.KAICHO_NAME,
+  (newVal) => {
+    formData.KAICHO_NAME = validateLength(newVal, maxLength.value)
+  }
+)
+
+/** 予備 */
+watch(
+  () => formData.YOBI1,
+  (newVal) => {
+    formData.YOBI1 = validateLength(newVal, maxLength.value)
+  }
+)
+
+/** 住所1 */
+watch(
+  () => formData.ADDR1,
+  (newVal) => {
+    const maxLength = 40
+    formData.ADDR1 = validateLength(newVal, maxLength)
+  }
+)
+
+/** 住所2 */
+watch(
+  () => formData.ADDR2,
+  (newVal) => {
+    const maxLength = 40
+    formData.ADDR2 = validateLength(newVal, maxLength)
+  }
+)
+
+/** 発行番号・漢字 */
+watch(
+  () => formData.HAKKO_NO_KANJI,
+  (newVal) => {
+    if (newVal) {
+      formData.HAKKO_NO_KANJI = convertToFullWidth(newVal)
+    }
+  },
+  { deep: true }
+)
+
+/** 電話1 */
+watch(
+  () => formData.TEL1,
+  (newVal) => {
+    if (newVal) {
+      formData.TEL1 = convertToTel(newVal)
+    }
+  },
+  { deep: true }
+)
+
+/** FAX1 */
+watch(
+  () => formData.FAX1,
+  (newVal) => {
+    if (newVal) {
+      formData.FAX1 = convertToTel(newVal)
+    }
+  },
+  { deep: true }
+)
+
+/** E-Mail1 */
+watch(
+  () => formData.E_MAIL1,
+  (newVal) => {
+    if (newVal) {
+      formData.E_MAIL1 = convertToAllowedCharacters(newVal)
+    }
+  },
+  { deep: true }
+)
+
+/** 電話2 */
+watch(
+  () => formData.TEL2,
+  (newVal) => {
+    if (newVal) {
+      formData.TEL2 = convertToTel(newVal)
+    }
+  },
+  { deep: true }
+)
+
+/** FAX2 */
+watch(
+  () => formData.FAX2,
+  (newVal) => {
+    if (newVal) {
+      formData.FAX2 = convertToTel(newVal)
+    }
+  },
+  { deep: true }
+)
+
+/** E-Mail2 */
+watch(
+  () => formData.E_MAIL2,
+  (newVal) => {
+    if (newVal) {
+      formData.E_MAIL2 = convertToAllowedCharacters(newVal)
+    }
+  },
+  { deep: true }
+)
+
+/** ホームページURL */
+watch(
+  () => formData.HP_URL,
+  (newVal) => {
+    if (newVal) {
+      formData.HP_URL = convertToAllowedCharacters(newVal)
+    }
+  },
+  { deep: true }
+)
+
+/** 登録番号 */
+watch(
+  () => formData.TOUROKU_NO,
+  (newVal) => {
+    if (newVal) {
+      formData.TOUROKU_NO = convertToHalfWidthProhibitSymbol(newVal)
+    }
+  },
+  { deep: true }
+)
+
+/** 振込　口座名義人（カナ） */
+watch(
+  () => formData.FURI_KOZA_MEIGI_KANA,
+  (newVal) => {
+    if (newVal) {
+      formData.FURI_KOZA_MEIGI_KANA = convertKanaToHalfWidth(newVal)
+    }
+  },
+  { deep: true }
+)
+
+/** 振込　口座名義人（漢字） */
+watch(
+  () => formData.FURI_KOZA_MEIGI,
+  (newVal) => {
+    if (newVal) {
+      formData.FURI_KOZA_MEIGI = convertToFullWidth(newVal)
+    }
+  },
+  { deep: true }
+)
+
+/** 支払　振込依頼人名（ﾌﾘｶﾞﾅ） */
+watch(
+  () => formData.KOFU_KAISYA_NAME,
+  (newVal) => {
+    if (newVal) {
+      formData.KOFU_KAISYA_NAME = convertKanaToHalfWidth(newVal)
+    }
+  },
+  { deep: true }
+)
+
 watch(
   () => formData,
   () => {
     editJudge.setEdited()
   }
 )
+
+// watch(
+//   () => formData,
+//   (newVal) => {
+//     if (newVal) {
+//       formData.HAKKO_NO_KANJI = convertToFullWidth(newVal.HAKKO_NO_KANJI)
+//       formData.TEL1 = convertToTel(newVal.TEL1)
+//       formData.FAX1 = convertToTel(newVal.FAX1)
+//       formData.TEL2 = convertToTel(newVal.TEL2)
+//       formData.FAX2 = convertToTel(newVal.FAX2)
+//       formData.E_MAIL1 = convertToAllowedCharacters(newVal.E_MAIL1)
+//       formData.E_MAIL2 = convertToAllowedCharacters(newVal.E_MAIL2)
+//       formData.HP_URL = convertToAllowedCharacters(newVal.HP_URL)
+//       formData.TOUROKU_NO = convertToHalfWidthProhibitSymbol(newVal.TOUROKU_NO)
+//       formData.FURI_KOZA_MEIGI_KANA = convertKanaToHalfWidth(
+//         newVal.FURI_KOZA_MEIGI_KANA
+//       )
+//       formData.FURI_KOZA_MEIGI = convertToFullWidth(newVal.FURI_KOZA_MEIGI)
+//       formData.KOFU_KAISYA_NAME = convertKanaToHalfWidth(
+//         newVal.KOFU_KAISYA_NAME
+//       )
+//     }
+//   },
+//   { deep: true }
+// )
 
 //振込　金融機関
 watch(
@@ -652,34 +906,6 @@ const cancel = () => {
     },
   })
 }
-
-//--------------------------------------------------------------------------
-//監視定義
-//--------------------------------------------------------------------------
-watch(
-  () => formData,
-  (newVal) => {
-    if (newVal) {
-      formData.HAKKO_NO_KANJI = convertToFullWidth(newVal.HAKKO_NO_KANJI)
-      formData.TEL1 = convertToTel(newVal.TEL1)
-      formData.FAX1 = convertToTel(newVal.FAX1)
-      formData.TEL2 = convertToTel(newVal.TEL2)
-      formData.FAX2 = convertToTel(newVal.FAX2)
-      formData.E_MAIL1 = convertToAllowedCharacters(newVal.E_MAIL1)
-      formData.E_MAIL2 = convertToAllowedCharacters(newVal.E_MAIL2)
-      formData.HP_URL = convertToAllowedCharacters(newVal.HP_URL)
-      formData.TOUROKU_NO = convertToHalfWidthProhibitSymbol(newVal.TOUROKU_NO)
-      formData.FURI_KOZA_MEIGI_KANA = convertKanaToHalfWidth(
-        newVal.FURI_KOZA_MEIGI_KANA
-      )
-      formData.FURI_KOZA_MEIGI = convertToFullWidth(newVal.FURI_KOZA_MEIGI)
-      formData.KOFU_KAISYA_NAME = convertKanaToHalfWidth(
-        newVal.KOFU_KAISYA_NAME
-      )
-    }
-  },
-  { deep: true }
-)
 </script>
 
 <style lang="scss" scoped>
