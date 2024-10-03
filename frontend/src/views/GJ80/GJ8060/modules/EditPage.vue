@@ -459,7 +459,7 @@ watch(formData, () => editJudge.setEdited())
 watch(
   () => formData.KEN_CD,
   (newVal) => {
-    if (KEN_CD_NAME_LIST.value.length > 0)
+    if (KEN_CD_NAME_LIST.value && KEN_CD_NAME_LIST.value.length > 0)
       formData.ADDR_1 =
         KEN_CD_NAME_LIST.value.find((item) => item.CODE === newVal)?.NAME || ''
   }
