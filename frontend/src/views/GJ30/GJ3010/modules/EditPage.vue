@@ -1,6 +1,6 @@
 <template>
   <a-modal
-    :visible="modalVisible"
+    :open="modalVisible"
     centered
     title="（GJ3011）互助基金契約者情報変更(增羽) 請求書発行"
     width="800px"

@@ -1,6 +1,6 @@
 <template>
   <a-modal
-    :visible="visible"
+    :open="visible"
     :body-style="{ height: '450px' }"
     width="800px"
     title="（GJ8101）消費税率マスタメンテナンス"

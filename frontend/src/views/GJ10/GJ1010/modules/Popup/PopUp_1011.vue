@@ -8,7 +8,7 @@
  * ----------------------------------------------------------------->
 <template>
   <a-modal
-    :visible="modalVisible"
+    :open="modalVisible"
     centered
     title="（GJ1011）互助基金契約者マスタメンテナンス（基本情報入力）"
     width="1200px"

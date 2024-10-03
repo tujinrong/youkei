@@ -1,6 +1,6 @@
 <template>
   <a-modal
-    :visible="modalVisible"
+    :open="modalVisible"
     centered
     title="（GJ8041）使用者マスタメンテナンス"
     width="800px"

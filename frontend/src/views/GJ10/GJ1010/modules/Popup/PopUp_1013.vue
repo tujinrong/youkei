@@ -8,7 +8,7 @@
  * ----------------------------------------------------------------->
 <template>
   <a-modal
-    :visible="detailKbn === FarmManage.FarmInfo"
+    :open="detailKbn === FarmManage.FarmInfo"
     centered
     title="（GJ1013）互助基金契約者マスタメンテナンス(農場情報入力)"
     width="1000px"

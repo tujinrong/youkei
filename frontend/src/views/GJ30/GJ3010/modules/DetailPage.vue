@@ -9,7 +9,7 @@
 <template>
   <a-modal
     v-show="detailKbn === FarmManage.Detail"
-    :visible="modalVisible"
+    :open="modalVisible"
     centered
     title="契約農場別明細 增羽情報(入力)"
     width="800px"

@@ -8,7 +8,7 @@
  * ----------------------------------------------------------------->
 <template>
   <a-modal
-    :visible="modalVisible"
+    :open="modalVisible"
     centered
     title="契約農場別明細 移動情報(入力)"
     width="1000px"

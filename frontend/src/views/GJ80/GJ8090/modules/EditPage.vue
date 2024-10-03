@@ -8,7 +8,7 @@
  * ----------------------------------------------------------------->
 <template>
   <a-modal
-    :visible="modalVisible"
+    :open="modalVisible"
     centered
     title="（GJ8091）契約者農場マスタメンテナンス"
     width="800px"

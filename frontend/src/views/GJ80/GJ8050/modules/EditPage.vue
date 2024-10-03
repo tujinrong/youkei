@@ -1,6 +1,6 @@
 <template>
   <a-modal
-    :visible="modalVisible"
+    :open="modalVisible"
     centered
     title="（GJ8051）金融機関マスタメンテナンス"
     width="1000px"

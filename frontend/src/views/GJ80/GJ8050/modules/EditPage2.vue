@@ -1,6 +1,6 @@
 <template>
   <a-modal
-    :visible="modalVisible"
+    :open="modalVisible"
     centered
     title="（GJ8052）支店マスタメンテナンス"
     width="1000px"

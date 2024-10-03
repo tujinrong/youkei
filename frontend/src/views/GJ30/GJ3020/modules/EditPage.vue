@@ -1,6 +1,6 @@
 <template>
   <a-modal
-    :visible="modalVisible"
+    :open="modalVisible"
     centered
     title="（GJ3021）互助基金契約者情報変更（契約区分変更）通知書発行"
     width="800px"
@@ -24,7 +24,7 @@
               borderTop: 'none',
             }"
           >
-            　
+
           </th>
           <td><span class="pt-1">　2:企業</span></td></a-col
         ></a-row

@@ -8,7 +8,7 @@
  * ----------------------------------------------------------------->
 <template>
   <a-modal
-    :visible="modalVisible"
+    :open="modalVisible"
     centered
     title="契約区分情報(入力)"
     width="800px"

@@ -1,6 +1,6 @@
 <template>
   <a-modal
-    :visible="modalVisible"
+    :open="modalVisible"
     wrapClassName="wrap-modal"
     centered
     width="800px"

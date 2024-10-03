@@ -1,7 +1,7 @@
 <template>
   <a-modal
     v-show="detailKbn === FarmManage.Detail"
-    :visible="visible"
+    :open="visible"
     centered
     title="2.契約農場別登録明細情報(入力)"
     width="1000px"
