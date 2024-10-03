@@ -55,7 +55,7 @@ export interface InitDetailResponse extends DaResponseBase {
 
 export interface SearchRowVM {
   /**ユーザID */
-  USER_ID: string
+  USERID: string
   /**ユーザ名 */
   USER_NAME: string
   /**使用区分  */

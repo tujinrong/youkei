@@ -15,9 +15,9 @@
             <a-col span="24">
               <th class="required">ユーザーID</th>
               <td>
-                <a-form-item v-bind="validateInfos.USER_ID">
+                <a-form-item v-bind="validateInfos.USERID">
                   <a-input
-                    v-model:value="formData.USER_ID"
+                    v-model:value="formData.USERID"
                     :maxlength="10"
                     :disabled="!isNew"
                     class="w-30!"
@@ -163,7 +163,7 @@ const emit = defineEmits(['update:visible', 'getTableData'])
 const editJudge = new Judgement('GJ8040')
 let upddttm
 const formData = reactive({
-  USER_ID: '',
+  USERID: '',
   USER_NAME: '',
   PASS: '',
   PASS_KIGEN_DATE: undefined,
@@ -175,7 +175,7 @@ const formData = reactive({
 
 const SIYO_KBN_LIST = ref<CmCodeNameModel[]>()
 const rules = reactive({
-  USER_ID: [
+  USERID: [
     {
       required: true,
       message: ITEM_REQUIRE_ERROR.Msg.replace('{0}', 'ユーザーID'),
@@ -254,10 +254,9 @@ watch(
   () => props.visible,
   (newValue) => {
     if (newValue) {
-      const userId = props.userData ? props.userData.USER_ID : ''
+      const userId = props.userData ? props.userData.USERID : ''
       // Object.assign(formData, props.userData)
       // nextTick(() => editJudge.reset())
-      debugger
       InitDetail({
         USERID: userId,
         EDIT_KBN: isNew.value ? EnumEditKbn.Add : EnumEditKbn.Edit,
@@ -285,7 +284,7 @@ watch(
   () => formData,
   (newVal) => {
     if (newVal) {
-      formData.USER_ID = convertKanaToHalfWidth(newVal.USER_ID)
+      formData.USERID = convertKanaToHalfWidth(newVal.USERID)
       formData.PASS = convertToHalfWidth(newVal.PASS)
     }
   },
@@ -335,7 +334,7 @@ const deleteData = () => {
     onOk: async () => {
       try {
         await Delete({
-          USERID: formData.USER_ID,
+          USERID: formData.USERID,
           UP_DATE: upddttm,
           EDIT_KBN: EnumEditKbn.Edit,
         })
