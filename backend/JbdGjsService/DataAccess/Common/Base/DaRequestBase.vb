@@ -54,18 +54,18 @@ Namespace JBD.GJS.Service
         ''' OS
         ''' </summary>
         <JsonIgnore>
-        Public Property os As String = String.Empty                           
+        Public Property os As String = String.Empty
 
         ''' <summary>
         ''' ブラウザー
         ''' </summary>
         <JsonIgnore>
-        Public Property browser As String = String.Empty                      
+        Public Property browser As String = String.Empty
 
         ''' <summary>
         ''' ユーザーID
         ''' </summary>
-        Public Property USER_ID As String = String.Empty                   
+        Public Property USER_ID As String = String.Empty
 
         ''' <summary>
         ''' トークン

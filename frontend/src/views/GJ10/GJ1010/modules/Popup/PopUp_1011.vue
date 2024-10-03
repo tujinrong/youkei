@@ -18,28 +18,37 @@
     @cancel="goList"
   >
     <div class="edit_table form">
-      <b>第8期</b>
+      <b>第{{ formData.KI }}期</b>
       <a-form class="border-t-1">
         <a-row class="mt-2">
           <a-col span="12">
             <th class="required">契約者番号</th>
             <td>
               <a-form-item v-bind="validateInfos.KEIYAKUSYA_CD">
-                <a-input
+                <!-- <a-input
                   v-model:value="formData.KEIYAKUSYA_CD"
                   :disabled="!isNew"
                   :maxlength="5"
                   class="w-30"
                 >
                 </a-input
-              ></a-form-item>
+              > -->
+                <a-input-number
+                  v-model:value="formData.KEIYAKUSYA_CD"
+                  :disabled="!isNew"
+                  :min="1"
+                  :max="99999"
+                  :maxlength="5"
+                  class="w-30"
+                ></a-input-number>
+              </a-form-item>
             </td>
           </a-col>
           <a-col span="12">
             <th>経営安定対策事業生産者番号</th>
             <td>
               <a-form-item v-bind="validateInfos.SEISANSYA_CD">
-                <a-input
+                <!-- <a-input
                   v-model:value="formData.SEISANSYA_CD"
                   :maxlength="5"
                   class="w-30"
@@ -47,8 +56,15 @@
                     changeType('number', $event.target.value, 'SEISANSYA_CD')
                   "
                 >
-                </a-input
-              ></a-form-item>
+                </a-input> -->
+                <a-input-number
+                  v-model:value="formData.SEISANSYA_CD"
+                  :min="1"
+                  :max="99999"
+                  :maxlength="5"
+                  class="w-30"
+                ></a-input-number>
+              </a-form-item>
             </td>
           </a-col>
         </a-row>
@@ -62,6 +78,7 @@
                   :options="KEN_LIST"
                   split-val
                   class="max-w-50"
+                  type="number"
                 ></ai-select>
               </a-form-item>
             </td>
@@ -70,7 +87,7 @@
             <th>日鶏協番号</th>
             <td>
               <a-form-item v-bind="validateInfos.NIKKEIKYO_CD">
-                <a-input
+                <!-- <a-input
                   v-model:value="formData.NIKKEIKYO_CD"
                   :maxlength="5"
                   class="w-30"
@@ -78,8 +95,15 @@
                     changeType('number', $event.target.value, 'SEISANSYA_CD')
                   "
                 >
-                </a-input
-              ></a-form-item>
+                </a-input> -->
+                <a-input-number
+                  v-model:value="formData.NIKKEIKYO_CD"
+                  :min="1"
+                  :max="99999"
+                  :maxlength="5"
+                  class="w-30"
+                ></a-input-number>
+              </a-form-item>
             </td>
           </a-col>
         </a-row>
@@ -279,7 +303,6 @@
                 v-model:value="formData.ADDR_FAX"
                 :maxlength="14"
                 class="w-40"
-                @input="changeType('tel', $event.target.value, 'ADDR_FAX')"
               ></a-input>
             </td>
           </a-col>
@@ -334,7 +357,7 @@
                   split-val
                   class="max-w-65"
                   :disabled="!hasnyuryoku"
-                  @change="handleInitDetail(false)"
+                  @change="onChangeBANK_CD"
                 ></ai-select
               ></a-form-item>
             </td>
@@ -442,9 +465,9 @@
                   <a-radio-group
                     v-model:value="formData.NYURYOKU_JYOKYO"
                     class="ml-2 h-full pt-1"
-                  >
-                    <a-radio :value="1">有</a-radio>
-                    <a-radio :value="2">無</a-radio>
+                    >２
+                    <a-radio :value="2">有</a-radio>
+                    <a-radio :value="1">無</a-radio>
                   </a-radio-group>
                 </td>
               </a-col>
@@ -473,7 +496,7 @@
     <template #footer>
       <div class="pt-2 flex justify-between border-t-1">
         <a-space :size="20">
-          <a-button class="warning-btn" @click="">保存</a-button>
+          <a-button class="warning-btn" @click="saveData">保存</a-button>
           <a-button class="warning-btn" @click=""> 保存して継続登録 </a-button>
           <a-button class="danger-btn" :disabled="isNew" @click="deleteData"
             >削除</a-button
@@ -508,8 +531,14 @@ import {
   convertToKaNa,
   convertToFuRiGaNa,
 } from '@/utils/util'
-import { InitDetail, SearchDetail } from '../../service/1011/service'
+import {
+  Delete,
+  InitDetail,
+  Save,
+  SearchDetail,
+} from '../../service/1011/service'
 import { DetailVM, SearchDetailRequest } from '../../service/1011/type'
+import { Console } from 'console'
 //--------------------------------------------------------------------------
 //データ定義
 //--------------------------------------------------------------------------
@@ -519,7 +548,7 @@ const props = defineProps<{
   params: SearchDetailRequest
   keys: any
 }>()
-const emit = defineEmits(['update:visible'])
+const emit = defineEmits(['update:visible', 'getTableList'])
 
 const editJudge = new Judgement()
 const createDefaultParams = () => {
@@ -704,6 +733,26 @@ watch(
   },
   { deep: true }
 )
+watch(
+  () => formData.FURI_BANK_CD,
+  async (newValue) => {
+    const res = await InitDetail({
+      KI: props.params.KI,
+      FURI_BANK_CD: newValue,
+    })
+    SITEN_LIST.value = res.SITEN_LIST
+  }
+)
+//都道府県を選択した場合、住所（住所１）の値をセットする
+watch(
+  () => formData.KEN_CD,
+  (newVal) => {
+    if (KEN_LIST.value.length > 0) {
+      formData.ADDR_1 =
+        KEN_LIST.value.find((item) => item.CODE === newVal)?.NAME || ''
+    }
+  }
+)
 //--------------------------------------------------------------------------
 //メソッド
 //--------------------------------------------------------------------------
@@ -726,10 +775,15 @@ const goList = () => {
   closeModal()
 }
 
+const onChangeBANK_CD = () => {
+  //クリア
+  formData.FURI_BANK_SITEN_CD = ''
+}
+
 const handleInitDetail = async (initflg: boolean) => {
   try {
     if (!initflg) {
-      formData.FURI_BANK_SITEN_CD = ''
+      // formData.FURI_BANK_SITEN_CD = ''
     }
     const res = await InitDetail({
       KI: props.params.KI,
@@ -750,7 +804,7 @@ const handleInitDetail = async (initflg: boolean) => {
     })
   } catch (error) {
     closeModal()
-    // emit('getTableList')
+    emit('getTableList')
   }
 }
 
@@ -761,50 +815,52 @@ const handleSearchDetail = async () => {
     EDIT_KBN: props.editkbn,
   })
   Object.assign(formData, res.KEIYAKUSYA)
+  hasnyuryoku.value = formData.FURI_BANK_CD !== '' ? true : false
 }
 
 const closeModal = () => {
-  editJudge.judgeIsEdited(() => {
-    Object.assign(formData, createDefaultParams())
-    hasnyuryoku.value = false
-    clearValidate()
-    emit('update:visible', false)
+  resetFields()
+  clearValidate()
+  modalVisible.value = false
+}
+
+/** 登録処理 */
+const saveData = async () => {
+  if (!isNew.value) {
+    if (!editJudge.isPageEdited()) {
+      showInfoModal({
+        content: '変更したデータはありません。',
+      })
+      return
+    }
+  }
+  await validate()
+  showSaveModal({
+    content: SAVE_CONFIRM.Msg,
+    onOk: async () => {
+      await Save({ KEIYAKUSYA: formData, EDIT_KBN: props.editkbn })
+      closeModal()
+      emit('getTableList')
+      message.success(SAVE_OK_INFO.Msg)
+    },
   })
 }
 
-// const saveData = async () => {
-//   await validate()
-//   if (!editJudge.isPageEdited()) {
-//     showInfoModal({
-//       content: '変更したデータはありません。',
-//     })
-//   } else {
-//     showSaveModal({
-//       content: SAVE_CONFIRM.Msg,
-//       onOk: async () => {
-//         try {
-//           await Save({ KEIYAKUSYA: formData })
-//           closeModal()
-//           message.success(SAVE_OK_INFO.Msg)
-//         } catch (error) {}
-//       },
-//     })
-//   }
-// }
+//削除処理
 const deleteData = () => {
   showDeleteModal({
     handleDB: true,
     content: DELETE_CONFIRM.Msg,
     onOk: async () => {
       try {
-        // await Delete({
-        //   KI: formData.KI,
-        //   KEIYAKUSYA_CD: formData.KEIYAKUSYA_CD,
-        //   NOJO_CD: formData.NOJO_CD,
-        //   UP_DATE: upddttm,
-        //   EDIT_KBN: EnumEditKbn.Edit,
-        // })
+        await Delete({
+          KI: formData.KI,
+          KEIYAKUSYA_CD: formData.KEIYAKUSYA_CD,
+          UP_DATE: formData.UP_DATE,
+          EDIT_KBN: EnumEditKbn.Edit,
+        })
         closeModal()
+        emit('getTableList')
         message.success(DELETE_OK_INFO.Msg)
       } catch (error) {}
     },

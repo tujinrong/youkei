@@ -35,7 +35,7 @@ Namespace JBD.GJS.Service
         ''' </summary>
         Public Shared Function [CInt](obj As Object) As Integer
             If obj Is Nothing OrElse TypeOf obj Is DBNull Then Return 0
-            If TypeOf obj Is Integer Then Return Cint(obj)
+            If TypeOf obj Is Integer Then Return CInt(obj)
             Dim i As Integer = Nothing
             Return If((Integer.TryParse(obj.ToString(), i)), i, 0)
         End Function
