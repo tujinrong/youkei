@@ -34,6 +34,7 @@
               <td>
                 <a-form-item>
                   <a-input
+                    v-fullwidth-limit
                     v-model:value="searchParams.BANK_NAME"
                     :maxlength="30"
                     class="max-w-75"
