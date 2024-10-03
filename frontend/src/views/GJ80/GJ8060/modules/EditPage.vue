@@ -512,6 +512,7 @@ const saveData = async () => {
             ...formData,
             UP_DATE: isNew.value ? undefined : upddttm,
           },
+          EDIT_KBN: props.editkbn,
         })
         closeModal()
         message.success(SAVE_OK_INFO.Msg)
@@ -531,6 +532,7 @@ const deleteData = () => {
           KI: formData.KI,
           ITAKU_CD: formData.ITAKU_CD,
           UP_DATE: upddttm,
+          EDIT_KBN: props.editkbn,
         })
         closeModal()
         message.success(DELETE_OK_INFO.Msg)
