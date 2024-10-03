@@ -305,7 +305,6 @@ async function reset() {
 }
 
 const searchAll = async () => {
-  tableData.value = []
   await searchData()
 }
 

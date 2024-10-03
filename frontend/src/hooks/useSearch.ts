@@ -60,7 +60,11 @@ export default function useSearch({
         }
       }, 0)
       return await Promise.resolve(res)
-    } catch (error) {
+    } catch (error: any) {
+      if (error?.response?.data[listname]) {
+        //テーブルリストをクリア
+        source.value = error?.response?.data[listname]
+      }
       loading.value = false
       return await Promise.reject(error)
     }
