@@ -444,8 +444,9 @@ watch(
       })
       if (!isNew.value) {
         Object.assign(formData, res.ITAKU)
+        upddttm = res.ITAKU.UP_DATE
       }
-      KEN_CD_NAME_LIST.value = res.KEN_CD_NAME_LIST
+      KEN_CD_NAME_LIST.value = res.KEN_LIST
     }
     nextTick(() => {
       editJudge.reset()
@@ -481,6 +482,7 @@ watch(
 const closeModal = () => {
   resetFields()
   clearValidate()
+  emit('getTableList')
   modalVisible.value = false
 }
 //画面遷移

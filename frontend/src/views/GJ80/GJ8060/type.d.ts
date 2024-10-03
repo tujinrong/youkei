@@ -72,7 +72,7 @@ export interface SearchResponse extends CmSearchResponseBase {
 /**初期化処理(詳細画面) */
 export interface InitDetailResponse extends DaResponseBase {
   /**都道府県情報プルダウンリスト */
-  KEN_CD_NAME_LIST: CmCodeNameModel[]
+  KEN_LIST: CmCodeNameModel[]
   /**事務委託先情報 */
   ITAKU: DetailVM
 }
