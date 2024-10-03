@@ -216,17 +216,24 @@ const isNew = computed(() => props.editkbn === EnumEditKbn.Add)
 
 const checkUserNameInput = () => {
   const userInput = formData.USER_NAME
-  const fullWidthChars = userInput.match(/[^\x00-\x7F]/g) || []
-  const fullWidthCount = fullWidthChars.length
-  const halfWidthCount = userInput.length - fullWidthCount
+  let byteCount = 0
+  let result = ''
 
-  if (fullWidthCount > 10) {
-    formData.USER_NAME = userInput.slice(0, 10)
-  }
+  for (let i = 0; i < userInput.length; i++) {
+    const char = userInput[i]
 
-  if (fullWidthCount + halfWidthCount > 20) {
-    formData.USER_NAME = userInput.slice(0, 20)
+    if (char.match(/[^\x00-\x7F]/)) {
+      byteCount += 2
+    } else {
+      byteCount += 1
+    }
+
+    if (byteCount > 20) {
+      break
+    }
+    result += char
   }
+  formData.USER_NAME = result
 }
 
 //---------------------------------------------------------------------------

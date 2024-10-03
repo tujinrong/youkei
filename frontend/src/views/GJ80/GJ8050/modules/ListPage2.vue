@@ -38,7 +38,7 @@
             <a-form-item>
               <a-input
                 v-model:value="searchParams2.SITEN_KANA"
-                :maxlength="20"
+                :maxlength="60"
                 class="max-w-full"
               ></a-input>
             </a-form-item>
@@ -50,8 +50,9 @@
             <a-form-item>
               <a-input
                 v-model:value="searchParams2.SITEN_NAME"
-                :maxlength="20"
+                :maxlength="30"
                 class="max-w-75"
+                @input="checkUserNameInput"
               ></a-input>
             </a-form-item>
           </td>
@@ -165,8 +166,12 @@ import { EnumAndOr, EnumEditKbn } from '@/enum'
 import useSearch from '@/hooks/useSearch'
 import { Judgement } from '@/utils/judge-edited'
 import { Form } from 'ant-design-vue'
-import { computed, onMounted, reactive, ref, toRef, watch } from 'vue'
-import { changeTableSort } from '@/utils/util'
+import { computed, reactive, ref, toRef, watch } from 'vue'
+import {
+  changeTableSort,
+  convertKanaToHalfWidth,
+  convertToHalfNumber,
+} from '@/utils/util'
 import EditPage2 from './EditPage2.vue'
 import { VxeTableInstance } from 'vxe-table'
 import { SearchSitenRowVM } from '../service/8050/type'
@@ -219,10 +224,31 @@ const modalVisible = computed({
   },
 })
 
+const checkUserNameInput = () => {
+  const userInput = searchParams2.SITEN_NAME
+  let byteCount = 0
+  let result = ''
+
+  for (let i = 0; i < userInput.length; i++) {
+    const char = userInput[i]
+
+    if (char.match(/[^\x00-\x7F]/)) {
+      byteCount += 2
+    } else {
+      byteCount += 1
+    }
+
+    if (byteCount > 30) {
+      break
+    }
+    result += char
+  }
+  searchParams2.SITEN_NAME = result
+}
+
 //--------------------------------------------------------------------------
 //監視定義
 //--------------------------------------------------------------------------
-
 watch(
   () => props.visible,
   (newV) => {
@@ -232,6 +258,18 @@ watch(
     }
   }
 )
+
+watch(
+  () => searchParams2,
+  (newVal) => {
+    if (newVal) {
+      searchParams2.SITEN_CD = convertToHalfNumber(newVal.SITEN_CD)
+      searchParams2.SITEN_KANA = convertKanaToHalfWidth(newVal.SITEN_KANA)
+    }
+  },
+  { deep: true }
+)
+
 //--------------------------------------------------------------------------
 //メソッド
 //--------------------------------------------------------------------------

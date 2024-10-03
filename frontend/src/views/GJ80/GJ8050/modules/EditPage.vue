@@ -35,6 +35,7 @@
               <a-form-item v-bind="validateInfos.BANK_KANA">
                 <a-input
                   v-model:value="formData.BANK_KANA"
+                  :maxlength="60"
                   class="max-w-150"
                 ></a-input>
               </a-form-item>
@@ -46,7 +47,9 @@
               <a-form-item v-bind="validateInfos.BANK_NAME">
                 <a-input
                   v-model:value="formData.BANK_NAME"
+                  :maxlength="30"
                   class="max-w-75"
+                  @input="checkUserNameInput(30)"
                 ></a-input>
               </a-form-item>
             </td>
@@ -79,13 +82,13 @@ import {
   SAVE_CONFIRM,
   SAVE_OK_INFO,
 } from '@/constants/msg'
-import { EnumEditKbn, PageStatus } from '@/enum'
+import { EnumEditKbn } from '@/enum'
 import { showDeleteModal, showInfoModal, showSaveModal } from '@/utils/modal'
 import { Form, message } from 'ant-design-vue'
-import { computed, nextTick, onMounted, reactive, ref, watch } from 'vue'
-import { useRoute, useRouter } from 'vue-router'
+import { computed, nextTick, reactive, watch } from 'vue'
 import { Judgement } from '@/utils/judge-edited'
 import { DeleteBank, InitBankDetail, SaveBank } from '../service/8051/service'
+import { convertKanaToHalfWidth, convertToHalfNumber } from '@/utils/util'
 //---------------------------------------------------------------------------
 //属性
 //---------------------------------------------------------------------------
@@ -155,6 +158,29 @@ const modalVisible = computed({
   },
 })
 const isNew = computed(() => (props.editkbn === EnumEditKbn.Add ? true : false))
+
+const checkUserNameInput = (maxlength: number) => {
+  const userInput = formData.BANK_NAME
+  let byteCount = 0
+  let result = ''
+
+  for (let i = 0; i < userInput.length; i++) {
+    const char = userInput[i]
+
+    if (char.match(/[^\x00-\x7F]/)) {
+      byteCount += 2
+    } else {
+      byteCount += 1
+    }
+
+    if (byteCount > maxlength) {
+      break
+    }
+    result += char
+  }
+  formData.BANK_NAME = result
+}
+
 //--------------------------------------------------------------------------
 //監視定義
 //--------------------------------------------------------------------------
@@ -172,6 +198,18 @@ watch(
   }
 )
 watch(formData, () => editJudge.setEdited())
+
+watch(
+  () => formData,
+  (newVal) => {
+    if (newVal) {
+      formData.BANK_CD = convertToHalfNumber(newVal.BANK_CD)
+      formData.BANK_KANA = convertKanaToHalfWidth(newVal.BANK_KANA)
+    }
+  },
+  { deep: true }
+)
+
 //--------------------------------------------------------------------------
 //メソッド
 //--------------------------------------------------------------------------

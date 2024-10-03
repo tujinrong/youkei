@@ -416,7 +416,7 @@ import {
   convertToFullWidth,
   convertToAllowedCharacters,
   convertKanaToHalfWidth,
-  convertToAllowedCharactersOnly,
+  convertToHalfWidthProhibitSymbol,
 } from '@/utils/util'
 
 const formData = reactive<DetailVM>({
@@ -668,7 +668,7 @@ watch(
       formData.E_MAIL1 = convertToAllowedCharacters(newVal.E_MAIL1)
       formData.E_MAIL2 = convertToAllowedCharacters(newVal.E_MAIL2)
       formData.HP_URL = convertToAllowedCharacters(newVal.HP_URL)
-      formData.TOUROKU_NO = convertToAllowedCharactersOnly(newVal.TOUROKU_NO)
+      formData.TOUROKU_NO = convertToHalfWidthProhibitSymbol(newVal.TOUROKU_NO)
       formData.FURI_KOZA_MEIGI_KANA = convertKanaToHalfWidth(
         newVal.FURI_KOZA_MEIGI_KANA
       )

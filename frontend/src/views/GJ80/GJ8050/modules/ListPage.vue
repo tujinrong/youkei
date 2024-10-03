@@ -37,6 +37,7 @@
                     v-model:value="searchParams.BANK_NAME"
                     :maxlength="30"
                     class="max-w-75"
+                    @change="checkUserNameInput(30)"
                   ></a-input>
                 </a-form-item>
               </td>
@@ -141,10 +142,14 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, reactive, toRef, watch, computed, onUnmounted } from 'vue'
-import { EnumAndOr, EnumEditKbn, PageStatus } from '@/enum'
+import { ref, reactive, toRef, computed, onUnmounted, watch } from 'vue'
+import { EnumAndOr, EnumEditKbn } from '@/enum'
 import useSearch from '@/hooks/useSearch'
-import { changeTableSort } from '@/utils/util'
+import {
+  changeTableSort,
+  convertKanaToHalfWidth,
+  convertToHalfNumber,
+} from '@/utils/util'
 import { VxeTableInstance } from 'vxe-pc-ui'
 import { SearchBankRowVM, SearchSitenRowVM } from '../service/8050/type'
 import { PreviewBank, SearchBank } from '../service/8050/service'
@@ -198,12 +203,30 @@ const isSelected = computed(() => {
   if (xTableRef) return xTableRef.value?.getCurrentRecord()
   return false
 })
+
+const checkUserNameInput = (maxlength: number) => {
+  const userInput = searchParams.BANK_NAME
+  let byteCount = 0
+  let result = ''
+
+  for (let i = 0; i < userInput.length; i++) {
+    const char = userInput[i]
+
+    if (char.match(/[^\x00-\x7F]/)) {
+      byteCount += 2
+    } else {
+      byteCount += 1
+    }
+
+    if (byteCount > maxlength) {
+      return
+    }
+    result += char
+  }
+  searchParams.BANK_NAME = result
+}
 //---------------------------------------------------------------------------
 //フック関数
-//--------------------------------------------------------------------------
-
-//--------------------------------------------------------------------------
-//監視定義
 //--------------------------------------------------------------------------
 
 //--------------------------------------------------------------------------
@@ -276,6 +299,20 @@ onUnmounted(() => {
   previewName.value = ''
   channel.close()
 })
+
+//--------------------------------------------------------------------------
+//監視定義
+//--------------------------------------------------------------------------
+watch(
+  () => searchParams,
+  (newVal) => {
+    if (newVal) {
+      searchParams.BANK_CD = convertToHalfNumber(newVal.BANK_CD)
+      searchParams.BANK_KANA = convertKanaToHalfWidth(newVal.BANK_KANA)
+    }
+  },
+  { deep: true }
+)
 </script>
 
 <style lang="scss" scoped>

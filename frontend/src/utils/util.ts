@@ -302,7 +302,7 @@ export function convertToHalfWidth(input: string): string {
 }
 
 /**全角のアルファペット、数字及びスペースを半角に変換*/
-export function convertToAllowedCharactersOnly(input: string): string {
+export function convertToHalfWidthProhibitSymbol(input: string): string {
   return input
     .replace(/[！-～]/g, (ch) => String.fromCharCode(ch.charCodeAt(0) - 0xfee0))
     .replace(/　/g, ' ')
@@ -319,7 +319,7 @@ export function convertToHalfNumber(input: string): string {
   return input
     .replace(/[！-～]/g, (ch) => String.fromCharCode(ch.charCodeAt(0) - 0xfee0))
     .replace(/　/g, ' ')
-    .replace(/[^0-9]/g, '')
+    .replace(/[^0-9\s]/g, '')
 }
 
 /**電話番号に変換*/
