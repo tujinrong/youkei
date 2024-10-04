@@ -90,7 +90,7 @@ watch(
   async (newValue) => {
     if (newValue) {
       if (newValue && !isNew.value) {
-        //await init()
+        await init()
       }
       nextTick(() => {
         editJudge.reset()
@@ -148,19 +148,10 @@ const save = async () => {
     content: SAVE_CONFIRM.Msg,
     onOk: async () => {
       try {
-        //await Save({ TAX: { ...formData, UP_DATE: upddttm } })
+        await Save({ TAX: { ...formData, UP_DATE: upddttm } })
         message.success(SAVE_OK_INFO.Msg)
         closeModal()
       } catch (error) {}
-    },
-  })
-}
-const continueSave = () => {
-  showSaveModal({
-    content: SAVE_CONFIRM.Msg,
-    onOk: async () => {
-      message.success(SAVE_OK_INFO.Msg)
-      resetFields()
     },
   })
 }
@@ -172,10 +163,10 @@ const deleteData = () => {
     content: DELETE_CONFIRM.Msg,
     onOk: async () => {
       try {
-        // await Delete({
-        //   TAX_DATE_FROM: formData.TAX_DATE_FROM,
-        //   UP_DATE: upddttm,
-        // })
+        await Delete({
+          TAX_DATE_FROM: formData.TAX_DATE_FROM,
+          UP_DATE: upddttm,
+        })
         closeModal()
         message.success(DELETE_OK_INFO.Msg)
       } catch (error) {}
