@@ -47,9 +47,22 @@ Namespace JBD.GJS.Service.GJ1011
             wkCmd.CommandText = "PKG_GJ1011.GJ1011_KEIYAKU_DEL"
 
             '引き渡し
-            wkCmd.Parameters.Add("IN_KI", wNojoCd.KI)
-            wkCmd.Parameters.Add("IN_KEIYAKU", wNojoCd.KEIYAKUSYA_CD)
-            wkCmd.Parameters.Add("IN_OLD_JIMUITAKU_CD", wNojoCd.OLD_JIMUITAKU_CD)
+            '期
+            Dim paraKI As OracleParameter = wkCmd.Parameters.Add("IN_KI", wNojoCd.KI)
+            '契約者番号
+            Dim paraKEIYAKU_CD As OracleParameter = wkCmd.Parameters.Add("IN_KEIYAKU", wNojoCd.KEIYAKUSYA_CD)
+            '委託先
+            Dim paraITAKUSAKI_CD As OracleParameter = wkCmd.Parameters.Add("IN_OLD_JIMUITAKU_CD", wNojoCd.OLD_JIMUITAKU_CD)
+
+            '----------------------------------------
+            '   共通情報
+            '----------------------------------------
+            'データ更新日    
+            wkCmd.Parameters.Add("IN_UP_DATE", Now)
+            'データ更新ＩＤ    
+            wkCmd.Parameters.Add("IN_UP_ID", pLOGINUSERID)
+            'コンピュータ名 
+            wkCmd.Parameters.Add("IN_COM_NAME", pPCNAME)
 
             '戻り
             Dim p_MSGCD As OracleParameter = wkCmd.Parameters.Add("OU_MSGCD", OracleDbType.Varchar2, 255, DBNull.Value, ParameterDirection.Output)
@@ -60,8 +73,6 @@ Namespace JBD.GJS.Service.GJ1011
             If wkCmd.Parameters("OU_MSGCD").Value.ToString() <> "0" Then
                 Return New DaResponseBase(EnumServiceResult.Exception , wkCmd.Parameters("OU_MSGNM").Value.ToString())
             End If
-
-            wkRet = True
 
             'データベースへの接続を閉じる
             If Not wkCmd Is Nothing Then
