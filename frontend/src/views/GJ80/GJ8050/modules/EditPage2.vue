@@ -271,9 +271,11 @@ const continueSave = async () => {
     onOk: async () => {
       await saveDB()
       message.success(SAVE_OK_INFO.Msg)
-      formData.SITEN_CD = ''
-      formData.SITEN_KANA = ''
-      formData.SITEN_NAME = ''
+      Object.assign(formData, {
+        SITEN_CD: '',
+        SITEN_KANA: '',
+        SITEN_NAME: '',
+      })
       nextTick(() => {
         clearValidate()
         editJudge.reset()

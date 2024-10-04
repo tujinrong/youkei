@@ -187,7 +187,7 @@ watch(
   () => formData.BANK_CD,
   (newVal) => {
     if (newVal) {
-      formData.BANK_CD = convertToHalfNumber(newVal)
+      formData.BANK_CD = String(convertToHalfNumber(newVal))
     }
   },
   { deep: true }
