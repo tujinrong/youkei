@@ -47,6 +47,7 @@
               <a-form-item v-bind="validateInfos.SITEN_KANA">
                 <a-input
                   v-model:value="formData.SITEN_KANA"
+                  :maxlength="60"
                   class="max-w-150"
                 ></a-input>
               </a-form-item>
@@ -58,6 +59,8 @@
               <a-form-item v-bind="validateInfos.SITEN_NAME">
                 <a-input
                   v-model:value="formData.SITEN_NAME"
+                  v-fullwidth-limit
+                  :maxlength="30"
                   class="max-w-75"
                 ></a-input>
               </a-form-item>
@@ -106,6 +109,10 @@ import {
   InitSitenDetail,
   SaveSiten,
 } from '../service/8052/service'
+import {
+  convertKanaToHalfWidth,
+  convertToHalfWidthProhibitLetter,
+} from '@/utils/util'
 //---------------------------------------------------------------------------
 //属性
 //---------------------------------------------------------------------------
@@ -199,6 +206,29 @@ watch(
   }
 )
 watch(formData, () => editJudge.setEdited())
+
+/**支店コード */
+watch(
+  () => formData.SITEN_CD,
+  (newVal) => {
+    if (newVal) {
+      formData.SITEN_CD = convertToHalfWidthProhibitLetter(newVal)
+    }
+  },
+  { deep: true }
+)
+
+/**支店名（ｶﾅ） */
+watch(
+  () => formData.SITEN_KANA,
+  (newVal) => {
+    if (newVal) {
+      formData.SITEN_KANA = convertKanaToHalfWidth(newVal)
+    }
+  },
+  { deep: true }
+)
+
 //--------------------------------------------------------------------------
 //メソッド
 //--------------------------------------------------------------------------

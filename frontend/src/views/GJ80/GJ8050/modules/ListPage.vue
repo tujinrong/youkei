@@ -148,7 +148,6 @@ import useSearch from '@/hooks/useSearch'
 import {
   changeTableSort,
   convertKanaToHalfWidth,
-  convertToHalfNumber,
   convertToHalfWidthProhibitLetter,
 } from '@/utils/util'
 import { VxeTableInstance } from 'vxe-pc-ui'

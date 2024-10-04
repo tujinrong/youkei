@@ -47,6 +47,8 @@
               <a-form-item v-bind="validateInfos.BANK_NAME">
                 <a-input
                   v-model:value="formData.BANK_NAME"
+                  v-fullwidth-limit
+                  :maxlength="30"
                   class="max-w-75"
                 ></a-input>
               </a-form-item>
@@ -87,13 +89,12 @@ import {
 import { EnumEditKbn } from '@/enum'
 import { showDeleteModal, showInfoModal, showSaveModal } from '@/utils/modal'
 import { Form, message } from 'ant-design-vue'
-import { computed, nextTick, reactive, ref, watch } from 'vue'
+import { computed, nextTick, reactive, watch } from 'vue'
 import { Judgement } from '@/utils/judge-edited'
 import { DeleteBank, InitBankDetail, SaveBank } from '../service/8051/service'
 import {
-  validateLength,
   convertKanaToHalfWidth,
-  convertToHalfNumber,
+  convertToHalfWidthProhibitLetter,
 } from '@/utils/util'
 //---------------------------------------------------------------------------
 //属性
@@ -183,16 +184,18 @@ watch(
 )
 watch(formData, () => editJudge.setEdited())
 
+/**金融機関コード */
 watch(
   () => formData.BANK_CD,
   (newVal) => {
     if (newVal) {
-      formData.BANK_CD = String(convertToHalfNumber(newVal))
+      formData.BANK_CD = convertToHalfWidthProhibitLetter(newVal)
     }
   },
   { deep: true }
 )
 
+/**金融機関名（ｶﾅ） */
 watch(
   () => formData.BANK_KANA,
   (newVal) => {
@@ -201,14 +204,6 @@ watch(
     }
   },
   { deep: true }
-)
-
-watch(
-  () => formData.BANK_NAME,
-  (newVal) => {
-    const maxLength = 30
-    formData.BANK_NAME = validateLength(newVal, maxLength)
-  }
 )
 
 //--------------------------------------------------------------------------

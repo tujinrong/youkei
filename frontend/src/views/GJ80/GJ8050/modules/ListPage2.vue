@@ -50,6 +50,7 @@
             <a-form-item>
               <a-input
                 v-model:value="searchParams2.SITEN_NAME"
+                v-fullwidth-limit
                 :maxlength="30"
                 class="max-w-75"
                 @input="checkUserNameInput"
@@ -170,7 +171,7 @@ import { computed, reactive, ref, toRef, watch } from 'vue'
 import {
   changeTableSort,
   convertKanaToHalfWidth,
-  convertToHalfNumber,
+  convertToHalfWidthProhibitLetter,
 } from '@/utils/util'
 import EditPage2 from './EditPage2.vue'
 import { VxeTableInstance } from 'vxe-table'
@@ -259,12 +260,23 @@ watch(
   }
 )
 
+/**支店コード */
 watch(
-  () => searchParams2,
+  () => searchParams2.SITEN_CD,
   (newVal) => {
     if (newVal) {
-      searchParams2.SITEN_CD = convertToHalfNumber(newVal.SITEN_CD)
-      searchParams2.SITEN_KANA = convertKanaToHalfWidth(newVal.SITEN_KANA)
+      searchParams2.SITEN_CD = convertToHalfWidthProhibitLetter(newVal)
+    }
+  },
+  { deep: true }
+)
+
+/**支店名（ｶﾅ） */
+watch(
+  () => searchParams2.SITEN_KANA,
+  (newVal) => {
+    if (newVal) {
+      searchParams2.SITEN_KANA = convertKanaToHalfWidth(newVal)
     }
   },
   { deep: true }
