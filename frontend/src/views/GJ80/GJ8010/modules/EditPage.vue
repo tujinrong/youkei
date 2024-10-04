@@ -153,7 +153,7 @@ const modalVisible = computed({
     emit('update:visible', visible)
   },
 })
-const isNew = computed(() => (props.editkbn === EnumEditKbn.Add ? true : false))
+const isNew = computed(() => props.editkbn === EnumEditKbn.Add)
 //--------------------------------------------------------------------------
 //監視定義
 //--------------------------------------------------------------------------
