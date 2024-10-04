@@ -13,6 +13,7 @@ import {
   InitDetailRequest,
   InitDetailResponse,
   SaveRequest,
+  SearchRequest,
   SearchResponse,
 } from './type'
 
@@ -20,9 +21,9 @@ const servicename = 'GJ8100'
 const servicename2 = 'GJ8101'
 
 /** 初期化処理(一覧画面) */
-export const Search = (): Promise<SearchResponse> => {
+export const Search = (params: SearchRequest): Promise<SearchResponse> => {
   const methodname = 'Search'
-  return api(servicename, methodname)
+  return api(servicename, methodname, {})
 }
 
 /** 検索処理(詳細画面) */

@@ -10,7 +10,8 @@
 //-------------------------------------------------------------------
 //リクエスト
 //-------------------------------------------------------------------
-
+/**検索処理(一覧画面) */
+export interface SearchRequest extends CmSearchRequestBase {}
 /**削除処理(一覧画面) */
 export interface DeleteRequest extends DaRequestBase {
   /**適用開始日 */
