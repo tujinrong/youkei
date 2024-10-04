@@ -47,20 +47,20 @@ async function setupApp() {
       })
 
       // 入力法の候補が確定した時のイベント
-      el.addEventListener('compositionend', function (event) {
+      el.addEventListener('compositionend', function (event: any) {
         isComposing = false // 入力法の候補選択が終わった
         handleInput(event) // 最終的な入力結果を処理する
       })
 
       // ユーザーが入力する際のイベント
-      el.addEventListener('input', function (event) {
+      el.addEventListener('input', function (event: any) {
         if (!isComposing) {
           handleInput(event) // 入力法候補状態でない場合のみ入力を処理
         }
       })
 
       // 入力処理のロジック
-      function handleInput(event) {
+      function handleInput(_event: any) {
         // 入力フィールドの maxlength 属性から最大文字数を取得（全角は2単位、半角は1単位）
         const maxUnits = parseInt(el.getAttribute('maxlength'), 10)
 

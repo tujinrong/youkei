@@ -259,15 +259,25 @@ watch(
 watch(formData, () => editJudge.setEdited())
 
 watch(
-  () => formData,
+  () => formData.USERID,
   (newVal) => {
     if (newVal) {
-      formData.USERID = convertKanaToHalfWidth(newVal.USERID)
-      formData.PASS = convertToHalfWidth(newVal.PASS)
+      formData.USERID = convertKanaToHalfWidth(newVal)
     }
   },
   { deep: true }
 )
+
+watch(
+  () => formData.PASS,
+  (newVal) => {
+    if (newVal) {
+      formData.PASS = convertToHalfWidth(newVal)
+    }
+  },
+  { deep: true }
+)
+
 //--------------------------------------------------------------------------
 //メソッド
 //--------------------------------------------------------------------------

@@ -373,17 +373,96 @@ export function convertKanaToHalfWidth(input: string): string {
     'アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲンァィゥェォッャュョ'
   const halfWidthKana =
     'ｱｲｳｴｵｶｷｸｹｺｻｼｽｾｿﾀﾁﾂﾃﾄﾅﾆﾇﾈﾉﾊﾋﾌﾍﾎﾏﾐﾑﾒﾓﾔﾕﾖﾗﾘﾙﾚﾛﾜｦﾝｧｨｩｪｫｯｬｭｮ'
+  const voicedHiraganaMap: Record<string, string> = {
+    が: 'か',
+    ぎ: 'き',
+    ぐ: 'く',
+    げ: 'け',
+    ご: 'こ',
+    ざ: 'さ',
+    じ: 'し',
+    ず: 'す',
+    ぜ: 'せ',
+    ぞ: 'そ',
+    だ: 'た',
+    ぢ: 'ち',
+    づ: 'つ',
+    で: 'て',
+    ど: 'と',
+    ば: 'は',
+    び: 'ひ',
+    ぶ: 'ふ',
+    べ: 'へ',
+    ぼ: 'ほ',
+  }
+  const semiVoicedHiraganaMap: Record<string, string> = {
+    ぱ: 'は',
+    ぴ: 'ひ',
+    ぷ: 'ふ',
+    ぺ: 'へ',
+    ぽ: 'ほ',
+  }
+  const voicedKatakanaMap: Record<string, string> = {
+    ガ: 'カ',
+    ギ: 'キ',
+    グ: 'ク',
+    ゲ: 'ケ',
+    ゴ: 'コ',
+    ザ: 'サ',
+    ジ: 'シ',
+    ズ: 'ス',
+    ゼ: 'セ',
+    ゾ: 'ソ',
+    ダ: 'タ',
+    ヂ: 'チ',
+    ヅ: 'ツ',
+    デ: 'テ',
+    ド: 'ト',
+    バ: 'ハ',
+    ビ: 'ヒ',
+    ブ: 'フ',
+    ベ: 'ヘ',
+    ボ: 'ホ',
+  }
+  const semiVoicedKatakanaMap: Record<string, string> = {
+    パ: 'ハ',
+    ピ: 'ヒ',
+    プ: 'フ',
+    ペ: 'ヘ',
+    ポ: 'ホ',
+  }
 
   const convertChar = (char: string) => {
-    const hiraganaIndex = hiragana.indexOf(char)
-    if (hiraganaIndex > -1) return halfWidthKana[hiraganaIndex] // 平仮名 -> 半角カタカナ
-    const fullWidthIndex = fullWidthKana.indexOf(char)
-    if (fullWidthIndex > -1) return halfWidthKana[fullWidthIndex] // 全角カタカナ -> 半角カタカナ
-    if (char === 'ー') return 'ｰ' // 全角'ー' -> 半角
-    if (char.match(/[！-～]/)) {
-      return String.fromCharCode(char.charCodeAt(0) - 0xfee0) // 全角数字、アルファベット -> 半角
+    // 濁音の平仮名を処理（分解）
+    if (voicedHiraganaMap[char]) {
+      return voicedHiraganaMap[char] + 'ﾞ'
     }
-    if (char === '　') return ' ' // 全角スペース -> 半角スペース
+    // 半濁音の平仮名を処理（分解）
+    if (semiVoicedHiraganaMap[char]) {
+      return semiVoicedHiraganaMap[char] + 'ﾟ'
+    }
+    // 濁音のカタカナを処理（分解）
+    if (voicedKatakanaMap[char]) {
+      return voicedKatakanaMap[char] + 'ﾞ'
+    }
+    // 半濁音のカタカナを処理（分解）
+    if (semiVoicedKatakanaMap[char]) {
+      return semiVoicedKatakanaMap[char] + 'ﾟ'
+    }
+    // 平仮名を処理
+    const hiraganaIndex = hiragana.indexOf(char)
+    if (hiraganaIndex > -1) return halfWidthKana[hiraganaIndex]
+    // カタカナを処理
+    const fullWidthIndex = fullWidthKana.indexOf(char)
+    // 全角'ー' -> 半角
+    if (fullWidthIndex > -1) return halfWidthKana[fullWidthIndex]
+    if (char === 'ー') return 'ｰ'
+    // 全角数字、アルファベット -> 半角
+    if (char.match(/[！-～]/)) {
+      return String.fromCharCode(char.charCodeAt(0) - 0xfee0)
+    }
+    // 全角スペース -> 半角スペース
+    if (char === '　') return ' '
     return char
   }
   const allowedCharacters =
