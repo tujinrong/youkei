@@ -296,7 +296,7 @@ Namespace JBD.GJS.Service.GJ8050
             wSql = wSql & " BNK.BANK_KANA," & vbCrLf        '金融機関名（ｶﾅ）
             wSql = wSql & " BNK.BANK_NAME," & vbCrLf         '金融機関名（漢字）
 
-            wSql = wSql & " '令和' || TO_CHAR(TO_NUMBER(TO_CHAR(SYSDATE, 'YYYY')) - 2018) || '年' ||  TO_CHAR(SYSDATE, 'MM""月""DD""日""') NOWYMD" & vbCrLf
+            wSql = wSql & " CASE WHEN (TO_NUMBER(TO_CHAR(SYSDATE, 'YYYY')) - 2018) < 0 THEN TO_CHAR(SYSDATE,'EEYY','NLS_CALENDAR=''Japanese Imperial''') WHEN (TO_NUMBER(TO_CHAR(SYSDATE, 'YYYY')) - 2018) < 10 THEN  '令和0' || TO_CHAR(TO_NUMBER(TO_CHAR(SYSDATE, 'YYYY')) - 2018) ELSE '令和' || TO_CHAR(TO_NUMBER(TO_CHAR(SYSDATE, 'YYYY')) - 2018) END  || '年' ||  TO_CHAR(SYSDATE, 'MM""月""DD""日""') NOWYMD" & vbCrLf
 
             wSql = wSql & " FROM" & vbCrLf
             wSql = wSql & " TM_BANK BNK" & vbCrLf
@@ -393,7 +393,7 @@ Namespace JBD.GJS.Service.GJ8050
             wSql += "  STN.SITEN_CD SITEN_CD," & vbCrLf
             wSql += "  STN.SITEN_NAME SITEN_NAME," & vbCrLf
             wSql += "  STN.SITEN_KANA SITEN_KANA," & vbCrLf
-            wSql += "  '令和' || TO_CHAR(TO_NUMBER(TO_CHAR(SYSDATE, 'YYYY')) - 2018) || '年' ||  TO_CHAR(SYSDATE, 'MM""月""DD""日""') NOWYMD" & vbCrLf
+            wSql += "  CASE WHEN (TO_NUMBER(TO_CHAR(SYSDATE, 'YYYY')) - 2018) < 0 THEN TO_CHAR(SYSDATE,'EEYY','NLS_CALENDAR=''Japanese Imperial''') WHEN (TO_NUMBER(TO_CHAR(SYSDATE, 'YYYY')) - 2018) < 10 THEN  '令和0' || TO_CHAR(TO_NUMBER(TO_CHAR(SYSDATE, 'YYYY')) - 2018) ELSE '令和' || TO_CHAR(TO_NUMBER(TO_CHAR(SYSDATE, 'YYYY')) - 2018) END  || '年' ||  TO_CHAR(SYSDATE, 'MM""月""DD""日""') NOWYMD" & vbCrLf
             wSql += " FROM" & vbCrLf
             wSql += "  TM_SITEN STN," & vbCrLf
 

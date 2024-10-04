@@ -112,8 +112,8 @@ Public Class rptGJ8050
             rpt.PageSettings.Orientation = GrapeCity.ActiveReports.Document.Section.PageOrientation.Landscape
 
             ' 上下の余白を 1.0cm に設定します。
-            rpt.PageSettings.Margins.Top = GrapeCity.ActiveReports.SectionReport.CmToInch(myYOHAKU_UP)
-            rpt.PageSettings.Margins.Bottom = GrapeCity.ActiveReports.SectionReport.CmToInch(myYOHAKU_DOWN)
+            rpt.PageSettings.Margins.Top = 0.3
+            rpt.PageSettings.Margins.Bottom = 0.5
             ' 左右の余白を 1.0cm に設定します。
             rpt.PageSettings.Margins.Left = GrapeCity.ActiveReports.SectionReport.CmToInch(myYOHAKU_LEFT)
             rpt.PageSettings.Margins.Right = GrapeCity.ActiveReports.SectionReport.CmToInch(myYOHAKU_RIGHT)
