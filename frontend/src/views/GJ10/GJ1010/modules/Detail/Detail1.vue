@@ -198,7 +198,7 @@ const formData = reactive({
   BIKO: '',
 })
 
-const HASU_GOKEI = reactive({
+const HASU_GOKEI = ref({
   SAIRANKEI_SEIKEI: undefined,
   SAIRANKEI_IKUSEIKEI: undefined,
   NIKUYOKEI: undefined,
@@ -273,7 +273,7 @@ onMounted(async () => {
 const searchAll = async () => {
   tableData.value = []
   const res = await searchData()
-
+  HASU_GOKEI.value = res.HASU_GOKEI
   if (tableRef.value && tableData.value.length > 0) {
     tableRef.value.setCurrentRow(tableData.value[0])
   }

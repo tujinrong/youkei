@@ -43,15 +43,15 @@ Namespace JBD.GJS.Service.GJ1012
                 Dim row As DataRow = dt3.Rows(0)
                 res.HASU_GOKEI.SAIRANKEI_SEIKEI = DaConvertUtil.CInt(WordHenkan("N", "Z", row("HASU" & Format(1, "00"))))
                 res.HASU_GOKEI.SAIRANKEI_IKUSEIKEI = DaConvertUtil.CInt(WordHenkan("N", "Z", row("HASU" & Format(2, "00"))))
-                res.HASU_GOKEI.NIKUYOUKEI = DaConvertUtil.CInt(WordHenkan("N", "Z", row("HASU" & Format(3, "00"))))
+                res.HASU_GOKEI.NIKUYOKEI = DaConvertUtil.CInt(WordHenkan("N", "Z", row("HASU" & Format(3, "00"))))
                 res.HASU_GOKEI.SYUKEI_SEIKEI = DaConvertUtil.CInt(WordHenkan("N", "Z", row("HASU" & Format(4, "00"))))
                 res.HASU_GOKEI.SYUKEI_IKUSEIKEI = DaConvertUtil.CInt(WordHenkan("N", "Z", row("HASU" & Format(5, "00"))))
                 res.HASU_GOKEI.UZURA = DaConvertUtil.CInt(WordHenkan("N", "Z", row("HASU" & Format(6, "00"))))
                 res.HASU_GOKEI.AHIRU = DaConvertUtil.CInt(WordHenkan("N", "Z", row("HASU" & Format(7, "00"))))
                 res.HASU_GOKEI.KIJI = DaConvertUtil.CInt(WordHenkan("N", "Z", row("HASU" & Format(8, "00"))))
-                res.HASU_GOKEI.HOROHOROTORI = DaConvertUtil.CInt(WordHenkan("N", "Z", row("HASU" & Format(9, "00"))))
-                res.HASU_GOKEI.SICHIMENCHOU = DaConvertUtil.CInt(WordHenkan("N", "Z", row("HASU" & Format(10, "00"))))
-                res.HASU_GOKEI.DACHOU = DaConvertUtil.CInt(WordHenkan("N", "Z", row("HASU" & Format(11, "00"))))
+                res.HASU_GOKEI.HOROHOROCHO = DaConvertUtil.CInt(WordHenkan("N", "Z", row("HASU" & Format(9, "00"))))
+                res.HASU_GOKEI.SICHIMENCHO = DaConvertUtil.CInt(WordHenkan("N", "Z", row("HASU" & Format(10, "00"))))
+                res.HASU_GOKEI.DACHO = DaConvertUtil.CInt(WordHenkan("N", "Z", row("HASU" & Format(11, "00"))))
             End If
 
             If dt4.Rows.Count > 0 Then
