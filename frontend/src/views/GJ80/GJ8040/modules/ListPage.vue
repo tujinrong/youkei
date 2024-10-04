@@ -25,7 +25,7 @@
       >
         <vxe-column
           header-align="center"
-          field="USER_ID"
+          field="USERID"
           title="ユーザーID"
           width="120"
           sortable
@@ -33,7 +33,7 @@
           :resizable="true"
         >
           <template #default="{ row }">
-            <a @click="goForward(PageStatus.Edit, row)">{{ row.USER_ID }}</a>
+            <a @click="goForward(PageStatus.Edit, row)">{{ row.USERID }}</a>
           </template>
         </vxe-column>
         <vxe-column
