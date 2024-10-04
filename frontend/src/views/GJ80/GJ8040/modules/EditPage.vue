@@ -232,7 +232,7 @@ watch(
   () => props.visible,
   (newValue) => {
     if (newValue) {
-      const userId = props.userData ? props.userData.USERID : ''
+      const userId = props.userData ? props.userData.USER_ID : ''
       // Object.assign(formData, props.userData)
       // nextTick(() => editJudge.reset())
       InitDetail({
