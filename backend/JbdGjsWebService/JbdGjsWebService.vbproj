@@ -43,7 +43,7 @@
     <Import Include="System.Text" />
     <Import Include="System.Text.Json" />
     <Import Include="System.Text.RegularExpressions" />
-    <PackageReference Include="MESCIUS.ActiveReports.Aspnetcore.Viewer" Version="18.1.1" />
+    <PackageReference Include="GrapeCity.ActiveReports.Aspnetcore.Viewer.ja" Version="18.0.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
   </ItemGroup>
 

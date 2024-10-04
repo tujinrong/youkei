@@ -19,7 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="GrapeCity.ActiveReports.Export.Pdf" Version="18.0.0" />
+    <PackageReference Include="GrapeCity.ActiveReports.Export.Pdf.ja" Version="18.0.0" />
   </ItemGroup>
 
   <ItemGroup>
