@@ -59,6 +59,8 @@ export interface DeleteRequest extends DaRequestBase {
   KI: number | undefined
   /**契約者番号 */
   KEIYAKUSYA_CD: number | undefined
+  /**事務委託先番号(変更前) */
+  OLD_JIMUITAKU_CD: number | undefined
   /**データ更新日 */
   UP_DATE: Date | undefined
 }

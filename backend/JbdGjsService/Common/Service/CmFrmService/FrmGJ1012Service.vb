@@ -26,6 +26,8 @@ Namespace JBD.GJS.Service.GJ1012
             wSql &= "SELECT"
             wSql &= "  NOJ.MEISAI_NO,"
             wSql &= "  KJO.SEQNO,"
+            wSql &= "  KJO.KI,"
+            wSql &= "  KJO.KEIYAKUSYA_CD,"
             wSql &= "  KJO.KEIYAKU_DATE_FROM,"
             wSql &= "  KJO.KEIYAKU_DATE_TO,"
             wSql &= "  KJO.NOJO_CD,"

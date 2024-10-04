@@ -20,6 +20,11 @@ Namespace JBD.GJS.Service.GJ1012
         Public Property KEIYAKU_KBN As Integer? = Nothing
 
         ''' <summary>
+        ''' 契約区分コード
+        ''' </summary>
+        Public Property KEIYAKUSYA_NAME As String = String.Empty
+
+        ''' <summary>
         ''' 農場情報プルダウンリスト
         ''' </summary>
         Public Property NOJO_LIST As List(Of CmCodeNameModel) = New List(Of CmCodeNameModel)

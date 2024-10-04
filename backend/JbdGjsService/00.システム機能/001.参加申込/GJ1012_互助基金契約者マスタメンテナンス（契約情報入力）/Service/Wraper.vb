@@ -27,8 +27,8 @@ Namespace JBD.GJS.Service.GJ1012
             'データ結果判定
             For Each row As DataRow In dt1.Rows
                 Dim item As New CmCodeNameModel
-                item.CODE = DaConvertUtil.CInt(DaConvertUtil.CStr(row("MEISYO_CD")))
-                item.NAME = DaConvertUtil.CStr(row("MEISYO"))
+                item.CODE = DaConvertUtil.CInt(DaConvertUtil.CStr(row("NOJO_CD")))
+                item.NAME = DaConvertUtil.CStr(row("NOJO_NAME"))
                 res.NOJO_LIST.Add(item)
             Next
 

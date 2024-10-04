@@ -51,19 +51,19 @@
         </tr>
         <tr>
           <th>契約羽数合計</th>
-          <td>{{ hasuGokei.SAIRANKEI_SEIKEI }}</td>
-          <td>{{ hasuGokei.SAIRANKEI_IKUSEIKEI }}</td>
-          <td>{{ hasuGokei.NIKUYOUKEI }}</td>
-          <td>{{ hasuGokei.SYUKEI_SEIKEI }}</td>
-          <td>{{ hasuGokei.SYUKEI_IKUSEIKEI }}</td>
-          <td>{{ hasuGokei.UZURA }}</td>
-          <td>{{ hasuGokei.AHIRU }}</td>
-          <td>{{ hasuGokei.KIJI }}</td>
-          <td>{{ hasuGokei.HOROHOROTORI }}</td>
-          <td>{{ hasuGokei.SICHIMENCHOU }}</td>
-          <td>{{ hasuGokei.DACHOU }}</td>
+          <td>{{ HASU_GOKEI.SAIRANKEI_SEIKEI }}</td>
+          <td>{{ HASU_GOKEI.SAIRANKEI_IKUSEIKEI }}</td>
+          <td>{{ HASU_GOKEI.NIKUYOKEI }}</td>
+          <td>{{ HASU_GOKEI.SYUKEI_SEIKEI }}</td>
+          <td>{{ HASU_GOKEI.SYUKEI_IKUSEIKEI }}</td>
+          <td>{{ HASU_GOKEI.UZURA }}</td>
+          <td>{{ HASU_GOKEI.AHIRU }}</td>
+          <td>{{ HASU_GOKEI.KIJI }}</td>
+          <td>{{ HASU_GOKEI.HOROHOROCHO }}</td>
+          <td>{{ HASU_GOKEI.SICHIMENCHO }}</td>
+          <td>{{ HASU_GOKEI.DACHO }}</td>
           <td>
-            {{ hasuGokei.TOTAL || 0 }}
+            {{ HASU_GOKEI.TOTAL || 0 }}
           </td>
         </tr>
       </table> </a-card
@@ -121,14 +121,14 @@
         <vxe-column
           header-align="center"
           align="center"
-          field="TORISYURUI"
+          field="TORI_KBN_NAME"
           title="鳥の種類"
           min-width="120"
         ></vxe-column>
         <vxe-column
           header-align="center"
           align="right"
-          field="KEIYAKUHASU"
+          field="KEIYAKU_HASU"
           title="契約羽数"
           min-width="120"
         ></vxe-column>
@@ -151,7 +151,7 @@
 <script setup lang="ts">
 import useSearch from '@/hooks/useSearch'
 import { Judgement } from '@/utils/judge-edited'
-import { reactive, ref, toRef, computed } from 'vue'
+import { reactive, ref, toRef, computed, onMounted } from 'vue'
 import { DetailRowVM } from '../../type'
 import { changeTableSort } from '@/utils/util'
 import { EnumEditKbn, PageStatus } from '@/enum'
@@ -161,12 +161,24 @@ import { useRoute, useRouter } from 'vue-router'
 import { FarmManage } from '../../constant'
 import { VxeTableInstance } from 'vxe-table'
 import PopUp1012 from '../Popup/PopUp_1012.vue'
+import { Search } from '../../service/1012/service'
+import { SearchRequest } from '../../service/1012/type'
+import { search } from '@/views/GJ30/GJ3030/interface/3030/service'
 
 //--------------------------------------------------------------------------
 //データ定義
 //--------------------------------------------------------------------------
 const router = useRouter()
 const route = useRoute()
+
+const createDefaultParams = (): SearchRequest => {
+  return {
+    KI: Number(route.query.KI),
+    KEIYAKUSYA_CD: Number(route.query.KEIYAKUSYA_CD),
+  } as SearchRequest
+}
+
+const searchParams = reactive(createDefaultParams())
 
 const formData = reactive({
   KI: undefined as number | undefined,
@@ -186,18 +198,18 @@ const formData = reactive({
   BIKO: '',
 })
 
-const hasuGokei = reactive({
+const HASU_GOKEI = reactive({
   SAIRANKEI_SEIKEI: undefined,
   SAIRANKEI_IKUSEIKEI: undefined,
-  NIKUYOUKEI: undefined,
+  NIKUYOKEI: undefined,
   SYUKEI_SEIKEI: undefined,
   SYUKEI_IKUSEIKEI: undefined,
   UZURA: undefined,
   AHIRU: undefined,
   KIJI: undefined,
-  HOROHOROTORI: undefined,
-  SICHIMENCHOU: undefined,
-  DACHOU: undefined,
+  HOROHOROCHO: undefined,
+  SICHIMENCHO: undefined,
+  DACHO: undefined,
   TOTAL: undefined,
 })
 
@@ -216,10 +228,18 @@ const popupVisible = ref(false)
 const popupeditkbn = ref<EnumEditKbn>(EnumEditKbn.Add)
 
 const editJudge = new Judgement('GJ1010')
-const { pageParams, totalCount } = useSearch({
-  service: undefined,
+// const { pageParams, totalCount } = useSearch({
+//   service: undefined,
+//   source: tableData,
+// })
+
+const { pageParams, totalCount, searchData, clear } = useSearch({
+  service: Search,
   source: tableData,
+  params: toRef(() => searchParams),
+  // validate,
 })
+
 const NOJO_CD_CD_NAME_LIST = ref<CmCodeNameModel[]>([])
 const KEI_SYURUI_CD_NAME_LIST = ref<CmCodeNameModel[]>([])
 
@@ -237,6 +257,27 @@ const { validate, clearValidate, validateInfos, resetFields } = Form.useForm(
   formData,
   rules
 )
+
+//---------------------------------------------------------------------------
+//フック関数
+//--------------------------------------------------------------------------
+onMounted(async () => {
+  await searchAll()
+  // const res = await Search({
+  //   KI: Number(route.query.KI),
+  //   KEIYAKUSYA_CD: Number(route.query.KEIYAKUSYA_CD),
+  // })
+  // console.log(res)
+})
+
+const searchAll = async () => {
+  tableData.value = []
+  const res = await searchData()
+
+  if (tableRef.value && tableData.value.length > 0) {
+    tableRef.value.setCurrentRow(tableData.value[0])
+  }
+}
 //--------------------------------------------------------------------------
 //計算定義
 //--------------------------------------------------------------------------

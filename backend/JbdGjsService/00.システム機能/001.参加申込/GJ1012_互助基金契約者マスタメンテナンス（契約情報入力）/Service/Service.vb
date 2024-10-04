@@ -58,6 +58,7 @@ Namespace JBD.GJS.Service.GJ1012
 
                     End With
 
+
                     '-------------------------------------------------------------
                     '4.ビジネスロジック処理
                     '-------------------------------------------------------------
@@ -80,7 +81,7 @@ Namespace JBD.GJS.Service.GJ1012
                     End If
                     Dim res = Wraper.SearchResponse(dt1, dt2, dt3, dt4)
                     res.KEIYAKU_KBN = DaConvertUtil.CInt(dtchk.Rows(0)("KEIYAKU_KBN"))
-
+                    res.KEIYAKUSYA_NAME = DaConvertUtil.CStr(dtchk.Rows(0)("KEIYAKUSYA_NAME"))
                     '-------------------------------------------------------------
                     '6.正常返し
                     '-------------------------------------------------------------

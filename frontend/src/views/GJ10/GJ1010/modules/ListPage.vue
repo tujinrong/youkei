@@ -156,7 +156,12 @@
             class="ml-50%"
             type="primary"
             :disabled="!isDataSelected"
-            @click="goForward(PageStatus.Detail)"
+            @click="
+              goForward(
+                PageStatus.Detail,
+                xTableRef?.getCurrentRecord() ?? null
+              )
+            "
             >契約情報登録</a-button
           >
         </a-space>
@@ -416,16 +421,19 @@ const searchAll = async () => {
 }
 
 function goForward(status: PageStatus, row?: any) {
-  if (status === PageStatus.Edit || status === PageStatus.New) {
-    editVisible.value = true
-    editkbn.value =
-      status === PageStatus.Edit ? EnumEditKbn.Edit : EnumEditKbn.Add
-    return
-  }
+  // if (status === PageStatus.Edit || status === PageStatus.New) {
+  //   editVisible.value = true
+  //   editkbn.value =
+  //     status === PageStatus.Edit ? EnumEditKbn.Edit : EnumEditKbn.Add
+  //   return
+  // }
+  keyList.KEIYAKUSYA_CD = row.KEIYAKUSYA_CD
   router.push({
     name: route.name,
     query: {
       status: status,
+      KI: keyList.KI,
+      KEIYAKUSYA_CD: keyList.KEIYAKUSYA_CD,
     },
   })
 }

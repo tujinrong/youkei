@@ -574,6 +574,8 @@ const createDefaultParams = () => {
     ADDR_TEL2: '', //連絡先（電話2)
     ADDR_FAX: '', //連絡先（FAX）
     ADDR_E_MAIL: '', //メールアドレス
+    /**事務委託先番号(変更前) */
+    OLD_JIMUITAKU_CD: undefined as number | undefined,
     JIMUITAKU_CD: undefined as number | undefined, //事務委託先番号
     FURI_BANK_CD: '', //金融機関コード
     FURI_BANK_SITEN_CD: '', //本支店コード
@@ -857,6 +859,7 @@ const deleteData = () => {
           KI: formData.KI,
           KEIYAKUSYA_CD: formData.KEIYAKUSYA_CD,
           UP_DATE: formData.UP_DATE,
+          OLD_JIMUITAKU_CD: formData.OLD_JIMUITAKU_CD,
           EDIT_KBN: EnumEditKbn.Edit,
         })
         closeModal()

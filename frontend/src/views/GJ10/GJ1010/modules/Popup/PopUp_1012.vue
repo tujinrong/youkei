@@ -151,7 +151,7 @@
 </template>
 <script setup lang="ts">
 import { Judgement } from '@/utils/judge-edited'
-import { reactive, ref, toRef, computed } from 'vue'
+import { reactive, ref, toRef, computed, onMounted } from 'vue'
 import Detail2 from '../Popup/PopUp_1013.vue'
 import { EnumEditKbn, PageStatus } from '@/enum'
 import { Form, message } from 'ant-design-vue'
@@ -166,7 +166,9 @@ import { FarmManage } from '../../constant'
 import { VxeTableInstance } from 'vxe-table'
 import { showDeleteModal, showSaveModal } from '@/utils/modal'
 import { mathNumber } from '@/utils/util'
-
+import { Search } from '../../service/1012/service'
+import { useRoute } from 'vue-router'
+const route = useRoute()
 //--------------------------------------------------------------------------
 //データ定義
 //--------------------------------------------------------------------------
@@ -253,6 +255,32 @@ const modalVisible = computed({
 window.addEventListener('resize', function () {
   devicePixelRatio.value = window.devicePixelRatio
 })
+
+//---------------------------------------------------------------------------
+//フック関数
+//--------------------------------------------------------------------------
+// onMounted(async () => {
+//   const res = await Search({
+//     KI: Number(route.query.KI),
+//     KEIYAKUSYA_CD: Number(route.query.KEIYAKUSYA_CD),
+//   })
+//   console.log(res)
+
+// })
+
+//初期化処理
+// const getInitData = () => {
+
+// Init({ KI: KI, EDIT_KBN: EnumEditKbn.Add }).then((res) => {
+//   if (initflg) searchParams.KI = res.KI
+//   KEN_LIST.value = res.KEN_LIST
+//   KEIYAKU_KBN_LIST.value = res.KEIYAKU_KBN_LIST
+//   KEIYAKU_JYOKYO_LIST.value = res.KEIYAKU_JYOKYO_LIST
+//   ITAKU_LIST.value = res.ITAKU_LIST
+//   nextTick(() => clearValidate())
+// })
+// }
+
 //--------------------------------------------------------------------------
 //メソッド
 //--------------------------------------------------------------------------
