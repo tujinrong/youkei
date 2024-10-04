@@ -60,7 +60,7 @@ async function setupApp() {
       })
 
       // 入力処理のロジック
-      function handleInput(_event: any) {
+      function handleInput(event: any) {
         // 入力フィールドの maxlength 属性から最大文字数を取得（全角は2単位、半角は1単位）
         const maxUnits = parseInt(el.getAttribute('maxlength'), 10)
 

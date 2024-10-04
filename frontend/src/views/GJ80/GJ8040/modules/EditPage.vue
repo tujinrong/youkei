@@ -50,6 +50,7 @@
                     v-model:value="formData.PASS"
                     :maxlength="20"
                     class="w-60!"
+                    type="password"
                   ></a-input>
                 </a-form-item>
               </td>
@@ -107,6 +108,8 @@
                 <a-input
                   v-model:value="formData.TEISI_RIYU"
                   :disabled="!formData.TEISI_DATE"
+                  v-fullwidth-limit
+                  :maxlength="40"
                 />
               </td>
             </a-col>
@@ -142,7 +145,7 @@ import { Delete, InitDetail, Save } from '../service'
 import { Judgement } from '@/utils/judge-edited'
 import {
   convertKanaToHalfWidth,
-  convertToHalfWidth,
+  convertToAllowedCharacters,
   getDateJpText,
 } from '@/utils/util'
 import { SearchRowVM } from '../type'
@@ -258,6 +261,7 @@ watch(
 
 watch(formData, () => editJudge.setEdited())
 
+/**ユーザID */
 watch(
   () => formData.USERID,
   (newVal) => {
@@ -268,11 +272,12 @@ watch(
   { deep: true }
 )
 
+/**パスワード */
 watch(
   () => formData.PASS,
   (newVal) => {
     if (newVal) {
-      formData.PASS = convertToHalfWidth(newVal)
+      formData.PASS = convertToAllowedCharacters(newVal)
     }
   },
   { deep: true }
