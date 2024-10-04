@@ -294,11 +294,25 @@ export function convertToFullWidth(input: string): string {
     .replace(/ /g, '　')
 }
 
-/**全角のアルファペット、数字、スペース及び記号を半角に変換*/
+/**全角のアルファペット、数字、スペース及び記号を半角に変換（漢字とかなを制限されていない）*/
 export function convertToHalfWidth(input: string): string {
   return input
     .replace(/[！-～]/g, (ch) => String.fromCharCode(ch.charCodeAt(0) - 0xfee0))
     .replace(/　/g, ' ')
+    .replace(/「」/g, '｢｣')
+}
+
+/**全角のアルファペット、数字、スペース及び記号を半角に変換*/
+export function convertToAllowedCharacters(input: string): string {
+  const fullWidthToHalfWidth = input
+    .replace(/[！-～]/g, (ch) => String.fromCharCode(ch.charCodeAt(0) - 0xfee0))
+    .replace(/　/g, ' ')
+    .replace(/「」/g, '｢｣')
+
+  return fullWidthToHalfWidth.replace(
+    /[^0-9A-Za-z\-@./!"#$%&'()=~|｢｣[\]{}^;:,.\\`+*<>?_ ]/g,
+    ''
+  )
 }
 
 /**全角のアルファペット、数字及びスペースを半角に変換*/
@@ -309,19 +323,20 @@ export function convertToHalfWidthProhibitSymbol(input: string): string {
     .replace(/[^A-Za-z0-9\s]/g, '')
 }
 
-//すべての文字を半角に変換
-export function convertALLToHalfWidth(input: string): string {
-  return input.replace(/[^\u0020-\u007E\uFF61-\uFF9F]/g, '')
+/**全角の数字、記号及びスペースを半角に変換*/
+export function convertToHalfWidthProhibitLetter(input: string): string {
+  return input
+    .replace(/[！-～]/g, (ch) => String.fromCharCode(ch.charCodeAt(0) - 0xfee0))
+    .replace(/　/g, ' ')
+    .replace(/[^0-9\-@./!"#$%&'()=~|｢｣[\]{}^;:,.\\`+*<>?_ ]/g, '')
 }
 
-/**半角数字に変換*/
-export function convertToHalfNumber(input: number | string): number {
-  const result = String(input)
+/**全角の数字及びスペースを半角に変換*/
+export function convertToHalfNumber(input: string): string {
+  return input
     .replace(/[！-～]/g, (ch) => String.fromCharCode(ch.charCodeAt(0) - 0xfee0))
     .replace(/　/g, ' ')
     .replace(/[^0-9\s]/g, '')
-
-  return Number(result)
 }
 
 /**電話番号に変換*/
@@ -330,6 +345,11 @@ export function convertToTel(input: string): string {
     .replace(/[！-～]/g, (ch) => String.fromCharCode(ch.charCodeAt(0) - 0xfee0))
     .replace(/　/g, ' ')
     .replace(/[^0-9-]/g, '')
+}
+
+//すべての文字を半角に変換
+export function convertALLToHalfWidth(input: string): string {
+  return input.replace(/[^\u0020-\u007E\uFF61-\uFF9F]/g, '')
 }
 
 /**平仮名に変換*/
@@ -350,19 +370,6 @@ export function convertToFuRiGaNa(input: string): string {
 export const mathNumber = {
   formatter: (value) => value.replace(/\B(?=(\d{3})+(?!\d))/g, ','),
   parser: (value) => value.replace(/(,*)/g, ''),
-}
-
-/**全角・半角の数字、アルファベット、スペース及び記号を半角に変換*/
-export function convertToAllowedCharacters(input: string): string {
-  const fullWidthToHalfWidth = input
-    .replace(/[！-～]/g, (ch) => String.fromCharCode(ch.charCodeAt(0) - 0xfee0))
-    .replace(/　/g, ' ')
-    .replace(/「」/g, '｢｣')
-
-  return fullWidthToHalfWidth.replace(
-    /[^0-9A-Za-z\-@./!"#$%&'()=~|｢｣[\]{}^;:,.\\`+*<>?_ ]/g,
-    ''
-  )
 }
 
 /**カタカナは全角を半角に変換し、平仮名を半角カタカナに変換し、制限された文字のみ許可*/

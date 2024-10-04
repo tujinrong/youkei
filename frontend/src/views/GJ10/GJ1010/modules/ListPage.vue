@@ -290,13 +290,12 @@ import { computed, reactive, ref, toRef, nextTick, onMounted } from 'vue'
 import { ITEM_REQUIRE_ERROR } from '@/constants/msg'
 import useSearch from '@/hooks/useSearch'
 import { useElementSize } from '@vueuse/core'
-import { changeTableSort } from '@/utils/util'
+import { changeTableSort, convertToTel } from '@/utils/util'
 import { Form } from 'ant-design-vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useTabStore } from '@/store/modules/tab'
 import { SearchRequest, SearchRowVM } from '../service/1010/type'
 import { VxeTableInstance } from 'vxe-table'
-import { convertToHalfNumber } from '@/utils/util'
 
 import EditPage from './Popup/PopUp_1011.vue'
 import { Init, Search } from '../service/1010/service'
@@ -403,11 +402,7 @@ const { validate, clearValidate, validateInfos, resetFields } = Form.useForm(
   searchParams,
   rules
 )
-const handleTel = () => {
-  nextTick(
-    () => (searchParams.ADDR_TEL1 = convertToHalfNumber(searchParams.ADDR_TEL1))
-  )
-}
+
 //検索処理
 
 const searchAll = async () => {

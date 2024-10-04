@@ -442,7 +442,7 @@ import {
   convertToAllowedCharacters,
   convertKanaToHalfWidth,
   convertToHalfWidthProhibitSymbol,
-  validateLength,
+  convertToHalfWidth,
 } from '@/utils/util'
 
 const formData = reactive<DetailVM>({
@@ -798,31 +798,6 @@ watch(
     editJudge.setEdited()
   }
 )
-
-// watch(
-//   () => formData,
-//   (newVal) => {
-//     if (newVal) {
-//       formData.HAKKO_NO_KANJI = convertToFullWidth(newVal.HAKKO_NO_KANJI)
-//       formData.TEL1 = convertToTel(newVal.TEL1)
-//       formData.FAX1 = convertToTel(newVal.FAX1)
-//       formData.TEL2 = convertToTel(newVal.TEL2)
-//       formData.FAX2 = convertToTel(newVal.FAX2)
-//       formData.E_MAIL1 = convertToAllowedCharacters(newVal.E_MAIL1)
-//       formData.E_MAIL2 = convertToAllowedCharacters(newVal.E_MAIL2)
-//       formData.HP_URL = convertToAllowedCharacters(newVal.HP_URL)
-//       formData.TOUROKU_NO = convertToHalfWidthProhibitSymbol(newVal.TOUROKU_NO)
-//       formData.FURI_KOZA_MEIGI_KANA = convertKanaToHalfWidth(
-//         newVal.FURI_KOZA_MEIGI_KANA
-//       )
-//       formData.FURI_KOZA_MEIGI = convertToFullWidth(newVal.FURI_KOZA_MEIGI)
-//       formData.KOFU_KAISYA_NAME = convertKanaToHalfWidth(
-//         newVal.KOFU_KAISYA_NAME
-//       )
-//     }
-//   },
-//   { deep: true }
-// )
 
 //振込　金融機関
 watch(

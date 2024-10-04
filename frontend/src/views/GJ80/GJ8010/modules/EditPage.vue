@@ -86,7 +86,7 @@
 import { EnumEditKbn } from '@/enum'
 import { Judgement } from '@/utils/judge-edited'
 import { computed, nextTick, reactive, watch } from 'vue'
-import { convertToFullWidth, convertToHalfNumber } from '@/utils/util'
+import { convertToFullWidth } from '@/utils/util'
 import {
   DELETE_CONFIRM,
   DELETE_OK_INFO,

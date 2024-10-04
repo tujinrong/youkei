@@ -8,7 +8,7 @@
             <a-col v-bind="layout">
               <th>金融機関コード</th>
               <td>
-                <a-form-item>
+                <a-form-item v-bind="validateInfos.BANK_CD">
                   <a-input
                     v-model:value="searchParams.BANK_CD"
                     :maxlength="4"
@@ -38,7 +38,6 @@
                     v-model:value="searchParams.BANK_NAME"
                     :maxlength="30"
                     class="max-w-75"
-                    @change="checkUserNameInput(30)"
                   ></a-input>
                 </a-form-item>
               </td>
@@ -150,6 +149,7 @@ import {
   changeTableSort,
   convertKanaToHalfWidth,
   convertToHalfNumber,
+  convertToHalfWidthProhibitLetter,
 } from '@/utils/util'
 import { VxeTableInstance } from 'vxe-pc-ui'
 import { SearchBankRowVM, SearchSitenRowVM } from '../service/8050/type'
@@ -157,6 +157,8 @@ import { PreviewBank, SearchBank } from '../service/8050/service'
 import { showInfoModal } from '@/utils/modal'
 import EditPage from './EditPage.vue'
 import ListPage2 from './ListPage2.vue'
+import { ITEM_REQUIRE_ERROR } from '@/constants/msg'
+import { Form } from 'ant-design-vue'
 //--------------------------------------------------------------------------
 //データ定義
 //--------------------------------------------------------------------------
@@ -174,6 +176,16 @@ const createDefaultParams = () => {
 const searchParams = reactive(createDefaultParams())
 
 const bankTableData = ref<SearchBankRowVM[]>([])
+
+const rules = reactive({
+  BANK_CD: [
+    {
+      required: false,
+      message: ITEM_REQUIRE_ERROR.Msg.replace('{0}', '金融機関コード'),
+    },
+  ],
+})
+const { validateInfos } = Form.useForm(searchParams, rules)
 
 const editVisible1 = ref(false)
 const list2Visible = ref(false)
@@ -204,28 +216,6 @@ const isSelected = computed(() => {
   if (xTableRef) return xTableRef.value?.getCurrentRecord()
   return false
 })
-
-const checkUserNameInput = (maxlength: number) => {
-  const userInput = searchParams.BANK_NAME
-  let byteCount = 0
-  let result = ''
-
-  for (let i = 0; i < userInput.length; i++) {
-    const char = userInput[i]
-
-    if (char.match(/[^\x00-\x7F]/)) {
-      byteCount += 2
-    } else {
-      byteCount += 1
-    }
-
-    if (byteCount > maxlength) {
-      return
-    }
-    result += char
-  }
-  searchParams.BANK_NAME = result
-}
 //---------------------------------------------------------------------------
 //フック関数
 //--------------------------------------------------------------------------
@@ -304,12 +294,23 @@ onUnmounted(() => {
 //--------------------------------------------------------------------------
 //監視定義
 //--------------------------------------------------------------------------
+/**金融機関コード */
 watch(
-  () => searchParams,
+  () => searchParams.BANK_CD,
   (newVal) => {
     if (newVal) {
-      searchParams.BANK_CD = convertToHalfNumber(newVal.BANK_CD)
-      searchParams.BANK_KANA = convertKanaToHalfWidth(newVal.BANK_KANA)
+      searchParams.BANK_CD = convertToHalfWidthProhibitLetter(newVal)
+    }
+  },
+  { deep: true }
+)
+
+/**金融機関名（ｶﾅ） */
+watch(
+  () => searchParams.BANK_KANA,
+  (newVal) => {
+    if (newVal) {
+      searchParams.BANK_KANA = convertKanaToHalfWidth(newVal)
     }
   },
   { deep: true }
