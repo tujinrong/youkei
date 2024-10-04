@@ -73,6 +73,7 @@
         >
           <vxe-column
             header-align="center"
+            align="right"
             field="MEISYO_CD"
             title="名称コード"
             width="120"
@@ -83,6 +84,7 @@
           </vxe-column>
           <vxe-column
             header-align="center"
+            align="center"
             field="MEISYO"
             title="名称"
             min-width="300"
@@ -93,6 +95,7 @@
           </vxe-column>
           <vxe-column
             header-align="center"
+            align="center"
             field="RYAKUSYO"
             title="略称"
             width="200"
