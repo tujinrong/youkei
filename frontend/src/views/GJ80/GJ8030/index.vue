@@ -6,10 +6,9 @@
       style="background-color: aliceblue"
     >
       <h1>（GJ8030）日本養鶏協会マスタメンテナンス</h1>
-
       <div class="edit_table form">
         <a-row>
-          <a-col span="12">
+          <a-col span="13" :order="1">
             <th class="required">協会名称</th>
             <td>
               <a-form-item v-bind="validateInfos.KYOKAI_NAME">
@@ -20,19 +19,7 @@
               /></a-form-item>
             </td>
           </a-col>
-          <a-col span="12">
-            <th class="required text-end!">支援事業名</th>
-            <td>
-              <a-form-item v-bind="validateInfos.JIGYO_NAME">
-                <a-input
-                  v-model:value="formData.JIGYO_NAME"
-                  v-fullwidth-limit
-                  :maxlength="30"
-                />
-              </a-form-item>
-            </td>
-          </a-col>
-          <a-col span="12">
+          <a-col span="13" :order="3">
             <th class="required">役職名</th>
             <td>
               <a-form-item v-bind="validateInfos.YAKUMEI">
@@ -44,9 +31,7 @@
               </a-form-item>
             </td>
           </a-col>
-        </a-row>
-        <a-row>
-          <a-col span="12">
+          <a-col span="13" :order="4">
             <th class="required">会長名</th>
             <td>
               <a-form-item v-bind="validateInfos.KAICHO_NAME">
@@ -58,7 +43,19 @@
               </a-form-item>
             </td>
           </a-col>
-          <a-col span="12">
+          <a-col span="11" :order="2">
+            <th class="required text-end!">支援事業名</th>
+            <td>
+              <a-form-item v-bind="validateInfos.JIGYO_NAME">
+                <a-input
+                  v-model:value="formData.JIGYO_NAME"
+                  v-fullwidth-limit
+                  :maxlength="30"
+                />
+              </a-form-item>
+            </td>
+          </a-col>
+          <a-col span="11" :order="5">
             <th class="text-end!">予備</th>
             <td>
               <a-form-item v-bind="validateInfos.YOBI1">
