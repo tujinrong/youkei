@@ -332,7 +332,7 @@ export function convertToHalfWidthProhibitLetter(input: string): string {
     .replace(/[^0-9\-@./!"#$%&'()=~|｢｣[\]{}^;:,.\\`+*<>?_ ]/g, '')
 }
 
-/**全角のアルファペット、数字及びスペースを半角に変換、及び英字は大文字を小文字に変換*/
+/**全角のアルファペット、数字及びスペースを半角に変換、及び英字は小文字を大文字に変換*/
 export function convertToHalfWidthAndUpperCase(input: string): string {
   return input
     .toUpperCase()
