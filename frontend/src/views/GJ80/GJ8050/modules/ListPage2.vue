@@ -172,6 +172,7 @@ import {
   changeTableSort,
   convertKanaToHalfWidth,
   convertToHalfWidthProhibitLetter,
+  openNew,
 } from '@/utils/util'
 import EditPage2 from './EditPage2.vue'
 import { VxeTableInstance } from 'vxe-table'
@@ -349,24 +350,7 @@ async function reset2() {
 async function preview2() {
   try {
     await PreviewSiten({ ...searchParams2, BANK_CD: props.bankcd })
-    const openNew = () => {
-      const baseURL = `${window.location.origin}/preview`
-
-      const params = {
-        ...searchParams2,
-        name: 'S80502',
-      }
-
-      const paramString = Object.keys(params)
-        .map((key) => `${key}=${encodeURIComponent(params[key])}`)
-        .join('&')
-      const encryptedParams = encrypt(paramString)
-
-      const url = `${baseURL}?${encryptedParams}`
-
-      window.open(url, '_blank')
-    }
-    openNew()
+    openNew(searchParams2, 'S80502')
   } catch (error) {}
 }
 </script>

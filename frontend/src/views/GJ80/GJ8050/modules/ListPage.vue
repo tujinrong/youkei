@@ -149,6 +149,7 @@ import {
   changeTableSort,
   convertKanaToHalfWidth,
   convertToHalfWidthProhibitLetter,
+  openNew,
 } from '@/utils/util'
 import { VxeTableInstance } from 'vxe-pc-ui'
 import { SearchBankRowVM, SearchSitenRowVM } from '../service/8050/type'
@@ -270,41 +271,11 @@ async function preview1() {
   try {
     previewName.value = 'S80501'
     await PreviewBank({ ...searchParams })
-    const openNew = () => {
-      const baseURL = `${window.location.origin}/preview`
-
-      const params = {
-        ...searchParams,
-        name: previewName.value,
-      }
-
-      const paramString = Object.keys(params)
-        .map((key) => `${key}=${encodeURIComponent(params[key])}`)
-        .join('&')
-      const encryptedParams = encrypt(paramString)
-
-      const url = `${baseURL}?${encryptedParams}`
-
-      window.open(url, '_blank')
-    }
-    openNew()
+    openNew(searchParams, previewName.value)
   } catch (error) {}
-}
-let uid = ''
-const channel = new BroadcastChannel('channel_preview')
-channel.onmessage = (event) => {
-  if (!uid) uid = event.data.uid
-  if (event.data.isMounted) {
-    channel.postMessage({
-      params: JSON.stringify(searchParams),
-      name: previewName.value,
-      uid: uid,
-    })
-  }
 }
 onUnmounted(() => {
   previewName.value = ''
-  channel.close()
 })
 
 //--------------------------------------------------------------------------

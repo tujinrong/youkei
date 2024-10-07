@@ -111,6 +111,7 @@ import { ITEM_REQUIRE_ERROR } from '@/constants/msg'
 import { Form } from 'ant-design-vue'
 import { Init, Preview } from './service'
 import { PreviewRequest } from './type'
+import { openNew } from '@/utils/util'
 
 //--------------------------------------------------------------------------
 //データ定義
@@ -299,10 +300,7 @@ async function onPreview() {
   await validate()
   try {
     await Preview({ ...formData })
-    const openNew = () => {
-      window.open(URL.value, '_blank')
-    }
-    openNew()
+    openNew(formData, 'S1030')
   } catch (error) {}
 }
 
@@ -310,16 +308,6 @@ async function onPreview() {
 //監視定義
 //--------------------------------------------------------------------------
 
-//-----------------------------------------------------
-const channel = new BroadcastChannel('channel_preview')
-channel.onmessage = (event) => {
-  if (event.data.isMounted) {
-    channel.postMessage({ params: JSON.stringify(formData), name: 'S1030' })
-  }
-}
-onUnmounted(() => {
-  channel.close()
-})
 //-----------------------------------------------------
 </script>
 

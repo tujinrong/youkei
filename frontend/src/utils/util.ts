@@ -9,6 +9,7 @@
 import { ERA_YEARS } from '@/constants/business'
 import { Enum日付不明区分 } from '@/enum'
 import { Ref } from 'vue'
+import { encryptByBase64 as encrypt } from '@/utils/encrypt/data'
 
 /**  /4/1 or -4-1 => 0401 */
 export function DatePadZero(dateString) {
@@ -492,4 +493,23 @@ export function validateLength(input: string, length: number): string {
     result += char
   }
   return result
+}
+
+/**
+ * プレビュー画面を開く
+ * @param searchParams パラメータ
+ * @param name プレビューID
+ */
+export function openNew(searchParams, name) {
+  const baseURL = `${window.location.origin}/preview`
+  const params = {
+    param: JSON.stringify(searchParams),
+    name,
+  }
+  const paramString = Object.keys(params)
+    .map((key) => `${key}=${encodeURIComponent(params[key])}`)
+    .join('&')
+  const encryptedParams = encrypt(paramString)
+  const url = `${baseURL}?${encryptedParams}`
+  window.open(url, '_blank')
 }
