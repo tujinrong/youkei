@@ -191,6 +191,9 @@ const closeModal = () => {
       TAX_RITU: undefined,
     })
     model.value = false
+    nextTick(() => {
+      clearValidate()
+    })
   })
 }
 
