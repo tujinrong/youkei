@@ -178,6 +178,7 @@ import { VxeTableInstance } from 'vxe-table'
 import { SearchSitenRowVM } from '../service/8050/type'
 import { PreviewSiten, SearchSiten } from '../service/8050/service'
 import { showInfoModal } from '@/utils/modal'
+import { encryptByBase64 as encrypt } from '@/utils/encrypt/data'
 
 //---------------------------------------------------------------------------
 //属性
@@ -349,20 +350,24 @@ async function preview2() {
   try {
     await PreviewSiten({ ...searchParams2, BANK_CD: props.bankcd })
     const openNew = () => {
-      window.open(props.URL, '_blank')
+      const baseURL = `${window.location.origin}/preview`
+
+      const params = {
+        ...searchParams2,
+        name: 'S80502',
+      }
+
+      const paramString = Object.keys(params)
+        .map((key) => `${key}=${encodeURIComponent(params[key])}`)
+        .join('&')
+      const encryptedParams = encrypt(paramString)
+
+      const url = `${baseURL}?${encryptedParams}`
+
+      window.open(url, '_blank')
     }
     openNew()
   } catch (error) {}
-}
-
-const channel = new BroadcastChannel('channel_preview')
-channel.onmessage = (event) => {
-  if (event.data.isMounted) {
-    channel.postMessage({
-      params: JSON.stringify({ ...searchParams2, BANK_CD: props.bankcd }),
-      name: 'S80502',
-    })
-  }
 }
 </script>
 

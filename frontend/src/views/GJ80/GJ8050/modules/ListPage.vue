@@ -158,6 +158,7 @@ import EditPage from './EditPage.vue'
 import ListPage2 from './ListPage2.vue'
 import { ITEM_REQUIRE_ERROR } from '@/constants/msg'
 import { Form } from 'ant-design-vue'
+import { encryptByBase64 as encrypt } from '@/utils/encrypt/data'
 //--------------------------------------------------------------------------
 //データ定義
 //--------------------------------------------------------------------------
@@ -270,18 +271,34 @@ async function preview1() {
     previewName.value = 'S80501'
     await PreviewBank({ ...searchParams })
     const openNew = () => {
-      window.open(URL.value, '_blank')
+      const baseURL = `${window.location.origin}/preview`
+
+      const params = {
+        ...searchParams,
+        name: previewName.value,
+      }
+
+      const paramString = Object.keys(params)
+        .map((key) => `${key}=${encodeURIComponent(params[key])}`)
+        .join('&')
+      const encryptedParams = encrypt(paramString)
+
+      const url = `${baseURL}?${encryptedParams}`
+
+      window.open(url, '_blank')
     }
     openNew()
   } catch (error) {}
 }
-
+let uid = ''
 const channel = new BroadcastChannel('channel_preview')
 channel.onmessage = (event) => {
+  if (!uid) uid = event.data.uid
   if (event.data.isMounted) {
     channel.postMessage({
       params: JSON.stringify(searchParams),
       name: previewName.value,
+      uid: uid,
     })
   }
 }
