@@ -144,7 +144,7 @@
                 <a-button type="primary" @click="clear">キャンセル</a-button>
                 <a-button type="primary">EXCEL出力</a-button>
               </a-space>
-              <close-page />
+              <CloseButton />
             </div>
           </a-col>
         </a-row>

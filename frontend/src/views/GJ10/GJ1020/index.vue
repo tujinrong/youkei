@@ -60,7 +60,7 @@
           >
           <a-button type="primary" @click="reset">条件クリア</a-button>
         </a-space>
-        <close-page />
+        <CloseButton />
       </div> </a-card
     ><a-card class="flex-1 staticWidth"
       ><h2>1.契約農場別明細 移動情報(表示)</h2>

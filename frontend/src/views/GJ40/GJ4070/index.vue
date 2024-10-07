@@ -75,7 +75,7 @@
                 >
                 <a-button type="primary" @click="clear">キャンセル</a-button>
               </a-space>
-              <close-page />
+              <CloseButton />
             </div>
           </a-col>
         </a-row>

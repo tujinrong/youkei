@@ -55,7 +55,7 @@
                 <a-button type="primary" @click="onPreview">実行</a-button>
                 <a-button type="primary" @click="clear">キャンセル</a-button>
               </a-space>
-              <close-page />
+              <CloseButton />
             </div>
           </a-col>
         </a-row>

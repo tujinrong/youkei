@@ -8,7 +8,7 @@
             >新規登録</a-button
           >
         </a-space>
-        <close-page />
+        <CloseButton />
       </div>
     </a-card>
     <a-card :bordered="false" class="flex-1 staticWidth" ref="cardRef">

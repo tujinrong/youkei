@@ -11,6 +11,7 @@
 </template>
 
 <script lang="ts" setup>
+import { CLOSE_CONFIRM } from '@/constants/msg'
 import { useRouteStore } from '@/store/modules/route'
 import { useTabStore } from '@/store/modules/tab'
 import { showConfirmModal } from '@/utils/modal'
@@ -27,7 +28,7 @@ const routeStore = useRouteStore()
 //--------------------------------------------------------------------------
 const close = async () => {
   showConfirmModal({
-    content: '終了します。よろしいですか？',
+    content: CLOSE_CONFIRM,
     onOk: async () => {
       tabStore.removeActiveTab()
       routeStore.reCacheRoutesByKey(route.name as RouteKey)

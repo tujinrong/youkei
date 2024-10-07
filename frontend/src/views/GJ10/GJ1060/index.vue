@@ -99,7 +99,7 @@
                 <a-button type="primary">EXCEL出力</a-button>
                 <a-button type="primary">条件クリア</a-button>
               </a-space>
-              <close-page />
+              <CloseButton />
             </div>
           </a-col>
         </a-row>

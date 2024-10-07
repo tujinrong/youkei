@@ -173,7 +173,7 @@
           <a-button type="primary" @click="reset">条件クリア</a-button>
           <a-button class="ml-20" type="primary" @click="">CSV出力</a-button>
         </a-space>
-        <close-page /></div></a-card
+        <CloseButton /></div></a-card
     ><a-card :bordered="false" class="flex-1 staticWidth" ref="cardRef">
       <a-pagination
         v-model:current="pageParams.PAGE_NUM"

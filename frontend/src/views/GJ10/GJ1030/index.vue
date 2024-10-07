@@ -95,7 +95,7 @@
                 >
                 <a-button type="primary" @click="clear">条件クリア</a-button>
               </a-space>
-              <close-page />
+              <CloseButton />
             </div>
           </a-col>
         </a-row>

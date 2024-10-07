@@ -52,7 +52,7 @@
               >変更（表示）</a-button
             >
           </a-space>
-          <close-page />
+          <CloseButton />
         </div>
         <vxe-table
           ref="xTableRef"
