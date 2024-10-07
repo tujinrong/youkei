@@ -18,13 +18,12 @@ Namespace JBD.GJS.Service.GJ8101
         ''' <summary>
         ''' 検索処理_詳細画面処理
         ''' </summary>
-        Public Shared Function InitDetailResponse(ds As DataSet, ek As EnumEditKbn?) As InitDetailResponse
+        Public Shared Function InitDetailResponse(dt As DataTable, ek As EnumEditKbn?) As InitDetailResponse
             Dim item As New InitDetailResponse()
 
             '消費税率情報
             Select Case ek
                 Case EnumEditKbn.Edit       '変更入力
-                    Dim dt = ds.Tables(0)
                     If dt.Rows.Count > 0 Then
                         Dim row As DataRow = dt.Rows(0)
                         item.TAX.TAX_DATE_FROM  = DaConvertUtil.CDate(row("TAX_DATE_FROM"))

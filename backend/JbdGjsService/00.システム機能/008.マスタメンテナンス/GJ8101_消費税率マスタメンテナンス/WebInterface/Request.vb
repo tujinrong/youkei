@@ -44,12 +44,12 @@ Namespace JBD.GJS.Service.GJ8101
         ''' <summary>
         ''' 適用開始日
         ''' </summary>
-        Public Property TAX_DATE_FROM As Integer? = Nothing
+        Public Property TAX_DATE_FROM As DateTime? = Nothing
 
         ''' <summary>
         ''' データ更新日
         ''' </summary>
-        Public Property UP_DATE As DateTime?
+        Public Property UP_DATE As DateTime? = Nothing
 
     End Class
 End Namespace

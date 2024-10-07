@@ -38,27 +38,25 @@ Namespace JBD.GJS.Service.GJ8101
                     '-------------------------------------------------------------
 
                     '事務委託先情報処理
-                    Dim ds As DataSet = New DataSet()
+                    Dim dt As DataTable = New DataTable()
                     Select Case req.EDIT_KBN
                         Case EnumEditKbn.Edit       '変更入力
                             '検索結果出力用ＳＱＬ作成
                             Dim sql = FrmGJ8101Service.f_Search_SQLMake(req)
 
                             'データSelect 
-                            Dim dt1 = FrmService.f_Select_ODP(db, sql).Tables(0)
+                            dt = FrmService.f_Select_ODP(db, sql).Tables(0)
 
                             'データ結果判定
-                            If dt1.Rows.Count = 0 Then
+                            If dt.Rows.Count = 0 Then
                                 Return New InitDetailResponse("該当データが存在しませんでした。")
                             End If
-
-                            ds.Tables.Add(dt1)
                     End Select
 
                     ''-------------------------------------------------------------
                     ''5.データ加工処理
                     ''-------------------------------------------------------------
-                    Dim res = Wraper.InitDetailResponse(ds, req.EDIT_KBN)
+                    Dim res = Wraper.InitDetailResponse(dt, req.EDIT_KBN)
 
                     '-------------------------------------------------------------
                     '6.正常返し
