@@ -252,7 +252,7 @@
                     <a-input-number
                       v-model:value="formData.FURI_KOZA_NO"
                       string-mode
-                      :min="1"
+                      :min="0"
                       :max="9999999"
                       :maxlength="7"
                       style="width: 100%"
@@ -267,7 +267,7 @@
                     <a-input-number
                       v-model:value="formData.FURI_SYUBETU"
                       string-mode
-                      :min="1"
+                      :min="0"
                       :max="99"
                       :maxlength="2"
                       style="width: 100%"
@@ -438,8 +438,7 @@ import {
   convertToFullWidth,
   convertToAllowedCharacters,
   convertKanaToHalfWidth,
-  convertToHalfWidthProhibitSymbol,
-  convertToHalfWidth,
+  convertToHalfWidthAndUpperCase,
 } from '@/utils/util'
 
 const formData = reactive<DetailVM>({
@@ -750,7 +749,7 @@ watch(
   () => formData.TOUROKU_NO,
   (newVal) => {
     if (newVal) {
-      formData.TOUROKU_NO = convertToHalfWidthProhibitSymbol(newVal)
+      formData.TOUROKU_NO = convertToHalfWidthAndUpperCase(newVal)
     }
   },
   { deep: true }

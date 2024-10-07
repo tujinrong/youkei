@@ -295,7 +295,7 @@ export function convertToFullWidth(input: string): string {
     .replace(/ /g, '　')
 }
 
-/**全角のアルファペット、数字、スペース及び記号を半角に変換（漢字とかなを制限されていない）*/
+/**全角のアルファペット、数字、スペース及び記号を半角に変換（漢字と仮名を制限されていない）*/
 export function convertToHalfWidth(input: string): string {
   return input
     .replace(/[！-～]/g, (ch) => String.fromCharCode(ch.charCodeAt(0) - 0xfee0))
@@ -330,6 +330,15 @@ export function convertToHalfWidthProhibitLetter(input: string): string {
     .replace(/[！-～]/g, (ch) => String.fromCharCode(ch.charCodeAt(0) - 0xfee0))
     .replace(/　/g, ' ')
     .replace(/[^0-9\-@./!"#$%&'()=~|｢｣[\]{}^;:,.\\`+*<>?_ ]/g, '')
+}
+
+/**全角のアルファペット、数字及びスペースを半角に変換、及び英字は大文字を小文字に変換*/
+export function convertToHalfWidthAndUpperCase(input: string): string {
+  return input
+    .toUpperCase()
+    .replace(/[！-～]/g, (ch) => String.fromCharCode(ch.charCodeAt(0) - 0xfee0))
+    .replace(/　/g, ' ')
+    .replace(/[^A-Z0-9\s]/g, '')
 }
 
 /**全角の数字及びスペースを半角に変換*/
