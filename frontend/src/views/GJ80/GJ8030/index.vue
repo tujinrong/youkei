@@ -815,13 +815,11 @@ watch(
 const onChangeFuriBank = () => {
   //クリア
   formData.FURI_BANK_SITEN_CD = ''
-  formData.FURI_KOZA_SYUBETU = undefined
 }
 
 const onChangeKofuBank = () => {
   //クリア
   formData.KOFU_BANK_SITEN_CD = ''
-  formData.KOFU_KOZA_SYUBETU = undefined
 }
 
 /** 登録処理 */
