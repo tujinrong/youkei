@@ -422,7 +422,7 @@
 <script setup lang="ts">
 import { Judgement } from '@/utils/judge-edited'
 import { Form, message } from 'ant-design-vue'
-import { onMounted, reactive, ref, watch } from 'vue'
+import { nextTick, onMounted, reactive, ref, watch } from 'vue'
 import { InitDetail, Save, SearchDetail } from './service'
 import { DetailVM } from './type'
 import { showConfirmModal, showSaveModal } from '@/utils/modal'
@@ -651,6 +651,10 @@ onMounted(async () => {
   Object.assign(option2, res1)
   const res = await SearchDetail({})
   Object.assign(formData, res.KYOKAI)
+  nextTick(() => {
+    editJudge.reset()
+    clearValidate()
+  })
 })
 
 //--------------------------------------------------------------------------
@@ -788,12 +792,7 @@ watch(
   { deep: true }
 )
 
-watch(
-  () => formData,
-  () => {
-    editJudge.setEdited()
-  }
-)
+watch(formData, () => editJudge.setEdited())
 
 //振込　金融機関
 watch(
@@ -838,12 +837,13 @@ const save = async () => {
 
 /** キャンセル処理 */
 const cancel = () => {
-  showConfirmModal({
-    content: CLOSE_CONFIRM.Msg,
-    onOk: async () => {
-      const res = await SearchDetail({})
-      Object.assign(formData, res.KYOKAI)
-    },
+  editJudge.judgeIsEdited(async () => {
+    const res = await SearchDetail({})
+    Object.assign(formData, res.KYOKAI)
+    nextTick(() => {
+      editJudge.reset()
+      clearValidate()
+    })
   })
 }
 </script>
