@@ -75,6 +75,7 @@ import { EnumEditKbn } from '@/enum'
 const props = defineProps<{
   editkbn: EnumEditKbn
 }>()
+const emit = defineEmits(['update:visible', 'getTableList'])
 let upddttm
 const isNew = computed(() => props.editkbn === EnumEditKbn.Add)
 const model = defineModel('visible')
@@ -135,7 +136,10 @@ const { validate, clearValidate, validateInfos, resetFields } = Form.useForm(
 //初期化処理
 const init = async () => {
   try {
-    const res = await InitDetail({ TAX_DATE_FROM: formData.TAX_DATE_FROM })
+    const res = await InitDetail({
+      TAX_DATE_FROM: formData.TAX_DATE_FROM,
+      EDIT_KBN: props.editkbn,
+    })
     Object.assign(formData, res.TAX)
     upddttm = res.TAX.UP_DATE
   } catch (error) {}
@@ -148,9 +152,13 @@ const save = async () => {
     content: SAVE_CONFIRM.Msg,
     onOk: async () => {
       try {
-        await Save({ TAX: { ...formData, UP_DATE: upddttm } })
+        await Save({
+          TAX: { ...formData, UP_DATE: upddttm },
+          EDIT_KBN: props.editkbn,
+        })
         message.success(SAVE_OK_INFO.Msg)
         closeModal()
+        emit('getTableList')
       } catch (error) {}
     },
   })
@@ -168,6 +176,7 @@ const deleteData = () => {
           UP_DATE: upddttm,
         })
         closeModal()
+        emit('getTableList')
         message.success(DELETE_OK_INFO.Msg)
       } catch (error) {}
     },

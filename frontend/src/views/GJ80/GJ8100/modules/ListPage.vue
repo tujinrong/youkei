@@ -43,9 +43,7 @@
           :resizable="true"
           ><template #default="{ row }">
             <a @click="edit(row.TAX_DATE_FROM)">{{
-              row.TAX_DATE_FROM
-                ? getDateJpText(new Date(row.TAX_DATE_FROM))
-                : ''
+              row.TAX_DATE_TO ? getDateJpText(new Date(row.TAX_DATE_TO)) : ''
             }}</a>
           </template>
         </vxe-column>
@@ -64,6 +62,7 @@
     v-model:visible="visible"
     ref="editModalRef"
     v-bind="{ editkbn }"
+    @getTableList="searchAll"
   />
 </template>
 <script setup lang="ts">
@@ -78,17 +77,16 @@ const visible = ref(false)
 const editkbn = ref<EnumEditKbn>(EnumEditKbn.Add)
 const editModalRef = ref()
 const xTableRef = ref<VxeTableInstance>()
-const tableData = ref<SearchRowVM[]>([
-  { TAX_DATE_FROM: new Date(), TAX_DATE_TO: new Date(), TAX_RITU: 1 },
-  { TAX_DATE_FROM: new Date(), TAX_DATE_TO: new Date(), TAX_RITU: 2 },
-  { TAX_DATE_FROM: new Date(), TAX_DATE_TO: new Date(), TAX_RITU: 3 },
-])
+const tableData = ref<SearchRowVM[]>([])
 const cardRef = ref()
 
 onMounted(async () => {
-  const res = await Search()
-  tableData.value = res.KEKKA_LIST
+  await searchAll()
 })
+const searchAll = async () => {
+  const res = await Search({})
+  tableData.value = res.KEKKA_LIST
+}
 const add = () => {
   editkbn.value = EnumEditKbn.Add
   visible.value = true
