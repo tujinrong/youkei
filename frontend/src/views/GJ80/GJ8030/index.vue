@@ -347,7 +347,7 @@
                   <a-input-number
                     v-model:value="formData.KOFU_KOZA_NO"
                     string-mode
-                    :min="1"
+                    :min="0"
                     :max="9999999"
                     :maxlength="7"
                     style="width: 100%"
@@ -361,7 +361,7 @@
                   <a-input-number
                     v-model:value="formData.KOFU_SYUBETU"
                     string-mode
-                    :min="1"
+                    :min="0"
                     :max="99"
                     :maxlength="2"
                     style="width: 100%"
@@ -375,7 +375,7 @@
                   <a-input-number
                     v-model:value="formData.KOFU_CD_KBN"
                     string-mode
-                    :min="1"
+                    :min="0"
                     :max="9"
                     :maxlength="1"
                     style="width: 100%"
