@@ -414,7 +414,7 @@
           <a-button class="warning-btn" @click="save">保存</a-button>
           <a-button type="primary" @click="cancel">キャンセル</a-button>
         </a-space>
-        <close-page />
+        <EndButton :editJudge="editJudge" />
       </div>
     </a-card>
   </div>

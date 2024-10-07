@@ -419,6 +419,10 @@ export const CLOSE_CONFIRM = {
   No: 'C001002',
   Msg: 'データが変更されています。よろしいですか？',
 }
+export const EXIT_CONFIRM = {
+  No: 'C001002',
+  Msg: '終了します。よろしいですか？',
+}
 export const MOVE_CONFIRM = {
   No: 'C001003',
   Msg: '登録処理を行っていません。\nこの操作を続いてもよろしいですか？',

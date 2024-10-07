@@ -152,7 +152,7 @@
           <a-button class="warning-btn" @click="save">保存</a-button>
           <a-button type="primary" @click="cancel">キャンセル</a-button>
         </a-space>
-        <close-page />
+        <EndButton :editJudge="editJudge" />
       </div>
     </a-card>
   </div>
@@ -172,6 +172,7 @@ import {
 } from '@/constants/msg'
 import { showConfirmModal, showSaveModal } from '@/utils/modal'
 import { getDateJpText, convertToFullWidth } from '@/utils/util'
+import { nextTick } from 'process'
 
 const formData = reactive<DetailVM>({
   KI: undefined as number | undefined,
@@ -212,7 +213,12 @@ const { validate, clearValidate, validateInfos, resetFields } = Form.useForm(
 )
 
 onMounted(async () => {
-  init()
+  const res = await InitDetail({})
+  Object.assign(formData, res.SYORI_KI)
+  nextTick(() => {
+    editJudge.reset()
+    clearValidate()
+  })
 })
 
 //--------------------------------------------------------------------------
@@ -227,12 +233,7 @@ watch(
   }
 )
 
-watch(
-  () => formData,
-  () => {
-    editJudge.setEdited()
-  }
-)
+watch(formData, () => editJudge.setEdited())
 
 watch(
   () => formData.JIGYO_NENDO,
@@ -245,10 +246,12 @@ watch(
 )
 
 /** 初期化処理 */
-const init = async () => {
-  const res = await InitDetail({})
-  Object.assign(formData, res.SYORI_KI)
-}
+// const init = async () => {
+//   nextTick(() => {
+//     editJudge.reset()
+//     clearValidate()
+//   })
+// }
 
 /** 登録処理 */
 const save = async () => {
@@ -266,11 +269,13 @@ const save = async () => {
 
 /** キャンセル処理 */
 const cancel = () => {
-  showConfirmModal({
-    content: CLOSE_CONFIRM.Msg,
-    onOk: async () => {
-      init()
-    },
+  editJudge.judgeIsEdited(async () => {
+    const res = await InitDetail({})
+    Object.assign(formData, res.SYORI_KI)
+    nextTick(() => {
+      editJudge.reset()
+      clearValidate()
+    })
   })
 }
 </script>
