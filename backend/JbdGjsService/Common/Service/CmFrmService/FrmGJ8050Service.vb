@@ -96,7 +96,7 @@ Namespace JBD.GJS.Service.GJ8050
 
             Dim wOrder = wkOrderby  &  wkOrderbyFlg
             If wKbn.ORDER_BY = 2 OrElse wKbn.ORDER_BY = -2 OrElse wKbn.ORDER_BY = 3 OrElse wKbn.ORDER_BY = -3 
-                wOrder = " UTL_I18N.TRANSLITERATE(case when  "  & wkOrderby  &  " is null then '0' else "  & wkOrderby  &  " end, 'hwkatakana_fwkatakana')  "   & wkOrderbyFlg 
+                wOrder = " UTL_I18N.TRANSLITERATE(case when  "  & wkOrderby  &  " is null then '０' else TO_MULTI_BYTE("  & wkOrderby  &  ") end, 'hwkatakana_fwkatakana')  "   & wkOrderbyFlg 
             End If
             wSql += wOrder & vbCrLf
 
@@ -222,13 +222,13 @@ Namespace JBD.GJS.Service.GJ8050
             Else If wKbn.ORDER_BY = 2 Then
                 wSql += "  STN.SITEN_CD ASC " & vbCrLf
             Else If wKbn.ORDER_BY = -3 Then
-                wSql += " UTL_I18N.TRANSLITERATE(case when  STN.SITEN_KANA is null then '0' else STN.SITEN_KANA end, 'hwkatakana_fwkatakana')  DESC "     & vbCrLf
+                wSql += " UTL_I18N.TRANSLITERATE(case when  STN.SITEN_KANA is null then '０' else TO_MULTI_BYTE(STN.SITEN_KANA) end, 'hwkatakana_fwkatakana')  DESC "     & vbCrLf
             Else If wKbn.ORDER_BY = 3 Then
-                wSql += " UTL_I18N.TRANSLITERATE(case when  STN.SITEN_KANA is null then '0' else STN.SITEN_KANA end, 'hwkatakana_fwkatakana')  ASC "     & vbCrLf
+                wSql += " UTL_I18N.TRANSLITERATE(case when  STN.SITEN_KANA is null then '０' else TO_MULTI_BYTE(STN.SITEN_KANA) end, 'hwkatakana_fwkatakana')  ASC "     & vbCrLf
             Else If wKbn.ORDER_BY = -4 Then
-                wSql += " UTL_I18N.TRANSLITERATE(case when  STN.SITEN_NAME is null then '0' else STN.SITEN_NAME end, 'hwkatakana_fwkatakana')  DESC "     & vbCrLf
+                wSql += " UTL_I18N.TRANSLITERATE(case when  STN.SITEN_NAME is null then '０' else TO_MULTI_BYTE(STN.SITEN_NAME) end, 'hwkatakana_fwkatakana')  DESC "     & vbCrLf
             Else If wKbn.ORDER_BY = 4 Then
-                wSql += " UTL_I18N.TRANSLITERATE(case when  STN.SITEN_NAME is null then '0' else STN.SITEN_NAME end, 'hwkatakana_fwkatakana')  ASC "     & vbCrLf
+                wSql += " UTL_I18N.TRANSLITERATE(case when  STN.SITEN_NAME is null then '０' else TO_MULTI_BYTE(STN.SITEN_NAME) end, 'hwkatakana_fwkatakana')  ASC "     & vbCrLf
             Else
                 wSql += "  STN.BANK_CD, STN.SITEN_CD" & vbCrLf
             End If
