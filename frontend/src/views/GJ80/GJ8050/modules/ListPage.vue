@@ -102,7 +102,7 @@
           header-align="center"
           field="BANK_CD"
           title="金融機関"
-          width="500"
+          width="200"
           align="center"
           sortable
           :params="{ order: 1 }"
@@ -116,7 +116,7 @@
           header-align="center"
           field="BANK_KANA"
           title="金融機関名（ｶﾅ）"
-          width="500"
+          min-width="400"
           sortable
           :params="{ order: 2 }"
           :resizable="true"
@@ -126,7 +126,7 @@
           header-align="center"
           field="BANK_NAME"
           title="金融機関名（漢字）"
-          min-width="500"
+          width="400"
           sortable
           :params="{ order: 3 }"
         ></vxe-column> </vxe-table
