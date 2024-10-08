@@ -361,7 +361,6 @@ function parseJapaneseDate(japaneseDateStr) {
     const formattedDate = `${westernYear}-${formattedMonth}-${formattedDay}`
     return formattedDate // フォーマットされた日付を返す
   } catch (error) {
-    console.error(error.message)
     return null // エラーが発生した場合はnullを返す
   }
 }

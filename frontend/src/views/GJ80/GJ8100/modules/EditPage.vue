@@ -67,7 +67,7 @@ import {
 import { Judgement } from '@/utils/judge-edited'
 import { showDeleteModal, showSaveModal } from '@/utils/modal'
 import { Form, message } from 'ant-design-vue'
-import { computed, nextTick, reactive, ref, watch } from 'vue'
+import { computed, nextTick, reactive, watch } from 'vue'
 import { Delete, InitDetail, Save } from '../service'
 import { SearchRowVM } from '../type'
 import { EnumEditKbn } from '@/enum'
@@ -128,10 +128,7 @@ const rules = reactive({
     },
   ],
 })
-const { validate, clearValidate, validateInfos, resetFields } = Form.useForm(
-  formData,
-  rules
-)
+const { validate, clearValidate, validateInfos } = Form.useForm(formData, rules)
 
 //初期化処理
 const init = async () => {
