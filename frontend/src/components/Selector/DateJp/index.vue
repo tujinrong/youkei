@@ -10,7 +10,7 @@
   <a-date-picker
     ref="dateRef"
     v-model:value="curVal"
-    :format="formatter"
+    :format="[formatter(curVal), 'YYYY-MM-DD', 'YYYY/MM/DD']"
     :disabled-date="disabledDate"
     :allowClear="!notAllowClear"
     class="w-42!"
@@ -89,52 +89,132 @@ watch(
 //--------------------------------------------------------------------------
 //フック関数
 //--------------------------------------------------------------------------
-// onMounted(() => {
-//   const inputDom = dateRef.value.$el.querySelector('input')
-//   if (inputDom) {
-//     inputDom.readOnly = false
-//     inputDom.addEventListener('input', (e) => {
-//       e.target.value = e.target.value.toUpperCase() //大文字
-//       inputText = e.target.value
-//     })
-//     dateRef.value.$el.addEventListener('keydown', (e) => {
-//       //Tab/Enter キー
-//       if (e.keyCode == 13 || e.keyCode == 9) {
-//         //補充年
-//         if (new RegExp(/^[0-9A]{1,2}[-\/]?[0-9A]{1,2}$/).test(inputText)) {
-//           inputText = dayjs().year() + '/' + inputText
-//         }
-//         setInputValue(inputText)
-//       }
-//       //Delete/BackSpace キー
-//       if (e.keyCode == 8 || e.keyCode == 46) {
-//         setTimeout(() => {
-//           if (!e.target.value) curVal.value = null
-//         }, 0)
-//       }
-//     })
-//     inputDom.addEventListener('focus', (e) => {
-//       e.target.select()
-//     })
-//   }
-// })
 onMounted(() => {
-  const inputDom = dateRef.value.$el.querySelector('.ant-picker-input')
+  const inputDom = dateRef.value.$el.querySelector('input')
   if (inputDom) {
-    inputDom.addEventListener('keydown', function (event) {
-      if (event.key === 'Backspace') {
-        event.preventDefault()
+    // 元号を置換するための関数
+    function replaceEra(value) {
+      // 元号のマッピング（全角・半角、アルファベットにも対応）
+      const eraMapping = {
+        '1': '明治',
+        '１': '明治',
+        m: '明治',
+        ｍ: '明治',
+        '2': '大正',
+        '２': '大正',
+        t: '大正',
+        ｔ: '大正',
+        '3': '昭和',
+        '３': '昭和',
+        s: '昭和',
+        ｓ: '昭和',
+        '4': '平成',
+        '４': '平成',
+        h: '平成',
+        ｈ: '平成',
+        '5': '令和',
+        '５': '令和',
+        r: '令和',
+        ｒ: '令和',
+      }
+
+      // 入力の最初の文字を元号に変換
+      const era = eraMapping[value[0].toLowerCase()]
+
+      // 元号が存在する場合は置換、存在しない場合はそのまま返す
+      return era
+        ? { value: era + value.slice(1), replaced: true }
+        : { value, replaced: false }
+    }
+
+    // input要素を編集可能にする
+    inputDom.readOnly = false
+
+    // ユーザーが直接入力したときの処理
+    inputDom.addEventListener('input', (e) => {
+      if (!e.isComposing) {
+        // 日本語入力中でない場合にのみ実行
+        let value = e.target.value // 現在の入力値
+        let cursorPosition = e.target.selectionStart // 現在のカーソル位置を保存
+
+        // 元号を置換する
+        let { value: newValue, replaced } = replaceEra(value)
+
+        // 置換後の値を大文字にしてセット
+        e.target.value = newValue.toUpperCase()
+
+        // もし元号が置換されたら、カーソルを元号の後に移動
+        if (replaced) {
+          e.target.setSelectionRange(2, 2) // 2文字目の後にカーソルを移動
+        } else {
+          // 置換されなかった場合、元のカーソル位置を保持
+          e.target.setSelectionRange(cursorPosition, cursorPosition)
+        }
+      }
+      inputText = e.target.value // 入力されたテキストを保持
+    })
+
+    // 日本語入力が確定されたときの処理
+    inputDom.addEventListener('compositionend', (e) => {
+      let value = e.target.value // 現在の入力値
+      let cursorPosition = e.target.selectionStart // 現在のカーソル位置を保存
+
+      // 元号を置換する
+      let { value: newValue, replaced } = replaceEra(value)
+
+      // 置換後の値を大文字にしてセット
+      e.target.value = newValue.toUpperCase()
+
+      // もし元号が置換されたら、カーソルを元号の後に移動
+      if (replaced) {
+        e.target.setSelectionRange(2, 2) // 2文字目の後にカーソルを移動
+      } else {
+        // 置換されなかった場合、元のカーソル位置を保持
+        e.target.setSelectionRange(cursorPosition, cursorPosition)
+      }
+      inputText = e.target.value // 入力されたテキストを保持
+    })
+
+    dateRef.value.$el.addEventListener('keydown', (e) => {
+      //Tab/Enter キー
+      if (e.keyCode == 13 || e.keyCode == 9) {
+        //補充年
+        if (new RegExp(/^[0-9A]{1,2}[-\/]?[0-9A]{1,2}$/).test(inputText)) {
+          inputText = dayjs().year() + '/' + inputText
+        }
+        setInputValue(inputText)
+      }
+      //Delete/BackSpace キー
+      if (e.keyCode == 8 || e.keyCode == 46) {
+        setTimeout(() => {
+          if (!e.target.value) curVal.value = null
+        }, 0)
       }
     })
+    // inputDom.addEventListener('focus', (e) => {
+    //   e.target.select()
+    // })
   }
+})
+onMounted(() => {
+  // const inputDom = dateRef.value.$el.querySelector('.ant-picker-input')
+  // if (inputDom) {
+  //   inputDom.addEventListener('keydown', function (event) {
+  //     if (event.key === 'Backspace') {
+  //       event.preventDefault()
+  //     }
+  //   })
+  // }
 })
 //--------------------------------------------------------------------------
 //メソッド
 //--------------------------------------------------------------------------
 
 async function setInputValue(value: string) {
+  debugger
+  let parseDate = parseJapaneseDate(value)
   if (value) {
-    const inputStr = DatePadZero(value).replace(/[\/-]/g, '')
+    const inputStr = DatePadZero(parseDate).replace(/[\/-]/g, '')
     if (YYYYMMDDRegExp.test(inputStr)) {
       const dateVal = dayjs(inputStr, 'YYYYMMDD')
       // 20240215
@@ -228,6 +308,64 @@ function formatter(value): string {
     return dayjs(value).isValid() ? getDateJpAddSpace(value) : ''
   }
 }
+function parseJapaneseDate(japaneseDateStr) {
+  try {
+    // 各元号の開始日と終了日を定義（令和には終了日はなし）
+    const eraMapping = {
+      明治: { start: new Date(1868, 9, 23), end: new Date(1912, 7, 29) }, // 明治: 1868年10月23日 - 1912年7月29日
+      大正: { start: new Date(1912, 7, 30), end: new Date(1926, 11, 24) }, // 大正: 1912年7月30日 - 1926年12月24日
+      昭和: { start: new Date(1926, 11, 25), end: new Date(1989, 0, 7) }, // 昭和: 1926年12月25日 - 1989年1月7日
+      平成: { start: new Date(1989, 0, 8), end: new Date(2019, 3, 30) }, // 平成: 1989年1月8日 - 2019年4月30日
+      令和: { start: new Date(2019, 4, 1), end: null }, // 令和: 2019年5月1日 - 現在
+    }
+
+    // 年号名、年、月、日を抽出
+    const eraMatch = japaneseDateStr.match(/(明治|大正|昭和|平成|令和)/)
+    const yearMatch = japaneseDateStr.match(/(\d{1,2})年/)
+    const monthMatch = japaneseDateStr.match(/(\d{1,2})月/)
+    const dayMatch = japaneseDateStr.match(/(\d{1,2})日/)
+
+    // 日付のフォーマットが正しいか確認
+    if (!eraMatch || !yearMatch || !monthMatch || !dayMatch) {
+      throw new Error('日付のフォーマットが無効です') // フォーマットが無効の場合
+    }
+
+    // 元号名と日付情報を抽出
+    const eraName = eraMatch[0] // 元号名
+    const eraYear = parseInt(yearMatch[1], 10) // 和暦の年を整数に変換
+    const month = parseInt(monthMatch[1], 10) - 1 // JavaScriptのDateは0始まりの月
+    const day = parseInt(dayMatch[1], 10)
+
+    // 元号に対応する期間を取得
+    const era = eraMapping[eraName]
+    if (!era) {
+      throw new Error('不明な元号です')
+    }
+
+    // 元号の開始年に基づき、西暦年を計算
+    const westernYear = era.start.getFullYear() + eraYear - 1
+
+    // 入力された日付を西暦に変換してDateオブジェクトを作成
+    const inputDate = new Date(westernYear, month, day)
+
+    // 入力日が元号の期間内にあるか確認
+    if (inputDate < era.start || (era.end && inputDate > era.end)) {
+      throw new Error(`${eraName}の期間外の日付です`) // 日付が元号の範囲外の場合
+    }
+
+    // 月と日をフォーマット
+    const formattedMonth = String(month + 1).padStart(2, '0')
+    const formattedDay = String(day).padStart(2, '0')
+
+    // 西暦日付のフォーマットを作成
+    const formattedDate = `${westernYear}-${formattedMonth}-${formattedDay}`
+    return formattedDate // フォーマットされた日付を返す
+  } catch (error) {
+    console.error(error.message)
+    return null // エラーが発生した場合はnullを返す
+  }
+}
+
 function getDateJpAddSpace(value: Date | string | undefined) {
   if (value) {
     try {
