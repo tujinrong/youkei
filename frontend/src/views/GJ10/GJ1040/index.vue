@@ -266,7 +266,7 @@ const clearFromToValue = {
 }
 const NYURYOKU_JYOKYO_LABELS = {
   NYURYOKU_TYU: '入力中',
-  NYURYOKU_KAKUTEI: '入力確認',
+  NYURYOKU_KAKUTEI: '入力確定',
 }
 const KEIYAKUBI_LABELS = {
   NYURYOKU_NOMI: '入力のみ',
