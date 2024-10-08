@@ -36,7 +36,7 @@
                   v-model:value="formData.SYUTURYOKU_KBN"
                   class="mt-1"
                 >
-                  <a-radio :value="1">契約者& 合計</a-radio>
+                  <a-radio :value="1">契約者＆合計</a-radio>
                   <a-radio :value="2">合計</a-radio>
                 </a-radio-group>
               </td>
