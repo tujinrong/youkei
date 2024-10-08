@@ -97,7 +97,7 @@
             <div class="mb-2 header_operation flex justify-between w-full">
               <a-space :size="20">
                 <a-button type="primary">EXCEL出力</a-button>
-                <a-button type="primary">条件クリア</a-button>
+                <a-button type="primary">キャンセル</a-button>
               </a-space>
               <CloseButton />
             </div>
