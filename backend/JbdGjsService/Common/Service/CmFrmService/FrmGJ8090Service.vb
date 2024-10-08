@@ -58,19 +58,23 @@ Namespace JBD.GJS.Service.GJ8090
                 wkWhere = "  AND (" & wkWhere & ")"
             End If
 
-            wkOrderby = "  KNJ.NOJO_CD"
-            Select Case wKbn.ORDER_BY
-                Case -1
-                    wkOrderby = "  KNJ.NOJO_CD DESC "
-                Case 2
-                    wkOrderby = "  KNJ.NOJO_NAME ASC "
-                Case -2
-                    wkOrderby = "  KNJ.NOJO_NAME DESC "
-                Case 3
-                    wkOrderby = "  KNJ.ADDR_1 || KNJ.ADDR_2 || KNJ.ADDR_3 || KNJ.ADDR_4  ASC "
-                Case -3
-                    wkOrderby = "  KNJ.ADDR_1 || KNJ.ADDR_2 || KNJ.ADDR_3 || KNJ.ADDR_4  DESC "
+            wkOrderby = "  KNJ.NOJO_CD "
+            Dim wkOrderbyFlg = "  ASC " 
+            Select Case True
+                Case wKbn.ORDER_BY  =  2 Or wKbn.ORDER_BY  =  -2  
+                    wkOrderby = "  KNJ.NOJO_NAME "
+                Case wKbn.ORDER_BY  =  3 Or wKbn.ORDER_BY  =  -3  
+                    wkOrderby = "  KNJ.ADDR_1 || KNJ.ADDR_2 || KNJ.ADDR_3 || KNJ.ADDR_4 "
             End Select
+
+            If wKbn.ORDER_BY  <  0 Then 
+                wkOrderbyFlg = "  DESC " 
+            End If
+
+            Dim wOrder = wkOrderby  &  wkOrderbyFlg
+            If wKbn.ORDER_BY =  2 OrElse wKbn.ORDER_BY = -2 OrElse wKbn.ORDER_BY = 3 OrElse wKbn.ORDER_BY = -3 Then 
+                wOrder = " UTL_I18N.TRANSLITERATE(case when  "  & wkOrderby  &  " is null then '0' else "  & wkOrderby  &  " end, 'hwkatakana_fwkatakana')  "   & wkOrderbyFlg 
+            End If
 
             '==SQL作成====================
             'SQL作成
@@ -84,8 +88,8 @@ Namespace JBD.GJS.Service.GJ8090
             wSql &= "WHERE KNJ.KI = " & wKbn.KI    '期
             wSql &= "  AND KNJ.KEIYAKUSYA_CD = " & wKbn.KEIYAKUSYA_CD    '契約者
             wSql &= wkWhere & " "
-            wSql &= "ORDER BY"
-            wSql &= wkOrderby & " "
+            wSql &= "ORDER BY "  &  wORder
+
             Return wSql
         End Function
 #End Region

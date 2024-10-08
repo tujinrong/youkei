@@ -74,7 +74,6 @@ Namespace JBD.GJS.Service.GJ8050
             wSql = wSql & " FROM" & vbCrLf
             wSql = wSql & " TM_BANK BNK" & vbCrLf
 
-
             If pJoken = "" Then
             Else
                 wSql += " WHERE (" & pJoken & ")" & vbCrLf
@@ -82,19 +81,24 @@ Namespace JBD.GJS.Service.GJ8050
 
             wSql += "ORDER BY" & vbCrLf
 
-            If wKbn.ORDER_BY = -1 Then
-                wSql += "  BNK.BANK_CD DESC " & vbCrLf
-            Else If wKbn.ORDER_BY = -2 Then
-                wSql += "  BNK.BANK_KANA DESC " & vbCrLf
-            Else If wKbn.ORDER_BY = 2 Then
-                wSql += "  BNK.BANK_KANA ASC " & vbCrLf
-            Else If wKbn.ORDER_BY = -3 Then
-                wSql += "  BNK.BANK_NAME DESC " & vbCrLf
-            Else If wKbn.ORDER_BY = 3 Then
-                wSql += "  BNK.BANK_NAME ASC" & vbCrLf
-            Else
-                wSql += "  BNK.BANK_CD " & vbCrLf
+            wkOrderby = "  BNK.BANK_CD "
+            Dim wkOrderbyFlg = "  ASC " 
+            Select Case True
+                Case wKbn.ORDER_BY = 2 Or wKbn.ORDER_BY = -2 
+                    wkOrderby = "  BNK.BANK_KANA "
+                Case wKbn.ORDER_BY = 3 Or wKbn.ORDER_BY = -3
+                    wkOrderby = "  BNK.BANK_NAME"
+            End Select
+
+            If wKbn.ORDER_BY < 0 Then
+                    wkOrderbyFlg = "  DESC " 
             End If
+
+            Dim wOrder = wkOrderby  &  wkOrderbyFlg
+            If wKbn.ORDER_BY = 2 OrElse wKbn.ORDER_BY = -2 OrElse wKbn.ORDER_BY = 3 OrElse wKbn.ORDER_BY = -3 
+                wOrder = " UTL_I18N.TRANSLITERATE(case when  "  & wkOrderby  &  " is null then '0' else "  & wkOrderby  &  " end, 'hwkatakana_fwkatakana')  "   & wkOrderbyFlg 
+            End If
+            wSql += wOrder & vbCrLf
 
             Return wSql
         End Function
@@ -218,13 +222,13 @@ Namespace JBD.GJS.Service.GJ8050
             Else If wKbn.ORDER_BY = 2 Then
                 wSql += "  STN.SITEN_CD ASC " & vbCrLf
             Else If wKbn.ORDER_BY = -3 Then
-                wSql += "  STN.SITEN_KANA DESC " & vbCrLf
+                wSql += " UTL_I18N.TRANSLITERATE(case when  STN.SITEN_KANA is null then '0' else STN.SITEN_KANA end, 'hwkatakana_fwkatakana')  DESC "     & vbCrLf
             Else If wKbn.ORDER_BY = 3 Then
-                wSql += "  STN.SITEN_KANA ASC" & vbCrLf
+                wSql += " UTL_I18N.TRANSLITERATE(case when  STN.SITEN_KANA is null then '0' else STN.SITEN_KANA end, 'hwkatakana_fwkatakana')  ASC "     & vbCrLf
             Else If wKbn.ORDER_BY = -4 Then
-                wSql += "  STN.SITEN_NAME DESC " & vbCrLf
+                wSql += " UTL_I18N.TRANSLITERATE(case when  STN.SITEN_NAME is null then '0' else STN.SITEN_NAME end, 'hwkatakana_fwkatakana')  DESC "     & vbCrLf
             Else If wKbn.ORDER_BY = 4 Then
-                wSql += "  STN.SITEN_NAME ASC" & vbCrLf
+                wSql += " UTL_I18N.TRANSLITERATE(case when  STN.SITEN_NAME is null then '0' else STN.SITEN_NAME end, 'hwkatakana_fwkatakana')  ASC "     & vbCrLf
             Else
                 wSql += "  STN.BANK_CD, STN.SITEN_CD" & vbCrLf
             End If

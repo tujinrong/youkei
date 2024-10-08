@@ -128,38 +128,38 @@ Namespace JBD.GJS.Service.GJ1010
                 pJoken += "(KYK.KEIYAKU_DATE IS NOT NULL AND KEIYAKU_JYOKYO IN (1,2))" & vbCrLf
             End If
 
-            wkOrderby = "  KYK.KEIYAKUSYA_CD"
+            wkOrderby = "  KYK.KEIYAKUSYA_CD "
             Select Case wKbn.ORDER_BY
                 Case -1
                     wkOrderby = "  KYK.KEIYAKUSYA_CD DESC "
                 Case 2
-                    wkOrderby = "  KYK.KEIYAKUSYA_NAME ASC "
+                    wkOrderby = " UTL_I18N.TRANSLITERATE(case when  KYK.KEIYAKUSYA_NAME is null then '0' else KYK.KEIYAKUSYA_NAME end, 'hwkatakana_fwkatakana'), KYK.KEIYAKUSYA_CD  ASC "
                 Case -2
-                    wkOrderby = "  KYK.KEIYAKUSYA_NAME DESC "
+                    wkOrderby = " UTL_I18N.TRANSLITERATE(case when  KYK.KEIYAKUSYA_NAME is null then '0' else KYK.KEIYAKUSYA_NAME end, 'hwkatakana_fwkatakana'), KYK.KEIYAKUSYA_CD  DESC "
                 Case 3
-                    wkOrderby = "  KYK.KEIYAKUSYA_KANA  ASC "
+                    wkOrderby = " UTL_I18N.TRANSLITERATE(case when  KYK.KEIYAKUSYA_KANA is null then '0' else KYK.KEIYAKUSYA_KANA end, 'hwkatakana_fwkatakana') , KYK.KEIYAKUSYA_CD  ASC "
                 Case -3
-                    wkOrderby = "  KYK.KEIYAKUSYA_KANA  DESC "
+                    wkOrderby = " UTL_I18N.TRANSLITERATE(case when  KYK.KEIYAKUSYA_KANA is null then '0' else KYK.KEIYAKUSYA_KANA end, 'hwkatakana_fwkatakana') , KYK.KEIYAKUSYA_CD  DESC "
                 Case 4
-                    wkOrderby = "  KYK.KEIYAKU_KBN  ASC "
+                    wkOrderby = "  KYK.KEIYAKU_KBN  , KYK.KEIYAKUSYA_CD ASC "
                 Case -4
-                    wkOrderby = "  KYK.KEIYAKU_KBN  DESC "
+                    wkOrderby = "  KYK.KEIYAKU_KBN , KYK.KEIYAKUSYA_CD  DESC "
                 Case 5
-                    wkOrderby = "  KYK.KEIYAKU_JYOKYO  ASC "
+                    wkOrderby = "  KYK.KEIYAKU_JYOKYO  , KYK.KEIYAKUSYA_CD ASC "
                 Case -5
-                    wkOrderby = "  KYK.KEIYAKU_JYOKYO  DESC "
+                    wkOrderby = "  KYK.KEIYAKU_JYOKYO  , KYK.KEIYAKUSYA_CD DESC "
                 Case 6
-                    wkOrderby = "  KYK.ADDR_TEL1  ASC "
+                    wkOrderby = "  KYK.ADDR_TEL1  , KYK.KEIYAKUSYA_CD ASC "
                 Case -6
-                    wkOrderby = "  KYK.ADDR_TEL1  DESC "
+                    wkOrderby = "  KYK.ADDR_TEL1 , KYK.KEIYAKUSYA_CD  DESC "
                 Case 7
-                    wkOrderby = "  LPAD(KYK.KEN_CD,2) || M05.RYAKUSYO  ASC "
+                    wkOrderby = "  LPAD(KYK.KEN_CD,2) || M05.RYAKUSYO  , KYK.KEIYAKUSYA_CD ASC "
                 Case -7
-                    wkOrderby = "  LPAD(KYK.KEN_CD,2) || M05.RYAKUSYO  DESC "
+                    wkOrderby = "  LPAD(KYK.KEN_CD,2) || M05.RYAKUSYO  , KYK.KEIYAKUSYA_CD DESC "
                 Case 8
-                    wkOrderby = "  ITK.ITAKU_RYAKU  ASC "
+                    wkOrderby = " UTL_I18N.TRANSLITERATE(case when  ITK.ITAKU_RYAKU is null then '0' else ITK.ITAKU_RYAKU end, 'hwkatakana_fwkatakana') , KYK.KEIYAKUSYA_CD  ASC "
                 Case -8
-                    wkOrderby = "  ITK.ITAKU_RYAKU  DESC "
+                    wkOrderby = " UTL_I18N.TRANSLITERATE(case when  ITK.ITAKU_RYAKU is null then '0' else ITK.ITAKU_RYAKU end, 'hwkatakana_fwkatakana')  , KYK.KEIYAKUSYA_CD DESC "
             End Select
 
             '==SQL作成====================
