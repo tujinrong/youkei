@@ -137,7 +137,7 @@
         </div>
         <div class="my-2 flex justify-between max-w-250">
           <a-space
-            ><span>検索方法</span>
+            ><span>検索方法<span style="color: red">＊</span></span>
             <a-radio-group v-model:value="searchParams.SEARCH_METHOD">
               <a-radio :value="EnumAndOr.AndCode">すべてを含む(AND)</a-radio>
               <a-radio :value="EnumAndOr.OrCode">いずれかを含む(OR)</a-radio>
