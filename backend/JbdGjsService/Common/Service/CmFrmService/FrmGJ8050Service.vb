@@ -81,7 +81,21 @@ Namespace JBD.GJS.Service.GJ8050
             End If
 
             wSql += "ORDER BY" & vbCrLf
-            wSql += "  BNK.BANK_CD" & vbCrLf
+
+            If wKbn.ORDER_BY = -1 Then
+                wSql += "  BNK.BANK_CD DESC " & vbCrLf
+            Else If wKbn.ORDER_BY = -2 Then
+                wSql += "  BNK.BANK_KANA DESC " & vbCrLf
+            Else If wKbn.ORDER_BY = 2 Then
+                wSql += "  BNK.BANK_KANA ASC " & vbCrLf
+            Else If wKbn.ORDER_BY = -3 Then
+                wSql += "  BNK.BANK_NAME DESC " & vbCrLf
+            Else If wKbn.ORDER_BY = 3 Then
+                wSql += "  BNK.BANK_NAME ASC" & vbCrLf
+            Else
+                wSql += "  BNK.BANK_CD " & vbCrLf
+            End If
+
             Return wSql
         End Function
 
@@ -194,7 +208,27 @@ Namespace JBD.GJS.Service.GJ8050
             End If
 
             wSql += "ORDER BY" & vbCrLf
-            wSql += "  STN.BANK_CD, STN.SITEN_CD" & vbCrLf
+
+            If wKbn.ORDER_BY = -1 Then
+                wSql += "  STN.BANK_CD DESC " & vbCrLf
+            Else If wKbn.ORDER_BY = 1 Then
+                wSql += "  STN.BANK_CD ASC " & vbCrLf
+            Else If wKbn.ORDER_BY = -2 Then
+                wSql += "  STN.SITEN_CD DESC " & vbCrLf
+            Else If wKbn.ORDER_BY = 2 Then
+                wSql += "  STN.SITEN_CD ASC " & vbCrLf
+            Else If wKbn.ORDER_BY = -3 Then
+                wSql += "  STN.SITEN_KANA DESC " & vbCrLf
+            Else If wKbn.ORDER_BY = 3 Then
+                wSql += "  STN.SITEN_KANA ASC" & vbCrLf
+            Else If wKbn.ORDER_BY = -4 Then
+                wSql += "  STN.SITEN_NAME DESC " & vbCrLf
+            Else If wKbn.ORDER_BY = 4 Then
+                wSql += "  STN.SITEN_NAME ASC" & vbCrLf
+            Else
+                wSql += "  STN.BANK_CD, STN.SITEN_CD" & vbCrLf
+            End If
+
             Return wSql
         End Function
 
@@ -208,7 +242,7 @@ Namespace JBD.GJS.Service.GJ8050
         '引数            :なし
         '戻り値          :Sql String
         '------------------------------------------------------------------
-        Public Shared Function f_Search_SQLMakePage2(psize As Integer, pnum As Integer, sql As String) As String
+        Public Shared Function f_Search_SQLMakePage2(psize As Integer, pnum As Integer,  sql As String) As String
             '==SQL作成====================
             Dim wSql = ""
             wSql &= "SELECT * "

@@ -60,17 +60,15 @@ Namespace JBD.GJS.Service.GJ8090
 
             wkOrderby = "  KNJ.NOJO_CD"
             Select Case wKbn.ORDER_BY
-                Case 1
-                    wkOrderby = "  KNJ.NOJO_CD ASC "
                 Case -1
                     wkOrderby = "  KNJ.NOJO_CD DESC "
                 Case 2
                     wkOrderby = "  KNJ.NOJO_NAME ASC "
                 Case -2
                     wkOrderby = "  KNJ.NOJO_NAME DESC "
-                Case 2
+                Case 3
                     wkOrderby = "  KNJ.ADDR_1 || KNJ.ADDR_2 || KNJ.ADDR_3 || KNJ.ADDR_4  ASC "
-                Case -2
+                Case -3
                     wkOrderby = "  KNJ.ADDR_1 || KNJ.ADDR_2 || KNJ.ADDR_3 || KNJ.ADDR_4  DESC "
             End Select
 

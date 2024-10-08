@@ -128,6 +128,40 @@ Namespace JBD.GJS.Service.GJ1010
                 pJoken += "(KYK.KEIYAKU_DATE IS NOT NULL AND KEIYAKU_JYOKYO IN (1,2))" & vbCrLf
             End If
 
+            wkOrderby = "  KYK.KEIYAKUSYA_CD"
+            Select Case wKbn.ORDER_BY
+                Case -1
+                    wkOrderby = "  KYK.KEIYAKUSYA_CD DESC "
+                Case 2
+                    wkOrderby = "  KYK.KEIYAKUSYA_NAME ASC "
+                Case -2
+                    wkOrderby = "  KYK.KEIYAKUSYA_NAME DESC "
+                Case 3
+                    wkOrderby = "  KYK.KEIYAKUSYA_KANA  ASC "
+                Case -3
+                    wkOrderby = "  KYK.KEIYAKUSYA_KANA  DESC "
+                Case 4
+                    wkOrderby = "  KYK.KEIYAKU_KBN  ASC "
+                Case -4
+                    wkOrderby = "  KYK.KEIYAKU_KBN  DESC "
+                Case 5
+                    wkOrderby = "  KYK.KEIYAKU_JYOKYO  ASC "
+                Case -5
+                    wkOrderby = "  KYK.KEIYAKU_JYOKYO  DESC "
+                Case 6
+                    wkOrderby = "  KYK.ADDR_TEL1  ASC "
+                Case -6
+                    wkOrderby = "  KYK.ADDR_TEL1  DESC "
+                Case 7
+                    wkOrderby = "  LPAD(KYK.KEN_CD,2) || M05.RYAKUSYO  ASC "
+                Case -7
+                    wkOrderby = "  LPAD(KYK.KEN_CD,2) || M05.RYAKUSYO  DESC "
+                Case 8
+                    wkOrderby = "  ITK.ITAKU_RYAKU  ASC "
+                Case -8
+                    wkOrderby = "  ITK.ITAKU_RYAKU  DESC "
+            End Select
+
             '==SQL作成====================
             'SQL作成
             wSql &= "SELECT"
@@ -161,7 +195,7 @@ Namespace JBD.GJS.Service.GJ1010
             wSql &= "  AND KYK.JIMUITAKU_CD = ITK.ITAKU_CD(+)"
             wSql &= pJoken & " "
             wSql &= "ORDER BY"
-            wSql &= "  KYK.KEIYAKUSYA_CD"
+            wSql &= wkOrderby & " "
             Return wSql
         End Function
 #End Region

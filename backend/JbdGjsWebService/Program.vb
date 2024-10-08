@@ -32,7 +32,6 @@ Public Class Program
             db.Session.UserID = DaConst.SYSTEM
             DaDbLogService.WriteDbMessage(db, "System Start Up")
         End Using
-
         builder.Services.AddControllers(Sub(options) options.Filters.Add(GetType(JBD.GJS.WebService.WebApiExceptionFilterAttribute)))
         Dim maxRequestBodySize = configuration.GetValue(Of Long)("MaxRequestBodySize")
         If maxRequestBodySize > 0L Then
@@ -84,7 +83,7 @@ Public Class Program
         app.UseAuthorization()
 
         app.MapControllers()
-
+        System.Console.WriteLine("youkei ok1")
         app.Run()
     End Sub
 

@@ -87,7 +87,7 @@ Namespace JBD.GJS.Service.GJ8050
                     Dim sql = FrmGJ8050Service.f_Search_SQLMake2(req)
 
                     '元の SQL をページ分割されたデータ出力に変換する
-                    Dim psql = FrmGJ8050Service.f_Search_SQLMakePage2(req.PAGE_SIZE, req.PAGE_NUM, sql)
+                    Dim psql = FrmGJ8050Service.f_Search_SQLMakePage2(req.PAGE_SIZE, req.PAGE_NUM,  sql)
 
                     'データSelect 
                     Dim ds = FrmService.f_Select_ODP(db, psql)
