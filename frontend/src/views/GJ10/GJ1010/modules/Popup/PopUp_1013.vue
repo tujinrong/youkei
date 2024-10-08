@@ -179,8 +179,7 @@
   </a-modal>
 </template>
 <script lang="ts" setup>
-import { onMounted, reactive, ref, watch, toRef } from 'vue'
-import { NoJoRowVM } from '../../type'
+import { onMounted, reactive, ref, watch, toRef, nextTick } from 'vue'
 import { changeTableSort } from '@/utils/util'
 import useSearch from '@/hooks/useSearch'
 import { Form } from 'ant-design-vue'
@@ -188,13 +187,26 @@ import { ITEM_REQUIRE_ERROR } from '@/constants/msg'
 import { useRoute, useRouter } from 'vue-router'
 import { Judgement } from '@/utils/judge-edited'
 import { FarmManage } from '../../constant'
+import { NoJoRowVM } from '../../service/1012/type'
+import { SearchRequest } from '../../service/1013/type'
+import { InitDetail, Search } from '../../service/1013/service'
+import { VxeTableInstance } from 'vxe-pc-ui'
+import { EnumEditKbn } from '@/enum'
 //--------------------------------------------------------------------------
 //データ定義
 //--------------------------------------------------------------------------
 const router = useRouter()
 const route = useRoute()
-
+const xTableRef = ref<VxeTableInstance>()
 const editJudge = new Judgement('GJ1013')
+const createDefaultParams = (): SearchRequest => {
+  return {
+    KI: Number(route.query.KI),
+    KEIYAKUSYA_CD: Number(route.query.KEIYAKUSYA_CD),
+  } as SearchRequest
+}
+
+const searchParams = reactive(createDefaultParams())
 const formData = reactive({
   KI: undefined as number | undefined,
   KEIYAKUSYA_NAME: '',
@@ -215,9 +227,12 @@ const formData = reactive({
 })
 const KEN_CD_NAME_LIST = ref<CmCodeNameModel[]>([])
 const tableData = ref<NoJoRowVM[]>([])
-const { pageParams } = useSearch({
-  service: undefined,
+const { pageParams, searchData } = useSearch({
+  service: Search,
   source: tableData,
+  params: toRef(() => searchParams),
+  listname: 'NOJO_JOHO_LIST',
+  tableRef: xTableRef,
 })
 const rules = reactive({
   NOJO_CD: [
@@ -289,11 +304,21 @@ const { validate, clearValidate, validateInfos, resetFields } = Form.useForm(
 //---------------------------------------------------------------------------
 //フック関数
 //--------------------------------------------------------------------------
-onMounted(() => {})
+onMounted(async () => {
+  await searchData()
+  const res = await InitDetail({
+    ...searchParams,
+    NOJO_CD: 1,
+    EDIT_KBN: EnumEditKbn.Edit,
+  })
+  Object.assign(formData, res.NOJO_JOHO)
+  KEN_CD_NAME_LIST.value = res.KEN_LIST
+})
 
 //--------------------------------------------------------------------------
 //監視定義
 //--------------------------------------------------------------------------
+
 watch(
   () => formData,
   () => editJudge.setEdited()

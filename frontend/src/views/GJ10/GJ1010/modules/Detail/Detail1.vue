@@ -79,7 +79,7 @@
         class="m-b-1 text-end"
       />
       <vxe-table
-        ref="tableRef"
+        ref="xTableRef"
         class="mt-2"
         :column-config="{ resizable: true }"
         :row-config="{ isCurrent: true, isHover: true }"
@@ -87,7 +87,7 @@
         :data="tableData"
         :sort-config="{ trigger: 'cell', orders: ['desc', 'asc'] }"
         :empty-render="{ name: 'NotData' }"
-        @cell-dblclick="({ row }) => changeData()"
+        @cell-dblclick="({ row }) => changeData(row)"
         @sort-change="(e) => changeTableSort(e, toRef(pageParams, 'ORDER_BY'))"
       >
         <vxe-column
@@ -98,7 +98,7 @@
           width="100"
         >
           <template #default="{ row }">
-            <a @click="changeData()">{{ row.MEISAI_NO }}</a>
+            <a @click="changeData(row)">{{ row.MEISAI_NO }}</a>
           </template>
         </vxe-column>
         <vxe-column
@@ -108,7 +108,7 @@
           width="200"
         >
           <template #default="{ row }">
-            <a @click="changeData()">{{ row.NOJO_NAME }}</a>
+            <a @click="changeData(row)">{{ row.NOJO_NAME }}</a>
           </template>
         </vxe-column>
         <vxe-column
@@ -143,7 +143,12 @@
 
       <PopUp1012
         v-model:visible="popupVisible"
-        :editkbn="popupeditkbn"
+        v-bind="{
+          editkbn: popupeditkbn,
+          row: currentRow,
+          NOJO_LIST: editOptions.NOJO_LIST,
+          TORI_KBN_LIST: editOptions.TORI_KBN_LIST,
+        }"
       ></PopUp1012>
     </a-card>
   </div>
@@ -152,18 +157,15 @@
 import useSearch from '@/hooks/useSearch'
 import { Judgement } from '@/utils/judge-edited'
 import { reactive, ref, toRef, computed, onMounted } from 'vue'
-import { DetailRowVM } from '../../type'
 import { changeTableSort } from '@/utils/util'
 import { EnumEditKbn, PageStatus } from '@/enum'
 import { Form } from 'ant-design-vue'
 import { ITEM_REQUIRE_ERROR } from '@/constants/msg'
 import { useRoute, useRouter } from 'vue-router'
-import { FarmManage } from '../../constant'
 import { VxeTableInstance } from 'vxe-table'
 import PopUp1012 from '../Popup/PopUp_1012.vue'
 import { Search } from '../../service/1012/service'
-import { SearchRequest } from '../../service/1012/type'
-import { search } from '@/views/GJ30/GJ3030/interface/3030/service'
+import { SearchRequest, SearchRowVM } from '../../service/1012/type'
 
 //--------------------------------------------------------------------------
 //データ定義
@@ -171,6 +173,7 @@ import { search } from '@/views/GJ30/GJ3030/interface/3030/service'
 const router = useRouter()
 const route = useRoute()
 
+const xTableRef = ref<VxeTableInstance>()
 const createDefaultParams = (): SearchRequest => {
   return {
     KI: Number(route.query.KI),
@@ -212,39 +215,28 @@ const HASU_GOKEI = ref({
   DACHO: undefined,
   TOTAL: undefined,
 })
-
-const tableData = ref<DetailRowVM[]>([
-  {
-    MEISAI_NO: 0,
-    NOJO_NAME: '(宇)宇宇イイアイ-',
-    NOJO_ADDR: '北海道亜宇亜亜亜宇亜宇亜亜亜宇亜宇亜亜亜',
-    TORISYURUI: '揉卵成鶏',
-    KEIYAKUHASU: '111',
-    BIKO: '',
-  },
-])
-
+const editOptions = reactive<{
+  NOJO_LIST: CmCodeNameModel[]
+  TORI_KBN_LIST: CmCodeNameModel[]
+}>({
+  NOJO_LIST: [],
+  TORI_KBN_LIST: [],
+})
+const tableData = ref<SearchRowVM[]>([])
+const currentRow = ref<SearchRowVM>()
 const popupVisible = ref(false)
 const popupeditkbn = ref<EnumEditKbn>(EnumEditKbn.Add)
 
 const editJudge = new Judgement('GJ1010')
-// const { pageParams, totalCount } = useSearch({
-//   service: undefined,
-//   source: tableData,
-// })
 
 const { pageParams, totalCount, searchData, clear } = useSearch({
   service: Search,
   source: tableData,
   params: toRef(() => searchParams),
+  tableRef: xTableRef,
   // validate,
 })
 
-const NOJO_CD_CD_NAME_LIST = ref<CmCodeNameModel[]>([])
-const KEI_SYURUI_CD_NAME_LIST = ref<CmCodeNameModel[]>([])
-
-const tableRef = ref<VxeTableInstance>()
-const devicePixelRatio = ref(window.devicePixelRatio)
 const rules = reactive({
   MEISAI_NO: [
     {
@@ -263,20 +255,14 @@ const { validate, clearValidate, validateInfos, resetFields } = Form.useForm(
 //--------------------------------------------------------------------------
 onMounted(async () => {
   await searchAll()
-  // const res = await Search({
-  //   KI: Number(route.query.KI),
-  //   KEIYAKUSYA_CD: Number(route.query.KEIYAKUSYA_CD),
-  // })
-  // console.log(res)
 })
 
 const searchAll = async () => {
-  tableData.value = []
   const res = await searchData()
+  //KEIYAKU_KBN
+  formData.KEIYAKUSYA_NAME = res.KEIYAKUSYA_NAME
+  Object.assign(editOptions, res)
   HASU_GOKEI.value = res.HASU_GOKEI
-  if (tableRef.value && tableData.value.length > 0) {
-    tableRef.value.setCurrentRow(tableData.value[0])
-  }
 }
 //--------------------------------------------------------------------------
 //計算定義
@@ -286,9 +272,6 @@ const searchAll = async () => {
 //監視定義
 //--------------------------------------------------------------------------
 
-window.addEventListener('resize', function () {
-  devicePixelRatio.value = window.devicePixelRatio
-})
 //--------------------------------------------------------------------------
 //メソッド
 //--------------------------------------------------------------------------
@@ -296,7 +279,8 @@ const addData = () => {
   popupVisible.value = true
   popupeditkbn.value = EnumEditKbn.Add
 }
-const changeData = () => {
+const changeData = (row) => {
+  currentRow.value = row
   popupVisible.value = true
   popupeditkbn.value = EnumEditKbn.Edit
 }

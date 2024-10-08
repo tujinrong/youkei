@@ -8,9 +8,9 @@
  * ----------------------------------------------------------------->
 <template>
   <div class="flex items-center w-full">
-    <DateJp :value="value.VALUE_FM" :disabled="disabled" @change="change1" />
+    <DateJp :value="value.VALUE_FM" :disabled="disabled1" @change="change1" />
     <span>～</span>
-    <DateJp :value="value.VALUE_TO" :disabled="disabled" @change="change2" />
+    <DateJp :value="value.VALUE_TO" :disabled="disabled2" @change="change2" />
   </div>
 </template>
 
@@ -24,7 +24,8 @@ const props = defineProps<{
     VALUE_FM: Date | undefined
     VALUE_TO: Date | undefined
   }
-  disabled?: boolean
+  disabled1?: boolean
+  disabled2?: boolean
 }>()
 const emit = defineEmits(['update:value'])
 

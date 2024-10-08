@@ -26,7 +26,7 @@
       :title="opt.NAME"
       :disabled="opt.disabled"
     >
-      {{ opt.CODE ? opt.CODE + ' : ' + opt.NAME : opt.NAME }}
+      {{ opt.CODE === 0 || opt.CODE ? opt.CODE + ' : ' + opt.NAME : opt.NAME }}
     </a-select-option>
   </a-select>
 </template>
@@ -64,13 +64,12 @@ const curVal = computed({
       return item.CODE == props.value
     })
     if (item) {
-      return item.CODE ? item.CODE + ' : ' + item.NAME : ''
+      return item.CODE === 0 || item.CODE ? item.CODE + ' : ' + item.NAME : ''
     }
     return props.value
   },
   set(val) {
     const oldVal = curVal.value
-
     const curOpt = props.options.find((item) => {
       const value = val?.split(' : ')[0]
       const label = val?.split(' : ')[1]

@@ -32,7 +32,8 @@
             <a-form-item v-bind="validateInfos.NOJO_CD">
               <ai-select
                 v-model:value="formData.NOJO_CD"
-                :options="NOJO_CD_CD_NAME_LIST"
+                type="number"
+                :options="NOJO_LIST"
                 split-val
               ></ai-select>
             </a-form-item>
@@ -79,10 +80,11 @@
         <a-col span="23">
           <th class="required">鶏の種類</th>
           <td>
-            <a-form-item v-bind="validateInfos.KEI_SYURUI">
+            <a-form-item v-bind="validateInfos.TORI_KBN">
               <ai-select
-                v-model:value="formData.KEI_SYURUI"
-                :options="KEI_SYURUI_CD_NAME_LIST"
+                v-model:value="formData.TORI_KBN"
+                :options="TORI_KBN_LIST"
+                type="number"
                 class="max-w-40"
                 split-val
               ></ai-select>
@@ -108,15 +110,14 @@
         <a-col span="24">
           <th class="required">契約年月日</th>
           <td>
-            <a-form-item v-bind="validateInfos.KEIYAKU_YMD_FM" class="!w-40">
-              <DateJp v-model:value="formData.KEIYAKU_YMD_FM"
-            /></a-form-item>
-            <span class="ml-2 mt-1">～</span>
-            <a-form-item class="!w-40">
-              <DateJp
-                v-model:value="formData.KEIYAKU_YMD_TO"
-                disabled /></a-form-item
-            ><span class="flex items-center ml-2"
+            <a-form-item v-bind="validateInfos.KEIYAKU_DATE" class="w-90!">
+              <range-date
+                v-model:value="formData.KEIYAKU_DATE"
+                :disabled2="true"
+                class="w-full"
+              />
+            </a-form-item>
+            <span class="flex items-center"
               >(契約日を入力する二とで单価を取得します)</span
             >
           </td>
@@ -124,7 +125,7 @@
       </a-row>
       <a-row>
         <a-col span="23">
-          <th class="required">備考</th>
+          <th>備考</th>
           <td>
             <a-input v-model:value="formData.BIKO"></a-input>
           </td>
@@ -151,7 +152,7 @@
 </template>
 <script setup lang="ts">
 import { Judgement } from '@/utils/judge-edited'
-import { reactive, ref, toRef, computed, onMounted } from 'vue'
+import { reactive, ref, toRef, computed, onMounted, watch, nextTick } from 'vue'
 import Detail2 from '../Popup/PopUp_1013.vue'
 import { EnumEditKbn, PageStatus } from '@/enum'
 import { Form, message } from 'ant-design-vue'
@@ -166,15 +167,18 @@ import { FarmManage } from '../../constant'
 import { VxeTableInstance } from 'vxe-table'
 import { showDeleteModal, showSaveModal } from '@/utils/modal'
 import { mathNumber } from '@/utils/util'
-import { Search } from '../../service/1012/service'
 import { useRoute } from 'vue-router'
+import { SearchRowVM } from '../../service/1012/type'
 const route = useRoute()
 //--------------------------------------------------------------------------
 //データ定義
 //--------------------------------------------------------------------------
 const props = defineProps<{
-  editkbn: EnumEditKbn
   visible: boolean
+  editkbn: EnumEditKbn
+  row?: SearchRowVM
+  NOJO_LIST: CmCodeNameModel[]
+  TORI_KBN_LIST: CmCodeNameModel[]
 }>()
 const emit = defineEmits(['update:visible'])
 
@@ -190,10 +194,9 @@ const formData = reactive({
   ADDR_3: '',
   ADDR_4: '',
   MEISAI_NO: undefined as number | undefined,
-  KEI_SYURUI: undefined as number | undefined,
+  TORI_KBN: undefined as number | undefined,
   KEIYAKU_HASU: undefined as number | undefined,
-  KEIYAKU_YMD_FM: undefined as Date | undefined,
-  KEIYAKU_YMD_TO: undefined as Date | undefined,
+  KEIYAKU_DATE: undefined as CmDateFmToModel | undefined,
   BIKO: '',
 })
 
@@ -216,15 +219,7 @@ const isEdit = ref(false)
 
 const editJudge = new Judgement()
 
-const NOJO_CD_CD_NAME_LIST = ref<CmCodeNameModel[]>([
-  { CODE: 666, NAME: '農場名農場名農場名農場名農場名農場名農場' },
-])
-const KEI_SYURUI_CD_NAME_LIST = ref<CmCodeNameModel[]>([
-  { CODE: 1, NAME: 'ホロホロ鳥' },
-])
-
 const tableRef = ref<VxeTableInstance>()
-const devicePixelRatio = ref(window.devicePixelRatio)
 const rules = reactive({
   MEISAI_NO: [
     {
@@ -251,35 +246,24 @@ const modalVisible = computed({
 //--------------------------------------------------------------------------
 //監視定義
 //--------------------------------------------------------------------------
-
-window.addEventListener('resize', function () {
-  devicePixelRatio.value = window.devicePixelRatio
-})
+watch(
+  () => props.visible,
+  async (newValue) => {
+    if (!newValue) return
+    if (true) {
+      Object.assign(formData, props.row)
+    }
+    nextTick(() => editJudge.reset())
+  }
+)
 
 //---------------------------------------------------------------------------
 //フック関数
 //--------------------------------------------------------------------------
-// onMounted(async () => {
-//   const res = await Search({
-//     KI: Number(route.query.KI),
-//     KEIYAKUSYA_CD: Number(route.query.KEIYAKUSYA_CD),
-//   })
-//   console.log(res)
-
-// })
+onMounted(async () => {})
 
 //初期化処理
-// const getInitData = () => {
-
-// Init({ KI: KI, EDIT_KBN: EnumEditKbn.Add }).then((res) => {
-//   if (initflg) searchParams.KI = res.KI
-//   KEN_LIST.value = res.KEN_LIST
-//   KEIYAKU_KBN_LIST.value = res.KEIYAKU_KBN_LIST
-//   KEIYAKU_JYOKYO_LIST.value = res.KEIYAKU_JYOKYO_LIST
-//   ITAKU_LIST.value = res.ITAKU_LIST
-//   nextTick(() => clearValidate())
-// })
-// }
+const getInitData = () => {}
 
 //--------------------------------------------------------------------------
 //メソッド

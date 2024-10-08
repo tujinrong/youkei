@@ -39,7 +39,8 @@
                 <a-form-item v-bind="validateInfos.REG_DATE">
                   <range-date
                     v-model:value="formData.REG_DATE"
-                    :disabled="!CHOOSE_REG_DATE"
+                    :disabled1="!CHOOSE_REG_DATE"
+                    :disabled2="!CHOOSE_REG_DATE"
                     class="max-w-110"
                 /></a-form-item>
               </td>
@@ -57,7 +58,8 @@
                 <a-form-item v-bind="validateInfos.UP_DATE">
                   <range-date
                     v-model:value="formData.UP_DATE"
-                    :disabled="CHOOSE_REG_DATE"
+                    :disabled1="CHOOSE_REG_DATE"
+                    :disabled2="CHOOSE_REG_DATE"
                     class="max-w-110"
                 /></a-form-item>
               </td>
@@ -130,7 +132,8 @@
               <td>
                 <range-date
                   v-model:value="formData.KEIYAKUBI_YMD"
-                  :disabled="!formData.KEIYAKUBI.NYURYOKU_NOMI"
+                  :disabled1="!formData.KEIYAKUBI.NYURYOKU_NOMI"
+                  :disabled2="!formData.KEIYAKUBI.NYURYOKU_NOMI"
                   class="max-w-110"
                 /></td
             ></a-col>
