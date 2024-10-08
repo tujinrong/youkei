@@ -101,7 +101,7 @@
         <vxe-column
           header-align="center"
           field="BANK_CD"
-          title="金融機関"
+          title="金融機関コード"
           width="200"
           align="center"
           sortable

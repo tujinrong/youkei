@@ -104,8 +104,8 @@
       <vxe-column
         header-align="center"
         field="BANK_CD"
-        title="金融機関"
-        width="120"
+        title="金融機関コード"
+        width="150"
         align="center"
         sortable
         :params="{ order: 1 }"
@@ -116,7 +116,7 @@
         header-align="center"
         field="SITEN_CD"
         title="支店コード"
-        width="120"
+        width="130"
         align="center"
         sortable
         :params="{ order: 2 }"
