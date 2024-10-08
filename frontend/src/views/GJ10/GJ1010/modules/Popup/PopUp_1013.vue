@@ -25,7 +25,7 @@
           ><read-only-pop
             th="契約者"
             th-width="110"
-            :td="formData.KEIYAKUSYA_NAME"
+            :td="KEIYAKUSYA_NAME"
           ></read-only-pop>
         </a-col>
       </a-row>
@@ -179,23 +179,23 @@
   </a-modal>
 </template>
 <script lang="ts" setup>
-import { onMounted, reactive, ref, watch, toRef, nextTick } from 'vue'
+import { onMounted, reactive, ref, watch, toRef } from 'vue'
 import { changeTableSort } from '@/utils/util'
 import useSearch from '@/hooks/useSearch'
-import { Form } from 'ant-design-vue'
-import { ITEM_REQUIRE_ERROR } from '@/constants/msg'
-import { useRoute, useRouter } from 'vue-router'
+import { Form, message } from 'ant-design-vue'
+import { ITEM_REQUIRE_ERROR, SAVE_CONFIRM, SAVE_OK_INFO } from '@/constants/msg'
+import { useRoute } from 'vue-router'
 import { Judgement } from '@/utils/judge-edited'
 import { FarmManage } from '../../constant'
 import { NoJoRowVM } from '../../service/1012/type'
-import { SearchRequest } from '../../service/1013/type'
-import { InitDetail, Search } from '../../service/1013/service'
+import { DetailVM, SearchRequest } from '../../service/1013/type'
+import { InitDetail, Save, Search } from '../../service/1013/service'
 import { VxeTableInstance } from 'vxe-pc-ui'
 import { EnumEditKbn } from '@/enum'
+import { showSaveModal } from '@/utils/modal'
 //--------------------------------------------------------------------------
 //データ定義
 //--------------------------------------------------------------------------
-const router = useRouter()
 const route = useRoute()
 const xTableRef = ref<VxeTableInstance>()
 const editJudge = new Judgement('GJ1013')
@@ -205,7 +205,12 @@ const createDefaultParams = (): SearchRequest => {
     KEIYAKUSYA_CD: Number(route.query.KEIYAKUSYA_CD),
   } as SearchRequest
 }
-
+const props = defineProps<{
+  editkbn: EnumEditKbn
+  KEIYAKUSYA_CD: number
+  KEIYAKUSYA_NAME: string
+}>()
+const detailKbn = defineModel<FarmManage>('detailKbn')
 const searchParams = reactive(createDefaultParams())
 const formData = reactive({
   KI: undefined as number | undefined,
@@ -326,7 +331,6 @@ watch(
 //--------------------------------------------------------------------------
 //メソッド
 //--------------------------------------------------------------------------
-const detailKbn = defineModel<FarmManage>('detailKbn')
 
 const goList = () => {
   editJudge.judgeIsEdited(() => {
@@ -334,7 +338,26 @@ const goList = () => {
     detailKbn.value = FarmManage.Detail
   })
 }
-const saveData = () => {}
+const saveData = async () => {
+  await validate()
+  showSaveModal({
+    content: SAVE_CONFIRM.Msg,
+    onOk: async () => {
+      try {
+        await Save({
+          NOJO_JOHO: {
+            ...formData,
+            KEIYAKUSYA_CD: props.KEIYAKUSYA_CD,
+            UP_DATE: new Date(),
+          } as DetailVM,
+          EDIT_KBN: props.editkbn,
+        })
+        message.success(SAVE_OK_INFO.Msg)
+        goList()
+      } catch (error) {}
+    },
+  })
+}
 </script>
 
 <style lang="scss" scoped>

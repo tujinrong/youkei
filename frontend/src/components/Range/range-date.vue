@@ -8,9 +8,9 @@
  * ----------------------------------------------------------------->
 <template>
   <div class="flex items-center w-full">
-    <DateJp :value="value.VALUE_FM" :disabled="disabled1" @change="change1" />
+    <DateJp :value="value?.VALUE_FM" :disabled="disabled1" @change="change1" />
     <span>～</span>
-    <DateJp :value="value.VALUE_TO" :disabled="disabled2" @change="change2" />
+    <DateJp :value="value?.VALUE_TO" :disabled="disabled2" @change="change2" />
   </div>
 </template>
 
@@ -20,10 +20,12 @@ import { Form } from 'ant-design-vue'
 //属性
 //---------------------------------------------------------------------------
 const props = defineProps<{
-  value: {
-    VALUE_FM: Date | undefined
-    VALUE_TO: Date | undefined
-  }
+  value:
+    | {
+        VALUE_FM: Date | undefined
+        VALUE_TO: Date | undefined
+      }
+    | undefined
   disabled1?: boolean
   disabled2?: boolean
 }>()
@@ -40,13 +42,13 @@ const formItemContext = Form.useInjectFormItemContext()
 function change1(val) {
   emit('update:value', {
     VALUE_FM: val ?? undefined,
-    VALUE_TO: props.value.VALUE_TO,
+    VALUE_TO: props.value?.VALUE_TO,
   })
   formItemContext.onFieldChange()
 }
 function change2(val) {
   emit('update:value', {
-    VALUE_FM: props.value.VALUE_FM,
+    VALUE_FM: props.value?.VALUE_FM,
     VALUE_TO: val ?? undefined,
   })
   formItemContext.onFieldChange()

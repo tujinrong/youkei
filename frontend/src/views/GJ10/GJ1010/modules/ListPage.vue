@@ -170,7 +170,7 @@
         </AButton>
       </div>
     </a-card>
-    <a-card :bordered="false" class="flex-1 staticWidth" ref="cardRef">
+    <a-card :bordered="false" class="flex-1 staticWidth">
       <a-pagination
         v-model:current="pageParams.PAGE_NUM"
         v-model:page-size="pageParams.PAGE_SIZE"
@@ -294,8 +294,7 @@ import { EnumAndOr, EnumEditKbn, PageStatus } from '@/enum'
 import { computed, reactive, ref, toRef, nextTick, onMounted } from 'vue'
 import { ITEM_REQUIRE_ERROR } from '@/constants/msg'
 import useSearch from '@/hooks/useSearch'
-import { useElementSize } from '@vueuse/core'
-import { changeTableSort, convertToTel } from '@/utils/util'
+import { changeTableSort } from '@/utils/util'
 import { Form } from 'ant-design-vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useTabStore } from '@/store/modules/tab'
@@ -343,9 +342,7 @@ const layout = {
 const router = useRouter()
 const route = useRoute()
 const tabStore = useTabStore()
-const cardRef = ref()
 const xTableRef = ref<VxeTableInstance>()
-const { height } = useElementSize(cardRef)
 
 const KEN_LIST = ref<CmCodeNameModel[]>([])
 const KEIYAKU_KBN_LIST = ref<CmCodeNameModel[]>([])
@@ -403,7 +400,7 @@ const getInitData = (KI: number, initflg: boolean) => {
 //メソッド
 //--------------------------------------------------------------------------
 
-const { validate, clearValidate, validateInfos, resetFields } = Form.useForm(
+const { validate, clearValidate, validateInfos } = Form.useForm(
   searchParams,
   rules
 )
@@ -421,12 +418,6 @@ const searchAll = async () => {
 }
 
 function goForward(status: PageStatus, row?: any) {
-  // if (status === PageStatus.Edit || status === PageStatus.New) {
-  //   editVisible.value = true
-  //   editkbn.value =
-  //     status === PageStatus.Edit ? EnumEditKbn.Edit : EnumEditKbn.Add
-  //   return
-  // }
   keyList.KEIYAKUSYA_CD = row.KEIYAKUSYA_CD
   router.push({
     name: route.name,
@@ -449,6 +440,8 @@ async function forwardEdit(KEIYAKUSYA_CD) {
   editkbn.value = EnumEditKbn.Edit
   keyList.KEIYAKUSYA_CD = KEIYAKUSYA_CD
 }
+
+function handleTel() {}
 </script>
 <style lang="scss" scoped>
 :deep(th) {

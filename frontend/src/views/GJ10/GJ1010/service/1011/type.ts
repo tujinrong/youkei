@@ -21,7 +21,22 @@ export interface SearchDetailRequest extends DaRequestBase {
   /**期 */
   KI: number
   /**契約者番号 */
-  KEIYAKUSYA_CD: number
+  KEIYAKUSYA_CD: number | undefined
+}
+export interface SaveRequest extends DaRequestBase {
+  /**契約者情報 */
+  KEIYAKUSYA: DetailVM
+}
+
+export interface DeleteRequest extends DaRequestBase {
+  /**期 */
+  KI: number | undefined
+  /**契約者番号 */
+  KEIYAKUSYA_CD: number | undefined
+  /**事務委託先番号(変更前) */
+  OLD_JIMUITAKU_CD: number | undefined
+  /**データ更新日 */
+  UP_DATE: Date | undefined
 }
 
 //-------------------------------------------------------------------
@@ -47,22 +62,6 @@ export interface InitDetailResponse extends DaResponseBase {
 export interface SearchDetailResponse extends DaResponseBase {
   /**契約者情報 */
   KEIYAKUSYA: DetailVM
-}
-
-export interface SaveRequest extends DaRequestBase {
-  /**契約者情報 */
-  KEIYAKUSYA: DetailVM
-}
-
-export interface DeleteRequest extends DaRequestBase {
-  /**期 */
-  KI: number | undefined
-  /**契約者番号 */
-  KEIYAKUSYA_CD: number | undefined
-  /**事務委託先番号(変更前) */
-  OLD_JIMUITAKU_CD: number | undefined
-  /**データ更新日 */
-  UP_DATE: Date | undefined
 }
 
 //-------------------------------------------------------------------

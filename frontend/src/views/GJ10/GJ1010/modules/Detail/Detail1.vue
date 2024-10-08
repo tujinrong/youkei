@@ -148,6 +148,8 @@
           row: currentRow,
           NOJO_LIST: editOptions.NOJO_LIST,
           TORI_KBN_LIST: editOptions.TORI_KBN_LIST,
+          KEIYAKU_KBN: formData.KEIYAKU_KBN,
+          KEIYAKUSYA_NAME: formData.KEIYAKUSYA_NAME,
         }"
       ></PopUp1012>
     </a-card>
@@ -156,11 +158,9 @@
 <script setup lang="ts">
 import useSearch from '@/hooks/useSearch'
 import { Judgement } from '@/utils/judge-edited'
-import { reactive, ref, toRef, computed, onMounted } from 'vue'
+import { reactive, ref, toRef, onMounted } from 'vue'
 import { changeTableSort } from '@/utils/util'
-import { EnumEditKbn, PageStatus } from '@/enum'
-import { Form } from 'ant-design-vue'
-import { ITEM_REQUIRE_ERROR } from '@/constants/msg'
+import { EnumEditKbn } from '@/enum'
 import { useRoute, useRouter } from 'vue-router'
 import { VxeTableInstance } from 'vxe-table'
 import PopUp1012 from '../Popup/PopUp_1012.vue'
@@ -186,19 +186,7 @@ const searchParams = reactive(createDefaultParams())
 const formData = reactive({
   KI: undefined as number | undefined,
   KEIYAKUSYA_NAME: '',
-  NOJO_CD: undefined as number | undefined,
-  NOJO_NAME: '',
-  ADDR_POST: '',
-  ADDR_1: '',
-  ADDR_2: '',
-  ADDR_3: '',
-  ADDR_4: '',
-  MEISAI_NO: undefined as number | undefined,
-  KEI_SYURUI: undefined as number | undefined,
-  KEIYAKU_HASU: undefined as number | undefined,
-  KEIYAKU_YMD_FM: undefined as Date | undefined,
-  KEIYAKU_YMD_TO: undefined as Date | undefined,
-  BIKO: '',
+  KEIYAKU_KBN: 0,
 })
 
 const HASU_GOKEI = ref({
@@ -229,26 +217,13 @@ const popupeditkbn = ref<EnumEditKbn>(EnumEditKbn.Add)
 
 const editJudge = new Judgement('GJ1010')
 
-const { pageParams, totalCount, searchData, clear } = useSearch({
+const { pageParams, totalCount, searchData } = useSearch({
   service: Search,
   source: tableData,
   params: toRef(() => searchParams),
   tableRef: xTableRef,
   // validate,
 })
-
-const rules = reactive({
-  MEISAI_NO: [
-    {
-      required: true,
-      message: ITEM_REQUIRE_ERROR.Msg.replace('{0}', '明細番号'),
-    },
-  ],
-})
-const { validate, clearValidate, validateInfos, resetFields } = Form.useForm(
-  formData,
-  rules
-)
 
 //---------------------------------------------------------------------------
 //フック関数
@@ -259,8 +234,9 @@ onMounted(async () => {
 
 const searchAll = async () => {
   const res = await searchData()
-  //KEIYAKU_KBN
+  formData.KEIYAKU_KBN = res.KEIYAKU_KBN
   formData.KEIYAKUSYA_NAME = res.KEIYAKUSYA_NAME
+  formData.KI = searchParams.KI
   Object.assign(editOptions, res)
   HASU_GOKEI.value = res.HASU_GOKEI
 }
@@ -284,14 +260,9 @@ const changeData = (row) => {
   popupVisible.value = true
   popupeditkbn.value = EnumEditKbn.Edit
 }
-const deleteData = () => {}
-const saveData = () => {}
-const reset = () => {}
-function goForward(status: PageStatus, row?: any) {}
 
 const goList = () => {
   editJudge.judgeIsEdited(() => {
-    resetFields()
     router.push({ name: route.name })
   })
 }

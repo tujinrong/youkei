@@ -62,7 +62,7 @@ export interface SaveRequest extends DaRequestBase {
   /**契約羽数 */
   KEIYAKU_HASU: number | undefined
   /**契約年月日 */
-  KEIYAKU_DATE: CmDateFmToModel
+  KEIYAKU_DATE: CmDateFmToModel | undefined
   /**備考 */
   BIKO: string
   /**契約区分コード */
@@ -73,7 +73,7 @@ export interface SaveRequest extends DaRequestBase {
 
 export interface DeleteRequest extends DaRequestBase {
   /**自動採番 */
-  SEQNO: number
+  SEQNO: number | undefined
   /**データ更新日 */
   UP_DATE: Date
 }

@@ -136,9 +136,15 @@
       <div class="pt-2 flex justify-between border-t-1">
         <a-space :size="20" class="mb-2">
           <a-button class="warning-btn" @click="saveData">保存</a-button>
-          <a-button class="warning-btn" @click="continueSave">
+          <a-button
+            class="warning-btn"
+            :disabled="!isNew"
+            @click="continueSave"
+          >
             保存して継続登録 </a-button
-          ><a-button class="danger-btn" @click="deleteData">削除</a-button>
+          ><a-button class="danger-btn" :disabled="isNew" @click="deleteData"
+            >削除</a-button
+          >
           <a-button type="primary" @click="reset">キャンセル</a-button></a-space
         >
         <a-button type="primary" @click="closeModal">閉じる</a-button>
@@ -148,13 +154,18 @@
   <Detail2
     v-if="detailKbn === FarmManage.FarmInfo"
     v-model:detailKbn="detailKbn"
+    v-bind="{
+      KEIYAKUSYA_CD: formData.KEIYAKUSYA_CD,
+      KEIYAKUSYA_NAME,
+      editkbn,
+    }"
   />
 </template>
 <script setup lang="ts">
 import { Judgement } from '@/utils/judge-edited'
-import { reactive, ref, toRef, computed, onMounted, watch, nextTick } from 'vue'
+import { reactive, ref, computed, watch, nextTick } from 'vue'
 import Detail2 from '../Popup/PopUp_1013.vue'
-import { EnumEditKbn, PageStatus } from '@/enum'
+import { EnumEditKbn } from '@/enum'
 import { Form, message } from 'ant-design-vue'
 import {
   DELETE_CONFIRM,
@@ -164,12 +175,10 @@ import {
   SAVE_OK_INFO,
 } from '@/constants/msg'
 import { FarmManage } from '../../constant'
-import { VxeTableInstance } from 'vxe-table'
 import { showDeleteModal, showSaveModal } from '@/utils/modal'
 import { mathNumber } from '@/utils/util'
-import { useRoute } from 'vue-router'
 import { SearchRowVM } from '../../service/1012/type'
-const route = useRoute()
+import { Delete, Save } from '../../service/1012/service'
 //--------------------------------------------------------------------------
 //データ定義
 //--------------------------------------------------------------------------
@@ -179,13 +188,16 @@ const props = defineProps<{
   row?: SearchRowVM
   NOJO_LIST: CmCodeNameModel[]
   TORI_KBN_LIST: CmCodeNameModel[]
+  KEIYAKU_KBN: number
+  KEIYAKUSYA_NAME: string
 }>()
 const emit = defineEmits(['update:visible'])
 
 const detailKbn = ref(FarmManage.Detail)
 const formData = reactive({
+  SEQNO: undefined as number | undefined,
   KI: undefined as number | undefined,
-  KEIYAKUSYA_NAME: '',
+  KEIYAKUSYA_CD: undefined as number | undefined,
   NOJO_CD: undefined as number | undefined,
   NOJO_NAME: '',
   ADDR_POST: '136-0073',
@@ -200,26 +212,8 @@ const formData = reactive({
   BIKO: '',
 })
 
-const hasuGokei = reactive({
-  SAIRANKEI_SEIKEI: undefined,
-  SAIRANKEI_IKUSEIKEI: undefined,
-  NIKUYOUKEI: undefined,
-  SYUKEI_SEIKEI: undefined,
-  SYUKEI_IKUSEIKEI: undefined,
-  UZURA: undefined,
-  AHIRU: undefined,
-  KIJI: undefined,
-  HOROHOROTORI: undefined,
-  SICHIMENCHOU: undefined,
-  DACHOU: undefined,
-  TOTAL: undefined,
-})
-
-const isEdit = ref(false)
-
 const editJudge = new Judgement()
 
-const tableRef = ref<VxeTableInstance>()
 const rules = reactive({
   MEISAI_NO: [
     {
@@ -243,6 +237,8 @@ const modalVisible = computed({
     emit('update:visible', visible)
   },
 })
+
+const isNew = computed(() => props.editkbn === EnumEditKbn.Add)
 //--------------------------------------------------------------------------
 //監視定義
 //--------------------------------------------------------------------------
@@ -250,7 +246,7 @@ watch(
   () => props.visible,
   async (newValue) => {
     if (!newValue) return
-    if (true) {
+    if (!isNew.value) {
       Object.assign(formData, props.row)
     }
     nextTick(() => editJudge.reset())
@@ -260,10 +256,6 @@ watch(
 //---------------------------------------------------------------------------
 //フック関数
 //--------------------------------------------------------------------------
-onMounted(async () => {})
-
-//初期化処理
-const getInitData = () => {}
 
 //--------------------------------------------------------------------------
 //メソッド
@@ -279,46 +271,60 @@ const goList = () => {
     closeModal()
   })
 }
-
-const addData = () => {
-  isEdit.value = true
-}
-const changeData = () => {
-  const a = tableRef.value?.getCurrentRecord()
-  isEdit.value = true
-}
 const deleteData = () => {
   showDeleteModal({
     handleDB: true,
     content: DELETE_CONFIRM.Msg,
     onOk: async () => {
-      message.success(DELETE_OK_INFO.Msg)
-      closeModal()
+      try {
+        await Delete({ SEQNO: formData.SEQNO, UP_DATE: new Date() })
+        message.success(DELETE_OK_INFO.Msg)
+        closeModal()
+      } catch (error) {}
     },
   })
 }
-const saveData = () => {
+
+const saveData = async () => {
+  await validate()
   showSaveModal({
     content: SAVE_CONFIRM.Msg,
     onOk: async () => {
-      message.success(SAVE_OK_INFO.Msg)
-      closeModal()
+      try {
+        await Save({
+          ...formData,
+          KEIYAKU_KBN: props.KEIYAKU_KBN,
+          UP_DATE: new Date(),
+          EDIT_KBN: props.editkbn,
+        })
+        message.success(SAVE_OK_INFO.Msg)
+        closeModal()
+      } catch (error) {}
     },
   })
 }
-const continueSave = () => {
+const continueSave = async () => {
+  await validate()
   showSaveModal({
     content: SAVE_CONFIRM.Msg,
     onOk: async () => {
-      message.success(SAVE_OK_INFO.Msg)
+      try {
+        await Save({
+          ...formData,
+          KEIYAKU_KBN: props.KEIYAKU_KBN,
+          UP_DATE: new Date(),
+          EDIT_KBN: EnumEditKbn.Add,
+        })
+        message.success(SAVE_OK_INFO.Msg)
+      } catch (error) {}
       resetFields()
+      clearValidate()
     },
   })
 }
 const reset = () => {
   resetFields()
 }
-function goForward(status: PageStatus, row?: any) {}
 
 const addNoJo = () => {
   detailKbn.value = FarmManage.FarmInfo

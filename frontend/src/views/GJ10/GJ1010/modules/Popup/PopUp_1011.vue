@@ -508,10 +508,9 @@
   </a-modal>
 </template>
 <script setup lang="ts">
-import { EnumEditKbn, PageStatus } from '@/enum'
-import { useRoute, useRouter } from 'vue-router'
+import { EnumEditKbn } from '@/enum'
 import { Form, message } from 'ant-design-vue'
-import { reactive, nextTick, onMounted, ref, watch, computed } from 'vue'
+import { reactive, nextTick, ref, watch, computed } from 'vue'
 import DateJp from '@/components/Selector/DateJp/index.vue'
 import { Judgement } from '@/utils/judge-edited'
 import { showDeleteModal, showInfoModal, showSaveModal } from '@/utils/modal'
@@ -538,7 +537,6 @@ import {
   SearchDetail,
 } from '../../service/1011/service'
 import { DetailVM, SearchDetailRequest } from '../../service/1011/type'
-import { Console } from 'console'
 //--------------------------------------------------------------------------
 //データ定義
 //--------------------------------------------------------------------------
