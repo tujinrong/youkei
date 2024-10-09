@@ -63,7 +63,7 @@
           <td>{{ HASU_GOKEI.SICHIMENCHO }}</td>
           <td>{{ HASU_GOKEI.DACHO }}</td>
           <td>
-            {{ HASU_GOKEI.TOTAL || 0 }}
+            {{ total }}
           </td>
         </tr>
       </table> </a-card
@@ -158,7 +158,7 @@
 <script setup lang="ts">
 import useSearch from '@/hooks/useSearch'
 import { Judgement } from '@/utils/judge-edited'
-import { reactive, ref, toRef, onMounted } from 'vue'
+import { reactive, ref, toRef, onMounted, computed } from 'vue'
 import { changeTableSort } from '@/utils/util'
 import { EnumEditKbn } from '@/enum'
 import { useRoute, useRouter } from 'vue-router'
@@ -166,7 +166,6 @@ import { VxeTableInstance } from 'vxe-table'
 import PopUp1012 from '../Popup/PopUp_1012.vue'
 import { Search } from '../../service/1012/service'
 import { SearchRequest, SearchRowVM } from '../../service/1012/type'
-
 //--------------------------------------------------------------------------
 //データ定義
 //--------------------------------------------------------------------------
@@ -190,18 +189,17 @@ const formData = reactive({
 })
 
 const HASU_GOKEI = ref({
-  SAIRANKEI_SEIKEI: undefined,
-  SAIRANKEI_IKUSEIKEI: undefined,
-  NIKUYOKEI: undefined,
-  SYUKEI_SEIKEI: undefined,
-  SYUKEI_IKUSEIKEI: undefined,
-  UZURA: undefined,
-  AHIRU: undefined,
-  KIJI: undefined,
-  HOROHOROCHO: undefined,
-  SICHIMENCHO: undefined,
-  DACHO: undefined,
-  TOTAL: undefined,
+  SAIRANKEI_SEIKEI: 0,
+  SAIRANKEI_IKUSEIKEI: 0,
+  NIKUYOKEI: 0,
+  SYUKEI_SEIKEI: 0,
+  SYUKEI_IKUSEIKEI: 0,
+  UZURA: 0,
+  AHIRU: 0,
+  KIJI: 0,
+  HOROHOROCHO: 0,
+  SICHIMENCHO: 0,
+  DACHO: 0,
 })
 const editOptions = reactive<{
   NOJO_LIST: CmCodeNameModel[]
@@ -243,7 +241,9 @@ const searchAll = async () => {
 //--------------------------------------------------------------------------
 //計算定義
 //--------------------------------------------------------------------------
-
+const total = computed(() => {
+  return Object.values(HASU_GOKEI.value).reduce((sum, val) => sum + val, 0)
+})
 //--------------------------------------------------------------------------
 //監視定義
 //--------------------------------------------------------------------------
