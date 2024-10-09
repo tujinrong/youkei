@@ -22,7 +22,7 @@
                 xl: 12,
                 xxl: 17,
               }"
-              ><th class="required">対象期</th>
+              ><th class="required">期</th>
               <td>
                 <a-form-item v-bind="validateInfos.KI">
                   <a-input-number

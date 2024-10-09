@@ -14,7 +14,7 @@
         <div class="self_adaption_table form" ref="headRef">
           <a-row>
             <a-col span="24">
-              <th class="required">対象期</th>
+              <th class="required">期</th>
               <td>
                 <a-form-item v-bind="validateInfos.KI">
                   <span class="!align-middle">第 </span>
