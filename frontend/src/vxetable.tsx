@@ -24,6 +24,9 @@ VXETable.setConfig({
     rowConfig: {
       height: 28,
     },
+    sortConfig: {
+      remote: true,
+    },
     minHeight: 168,
   },
 })
