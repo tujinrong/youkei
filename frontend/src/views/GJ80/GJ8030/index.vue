@@ -412,7 +412,12 @@
       <div class="py-2 my-4 flex justify-between border-t-1">
         <a-space :size="20">
           <a-button class="warning-btn" @click="save">保存</a-button>
-          <a-button type="primary" @click="cancel">キャンセル</a-button>
+          <a-button
+            type="primary"
+            @click="cancel"
+            :disabled="editkbn == EnumEditKbn.Add"
+            >キャンセル</a-button
+          >
         </a-space>
         <EndButton :editJudge="editJudge" />
       </div>
