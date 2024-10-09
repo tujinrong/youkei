@@ -73,7 +73,7 @@ Namespace JBD.GJS.Service.GJ8090
 
             Dim wOrder = wkOrderby  &  wkOrderbyFlg
             If wKbn.ORDER_BY =  2 OrElse wKbn.ORDER_BY = -2 OrElse wKbn.ORDER_BY = 3 OrElse wKbn.ORDER_BY = -3 Then 
-                wOrder = " UTL_I18N.TRANSLITERATE(case when  "  & wkOrderby  &  " is null then '０' else TO_MULTI_BYTE("  & wkOrderby  &  ")  end, 'hwkatakana_fwkatakana' )  "   & wkOrderbyFlg 
+                wOrder = " UTL_I18N.TRANSLITERATE(case when  "  & wkOrderby  &  " is null then '0' else TO_MULTI_BYTE("  & wkOrderby  &  ")  end, 'hwkatakana_fwkatakana' )  "   & wkOrderbyFlg 
             End If
 
             '==SQL作成====================
