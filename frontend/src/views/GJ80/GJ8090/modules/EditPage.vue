@@ -382,26 +382,6 @@ const saveDB = async () => {
     EDIT_KBN: isNew.value ? EnumEditKbn.Add : EnumEditKbn.Edit,
   })
 }
-// const saveData = async () => {
-//   if (!isNew.value) {
-//     if (!editJudge.isPageEdited()) {
-//       showInfoModal({
-//         content: '変更したデータはありません。',
-//       })
-//       return
-//     }
-//   }
-//   await validate()
-//   showSaveModal({
-//     content: SAVE_CONFIRM.Msg,
-//     onOk: async () => {
-//       await saveDB()
-//       closeModal()
-//       emit('getTableList')
-//       message.success(SAVE_OK_INFO.Msg)
-//     },
-//   })
-// }
 
 //保存して継続登録
 const continueSave = async () => {
@@ -414,14 +394,13 @@ const continueSave = async () => {
     }
   }
   await validate()
-
-  if (isNew.value) {
-    showSaveModal({
-      content: SAVE_CONFIRM.Msg,
-      onOk: async () => {
-        await saveDB()
-        emit('getTableList')
-        message.success(SAVE_OK_INFO.Msg)
+  showSaveModal({
+    content: SAVE_CONFIRM.Msg,
+    onOk: async () => {
+      await saveDB()
+      emit('getTableList')
+      message.success(SAVE_OK_INFO.Msg)
+      if (isNew.value) {
         Object.assign(formData, {
           NOJO_CD: undefined,
           NOJO_NAME: '',
@@ -433,25 +412,13 @@ const continueSave = async () => {
           ADDR_4: '',
           MEISAI_NO: undefined,
         })
-        nextTick(() => {
-          clearValidate()
-          editJudge.reset()
-        })
-      },
-    })
-  } else {
-    showSaveModal({
-      content: SAVE_CONFIRM.Msg,
-      onOk: async () => {
-        await saveDB()
-        emit('getTableList')
-        message.success(SAVE_OK_INFO.Msg)
-        nextTick(() => {
-          editJudge.reset()
-        })
-      },
-    })
-  }
+      }
+      nextTick(() => {
+        clearValidate()
+        editJudge.reset()
+      })
+    },
+  })
 }
 //削除処理
 const deleteData = () => {

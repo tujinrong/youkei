@@ -60,12 +60,7 @@
     <template #footer>
       <div class="pt-2 flex justify-between border-t-1">
         <a-space :size="20">
-          <a-button class="warning-btn" @click="saveData"> 保存 </a-button>
-          <a-button
-            class="warning-btn"
-            :disabled="!isNew"
-            @click="continueSave"
-          >
+          <a-button class="warning-btn" @click="continueSave">
             保存して継続登録
           </a-button>
 
@@ -245,7 +240,8 @@ const saveDB = async () => {
   })
 }
 
-const saveData = async () => {
+//保存して継続登録
+const continueSave = async () => {
   if (!isNew.value) {
     if (!editJudge.isPageEdited()) {
       showInfoModal({
@@ -258,27 +254,14 @@ const saveData = async () => {
   showSaveModal({
     content: SAVE_CONFIRM.Msg,
     onOk: async () => {
-      try {
-        await saveDB()
-        emit('getTableList', false)
-        closeModal()
-        message.success(SAVE_OK_INFO.Msg)
-      } catch (error) {}
-    },
-  })
-}
-
-//保存して継続登録(新規モードのみ)
-const continueSave = async () => {
-  await validate()
-  showSaveModal({
-    content: SAVE_CONFIRM.Msg,
-    onOk: async () => {
       await saveDB()
+      emit('getTableList', true)
       message.success(SAVE_OK_INFO.Msg)
-      resetFields()
-      clearValidate()
+      if (isNew.value) {
+        resetFields()
+      }
       nextTick(() => {
+        clearValidate()
         editJudge.reset()
       })
     },

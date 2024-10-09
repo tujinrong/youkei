@@ -179,7 +179,7 @@
   </a-modal>
 </template>
 <script lang="ts" setup>
-import { onMounted, reactive, ref, watch, toRef } from 'vue'
+import { onMounted, reactive, ref, watch, toRef, computed } from 'vue'
 import { changeTableSort } from '@/utils/util'
 import useSearch from '@/hooks/useSearch'
 import { Form, message } from 'ant-design-vue'
@@ -305,7 +305,7 @@ const { validate, clearValidate, validateInfos, resetFields } = Form.useForm(
 //--------------------------------------------------------------------------
 //計算定義
 //--------------------------------------------------------------------------
-
+const isNew = computed(() => props.editkbn === EnumEditKbn.Add)
 //---------------------------------------------------------------------------
 //フック関数
 //--------------------------------------------------------------------------
@@ -314,9 +314,11 @@ onMounted(async () => {
   const res = await InitDetail({
     ...searchParams,
     NOJO_CD: 1,
-    EDIT_KBN: EnumEditKbn.Edit,
+    EDIT_KBN: props.editkbn,
   })
-  Object.assign(formData, res.NOJO_JOHO)
+  if (!isNew.value) {
+    Object.assign(formData, res.NOJO_JOHO)
+  }
   KEN_CD_NAME_LIST.value = res.KEN_LIST
 })
 

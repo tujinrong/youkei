@@ -135,12 +135,7 @@
     <template #footer>
       <div class="pt-2 flex justify-between border-t-1">
         <a-space :size="20" class="mb-2">
-          <a-button class="warning-btn" @click="saveData">保存</a-button>
-          <a-button
-            class="warning-btn"
-            :disabled="!isNew"
-            @click="continueSave"
-          >
+          <a-button class="warning-btn" @click="continueSave">
             保存して継続登録 </a-button
           ><a-button class="danger-btn" :disabled="isNew" @click="deleteData"
             >削除</a-button
@@ -175,7 +170,7 @@ import {
   SAVE_OK_INFO,
 } from '@/constants/msg'
 import { FarmManage } from '../../constant'
-import { showDeleteModal, showSaveModal } from '@/utils/modal'
+import { showDeleteModal, showInfoModal, showSaveModal } from '@/utils/modal'
 import { mathNumber } from '@/utils/util'
 import { SearchRowVM } from '../../service/1012/type'
 import { Delete, Save } from '../../service/1012/service'
@@ -191,7 +186,7 @@ const props = defineProps<{
   KEIYAKU_KBN: number
   KEIYAKUSYA_NAME: string
 }>()
-const emit = defineEmits(['update:visible'])
+const emit = defineEmits(['update:visible', 'getTableList'])
 
 const detailKbn = ref(FarmManage.Detail)
 const formData = reactive({
@@ -285,7 +280,16 @@ const deleteData = () => {
   })
 }
 
-const saveData = async () => {
+//保存して継続登録
+const continueSave = async () => {
+  if (!isNew.value) {
+    if (!editJudge.isPageEdited()) {
+      showInfoModal({
+        content: '変更したデータはありません。',
+      })
+      return
+    }
+  }
   await validate()
   showSaveModal({
     content: SAVE_CONFIRM.Msg,
@@ -297,27 +301,12 @@ const saveData = async () => {
           UP_DATE: new Date(),
           EDIT_KBN: props.editkbn,
         })
+        emit('getTableList')
         message.success(SAVE_OK_INFO.Msg)
-        closeModal()
+        if (isNew.value) {
+          resetFields()
+        }
       } catch (error) {}
-    },
-  })
-}
-const continueSave = async () => {
-  await validate()
-  showSaveModal({
-    content: SAVE_CONFIRM.Msg,
-    onOk: async () => {
-      try {
-        await Save({
-          ...formData,
-          KEIYAKU_KBN: props.KEIYAKU_KBN,
-          UP_DATE: new Date(),
-          EDIT_KBN: EnumEditKbn.Add,
-        })
-        message.success(SAVE_OK_INFO.Msg)
-      } catch (error) {}
-      resetFields()
       clearValidate()
     },
   })

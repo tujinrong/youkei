@@ -496,8 +496,9 @@
     <template #footer>
       <div class="pt-2 flex justify-between border-t-1">
         <a-space :size="20">
-          <a-button class="warning-btn" @click="saveData">保存</a-button>
-          <a-button class="warning-btn" @click=""> 保存して継続登録 </a-button>
+          <a-button class="warning-btn" @click="continueSave">
+            保存して継続登録
+          </a-button>
           <a-button class="danger-btn" :disabled="isNew" @click="deleteData"
             >削除</a-button
           >
@@ -824,8 +825,8 @@ const closeModal = () => {
   modalVisible.value = false
 }
 
-/** 登録処理 */
-const saveData = async () => {
+//保存して継続登録
+const continueSave = async () => {
   if (!isNew.value) {
     if (!editJudge.isPageEdited()) {
       showInfoModal({
@@ -839,9 +840,16 @@ const saveData = async () => {
     content: SAVE_CONFIRM.Msg,
     onOk: async () => {
       await Save({ KEIYAKUSYA: formData, EDIT_KBN: props.editkbn })
-      closeModal()
       emit('getTableList')
       message.success(SAVE_OK_INFO.Msg)
+      if (isNew.value) {
+        resetFields()
+        formData.KI = props.params.KI
+      }
+      nextTick(() => {
+        clearValidate()
+        editJudge.reset()
+      })
     },
   })
 }
