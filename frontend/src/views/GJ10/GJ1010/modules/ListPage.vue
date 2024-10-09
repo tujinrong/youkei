@@ -87,7 +87,7 @@
                   :maxlength="25"
                   class="w-130"
                 ></a-input>
-                <span class="w-40!">(部分一致)</span>
+                <span class="w-40! flex items-center">(部分一致)</span>
               </td>
             </a-col>
             <a-col v-bind="layout">
@@ -98,7 +98,7 @@
                   :maxlength="50"
                   class="w-130"
                 ></a-input>
-                <span class="w-40!">(部分一致)</span>
+                <span class="w-40! flex items-center">(部分一致)</span>
               </td>
             </a-col>
             <a-col v-bind="layout">
@@ -109,7 +109,7 @@
                   class="w-250"
                   :maxlength="54"
                 ></a-input>
-                <span class="w-65!">(部分一致)</span>
+                <span class="w-65! flex items-center">(部分一致)</span>
               </td>
             </a-col>
             <a-col v-bind="layout">
@@ -121,7 +121,7 @@
                   :maxlength="14"
                   @input="handleTel"
                 ></a-input>
-                <span>(全一致)</span>
+                <span class="flex items-center">(全一致)</span>
               </td>
             </a-col>
             <a-col v-bind="layout">
