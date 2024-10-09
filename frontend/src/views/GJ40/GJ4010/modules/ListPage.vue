@@ -207,8 +207,6 @@
         <a-space :size="20">
           <a-button type="primary" @click="search">検索</a-button>
           <a-button type="primary" @click="clear">キャンセル</a-button>
-          <a-button type="primary" @click="openGJ4011">経営支援登録</a-button>
-          <a-button type="primary" @click="openGJ4013">焼却・埋却登録</a-button>
         </a-space>
         <AButton type="primary" class="ml-a" @click="tabStore.removeActiveTab">
           閉じる
@@ -238,6 +236,24 @@
         @cell-dblclick="({ row }) => openGJ4013(row)"
         @sort-change="(e) => changeTableSort(e, toRef(pageParams, 'ORDER_BY'))"
       >
+        <vxe-column
+          header-align="center"
+          title="経営支援"
+          width="120"
+          align="center"
+          ><template #default="{ row }">
+            <a @click="openGJ4011"><span>経営支援</span></a>
+          </template></vxe-column
+        >
+        <vxe-column
+          header-align="center"
+          title="焼却・埋却"
+          width="120"
+          align="center"
+          ><template #default="{ row }">
+            <a @click="openGJ4013"><span>焼却・埋却</span></a>
+          </template></vxe-column
+        >
         <vxe-column
           header-align="center"
           align="right"

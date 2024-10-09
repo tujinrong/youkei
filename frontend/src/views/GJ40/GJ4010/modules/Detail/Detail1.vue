@@ -88,6 +88,15 @@
       >
         <vxe-column
           header-align="center"
+          title="明細入力"
+          width="120"
+          align="center"
+          ><template #default="{ row }">
+            <a @click="openGJ4012"><span>明細入力</span></a>
+          </template></vxe-column
+        >
+        <vxe-column
+          header-align="center"
           align="right"
           field="MEISAI_NO"
           title="明細番号"
@@ -312,9 +321,6 @@
     <template #footer>
       <div class="pt-2 flex justify-between border-t-1">
         <a-space :size="20">
-          <a-button type="primary" :disabled="!isEdit" @click="openGJ4012"
-            >互助金明細入力</a-button
-          >
           <a-button type="primary" :disabled="!isEdit" @click="closeModal"
             >キャンセル</a-button
           >

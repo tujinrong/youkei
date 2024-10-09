@@ -191,9 +191,6 @@
         <a-space :size="20">
           <a-button type="primary" @click="search">検索</a-button>
           <a-button type="primary" @click="clear">キャンセル</a-button>
-          <a-button class="ml-20" type="primary" @click="openGJ2091"
-            >入金確認</a-button
-          >
         </a-space>
         <AButton type="primary" class="ml-a" @click="tabStore.removeActiveTab">
           閉じる
@@ -230,14 +227,30 @@
           title="契約者番号"
           min-width="100"
           sortable
-        ></vxe-column>
+          ><template #default="{ row }">
+            <a
+              @click="
+                row.SYORI_JOKYO_KBN == 2 ? openGJ2092(row) : openGJ2091(row)
+              "
+              >{{ row.KEIYAKUSYA_CD }}</a
+            >
+          </template></vxe-column
+        >
         <vxe-column
           header-align="center"
           field="KEIYAKUSYA_NAME"
           title="契約者名"
           min-width="100"
           sortable
-        ></vxe-column>
+          ><template #default="{ row }">
+            <a
+              @click="
+                row.SYORI_JOKYO_KBN == 1 ? openGJ2091(row) : openGJ2092(row)
+              "
+              >{{ row.KEIYAKUSYA_NAME }}</a
+            >
+          </template></vxe-column
+        >
         <vxe-column
           header-align="center"
           field="KEIYAKUSYA_KANA"

@@ -152,18 +152,6 @@
           <a-button class="ml-40%" type="primary" @click="forwardAdd"
             >新規登録</a-button
           >
-          <a-button
-            class="ml-50%"
-            type="primary"
-            :disabled="!isDataSelected"
-            @click="
-              goForward(
-                PageStatus.Detail,
-                xTableRef?.getCurrentRecord() ?? null
-              )
-            "
-            >契約情報登録</a-button
-          >
         </a-space>
         <AButton type="primary" class="ml-a" @click="tabStore.removeActiveTab">
           閉じる
@@ -193,6 +181,18 @@
         @cell-dblclick="({ row }) => forwardEdit(row.KEIYAKUSYA_CD)"
         @sort-change="(e) => changeTableSort(e, toRef(pageParams, 'ORDER_BY'))"
       >
+        <vxe-column
+          header-align="center"
+          title="契約情報"
+          width="100"
+          align="center"
+        >
+          <template #default="{ row }">
+            <a @click="goForward(PageStatus.Detail, row)"
+              ><span>契約情報</span>
+            </a>
+          </template>
+        </vxe-column>
         <vxe-column
           header-align="center"
           field="KEIYAKUSYA_CD"

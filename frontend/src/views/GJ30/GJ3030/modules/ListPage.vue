@@ -61,21 +61,16 @@
     ></a-card>
     <a-card class="flex-1 staticWidth"
       ><h2>契約農場別明細 讓渡情報(表示)</h2>
-      <div class="flex justify-between">
-        <a-button type="primary" @click="() => (previewVisible = true)"
-          >通知書発行</a-button
-        >
-        <a-pagination
-          v-model:current="pageParams.PAGE_NUM"
-          v-model:page-size="pageParams.PAGE_SIZE"
-          :total="totalCount"
-          :page-size-options="['10', '25', '50', '100']"
-          :show-total="(total) => `抽出件数： ${total} 件`"
-          show-less-items
-          show-size-changer
-          class="m-b-1 text-end"
-        />
-      </div>
+      <a-pagination
+        v-model:current="pageParams.PAGE_NUM"
+        v-model:page-size="pageParams.PAGE_SIZE"
+        :total="totalCount"
+        :page-size-options="['10', '25', '50', '100']"
+        :show-total="(total) => `抽出件数： ${total} 件`"
+        show-less-items
+        show-size-changer
+        class="m-b-1 text-end"
+      />
       <vxe-table
         class="my-1"
         ref="xTableRef"
@@ -88,6 +83,17 @@
         @cell-dblclick="({ row }) => edit()"
         @sort-change="(e) => changeTableSort(e, toRef(pageParams, 'ORDER_BY'))"
       >
+        <vxe-column
+          header-align="center"
+          title="通知書発行"
+          width="120"
+          align="center"
+          ><template #default="{ row }">
+            <a @click="() => (previewVisible = true)"
+              ><span>通知書発行</span></a
+            >
+          </template></vxe-column
+        >
         <vxe-column
           header-align="center"
           align="center"
