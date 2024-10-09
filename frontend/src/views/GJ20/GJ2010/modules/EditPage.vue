@@ -928,7 +928,17 @@ th {
   border-left: none !important;
   border-right: 1px solid #8a8d92 !important;
 }
-.self_adaption_table .ant-col th {
-  text-align: center;
+.self_adaption_table .ant-col {
+  th {
+    text-align: center;
+    border: 1px solid #8a8d92;
+    margin: 0 0 -1px -1px;
+    border-right: 1px solid #c0c4cc;
+  }
+  td {
+    border: 1px solid #8a8d92;
+    margin: 0 0 -1px 0;
+    border-left: none;
+  }
 }
 </style>

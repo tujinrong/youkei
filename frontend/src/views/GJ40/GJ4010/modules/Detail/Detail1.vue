@@ -501,4 +501,17 @@ tr td {
   border: 1px solid rgb(190, 190, 190);
   width: 0.8rem !important;
 }
+
+:deep(.self_adaption_table .ant-col) {
+  th {
+    border: 1px solid #8a8d92;
+    margin: 0 0 -1px -1px;
+    border-right: 1px solid #c0c4cc;
+  }
+  td {
+    border: 1px solid #8a8d92;
+    margin: 0 0 -1px 0;
+    border-left: none;
+  }
+}
 </style>
