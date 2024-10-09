@@ -11,7 +11,7 @@
     }"
     :mask-closable="false"
     destroy-on-close
-    @cancel="goList"
+    @cancel="closeModal"
   >
     <div class="edit_table form">
       <a-form>

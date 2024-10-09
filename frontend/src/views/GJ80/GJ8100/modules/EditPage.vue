@@ -51,7 +51,7 @@
 
           <a-button class="danger-btn" @click="deleteData"> 削除 </a-button>
         </a-space>
-        <a-button type="primary" @click="closeModal">閉じる</a-button>
+        <a-button type="primary" @click="goList">閉じる</a-button>
       </div>
     </template>
   </a-modal>
@@ -179,18 +179,20 @@ const deleteData = () => {
     },
   })
 }
-
-const closeModal = () => {
+const goList = () => {
   editJudge.judgeIsEdited(() => {
-    Object.assign(formData, {
-      TAX_DATE_FROM: undefined,
-      TAX_DATE_TO: undefined,
-      TAX_RITU: undefined,
-    })
-    model.value = false
-    nextTick(() => {
-      clearValidate()
-    })
+    closeModal()
+  })
+}
+const closeModal = () => {
+  Object.assign(formData, {
+    TAX_DATE_FROM: undefined,
+    TAX_DATE_TO: undefined,
+    TAX_RITU: undefined,
+  })
+  model.value = false
+  nextTick(() => {
+    clearValidate()
   })
 }
 

@@ -7,7 +7,7 @@
     :body-style="{ height: '450px' }"
     :mask-closable="false"
     destroy-on-close
-    @cancel="goList"
+    @cancel="closeModal()"
   >
     <div class="modal-container">
       <div class="edit_table form w-130">

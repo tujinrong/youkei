@@ -15,7 +15,7 @@
     :body-style="{ minHeight: '450px' }"
     :mask-closable="false"
     destroy-on-close
-    @cancel="goList"
+    @cancel="closeModal"
   >
     <div class="edit_table form">
       <b>第{{ formData.KI }}期</b>
