@@ -148,7 +148,7 @@
       <div class="flex">
         <a-space :size="20">
           <a-button type="primary" @click="searchAll">検索</a-button>
-          <a-button type="primary" @click="clear">条件クリア</a-button>
+          <a-button type="primary" @click="clear">キャンセル</a-button>
           <a-button class="ml-40%" type="primary" @click="forwardAdd"
             >新規登録</a-button
           >

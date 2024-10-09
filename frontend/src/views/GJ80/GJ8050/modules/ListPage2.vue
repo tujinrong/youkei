@@ -72,7 +72,7 @@
     <div class="flex">
       <a-space :size="20">
         <a-button type="primary" @click="searchAll2()">検索</a-button>
-        <a-button type="primary" @click="reset2">条件クリア</a-button>
+        <a-button type="primary" @click="reset2">キャンセル</a-button>
         <a-button class="ml-10" type="primary" @click="forwardNew2"
           >新規登録</a-button
         >

@@ -93,7 +93,7 @@
                 <a-button type="primary" @click="onPreview"
                   >プレビュー</a-button
                 >
-                <a-button type="primary" @click="clear">条件クリア</a-button>
+                <a-button type="primary" @click="clear">キャンセル</a-button>
               </a-space>
               <CloseButton />
             </div>

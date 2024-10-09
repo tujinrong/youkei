@@ -58,7 +58,7 @@
             @click="add"
             >新規登録</a-button
           >
-          <a-button type="primary" @click="reset">条件クリア</a-button>
+          <a-button type="primary" @click="reset">キャンセル</a-button>
         </a-space>
         <CloseButton />
       </div> </a-card
@@ -295,7 +295,7 @@ const edit = () => {
   editkbn.value = EnumEditKbn.Edit
 }
 
-//条件クリア
+//キャンセル
 const reset = () => {
   clear()
   clearValidate()

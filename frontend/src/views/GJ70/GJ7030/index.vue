@@ -147,7 +147,7 @@
       <div class="flex">
         <a-space :size="20">
           <a-button type="primary" @click="search">検索</a-button>
-          <a-button type="primary" @click="reset">条件クリア</a-button>
+          <a-button type="primary" @click="reset">キャンセル</a-button>
           <a-button class="ml-20" type="primary" @click="">CSV出力</a-button>
         </a-space>
         <CloseButton /></div></a-card

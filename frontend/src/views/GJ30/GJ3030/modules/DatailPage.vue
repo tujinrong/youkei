@@ -36,7 +36,7 @@
           <div class="flex ml-5">
             <a-space :size="20" class="mb-2">
               <a-button type="primary" @click="search2">検索</a-button
-              ><a-button type="primary" @click="reset">条件クリア</a-button>
+              ><a-button type="primary" @click="reset">キャンセル</a-button>
             </a-space>
           </div>
         </a-col></a-row
@@ -301,7 +301,7 @@ function search2() {
   }
   isSearched2.value = true
 }
-//条件クリア
+//キャンセル
 const reset = () => {
   isSearched2.value = false
   isEditing2.value = false

@@ -49,7 +49,7 @@
         <a-space :size="20">
           <a-button type="primary" :disabled="isSearched" @click="search"
             >検索</a-button
-          ><a-button type="primary" @click="reset">条件クリア</a-button>
+          ><a-button type="primary" @click="reset">キャンセル</a-button>
           <a-button
             type="primary"
             :disabled="!isSearched || isEditing"
@@ -241,7 +241,7 @@ const { pageParams, totalCount, searchData, clear } = useSearch({
   validate,
 })
 
-//条件クリア
+//キャンセル
 const reset = () => {
   clear()
   clearValidate()
