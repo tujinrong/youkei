@@ -84,7 +84,7 @@
           </vxe-column>
           <vxe-column
             header-align="center"
-            align="center"
+            align="left"
             field="MEISYO"
             title="名称"
             min-width="300"
@@ -95,7 +95,7 @@
           </vxe-column>
           <vxe-column
             header-align="center"
-            align="center"
+            align="left"
             field="RYAKUSYO"
             title="略称"
             width="200"
