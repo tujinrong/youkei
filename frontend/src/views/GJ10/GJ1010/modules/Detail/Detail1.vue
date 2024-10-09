@@ -28,7 +28,9 @@
         <div class="my-2 flex justify-between">
           <a-space :size="20">
             <a-button type="primary" @click="addData">新規登録</a-button
-            ><a-button class="ml-20" type="primary">前期データコピー</a-button>
+            ><a-button class="ml-20" type="primary" @click="copyData"
+              >前期データコピー</a-button
+            >
           </a-space>
           <a-button type="primary" @click="goList">一覧へ</a-button>
         </div>
@@ -151,6 +153,7 @@
           KEIYAKU_KBN: formData.KEIYAKU_KBN,
           KEIYAKUSYA_NAME: formData.KEIYAKUSYA_NAME,
         }"
+        @getTableList="searchAll"
       ></PopUp1012>
     </a-card>
   </div>
@@ -164,7 +167,7 @@ import { EnumEditKbn } from '@/enum'
 import { useRoute, useRouter } from 'vue-router'
 import { VxeTableInstance } from 'vxe-table'
 import PopUp1012 from '../Popup/PopUp_1012.vue'
-import { Search } from '../../service/1012/service'
+import { Copy, Search } from '../../service/1012/service'
 import { SearchRequest, SearchRowVM } from '../../service/1012/type'
 //--------------------------------------------------------------------------
 //データ定義
@@ -265,6 +268,10 @@ const goList = () => {
   editJudge.judgeIsEdited(() => {
     router.push({ name: route.name })
   })
+}
+
+const copyData = async () => {
+  await Copy({ ...searchParams, KEIYAKU_KBN: formData.KEIYAKU_KBN })
 }
 </script>
 <style lang="scss" scoped>

@@ -135,13 +135,15 @@
     <template #footer>
       <div class="pt-2 flex justify-between border-t-1">
         <a-space :size="20" class="mb-2">
+          <a-button type="primary" @click="copyData">前期データコピー</a-button>
           <a-button class="warning-btn" @click="continueSave">
-            保存して継続登録 </a-button
-          ><a-button class="danger-btn" :disabled="isNew" @click="deleteData"
-            >削除</a-button
-          >
-          <a-button type="primary" @click="reset">キャンセル</a-button></a-space
-        >
+            保存して継続登録
+          </a-button>
+          <a-button class="danger-btn" :disabled="isNew" @click="deleteData"
+            >削除
+          </a-button>
+          <a-button type="primary" @click="reset">キャンセル</a-button>
+        </a-space>
         <a-button type="primary" @click="closeModal">閉じる</a-button>
       </div>
     </template>
@@ -173,7 +175,7 @@ import { FarmManage } from '../../constant'
 import { showDeleteModal, showInfoModal, showSaveModal } from '@/utils/modal'
 import { mathNumber } from '@/utils/util'
 import { SearchRowVM } from '../../service/1012/type'
-import { Delete, Save } from '../../service/1012/service'
+import { Copy, Delete, Save } from '../../service/1012/service'
 //--------------------------------------------------------------------------
 //データ定義
 //--------------------------------------------------------------------------
@@ -317,6 +319,15 @@ const reset = () => {
 
 const addNoJo = () => {
   detailKbn.value = FarmManage.FarmInfo
+}
+
+const copyData = async () => {
+  await Copy({
+    KI: formData.KI,
+    KEIYAKUSYA_CD: formData.KEIYAKUSYA_CD,
+    KEIYAKU_DATE: formData.KEIYAKU_DATE,
+    KEIYAKU_KBN: props.KEIYAKU_KBN,
+  })
 }
 </script>
 <style lang="scss" scoped>
