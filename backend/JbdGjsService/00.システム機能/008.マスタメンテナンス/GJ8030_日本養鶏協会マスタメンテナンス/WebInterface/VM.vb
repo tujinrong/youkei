@@ -17,7 +17,7 @@ Namespace JBD.GJS.Service.GJ8030
         ''' <summary>
         ''' 協会区分
         ''' </summary>
-        Public Property KYOKAI_KBN As Integer
+        Public Property KYOKAI_KBN As Integer? = Nothing
 
         ''' <summary>
         ''' 協会名称
@@ -117,7 +117,7 @@ Namespace JBD.GJS.Service.GJ8030
         ''' <summary>
         ''' 振込　口座種別
         ''' </summary>
-        Public Property FURI_KOZA_SYUBETU As Integer
+        Public Property FURI_KOZA_SYUBETU As Integer? = Nothing
 
         ''' <summary>
         ''' 振込　口座番号
@@ -127,7 +127,7 @@ Namespace JBD.GJS.Service.GJ8030
         ''' <summary>
         ''' 振込　種別コード
         ''' </summary>
-        Public Property FURI_SYUBETU As Integer
+        Public Property FURI_SYUBETU As Integer? = Nothing
 
         ''' <summary>
         ''' 振込　口座名義人（カナ）

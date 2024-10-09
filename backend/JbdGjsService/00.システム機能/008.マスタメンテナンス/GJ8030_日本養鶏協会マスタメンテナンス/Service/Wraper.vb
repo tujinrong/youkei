@@ -58,7 +58,10 @@ Namespace JBD.GJS.Service.GJ8030
                 ' dt をループし、List にデータを追加します。
                 Dim row As DataRow = dt.Rows(0)
                 Dim item = New SearchDetailResponse()
-                item.KYOKAI.KYOKAI_KBN = DaConvertUtil.CInt(DaConvertUtil.CStr(row("KYOKAI_KBN")))
+
+                If Not IsDBNull(row("FURI_KOZA_SYUBETU")) AndAlso Not IsNothing(row("KYOKAI_KBN")) Then
+                    item.KYOKAI.KYOKAI_KBN = DaConvertUtil.CInt(DaConvertUtil.CStr(row("KYOKAI_KBN")))
+                End If
                 '協会名称 ”社団法人　日本養鶏協会”
                 item.KYOKAI.KYOKAI_NAME = DaConvertUtil.CStr(WordHenkan("N", "S", row("KYOKAI_NAME")))
                 '役職名 ”会長”
@@ -108,11 +111,15 @@ Namespace JBD.GJS.Service.GJ8030
                 '支払先支店コード
                 item.KYOKAI.FURI_BANK_SITEN_CD = DaConvertUtil.CStr(WordHenkan("N", "S", row("FURI_BANK_SITEN_CD")))
                 '口座種別
-                item.KYOKAI.FURI_KOZA_SYUBETU = DaConvertUtil.CInt(WordHenkan("N", "S", row("FURI_KOZA_SYUBETU")))
+                If Not IsDBNull(row("FURI_KOZA_SYUBETU")) AndAlso Not IsNothing(row("FURI_KOZA_SYUBETU")) Then
+                    item.KYOKAI.FURI_KOZA_SYUBETU = DaConvertUtil.CInt(WordHenkan("N", "S", row("FURI_KOZA_SYUBETU")))
+                End If
                 '口座番号
                 item.KYOKAI.FURI_KOZA_NO = DaConvertUtil.CStr(WordHenkan("N", "S", row("FURI_KOZA_NO")))
                 '種別コード
-                item.KYOKAI.FURI_SYUBETU = DaConvertUtil.CInt(WordHenkan("N", "S", row("FURI_SYUBETU")))
+                If Not IsDBNull(row("FURI_SYUBETU")) AndAlso Not IsNothing(row("FURI_SYUBETU")) Then
+                    item.KYOKAI.FURI_SYUBETU = DaConvertUtil.CInt(WordHenkan("N", "S", row("FURI_SYUBETU")))
+                End If
                 '口座名義人
                 item.KYOKAI.FURI_KOZA_MEIGI = DaConvertUtil.CStr(WordHenkan("N", "S", row("FURI_KOZA_MEIGI")))
                 '口座名義人（カナ）

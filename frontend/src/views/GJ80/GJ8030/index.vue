@@ -440,6 +440,7 @@ import {
   convertKanaToHalfWidth,
   convertToHalfWidthAndUpperCase,
 } from '@/utils/util'
+import { EnumEditKbn } from '@/enum'
 
 const formData = reactive<DetailVM>({
   KYOKAI_NAME: '',
@@ -493,6 +494,8 @@ const option2 = reactive({
   KOZA_SYUBETU_LIST: [],
 })
 const editJudge = new Judgement('GJ8030')
+const editkbn = ref<EnumEditKbn>(EnumEditKbn.Add)
+
 const rules = reactive({
   KYOKAI_NAME: [
     {
@@ -650,6 +653,11 @@ onMounted(async () => {
   Object.assign(option1, res1)
   Object.assign(option2, res1)
   const res = await SearchDetail({})
+  if (res.KYOKAI.UP_DATE) {
+    editkbn.value = EnumEditKbn.Edit
+  } else {
+    editkbn.value = EnumEditKbn.Add
+  }
   Object.assign(formData, res.KYOKAI)
   nextTick(() => {
     editJudge.reset()
@@ -823,12 +831,14 @@ const onChangeKofuBank = () => {
 
 /** 登録処理 */
 const save = async () => {
+  console.log(editkbn.value)
+
   await validate()
   showSaveModal({
     content: SAVE_CONFIRM.Msg,
     onOk: async () => {
       try {
-        await Save({ KYOKAI: formData })
+        await Save({ KYOKAI: formData, EDIT_KBN: editkbn.value })
         message.success(SAVE_OK_INFO.Msg)
       } catch (error) {}
     },
@@ -839,6 +849,11 @@ const save = async () => {
 const cancel = () => {
   editJudge.judgeIsEdited(async () => {
     const res = await SearchDetail({})
+    if (res.KYOKAI.UP_DATE) {
+      editkbn.value = EnumEditKbn.Edit
+    } else {
+      editkbn.value = EnumEditKbn.Add
+    }
     Object.assign(formData, res.KYOKAI)
     nextTick(() => {
       editJudge.reset()
