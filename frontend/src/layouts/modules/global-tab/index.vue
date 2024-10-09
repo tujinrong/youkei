@@ -91,20 +91,9 @@ async function handleCloseTab(tab: App.Global.Tab) {
       delete judgeStore[key]
     }
   }
-  const arr: string[] = Object.keys(judgeStore)
-  const isShowModal = arr.some((el) => tab.id.includes(el.toLowerCase()))
-  if (isShowModal) {
-    showConfirmModal({
-      content: CLOSE_CONFIRM.Msg,
-      onOk: async () => {
-        await tabStore.removeTab(tab.id)
-        await routeStore.reCacheRoutesByKey(tab.routeKey)
-      },
-    })
-  } else {
-    await tabStore.removeTab(tab.id)
-    await routeStore.reCacheRoutesByKey(tab.routeKey)
-  }
+  //close tab（そのまま閉じて、編集を検証しない）
+  await tabStore.removeTab(tab.id)
+  await routeStore.reCacheRoutesByKey(tab.routeKey)
 }
 
 async function refresh() {
