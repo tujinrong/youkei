@@ -40,17 +40,6 @@
               @click="goForward(PageStatus.New)"
               >新規登録</a-button
             >
-            <a-button
-              type="primary"
-              :disabled="!searchParams.SYURUI_KBN"
-              @click="
-                goForward(
-                  PageStatus.Edit,
-                  xTableRef?.getCurrentRecord() ?? null
-                )
-              "
-              >変更（表示）</a-button
-            >
           </a-space>
           <CloseButton />
         </div>
@@ -81,6 +70,11 @@
             :params="{ order: 1 }"
             :resizable="true"
           >
+            <template #default="{ row }">
+              <a @click="goForward(PageStatus.Edit, row)">{{
+                row.MEISYO_CD
+              }}</a>
+            </template>
           </vxe-column>
           <vxe-column
             header-align="center"
@@ -92,6 +86,9 @@
             :params="{ order: 2 }"
             :resizable="true"
           >
+            <template #default="{ row }">
+              <a @click="goForward(PageStatus.Edit, row)">{{ row.MEISYO }}</a>
+            </template>
           </vxe-column>
           <vxe-column
             header-align="center"

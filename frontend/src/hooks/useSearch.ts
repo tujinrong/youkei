@@ -55,7 +55,7 @@ export default function useSearch({
       loading.value = false
       setTimeout(() => {
         if (tableRef && source.value.length > 0) {
-          tableRef.value?.setCurrentRow(source.value[0])
+          //tableRef.value?.setCurrentRow(source.value[0])
           tableRef.value?.scrollTo(0, 0)
         }
       }, 0)

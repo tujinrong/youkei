@@ -12,35 +12,14 @@
   --vxe-ui-font-color: #262626;
   --vxe-ui-table-border-color: #dddddd;
   --vxe-ui-table-column-padding-default: 6px 0;
-  --vxe-ui-table-header-background-color: #fff;
+  --vxe-ui-table-header-background-color: #ffffe1;
   --vxe-ui-table-row-height-default: 36px;
-  --vxe-ui-layout-background-color: #eeeeee;
-  --vxe-ui-table-row-current-background-color: #3b82f6;
-  --vxe-ui-table-row-hover-current-background-color: #3b82f6;
 }
 
 .vxe-table {
   // border: 1px solid #606266;
-  tbody {
-    background-color: #fff;
-  }
 }
-.vxe-table--render-default .vxe-body--row.row--current {
-  td {
-    & > span {
-      color: #fff;
-    }
-    & > a {
-      color: #fff;
-    }
-    & > div {
-      & > a,
-      span {
-        color: #fff;
-      }
-    }
-  }
-}
+
 .vxe-table--render-default.border--full .vxe-table--header-wrapper {
   // border-bottom: 1px solid #606266;
 }
