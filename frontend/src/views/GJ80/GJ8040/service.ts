@@ -30,7 +30,7 @@ export const InitDetail = (
   params: InitDetailRequest
 ): Promise<InitDetailResponse> => {
   const methodname = 'InitDetail'
-  return api(servicename2, methodname, params)
+  return api(servicename2, methodname, params, undefined, { loading: true })
 }
 
 /** 登録処理(詳細画面) */
