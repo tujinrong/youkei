@@ -429,8 +429,8 @@ import { Judgement } from '@/utils/judge-edited'
 import { Form, message } from 'ant-design-vue'
 import { nextTick, onMounted, reactive, ref, watch } from 'vue'
 import { InitDetail, Save, SearchDetail } from './service'
-import { DetailVM } from './type'
-import { showConfirmModal, showSaveModal } from '@/utils/modal'
+import { DetailVM, SearchDetailResponse } from './type'
+import { showSaveModal } from '@/utils/modal'
 import {
   JUDGE_CONFIRM,
   ITEM_REQUIRE_ERROR,
@@ -657,17 +657,7 @@ onMounted(async () => {
   const res1 = await InitDetail({ BANK_CD: '' })
   Object.assign(option1, res1)
   Object.assign(option2, res1)
-  const res = await SearchDetail({})
-  if (res.KYOKAI.UP_DATE) {
-    editkbn.value = EnumEditKbn.Edit
-  } else {
-    editkbn.value = EnumEditKbn.Add
-  }
-  Object.assign(formData, res.KYOKAI)
-  nextTick(() => {
-    editJudge.reset()
-    clearValidate()
-  })
+  await handleSearchDetail()
 })
 
 //--------------------------------------------------------------------------
@@ -833,17 +823,35 @@ const onChangeKofuBank = () => {
   //クリア
   formData.KOFU_BANK_SITEN_CD = ''
 }
-
+/** 検索処理 */
+const handleSearchDetail = async () => {
+  const res = await SearchDetail({})
+  if (res.KYOKAI.UP_DATE) {
+    editkbn.value = EnumEditKbn.Edit
+  } else {
+    editkbn.value = EnumEditKbn.Add
+  }
+  Object.assign(formData, res.KYOKAI)
+  nextTick(() => {
+    editJudge.reset()
+    clearValidate()
+  })
+}
 /** 登録処理 */
 const save = async () => {
   await validate()
+  let errorMessage = ''
   showSaveModal({
     content: SAVE_CONFIRM.Msg,
     onOk: async () => {
       try {
-        await Save({ KYOKAI: formData, EDIT_KBN: editkbn.value })
+        const res = await Save({ KYOKAI: formData, EDIT_KBN: editkbn.value })
+        errorMessage = res.MESSAGE
         message.success(SAVE_OK_INFO.Msg)
-      } catch (error) {}
+      } catch (error) {
+        await handleSearchDetail()
+        console.log(editkbn.value)
+      }
     },
   })
 }
@@ -851,17 +859,7 @@ const save = async () => {
 /** キャンセル処理 */
 const cancel = () => {
   editJudge.judgeIsEdited(async () => {
-    const res = await SearchDetail({})
-    if (res.KYOKAI.UP_DATE) {
-      editkbn.value = EnumEditKbn.Edit
-    } else {
-      editkbn.value = EnumEditKbn.Add
-    }
-    Object.assign(formData, res.KYOKAI)
-    nextTick(() => {
-      editJudge.reset()
-      clearValidate()
-    })
+    await handleSearchDetail()
   })
 }
 </script>

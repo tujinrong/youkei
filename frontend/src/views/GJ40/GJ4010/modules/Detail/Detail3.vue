@@ -81,7 +81,7 @@
                 :row-config="{ isCurrent: true, isHover: true }"
                 :data="tableData"
                 height="400px"
-                :sort-config="{ trigger: 'cell', orders: ['desc', 'asc'] }"
+                :sort-config="{ trigger: 'cell', orders: ['asc', 'desc'] }"
                 :empty-render="{ name: 'NotData' }"
                 @cell-click="({ row }) => changeData()"
                 @sort-change="

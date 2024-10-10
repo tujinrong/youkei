@@ -2,34 +2,17 @@
  * 業務名称　: 互助事業システム
  * 機能概要　: 契約者積立金・互助金単価マスタ
  * 　　　　　  インターフェース定義
- * 作成日　　: 2024.09.02
- * 作成者　　: 阎格
+ * 作成日　　: 2024.10.10
+ * 作成者　　: 高弘昆
  * 変更履歴　:
  * -----------------------------------------------------------------*/
 
 //-------------------------------------------------------------------
-//リクエスト
+//レスポンス
 //-------------------------------------------------------------------
 
-/**登録処理(詳細画面) */
-export interface SaveRequest extends DaRequestBase {
-  /** */
-  KEKKA: DetailVM
-}
-
-//-------------------------------------------------------------------
-//ビューモデル
-//-------------------------------------------------------------------
-
-/** 情報 */
-export interface DetailVM {
-  TAISYO_DATE_FROM: string
-  TAISYO_DATE_TO: string
-  KEIYAKU_KBN: number | undefined
-  TORI_KBN: number | undefined
-  TUMITATE_TANKA: number | undefined
-  KEIEISIEN_TANKA: number | undefined
-  SYOKYAKU_TANKA: number | undefined
-  TESURYO_RITU: number | undefined
-  KOFU_RITU: number | undefined
+/**検索処理(一覧画面) */
+export interface SearchResponse extends CmSearchResponseBase {
+  /**一覧情報 */
+  KEKKA_LIST: CmDateFmToModel
 }

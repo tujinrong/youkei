@@ -96,7 +96,7 @@
       :row-config="{ isCurrent: true, isHover: true }"
       :data="sitanTableData"
       height="370px"
-      :sort-config="{ trigger: 'cell', orders: ['desc', 'asc'] }"
+      :sort-config="{ trigger: 'cell', orders: ['asc', 'desc'] }"
       :empty-render="{ name: 'NotData' }"
       @cell-dblclick="({ row }) => forwardEdit2(row.BANK_CD, row.SITEN_CD)"
       @sort-change="(e) => changeTableSort(e, toRef(pageParams2, 'ORDER_BY'))"

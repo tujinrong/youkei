@@ -137,7 +137,7 @@
               max-height="300px"
               :row-config="{ isCurrent: true, isHover: true }"
               :data="tableData"
-              :sort-config="{ trigger: 'cell', orders: ['desc', 'asc'] }"
+              :sort-config="{ trigger: 'cell', orders: ['asc', 'desc'] }"
               :empty-render="{ name: 'NotData' }"
             >
               <vxe-column

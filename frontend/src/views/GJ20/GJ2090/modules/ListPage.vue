@@ -215,7 +215,7 @@
         :row-config="{ isCurrent: true, isHover: true }"
         :data="tableData"
         height="210px"
-        :sort-config="{ trigger: 'cell', orders: ['desc', 'asc'] }"
+        :sort-config="{ trigger: 'cell', orders: ['asc', 'desc'] }"
         :empty-render="{ name: 'NotData' }"
         @cell-dblclick="({ row }) => openGJ2092(row)"
         @sort-change="(e) => changeTableSort(e, toRef(pageParams, 'ORDER_BY'))"

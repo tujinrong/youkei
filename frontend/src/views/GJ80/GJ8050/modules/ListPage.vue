@@ -1,6 +1,11 @@
 <template>
   <div class="h-full min-h-500px flex-col-stretch gap-12px flex">
-    <a-card ref="headRef" :bordered="false" class="staticWidth">
+    <a-card
+      ref="headRef"
+      :bordered="false"
+      class="staticWidth"
+      :body-style="{ backgroundColor: 'aliceblue' }"
+    >
       <h1>（GJ8050）金融機関一覧</h1>
       <div class="self_adaption_table form mt-1">
         <div class="max-w-750px">
@@ -66,7 +71,12 @@
         <EndButton />
       </div>
     </a-card>
-    <a-card :bordered="false" ref="cardRef1" class="staticWidth flex-1">
+    <a-card
+      :bordered="false"
+      ref="cardRef1"
+      class="staticWidth flex-1"
+      :body-style="{ backgroundColor: 'aliceblue' }"
+    >
       <a-pagination
         v-model:current="pageParams.PAGE_NUM"
         v-model:page-size="pageParams.PAGE_SIZE"
@@ -84,7 +94,7 @@
         :row-config="{ isCurrent: true, isHover: true }"
         :data="bankTableData"
         height="480px"
-        :sort-config="{ trigger: 'cell', orders: ['desc', 'asc'] }"
+        :sort-config="{ trigger: 'cell', orders: ['asc', 'desc'] }"
         :empty-render="{ name: 'NotData' }"
         @cell-dblclick="({ row }) => forwardEdit1(row.BANK_CD)"
         @sort-change="(e) => changeTableSort(e, toRef(pageParams, 'ORDER_BY'))"

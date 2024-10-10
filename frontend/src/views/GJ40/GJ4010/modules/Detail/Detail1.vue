@@ -81,7 +81,7 @@
         max-height="160px"
         :row-config="{ isCurrent: true, isHover: true }"
         :data="tableData"
-        :sort-config="{ trigger: 'cell', orders: ['desc', 'asc'] }"
+        :sort-config="{ trigger: 'cell', orders: ['asc', 'desc'] }"
         :empty-render="{ name: 'NotData' }"
         @cell-click="({ row }) => changeData()"
         @sort-change="(e) => changeTableSort(e, toRef(pageParams, 'ORDER_BY'))"
