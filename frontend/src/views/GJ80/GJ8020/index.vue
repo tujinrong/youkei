@@ -72,12 +72,7 @@
               <read-only-pop
                 thWidth="200"
                 th="積立金返還人数"
-                :td="
-                  String(formData.HENKAN_NINZU).replace(
-                    /\B(?=(\d{3})+(?!\d))/g,
-                    ','
-                  )
-                "
+                :td="formatNumberWithCommas(formData.HENKAN_NINZU)"
                 after="（人）"
               />
             </a-col>
@@ -87,12 +82,7 @@
               <read-only-pop
                 thWidth="200"
                 th="積立金返還額合計"
-                :td="
-                  String(formData.HENKAN_GOKEI).replace(
-                    /\B(?=(\d{3})+(?!\d))/g,
-                    ','
-                  )
-                "
+                :td="formatNumberWithCommas(formData.HENKAN_GOKEI)"
                 after="（円）（左記項目は積立金返還処理で算定した結果を保存、表示）"
               />
             </a-col>
@@ -150,7 +140,12 @@
       <div class="py-2 my-4 flex justify-between border-t-1">
         <a-space :size="20">
           <a-button class="warning-btn" @click="save">保存</a-button>
-          <a-button type="primary" @click="cancel">キャンセル</a-button>
+          <a-button
+            type="primary"
+            @click="cancel"
+            :disabled="editkbn == EnumEditKbn.Add"
+            >キャンセル</a-button
+          >
         </a-space>
         <EndButton :editJudge="editJudge" />
       </div>
@@ -161,7 +156,7 @@
 <script setup lang="ts">
 import { Judgement } from '@/utils/judge-edited'
 import { Form, message } from 'ant-design-vue'
-import { onMounted, reactive, watch } from 'vue'
+import { onMounted, reactive, ref, watch } from 'vue'
 import { InitDetail, Save } from './service'
 import { DetailVM } from './type'
 import {
@@ -171,8 +166,13 @@ import {
   SAVE_OK_INFO,
 } from '@/constants/msg'
 import { showConfirmModal, showSaveModal } from '@/utils/modal'
-import { getDateJpText, convertToFullWidth } from '@/utils/util'
+import {
+  getDateJpText,
+  convertToFullWidth,
+  formatNumberWithCommas,
+} from '@/utils/util'
 import { nextTick } from 'process'
+import { EnumAndOr, EnumEditKbn } from '@/enum'
 
 const formData = reactive<DetailVM>({
   KI: undefined as number | undefined,
@@ -191,6 +191,7 @@ const formData = reactive<DetailVM>({
 })
 
 const editJudge = new Judgement('GJ8020')
+const editkbn = ref<EnumEditKbn>(EnumEditKbn.Add)
 
 /** ルール */
 const rules = reactive({
@@ -214,6 +215,11 @@ const { validate, clearValidate, validateInfos, resetFields } = Form.useForm(
 
 onMounted(async () => {
   const res = await InitDetail({})
+  if (res.SYORI_KI.UP_DATE) {
+    editkbn.value = EnumEditKbn.Edit
+  } else {
+    editkbn.value = EnumEditKbn.Add
+  }
   Object.assign(formData, res.SYORI_KI)
   nextTick(() => {
     editJudge.reset()
@@ -260,7 +266,7 @@ const save = async () => {
     content: SAVE_CONFIRM.Msg,
     onOk: async () => {
       try {
-        await Save({ SYORI_KI: formData })
+        await Save({ SYORI_KI: formData, EDIT_KBN: editkbn.value })
         message.success(SAVE_OK_INFO.Msg)
       } catch (error) {}
     },
@@ -271,6 +277,11 @@ const save = async () => {
 const cancel = () => {
   editJudge.judgeIsEdited(async () => {
     const res = await InitDetail({})
+    if (res.SYORI_KI.UP_DATE) {
+      editkbn.value = EnumEditKbn.Edit
+    } else {
+      editkbn.value = EnumEditKbn.Add
+    }
     Object.assign(formData, res.SYORI_KI)
     nextTick(() => {
       editJudge.reset()

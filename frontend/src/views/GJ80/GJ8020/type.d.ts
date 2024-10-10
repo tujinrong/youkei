@@ -59,4 +59,6 @@ export interface DetailVM {
   HASSEI_KAISU: number | undefined
   /** 備考 */
   BIKO: string | undefined
+  /**データ更新日 */
+  UP_DATE: Date | undefined
 }

@@ -836,8 +836,6 @@ const onChangeKofuBank = () => {
 
 /** 登録処理 */
 const save = async () => {
-  console.log(editkbn.value)
-
   await validate()
   showSaveModal({
     content: SAVE_CONFIRM.Msg,

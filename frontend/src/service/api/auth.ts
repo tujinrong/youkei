@@ -3,6 +3,8 @@ import { encryptBySHA256 } from '@/utils/encrypt/data'
 
 const servicename = 'GJ0000'
 
+const servicename2 = 'GJ0010'
+
 /** ログイン処理 */
 export const Login = (
   data: Api.Auth.LoginRequest
@@ -16,5 +18,5 @@ export const Login = (
 
 export const fetchGetUserInfo = (): Promise<Api.Auth.UserInfo> => {
   const methodname = 'GetUserInfo'
-  return api(servicename, methodname)
+  return api(servicename2, methodname)
 }

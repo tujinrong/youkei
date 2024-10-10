@@ -9,7 +9,7 @@
 import { api } from '@/service/request/common-service'
 import { InitResponse } from './type'
 
-const servicename = 'GJ0000'
+const servicename = 'GJ0020'
 
 /** 取得処理(ホーム画面) */
 export const Init = (): Promise<InitResponse> => {

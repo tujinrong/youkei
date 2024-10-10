@@ -200,12 +200,7 @@
               </tr>
               <tr>
                 <td>
-                  {{
-                    String(formData.TUMITATE_KIN || 1111111).replace(
-                      /\B(?=(\d{3})+(?!\d))/g,
-                      ','
-                    )
-                  }}
+                  {{ formatNumberWithCommas(formData.TUMITATE_KIN | 1111111) }}
                 </td>
                 <td>{{ formData.TESURYO || 0 }}</td>
                 <td>{{ formData.SEIKYU_KIN || 0 }}</td>
@@ -258,7 +253,7 @@ import { computed, nextTick, reactive, watch, ref } from 'vue'
 import { EnumEditKbn, PageStatus } from '@/enum'
 import { DetailVM } from '../../type'
 import { useRoute, useRouter } from 'vue-router'
-import { mathNumber } from '@/utils/util'
+import { formatNumberWithCommas, mathNumber } from '@/utils/util'
 import DateJp from '@/components/Selector/DateJp/index.vue'
 import Detail2 from '@/views/GJ20/GJ2090/modules/Detail/Detail2.vue'
 

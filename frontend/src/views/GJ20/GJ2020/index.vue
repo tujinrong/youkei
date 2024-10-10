@@ -73,7 +73,7 @@
                       class="w-15"
                     ></a-input-number>
                     <!-- <a-input v-model:value="formData.SEIKYU_KAISU" class="w-14" /> -->
-                    <span>(入力&表示)</span>
+                    <span>(入力＆表示)</span>
                   </div>
                 </a-form-item>
               </td>
@@ -200,7 +200,7 @@
       >
         <vxe-column
           header-align="center"
-          align="center"
+          align="right"
           field="KI"
           title="対象期"
           width="80"
@@ -209,7 +209,7 @@
         </vxe-column>
         <vxe-column
           header-align="center"
-          align="center"
+          align="right"
           field="SEIKYU_KAISU"
           title="回数"
           width="80"
@@ -227,6 +227,7 @@
         </vxe-column>
         <vxe-column
           header-align="center"
+          align="center"
           field="KEIYAKU_HENKO_KBN"
           title="計算区分"
           min-width="100"

@@ -47,12 +47,12 @@ Namespace JBD.GJS.Service.GJ8020
         ''' <summary>
         ''' 積立金返還人数
         ''' </summary>
-        Public Property HENKAN_NINZU As Integer?
+        Public Property HENKAN_NINZU As Integer? = Nothing
 
         ''' <summary>
         ''' 積立金返還額合計
         ''' </summary>
-        Public Property HENKAN_GOKEI As Integer?
+        Public Property HENKAN_GOKEI As Integer? = Nothing
 
         ''' <summary>
         ''' 前期積立金返還率

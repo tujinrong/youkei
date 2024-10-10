@@ -382,6 +382,15 @@ export const mathNumber = {
   parser: (value) => value.replace(/(,*)/g, ''),
 }
 
+export function formatNumberWithCommas(
+  number: number | string | null | undefined
+): string {
+  if (number === null || number === undefined) {
+    return ''
+  }
+  return String(number).replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+}
+
 /**カタカナは全角を半角に変換し、平仮名を半角カタカナに変換し、制限された文字のみ許可*/
 export function convertKanaToHalfWidth(input: string): string {
   const hiragana =
