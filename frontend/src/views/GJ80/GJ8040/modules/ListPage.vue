@@ -61,6 +61,7 @@
         </vxe-column>
         <vxe-column
           header-align="center"
+          align="center"
           field="SIYO_KBN_NAME"
           title="使用区分"
           width="120"
