@@ -35,7 +35,7 @@ Namespace JBD.GJS.Service.GJ8010
     ''' 検索処理_一覧画面処理処理(成功)
     ''' </summary>
     Public Class SearchResponse
-        Inherits DaResponseBase
+        Inherits CmSearchResponseBase
 
         ''' <summary>
         ''' 種類区分コード

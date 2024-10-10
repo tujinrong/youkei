@@ -21,7 +21,7 @@ Namespace JBD.GJS.Service.GJ8010
     ''' 検索処理_一覧画面処理
     ''' </summary>
     Public Class SearchRequest
-        Inherits DaRequestBase
+        Inherits CmSearchRequestBase
 
         ''' <summary>
         ''' 種類区分コード

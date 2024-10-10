@@ -71,13 +71,14 @@ Namespace JBD.GJS.Service.GJ8010
                     '-------------------------------------------------------------
 
                     '-------------------------------------------------------------
-                    '4.ビジネスロジック処理
+                    '4.ビジネスロジック処理req.SYURUI_KBN
                     '-------------------------------------------------------------
                     '検索結果出力用ＳＱＬ作成
-                    Dim sql = FrmService.f_Search_SQLMakeCode(0, req.SYURUI_KBN)
+                    Dim sql = FrmService.f_Search_SQLMakeCode(0, req.SYURUI_KBN, req.ORDER_BY)
+                    Dim rSql = FrmService.f_Search_SQLMakePage(req.PAGE_SIZE,req.PAGE_NUM, sql)
 
                     'データSelect 
-                    Dim ds = FrmService.f_Select_ODP(db, sql)
+                    Dim ds = FrmService.f_Select_ODP(db, rSql)
 
                     '-------------------------------------------------------------
                     '5.データ加工処理

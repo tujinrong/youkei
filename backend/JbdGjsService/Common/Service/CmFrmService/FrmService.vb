@@ -165,7 +165,7 @@ Namespace JBD.GJS.Service
     ''' </param>
     ''' <returns></returns>
     ''' <remarks></remarks>
-    Public Shared Function f_Search_SQLMakeCode(iKbn As Integer, iSelKbn As Integer?) As String
+    Public Shared Function f_Search_SQLMakeCode(iKbn As Integer, iSelKbn As Integer?, iOrder As Integer) As String
         Dim wkSB As New StringBuilder
         Dim wkANDorOR As String = String.Empty
         Dim wkWhere As New StringBuilder
@@ -208,7 +208,20 @@ Namespace JBD.GJS.Service
             Case 0, 1
                 '検索
                 wkSB.AppendLine(" ORDER BY ")
-                wkSB.AppendLine(" T.MEISYO_CD ")
+                Dim wkOrderby = " T.MEISYO_CD "
+                Select Case iOrder
+                    Case -1
+                        wkOrderby = "  T.MEISYO_CD DESC "
+                    Case 2
+                        wkOrderby = " T.MEISYO  ASC "
+                    Case -2
+                        wkOrderby = " T.MEISYO  DESC "
+                    Case 3
+                        wkOrderby = " T.RYAKUSYO  ASC "
+                    Case -3
+                        wkOrderby = " T.RYAKUSYO  DESC "
+                End Select
+                wkSB.AppendLine(wkOrderby)
         End Select
 
         Return wkSB.ToString
