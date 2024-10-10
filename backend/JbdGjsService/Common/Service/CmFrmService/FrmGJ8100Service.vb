@@ -34,8 +34,24 @@ Namespace JBD.GJS.Service.GJ8100
 
         '適用開始日を基準に降順
         sSql += "ORDER BY" & vbCrLf
-        sSql += "TAX.TAX_DATE_FROM" & vbCrLf
-        sSql += "DESC" & vbCrLf
+
+        Dim wkOrderby = "  TAX.TAX_DATE_FROM DESC "
+        Select Case req.ORDER_BY
+            Case 1
+                wkOrderby = "  TAX.TAX_DATE_FROM ASC "
+            Case -1
+                wkOrderby = "  TAX.TAX_DATE_FROM DESC "
+            Case 2
+                wkOrderby = " TAX.TAX_DATE_TO ASC "
+            Case -2
+                wkOrderby = " TAX.TAX_DATE_TO DESC  "
+            Case 3
+                wkOrderby = " TAX.TAX_RITU  ASC "
+            Case -3
+                wkOrderby = " TAX.TAX_RITU  DESC "
+        End Select
+
+        sSql += wkOrderby & vbCrLf
 
         Return sSql
 

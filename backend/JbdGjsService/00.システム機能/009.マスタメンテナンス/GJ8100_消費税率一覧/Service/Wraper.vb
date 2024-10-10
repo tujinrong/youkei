@@ -20,6 +20,8 @@ Namespace JBD.GJS.Service.GJ8100
         ''' </summary>
         Public Shared Function SearchResponse(dt As DataTable) As SearchResponse
             Dim res = New SearchResponse()
+            res.TOTAL_ROW_COUNT = DaConvertUtil.Cint(DaConvertUtil.CStr(dt.Rows(0)("RCNT")))
+            res.TOTAL_PAGE_COUNT = DaConvertUtil.Cint(DaConvertUtil.CStr(dt.Rows(0)("PCNT")))
             'データ結果判定
             res.KEKKA_LIST = New List(Of SearchRowVM)
             ' dt をループし、List にデータを追加します。

@@ -17,7 +17,7 @@ Namespace JBD.GJS.Service.GJ8040
         Inherits CmServiceBase
 
         <DisplayName("検索処理_一覧画面処理")>
-        Public Shared Function Search(req As DaRequestBase) As SearchResponse
+        Public Shared Function Search(req As CmSearchRequestBase) As SearchResponse
             Return Nolock(req,
                 Function(db)
 
@@ -37,7 +37,8 @@ Namespace JBD.GJS.Service.GJ8040
                     '4.ビジネスロジック処理
                     '-------------------------------------------------------------
                     '検索結果出力用ＳＱＬ作成
-                    Dim sql = FrmGJ8040Service.f_Search_SQLMake()
+                    Dim sql = FrmGJ8040Service.f_Search_SQLMake(req)
+                    Dim rSql = FrmService.f_Search_SQLMakePage(req.PAGE_SIZE,req.PAGE_NUM, sql)
 
                     'データSelect 
                     Dim ds = FrmService.f_Select_ODP(db, sql)

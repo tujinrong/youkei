@@ -7,7 +7,6 @@
 ' 変更履歴　:
 ' *******************************************************************
 
-Imports OracleInternal.Json
 
 Namespace JBD.GJS.Service.GJ8040
 
@@ -20,7 +19,7 @@ Namespace JBD.GJS.Service.GJ8040
         '引数            :なし
         '戻り値          :Boolean(正常True/エラーFalse)
         '------------------------------------------------------------------
-        Public Shared Function f_Search_SQLMake() As String
+        Public Shared Function f_Search_SQLMake(req As CmSearchRequestBase) As String
             Dim sSql As String = String.Empty
 
             '==SQL作成====================
@@ -28,7 +27,7 @@ Namespace JBD.GJS.Service.GJ8040
             sSql = " SELECT " & vbCrLf
             sSql += "  USR.USER_ID USER_ID, USR.USER_NAME USER_NAME," & vbCrLf
             sSql += "  CD6.MEISYO SIYO_KBN_NAME," & vbCrLf
-            sSql += "  TO_CHAR(USR.TEISI_DATE,'EEYY/MM/DD','NLS_CALENDAR=''Japanese Imperial''') TEISI_DATE," & vbCrLf
+            sSql += "  USR.TEISI_DATE TEISI_DATE," & vbCrLf
             sSql += "  USR.TEISI_RIYU TEISI_RIYU" & vbCrLf
             sSql += " FROM" & vbCrLf
             sSql += "  TM_USER USR," & vbCrLf
@@ -36,7 +35,30 @@ Namespace JBD.GJS.Service.GJ8040
             sSql += " WHERE" & vbCrLf
             sSql += "  USR.SIYO_KBN = CD6.MEISYO_CD(+)" & vbCrLf
             sSql += "ORDER BY" & vbCrLf
-            sSql += "  USR.USER_ID" & vbCrLf
+
+            Dim wkOrderby = "  USR.USER_ID "
+            Select Case req.ORDER_BY
+                Case -1
+                    wkOrderby = "  USR.USER_ID DESC "
+                Case 2
+                    wkOrderby = " USR.USER_NAME ASC "
+                Case -2
+                    wkOrderby = " USR.USER_NAME DESC "
+                Case 3
+                    wkOrderby = " CD6.MEISYO  ASC "
+                Case -3
+                    wkOrderby = " CD6.MEISYO  DESC "
+                Case 4
+                    wkOrderby = "  USR.TEISI_DATE  ASC "
+                Case -4
+                    wkOrderby = "  USR.TEISI_DATE  DESC "
+                Case 5
+                    wkOrderby = "  USR.TEISI_RIYU  ASC "
+                Case -5
+                    wkOrderby = "  USR.TEISI_RIYU  DESC "
+            End Select
+
+            sSql += wkOrderby & vbCrLf
 
             Return sSql
         End Function
