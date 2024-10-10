@@ -38,9 +38,10 @@ Namespace JBD.GJS.Service.GJ2010
                     '-------------------------------------------------------------
                     '検索結果出力用ＳＱＬ作成
                     Dim sql = FrmGJ2010Service.f_Search_SQLMake(0,req)
+                    Dim rSql = FrmService.f_Search_SQLMakePage(req.PAGE_SIZE,req.PAGE_NUM, sql)
 
                     'データSelect 
-                    Dim ds = FrmService.f_Select_ODP(db, sql)
+                    Dim ds = FrmService.f_Select_ODP(db, rSql)
 
                     '-------------------------------------------------------------
                     '5.データ加工処理
