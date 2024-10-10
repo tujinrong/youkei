@@ -340,6 +340,7 @@ async function forwardEdit2(BANK_CD, SITEN_CD) {
 // クリア支店
 async function reset2() {
   Object.assign(searchParams2, createDefaultParams2())
+  searchParams2.BANK_CD = props.bankcd
   xTableRef2.value?.clearSort()
   clear2()
 }
