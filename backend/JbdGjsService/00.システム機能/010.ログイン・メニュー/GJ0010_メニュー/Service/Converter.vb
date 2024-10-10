@@ -1,32 +1,19 @@
 ﻿' *******************************************************************
 ' 業務名称　: 互助事業システム
-' 機能概要　: ログイン
+' 機能概要　: メニュー
 ' 　　　　　　DB項目から画面項目に変換
 ' 作成日　　: 2024.07.21
 ' 作成者　　: 宋 峰
 ' 変更履歴　:
 ' *******************************************************************
 
-Namespace JBD.GJS.Service.GJ0000
+Namespace JBD.GJS.Service.GJ0010
 
     ''' <summary>
-    ''' ログイン
+    ''' メニュー
     ''' </summary>
     Public Class Converter
         Inherits CmConerterBase
-        ''' <summary>
-        ''' ログイン
-        ''' </summary>
-        Public Shared Function GetDto(req As LoginRequest) As DataTable
-            Dim dt As DataTable = New DataTable
-            dt.Columns.Add("USER_ID", GetType(String))
-            dt.Columns.Add("PASS", GetType(String))
-            Dim dr As DataRow = dt.NewRow()
-            dr("USER_ID") = req.USER_ID        'ユーザーID
-            dr("PASS") = req.PASS              'パスワード
-            dt.Rows.Add(dr)                                
-            Return dt
-        End Function
 
         ''' <summary>
         ''' ユーザー情報を取得する

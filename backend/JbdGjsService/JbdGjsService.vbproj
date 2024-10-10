@@ -59,4 +59,9 @@
   <ItemGroup>
     <ProjectReference Include="..\JbdGjsCommon\JbdGjsCommon.vbproj" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="00.システム機能\002.生産者積立金の算定・請求・納付\" />
+    <Folder Include="00.システム機能\010.ログイン・メニュー\GJ0010_メニュー\" />
+    <Folder Include="00.システム機能\010.ログイン・メニュー\GJ0020_契約情報\" />
+  </ItemGroup>
 </Project>
