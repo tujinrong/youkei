@@ -163,7 +163,7 @@ Namespace JBD.GJS.Service.GJ8050
             If wKbn.BANK_CD <> "" Then
                 If pJoken = "" Then
                 Else
-                    pJoken += wkANDorOR & vbCrLf
+                    pJoken += " AND " & vbCrLf
                 End If
                 pJoken += "(BANK_CD  = '" & wKbn.BANK_CD & "')" & vbCrLf
             End If

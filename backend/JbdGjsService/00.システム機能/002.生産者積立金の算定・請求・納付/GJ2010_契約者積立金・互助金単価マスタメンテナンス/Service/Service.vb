@@ -1,23 +1,23 @@
 ﻿' *******************************************************************
 ' 業務名称　: 互助事業システム
-' 機能概要　: ログイン
-'            サービス処理
-' 作成日　　: 2024.07.21
+' 機能概要　: 契約者積立金・互助金単価マスタ一覧
+'             サービス処理
+' 作成日　　: 2024.10.09
 ' 作成者　　: 宋 峰
 ' 変更履歴　:
 ' *******************************************************************
 
-Namespace JBD.GJS.Service.GJ0000
-    
+Namespace JBD.GJS.Service.GJ2010
+
     ''' <summary>
-    ''' ログイン
+    ''' 検索処理_一覧画面処理
     ''' </summary>
-    <DisplayName("ログイン")>
+    <DisplayName("検索処理_一覧画面処理")>
     Public Class Service
         Inherits CmServiceBase
 
-        <DisplayName("ログイン処理")>
-        Public Shared Function Login(req As LoginRequest) As LoginResponse
+        <DisplayName("検索処理_一覧画面処理")>
+        Public Shared Function Search(req As SearchRequest) As SearchResponse
             Return Nolock(req,
                 Function(db)
 
@@ -36,28 +36,20 @@ Namespace JBD.GJS.Service.GJ0000
                     '-------------------------------------------------------------
                     '4.ビジネスロジック処理
                     '-------------------------------------------------------------
-                    '検索結果出力用ＳＱＬ作成 
-                    Dim sql = FrmGJ0000Service.f_Search_SQLMake(req.USER_ID)
+                    '検索結果出力用ＳＱＬ作成
+                    Dim sql = FrmGJ2010Service.f_Search_SQLMake(0)
 
                     'データSelect 
                     Dim ds = FrmService.f_Select_ODP(db, sql)
-                    Dim dt = ds.Tables(0)
-
-                    'データ結果判定
-                    If dt.Rows.Count > 0 Then
-                        Dim ret = FrmGJ0000Service.f_User_Check(dt, req.PASS, req.USER_ID)
-                        If Not String.IsNullOrEmpty(ret) Then
-                            Return New LoginResponse(ret)
-                        End If
-                    Else
-                        'データ存在なし
-                        Return New LoginResponse("ユーザーＩＤ、パスワードが正しくありません。")
-                    End If
 
                     '-------------------------------------------------------------
                     '5.データ加工処理
                     '-------------------------------------------------------------
-                    Dim res = Wraper.GetLoginResponse(dt)
+                    Dim dt = ds.Tables(0)
+                    If dt.Rows.Count = 0 Then
+                        Return New SearchResponse(EnumServiceResult.ServiceAlert2, "指定された条件に一致するデータは存在しません。")
+                    End If
+                    Dim res = Wraper.SearchResponse(dt)
 
                     '-------------------------------------------------------------
                     '6.正常返し
@@ -67,5 +59,6 @@ Namespace JBD.GJS.Service.GJ0000
                 End Function)
 
         End Function
+
     End Class
 End Namespace
