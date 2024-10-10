@@ -90,14 +90,20 @@ Namespace JBD.GJS.Service.GJ8020
                     Dim dt = ds.Tables(0)
 
                     ''データの独占性
-                    If dt.Rows.Count = 0 Then
-                        req.EDIT_KBN = EnumEditKbn.Add
+                    If req.EDIT_KBN = EnumEditKbn.Add Then
+                        If dt.Rows.Count > 0 Then
+                            Return New DaResponseBase("既に登録されています。")
+                        End If
                     Else
+                        If dt.Rows.Count = 0 Then
+                            Return New DaResponseBase("既に削除されています。")
+                        End If
+
                         If CDate(dt.Rows(0)("UP_DATE")) > req.SYORI_KI.UP_DATE Then
                             Return New DaResponseBase("データを更新できません。他のユーザーによって変更された可能性があります。")
                         End If
-                        req.EDIT_KBN = EnumEditKbn.Edit
                     End If
+
 
                     '保存処理
                     Dim res = FrmGJ8020Service.f_Data_Update(db, req)

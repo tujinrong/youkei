@@ -18,7 +18,7 @@
                   name="KI"
                   v-model:value="formData.KI"
                   :max="99"
-                  :min="1"
+                  :min="0"
                   :maxlength="2"
                 >
                 </a-input-number>
@@ -122,7 +122,7 @@
                 v-model:value="formData.HASSEI_KAISU"
                 class="w-14"
                 :max="99"
-                :min="1"
+                :min="0"
                 :maxlength="2"
               >
               </a-input-number>
@@ -188,7 +188,6 @@ const formData = reactive<DetailVM>({
   NOFU_KIGEN: '',
   HASSEI_KAISU: undefined as number | undefined,
   BIKO: undefined as string | undefined,
-  UP_DATE: undefined as Date | undefined,
 })
 
 const editJudge = new Judgement('GJ8020')
@@ -215,7 +214,17 @@ const { validate, clearValidate, validateInfos, resetFields } = Form.useForm(
 )
 
 onMounted(async () => {
-  await handleInitDetail()
+  const res = await InitDetail({})
+  if (res.SYORI_KI.UP_DATE) {
+    editkbn.value = EnumEditKbn.Edit
+  } else {
+    editkbn.value = EnumEditKbn.Add
+  }
+  Object.assign(formData, res.SYORI_KI)
+  nextTick(() => {
+    editJudge.reset()
+    clearValidate()
+  })
 })
 
 //--------------------------------------------------------------------------
@@ -243,19 +252,12 @@ watch(
 )
 
 /** 初期化処理 */
-const handleInitDetail = async () => {
-  const res = await InitDetail({})
-  if (res.SYORI_KI.UP_DATE) {
-    editkbn.value = EnumEditKbn.Edit
-  } else {
-    editkbn.value = EnumEditKbn.Add
-  }
-  Object.assign(formData, res.SYORI_KI)
-  nextTick(() => {
-    editJudge.reset()
-    clearValidate()
-  })
-}
+// const init = async () => {
+//   nextTick(() => {
+//     editJudge.reset()
+//     clearValidate()
+//   })
+// }
 
 /** 登録処理 */
 const save = async () => {
@@ -266,9 +268,7 @@ const save = async () => {
       try {
         await Save({ SYORI_KI: formData, EDIT_KBN: editkbn.value })
         message.success(SAVE_OK_INFO.Msg)
-      } catch (error) {
-        await handleInitDetail()
-      }
+      } catch (error) {}
     },
   })
 }
@@ -276,7 +276,17 @@ const save = async () => {
 /** キャンセル処理 */
 const cancel = () => {
   editJudge.judgeIsEdited(async () => {
-    await handleInitDetail()
+    const res = await InitDetail({})
+    if (res.SYORI_KI.UP_DATE) {
+      editkbn.value = EnumEditKbn.Edit
+    } else {
+      editkbn.value = EnumEditKbn.Add
+    }
+    Object.assign(formData, res.SYORI_KI)
+    nextTick(() => {
+      editJudge.reset()
+      clearValidate()
+    })
   })
 }
 </script>

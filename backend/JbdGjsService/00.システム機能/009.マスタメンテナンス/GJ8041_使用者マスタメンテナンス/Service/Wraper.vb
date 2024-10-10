@@ -43,7 +43,9 @@ Namespace JBD.GJS.Service.GJ8041
                         item.USER.PASS_KIGEN_DATE = DaConvertUtil.CDate(row("PASS_KIGEN_DATE"))
                         item.USER.PASS_UP_DATE = DaConvertUtil.CDate(row("PASS_UP_DATE"))
                         item.USER.SIYO_KBN = DaConvertUtil.CInt(WordHenkan("N", "Z", row("SIYO_KBN")))
-                        item.USER.TEISI_DATE = DaConvertUtil.CDate(row("TEISI_DATE"))
+                        If Not IsDBNull(row("TEISI_DATE")) AndAlso Not IsNothing(row("TEISI_DATE")) Then
+                            item.USER.TEISI_DATE = DaConvertUtil.CDate(row("TEISI_DATE"))
+                        End If
                         item.USER.TEISI_RIYU = DaConvertUtil.CStr(row("TEISI_RIYU"))
                         item.USER.UP_DATE = DaConvertUtil.CDate(row("UP_DATE"))
                     End If
