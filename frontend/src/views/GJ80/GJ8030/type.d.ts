@@ -51,7 +51,7 @@ export interface SearchDetailResponse extends DaResponseBase {
 /** 日本養鶏協会マスタメンテナンス情報 */
 export interface DetailVM {
   /** 協会区分 */
-  KYOKAI_KBN: number
+  KYOKAI_KBN: number | undefined
   /** 協会名称 */
   KYOKAI_NAME: string
   /** 支援事業名 */
@@ -95,7 +95,7 @@ export interface DetailVM {
   /** 振込　口座番号 */
   FURI_KOZA_NO: string
   /** 振込　種別コード */
-  FURI_SYUBETU: number
+  FURI_SYUBETU: number | undefined
   /** 振込　口座名義人（カナ） */
   FURI_KOZA_MEIGI_KANA: string
   /** 振込　口座名義人（漢字） */

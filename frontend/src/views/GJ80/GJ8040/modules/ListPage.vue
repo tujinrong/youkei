@@ -22,7 +22,18 @@
       ref="cardRef"
       :body-style="{ backgroundColor: 'aliceblue' }"
     >
+      <a-pagination
+        v-model:current="pageParams.PAGE_NUM"
+        v-model:page-size="pageParams.PAGE_SIZE"
+        :total="totalCount"
+        :page-size-options="['10', '25', '50', '100']"
+        :show-total="(total) => `抽出件数： ${total} 件`"
+        show-less-items
+        show-size-changer
+        class="m-b-1 text-end"
+      />
       <vxe-table
+        ref="xTableRef"
         class="h-full"
         :column-config="{ resizable: true }"
         :row-config="{ isCurrent: true, isHover: true }"
@@ -93,7 +104,7 @@
     v-model:visible="editVisible"
     :editkbn="editkbn"
     :user-data="userData"
-    @getTableData="init"
+    @getTableData="handleSearch"
   />
 </template>
 
@@ -105,34 +116,47 @@ import { EnumEditKbn, PageStatus } from '@/enum'
 import { changeTableSort } from '@/utils/util'
 import EditPage from './EditPage.vue'
 import { Search } from '../service'
+import { VxeTableInstance } from 'vxe-pc-ui'
+import useSearch from '@/hooks/useSearch'
 
 //--------------------------------------------------------------------------
 //データ定義
 //--------------------------------------------------------------------------
 const cardRef = ref()
 const { height } = useElementSize(cardRef)
-const tableData = ref<SearchRowVM[]>()
+const tableData = ref<SearchRowVM[]>([])
 const editVisible = ref(false)
 const editkbn = ref<EnumEditKbn>(EnumEditKbn.Add)
+
 const userData = ref<SearchRowVM>()
-const pageParams = reactive({
-  ORDER_BY: 0,
-})
+const xTableRef = ref<VxeTableInstance>()
+
 //--------------------------------------------------------------------------
 //監視定義
 //--------------------------------------------------------------------------
 
-onMounted(() => {
-  init()
+onMounted(async () => {
+  await handleSearch()
 })
 //--------------------------------------------------------------------------
 //メソッド
 //--------------------------------------------------------------------------
 
-const init = async () => {
-  const res = await Search()
-  tableData.value = res.KEKKA_LIST
+//検索処理
+const { pageParams, totalCount, searchData, clear } = useSearch({
+  service: Search,
+  source: tableData,
+  params: null,
+})
+
+const handleSearch = async () => {
+  tableData.value = []
+  const res = await searchData()
+  if (xTableRef.value && tableData.value.length > 0) {
+    xTableRef.value.setCurrentRow(tableData.value[0])
+  }
 }
+
 function goForward(status: PageStatus, row?: any) {
   editVisible.value = true
   if (status === PageStatus.Edit) {

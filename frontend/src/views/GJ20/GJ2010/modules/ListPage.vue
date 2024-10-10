@@ -19,7 +19,6 @@
     <a-card
       :bordered="false"
       class="flex-1 staticWidth"
-      ref="xTableRef"
       :body-style="{ backgroundColor: 'aliceblue' }"
     >
       <a-pagination
@@ -33,6 +32,7 @@
         class="m-b-1 text-end"
       />
       <vxe-table
+        ref="xTableRef"
         class="h-full"
         align="center"
         :column-config="{ resizable: true }"

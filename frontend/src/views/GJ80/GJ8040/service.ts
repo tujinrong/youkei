@@ -20,9 +20,11 @@ const servicename = 'GJ8040'
 const servicename2 = 'GJ8041'
 
 /** 初期化処理(一覧画面) */
-export const Search = (): Promise<SearchResponse> => {
+export const Search = (
+  params: CmSearchRequestBase
+): Promise<SearchResponse> => {
   const methodname = 'Search'
-  return api(servicename, methodname)
+  return api(servicename, methodname, params, undefined, { loading: true })
 }
 
 /** 検索処理(詳細画面) */

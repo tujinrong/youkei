@@ -467,20 +467,20 @@ const formData = reactive<DetailVM>({
   TOUROKU_NO: '',
   FURI_BANK_CD: '',
   FURI_BANK_SITEN_CD: '',
-  FURI_KOZA_SYUBETU: 0,
+  FURI_KOZA_SYUBETU: undefined as number | undefined,
   FURI_KOZA_NO: '',
-  FURI_SYUBETU: 0,
+  FURI_SYUBETU: undefined as number | undefined,
   FURI_KOZA_MEIGI_KANA: '',
   FURI_KOZA_MEIGI: '',
   KOFU_BANK_CD: '',
   KOFU_BANK_SITEN_CD: '',
-  KOFU_KOZA_SYUBETU: 0,
+  KOFU_KOZA_SYUBETU: undefined as number | undefined,
   KOFU_KOZA_NO: '',
-  KOFU_SYUBETU: 0,
-  KOFU_CD_KBN: 0,
-  KOFU_KAISYA_CD: 0,
+  KOFU_SYUBETU: undefined as number | undefined,
+  KOFU_CD_KBN: undefined as number | undefined,
+  KOFU_KAISYA_CD: undefined as number | undefined,
   KOFU_KAISYA_NAME: '',
-  KYOKAI_KBN: 0,
+  KYOKAI_KBN: undefined as number | undefined,
 })
 
 /**振込口座プルダウンリスト */
@@ -840,17 +840,14 @@ const handleSearchDetail = async () => {
 /** 登録処理 */
 const save = async () => {
   await validate()
-  let errorMessage = ''
   showSaveModal({
     content: SAVE_CONFIRM.Msg,
     onOk: async () => {
       try {
-        const res = await Save({ KYOKAI: formData, EDIT_KBN: editkbn.value })
-        errorMessage = res.MESSAGE
+        await Save({ KYOKAI: formData, EDIT_KBN: editkbn.value })
         message.success(SAVE_OK_INFO.Msg)
       } catch (error) {
         await handleSearchDetail()
-        console.log(editkbn.value)
       }
     },
   })

@@ -36,7 +36,7 @@ export interface SaveRequest extends DaRequestBase {
 //-------------------------------------------------------------------
 
 /**検索処理(一覧画面) */
-export interface SearchResponse extends DaResponseBase {
+export interface SearchResponse extends CmSearchResponseBase {
   /**ユーザー情報リスト */
   KEKKA_LIST: SearchRowVM[]
 }
