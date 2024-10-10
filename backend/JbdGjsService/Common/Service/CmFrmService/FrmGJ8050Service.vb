@@ -7,6 +7,8 @@
 ' 変更履歴　:
 ' *******************************************************************
 
+Imports OracleInternal.Json
+
 Namespace JBD.GJS.Service.GJ8050
 
     Public Class FrmGJ8050Service
@@ -80,8 +82,7 @@ Namespace JBD.GJS.Service.GJ8050
             End If
 
             wSql += "ORDER BY" & vbCrLf
-
-            wkOrderby = "  BNK.BANK_CD "
+wkOrderby = "  BNK.BANK_CD "
             Dim wkOrderbyFlg = "  ASC " 
             Select Case True
                 Case wKbn.ORDER_BY = 2 Or wKbn.ORDER_BY = -2 
@@ -91,11 +92,10 @@ Namespace JBD.GJS.Service.GJ8050
             End Select
 
             If wKbn.ORDER_BY < 0 Then
-                    wkOrderbyFlg = "  DESC " 
-            End If
-
-            Dim wOrder = wkOrderby  &  wkOrderbyFlg
-            If wKbn.ORDER_BY = 2 OrElse wKbn.ORDER_BY = -2 OrElse wKbn.ORDER_BY = 3 OrElse wKbn.ORDER_BY = -3 
+                    wkOrderbyFlg = "  DESC "
+End If
+Dim wOrder = wkOrderby  &  wkOrderbyFlg
+If wKbn.ORDER_BY = 2 OrElse wKbn.ORDER_BY = -2 OrElse wKbn.ORDER_BY = 3 OrElse wKbn.ORDER_BY = -3 
                 wOrder = " UTL_I18N.TRANSLITERATE(case when  "  & wkOrderby  &  " is null then '0' else TO_MULTI_BYTE("  & wkOrderby  &  ") end, 'hwkatakana_fwkatakana')  "   & wkOrderbyFlg 
             End If
             wSql += wOrder & vbCrLf
@@ -144,62 +144,70 @@ Namespace JBD.GJS.Service.GJ8050
             Dim wSql As String = String.Empty
             Dim wkOrderby As String = String.Empty
             Dim pJoken As String = String.Empty
-
+            Dim strW1 As String = String.Empty
+            Dim strW2 As String = String.Empty
             'WHERE句の AND条件、OR条件の判定
             Select Case wKbn.SEARCH_METHOD
                 Case EnumAndOr.AndCode
                     '検索方法で[すべてを含む]を選択
-                    wkANDorOR = " AND "
+                    strW2 = " AND "
                 Case EnumAndOr.OrCode
                     '検索方法で[いずれかを含む]を選択
-                    wkANDorOR = " OR "
+                    strW2 = " OR "
                 Case Else
-                    wkANDorOR = " AND "
+                    strW2 = " AND "
             End Select
-
-            pJoken = ""
-
-            '支店・支所
-            If wKbn.SITEN_CD <> "" Then
-                If pJoken = "" Then
-                Else
-                    pJoken += wkANDorOR & vbCrLf
-                End If
-                pJoken += "(STN.SITEN_CD LIKE '" & wKbn.SITEN_CD & "%')" & vbCrLf
-            End If
-
-            '支店・支所名(カナ)
-            If wKbn.SITEN_KANA <> "" Then
-                If pJoken = "" Then
-                Else
-                    pJoken += wkANDorOR & vbCrLf
-                End If
-                pJoken += "(STN.SITEN_KANA LIKE '" & wKbn.SITEN_KANA & "%')" & vbCrLf
-            End If
-
-            '支店・支所名(漢字)
-            If wKbn.SITEN_NAME <> "" Then
-                If pJoken = "" Then
-                Else
-                    pJoken += wkANDorOR & vbCrLf
-                End If
-                pJoken += "(STN.SITEN_NAME LIKE '" & wKbn.SITEN_NAME & "%')" & vbCrLf
-            End If
 
             '==SQL作成====================
             'SQL作成
+            '検索
             wSql = " SELECT " & vbCrLf
             wSql += "  STN.BANK_CD BANK_CD," & vbCrLf
             wSql += "  STN.SITEN_CD," & vbCrLf
             wSql += "  STN.SITEN_KANA," & vbCrLf
             wSql += "  STN.SITEN_NAME" & vbCrLf
             wSql += " FROM" & vbCrLf
-            wSql += "  TM_SITEN STN WHERE BANK_CD  = '" & wKbn.BANK_CD & "' " & vbCrLf
+            wSql += "  TM_SITEN STN" & vbCrLf
+            wSql += " WHERE" & vbCrLf
 
+            '支店・支所
+            If wKbn.SITEN_CD <> "" Then
+                If strW1 = "" Then
+                Else
+                    strW1 += strW2 & vbCrLf
+                End If
+                strW1 += "(STN.SITEN_CD LIKE '" & wKbn.SITEN_CD & "%')" & vbCrLf
+            End If
+
+            '支店・支所名(カナ)
+            If wKbn.SITEN_KANA <> "" Then
+                If strW1 = "" Then
+                Else
+                    strW1 += strW2 & vbCrLf
+                End If
+                strW1 += "(STN.SITEN_KANA LIKE '" & wKbn.SITEN_KANA & "%')" & vbCrLf
+            End If
+
+            '支店・支所名(漢字)
+            If wKbn.SITEN_NAME <> "" Then
+                If strW1 = "" Then
+                Else
+                    strW1 += strW2 & vbCrLf
+                End If
+                strW1 += "(STN.SITEN_NAME LIKE '" & wKbn.SITEN_NAME & "%')" & vbCrLf
+            End If
+
+            '条件結合
+            pJoken = " (STN.BANK_CD = " & wKbn.BANK_CD & ")" & vbCrLf
+            If strW1 = "" Then
+            Else
+                pJoken += " AND (" & strW1 & ")" & vbCrLf
+            End If
 
             If pJoken = "" Then
+                wSql += " (STN.BANK_CD = " & wKbn.BANK_CD & ")" & vbCrLf
             Else
-                wSql += " AND (" & pJoken & ")" & vbCrLf
+                wSql += pJoken
             End If
 
             wSql += "ORDER BY" & vbCrLf
@@ -238,9 +246,9 @@ Namespace JBD.GJS.Service.GJ8050
         '戻り値          :Sql String
         '------------------------------------------------------------------
         Public Shared Function f_Search_SQLMakePage2(psize As Integer, pnum As Integer,  sql As String) As String
-            '==SQL作成====================
-            Dim wSql = ""
-            wSql &= "SELECT * "
+'==SQL作成====================
+Dim wSql = ""
+wSql &= "SELECT * "
             wSql &= "  FROM ( "
             wSql &= " SELECT T1.BANK_CD,                              "
             wSql &= "        T1.SITEN_CD,                            "
