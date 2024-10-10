@@ -31,7 +31,9 @@ Namespace JBD.GJS.Service.GJ8040
                     item.USER_ID = DaConvertUtil.CStr(row("USER_ID"))
                     item.USER_NAME = DaConvertUtil.CStr(row("USER_NAME"))
                     item.SIYO_KBN_NAME = DaConvertUtil.CStr(row("SIYO_KBN_NAME"))
-                    item.TEISI_DATE = DaConvertUtil.CDate(row("TEISI_DATE"))
+                    If Not IsDBNull(row("TEISI_DATE")) AndAlso Not IsNothing(row("TEISI_DATE")) Then
+                        item.TEISI_DATE = DaConvertUtil.CDate(row("TEISI_DATE"))
+                    End If
                     item.TEISI_RIYU = DaConvertUtil.CStr(row("TEISI_RIYU"))
                     res.KEKKA_LIST.Add(item)
                 Next

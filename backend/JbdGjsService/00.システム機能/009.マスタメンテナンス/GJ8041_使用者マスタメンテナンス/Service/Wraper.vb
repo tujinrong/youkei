@@ -55,6 +55,7 @@ Namespace JBD.GJS.Service.GJ8041
                         Dim pPASS_UP_DATE = Now
                         Dim pPASS_KIGEN_DATE = DateAdd(DateInterval.Day, pPASS_KIGEN, pPASS_UP_DATE)
                         item.USER.PASS_KIGEN_DATE = pPASS_KIGEN_DATE
+                        item.USER.PASS_UP_DATE = pPASS_UP_DATE
                     End If
             End Select
 

@@ -86,14 +86,19 @@
           title="使用停止日"
           min-width="150"
           sortable
-          formatter="JpDate"
           :params="{ order: 4 }"
           :resizable="true"
-        ></vxe-column>
+        >
+          <template #default="{ row }">
+            {{ row.TEISI_DATE ? getDateJpText(new Date(row.TEISI_DATE)) : '' }}
+          </template></vxe-column
+        >
         <vxe-column
           header-align="center"
           field="TEISI_RIYU"
           title="使用停止理由"
+          sortable
+          :params="{ order: 5 }"
           min-width="400"
           :resizable="false"
         ></vxe-column>
@@ -113,7 +118,7 @@ import { useElementSize } from '@vueuse/core'
 import { onMounted, reactive, ref, toRef, watch } from 'vue'
 import { SearchRowVM } from '../type'
 import { EnumEditKbn, PageStatus } from '@/enum'
-import { changeTableSort } from '@/utils/util'
+import { changeTableSort, getDateJpText } from '@/utils/util'
 import EditPage from './EditPage.vue'
 import { Search } from '../service'
 import { VxeTableInstance } from 'vxe-pc-ui'
