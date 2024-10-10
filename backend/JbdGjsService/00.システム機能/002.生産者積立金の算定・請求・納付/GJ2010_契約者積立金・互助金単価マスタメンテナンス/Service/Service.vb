@@ -37,7 +37,7 @@ Namespace JBD.GJS.Service.GJ2010
                     '4.ビジネスロジック処理
                     '-------------------------------------------------------------
                     '検索結果出力用ＳＱＬ作成
-                    Dim sql = FrmGJ2010Service.f_Search_SQLMake(0)
+                    Dim sql = FrmGJ2010Service.f_Search_SQLMake(0,req)
 
                     'データSelect 
                     Dim ds = FrmService.f_Select_ODP(db, sql)

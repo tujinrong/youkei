@@ -17,7 +17,7 @@ Namespace JBD.GJS.Service.GJ2010
     '引数            :なし
     '戻り値          :Boolean(正常True/エラーFalse)
     '------------------------------------------------------------------
-    Public Shared Function f_Search_SQLMake(iKbn As Integer) As String
+    Public Shared Function f_Search_SQLMake(iKbn As Integer, req As SearchRequest) As String
         Dim sSql As String = String.Empty
         Dim sWhere As String = String.Empty
         Dim strER As String = String.Empty
@@ -61,8 +61,18 @@ Namespace JBD.GJS.Service.GJ2010
                 sSql += "GROUP BY" & vbCrLf
                 sSql += "  TAN.TAISYO_DATE_FROM," & vbCrLf
                 sSql += "  TAN.TAISYO_DATE_TO" & vbCrLf
-                sSql += "ORDER BY" & vbCrLf
-                sSql += "  TAN.TAISYO_DATE_FROM" & vbCrLf
+                sSql += " ORDER BY " & vbCrLf
+
+                Dim wkOrderby = "  TAN.TAISYO_DATE_FROM "
+                Select Case req.ORDER_BY
+                    Case -1
+                        wkOrderby = "  TAN.TAISYO_DATE_FROM DESC "
+                    Case 2
+                        wkOrderby = " TAN.TAISYO_DATE_TO ASC "
+                    Case -2
+                        wkOrderby = " TAN.TAISYO_DATE_TO DESC "
+                End Select
+                sSql += wkOrderby & vbCrLf
 
             Case 1
                 'チェックリスト
