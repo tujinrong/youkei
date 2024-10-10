@@ -17,6 +17,16 @@
       class="flex-1 staticWidth"
       :body-style="{ backgroundColor: 'aliceblue' }"
     >
+      <a-pagination
+        v-model:current="pageParams.PAGE_NUM"
+        v-model:page-size="pageParams.PAGE_SIZE"
+        :total="totalCount"
+        :page-size-options="['10', '25', '50', '100']"
+        :show-total="(total) => `抽出件数： ${total} 件`"
+        show-less-items
+        show-size-changer
+        class="m-b-1 text-end"
+      />
       <vxe-table
         class="h-full"
         ref="xTableRef"
@@ -25,7 +35,9 @@
         :row-config="{ isCurrent: true, isHover: true }"
         :data="tableData"
         @cell-dblclick="({ row }) => edit(row.TAX_DATE_FROM)"
+        :sort-config="{ trigger: 'cell', orders: ['asc', 'desc'] }"
         :empty-render="{ name: 'NotData' }"
+        @sort-change="(e) => changeTableSort(e, toRef(pageParams, 'ORDER_BY'))"
       >
         <vxe-column
           header-align="center"
@@ -33,6 +45,8 @@
           title="適用開始日"
           width="160"
           align="center"
+          sortable
+          :params="{ order: 1 }"
           :resizable="true"
           ><template #default="{ row }">
             <a @click="edit(row.TAX_DATE_FROM)">{{
@@ -48,6 +62,8 @@
           title="適用終了日"
           width="160"
           align="center"
+          sortable
+          :params="{ order: 2 }"
           :resizable="true"
           ><template #default="{ row }">
             <a @click="edit(row.TAX_DATE_FROM)">{{
@@ -61,6 +77,8 @@
           title="消費税率（%）"
           width="120"
           align="right"
+          sortable
+          :params="{ order: 3 }"
           :resizable="true"
         ></vxe-column>
       </vxe-table>
@@ -70,17 +88,19 @@
     v-model:visible="visible"
     ref="editModalRef"
     v-bind="{ editkbn }"
-    @getTableList="searchAll"
+    @getTableList="handleSearch"
   />
 </template>
 <script setup lang="ts">
-import { onMounted, ref } from 'vue'
+import { onMounted, ref, toRef } from 'vue'
 import { VxeTableInstance } from 'vxe-pc-ui'
 import EditModal from './EditPage.vue'
-import { getDateJpText } from '@/utils/util'
+import { changeTableSort, getDateJpText } from '@/utils/util'
 import { EnumEditKbn } from '@/enum'
 import { Search } from '../service'
 import { SearchRowVM } from '../type'
+import useSearch from '@/hooks/useSearch'
+
 const visible = ref(false)
 const editkbn = ref<EnumEditKbn>(EnumEditKbn.Add)
 const editModalRef = ref()
@@ -89,12 +109,24 @@ const tableData = ref<SearchRowVM[]>([])
 const cardRef = ref()
 
 onMounted(async () => {
-  await searchAll()
+  await handleSearch()
 })
-const searchAll = async () => {
-  const res = await Search({})
-  tableData.value = res.KEKKA_LIST
+
+//検索処理
+const { pageParams, totalCount, searchData, clear } = useSearch({
+  service: Search,
+  source: tableData,
+  params: null,
+})
+
+const handleSearch = async () => {
+  tableData.value = []
+  const res = await searchData()
+  if (xTableRef.value && tableData.value.length > 0) {
+    xTableRef.value.setCurrentRow(tableData.value[0])
+  }
 }
+
 const add = () => {
   editkbn.value = EnumEditKbn.Add
   visible.value = true
