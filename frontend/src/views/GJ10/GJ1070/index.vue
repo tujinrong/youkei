@@ -8,7 +8,11 @@
  * ----------------------------------------------------------------->
 <template>
   <div>
-    <a-card :bordered="false" class="h-290px min-h-290px staticWidth">
+    <a-card
+      :bordered="false"
+      class="h-290px min-h-290px staticWidth"
+      :body-style="{ backgroundColor: 'aliceblue' }"
+    >
       <div class="max-w-1150px">
         <h1>（GJ1070）事業加入状況表（農場別リスト）作成</h1>
         <div class="self_adaption_table form" ref="headRef">

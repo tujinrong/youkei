@@ -1,6 +1,11 @@
 <template>
   <div class="h-full min-h-500px flex-col-stretch gap-12px">
-    <a-card ref="headRef" :bordered="false" class="staticWidth">
+    <a-card
+      ref="headRef"
+      :bordered="false"
+      class="staticWidth"
+      :body-style="{ backgroundColor: 'aliceblue' }"
+    >
       <h1>（GJ2010）契約者積立金・互助金単価マスタ一覧</h1>
       <div class="mt-1 flex">
         <a-space :size="20">
@@ -11,7 +16,12 @@
         <EndButton />
       </div>
     </a-card>
-    <a-card :bordered="false" class="flex-1 staticWidth" ref="xTableRef">
+    <a-card
+      :bordered="false"
+      class="flex-1 staticWidth"
+      ref="xTableRef"
+      :body-style="{ backgroundColor: 'aliceblue' }"
+    >
       <a-pagination
         v-model:current="pageParams.PAGE_NUM"
         v-model:page-size="pageParams.PAGE_SIZE"

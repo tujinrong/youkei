@@ -8,7 +8,11 @@
  * ----------------------------------------------------------------->
 <template>
   <div>
-    <a-card :bordered="false" class="h-510px min-h-510px staticWidth">
+    <a-card
+      :bordered="false"
+      class="h-510px min-h-510px staticWidth"
+      :body-style="{ backgroundColor: 'aliceblue' }"
+    >
       <div class="max-w-1150px">
         <h1>（GJ1040）契約者別契約情報入力確認チェックリスト作成処理</h1>
         <div class="self_adaption_table form" ref="headRef">

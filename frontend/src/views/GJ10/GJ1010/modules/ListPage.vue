@@ -8,7 +8,12 @@
  * ----------------------------------------------------------------->
 <template>
   <div class="h-full min-h-500px flex-col-stretch gap-12px">
-    <a-card ref="headRef" :bordered="false" class="staticWidth">
+    <a-card
+      ref="headRef"
+      :bordered="false"
+      class="staticWidth"
+      :body-style="{ backgroundColor: 'aliceblue' }"
+    >
       <div class="max-w-1150px">
         <h1>（GJ1010）互助基金契約者マスタ一覧</h1>
         <div class="self_adaption_table form mt-1">
@@ -158,7 +163,11 @@
         </AButton>
       </div>
     </a-card>
-    <a-card :bordered="false" class="flex-1 staticWidth">
+    <a-card
+      :bordered="false"
+      class="flex-1 staticWidth"
+      :body-style="{ backgroundColor: 'aliceblue' }"
+    >
       <a-pagination
         v-model:current="pageParams.PAGE_NUM"
         v-model:page-size="pageParams.PAGE_SIZE"

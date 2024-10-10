@@ -10,7 +10,11 @@
   <div
     class="h-full min-h-500px flex-col-stretch gap-12px lt-sm:overflow-auto px-4 py-4"
   >
-    <a-card :bordered="false" class="staticWidth">
+    <a-card
+      :bordered="false"
+      class="staticWidth"
+      :body-style="{ backgroundColor: 'aliceblue' }"
+    >
       <div class="max-w-584px">
         <h1>（GJ1020）互助基金契約者情報変更（移動）</h1>
         <div class="self_adaption_table form mt-1">
@@ -62,7 +66,9 @@
         </a-space>
         <EndButton />
       </div> </a-card
-    ><a-card class="flex-1 staticWidth"
+    ><a-card
+      class="flex-1 staticWidth"
+      :body-style="{ backgroundColor: 'aliceblue' }"
       ><h2>1.契約農場別明細 移動情報(表示)</h2>
       <div class="flex justify-between">
         <a-pagination

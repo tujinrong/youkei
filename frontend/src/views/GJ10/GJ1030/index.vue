@@ -1,6 +1,10 @@
 <template>
   <div>
-    <a-card :bordered="false" class="h-330px min-h-330px staticWidth">
+    <a-card
+      :bordered="false"
+      class="h-330px min-h-330px staticWidth"
+      :body-style="{ backgroundColor: 'aliceblue' }"
+    >
       <div class="max-w-1150px">
         <h1>（GJ1030）契約者一覧表（連絡用）</h1>
         <div class="self_adaption_table form" ref="headRef">

@@ -1,6 +1,11 @@
 <template>
   <div class="h-full min-h-500px flex-col-stretch gap-12px flex">
-    <a-card ref="headRef" :bordered="false" class="staticWidth">
+    <a-card
+      ref="headRef"
+      :bordered="false"
+      class="staticWidth"
+      :body-style="{ backgroundColor: 'aliceblue' }"
+    >
       <div class="max-w-780px">
         <h1>（GJ8060）事務委託先一覧</h1>
         <div class="self_adaption_table form mt-1">
@@ -99,7 +104,12 @@
           > </a-space
         ><EndButton /></div
     ></a-card>
-    <a-card :bordered="false" class="flex-1 staticWidth" ref="cardRef">
+    <a-card
+      :bordered="false"
+      class="flex-1 staticWidth"
+      ref="cardRef"
+      :body-style="{ backgroundColor: 'aliceblue' }"
+    >
       <a-pagination
         v-model:current="pageParams.PAGE_NUM"
         v-model:page-size="pageParams.PAGE_SIZE"

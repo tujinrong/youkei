@@ -8,7 +8,11 @@
  * ----------------------------------------------------------------->
 <template>
   <div class="h-full min-h-500px flex-col-stretch gap-12px">
-    <a-card :bordered="false" class="h-65">
+    <a-card
+      :bordered="false"
+      class="h-65"
+      :body-style="{ backgroundColor: 'aliceblue' }"
+    >
       <h1>（GJ1012）互助基金契約者マスタメンテナンス（契約情報入力）</h1>
       <div class="self_adaption_table form">
         <b>第{{ formData.KI ?? 8 }}期</b>
@@ -69,7 +73,10 @@
           </td>
         </tr>
       </table> </a-card
-    ><a-card class="flex-1 staticWidth">
+    ><a-card
+      class="flex-1 staticWidth"
+      :body-style="{ backgroundColor: 'aliceblue' }"
+    >
       <a-pagination
         v-model:current="pageParams.PAGE_NUM"
         v-model:page-size="pageParams.PAGE_SIZE"
