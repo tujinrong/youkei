@@ -159,15 +159,6 @@ Namespace JBD.GJS.Service.GJ8050
 
             pJoken = ""
 
-            '金融機関
-            If wKbn.BANK_CD <> "" Then
-                If pJoken = "" Then
-                Else
-                    pJoken += " AND " & vbCrLf
-                End If
-                pJoken += "(BANK_CD  = '" & wKbn.BANK_CD & "')" & vbCrLf
-            End If
-
             '支店・支所
             If wKbn.SITEN_CD <> "" Then
                 If pJoken = "" Then
@@ -203,12 +194,12 @@ Namespace JBD.GJS.Service.GJ8050
             wSql += "  STN.SITEN_KANA," & vbCrLf
             wSql += "  STN.SITEN_NAME" & vbCrLf
             wSql += " FROM" & vbCrLf
-            wSql += "  TM_SITEN STN" & vbCrLf
+            wSql += "  TM_SITEN STN WHERE BANK_CD  = '" & wKbn.BANK_CD & "' " & vbCrLf
 
 
             If pJoken = "" Then
             Else
-                wSql += " WHERE (" & pJoken & ")" & vbCrLf
+                wSql += " AND (" & pJoken & ")" & vbCrLf
             End If
 
             wSql += "ORDER BY" & vbCrLf
