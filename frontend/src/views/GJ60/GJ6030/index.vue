@@ -91,7 +91,7 @@
                 <a-button type="primary" @click="onPreview">実行</a-button>
                 <a-button type="primary" @click="clear">キャンセル</a-button>
               </a-space>
-              <CloseButton />
+              <EndButton />
             </div>
           </a-col>
         </a-row>

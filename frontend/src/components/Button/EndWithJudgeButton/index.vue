@@ -1,6 +1,6 @@
 <!------------------------------------------------------------------
  * 業務名称　: 互助事業システム
- * 機能概要　: 閉じるボタン(画面)
+ * 機能概要　: 閉じる(終了)ボタン(画面)
  * 　　　　　  共通コンポーネント
  * 作成日　　: 2024.08.08
  * 作成者　　: 李
@@ -11,9 +11,10 @@
 </template>
 
 <script lang="ts" setup>
-import { CLOSE_CONFIRM } from '@/constants/msg'
+import { JUDGE_CONFIRM, END_CONFIRM } from '@/constants/msg'
 import { useRouteStore } from '@/store/modules/route'
 import { useTabStore } from '@/store/modules/tab'
+import { Judgement } from '@/utils/judge-edited'
 import { showConfirmModal } from '@/utils/modal'
 import { RouteKey } from '@elegant-router/types'
 import { useRoute } from 'vue-router'
@@ -23,17 +24,30 @@ import { useRoute } from 'vue-router'
 const tabStore = useTabStore()
 const route = useRoute()
 const routeStore = useRouteStore()
+const props = defineProps<{
+  editJudge: Judgement
+}>()
 //--------------------------------------------------------------------------
 //メソッド
 //--------------------------------------------------------------------------
 const close = async () => {
-  showConfirmModal({
-    content: CLOSE_CONFIRM,
-    onOk: async () => {
-      tabStore.removeActiveTab()
-      routeStore.reCacheRoutesByKey(route.name as RouteKey)
-    },
-  })
+  if (props.editJudge.isPageEdited()) {
+    showConfirmModal({
+      content: JUDGE_CONFIRM,
+      onOk: async () => {
+        tabStore.removeActiveTab()
+        routeStore.reCacheRoutesByKey(route.name as RouteKey)
+      },
+    })
+  } else {
+    showConfirmModal({
+      content: END_CONFIRM,
+      onOk: async () => {
+        tabStore.removeActiveTab()
+        routeStore.reCacheRoutesByKey(route.name as RouteKey)
+      },
+    })
+  }
 }
 
 defineExpose({ close })

@@ -97,7 +97,7 @@
           <a-button class="ml-100%" type="primary" @click="csvOutput"
             >CSV出力</a-button
           > </a-space
-        ><CloseButton /></div
+        ><EndButton /></div
     ></a-card>
     <a-card :bordered="false" class="flex-1 staticWidth" ref="cardRef">
       <a-pagination

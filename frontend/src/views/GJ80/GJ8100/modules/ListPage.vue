@@ -6,7 +6,7 @@
         <a-space :size="20">
           <a-button type="primary" @click="add">新規登録</a-button>
         </a-space>
-        <CloseButton /></div
+        <EndWithJudgeButton /></div
     ></a-card>
     <a-card ref="cardRef" class="flex-1 staticWidth">
       <vxe-table

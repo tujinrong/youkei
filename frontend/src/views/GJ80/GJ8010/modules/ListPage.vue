@@ -41,7 +41,7 @@
               >新規登録</a-button
             >
           </a-space>
-          <CloseButton />
+          <EndButton />
         </div>
         <vxe-table
           ref="xTableRef"

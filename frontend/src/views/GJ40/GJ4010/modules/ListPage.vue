@@ -208,9 +208,8 @@
           <a-button type="primary" @click="search">検索</a-button>
           <a-button type="primary" @click="clear">キャンセル</a-button>
         </a-space>
-        <AButton type="primary" class="ml-a" @click="tabStore.removeActiveTab">
-          閉じる
-        </AButton>
+
+        <EndButton />
       </div>
     </a-card>
     <a-card :bordered="false" class="flex-1 staticWidth" ref="cardRef">

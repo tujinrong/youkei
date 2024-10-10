@@ -106,9 +106,7 @@
           <a-button type="primary" @click="clear">キャンセル</a-button>
           <a-button class="ml-20" type="primary" @click="save">実行</a-button>
         </a-space>
-        <AButton type="primary" class="ml-a" @click="tabStore.removeActiveTab">
-          閉じる
-        </AButton>
+        <EndButton />
       </div>
     </a-card>
     <a-card :bordered="false" class="flex-1 staticWidth" ref="cardRef">

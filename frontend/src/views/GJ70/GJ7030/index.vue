@@ -150,7 +150,7 @@
           <a-button type="primary" @click="reset">キャンセル</a-button>
           <a-button class="ml-20" type="primary" @click="">CSV出力</a-button>
         </a-space>
-        <CloseButton /></div></a-card
+        <EndButton /></div></a-card
     ><a-card class="flex-1 staticWidth" ref="cardRef">
       <a-pagination
         v-model:current="pageParams.PAGE_NUM"

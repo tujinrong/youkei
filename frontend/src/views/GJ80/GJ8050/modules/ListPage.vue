@@ -63,7 +63,7 @@
           >
           <a-button type="primary" @click="preview1">プレビュー</a-button>
         </a-space>
-        <CloseButton />
+        <EndButton />
       </div>
     </a-card>
     <a-card :bordered="false" ref="cardRef1" class="staticWidth flex-1">

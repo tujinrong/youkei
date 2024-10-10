@@ -415,11 +415,11 @@ export const SAVE_CONFIRM = {
   No: 'C001001',
   Msg: '保存します。よろしいですか？',
 }
-export const CLOSE_CONFIRM = {
+export const JUDGE_CONFIRM = {
   No: 'C001002',
   Msg: 'データが変更されています。よろしいですか？',
 }
-export const EXIT_CONFIRM = {
+export const END_CONFIRM = {
   No: 'C001002',
   Msg: '終了します。よろしいですか？',
 }

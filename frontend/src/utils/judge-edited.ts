@@ -6,7 +6,7 @@
  * 作成者　　: 屠
  * 変更履歴　:
  * -----------------------------------------------------------------*/
-import { CLOSE_CONFIRM } from '@/constants/msg'
+import { JUDGE_CONFIRM } from '@/constants/msg'
 import { useEventListener } from '@vueuse/core'
 import { judgeStore } from '@/store'
 import { showConfirmModal } from './modal'
@@ -50,7 +50,7 @@ export class Judgement {
     if (this.isEdited) {
       Modal.destroyAll()
       showConfirmModal({
-        content: message ?? CLOSE_CONFIRM.Msg,
+        content: message ?? JUDGE_CONFIRM.Msg,
         onOk: async () => {
           this.reset()
           onOk()
@@ -65,7 +65,7 @@ export class Judgement {
     useEventListener(window, 'beforeunload', (e) => {
       if (this.isEdited) {
         e.preventDefault()
-        e.returnValue = CLOSE_CONFIRM.Msg
+        e.returnValue = JUDGE_CONFIRM.Msg
       }
     })
     useEventListener(window, 'unload', (e) => {

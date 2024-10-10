@@ -54,7 +54,7 @@
             >新規登録</a-button
           >
         </a-space>
-        <CloseButton /></div
+        <EndButton /></div
     ></a-card>
     <a-card class="flex-1 staticWidth"
       ><h2>契約区分情報(表示)</h2>

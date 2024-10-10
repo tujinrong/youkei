@@ -129,7 +129,7 @@
                 <a-button type="primary">プレビュー</a-button>
                 <a-button type="primary">キャンセル</a-button>
               </a-space>
-              <CloseButton />
+              <EndButton />
             </div>
           </a-col>
         </a-row>

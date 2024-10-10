@@ -60,7 +60,7 @@
           >
           <a-button type="primary" @click="reset">キャンセル</a-button>
         </a-space>
-        <CloseButton />
+        <EndButton />
       </div> </a-card
     ><a-card class="flex-1 staticWidth"
       ><h2>1.契約農場別明細 移動情報(表示)</h2>

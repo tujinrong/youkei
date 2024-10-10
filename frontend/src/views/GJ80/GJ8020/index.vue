@@ -147,7 +147,7 @@
             >キャンセル</a-button
           >
         </a-space>
-        <EndButton :editJudge="editJudge" />
+        <EndWithJudgeButton :editJudge="editJudge" />
       </div>
     </a-card>
   </div>
@@ -160,7 +160,7 @@ import { onMounted, reactive, ref, watch } from 'vue'
 import { InitDetail, Save } from './service'
 import { DetailVM } from './type'
 import {
-  CLOSE_CONFIRM,
+  JUDGE_CONFIRM,
   ITEM_REQUIRE_ERROR,
   SAVE_CONFIRM,
   SAVE_OK_INFO,

@@ -419,7 +419,7 @@
             >キャンセル</a-button
           >
         </a-space>
-        <EndButton :editJudge="editJudge" />
+        <EndWithJudgeButton :editJudge="editJudge" />
       </div>
     </a-card>
   </div>
@@ -432,7 +432,7 @@ import { InitDetail, Save, SearchDetail } from './service'
 import { DetailVM } from './type'
 import { showConfirmModal, showSaveModal } from '@/utils/modal'
 import {
-  CLOSE_CONFIRM,
+  JUDGE_CONFIRM,
   ITEM_REQUIRE_ERROR,
   ITEM_SELECTREQUIRE_ERROR,
   SAVE_CONFIRM,

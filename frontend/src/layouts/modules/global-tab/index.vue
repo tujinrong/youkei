@@ -11,7 +11,7 @@ import { useTabStore } from '@/store/modules/tab'
 import ContextMenu from './context-menu.vue'
 import { judgeStore } from '@/store'
 import { showConfirmModal } from '@/utils/modal'
-import { CLOSE_CONFIRM } from '@/constants/msg'
+import { JUDGE_CONFIRM } from '@/constants/msg'
 
 defineOptions({
   name: 'GlobalTab',

@@ -127,7 +127,7 @@
                 >
                 <a-button type="primary" @click="clear">キャンセル</a-button>
               </a-space>
-              <CloseButton />
+              <EndButton />
             </div>
           </a-col>
         </a-row>

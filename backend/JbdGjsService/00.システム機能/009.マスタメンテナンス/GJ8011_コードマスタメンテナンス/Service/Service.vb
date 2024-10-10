@@ -136,7 +136,7 @@ Namespace JBD.GJS.Service.GJ8011
                         Case EnumEditKbn.Edit       '変更入力
                             bNew = False
                             If dt.Rows.Count = 0 Then
-                                Return New DaResponseBase("データが存在しないため、データを変更できません。")
+                                Return New DaResponseBase("他の端末にて更新されています。")
                             ElseIf dt.Rows.Count > 0 Then
                                 'データの独占性
                                 If CDate(dt.Rows(0)("UP_DATE")) > req.CODE.UP_DATE Then
