@@ -43,6 +43,19 @@ Namespace JBD.GJS.Service.GJ8041
                     Dim ds = FrmService.f_Select_ODP(db, sql)
                     ds.Tables(0).TableName = "t1"
 
+                    '検索コントロールマスタデータ取得用ＳＱＬ作成
+                    sql = FrmGJ8041Service.f_TM_CONTROL_Data_Select()
+
+                    'データSelect 
+                    Dim dt3 = FrmService.f_Select_ODP(db, sql).Tables(0)
+
+                    'データ結果判定
+                    If dt3.Rows.Count = 0 Then
+                        Return New InitDetailResponse("コントロールマスタが設定されていません。")
+                    End If
+                    Dim cdt3 As DataTable = dt3.Copy()
+                    ds.Tables.Add(cdt3)
+
                     '契約者農場情報処理
                     Select Case req.EDIT_KBN
                         Case EnumEditKbn.Edit       '変更入力
@@ -58,19 +71,7 @@ Namespace JBD.GJS.Service.GJ8041
                             End If
                             Dim cdt As DataTable = dt.Copy()
                             ds.Tables.Add(cdt)
-                        Case EnumEditKbn.Add       '新規入力
-                            '検索コントロールマスタデータ取得用ＳＱＬ作成
-                            sql = FrmGJ8041Service.f_TM_CONTROL_Data_Select()
-                            
-                            'データSelect 
-                            Dim dt = FrmService.f_Select_ODP(db, sql).Tables(0)
 
-                            'データ結果判定
-                            If dt.Rows.Count = 0 Then
-                                Return New InitDetailResponse("コントロールマスタが設定されていません。")
-                            End If
-                            Dim cdt As DataTable = dt.Copy()
-                            ds.Tables.Add(cdt)
                     End Select
 
                     '-------------------------------------------------------------
