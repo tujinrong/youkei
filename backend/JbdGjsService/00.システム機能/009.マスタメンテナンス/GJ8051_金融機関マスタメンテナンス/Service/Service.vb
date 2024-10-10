@@ -51,7 +51,7 @@ Namespace JBD.GJS.Service.GJ8051
 
                             'データ結果判定
                             If dt.Rows.Count = 0 Then
-                                Return New InitBankDetailResponse("該当データが存在しませんでした。")
+                                Return New InitBankDetailResponse("指定された条件に一致するデータは存在しません。")
                             End If
                             Dim cdt As DataTable = dt.Copy()
                             ds.Tables.Add(cdt)
