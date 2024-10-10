@@ -26,7 +26,7 @@ Namespace JBD.GJS.Service.GJ2010
             For Each row As DataRow In dt.Rows
                 Dim item As New CmDateFmToModel
                 item.VALUE_FM = DaConvertUtil.CDate(row("TAISYO_DATE_FROM"))
-                item.VALUE_TO = DaConvertUtil.CDate(row("TAX_DATE_TO"))
+                item.VALUE_TO = DaConvertUtil.CDate(row("TAISYO_DATE_TO"))
                 res.KEKKA_LIST.Add(item)
             Next
             Return res

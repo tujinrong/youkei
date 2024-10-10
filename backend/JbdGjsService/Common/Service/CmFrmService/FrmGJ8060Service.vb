@@ -75,27 +75,27 @@ Namespace JBD.GJS.Service.GJ8060
             wkWhere = "  AND (" & wkWhere & ")"
         End If
 
-            Dim wkOrderby = "  ITK.ITAKU_CD "
-            Select Case req.ORDER_BY
-                Case -1
-                    wkOrderby = "  ITK.ITAKU_CD DESC "
-                Case 2
-                    wkOrderby = " UTL_I18N.TRANSLITERATE(case when  ITK.ITAKU_NAME is null then '0' else TO_MULTI_BYTE(ITK.ITAKU_NAME) end, 'hwkatakana_fwkatakana') ASC, ITK.ITAKU_CD  ASC "
-                Case -2
-                    wkOrderby = " UTL_I18N.TRANSLITERATE(case when  ITK.ITAKU_NAME is null then '0' else TO_MULTI_BYTE(ITK.ITAKU_NAME) end, 'hwkatakana_fwkatakana') DESC, ITK.ITAKU_CD  ASC "
-                Case 3
-                    wkOrderby = " UTL_I18N.TRANSLITERATE(case when  ITK.ADDR_TEL is null then '0' else TO_MULTI_BYTE(ITK.ADDR_TEL) end, 'hwkatakana_fwkatakana') ASC, ITK.ITAKU_CD  ASC "
-                Case -3
-                    wkOrderby = " UTL_I18N.TRANSLITERATE(case when  ITK.ADDR_TEL is null then '0' else TO_MULTI_BYTE(ITK.ADDR_TEL) end, 'hwkatakana_fwkatakana') DESC, ITK.ITAKU_CD  ASC "
-                Case 4
-                    wkOrderby = "  UTL_I18N.TRANSLITERATE(case when  ITK.ADDR_POST is null then '0' else TO_MULTI_BYTE(ITK.ADDR_POST) end, 'hwkatakana_fwkatakana') ASC, ITK.ITAKU_CD  ASC "
-                Case -4
-                    wkOrderby = "  UTL_I18N.TRANSLITERATE(case when  ITK.ADDR_POST is null then '0' else TO_MULTI_BYTE(ITK.ADDR_POST) end, 'hwkatakana_fwkatakana') DESC, ITK.ITAKU_CD  ASC "
-                Case 5
-                    wkOrderby = "  ITK.ADDR_1  ASC, ITK.ITAKU_CD  ASC "
-                Case -5
-                    wkOrderby = "  ITK.ADDR_1  DESC, ITK.ITAKU_CD  ASC "
-            End Select
+        Dim wkOrderby = "  ITK.ITAKU_CD "
+        Select Case req.ORDER_BY
+            Case -1
+                wkOrderby = "  ITK.ITAKU_CD DESC "
+            Case 2
+                wkOrderby = " UTL_I18N.TRANSLITERATE(case when  ITK.ITAKU_NAME is null then '0' else TO_MULTI_BYTE(ITK.ITAKU_NAME) end, 'hwkatakana_fwkatakana') ASC, ITK.ITAKU_CD  ASC "
+            Case -2
+                wkOrderby = " UTL_I18N.TRANSLITERATE(case when  ITK.ITAKU_NAME is null then '0' else TO_MULTI_BYTE(ITK.ITAKU_NAME) end, 'hwkatakana_fwkatakana') DESC, ITK.ITAKU_CD  ASC "
+            Case 3
+                wkOrderby = " UTL_I18N.TRANSLITERATE(case when  ITK.ADDR_TEL is null then '0' else TO_MULTI_BYTE(ITK.ADDR_TEL) end, 'hwkatakana_fwkatakana') ASC, ITK.ITAKU_CD  ASC "
+            Case -3
+                wkOrderby = " UTL_I18N.TRANSLITERATE(case when  ITK.ADDR_TEL is null then '0' else TO_MULTI_BYTE(ITK.ADDR_TEL) end, 'hwkatakana_fwkatakana') DESC, ITK.ITAKU_CD  ASC "
+            Case 4
+                wkOrderby = "  UTL_I18N.TRANSLITERATE(case when  ITK.ADDR_POST is null then '0' else TO_MULTI_BYTE(ITK.ADDR_POST) end, 'hwkatakana_fwkatakana') ASC, ITK.ITAKU_CD  ASC "
+            Case -4
+                wkOrderby = "  UTL_I18N.TRANSLITERATE(case when  ITK.ADDR_POST is null then '0' else TO_MULTI_BYTE(ITK.ADDR_POST) end, 'hwkatakana_fwkatakana') DESC, ITK.ITAKU_CD  ASC "
+            Case 5
+                wkOrderby = "  ITK.ADDR_1  ASC, ITK.ITAKU_CD  ASC "
+            Case -5
+                wkOrderby = "  ITK.ADDR_1  DESC, ITK.ITAKU_CD  ASC "
+        End Select
 
         '==SQL作成====================
         Select Case wKbn
