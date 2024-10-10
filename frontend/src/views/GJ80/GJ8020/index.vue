@@ -188,6 +188,7 @@ const formData = reactive<DetailVM>({
   NOFU_KIGEN: '',
   HASSEI_KAISU: undefined as number | undefined,
   BIKO: undefined as string | undefined,
+  UP_DATE: undefined as Date | undefined,
 })
 
 const editJudge = new Judgement('GJ8020')
@@ -201,10 +202,30 @@ const rules = reactive({
       message: ITEM_REQUIRE_ERROR.Msg.replace('{0}', '事業対象期'),
     },
   ],
+  // TAISYO_NENDO: [
+  //   {
+  //     required: true,
+  //     message: ITEM_REQUIRE_ERROR.Msg.replace('{0}', '対象年度'),
+  //   },
+  // ],
   TAISYO_NENDO: [
     {
-      required: true,
-      message: ITEM_REQUIRE_ERROR.Msg.replace('{0}', '対象年度'),
+      // required: true,
+      // message: ITEM_REQUIRE_ERROR.Msg.replace('{0}', '対象年度'),
+      validator: (_rule, value) => {
+        console.log(666)
+        if (!value) {
+          return Promise.reject(
+            ITEM_REQUIRE_ERROR.Msg.replace('{0}', '対象年度')
+          )
+        }
+        if (value > formData.JIGYO_NENDO! || value < formData.JIGYO_NENDO!) {
+          return Promise.reject(
+            '対象年月は事業対象年度の範囲で指定して下さい。'
+          )
+        }
+        return Promise.resolve()
+      },
     },
   ],
 })

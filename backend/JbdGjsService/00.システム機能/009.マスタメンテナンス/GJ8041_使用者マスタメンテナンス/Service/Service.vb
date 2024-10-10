@@ -54,7 +54,7 @@ Namespace JBD.GJS.Service.GJ8041
 
                             'データ結果判定
                             If dt.Rows.Count = 0 Then
-                                Return New InitDetailResponse("該当データが存在しませんでした。")
+                                Return New InitDetailResponse("指定された条件に一致するデータは存在しません。")
                             End If
                             Dim cdt As DataTable = dt.Copy()
                             ds.Tables.Add(cdt)
