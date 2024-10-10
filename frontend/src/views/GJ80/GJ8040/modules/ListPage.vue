@@ -60,7 +60,7 @@
         <vxe-column
           header-align="center"
           field="USER_NAME"
-          title="ユーザ名"
+          title="ユーザー名"
           min-width="140"
           sortable
           :params="{ order: 2 }"
